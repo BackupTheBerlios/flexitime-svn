@@ -69,7 +69,7 @@
 				<many-to-many class="fr.umlv.ir3.flexitime.common.data.activity.impl.BusyImpl" column="idBusy"/>
 			</list>-->
 			
-			<set name="setBusy" cascade="save-update" table="resourcebusyset" >
+			<set name="setBusy" cascade="none" table="resourcebusyset" >
 				<key column="idResource" />
 				<many-to-many class="fr.umlv.ir3.flexitime.common.data.activity.impl.BusyImpl" column="idBusy"/>
 			</set>

@@ -8,21 +8,53 @@ package fr.umlv.ir3.flexitime.common.data;
 
 import java.awt.Color;
 import java.rmi.RemoteException;
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.activity.*;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.*;
-import fr.umlv.ir3.flexitime.common.data.admin.*;
-import fr.umlv.ir3.flexitime.common.data.admin.impl.*;
-import fr.umlv.ir3.flexitime.common.data.general.*;
-import fr.umlv.ir3.flexitime.common.data.general.impl.*;
-import fr.umlv.ir3.flexitime.common.data.resources.*;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
+import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.DeviceBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.GroupBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.RoomBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.TeacherBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl;
+import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
+import fr.umlv.ir3.flexitime.common.data.general.IFloor;
+import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.data.general.impl.BuildingImpl;
+import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
+import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
+import fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.IResource;
+import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectsGroupImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructureImpl;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
-import fr.umlv.ir3.flexitime.common.tools.*;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
+import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 /**
  * Create all datas from specific parameters. This class contains only statics
@@ -46,7 +78,6 @@ public class DataFactory
      * @param parent
      *              IDevice this Busy belongs to 
      * @return a new unavaibility for a device
-     * @throws FlexiException 
      */
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent) throws FlexiException
     {
@@ -74,7 +105,6 @@ public class DataFactory
      * @param reason
      *            the reason if the unavaibility
      * @return a new unavaibility for a device
-     * @throws FlexiException 
      */
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent, int reason) throws FlexiException
     {
@@ -97,7 +127,6 @@ public class DataFactory
      * 
      * @param busy
      *            the unavaibility to copy
-     * @param parent 
      * @return a new unavaibility for a device
      * @throws FlexiException 
      */
@@ -120,7 +149,6 @@ public class DataFactory
      * Constructs an unavailibility for a group between a gap without reason.
      * 
      * @param g gap of the unavaibulity
-     * @param parent 
      * @return a new unavaibility for a group
      * @throws FlexiException 
      */
@@ -144,7 +172,6 @@ public class DataFactory
      * Constructs an unavailibility for a group between a gap for the reason specified.
      * 
      * @param g gap of the unavaibulity
-     * @param parent 
      * @param reason reason of the unavaibility
      * @return a new unavaibility for a group
      * @throws FlexiException 
@@ -169,7 +196,6 @@ public class DataFactory
      * 
      * @param busy
      *            the unavaibility to copy
-     * @param parent 
      * @return a new unavaibility for a group
      * @throws FlexiException 
      */
@@ -298,7 +324,7 @@ public class DataFactory
             lesson.addResource(elem);
             System.out.println(elem.getClass() +" " + elem.getSetBusy());
         }
-        
+        System.out.println(lesson.getIdBusy());
         return lesson;
     }
     
@@ -355,10 +381,29 @@ public class DataFactory
      */
     public static ILesson createLesson(ILesson lesson) throws FlexiException
     {
-        ILesson les = new LessonImpl(lesson); 
+        ILesson les = new LessonImpl(lesson);
+        List<IResource> l = new LinkedList();
+        
+        for(Iterator<IDevice> it = les.getLstDevice().iterator(); it.hasNext(); )
+        {
+            l.add(it.next());
+        }
+        for(Iterator<IGroup> it = les.getLstGroup().iterator(); it.hasNext(); )
+        {
+            l.add(it.next());
+        }
+        for(Iterator<IRoom> it = les.getLstRoom().iterator(); it.hasNext(); )
+        {
+            l.add(it.next());
+        }
+        for(Iterator<ITeacher> it = les.getLstTeacher().iterator(); it.hasNext(); )
+        {
+            l.add(it.next());
+        }
+        
         try
         {
-            les = RemoteDataManager.getManager().saveOrUpdateLesson(les, null);
+            les = RemoteDataManager.getManager().saveOrUpdateLesson(les, l);
         }
         catch (RemoteException e)
         {
@@ -372,7 +417,6 @@ public class DataFactory
      * 
      * @param g
      *            the gap between the unavailibility.
-     * @param parent 
      * @return a new unavaibility for a room
      * @throws FlexiException 
      */
@@ -411,7 +455,6 @@ public class DataFactory
      * 
      * @param busy
      *            the unavaibility to copy
-     * @param parent 
      * @return a new unavaibility for a device
      * @throws FlexiException 
      */
@@ -435,7 +478,6 @@ public class DataFactory
      * 
      * @param g
      *            the gap between the unavailibility.
-     * @param parent 
      * @return a new unavaibility for a teacher
      * @throws FlexiException 
      */
@@ -460,7 +502,6 @@ public class DataFactory
      * 
      * @param g
      *            the gap between the unavailibility.
-     * @param parent 
      * @param reason
      *            an Integer representing the reason of the unavailibility.
      * @return a new unavaibility for a teacher
@@ -487,7 +528,6 @@ public class DataFactory
      * 
      * @param busy
      *            the unavaibility to copy
-     * @param parent 
      * @return a new unavaibility for a device
      * @throws FlexiException 
      */
