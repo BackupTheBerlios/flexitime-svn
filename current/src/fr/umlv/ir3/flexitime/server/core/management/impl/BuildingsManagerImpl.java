@@ -11,11 +11,7 @@ import fr.umlv.ir3.flexitime.server.core.management.*;
 
 
 /**
- * BuildingsManagerImpl - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * BuildingsManagerImpl - Implements the interface BuildingManager
  * 
  * @version 0.1
  * 

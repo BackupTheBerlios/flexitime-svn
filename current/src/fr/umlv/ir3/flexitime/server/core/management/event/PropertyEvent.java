@@ -10,11 +10,7 @@ import java.util.*;
 
 
 /**
- * PropertyEvent - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * PropertyEvent - Event sended to PropertyListener
  * 
  * @version 0.1
  * 

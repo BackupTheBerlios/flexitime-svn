@@ -8,11 +8,7 @@ package fr.umlv.ir3.flexitime.server.core.admin.impl;
 
 
 /**
- * Users - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Users - Implements the interface Users
  * 
  * @version 0.1
  * 
@@ -34,6 +30,23 @@ public class UsersImpl implements fr.umlv.ir3.flexitime.server.core.admin.Users 
      * @date     13 déc. 2004
      */
     public void addUser(String name, String passwd) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /** 
+     * checkUser - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param name 
+     * 
+     * @see fr.umlv.ir3.flexitime.server.core.admin.Users#checkUser(java.lang.String)
+     * @author   FlexiTeam - Administrateur
+     * @date     14 déc. 2004
+     */
+    public void checkUser(String name) {
         // TODO Auto-generated method stub
         
     }

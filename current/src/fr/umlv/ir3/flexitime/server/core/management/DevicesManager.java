@@ -10,11 +10,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.*;
 
 
 /**
- * DevicesManager - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * DevicesManager - Manages the devices in a list
  * 
  * @version 0.1
  * 
@@ -22,38 +18,35 @@ import fr.umlv.ir3.flexitime.common.data.ressources.*;
  */
 public interface DevicesManager {
     /** 
-     * getDevice - DOCME Description
-     * Quel service est rendu par cette méthode
+     * getDevice - get a device with its name
      * 
-     *     <code>exemple d'appel de la methode</code>
+     *     <code>Device d = myBuildingManager.getDevice("myDevice")</code>
      *
-     * @param name
-     * @return 
+     * @param name name of a device
+     * @return a Device
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
     Device getDevice(String name);
     /** 
-     * addDevice - DOCME Description
-     * Quel service est rendu par cette méthode
+     * addDevice - adds a device in the list
      * 
-     *     <code>exemple d'appel de la methode</code>
+     *     <code>myBuildingManager.addDevice(myDevice)</code>
      *
-     * @param device 
+     * @param device a Device
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
     void addDevice(Device device);
     /** 
-     * removeDevice - DOCME Description
-     * Quel service est rendu par cette méthode
+     * removeDevice - removes a device in the list
      * 
-     *     <code>exemple d'appel de la methode</code>
+     *     <code>Device d = myBuildingManager.removeDevice("myDevice")</code>
      *
-     * @param name
-     * @return 
+     * @param name name of a device to remove
+     * @return a Device
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004

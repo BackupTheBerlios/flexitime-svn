@@ -10,11 +10,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.*;
 
 
 /**
- * DevicesManager - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * DevicesManager - Implements the interface DevicesManager
  * 
  * @version 0.1
  * 

@@ -8,11 +8,7 @@ package fr.umlv.ir3.flexitime.server.core.admin;
 
 
 /**
- * Users - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Users - Creates a list of users who can use the program
  * 
  * @version 0.1
  * 
@@ -21,8 +17,7 @@ package fr.umlv.ir3.flexitime.server.core.admin;
 public interface Users {
     User getUser(String name);
     /** 
-     * addUser - DOCME Description
-     * Quel service est rendu par cette méthode
+     * addUser - adds a user une the list
      * 
      *     <code>exemple d'appel de la methode</code>
      *
@@ -34,5 +29,16 @@ public interface Users {
      */
     void addUser(String name, String passwd);
     User removeUser(String name);
+    /** 
+     * checkUser - check if a user exists
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param name 
+     * 
+     * @author   FlexiTeam - Valère FOREL
+     * @date     14 déc. 2004
+     */
+    void checkUser(String name);
     
 }

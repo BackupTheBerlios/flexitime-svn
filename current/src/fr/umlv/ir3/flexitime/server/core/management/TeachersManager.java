@@ -10,11 +10,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.*;
 
 
 /**
- * TeacherManager - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * TeacherManager - Manages the teachers in a list
  * 
  * @version 0.1
  * 
@@ -22,29 +18,39 @@ import fr.umlv.ir3.flexitime.common.data.ressources.*;
  */
 public interface TeachersManager {
     /** 
-     * getTeacher - DOCME Description
-     * Quel service est rendu par cette méthode
+     * getTeacher - get a teacher with its name
      * 
-     *     <code>exemple d'appel de la methode</code>
+     *     <code>Teacher t = myTeacherManager.getTeacher("name")</code>
      *
-     * @param name
-     * @return 
+     * @param name name of the teacher
+     * @return a Teacher
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
     Teacher getTeacher(String name);
     /** 
-     * addTeacher - DOCME Description
-     * Quel service est rendu par cette méthode
+     * addTeacher - adds a teacher in the list
      * 
-     *     <code>exemple d'appel de la methode</code>
+     *     <code>myTeacherManager.addTeacher(myTeacher)</code>
      *
-     * @param teacher 
+     * @param teacher the teacher
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
     void addTeacher(Teacher teacher);
+    /** 
+     * removeTeacher - remove a teacher in the list
+     * 
+     *     <code>Teacher t = myTeacherManager.removeTeacher("name")</code>
+     *
+     * @param name name of the teacher to remove
+     * @return a Teacher
+     * 
+     * @author   FlexiTeam - Valère FOREL
+     * @date     14 déc. 2004
+     */
+    Teacher removeTeacher(String name);
 
 }

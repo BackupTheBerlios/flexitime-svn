@@ -10,11 +10,7 @@ import java.util.*;
 
 
 /**
- * PropertyListener - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * PropertyListener - 
  * 
  * @version 0.1
  * 

@@ -15,11 +15,7 @@ import fr.umlv.ir3.flexitime.server.core.management.*;
 
 
 /**
- * SeanceManagerImpl - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * SeanceManagerImpl - Implements the interface SeancesManager
  * 
  * @version 0.1
  * 

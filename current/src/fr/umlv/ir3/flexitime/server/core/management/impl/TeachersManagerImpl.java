@@ -11,11 +11,7 @@ import fr.umlv.ir3.flexitime.server.core.management.*;
 
 
 /**
- * TeachersManagerImpl - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * TeachersManagerImpl - Implements the interface TeachersManager
  * 
  * @version 0.1
  * 
@@ -56,6 +52,24 @@ public class TeachersManagerImpl implements TeachersManager {
     public void addTeacher(Teacher teacher) {
         // TODO Auto-generated method stub
         
+    }
+
+    /** 
+     * removeTeacher - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param name
+     * @return 
+     * 
+     * @see fr.umlv.ir3.flexitime.server.core.management.TeachersManager#removeTeacher(java.lang.String)
+     * @author   FlexiTeam - Administrateur
+     * @date     14 déc. 2004
+     */
+    public Teacher removeTeacher(String name) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

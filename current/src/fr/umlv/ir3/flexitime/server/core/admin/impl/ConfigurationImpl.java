@@ -8,11 +8,7 @@ package fr.umlv.ir3.flexitime.server.core.admin.impl;
 
 
 /**
- * Configuration - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Configuration - Implements the interface Configuration
  * 
  * @version 0.1
  * 

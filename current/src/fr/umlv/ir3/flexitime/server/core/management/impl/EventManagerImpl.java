@@ -11,11 +11,7 @@ import fr.umlv.ir3.flexitime.server.core.management.event.*;
 
 
 /**
- * EventManagerImpl - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * EventManagerImpl - Implements the interface EventManager
  * 
  * @version 0.1
  * 

@@ -14,11 +14,7 @@ import fr.umlv.ir3.flexitime.common.tools.*;
 
 
 /**
- * SeancesManager - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * SeancesManager - Manages the seances in a list
  * 
  * @version 0.1
  * 
@@ -26,43 +22,39 @@ import fr.umlv.ir3.flexitime.common.tools.*;
  */
 public interface SeancesManager {
     /** 
-     * getSeance - DOCME Description
-     * Quel service est rendu par cette méthode
+     * getSeance - get a seance with its name
      * 
-     *     <code>exemple d'appel de la methode</code>
-     * @param debut
-     * @param heure
-     * @param group
-     *
-     * @return 
+     *     <code>Seance c = mySeancesManager.getSeance(date,time,"name of group")</code>
+     * 
+     * @param debut the date of the seance
+     * @param heure the time of the seance
+     * @param group the groupe which the seance depends
+     * @return a Seance
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
     Seance getSeance(Date debut, Time heure, Groups group);
     /** 
-     * addSeance - DOCME Description
-     * Quel service est rendu par cette méthode
+     * addSeance - adds a seance in the list
      * 
-     *     <code>exemple d'appel de la methode</code>
-     * @param seance
-     *
-     *  
+     *     <code>mySeancesManager.addSeance(mySeance)</code>
+     * 
+     * @param seance a Seance to add
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
     void addSeance(Seance seance);
     /** 
-     * removeSeance - DOCME Description
-     * Quel service est rendu par cette méthode
+     * removeSeance - remove a seance in the list
      * 
-     *     <code>exemple d'appel de la methode</code>
-     * @param debut
-     * @param heure
-     * @param group
-     *
-     * @return 
+     *     <code>Seance s = mySeancesManager.removeSeance(date,time,"group")</code>
+     * 
+     * @param debut the date of the seance
+     * @param heure the time of the seance
+     * @param group the group which the seance depends
+     * @return a Seance
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004

@@ -10,11 +10,7 @@ import fr.umlv.ir3.flexitime.common.data.general.*;
 
 
 /**
- * BuildingManager - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * BuildingManager - Manages the buildings in a list
  * 
  * @version 0.1
  * 
@@ -22,38 +18,35 @@ import fr.umlv.ir3.flexitime.common.data.general.*;
  */
 public interface BuildingsManager {
     /** 
-     * getBuilding - DOCME Description
-     * Quel service est rendu par cette méthode
+     * getBuilding - get a building with its name
      * 
-     *     <code>exemple d'appel de la methode</code>
+     *     <code>Building b = myBuildingManager.getBuilding("myBuilding")</code>
      *
-     * @param name
-     * @return 
+     * @param name name of the building
+     * @return a Building
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
     Building getBuilding(String name);   
     /** 
-     * addBuilding - DOCME Description
-     * Quel service est rendu par cette méthode
+     * addBuilding - adds a building in the list
      * 
-     *     <code>exemple d'appel de la methode</code>
+     *     <code>myBuildingManager.addBuilding(myBuilding)</code>
      *
-     * @param building 
+     * @param building a building
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
     void addBuilding(Building building);
     /** 
-     * removeBuilding - DOCME Description
-     * Quel service est rendu par cette méthode
+     * removeBuilding - remove a building in the list
      * 
-     *     <code>exemple d'appel de la methode</code>
+     *     <code>Building b = myBuildingManager.removeBuilding("myBuilding")</code>
      *
-     * @param name
-     * @return 
+     * @param name name of the building
+     * @return a building
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
