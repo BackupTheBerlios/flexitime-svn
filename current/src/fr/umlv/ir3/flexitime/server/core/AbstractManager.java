@@ -29,7 +29,7 @@ public abstract class AbstractManager implements IDataManager
     /**
      * list of IDataListener
      */
-    private List listenerList = new ArrayList();
+    private static List listenerList = new ArrayList();
 
     /**
      *  
@@ -49,7 +49,7 @@ public abstract class AbstractManager implements IDataManager
      * @param d Data on which event has occured
      * @param property type of the event 
      */
-    protected void notifyListener(IData d, int property)
+    protected static void notifyListener(IData d, int property)
     {
         ArrayList toRemove = new ArrayList();
         for (Iterator iter = listenerList.iterator() ; iter.hasNext() ;)

@@ -13,6 +13,7 @@ import java.util.List;
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.server.io.storage.GroupStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.RoomStorage;
 
@@ -40,6 +41,8 @@ public class RoomManager extends AbstractManager
     public void save(IData data) throws RemoteException
     {
         if(data instanceof IRoom) RoomStorage.save((IRoom) data);
+        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_ADDED);
+        t.start();
     }
 
     /** 
@@ -89,7 +92,10 @@ public class RoomManager extends AbstractManager
      */
     public void delete(IData data) throws RemoteException
     {
+        // TODO if not lock
         if(data instanceof IRoom) RoomStorage.delete((IRoom) data);
+        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_REMOVED);
+        t.start();
     }
 
     /** 
@@ -122,7 +128,11 @@ public class RoomManager extends AbstractManager
      */
     public void update(IData data) throws RemoteException
     {
+        //TODO lock
         if(data instanceof IRoom) RoomStorage.update((IRoom) data);
+        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_CHANGED);
+        t.start();
+        //TODO unlock
     }
 
 }

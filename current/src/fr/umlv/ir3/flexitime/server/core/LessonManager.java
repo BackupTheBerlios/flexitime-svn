@@ -11,6 +11,7 @@ import java.util.List;
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.server.io.storage.LessonStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.TrackStorage;
 
@@ -44,6 +45,8 @@ public class LessonManager extends AbstractManager
     public void save(IData data) throws RemoteException
     {
         if(data instanceof ILesson) LessonStorage.save((ILesson) data);
+        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_ADDED);
+        t.start();
     }
 
     /** 
@@ -93,7 +96,10 @@ public class LessonManager extends AbstractManager
      */
     public void delete(IData data) throws RemoteException
     {
+        // TODO if not lock
         if(data instanceof ILesson) LessonStorage.delete((ILesson) data);
+        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_REMOVED);
+        t.start();
     }
 
     /** 
@@ -126,7 +132,11 @@ public class LessonManager extends AbstractManager
      */
     public void update(IData data) throws RemoteException
     {
+        //TODO lock
         if(data instanceof ILesson) LessonStorage.update((ILesson) data);
+        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_CHANGED);
+        t.start();
+        //TODO unlock
     }
 
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.server.io.storage.CourseStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.DeviceStorage;
 
@@ -39,6 +40,8 @@ public class DeviceManager extends AbstractManager
     public void save(IData data) throws RemoteException
     {
         if(data instanceof IDevice) DeviceStorage.save((IDevice) data);
+        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_ADDED);
+        t.start();
     }
 
     /** 
@@ -88,7 +91,10 @@ public class DeviceManager extends AbstractManager
      */
     public void delete(IData data) throws RemoteException
     {
+        // TODO if not lock
         if(data instanceof IDevice) DeviceStorage.delete((IDevice) data);
+        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_REMOVED);
+        t.start();
     }
 
     /** 
@@ -121,7 +127,11 @@ public class DeviceManager extends AbstractManager
      */
     public void update(IData data) throws RemoteException
     {
+        //TODO lock
         if(data instanceof IDevice) DeviceStorage.update((IDevice) data);
+        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_CHANGED);
+        t.start();
+        //TODO unlock
     }
 
 }
