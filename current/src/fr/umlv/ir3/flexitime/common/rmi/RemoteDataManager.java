@@ -22,7 +22,7 @@ public class RemoteDataManager
 
     private static IDataManager          manager;
     private static IUserManager          userManager;
-    private static String                ipServer;
+    private static String                ipServer= "192.168.0.20";
     private static IConfigurationManager cfgManager;
     private static Registry              r;
 

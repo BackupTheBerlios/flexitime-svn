@@ -73,7 +73,10 @@ public class RootRoomTreeNode extends RootTreeNode
 		ArrayList list = new ArrayList(lst.size());
 		for(int i = 0;i<lst.size();i++)
 		{
-			add((IBuilding)lst.get(i));
+			if(lst.get(i) !=null)
+            {
+			    add((IBuilding)lst.get(i));
+            }
 		}
 		return children;
 	}

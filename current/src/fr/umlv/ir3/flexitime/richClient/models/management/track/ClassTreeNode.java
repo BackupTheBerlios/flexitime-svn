@@ -184,7 +184,10 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
 		
 		for(int i = 0;i<iClass.getLstGroups().size();i++)
 		{
-			add((IGroup)iClass.getLstGroups().get(i));
+			if(iClass.getLstGroups().get(i)!=null)
+            {
+			    add((IGroup)iClass.getLstGroups().get(i));
+            }
 		}
 		List list = new ArrayList(children);
         list.add(teachingStructure = new TeachingStructureTreeNode(this,iClass.getTeachingStructure(),model));

@@ -57,8 +57,12 @@ public class TeacherListModel extends AbstractListModel {
 	 */
 	public Object getElementAt(int index)
 	{
-		ITeacher teacher = (ITeacher)lstTeacher.get(index);
-		return teacher.getName()+ " " + teacher.getFirstName();
+		if(lstTeacher.get(index)!=null)
+        {
+            ITeacher teacher = (ITeacher)lstTeacher.get(index);
+            return teacher.getName()+ " " + teacher.getFirstName();
+        }
+		return null;
 	}
 
 	/**

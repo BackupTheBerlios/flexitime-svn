@@ -158,7 +158,10 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
 		ArrayList list = new ArrayList(building.getLstFloor().size());
 		for(int i = 0;i<building.getLstFloor().size();i++)
 		{
-			list.add(add((IFloor)building.getLstFloor().get(i)));
+			if(building.getLstFloor().get(i)!=null)
+            {
+			    list.add(add((IFloor)building.getLstFloor().get(i)));
+            }
 		}
 		this.children =list;
 		return(list);

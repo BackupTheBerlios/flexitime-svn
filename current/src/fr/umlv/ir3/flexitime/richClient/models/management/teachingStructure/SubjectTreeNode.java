@@ -166,16 +166,19 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
 			for(;ite.hasNext();)
 			{
 				ICourse cour = (ICourse)ite.next();
-				if(!map.containsKey(new Integer(cour.getType())))
-				{
-					ArrayList courseList = new ArrayList();
-					courseList.add(cour);
-					map.put(new Integer(cour.getType()),courseList);
-				}
-				else
-				{
-					((ArrayList)map.get(new Integer(cour.getType()))).add(cour);
-				}
+                if(cour!=null)
+                {
+                    if(!map.containsKey(new Integer(cour.getType())))
+    				{
+    					ArrayList courseList = new ArrayList();
+    					courseList.add(cour);
+    					map.put(new Integer(cour.getType()),courseList);
+    				}
+    				else
+    				{
+    					((ArrayList)map.get(new Integer(cour.getType()))).add(cour);
+    				}
+                }
 			}
 			Iterator TypeCourseIte = map.keySet().iterator();	
 			for(int i=1;i<=ICourse.class.getFields().length;i++)

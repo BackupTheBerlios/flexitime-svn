@@ -165,7 +165,10 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 		ArrayList list = new ArrayList(lstRoom.size());
 		for(int i = 0;i<lstRoom.size();i++)
 		{
-			list.add(new RoomTreeNode(this,(IRoom)lstRoom.get(i),model));
+			if(lstRoom.get(i)!=null)
+            {
+			    list.add(new RoomTreeNode(this,(IRoom)lstRoom.get(i),model));
+            }
 		}
 		this.children =list;
 		return(list);

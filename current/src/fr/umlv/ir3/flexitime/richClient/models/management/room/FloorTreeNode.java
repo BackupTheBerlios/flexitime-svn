@@ -161,16 +161,19 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 		for(;ite.hasNext();)
 		{
 			IRoom room = (IRoom)ite.next();
-			if(!map.containsKey(new Integer(room.getType())))
-			{
-				ArrayList Roomlist = new ArrayList();
-				Roomlist.add(room);
-				map.put(new Integer(room.getType()),Roomlist);
-			}
-			else
-			{
-				((ArrayList)map.get(new Integer(room.getType()))).add(room);
-			}
+			if(room !=null)
+            {
+                if(!map.containsKey(new Integer(room.getType())))
+    			{
+    				ArrayList Roomlist = new ArrayList();
+    				Roomlist.add(room);
+    				map.put(new Integer(room.getType()),Roomlist);
+    			}
+    			else
+    			{
+    				((ArrayList)map.get(new Integer(room.getType()))).add(room);
+    			}
+            }
 		}
 		Iterator TypeRoomIte = map.keySet().iterator();
 		for(int i=1;i<=IRoom.class.getFields().length;i++)

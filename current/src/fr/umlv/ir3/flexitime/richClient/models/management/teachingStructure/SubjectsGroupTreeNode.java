@@ -155,7 +155,10 @@ public class SubjectsGroupTreeNode extends DataListenerImpl implements FlexiTree
 		if(children.size()>0)return children;
 		for(int i = 0;i<subjectsGroup.getLstSubject().size();i++)
 		{
-			add((ISubject)subjectsGroup.getLstSubject().get(i));
+			if(subjectsGroup.getLstSubject().get(i)!=null)
+            {
+			    add((ISubject)subjectsGroup.getLstSubject().get(i));
+            }
 		}
 		return children;
 	}

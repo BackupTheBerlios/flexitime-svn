@@ -158,7 +158,10 @@ public class TypeCourseTreeNode implements FlexiTreeNode
 		ArrayList list = new ArrayList(lstCourse.size());
 		for(int i = 0;i<lstCourse.size();i++)
 		{
-			list.add(new CourseTreeNode(this,(ICourse)lstCourse.get(i),model));
+			if(lstCourse.get(i)!=null)
+            {
+			    list.add(new CourseTreeNode(this,(ICourse)lstCourse.get(i),model));
+            }
 		}
 		this.children =list;
 		return(list);
