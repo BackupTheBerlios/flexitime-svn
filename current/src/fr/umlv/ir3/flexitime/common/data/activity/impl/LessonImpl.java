@@ -184,21 +184,24 @@ public class LessonImpl extends BusyImpl implements ILesson
      * 
      * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#addResource(fr.umlv.ir3.flexitime.common.data.resources.IResource)
      */
-    public void addResource(IResource resource)
+    public boolean addResource(IResource resource)
     {
+        boolean isIn = false;
+        
         if (resource instanceof IRoom)
-            setRoom.add((IRoom) resource);
+            isIn = setRoom.add((IRoom) resource);
 
         else if (resource instanceof IDevice)
-            setDevice.add((IDevice) resource);
+            isIn = setDevice.add((IDevice) resource);
 
         else if (resource instanceof IGroup)
-            setGroup.add((IGroup) resource);
+            isIn = setGroup.add((IGroup) resource);
 
         else if (resource instanceof ITeacher)
-            setTeacher.add((ITeacher) resource);
+            isIn = setTeacher.add((ITeacher) resource);
 
         resource.addBusy(this);
+        return isIn;
     }
 
     /**

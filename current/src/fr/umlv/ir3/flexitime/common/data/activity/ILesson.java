@@ -31,8 +31,9 @@ public interface ILesson extends IBusy
      * 
      * @param resource
      *            the new Resource in a lesson.
+     * @return TODO
      */
-    void addResource(IResource resource);
+    boolean addResource(IResource resource);
 
     /**
      * Remove Resource in a lesson.

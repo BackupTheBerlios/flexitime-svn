@@ -733,13 +733,20 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             throws RemoteException
     {
         boolean newOne = ( lesson.getIdBusy() == null );
-        int type = lesson.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+        // int type = lesson.getIdBusy() == null ?
+        // DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+        // : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
+        int type[] = new int[lresource.size()];
+        int i = 0;
         for (IResource elem : lresource)
-            lesson.addResource(elem);
+        {
+            type[i] = lesson.addResource(elem) ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                    : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+            ++i;
+        }
 
-        //Sauvegarde de la lesson
+        // Sauvegarde de la lesson
         try
         {
             LessonStorage.save(lesson);
@@ -749,8 +756,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        
-        //Mise à jour des ressources associées
+
+        // Mise à jour des ressources associées
+        i = 0;
         for (IResource r : lresource)
         {
             if (r instanceof IGroup)
@@ -773,7 +781,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                 }
 
                 manager.fireDataChanged(IGroup.class, new DataEvent(g,
-                        "lstBusy", type, new Object[] { lesson }));
+                        "lstBusy", type[i], new Object[] { lesson }));
 
             }
             else if (r instanceof IDevice)
@@ -793,7 +801,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                 }
 
                 manager.fireDataChanged(IDevice.class, new DataEvent(d,
-                        "lstBusy", type, new Object[] { lesson }));
+                        "lstBusy", type[i], new Object[] { lesson }));
 
             }
             else if (r instanceof IRoom)
@@ -812,7 +820,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                     return null;
                 }
                 manager.fireDataChanged(IRoom.class, new DataEvent(ro,
-                        "lstBusy", type, new Object[] { lesson }));
+                        "lstBusy", type[i], new Object[] { lesson }));
             }
             else if (r instanceof ITeacher)
             {
@@ -830,9 +838,11 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                     return null;
                 }
                 manager.fireDataChanged(ITeacher.class, new DataEvent(t,
-                        "lstBusy", type, new Object[] { lesson }));
+                        "lstBusy", type[i], new Object[] { lesson }));
 
             }
+            
+            ++i;
 
         }
 
