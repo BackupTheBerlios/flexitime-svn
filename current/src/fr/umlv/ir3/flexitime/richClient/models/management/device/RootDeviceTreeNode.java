@@ -6,6 +6,7 @@
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.device;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,9 +15,10 @@ import java.util.List;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
-import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 
 /**
@@ -31,9 +33,11 @@ public class RootDeviceTreeNode extends RootTreeNode
     //   Constructeurs  //
     //==================// 
 	
-	public RootDeviceTreeNode(TreeNode parent,List lstDevice)
+	public RootDeviceTreeNode(TreeNode parent,List lstDevice) throws RemoteException
 	{
 		super(parent,lstDevice);
+//      TODO verifier le try catch
+        RemoteDataManager.getManager().addDataListener(IDevice.class,this);
 	}
 	
 	/**
@@ -42,11 +46,14 @@ public class RootDeviceTreeNode extends RootTreeNode
 	 * @param cat the category
 	 * @param factory the BuckFactory
 	 * @param model the model
+	 * @throws RemoteException 
 	 */
-	public RootDeviceTreeNode(TreeNode parent,List lstDevice,DefaultTreeModel model)
+	public RootDeviceTreeNode(TreeNode parent,List lstDevice,DefaultTreeModel model) throws RemoteException
 	{
 		super(parent,lstDevice,model);
-	}
+//      TODO verifier le try catch
+      RemoteDataManager.getManager().addDataListener(IDevice.class,this);
+    }
 	
 	
 	//	=============//
@@ -123,11 +130,57 @@ public class RootDeviceTreeNode extends RootTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(javax.swing.tree.TreeNode)
 	 */
-	public void remove(TreeNode childNode) {
-		lst.remove(((DeviceTreeNode)childNode).getDevice());
-		int index = children.indexOf(childNode);
-		children.remove(childNode);	
-		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+	public void remove(TreeNode childNode) throws RemoteException, FlexiException {
+		RemoteDataManager.getManager().deleteDevice(((DeviceTreeNode)childNode).getDevice());
+        lst.remove(((DeviceTreeNode)childNode).getDevice());
+
 		
 	}
+
+    /* (non-Javadoc)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
+     */
+    public void dataChanged(DataEvent event) throws RemoteException
+    {
+        IDevice device = (IDevice)event.getSource();
+        int type = event.getEventType();
+        switch(type)
+        {
+            case DataEvent.TYPE_PROPERTY_ADDED:
+            {
+                lst.add(device);
+                TypeDeviceTreeNode tdtn = searchChild(device.getType());
+                tdtn.add(device);
+                break;
+            }
+            case DataEvent.TYPE_PROPERTY_CHANGED :
+            {
+                TypeDeviceTreeNode tdtn = searchChild(device.getType());
+                tdtn.setValue(device);
+                break;
+            }
+            case DataEvent.TYPE_PROPERTY_REMOVED:
+            {
+                 lst.remove(device);
+                 TypeDeviceTreeNode tdtn = searchChild(device.getType());
+                 tdtn.remove(device);
+                break;
+            }
+        }
+        
+    }
+    
+    public TypeDeviceTreeNode searchChild(int type)
+    {
+        Iterator ite = children.iterator() ;
+        for(;ite.hasNext();)
+        {
+            TypeDeviceTreeNode tdtn= (TypeDeviceTreeNode)ite.next();
+            if(tdtn.getType()==type)
+            {
+                return tdtn;
+            }
+        }
+        return null;
+    }
 }

@@ -8,7 +8,6 @@ package fr.umlv.ir3.flexitime.common.rmi.admin;
 import java.rmi.Remote;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
-import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
 
 
 /**

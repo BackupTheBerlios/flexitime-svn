@@ -9,7 +9,6 @@ package fr.umlv.ir3.flexitime.richClient.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -46,19 +45,12 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExploitationAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExportAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.GestionAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.HistoryAction;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LargerTimeTableAction;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LogoutAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailAction;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.NextWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreferencesAction;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PrintAction;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerTimeTableAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.StatsAction;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
-import fr.umlv.ir3.flexitime.richClient.gui.views.IPServerView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
-import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
 
 /**
  * Client This class build an graphic interface for the user.

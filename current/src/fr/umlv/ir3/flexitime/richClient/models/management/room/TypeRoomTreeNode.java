@@ -9,6 +9,7 @@ package fr.umlv.ir3.flexitime.richClient.models.management.room;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
@@ -17,9 +18,11 @@ import javax.swing.tree.TreeNode;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
+import fr.umlv.ir3.flexitime.richClient.models.management.device.DeviceTreeNode;
 
 /**
  * @author Famille
@@ -105,6 +108,13 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	public int getChildCount() {
 		return processChildren().size();
 	}
+   
+    /* (non-Javadoc)
+     * @see javax.swing.tree.TreeNode#getChildCount()
+     */
+    public int getType() {
+        return type;
+    }
 
 	/* (non-Javadoc)
 	 * @see javax.swing.tree.TreeNode#getParent()
@@ -177,7 +187,7 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
 	 */
-	public TreeNode add() 
+	public TreeNode add() throws FlexiException 
 	{
 			IRoom room= DataFactory.createRoom("Nouvelle Salle",type,0,((FloorTreeNode)this.getParent()).getFloor());
 			room.setType(type);
@@ -194,6 +204,22 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 			model.nodesWereInserted(this,new int[]{children.size()-1});
 			return child;
 	}
+    
+    public TreeNode add(IRoom room)
+    {
+        lstRoom.add( room);
+        RoomTreeNode child = new RoomTreeNode(this,room,model);
+        if(children.size()==0)
+        {
+            processChildren();
+        }
+        else
+        {
+            children.add(child);
+        }
+        model.nodesWereInserted(this,new int[]{children.size()-1});
+        return child;
+    }
 	
 	
 	/* (non-Javadoc)
@@ -215,6 +241,29 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
 		
 	}
+    
+    public void remove(IRoom room) {
+        RoomTreeNode childNode = searchChild(room);
+        lstRoom.remove(room);
+        int index = children.indexOf(childNode);
+        children.remove(childNode); 
+        model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        
+    }
+    
+    public RoomTreeNode searchChild(IRoom room)
+    {
+        Iterator ite = children.iterator() ;
+        for(;ite.hasNext();)
+        {
+            RoomTreeNode rtn= (RoomTreeNode)ite.next();
+            if(rtn.getRoom().equals(room))
+            {
+                return rtn;
+            }
+        }
+        return null;
+    }
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)

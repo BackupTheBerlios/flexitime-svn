@@ -7,11 +7,8 @@
 
 package fr.umlv.ir3.flexitime.server.core.admin;
 
-import java.util.HashMap;
-
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
-import fr.umlv.ir3.flexitime.common.rmi.admin.IPreferenceListener;
 import fr.umlv.ir3.flexitime.common.rmi.admin.IPreferenceManager;
 
 /**

@@ -7,7 +7,9 @@ package fr.umlv.ir3.flexitime.common.rmi.admin;
 
 import java.io.IOException;
 import java.rmi.Remote;
+
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.xml.sax.SAXException;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;

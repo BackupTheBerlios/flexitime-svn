@@ -13,7 +13,6 @@ import java.awt.event.MouseListener;
 import javax.swing.Action;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTree;
 import javax.swing.tree.TreeNode;
@@ -128,8 +127,8 @@ public class FlexiMouseListenerFactory
 							TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
 							if(tmpTreeNode instanceof TypeDeviceTreeNode)
 							{
-								name = new String[]{"Ajouter un Matériel","Supprimer"};
-								action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode) ,DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
+								name = new String[]{"Ajouter un Matériel"};
+								action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode) };
 								
 							}
 							else if(tmpTreeNode instanceof DeviceTreeNode)

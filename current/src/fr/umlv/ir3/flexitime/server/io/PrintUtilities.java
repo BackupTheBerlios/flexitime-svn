@@ -6,9 +6,15 @@
  */
 package fr.umlv.ir3.flexitime.server.io;
 
-import java.awt.*;
-import javax.swing.*;
-import java.awt.print.*;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+
+import javax.swing.RepaintManager;
 
 /** A simple utility class that lets you very simply print
  *  an arbitrary component. Just pass the component to the

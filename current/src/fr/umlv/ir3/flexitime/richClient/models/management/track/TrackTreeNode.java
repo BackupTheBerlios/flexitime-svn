@@ -14,12 +14,11 @@ import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
@@ -179,11 +178,12 @@ public class TrackTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
 	 */
-	public TreeNode add() 
+	public TreeNode add() throws FlexiException 
 	{
 
 			IClass iClass = DataFactory.createClass("Nouvelle Promotion",track);
-			ClassTreeNode child = new ClassTreeNode(this,iClass,model);
+			iClass.setTeachingStructure(DataFactory.createTeachingStructure("structure",iClass));
+            ClassTreeNode child = new ClassTreeNode(this,iClass,model);
 			if(children.size()==0)
 			{
 				processChildren();

@@ -7,19 +7,6 @@
 
 package fr.umlv.ir3.flexitime.server.core.management;
 
-import fr.umlv.ir3.flexitime.server.core.BuildingManager;
-import fr.umlv.ir3.flexitime.server.core.ClassManager;
-import fr.umlv.ir3.flexitime.server.core.CourseManager;
-import fr.umlv.ir3.flexitime.server.core.DeviceManager;
-import fr.umlv.ir3.flexitime.server.core.FloorManager;
-import fr.umlv.ir3.flexitime.server.core.GroupManager;
-import fr.umlv.ir3.flexitime.server.core.LessonManager;
-import fr.umlv.ir3.flexitime.server.core.RoomManager;
-import fr.umlv.ir3.flexitime.server.core.SubjectManager;
-import fr.umlv.ir3.flexitime.server.core.SubjectsGroupManager;
-import fr.umlv.ir3.flexitime.server.core.TeacherManager;
-import fr.umlv.ir3.flexitime.server.core.TeachingStructureManager;
-import fr.umlv.ir3.flexitime.server.core.TrackManager;
 
 /**
  * ManagementFactory - Creates all the ressources needed

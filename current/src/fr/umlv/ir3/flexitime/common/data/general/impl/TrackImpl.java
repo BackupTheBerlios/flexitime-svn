@@ -9,7 +9,8 @@ package fr.umlv.ir3.flexitime.common.data.general.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.general.*;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
+import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
 /**

@@ -3,7 +3,6 @@ package fr.umlv.ir3.flexitime.common.event;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.EventObject;
 
 /**
  * Event sended to PropertyListener.

@@ -9,6 +9,7 @@ package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -23,11 +24,9 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiMouseListenerFactory;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiSelectionListenerFactory;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
-import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.RootSubjectsGroupTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.RootTrackTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.TeachingStructureTreeNode;
 
 /**
@@ -64,6 +63,8 @@ public class TeachingStructureView implements FlexiTreeNodeListener
 		treePanel.setBorder(BorderFactory.createTitledBorder("Liste des Blocs"));
 		
 		//Tree for SubjectsGroup
+        try
+        {
         RootTreeNode rootSubjectsGroupTree = new RootSubjectsGroupTreeNode(null,teachingStructure);
         JTree subjectsGroupTree = createJTree(rootSubjectsGroupTree);
         subjectsGroupTree.addMouseListener(FlexiMouseListenerFactory.createSubjectsGroupMouseLister());
@@ -74,14 +75,18 @@ public class TeachingStructureView implements FlexiTreeNodeListener
         treePanel.add(scrollBloc);
         
         //Construction du ViewPanel
-       CourseView courseView = new CourseView(model,tree);
-        viewPanel = courseView.getPanel();
-        viewPanel.setBorder(BorderFactory.createTitledBorder("Cours"));
+      // CourseView courseView = new CourseView(model,tree);
+       // viewPanel = courseView.getPanel();
+       // viewPanel.setBorder(BorderFactory.createTitledBorder("Cours"));
         
         //Ajout des panel dans le panel principal
         mainPanel.add(viewPanel,BorderLayout.CENTER,0 );
         mainPanel.add(treePanel,BorderLayout.WEST,1);
-		
+        }
+        catch(RemoteException e)
+        {
+            //TODO Probleme
+        }
 	}
 	
 	public JPanel getPanel()

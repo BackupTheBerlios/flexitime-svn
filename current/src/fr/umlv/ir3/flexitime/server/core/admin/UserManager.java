@@ -7,16 +7,14 @@
 
 package fr.umlv.ir3.flexitime.server.core.admin;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.IData;
-import fr.umlv.ir3.flexitime.common.data.admin.*;
-import fr.umlv.ir3.flexitime.common.data.admin.impl.*;
-import fr.umlv.ir3.flexitime.common.rmi.admin.IUserListener;
+import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl;
 import fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager;
-import fr.umlv.ir3.flexitime.server.core.AbstractManager;
 import fr.umlv.ir3.flexitime.server.io.FlexiLDAP;
 
 /**

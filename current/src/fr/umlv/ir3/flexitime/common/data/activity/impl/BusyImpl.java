@@ -6,11 +6,12 @@
 
 package fr.umlv.ir3.flexitime.common.data.activity.impl;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
-import fr.umlv.ir3.flexitime.common.tools.*;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
+import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 /**
  * Implements all methods of IBusy

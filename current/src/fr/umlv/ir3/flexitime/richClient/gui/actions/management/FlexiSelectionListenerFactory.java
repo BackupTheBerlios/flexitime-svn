@@ -8,17 +8,12 @@ package fr.umlv.ir3.flexitime.richClient.gui.actions.management;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -33,7 +28,6 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.management.NameView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.RoomsView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TeacherView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TeachingStructureView;
-import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.DeviceTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.BuildingTreeNode;

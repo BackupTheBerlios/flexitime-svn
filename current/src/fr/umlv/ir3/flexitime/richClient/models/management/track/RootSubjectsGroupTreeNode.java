@@ -6,6 +6,7 @@
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.track;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,10 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 
 /**
@@ -34,7 +36,7 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
     //   Constructeurs  //
     //==================// 
 	
-	public RootSubjectsGroupTreeNode(TreeNode parent,ITeachingStructure teachingStructure)
+	public RootSubjectsGroupTreeNode(TreeNode parent,ITeachingStructure teachingStructure) throws RemoteException
 	{
 		super(parent,teachingStructure.getLstSubjectsGroup());
 		this.teachingStructure = teachingStructure;
@@ -46,8 +48,9 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
 	 * @param cat the category
 	 * @param factory the BuckFactory
 	 * @param model the model
+	 * @throws RemoteException 
 	 */
-	public RootSubjectsGroupTreeNode(TreeNode parent,ITeachingStructure teachingStructure,DefaultTreeModel model)
+	public RootSubjectsGroupTreeNode(TreeNode parent,ITeachingStructure teachingStructure,DefaultTreeModel model) throws RemoteException
 	{
 		super(parent,teachingStructure.getLstSubjectsGroup(),model);
 		this.teachingStructure=teachingStructure;
@@ -75,7 +78,7 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
 		return(list);
 	}
 
-	public TreeNode add() 
+	public TreeNode add() throws FlexiException 
 	{
 
 		ISubjectsGroup subGroup = DataFactory.createSubjectsGroup("Nouveau Bloc",teachingStructure);
@@ -106,4 +109,13 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
 		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
 		
 	}
+
+    /* (non-Javadoc)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
+     */
+    public void dataChanged(DataEvent event) throws RemoteException
+    {
+        // TODO Auto-generated method stub
+        
+    }
 }

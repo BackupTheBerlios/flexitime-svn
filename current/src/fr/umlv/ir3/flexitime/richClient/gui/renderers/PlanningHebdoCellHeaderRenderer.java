@@ -8,13 +8,11 @@ package fr.umlv.ir3.flexitime.richClient.gui.renderers;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JRessourcePlanningHebdo;
 
 

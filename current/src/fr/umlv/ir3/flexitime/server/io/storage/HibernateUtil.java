@@ -14,8 +14,10 @@
 
 
 package fr.umlv.ir3.flexitime.server.io.storage;
-import net.sf.hibernate.*;
-import net.sf.hibernate.cfg.*;
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.SessionFactory;
+import net.sf.hibernate.cfg.Configuration;
 
 /**
  * DOCME Description

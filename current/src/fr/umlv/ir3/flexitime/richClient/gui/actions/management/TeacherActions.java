@@ -11,14 +11,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JList;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
-import javax.swing.table.TableModel;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreeNode;
 
-import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListModel;
 
 /**
@@ -42,8 +38,13 @@ public class TeacherActions
 
 			public void actionPerformed(ActionEvent arg0) 
 			{	
-				((TeacherListModel)model).add();
-				 System.out.println(((TeacherListModel)model).getSize());
+				try 
+                {
+					((TeacherListModel)model).add();
+				} catch (FlexiException e)
+                {
+					JOptionPane.showMessageDialog(null,e.getMessage(),"Ajout impossible",JOptionPane.ERROR_MESSAGE);
+				}
 				 list.setSelectedIndex(((TeacherListModel)model).getSize()-1);//list.getVisibleRowCount());
 			}
 			

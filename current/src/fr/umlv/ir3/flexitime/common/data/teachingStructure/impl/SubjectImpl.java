@@ -6,10 +6,13 @@
 
 package fr.umlv.ir3.flexitime.common.data.teachingStructure.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 
 /**
  * Defines a subject, it containes courses.

@@ -6,8 +6,15 @@
 
 package fr.umlv.ir3.flexitime.common.tools;
 
-import java.text.*;
-import java.util.*;
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 
 /**

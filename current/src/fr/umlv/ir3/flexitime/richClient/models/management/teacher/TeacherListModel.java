@@ -1,17 +1,19 @@
 package fr.umlv.ir3.flexitime.richClient.models.management.teacher;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.SortedSet;
 
 import javax.swing.AbstractListModel;
-import javax.swing.table.AbstractTableModel;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
+import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;
 
 
 
@@ -31,10 +33,12 @@ public class TeacherListModel extends AbstractListModel {
 	 * @param factory the BuckFactory
 	 * @param book the book
 	 * @param people the people
+	 * @throws RemoteException 
 	 */ 
-	public TeacherListModel(List lstTeacher)
+	public TeacherListModel(List lstTeacher) throws RemoteException
 	{
-		this.lstTeacher = lstTeacher;
+		RemoteDataManager.getManager().addDataListener(ITeacher.class,new TeacherListener());
+        this.lstTeacher = lstTeacher;
 	}
 	
 	/**
@@ -73,13 +77,20 @@ public class TeacherListModel extends AbstractListModel {
 	/**
 	 * To add a people to the people list
 	 * @param str the name of the new people
+	 * @throws FlexiException 
 	 */
-	public void add()
+	public void add() throws FlexiException
 	{	
 		
 		lstTeacher.add(DataFactory.createTeacher("Nouveau Professeur",""));
 		this.fireIntervalAdded(this,lstTeacher.size()-1,lstTeacher.size());
 	}
+    
+    public void add(ITeacher teacher)
+    {
+        lstTeacher.add(teacher);
+        this.fireIntervalAdded(this,lstTeacher.size()-1,lstTeacher.size());
+    }
 
 	/**
 	 * To delete a party
@@ -91,6 +102,16 @@ public class TeacherListModel extends AbstractListModel {
 			this.fireIntervalRemoved(this,lstTeacher.size()-1,lstTeacher.size());
 	}
 	
+    /**
+     * To delete a party
+     * @param index the party to be deleted
+     */
+    public void remove(ITeacher teacher)
+    {
+            lstTeacher.remove(teacher);
+            this.fireIntervalRemoved(this,lstTeacher.size()-1,lstTeacher.size());
+    }
+    
 	public void change(List values,int index)
 	{
 		if(values.size() >=3)
@@ -104,5 +125,56 @@ public class TeacherListModel extends AbstractListModel {
 		}
 		
 	}
+    
+    public class TeacherListener extends DataListenerImpl
+    {       
+
+        /**
+         * @throws RemoteException
+         */
+        protected TeacherListener() throws RemoteException
+        {
+            super();
+        }
+
+        /**
+         * Comment for <code>serialVersionUID</code>
+         */
+        private static final long serialVersionUID = 3256442508224444216L;
+
+        /* (non-Javadoc)
+         * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
+         */
+        public void dataChanged(DataEvent event) throws RemoteException
+        {
+            ITeacher teacher = (ITeacher)event.getSource();
+            int type = event.getEventType();
+            switch(type)
+            {
+                case DataEvent.TYPE_PROPERTY_ADDED:
+                {
+                    add(teacher);
+                    break;
+                }
+                case DataEvent.TYPE_PROPERTY_CHANGED :
+                {
+                    int ind = lstTeacher.indexOf(teacher);
+                    List list = new ArrayList();
+                    list.add(teacher.getName());
+                    list.add( teacher.getFirstName());
+                    list.add( teacher.getEmail());
+                    change(list,ind);
+                    break;
+                }
+                case DataEvent.TYPE_PROPERTY_REMOVED:
+                {
+                     remove(teacher);
+                    break;
+                }
+            }
+            
+        }
+        
+    }
 
 }

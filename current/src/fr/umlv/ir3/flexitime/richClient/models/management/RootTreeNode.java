@@ -6,17 +6,17 @@
  */
 package fr.umlv.ir3.flexitime.richClient.models.management;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
-import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 
 /**
@@ -25,7 +25,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeList
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public abstract class RootTreeNode implements FlexiTreeNode
+public abstract class RootTreeNode extends DataListenerImpl implements FlexiTreeNode 
 {
 //	===========//
     //   Champs  //
@@ -56,7 +56,7 @@ public abstract class RootTreeNode implements FlexiTreeNode
     //   Constructeurs  //
     //==================// 
 	
-	public RootTreeNode(TreeNode parent,List lstTrack)
+	public RootTreeNode(TreeNode parent,List lstTrack) throws RemoteException
 	{
 		this.parent = parent;
 		if( lstTrack==null)lst=new ArrayList();
@@ -71,7 +71,7 @@ public abstract class RootTreeNode implements FlexiTreeNode
 	 * @param factory the BuckFactory
 	 * @param model the model
 	 */
-	public RootTreeNode(TreeNode parent,List lst,DefaultTreeModel model)
+	public RootTreeNode(TreeNode parent,List lst,DefaultTreeModel model)throws RemoteException
 	{
 		this(parent,lst);
 		this.model=model;
@@ -145,6 +145,7 @@ public abstract class RootTreeNode implements FlexiTreeNode
 	/**
 	 * Creates dynamiquely the list of the children when the user click on the "plus"
 	 * @return the list of sub categories
+	 * @throws RemoteException 
 	 */
 	public abstract List processChildren();
 	/**
@@ -171,7 +172,7 @@ public abstract class RootTreeNode implements FlexiTreeNode
 		this.model = model;
 	}
 
-	public abstract TreeNode add();
+	public abstract TreeNode add() throws FlexiException;
 	
 	
 	/* (non-Javadoc)
@@ -182,7 +183,7 @@ public abstract class RootTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(javax.swing.tree.TreeNode)
 	 */
-	abstract public void remove(TreeNode childNode);
+	abstract public void remove(TreeNode childNode) throws RemoteException, FlexiException;
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(java.lang.Object)

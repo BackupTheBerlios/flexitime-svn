@@ -6,20 +6,25 @@
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.room;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
@@ -30,7 +35,7 @@ import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class BuildingTreeNode implements FlexiTreeNode
+public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode 
 {
 //	===========//
     //   Champs  //
@@ -64,12 +69,13 @@ public class BuildingTreeNode implements FlexiTreeNode
     //   Constructeurs  //
     //==================// 
 	
-	public BuildingTreeNode(FlexiTreeNode parent,IBuilding building)
+	public BuildingTreeNode(FlexiTreeNode parent,IBuilding building) throws RemoteException
 	{
 		this.parent = parent;
 		this.building = building;
 		children = new ArrayList();
 		this.listener = new ArrayList();
+        RemoteDataManager.getManager().addDataListener(IDevice.class,this);
 	}
 	
 	/**
@@ -78,8 +84,9 @@ public class BuildingTreeNode implements FlexiTreeNode
 	 * @param cat the category
 	 * @param factory the BuckFactory
 	 * @param model the model
+	 * @throws RemoteException 
 	 */
-	public BuildingTreeNode(FlexiTreeNode parent,IBuilding building,DefaultTreeModel model)
+	public BuildingTreeNode(FlexiTreeNode parent,IBuilding building,DefaultTreeModel model) throws RemoteException
 	{
 		this(parent,building);
 		this.model= (ResourceTreeModel)model;
@@ -151,7 +158,7 @@ public class BuildingTreeNode implements FlexiTreeNode
 		ArrayList list = new ArrayList(building.getLstFloor().size());
 		for(int i = 0;i<building.getLstFloor().size();i++)
 		{
-			list.add(new FloorTreeNode(this,(IFloor)building.getLstFloor().get(i),model));
+			list.add(add((IFloor)building.getLstFloor().get(i)));
 		}
 		this.children =list;
 		return(list);
@@ -174,24 +181,29 @@ public class BuildingTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
-	public TreeNode add() {
-		//synchronized(this.cat)
-		//{
-				IFloor floor = DataFactory.createFloor("Nouvel étage",building);
-				FloorTreeNode child = new FloorTreeNode(this,floor,model);
-				if(children.size()==0)
-				{
-					processChildren();
-				}
-				else
-				{
-					children.add(child);
-				}
-				model.nodesWereInserted(this,new int[]{children.size()-1});
-				return child;
-	}
+	public TreeNode add() throws FlexiException 
+    {
+	    IFloor floor = DataFactory.createFloor("Nouvel étage",building);
+		return(add(floor));
+		
+    }
 	
-	
+    public TreeNode add(IFloor floor)
+    {
+        try
+        {
+            FloorTreeNode child = new FloorTreeNode(this,floor,model);
+            children.add(child);
+            model.nodesWereInserted(this,new int[]{children.size()-1});
+            return child;
+        }
+        catch(RemoteException e)
+        {
+            JOptionPane.showMessageDialog(null,e.getMessage(),"Ajout impossible",JOptionPane.ERROR_MESSAGE);
+            return null;    
+        }
+        
+    }
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
@@ -202,18 +214,20 @@ public class BuildingTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
-	public void remove(TreeNode childNode) 
+	public void remove(TreeNode childNode) throws RemoteException, FlexiException 
 	{
-		//synchronized(cat.getParent())
-		//{
-			building.removeFloor(((FloorTreeNode)childNode).getFloor());
-			//TODO Enlevé floor de la base
-			int index = children.indexOf(childNode);
-			children.remove(childNode);	
-			model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
-		//}
+		RemoteDataManager.getManager().deleteFloor(((FloorTreeNode)childNode).getFloor());	
 		
 	}
+    
+    public void remove(IFloor floor)
+    {
+        FloorTreeNode childNode = searchChild(floor);
+        building.removeFloor(((FloorTreeNode)childNode).getFloor());
+        int index = children.indexOf(childNode);
+        children.remove(childNode); 
+        model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+    }
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
@@ -248,5 +262,61 @@ public class BuildingTreeNode implements FlexiTreeNode
 			((FlexiTreeNodeListener)iter.next()).nodeChanged(value);
 		}
 	}
+
+    /* (non-Javadoc)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
+     */
+    public void dataChanged(DataEvent event) throws RemoteException
+    {
+         IBuilding building = (IBuilding)event.getSource();
+         int type = event.getEventType();
+         switch(type)
+         {
+             case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+             {
+                 IFloor[] tabFloor = (IFloor[])event.getSubObjects();
+                 for(int i=0;i<tabFloor.length;i++)
+                 {
+                    add(tabFloor[i]);
+                 }
+                 break;
+             }
+             case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
+             {
+                IFloor[] tabFloor = (IFloor[])event.getSubObjects();
+                for(int i=0;i<tabFloor.length;i++)
+                {
+                    FloorTreeNode ftn = searchChild(tabFloor[i]);
+                    ftn.setFloor(tabFloor[i]);
+                }
+                break; 
+             }
+             case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+             {
+                 IFloor[] tabFloor = (IFloor[])event.getSubObjects();
+                 for(int i=0;i<tabFloor.length;i++)
+                 {
+                     remove(tabFloor[i]);
+                 }
+                 break;   
+             }
+   
+         }
+        
+    }
+    
+    public FloorTreeNode searchChild(IFloor floor)
+    {
+        Iterator ite = children.iterator() ;
+        for(;ite.hasNext();)
+        {
+            FloorTreeNode ftn= (FloorTreeNode)ite.next();
+            if(ftn.getFloor().equals(floor))
+            {
+                return ftn;
+            }
+        }
+        return null;
+    }
 
 }

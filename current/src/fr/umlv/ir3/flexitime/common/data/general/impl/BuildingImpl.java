@@ -6,9 +6,11 @@
 
 package fr.umlv.ir3.flexitime.common.data.general.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.general.*;
+import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
+import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
 /**

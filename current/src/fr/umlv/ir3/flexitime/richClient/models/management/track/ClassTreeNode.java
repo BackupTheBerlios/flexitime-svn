@@ -11,18 +11,14 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
@@ -175,7 +171,7 @@ public class ClassTreeNode implements FlexiTreeNode
 			children.add(new GroupTreeNode(this,(IGroup)iClass.getLstGroups().get(i),model));
 		}
 		//Ajout de la teachingStructure
-		if(iClass.getTeachingStructure()==null)iClass.setTeachingStructure(DataFactory.createTeachingStructure("structure",iClass));
+		//if(iClass.getTeachingStructure()==null)iClass.setTeachingStructure(DataFactory.createTeachingStructure("structure",iClass));
 		teachingStructure = new TeachingStructureTreeNode(this,iClass.getTeachingStructure(),model);
 		ArrayList list = new ArrayList(children);
 		list.add(teachingStructure);
@@ -199,7 +195,7 @@ public class ClassTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
-	public TreeNode add() {
+	public TreeNode add() throws FlexiException {
 	
 				IGroup groupe = DataFactory.createGroup("Nouveau Groupe",0,iClass);
 				GroupTreeNode child = new GroupTreeNode(this,groupe,model);

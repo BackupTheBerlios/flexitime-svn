@@ -5,7 +5,9 @@
  */
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.util.*;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;

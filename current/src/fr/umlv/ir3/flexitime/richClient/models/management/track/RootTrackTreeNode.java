@@ -6,18 +6,17 @@
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.track;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 
 /**
@@ -32,7 +31,7 @@ public class RootTrackTreeNode extends RootTreeNode{
     //   Constructeurs  //
     //==================// 
 	
-	public RootTrackTreeNode(TreeNode parent,List lstTrack)
+	public RootTrackTreeNode(TreeNode parent,List lstTrack) throws RemoteException
 	{
 		super(parent,lstTrack);
 	}
@@ -43,8 +42,9 @@ public class RootTrackTreeNode extends RootTreeNode{
 	 * @param cat the category
 	 * @param factory the BuckFactory
 	 * @param model the model
+	 * @throws RemoteException 
 	 */
-	public RootTrackTreeNode(TreeNode parent,List lstTrack,DefaultTreeModel model)
+	public RootTrackTreeNode(TreeNode parent,List lstTrack,DefaultTreeModel model) throws RemoteException
 	{
 		super(parent,lstTrack,model);
 	}
@@ -71,7 +71,7 @@ public class RootTrackTreeNode extends RootTreeNode{
 		return(list);
 	}
 
-	public TreeNode add() 
+	public TreeNode add() throws FlexiException 
 	{
 		//synchronized(this.cat)
 		//{
@@ -108,4 +108,13 @@ public class RootTrackTreeNode extends RootTreeNode{
 		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
 		
 	}
+
+    /* (non-Javadoc)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
+     */
+    public void dataChanged(DataEvent event) throws RemoteException
+    {
+        // TODO Auto-generated method stub
+        
+    }
 }

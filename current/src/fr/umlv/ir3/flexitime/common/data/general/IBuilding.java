@@ -7,6 +7,7 @@
 package fr.umlv.ir3.flexitime.common.data.general;
 
 import java.util.List;
+
 import fr.umlv.ir3.flexitime.common.data.IData;
 
 /**

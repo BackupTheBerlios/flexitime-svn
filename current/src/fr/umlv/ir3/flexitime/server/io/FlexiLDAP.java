@@ -8,11 +8,12 @@ package fr.umlv.ir3.flexitime.server.io;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+
 import javax.naming.Context;
+import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.ldap.InitialLdapContext;
-import javax.naming.NamingException;
 
 /**
  * @author Valère FOREL

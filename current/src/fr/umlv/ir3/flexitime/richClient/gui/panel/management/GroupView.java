@@ -27,7 +27,6 @@ import com.jgoodies.forms.layout.FormLayout;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
-import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
 
 /**

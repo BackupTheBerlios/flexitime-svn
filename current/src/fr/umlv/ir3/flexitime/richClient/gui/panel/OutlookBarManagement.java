@@ -7,42 +7,25 @@
 package fr.umlv.ir3.flexitime.richClient.gui.panel;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
+import java.rmi.RemoteException;
 import java.util.List;
 
-import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
-
-
-import fr.umlv.ir3.flexitime.richClient.gui.actions.management.DefaultTreeActions;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiMouseListenerFactory;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiSelectionListenerFactory;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.*;
-import fr.umlv.ir3.flexitime.richClient.models.*;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.RootDeviceTreeNode;
@@ -66,11 +49,13 @@ public class OutlookBarManagement
     //JList list;
 
 
-    public OutlookBarManagement(/*JPanel*/JComponent panelParent,List listTrack,List listDevice,List listBuilding,List listTeacher) {
+    public OutlookBarManagement(/*JPanel*/JComponent panelParent,List listTrack,List listDevice,List listBuilding,List listTeacher) throws RemoteException 
+    {
+
         this.panelParent = panelParent;
-    	panelOutlookBar = new JPanel(new BorderLayout());
-    	//panelOutlookBar.setPreferredSize();
-    	//Create a list model and a list for the Teachers.
+        panelOutlookBar = new JPanel(new BorderLayout());
+        //panelOutlookBar.setPreferredSize();
+        //Create a list model and a list for the Teachers.
         TeacherListModel listModel = new TeacherListModel(listTeacher);
         JList list = new JList(listModel);
         list.addMouseListener(FlexiMouseListenerFactory.createTeacherMouseLister());
@@ -81,7 +66,9 @@ public class OutlookBarManagement
         listView.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         //Tree for track
-        RootTreeNode rootTrackTree = new RootTrackTreeNode(null,listTrack);
+        RootTreeNode rootTrackTree;
+
+		rootTrackTree = new RootTrackTreeNode(null,listTrack);
         JTree treeTrack = createJTree(rootTrackTree);
         treeTrack.addMouseListener(FlexiMouseListenerFactory.createTrackMouseLister());
         treeTrack.addTreeSelectionListener(FlexiSelectionListenerFactory.createTrackTreeSelectionListener(this.panelParent));
@@ -106,6 +93,7 @@ public class OutlookBarManagement
         JScrollPane scrollRoom = new JScrollPane(treeRoom);
         scrollRoom.setPreferredSize(new Dimension(300,100));
         scrollRoom.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+       
         
         FlexiBar ob = new FlexiBar();
         ob.add("Filières",scrollTrack);

@@ -1,10 +1,13 @@
 package fr.umlv.ir3.flexitime.richClient.models.management;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 
 
 
@@ -44,20 +47,24 @@ public class ResourceTreeModel extends DefaultTreeModel {
 	}
 	
 	/**
-	 * To add a category
+	 * To add a resource
 	 * @param tree the tree of the categories
 	 * @param value the new category
+	 * @throws FlexiException 
 	 */
-	public void add(TreeNode tree)
+	public TreeNode add(TreeNode tree) throws FlexiException
 	{
-		((FlexiTreeNode)tree).add();
+		TreeNode treeNode = ((FlexiTreeNode)tree).add();
+        return treeNode;
 	}
 	
 	/**
 	 * To remove a category
 	 * @param tree the category to be deleted
+	 * @throws FlexiException 
+	 * @throws RemoteException 
 	 */
-	public void remove(TreeNode tree)
+	public void remove(TreeNode tree) throws RemoteException, FlexiException
 	{
 		if(tree.getParent()!=null)
 		{

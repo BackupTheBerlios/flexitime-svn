@@ -15,7 +15,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 
@@ -132,10 +131,18 @@ public class DeviceTreeNode implements FlexiTreeNode
 	public Enumeration children() {
 		return null;
 	}
-	public IDevice getDevice()
+	
+    public IDevice getDevice()
 	{
 		return device;
 	}
+    
+    public void setDevice(IDevice device)
+    {
+       this.device=device;
+       informListenerChange(device.getName());
+        model.nodeChanged(this);
+    }
 	/**
 	 * Creates dynamiquely the list of the children when the user click on the "plus"
 	 * @return the list of sub categories

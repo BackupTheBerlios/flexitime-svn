@@ -6,11 +6,8 @@
  */
 package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;

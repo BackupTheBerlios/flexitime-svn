@@ -6,6 +6,7 @@
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.device;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -16,9 +17,11 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
@@ -82,6 +85,7 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	 * @param cat the category
 	 * @param factory the BuckFactory
 	 * @param model the model
+	 * @throws RemoteException 
 	 */
 	public TypeDeviceTreeNode(TreeNode parent,String name,int type,List lstDevice,DefaultTreeModel model)
 	{
@@ -166,6 +170,10 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	{
 		return lstDevice;
 	}
+    public int getType()
+    {
+        return type;
+    }
 	/**
 	 * Redefinition of the method toString()
 	 * @return the name into a string
@@ -176,28 +184,32 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	}
 
 	
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
-	 */
-	public TreeNode add() 
-	{
-
-			IDevice device= DataFactory.createDevice("Nouveau Matériel");
-			device.setType(type);
-			lstDevice.add( device);
-			DeviceTreeNode child = new DeviceTreeNode(this,device,model);
-			if(children.size()==0)
-			{
-				processChildren();
-			}
-			else
-			{
-				children.add(child);
-			}
-			model.nodesWereInserted(this,new int[]{children.size()-1});
-			return child;
-	}
-	
+	/*
+    * (non-Javadoc)
+     * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
+     */
+    public TreeNode add() throws FlexiException 
+    {
+            IDevice device= DataFactory.createDevice("Nouveau Matériel");
+            device.setType(type);
+            return(add(device));
+    }
+    
+	public TreeNode add(IDevice device)
+    {
+        lstDevice.add( device);
+        DeviceTreeNode child = new DeviceTreeNode(this,device,model);
+        if(children.size()==0)
+        {
+            processChildren();
+        }
+        else
+        {
+            children.add(child);
+        }
+        model.nodesWereInserted(this,new int[]{children.size()-1});
+        return child;
+    }
 	
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
@@ -209,22 +221,44 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
-	public void remove(TreeNode childNode) {
+	public void remove(TreeNode childNode) throws RemoteException, FlexiException {
 		lstDevice.remove(((DeviceTreeNode)childNode).getDevice());
-		((RootDeviceTreeNode)this.getParent()).getList().remove(((DeviceTreeNode)childNode).getDevice());
-		//Effacement du device dans la base
+        ((RootDeviceTreeNode)this.getParent()).getList().remove(((DeviceTreeNode)childNode).getDevice());
 		int index = children.indexOf(childNode);
 		children.remove(childNode);	
 		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
 		
 	}
+    
+    public void remove(IDevice device) {
+        DeviceTreeNode childNode = searchChild(device);
+        lstDevice.remove(device);
+        int index = children.indexOf(childNode);
+        children.remove(childNode); 
+        model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        
+    }
+    
+    public DeviceTreeNode searchChild(IDevice device)
+    {
+        Iterator ite = children.iterator() ;
+        for(;ite.hasNext();)
+        {
+            DeviceTreeNode dtn= (DeviceTreeNode)ite.next();
+            if(dtn.getDevice().equals(device))
+            {
+                return dtn;
+            }
+        }
+        return null;
+    }
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
 	 */
-	public void setValue(Object newValue) {
-		//non utilisée
-		
+	public void setValue(Object device) {
+		DeviceTreeNode childNode = searchChild((IDevice)device);
+        childNode.setDevice(((IDevice)device));
 	}
 
 
@@ -244,4 +278,5 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	{
 		//Non utilisée
 	}
+
 }

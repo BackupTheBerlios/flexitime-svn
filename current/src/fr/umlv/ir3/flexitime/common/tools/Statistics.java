@@ -5,14 +5,13 @@
  */
 package fr.umlv.ir3.flexitime.common.tools;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.*;
-import fr.umlv.ir3.flexitime.common.data.activity.*;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.*;
-import fr.umlv.ir3.flexitime.common.data.resources.*;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
+import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 
 
 /**
