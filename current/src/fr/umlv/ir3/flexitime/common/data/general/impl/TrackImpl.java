@@ -105,6 +105,7 @@ public class TrackImpl extends DataImpl implements ITrack
     public void addClass(IClass pClass)
     {
         lstClass.add(pClass);
+        pClass.setParentTrack(this);
     }
 
     /** 

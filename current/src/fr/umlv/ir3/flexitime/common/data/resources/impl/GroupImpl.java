@@ -61,6 +61,17 @@ public class GroupImpl extends ResourceImpl implements IGroup
 		this.parentClass = parentClass;
 	}
 	
+	/**
+	 * Constructs a group with a name and a number of person
+	 * @param name name of the group
+	 * @param nbPerson number of person in this group
+	 */
+	public GroupImpl(String name, int nbPerson)
+	{
+	    super(name);
+	    this.nbPerson = nbPerson;
+	}
+	
     /**
      * Constructs a group.
      * 

@@ -34,7 +34,7 @@ public class ClassImpl extends DataImpl implements IClass
     //   Champs  //
     //===========// 
     private List lstGroups;
-    private ITeachingStructure teachStruct;
+    private ITeachingStructure teachingStructure;
     private ITrack parentTrack;
     
     
@@ -75,7 +75,7 @@ public class ClassImpl extends DataImpl implements IClass
      * Constructs a class.
      * 
      * @param sName a string for the name of this class.
-     * @param lstGroups the list of groups in this class.
+     * @param listOfGroups the list of groups in this class.
      * @param struct the teaching structure of this class.
 	 * @param track the parent track.
      */
@@ -83,7 +83,7 @@ public class ClassImpl extends DataImpl implements IClass
     {
         super(sName);
         this.lstGroups = new ArrayList(listOfGroups);
-        this.teachStruct = struct;
+        this.teachingStructure = struct;
         this.parentTrack = track;
     }
 
@@ -137,7 +137,7 @@ public class ClassImpl extends DataImpl implements IClass
 
     /** 
      * Returns the teaching structure of this class.
-     * <code>ITeachingStructure teachStruct = class.getTeachingStructure()</code>
+     * <code>ITeachingStructure teachingStructure = class.getTeachingStructure()</code>
      *
      * @return the teaching structure of this class.
      * 
@@ -145,7 +145,7 @@ public class ClassImpl extends DataImpl implements IClass
      */
     public ITeachingStructure getTeachingStructure()
     {
-        return teachStruct;
+        return teachingStructure;
     }
 
     /** 
@@ -158,7 +158,7 @@ public class ClassImpl extends DataImpl implements IClass
      */
     public void setTeachingStructure(ITeachingStructure struct)
     {
-        teachStruct = new TeachingStructureImpl(struct.getName(), struct.getLstSubjectsGroup());
+        teachingStructure = struct;
     }
 
     /** 
@@ -193,11 +193,12 @@ public class ClassImpl extends DataImpl implements IClass
      *
      * @param group a group to add to the list.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.general.IClass#addGroup(fr.umlv.ir3.flexitime.common.data.ressources.IGroup)
+     * @see fr.umlv.ir3.flexitime.common.data.general.IClass#addGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup)
      */
     public void addGroup(IGroup group)
     {
         lstGroups.add(group);
+        group.setParentClass(this);
     }
 
     /** 
@@ -206,7 +207,7 @@ public class ClassImpl extends DataImpl implements IClass
      *
      * @param group a group to remove of the list.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.general.IClass#removeGroup(fr.umlv.ir3.flexitime.common.data.ressources.IGroup)
+     * @see fr.umlv.ir3.flexitime.common.data.general.IClass#removeGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup)
      */
     public void removeGroup(IGroup group)
     {
@@ -219,7 +220,7 @@ public class ClassImpl extends DataImpl implements IClass
 	 *
 	 * @return the parent track of this class.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.general.IClass#getParentTrack()
+	 * @see fr.umlv.ir3.flexitime.common.data.general.IClass#getParentTrack()
 	 */
 	public ITrack getParentTrack()
 	{
@@ -232,7 +233,7 @@ public class ClassImpl extends DataImpl implements IClass
 	 * 
 	 * @param track the parent track of this class.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.general.IClass#setParentTrack(fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl)
+	 * @see fr.umlv.ir3.flexitime.common.data.general.IClass#setParentTrack(fr.umlv.ir3.flexitime.common.data.general.ITrack)
 	 */
 	public void setParentTrack(ITrack track)
 	{

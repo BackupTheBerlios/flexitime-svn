@@ -32,5 +32,23 @@ public interface IData extends Serializable
      * @author FlexiTeam - Guillaume GUERRIN
      */
     void setName(String name);
+    
+    /**
+     *  
+     * Returns id of the Data
+     *
+     * @return id
+     * 
+     */
+    Long getIdData();
+
+    /**
+     *  
+     * Setter fot the id
+     * 
+     * @param id Id to set 
+     * 
+     */
+    void setIdData(Long id);
 
 }

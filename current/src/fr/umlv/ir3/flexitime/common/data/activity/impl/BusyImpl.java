@@ -185,7 +185,6 @@ public abstract class BusyImpl implements IBusy
      * Setter of id
      * @param idBusy id to set 
      * 
-     * @see (si nécessaire)
      */
     public void setIdBusy(Long idBusy)
     {

@@ -30,11 +30,11 @@ public class CourseImpl extends DataImpl implements ICourse
     //===========//
 	//  Champs	 //
 	//===========//
-    private int iType;
-    private int iNbHours;
+    private int type;
+    private int nbHours;
     private Color color;
-    private List listOfTeachers;
-    private int iDefaultLength;
+    private List lstTeacher;
+    private int defaultLength;
     private ISubject parentSubject;
     
     
@@ -83,12 +83,22 @@ public class CourseImpl extends DataImpl implements ICourse
     public CourseImpl(String name, int type, int nbHours, Color color, List listTeachers, int defaultLength, SubjectImpl subject)
     {
         super(name);
-        this.iType = type;
-        this.iNbHours = nbHours;
+        this.type = type;
+        this.nbHours = nbHours;
         this.color = color;
-        this.listOfTeachers = new ArrayList(listTeachers);
-        this.iDefaultLength = defaultLength;
+        this.lstTeacher = new ArrayList(listTeachers);
+        this.defaultLength = defaultLength;
         this.parentSubject = subject;
+    }
+    
+    public CourseImpl(String name, int type, int nbHours, Color color, int defaultLength)
+    {
+        super(name);
+        this.type = type;
+        this.nbHours = nbHours;
+        this.color = color;
+        this.defaultLength = defaultLength;
+        lstTeacher = new ArrayList();
     }
 
     
@@ -106,7 +116,7 @@ public class CourseImpl extends DataImpl implements ICourse
      */
     public int getType()
     {
-        return iType;
+        return type;
     }
 
     /** 
@@ -120,7 +130,7 @@ public class CourseImpl extends DataImpl implements ICourse
      */
     public void setType(int type)
     {
-        this.iType = type;
+        this.type = type;
     }
 
     /** 
@@ -134,7 +144,7 @@ public class CourseImpl extends DataImpl implements ICourse
      */
     public int getNbHours()
     {
-        return iNbHours;
+        return nbHours;
     }
 
     /** 
@@ -148,7 +158,7 @@ public class CourseImpl extends DataImpl implements ICourse
      */
     public void setNbHours(int nbHours)
     {
-        this.iNbHours = nbHours;
+        this.nbHours = nbHours;
     }
 
 
@@ -163,7 +173,7 @@ public class CourseImpl extends DataImpl implements ICourse
 	 */
 	public int getDefaultLength()
 	{
-		return iDefaultLength;
+		return defaultLength;
 	}
 
 	/** 
@@ -177,7 +187,7 @@ public class CourseImpl extends DataImpl implements ICourse
 	 */
 	public void setDefaultLength(int hour)
 	{
-		this.iDefaultLength = hour;		
+		this.defaultLength = hour;		
 	}
 
     /** 
@@ -219,7 +229,7 @@ public class CourseImpl extends DataImpl implements ICourse
      */
     public List getLstTeacher()
     {
-        return listOfTeachers;
+        return lstTeacher;
     }
 
     /** 
@@ -233,7 +243,7 @@ public class CourseImpl extends DataImpl implements ICourse
      */
     public void setLstTeacher(List lstTeacher)
     {
-        this.listOfTeachers = new ArrayList(lstTeacher);
+        this.lstTeacher = new ArrayList(lstTeacher);
     }
 
     /** 
@@ -247,7 +257,7 @@ public class CourseImpl extends DataImpl implements ICourse
      */
     public void addTeacher(ITeacher teacher)
     {
-        listOfTeachers.add(teacher);
+        lstTeacher.add(teacher);
     }
 
     /** 
@@ -261,7 +271,7 @@ public class CourseImpl extends DataImpl implements ICourse
      */
     public void removeTeacher(ITeacher teacher)
     {
-        listOfTeachers.remove(teacher);
+        lstTeacher.remove(teacher);
     }
     
 	/** 

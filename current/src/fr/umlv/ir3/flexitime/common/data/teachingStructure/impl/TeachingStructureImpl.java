@@ -26,7 +26,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
     //===========//
 	//  Champs	 //
 	//===========//
-    private List listOfSubjectsGroups;
+    private List lstSubjectsGroup;
     
     
 	//=============//
@@ -46,6 +46,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
 	public TeachingStructureImpl(String name)
 	{
 		super(name);
+		lstSubjectsGroup = new ArrayList();
 	}
 	
     /**
@@ -57,7 +58,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
     public TeachingStructureImpl(String name, List listSubjectsGroup)
     {
         super(name);
-        this.listOfSubjectsGroups = new ArrayList(listSubjectsGroup);
+        this.lstSubjectsGroup = new ArrayList(listSubjectsGroup);
     }
 
     
@@ -75,7 +76,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
      */
     public List getLstSubjectsGroup()
     {
-        return listOfSubjectsGroups;
+        return lstSubjectsGroup;
     }
 
     /** 
@@ -89,7 +90,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
      */
     public void setLstSubjectsGroup(List lst)
     {
-        listOfSubjectsGroups = new ArrayList(lst);
+        lstSubjectsGroup = new ArrayList(lst);
     }
 
     /** 
@@ -103,7 +104,8 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
      */
     public void addSubjectsGroup(ISubjectsGroup subjectsGroup)
     {
-        listOfSubjectsGroups.add(subjectsGroup);
+        lstSubjectsGroup.add(subjectsGroup);
+        subjectsGroup.setParentTeachStruct(this);
     }
 
     /** 
@@ -117,7 +119,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
      */
     public void removeSubjectsGroup(ISubjectsGroup subjectsGroup)
     {
-        listOfSubjectsGroups.remove(subjectsGroup);
+        lstSubjectsGroup.remove(subjectsGroup);
     }
 }
 

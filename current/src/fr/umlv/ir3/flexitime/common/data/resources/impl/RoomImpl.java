@@ -84,6 +84,19 @@ public class RoomImpl extends ResourceImpl implements IRoom
         this.parentFloor = floor;        
     }
 
+    /**
+     * 
+     * Constructs a room
+     * @param name name of the room
+     * @param type type of the room
+     * @param capacity capacity of the room
+     */
+    public RoomImpl(String name, int type, int capacity)
+    {
+        super(name);
+        this.type = type;
+        this.capacity = capacity;
+    }
     
     //===========//
     // Méthodes  //

@@ -58,7 +58,7 @@ public interface IFloor extends IData
 	 * @return the building where the floor is. 
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-    IBuilding getBuilding();
+    IBuilding getParentBuilding();
     
 	/**
 	 * Sets the building where the floor is.
@@ -66,6 +66,6 @@ public interface IFloor extends IData
 	 * @param building the building where the floor is.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-    void setBuilding(IBuilding building);
+    void setParentBuilding(IBuilding building);
 
 }

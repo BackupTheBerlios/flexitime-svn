@@ -27,7 +27,7 @@ public class SubjectImpl extends DataImpl implements ISubject
     //===========//
 	//  Champs	 //
 	//===========//
-    private List listOfCourses;
+    private List lstCourse;
     private ISubjectsGroup parentSubjectsGroup;
     
     
@@ -48,6 +48,7 @@ public class SubjectImpl extends DataImpl implements ISubject
 	public SubjectImpl(String name)
 	{
 		super(name);
+		lstCourse = new ArrayList();
 	}
 	
 	/**
@@ -72,7 +73,7 @@ public class SubjectImpl extends DataImpl implements ISubject
     public SubjectImpl(String name, List listCourses, SubjectsGroupImpl subjectsGroup)
     {
         super(name);
-        this.listOfCourses = new ArrayList(listCourses);
+        this.lstCourse = new ArrayList(listCourses);
         this.parentSubjectsGroup = subjectsGroup;
     }
 
@@ -91,7 +92,7 @@ public class SubjectImpl extends DataImpl implements ISubject
      */
     public List getLstCourse()
     {
-        return listOfCourses;
+        return lstCourse;
     }
 
     /** 
@@ -105,7 +106,7 @@ public class SubjectImpl extends DataImpl implements ISubject
      */
     public void setLstCourse(List lstCourse)
     {
-        this.listOfCourses = new ArrayList(lstCourse);
+        this.lstCourse = new ArrayList(lstCourse);
     }
 
     /** 
@@ -119,7 +120,8 @@ public class SubjectImpl extends DataImpl implements ISubject
      */
     public void addCourse(ICourse course)
     {
-        listOfCourses.add(course);
+        lstCourse.add(course);
+        course.setParentSubject(this);
     }
 
     /** 
@@ -133,7 +135,7 @@ public class SubjectImpl extends DataImpl implements ISubject
      */
     public void removeCourse(ICourse course)
     {
-        listOfCourses.remove(course);
+        lstCourse.remove(course);
     }
 
 	/** 

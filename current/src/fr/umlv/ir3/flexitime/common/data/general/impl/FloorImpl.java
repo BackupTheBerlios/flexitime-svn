@@ -114,7 +114,7 @@ public class FloorImpl extends DataImpl implements IFloor
      *
      * @param room the room to add to the list.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#addRoom(fr.umlv.ir3.flexitime.common.data.ressources.IRoom)
+     * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#addRoom(fr.umlv.ir3.flexitime.common.data.resources.IRoom)
      */
     public void addRoom(IRoom room)
     {
@@ -128,7 +128,7 @@ public class FloorImpl extends DataImpl implements IFloor
      *
      * @param room the room to remove of the list.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#removeRoom(fr.umlv.ir3.flexitime.common.data.ressources.IRoom)
+     * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#removeRoom(fr.umlv.ir3.flexitime.common.data.resources.IRoom)
      */
     public void removeRoom(IRoom room)
     {
@@ -141,9 +141,9 @@ public class FloorImpl extends DataImpl implements IFloor
 	 * 
 	 * @return the name of the building where the floor is.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#getBuilding()
+	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#getParentBuilding()
 	 */
-	public IBuilding getBuilding()
+	public IBuilding getParentBuilding()
 	{
 		return parentBuilding;
 	}
@@ -151,11 +151,11 @@ public class FloorImpl extends DataImpl implements IFloor
 	/**
 	 * Sets the building where the floor is.
 	 * 
-	 * @param strBuilding the building where the floor is.
+	 * @param building the building where the floor is.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#setBuilding(IBuilding)
+	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#setParentBuilding(IBuilding)
 	 */
-	public void setBuilding(IBuilding building)
+	public void setParentBuilding(IBuilding building)
 	{
 		this.parentBuilding = building;
 	}

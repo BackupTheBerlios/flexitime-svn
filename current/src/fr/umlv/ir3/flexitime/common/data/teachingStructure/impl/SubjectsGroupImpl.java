@@ -27,7 +27,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
     //===========//
 	//  Champs	 //
 	//===========//
-    private List listOfSubjects;
+    private List lstSubject;
     private ITeachingStructure parentTeachStruct;
     
     
@@ -48,6 +48,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
 	public SubjectsGroupImpl(String name)
 	{
 		super(name);
+		lstSubject = new ArrayList();
 	}
 	
 	/**
@@ -72,7 +73,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
     public SubjectsGroupImpl(String name, List listSubjects, TeachingStructureImpl teachStruct)
     {
         super(name);
-        this.listOfSubjects = new ArrayList(listSubjects);
+        this.lstSubject = new ArrayList(listSubjects);
         this.parentTeachStruct = teachStruct;
     }
 
@@ -90,7 +91,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
      */
     public List getLstSubject()
     {
-        return listOfSubjects;
+        return lstSubject;
     }
 
     /** 
@@ -103,7 +104,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
      */
     public void setLstSubject(List lstSubject)
     {
-        this.listOfSubjects = new ArrayList(lstSubject);
+        this.lstSubject = new ArrayList(lstSubject);
     }
 
     /** 
@@ -116,7 +117,8 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
      */
     public void addSubject(ISubject subject)
     {
-        listOfSubjects.add(subject);
+        lstSubject.add(subject);
+        subject.setParentSubjectsGroup(this);
     }
 
     /** 
@@ -129,7 +131,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
      */
     public void removeSubject(ISubject subject)
     {
-        listOfSubjects.remove(subject);
+        lstSubject.remove(subject);
     }
     
 	/** 

@@ -116,7 +116,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
     public void addFloor(IFloor floor)
     {
         lstFloors.add(floor);
-        floor.setBuilding(this);
+        floor.setParentBuilding(this);
     }
 
     /** 
