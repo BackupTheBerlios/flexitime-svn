@@ -5,19 +5,11 @@
  */
 package fr.umlv.ir3.GL.test.edt.renderer;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 
-import temp.Busy;
 import fr.umlv.ir3.GL.test.edt.FlexiEDT;
+import fr.umlv.ir3.GL.test.edt.JLesson;
 import fr.umlv.ir3.GL.test.edt.model.EDTModel;
 
 
@@ -35,17 +27,14 @@ import fr.umlv.ir3.GL.test.edt.model.EDTModel;
  */
 public class EDTCellRenderer
 {
-    private JLabel label;
-    private int contrainte=1;
+    private JComponent comp;
 
     /**
      * DOCME
      * 
      */
     public EDTCellRenderer()
-    {
-        
-    }
+    {}
 
     /** 
      * DOCME Description
@@ -61,33 +50,18 @@ public class EDTCellRenderer
      */
     public JComponent getEDTCellRendererComponent(FlexiEDT flexiEDT, Object elementAt, int week, int day, int gap)
     {
-        this.contrainte = 1;
-        this.label = new JLabel();
-        if(elementAt == null)
-        {
-            //aucun rendu pour ce créneau car il sera surpassé par un Busy
-            return null;
-        }
-        else
+        this.comp = null;
+        if(elementAt != null)
         {
             if(elementAt instanceof EDTModel.LessonBloc)
             {
-                EDTModel.LessonBloc lessonBloc = (EDTModel.LessonBloc)elementAt;
-                Busy busy = lessonBloc.getBusy();
-//              nous sommes bien dans le cas d'un Busy à placer
-                this.contrainte = lessonBloc.getNbGap();
-                this.label.setBackground(busy.getColor());
-                this.label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                label.setFont(new Font("Serif", Font.PLAIN, 9));
-                this.label.setText("<html>" + busy.getReason() + " " + busy.getGap().getStartDate().getTime()+ "/" + busy.getGap().getEndDate().getTime()+ "</html>");
-                
+                //nous sommes bien dans le cas d'un Busy à placer
+                comp = new JLesson( (EDTModel.LessonBloc)elementAt ); 
             }   
             else
             {
-                //cas d'un créneau vide (sans cours)
-                this.label.setText("");
-                this.label.setBackground(Color.WHITE);
-                this.label.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+                //cas d'un créneau vide à placer
+                comp = new JLesson(null);
                 /*if(week%2 == 0 && gap%2 == 0)
                     this.label.setBackground(FlexiColor.getColor(FlexiColor.lightblue));
                 else
@@ -100,27 +74,10 @@ public class EDTCellRenderer
             }
         }
         
-        this.label.setPreferredSize(new Dimension(FlexiEDT.WEEK_WIDTH,FlexiEDT.GAP_HEIGTH*contrainte));
-        
-        this.label.setOpaque(true);
-        return this.label;
+       
+        return comp;
     }
 
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @return 
-     * 
-     * @see (si nécessaire)
-     * @author   FlexiTeam - binou
-     */
-    public int getEDTCellRendererConstraint()
-    {
-        // TODO Auto-generated method stub
-        return this.contrainte;
-    }
     
 
 

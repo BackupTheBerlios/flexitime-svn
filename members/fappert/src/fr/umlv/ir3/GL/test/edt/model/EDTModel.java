@@ -28,7 +28,7 @@ public class EDTModel
     private final String[] dayList = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"};
     private final int      nbDays  = 5;
     //TODO faire un JSlider pour assurer la cohérence
-    private final int      gapTime = 15;
+    private final int      gapTime = 30;
     private final Gap edtWeekGap;
     private final Gap[] blocList;
 
@@ -53,15 +53,17 @@ public class EDTModel
     {
         super();
         
-        this.edtWeekGap = new temp.Gap(2005,0,3,0,0,2005,2,1,0,0);
+        this.edtWeekGap = new Gap(2005,1,3,0,0,2005,3,1,0,0);
+        System.out.println(edtWeekGap.getEndDate().getCal().get(Calendar.WEEK_OF_YEAR));
+        System.out.println(edtWeekGap.getStartDate().getCal().get(Calendar.WEEK_OF_YEAR));
         this.nbWeeks = edtWeekGap.getEndDate().getCal().get(Calendar.WEEK_OF_YEAR)
         - edtWeekGap.getStartDate().getCal().get(Calendar.WEEK_OF_YEAR) + 1;
         
-        this.blocList = new temp.Gap[4];
-        this.blocList[0] = new temp.Gap(1901,1,1,8,30,1901,1,1,10,30);
-        this.blocList[1] = new temp.Gap(1901,1,1,10,45,1901,1,1,12,45);
-        this.blocList[2] = new temp.Gap(1901,1,1,13,45,1901,1,1,15,45);
-        this.blocList[3] = new temp.Gap(1901,1,1,16,0,1901,1,1,18,0);
+        this.blocList = new Gap[4];
+        this.blocList[0] = new Gap(1901,1,1,8,30,1901,1,1,10,30);
+        this.blocList[1] = new Gap(1901,1,1,10,45,1901,1,1,12,45);
+        this.blocList[2] = new Gap(1901,1,1,13,45,1901,1,1,15,45);
+        this.blocList[3] = new Gap(1901,1,1,16,0,1901,1,1,18,0);
 
 
         for (int i = 0; i < blocList.length; i++)

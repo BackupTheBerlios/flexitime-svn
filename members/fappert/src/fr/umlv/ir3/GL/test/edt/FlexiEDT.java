@@ -33,7 +33,7 @@ public class FlexiEDT extends JPanel
 	public static final int WEEK_WIDTH = 75;
 	public static final int DAY_COLUMN_WIDTH = 75;
 	public static final int DAY_HEIGTH = 25;
-	public static final int GAP_HEIGTH = 4;
+	public static final int GAP_HEIGTH = 15;
 	
 	
 	
@@ -263,13 +263,12 @@ public class FlexiEDT extends JPanel
     {
 
         JComponent comp = cellRenderer.getEDTCellRendererComponent(this,model.getElementAt(weekNumber,dayNumber,gapNumber), weekNumber, dayNumber,gapNumber);
-        int fusion = cellRenderer.getEDTCellRendererConstraint();
         if(comp != null)
         {
             GridBagConstraints c = new GridBagConstraints();
             c.gridx = x;
             c.gridy = y;
-            c.gridheight = fusion;
+            c.gridheight = ((JLesson)comp).getNbGaps();
             c.fill = GridBagConstraints.VERTICAL;
             add(comp, c);
         }
