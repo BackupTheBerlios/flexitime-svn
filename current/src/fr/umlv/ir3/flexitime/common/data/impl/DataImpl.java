@@ -9,14 +9,10 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Abstract class and base class of all implementations of data
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * Implements the interface IData 
+ * @version 1.0
  * 
  * @author FlexiTeam - Prâsad
  */
@@ -34,10 +30,24 @@ public abstract class DataImpl implements IData
         this.name = name;
     }
     
+    /**
+     * Getter for the name
+     * @return the name of the data
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
+     */
     public String getName()
     {
         return name;
     }
+    
+    /**
+     *  
+     * Setter for the name 
+     * @param name the name to set
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
+     */
     public void setName(String name)
     {
         this.name = name;
