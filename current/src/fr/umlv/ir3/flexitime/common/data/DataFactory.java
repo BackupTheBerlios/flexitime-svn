@@ -468,19 +468,19 @@ public class DataFactory
         ILesson les = new LessonImpl(lesson);
         List<IResource> l = new LinkedList<IResource>();
         
-        for(Iterator<IDevice> it = les.getLstDevice().iterator(); it.hasNext(); )
+        for(Iterator<IDevice> it = les.getSetDevice().iterator(); it.hasNext(); )
         {
             l.add(it.next());
         }
-        for(Iterator<IGroup> it = les.getLstGroup().iterator(); it.hasNext(); )
+        for(Iterator<IGroup> it = les.getSetGroup().iterator(); it.hasNext(); )
         {
             l.add(it.next());
         }
-        for(Iterator<IRoom> it = les.getLstRoom().iterator(); it.hasNext(); )
+        for(Iterator<IRoom> it = les.getSetRoom().iterator(); it.hasNext(); )
         {
             l.add(it.next());
         }
-        for(Iterator<ITeacher> it = les.getLstTeacher().iterator(); it.hasNext(); )
+        for(Iterator<ITeacher> it = les.getSetTeacher().iterator(); it.hasNext(); )
         {
             l.add(it.next());
         }

@@ -32,10 +32,10 @@ public class LessonImpl extends BusyImpl implements ILesson
     // ===========//
     // Champs //
     // ===========//
-    private List<IDevice>     lstDevice;
-    private List<IRoom>       lstRoom;
-    private List<ITeacher>    lstTeacher;
-    private List<IGroup>      lstGroup;
+    private Set<IDevice>     setDevice;
+    private Set<IRoom>       setRoom;
+    private Set<ITeacher>    setTeacher;
+    private Set<IGroup>      setGroup;
     private ICourse           course;
     private int               length;
 
@@ -48,10 +48,10 @@ public class LessonImpl extends BusyImpl implements ILesson
      */
     protected LessonImpl()
     {
-        lstDevice = new ArrayList<IDevice>();
-        lstRoom = new ArrayList<IRoom>();
-        lstTeacher = new ArrayList<ITeacher>();
-        lstGroup = new ArrayList<IGroup>();
+        setDevice = new HashSet<IDevice>();
+        setRoom = new HashSet<IRoom>();
+        setTeacher = new HashSet<ITeacher>();
+        setGroup = new HashSet<IGroup>();
     }
     
     /**
@@ -66,10 +66,10 @@ public class LessonImpl extends BusyImpl implements ILesson
     private LessonImpl(Gap g, ICourse _course)
     {
         super(g);
-        lstDevice = new ArrayList<IDevice>();
-        lstRoom = new ArrayList<IRoom>();
-        lstTeacher = new ArrayList<ITeacher>();
-        lstGroup = new ArrayList<IGroup>();
+        setDevice = new HashSet<IDevice>();
+        setRoom = new HashSet<IRoom>();
+        setTeacher = new HashSet<ITeacher>();
+        setGroup = new HashSet<IGroup>();
         
         course = _course;
     }
@@ -187,16 +187,16 @@ public class LessonImpl extends BusyImpl implements ILesson
     public void addResource(IResource resource)
     {
         if (resource instanceof IRoom)
-            lstRoom.add((IRoom) resource);
+            setRoom.add((IRoom) resource);
 
         else if (resource instanceof IDevice)
-            lstDevice.add((IDevice) resource);
+            setDevice.add((IDevice) resource);
 
         else if (resource instanceof IGroup)
-            lstGroup.add((IGroup) resource);
+            setGroup.add((IGroup) resource);
 
         else if (resource instanceof ITeacher)
-            lstTeacher.add((ITeacher) resource);
+            setTeacher.add((ITeacher) resource);
 
         resource.addBusy(this);
     }
@@ -213,45 +213,45 @@ public class LessonImpl extends BusyImpl implements ILesson
     public void removeResource(IResource resource)
     {
         if (resource instanceof IRoom)
-            lstRoom.remove(resource);
+            setRoom.remove(resource);
         else if (resource instanceof IDevice)
-           lstDevice.remove(resource);
+           setDevice.remove(resource);
         else if (resource instanceof IGroup)
-            lstGroup.remove(resource);
+            setGroup.remove(resource);
         else if (resource instanceof ITeacher)
-            lstTeacher.remove(resource);
+            setTeacher.remove(resource);
     }
 
     /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getLstTeacher()
+     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getSetTeacher()
      */
-    public List getLstTeacher()
+    public Set<ITeacher> getSetTeacher()
     {
-        return lstTeacher;
+        return setTeacher;
     }
 
     /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getLstDevice()
+     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getSetDevice()
      */
-    public List getLstDevice()
+    public Set<IDevice> getSetDevice()
     {
-        return lstDevice;
+        return setDevice;
     }
 
     /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getLstRoom()
+     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getSetRoom()
      */
-    public List getLstRoom()
+    public Set<IRoom> getSetRoom()
     {
-        return lstRoom;
+        return setRoom;
     }
 
     /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getLstGroup()
+     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getSetGroup()
      */
-    public List getLstGroup()
+    public Set<IGroup> getSetGroup()
     {
-        return lstGroup;
+        return setGroup;
     }
 
     /**
@@ -263,37 +263,37 @@ public class LessonImpl extends BusyImpl implements ILesson
     }
 
     /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setLstTeacher(List)
+     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setSetTeacher(Set)
      */
-    public void setLstTeacher(List<ITeacher> lteacher)
+    public void setSetTeacher(Set<ITeacher> lteacher)
     {
-        lstTeacher = lteacher;
+        setTeacher = lteacher;
 
     }
 
     /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setLstDevice(List)
+     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setSetDevice(Set)
      */
-    public void setLstDevice(List<IDevice> ldevice)
+    public void setSetDevice(Set<IDevice> ldevice)
     {
-        lstDevice = ldevice;
+        setDevice = ldevice;
 
     }
 
     /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setLstRoom(List)
+     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setSetRoom(Set)
      */
-    public void setLstRoom(List<IRoom> lroom)
+    public void setSetRoom(Set<IRoom> lroom)
     {
-        lstRoom = lroom;
+        setRoom = lroom;
     }
 
     /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setLstGroup(List)
+     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setSetGroup(Set)
      */
-    public void setLstGroup(List<IGroup> lgroup)
+    public void setSetGroup(Set<IGroup> lgroup)
     {
-        lstGroup = lgroup;
+        setGroup = lgroup;
     }
 
     /**
@@ -323,5 +323,31 @@ public class LessonImpl extends BusyImpl implements ILesson
     public void setLength(int length)
     {
         this.length = length;
+    }
+    
+    
+    /** 
+     * Get all the reources in a List
+     * @return List of Iresource
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getAllResources()
+     */
+    public List<IResource> getAllResources()
+    {
+        List<IResource> l = new LinkedList<IResource>();
+        
+        for(IDevice d : setDevice)
+            l.add(d);
+        
+        for(IGroup g : setGroup)
+            l.add(g);
+        
+        for(IRoom r : setRoom)
+            l.add(r);
+        
+        for(ITeacher t : setTeacher)
+            l.add(t);
+        
+        return l;
     }
 }

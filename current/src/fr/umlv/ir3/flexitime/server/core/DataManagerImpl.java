@@ -69,11 +69,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     protected final EventManager manager          = new EventManager();
 
     /**
-     * 
      * Default constructor export object so that it can be called via RMI
      * 
-     * @throws RemoteException
-     *             if a error occurs when exporting the object
+     * @throws RemoteException if a error occurs when exporting the object
      */
     public DataManagerImpl() throws RemoteException
     {
@@ -83,12 +81,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     /**
      * adds a listener to the list
      * 
-     * @param _class
-     *            Class that the listener listen to
-     * @param l
-     *            listener to be added
-     * @throws RemoteException
-     *             if not reachable
+     * @param _class Class that the listener listen to
+     * @param l listener to be added
+     * @throws RemoteException if not reachable
      */
     public void addDataListener(Class _class, IDataListener l)
             throws RemoteException
@@ -99,12 +94,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     /**
      * removes a listener from the list
      * 
-     * @param _class
-     *            Class that the listener listen to
-     * @param l
-     *            IDataListener to be removed
-     * @throws RemoteException
-     *             if not reachable
+     * @param _class Class that the listener listen to
+     * @param l IDataListener to be removed
+     * @throws RemoteException if not reachable
      */
     public void removeDataListener(Class _class, IDataListener l)
             throws RemoteException
@@ -233,7 +225,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * <code>exemple d'appel de la methode</code>
      * 
      * @param _class
-     * 
      * @return
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateClass(fr.umlv.ir3.flexitime.common.data.general.IClass,
@@ -338,7 +329,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * <code>exemple d'appel de la methode</code>
      * 
      * @param course
-     * 
      * @return
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateCourse(fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse,
@@ -525,7 +515,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * <code>exemple d'appel de la methode</code>
      * 
      * @param floor
-     * 
      * @return
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateFloor(fr.umlv.ir3.flexitime.common.data.general.IFloor,
@@ -631,7 +620,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * <code>exemple d'appel de la methode</code>
      * 
      * @param group
-     * 
      * @return
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup,
@@ -736,7 +724,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * <code>exemple d'appel de la methode</code>
      * 
      * @param lesson
-     * 
      * @return
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateLesson(fr.umlv.ir3.flexitime.common.data.activity.ILesson,
@@ -749,23 +736,29 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         int type = lesson.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
                 : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
-        for(IResource elem : lresource)
+        for (IResource elem : lresource)
             lesson.addResource(elem);
-        try {
-			LessonStorage.save(lesson);
-		} catch (HibernateException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-         for (IResource r : lresource)
+
+        //Sauvegarde de la lesson
+        try
         {
-            //lesson.addResource(r);
+            LessonStorage.save(lesson);
+        }
+        catch (HibernateException e1)
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        
+        //Mise à jour des ressources associées
+        for (IResource r : lresource)
+        {
             if (r instanceof IGroup)
             {
                 IGroup g = (IGroup) r;
                 if (newOne || !g.getSetBusy().contains(lesson))
                 {
-                    //g.addBusy(lesson);
+                    // g.addBusy(lesson);
                     lesson.addResource(g);
                 }
                 try
@@ -843,81 +836,82 @@ public class DataManagerImpl extends UnicastRemoteObject implements
 
         }
 
-//        for (Iterator<IGroup> it = lesson.getLstGroup().iterator() ; it
-//                .hasNext() ;)
-//        {
-//            IGroup g = it.next();
-//            try
-//            {
-//                GroupStorage.save(g);
-//            }
-//            catch (HibernateException e)
-//            {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//                return null;
-//            }
-//
-//            manager.fireDataChanged(IGroup.class, new DataEvent(g, "lstBusy",
-//                    type, new Object[] { lesson }));
-//
-//        }
-//
-//        for (Iterator<IDevice> it = lesson.getLstDevice().iterator() ; it
-//                .hasNext() ;)
-//        {
-//            IDevice d = it.next();
-//            try
-//            {
-//                DeviceStorage.save(d);
-//            }
-//            catch (HibernateException e)
-//            {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//                return null;
-//            }
-//            manager.fireDataChanged(IDevice.class, new DataEvent(d, "lstBusy",
-//                    type, new Object[] { lesson }));
-//
-//        }
-//
-//        for (Iterator<IRoom> it = lesson.getLstRoom().iterator() ; it.hasNext() ;)
-//        {
-//            IRoom r = it.next();
-//            try
-//            {
-//                RoomStorage.save(r);
-//            }
-//            catch (HibernateException e)
-//            {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//                return null;
-//            }
-//            manager.fireDataChanged(IRoom.class, new DataEvent(r, "lstBusy",
-//                    type, new Object[] { lesson }));
-//
-//        }
-//
-//        for (Iterator<ITeacher> it = lesson.getLstTeacher().iterator() ; it
-//                .hasNext() ;)
-//        {
-//            ITeacher t = it.next();
-//            try
-//            {
-//                TeacherStorage.save(t);
-//            }
-//            catch (HibernateException e)
-//            {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//                return null;
-//            }
-//            manager.fireDataChanged(ITeacher.class, new DataEvent(t, "lstBusy",
-//                    type, new Object[] { lesson }));
-//
-//        }
+        // for (Iterator<IGroup> it = lesson.getLstGroup().iterator() ; it
+        // .hasNext() ;)
+        // {
+        // IGroup g = it.next();
+        // try
+        // {
+        // GroupStorage.save(g);
+        // }
+        // catch (HibernateException e)
+        // {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // return null;
+        // }
+        //
+        // manager.fireDataChanged(IGroup.class, new DataEvent(g, "lstBusy",
+        // type, new Object[] { lesson }));
+        //
+        // }
+        //
+        // for (Iterator<IDevice> it = lesson.getLstDevice().iterator() ; it
+        // .hasNext() ;)
+        // {
+        // IDevice d = it.next();
+        // try
+        // {
+        // DeviceStorage.save(d);
+        // }
+        // catch (HibernateException e)
+        // {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // return null;
+        // }
+        // manager.fireDataChanged(IDevice.class, new DataEvent(d, "lstBusy",
+        // type, new Object[] { lesson }));
+        //
+        // }
+        //
+        // for (Iterator<IRoom> it = lesson.getLstRoom().iterator() ;
+        // it.hasNext() ;)
+        // {
+        // IRoom r = it.next();
+        // try
+        // {
+        // RoomStorage.save(r);
+        // }
+        // catch (HibernateException e)
+        // {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // return null;
+        // }
+        // manager.fireDataChanged(IRoom.class, new DataEvent(r, "lstBusy",
+        // type, new Object[] { lesson }));
+        //
+        // }
+        //
+        // for (Iterator<ITeacher> it = lesson.getLstTeacher().iterator() ; it
+        // .hasNext() ;)
+        // {
+        // ITeacher t = it.next();
+        // try
+        // {
+        // TeacherStorage.save(t);
+        // }
+        // catch (HibernateException e)
+        // {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // return null;
+        // }
+        // manager.fireDataChanged(ITeacher.class, new DataEvent(t, "lstBusy",
+        // type, new Object[] { lesson }));
+        //
+        // }
 
         return lesson;
     }
@@ -948,7 +942,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      */
     public boolean deleteLesson(ILesson lesson) throws RemoteException
     {
-        for (Iterator<IGroup> it = lesson.getLstGroup().iterator() ; it
+        for (Iterator<IGroup> it = lesson.getSetGroup().iterator() ; it
                 .hasNext() ;)
         {
             IGroup g = it.next();
@@ -969,7 +963,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
 
         }
 
-        for (Iterator<IDevice> it = lesson.getLstDevice().iterator() ; it
+        for (Iterator<IDevice> it = lesson.getSetDevice().iterator() ; it
                 .hasNext() ;)
         {
             IDevice d = it.next();
@@ -990,7 +984,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
 
         }
 
-        for (Iterator<IRoom> it = lesson.getLstRoom().iterator() ; it.hasNext() ;)
+        for (Iterator<IRoom> it = lesson.getSetRoom().iterator() ; it.hasNext() ;)
         {
             IRoom r = it.next();
             try
@@ -1010,7 +1004,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
 
         }
 
-        for (Iterator<ITeacher> it = lesson.getLstTeacher().iterator() ; it
+        for (Iterator<ITeacher> it = lesson.getSetTeacher().iterator() ; it
                 .hasNext() ;)
         {
 
@@ -1050,7 +1044,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * <code>exemple d'appel de la methode</code>
      * 
      * @param room
-     * 
      * @return
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateRoom(fr.umlv.ir3.flexitime.common.data.resources.IRoom,
@@ -1149,7 +1142,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * <code>exemple d'appel de la methode</code>
      * 
      * @param subject
-     * 
      * @return
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject,
@@ -1257,7 +1249,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * <code>exemple d'appel de la methode</code>
      * 
      * @param subjectsGroup
-     * 
      * @return
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup,
@@ -1460,7 +1451,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * <code>exemple d'appel de la methode</code>
      * 
      * @param teachingStructure
-     * 
      * @return
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateTeachingStructure(fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure,
@@ -1643,7 +1633,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * @param parent
      * @return
      * @throws RemoteException
-     * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateDeviceBusy(fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy,
      *      fr.umlv.ir3.flexitime.common.data.resources.IDevice)
      */
@@ -1677,7 +1666,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * @param parent
      * @return list of busies
      * @throws RemoteException
-     * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getBusies(fr.umlv.ir3.flexitime.common.data.resources.IResource)
      */
     public List<IBusy> getBusies(IResource parent) throws RemoteException
@@ -1694,7 +1682,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * @return
      * @throws RemoteException
      * @throws FlexiException
-     * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteDeviceBusy(fr.umlv.ir3.flexitime.common.data.general.ITrack)
      */
     public boolean deleteDeviceBusy(ITrack track) throws RemoteException,
@@ -1712,7 +1699,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * @param parent
      * @return
      * @throws RemoteException
-     * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateGroupBusy(fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy,
      *      fr.umlv.ir3.flexitime.common.data.resources.IGroup)
      */
@@ -1748,7 +1734,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * @param parent
      * @return
      * @throws RemoteException
-     * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateRoomBusy(fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy,
      *      fr.umlv.ir3.flexitime.common.data.resources.IRoom)
      */
@@ -1784,7 +1769,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * @param parent
      * @return
      * @throws RemoteException
-     * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateTeacherBusy(fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy,
      *      fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
      */

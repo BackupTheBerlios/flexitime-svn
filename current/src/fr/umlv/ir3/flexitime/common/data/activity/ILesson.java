@@ -7,6 +7,7 @@
 package fr.umlv.ir3.flexitime.common.data.activity;
 
 import java.util.List;
+import java.util.Set;
 
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
@@ -46,7 +47,7 @@ public interface ILesson extends IBusy
      * 
      * @return List of ITeacher
      */
-    public List getLstTeacher();
+    public Set<ITeacher> getSetTeacher();
 
     /**
      * Setter for List of ITeacher
@@ -54,14 +55,14 @@ public interface ILesson extends IBusy
      * @param lteacher
      *            List to set
      */
-    public void setLstTeacher(List<ITeacher> lteacher);
+    public void setSetTeacher(Set<ITeacher> lteacher);
 
     /**
      * Getter for List of IDevice
      * 
      * @return List of IDevice
      */
-    public List getLstDevice();
+    public Set<IDevice> getSetDevice();
 
     /**
      * Setter for List of IDevice
@@ -69,14 +70,14 @@ public interface ILesson extends IBusy
      * @param ldevice
      *            List to set
      */
-    public void setLstDevice(List<IDevice> ldevice);
+    public void setSetDevice(Set<IDevice> ldevice);
 
     /**
      * Getter for List of IRoom
      * 
      * @return List of IRoom
      */
-    public List getLstRoom();
+    public Set<IRoom> getSetRoom();
 
     /**
      * Setter for List of IGroup
@@ -84,14 +85,14 @@ public interface ILesson extends IBusy
      * @param lroom
      *            List to set
      */
-    public void setLstRoom(List<IRoom> lroom);
+    public void setSetRoom(Set<IRoom> lroom);
 
     /**
      * Getter for List of IGroup
      * 
      * @return List of IGroup
      */
-    public List getLstGroup();
+    public Set<IGroup> getSetGroup();
 
     /**
      * Setter for List of IGroup
@@ -99,7 +100,7 @@ public interface ILesson extends IBusy
      * @param lgroup
      *            List to set
      */
-    public void setLstGroup(List<IGroup> lgroup);
+    public void setSetGroup(Set<IGroup> lgroup);
 
     /**
      * Getter for ICourse contained in this Busy
@@ -130,4 +131,14 @@ public interface ILesson extends IBusy
      *            The length to set.
      */
     public void setLength(int length);
+    
+    /**
+     *  
+     * Get all resources contained in this lesson
+     *
+     * @return List of IResource
+     * 
+     */
+    public List<IResource> getAllResources();
+    
 }
