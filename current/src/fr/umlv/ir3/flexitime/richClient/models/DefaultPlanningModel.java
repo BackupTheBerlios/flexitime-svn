@@ -16,6 +16,7 @@ import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 import fr.umlv.ir3.flexitime.common.tools.Time;
+import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
 import fr.umlv.ir3.flexitime.server.MetierSimulator;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.LessonBloc;
 
@@ -43,7 +44,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
     //TODO faire un JSlider pour assurer la cohérence
     private final int      gapTime = 60;
     private final Gap edtWeekGap;
-    private final Gap[] blocList;
+    private final TimeBloc[] blocList;
 
 
     //Données calculées à mettre à jour
@@ -73,15 +74,20 @@ public class DefaultPlanningModel extends AbstractPlanningModel
         
         this.nbWeeks = Time.getGapWeek(edtWeekGap.getStartDate(),edtWeekGap.getEndDate()) + 1 ;
         
-        this.blocList = new Gap[4];
+        /*this.blocList = new Gap[4];
         this.blocList[0] = new Gap(1901,1,1,8,30,1901,1,1,10,30);
         this.blocList[1] = new Gap(1901,1,1,10,45,1901,1,1,12,45);
         this.blocList[2] = new Gap(1901,1,1,13,45,1901,1,1,15,45);
-        this.blocList[3] = new Gap(1901,1,1,16,0,1901,1,1,18,0);
+        this.blocList[3] = new Gap(1901,1,1,16,0,1901,1,1,18,0);*/
+        this.blocList = new TimeBloc[4];
+        this.blocList[0] = new TimeBloc(8,30,10,30);
+        this.blocList[1] = new TimeBloc(10,45,12,45);
+        this.blocList[2] = new TimeBloc(13,45,15,45);
+        this.blocList[3] = new TimeBloc(16,0,18,0);
 
 
         for (int i = 0; i < blocList.length; i++)
-            this.nbGaps += countNbGap(blocList[i].getStartDate(),blocList[i].getEndDate());
+            this.nbGaps += countNbGap(blocList[i].countNbMinutes());
   
         // Je suppose :
         // -> Busy toutes comprises dans le créneau concerné ici
@@ -162,7 +168,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
      */
     public int getBlocSize(int blocNumber)
     {
-        return this.countNbGap(blocList[blocNumber].getStartDate(),blocList[blocNumber].getEndDate());
+        return this.countNbGap(blocList[blocNumber].countNbMinutes());
     }
 
 
@@ -210,7 +216,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
      */
     public Object getGapHeaderAt(int blocNumber)
     {
-        return language.formatShortTime(blocList[blocNumber].getStartDate()) + "-" + language.formatShortTime(blocList[blocNumber].getEndDate());
+        return language.formatShortTime( new Time(1901,1,1,blocList[blocNumber].getStartHour(),blocList[blocNumber].getStartMin()))  + "-" + language.formatShortTime(   new Time(1901,1,1,blocList[blocNumber].getEndHour(),blocList[blocNumber].getEndMin())   );
     }
 
 
@@ -348,6 +354,11 @@ public class DefaultPlanningModel extends AbstractPlanningModel
 	{
 		return Time.countNbMinute_HM(begin,end)/gapTime;
 	}
+    
+    private int countNbGap(int nbMinutes)
+    {
+        return nbMinutes/gapTime;
+    }
 	
 	
     private List getBusyList(int weekNumber, int dayNumber)
@@ -457,7 +468,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
                     return;
                 
                 //***************************************************************
-                //	On cherche le premier bloc ki contient la date de debut du Busy
+                //  On cherche le premier bloc ki contient la date de debut du Busy
                 while( curBloc < blocList.length && Time.countNbMinute_HM( busy.getGap().getStartDate() , blocList[curBloc].getEndDate() ) <= 0 )
                 {
                     precSizeBloc += getBlocSize(curBloc);
@@ -480,7 +491,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
                 
                 
                 //***************************************************************
-                //	On cherche le premier bloc ki contient la date de fin du Busy
+                //  On cherche le premier bloc ki contient la date de fin du Busy
                 while( curBloc < blocList.length && Time.countNbMinute_HM( busy.getGap().getEndDate() , blocList[curBloc].getEndDate() ) < 0 )
                 {
                     precSizeBloc += getBlocSize(curBloc);

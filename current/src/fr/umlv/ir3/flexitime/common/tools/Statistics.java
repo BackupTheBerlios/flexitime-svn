@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl;
@@ -149,7 +150,7 @@ public class Statistics
      *
      * @param args 
      */
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         TeacherImpl t1 = new TeacherImpl("Revuz");
         TeacherImpl t2 = new TeacherImpl("Forax");
         TeacherImpl t3 = new TeacherImpl("CalmeJane");
@@ -238,6 +239,6 @@ public class Statistics
 	            System.out.println(stat.getCourseName()+" : "+stat.getNbHours()+"h effectuées");
 	        }
         }
-    }
+    }*/
 }
 
