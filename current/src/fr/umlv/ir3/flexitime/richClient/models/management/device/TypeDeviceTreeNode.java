@@ -188,29 +188,19 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
     * (non-Javadoc)
      * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
      */
-    public TreeNode add() throws FlexiException 
+    public void add() throws FlexiException 
     {
-            IDevice device= DataFactory.createDevice("Nouveau Matériel");
-            device.setType(type);
-            return null;
+            DataFactory.createDevice("Nouveau Matériel",type);
     }
     
-	public TreeNode add(IDevice device)
+	public void add(IDevice device)
     {
         System.out.println("Add device");
         lstDevice.add( device);
         DeviceTreeNode child = new DeviceTreeNode(this,device,model);
         children.add(child);
         model.nodesWereInserted(this,new int[]{children.size()-1});
-        return child;
     }
-	
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
-	 */
-	public void change(List value) {
-		//Non utilisée
-	}
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
@@ -265,15 +255,6 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	public void setModel(DefaultTreeModel model) {
 		this.model= (ResourceTreeModel)model;
 		
-	}
-	public void addFlexiTreeNodeListener(FlexiTreeNodeListener ob)
-	{
-		//Non utilisée
-	}
-	
-	public void informListenerChange(Object value)
-	{
-		//Non utilisée
 	}
 
 }

@@ -194,8 +194,7 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 	}
     public void setFloor(IFloor floor)
     {
-        this.floor =floor;
-        informListenerChange(floor.getName());
+        this.floor = floor;
         model.nodeChanged(this);
     }
 	/**
@@ -211,18 +210,7 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
-	public TreeNode add() {
-		//non utilisé
-		return null;
-	}
-	
-	
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
-	 */
-	public void change(List value) {
-			//non utilisée
-	}
+	public void add() {}
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
@@ -236,14 +224,10 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
 	 */
-	public void setValue(Object newValue) {
-		//synchronized(this.cat)
-		//{
+	public void setValue(Object newValue) throws RemoteException 
+    {
 			floor.setName((String)newValue);
-			informListenerChange(newValue);
-			model.nodeChanged(this);
-		//}
-		
+			RemoteDataManager.getManager().saveOrUpdateFloor(floor,floor.getParentBuilding());
 	}
 
 	/* (non-Javadoc)
@@ -252,19 +236,6 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 	public void setModel(DefaultTreeModel model) {
 		this.model = (ResourceTreeModel)model;
 		
-	}
-	public void addFlexiTreeNodeListener(FlexiTreeNodeListener ob)
-	{
-		listener.add(ob);
-	}
-	
-	public void informListenerChange(Object value)
-	{
-		Iterator iter = listener.iterator() ;
-		for(;iter.hasNext();)
-		{
-			((FlexiTreeNodeListener)iter.next()).nodeChanged(value);
-		}
 	}
 
     /* (non-Javadoc)

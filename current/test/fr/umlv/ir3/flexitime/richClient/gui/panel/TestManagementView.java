@@ -11,6 +11,7 @@ package fr.umlv.ir3.flexitime.richClient.gui.panel;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,7 +20,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.server.DataSimulator;
+import fr.umlv.ir3.flexitime.server.DataSimulatorSansRmi;
 
 
 
@@ -36,7 +39,7 @@ import fr.umlv.ir3.flexitime.server.DataSimulator;
 public class TestManagementView
 {
 
-    private void buildUI(Container container)
+    private void buildUI(Container container) throws FlexiException, RemoteException
     {
         container.setLayout(new BorderLayout());
         //JButton b1 = new JButton("b1");
@@ -46,8 +49,13 @@ public class TestManagementView
         JButton b4 = new JButton("b4");
         container.add(createPanelForComponent(b4,"StatusBar"), BorderLayout.SOUTH);
         
+        //Creation des objet dans la base
+       // DataSimulator.createTrackList();
+       // DataSimulator.createDeviceList();
+       // DataSimulator.createRoomList();
+       // DataSimulator.createTeacherList();
         //FlexiPlanning fe = new FlexiPlanning(new DefaultPlanningModel());
-        ManagementView managementView = new ManagementView(DataSimulator.createTrackList(),DataSimulator.createDeviceList(),DataSimulator.createRoomList(),DataSimulator.createTeacherList());
+        ManagementView managementView = new ManagementView();
         //ManagementView managementView = new ManagementView(null,null,null);
         //ManagementView managementView = new ManagementView(new ArrayList(),new ArrayList(),new ArrayList());
         container.add(new JScrollPane(createPanelForComponent(managementView.getPanel(),null)), BorderLayout.CENTER);
@@ -68,8 +76,10 @@ public class TestManagementView
     /**
      * Create the GUI and show it. For thread safety, this method should be
      * invoked from the event-dispatching thread.
+     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    private static void createAndShowGUI()
+    private static void createAndShowGUI() throws FlexiException, RemoteException
     {
         //Make sure we have nice window decorations.
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -96,7 +106,15 @@ public class TestManagementView
 
             public void run()
             {
-                createAndShowGUI();
+                try {
+					createAndShowGUI();
+				} catch (FlexiException e) {
+					System.out.println("Problème Remote :" +e.getMessage());
+				}
+                catch(RemoteException re)
+                {
+                  System.out.println("Problème Remote :" +re.getMessage() );
+                }
             }
         });
     }

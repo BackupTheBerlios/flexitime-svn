@@ -71,7 +71,7 @@ public class RootTrackTreeNode extends RootTreeNode{
 		return(list);
 	}
 
-	public TreeNode add() throws FlexiException 
+	public void add() throws FlexiException 
 	{
 		//synchronized(this.cat)
 		//{
@@ -88,7 +88,6 @@ public class RootTrackTreeNode extends RootTreeNode{
 			children.add(child);
 		}
 		model.nodesWereInserted(this,new int[]{children.size()-1});
-		return child;
 	}
 	
 	

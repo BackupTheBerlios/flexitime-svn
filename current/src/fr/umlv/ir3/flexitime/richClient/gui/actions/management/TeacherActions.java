@@ -7,6 +7,7 @@
 package fr.umlv.ir3.flexitime.richClient.gui.actions.management;
 
 import java.awt.event.ActionEvent;
+import java.rmi.RemoteException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -63,7 +64,13 @@ public class TeacherActions
 
 			public void actionPerformed(ActionEvent arg0) 
 			{
-					((TeacherListModel)model).remove(list.getSelectedIndex());
+					try {
+						((TeacherListModel)model).remove(list.getSelectedIndex());
+					} catch (RemoteException e) {
+						JOptionPane.showMessageDialog(null,e.getMessage(),"Suppression impossible",JOptionPane.ERROR_MESSAGE);
+					} catch (FlexiException e) {
+						JOptionPane.showMessageDialog(null,e.getMessage(),"Suppression impossible",JOptionPane.ERROR_MESSAGE);
+					}
 					list.setSelectedIndex(0);
 			}
 			

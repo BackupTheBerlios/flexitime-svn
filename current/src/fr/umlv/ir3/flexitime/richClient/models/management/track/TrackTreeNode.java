@@ -178,7 +178,7 @@ public class TrackTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
 	 */
-	public TreeNode add() throws FlexiException 
+	public void add() throws FlexiException 
 	{
 
 		System.out.println("Add promotion");	
@@ -194,7 +194,6 @@ public class TrackTreeNode implements FlexiTreeNode
 				children.add(child);
 			}
 			model.nodesWereInserted(this,new int[]{children.size()-1});
-			return child;
 	}
 	
 	

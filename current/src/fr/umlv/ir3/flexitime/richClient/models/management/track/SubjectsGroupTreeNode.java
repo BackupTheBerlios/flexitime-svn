@@ -175,7 +175,7 @@ public class SubjectsGroupTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
 	 */
-	public TreeNode add() throws FlexiException 
+	public void add() throws FlexiException 
 	{
 
 			ISubject subj = DataFactory.createSubject("Nouvelle Matière",subjectsGroup);
@@ -189,8 +189,7 @@ public class SubjectsGroupTreeNode implements FlexiTreeNode
 				children.add(child);
 			}
 			model.nodesWereInserted(this,new int[]{children.size()-1});
-			return child;
-	}
+}
 	
 	
 	/* (non-Javadoc)

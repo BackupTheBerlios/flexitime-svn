@@ -16,6 +16,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
+import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
@@ -187,28 +188,15 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
 	 */
-	public TreeNode add() throws FlexiException 
+	public void add() throws FlexiException 
 	{
-			IRoom room= DataFactory.createRoom("Nouvelle Salle",type,0,((FloorTreeNode)this.getParent()).getFloor());
-			room.setType(type);
-			RoomTreeNode child = new RoomTreeNode(this,room,model);
-			lstRoom.add(room);
-			if(children.size()==0)
-			{
-				processChildren();
-			}
-			else
-			{
-				children.add(child);
-			}
-			model.nodesWereInserted(this,new int[]{children.size()-1});
-			return child;
+			DataFactory.createRoom("Nouvelle Salle",type,0,((FloorTreeNode)this.getParent()).getFloor());
 	}
     
     public TreeNode add(IRoom room)
     {
         System.out.println("Add room");
-        lstRoom.add( room);
+        lstRoom.add(room);
         RoomTreeNode child = new RoomTreeNode(this,room,model);
         if(children.size()==0)
         {
@@ -221,14 +209,6 @@ public class TypeRoomTreeNode implements FlexiTreeNode
         model.nodesWereInserted(this,new int[]{children.size()-1});
         return child;
     }
-	
-	
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
-	 */
-	public void change(List value) {
-		//		Non utilisée
-	}
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
@@ -270,10 +250,15 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
 	 */
 	public void setValue(Object newValue) {
-		/*track.setName((String)newValue);
-		model.nodeChanged(this);*/
+		//non utilisée
 		
 	}
+    
+    public void changedRoom(IRoom room)
+    {
+        RoomTreeNode childNode= searchChild(room);
+        childNode.setRoom(room);
+    }
 
 
 	/* (non-Javadoc)
@@ -282,15 +267,6 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	public void setModel(DefaultTreeModel model) {
 		this.model= (ResourceTreeModel)model;
 		
-	}
-	public void addFlexiTreeNodeListener(FlexiTreeNodeListener ob)
-	{
-		//Non utilisée
-	}
-	
-	public void informListenerChange(Object value)
-	{
-		//Non utilisée
 	}
 
 }

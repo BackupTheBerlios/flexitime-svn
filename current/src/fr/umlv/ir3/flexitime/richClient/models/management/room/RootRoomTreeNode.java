@@ -79,10 +79,9 @@ public class RootRoomTreeNode extends RootTreeNode
 		return(list);
 	}
 
-	public TreeNode add() throws FlexiException
+	public void add() throws FlexiException
 	{
-		IBuilding build = DataFactory.createBuilding("Nouveau Batiment");
-		return(add(build));
+		DataFactory.createBuilding("Nouveau Batiment");
 	}
 	
     public TreeNode add(IBuilding building)
@@ -102,21 +101,19 @@ public class RootRoomTreeNode extends RootTreeNode
        }
        return null;
     }
-	
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
-	 */
-	public void change(List value) {
-	//non Utilisée
-	}
 
-	/* (non-Javadoc)
+	public void remove(TreeNode childNode) throws RemoteException, FlexiException {
+         RemoteDataManager.getManager().deleteBuilding(((BuildingTreeNode)childNode).getBuilding());
+        
+    }
+    /* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(javax.swing.tree.TreeNode)
 	 */
-	public void remove(TreeNode childNode) {
-		lst.remove(((BuildingTreeNode)childNode).getBuilding());
-		int index = children.indexOf(childNode);
-		children.remove(childNode);	
+	public void remove(IBuilding building) {
+		BuildingTreeNode childNode;
+        lst.remove(building);
+		int index = children.indexOf(childNode = searchChild(building));
+		children.remove(index);	
 		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
 		
 	}
@@ -138,20 +135,18 @@ public class RootRoomTreeNode extends RootTreeNode
             case DataEvent.TYPE_PROPERTY_CHANGED :
             {
                 BuildingTreeNode btn = searchChild(building);
-                btn.setValue(building.getName());
+                btn.setBuilding(building);
                 break;
             }
             case DataEvent.TYPE_PROPERTY_REMOVED:
             {
-                 BuildingTreeNode btn = searchChild(building);
-                 remove(btn);
+                remove(building);
                 break;
             }
   
         }
         
     }
-    
     
     public BuildingTreeNode searchChild(IBuilding building)
     {

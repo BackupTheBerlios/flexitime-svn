@@ -177,7 +177,7 @@ public class TypeCourseTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
 	 */
-	public TreeNode add() throws FlexiException 
+	public void add() throws FlexiException 
 	{
 
 			ICourse course= DataFactory.createCourse("Nouveau Cours",((SubjectTreeNode)this.getParent()).getSubject(),type);
@@ -193,7 +193,6 @@ public class TypeCourseTreeNode implements FlexiTreeNode
 				children.add(child);
 			}
 			model.nodesWereInserted(this,new int[]{children.size()-1});
-			return child;
 	}
 	
 	

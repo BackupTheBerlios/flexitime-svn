@@ -15,6 +15,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 
 /*
  * Created on 21 janv. 2005
@@ -31,7 +32,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
  */
 public class DataSimulator 
 {
-	public static List createTrackList()
+	public static List createTrackList() throws FlexiException
 	{
 		//Construction des Track
         ITrack trackIR = DataFactory.createTrack("IR");
@@ -99,7 +100,7 @@ public class DataSimulator
         return lstTrack;
 	}
 	
-	public static List createDeviceList()
+	public static List createDeviceList() throws FlexiException
 	{
 		List lstDevice = new ArrayList();
 		//Construction des Devices videoproj type 0
@@ -139,7 +140,7 @@ public class DataSimulator
 	}
 	
 	
-	public static List createRoomList()
+	public static List createRoomList() throws FlexiException
 	{
 		List lstBuilding = new ArrayList();
 		//Construction des Batiments
@@ -207,7 +208,7 @@ public class DataSimulator
 		return lstBuilding;
 	}
 	
-	public static List createTeacherList()
+	public static List createTeacherList() throws FlexiException
 	{
 		List lstTeacher = new ArrayList();
 		ITeacher teacher1 = DataFactory.createTeacher("Forax","Rémi");

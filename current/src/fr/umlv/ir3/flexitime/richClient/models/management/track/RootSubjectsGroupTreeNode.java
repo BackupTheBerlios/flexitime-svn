@@ -78,7 +78,7 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
 		return(list);
 	}
 
-	public TreeNode add() throws FlexiException 
+	public void add() throws FlexiException 
 	{
 
 		ISubjectsGroup subGroup = DataFactory.createSubjectsGroup("Nouveau Bloc",teachingStructure);
@@ -88,7 +88,6 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
 			children.add(child);
 		}
 		model.nodesWereInserted(this,new int[]{children.size()-1});
-		return child;
 	}
 	
 	

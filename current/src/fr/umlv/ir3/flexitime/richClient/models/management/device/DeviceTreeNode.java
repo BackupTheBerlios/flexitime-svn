@@ -6,6 +6,7 @@
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.device;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -15,6 +16,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 
@@ -140,25 +142,9 @@ public class DeviceTreeNode implements FlexiTreeNode
     public void setDevice(IDevice device)
     {
        this.device=device;
-       informListenerChange(device.getName());
-        model.nodeChanged(this);
+       model.nodeChanged(this);
     }
-	/**
-	 * Creates dynamiquely the list of the children when the user click on the "plus"
-	 * @return the list of sub categories
-	 */
-	/*public List processChildren()
-	{
-		if(children.size()>0)return children;
-		
-		ArrayList list = new ArrayList(track.getLstClass().size());
-		for(int i = 0;i<track.getLstClass().size();i++)
-		{
-			list.add(new TrackTreeNode(this,(Category)cat.getSubCategories().get(i),factory,model));
-		}
-		this.children =list;
-		return(list);
-	}*/
+    
 	public String toString()
 	{
 		return device.getName();
@@ -167,35 +153,19 @@ public class DeviceTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
 	 */
-	public TreeNode add() {
-		//Non utilisée
-		System.out.println("- Add de device");
-		return null;
-	}
-	
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
-	 */
-	public void change(List obj) {
-		//Non utilisée
-	}
+	public void add() {}
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
-	public void remove(TreeNode node) {
-		//Non Utilisée
-		// TODO Auto-generated method stub
-		
-	}
+	public void remove(TreeNode node) {}
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
 	 */
-	public void setValue(Object newValue) {
+	public void setValue(Object newValue) throws RemoteException {
 		device.setName((String)newValue);
-		informListenerChange(newValue);
-		model.nodeChanged(this);
+        RemoteDataManager.getManager().saveOrUpdateDevice(device);
 		
 	}
 
@@ -205,18 +175,5 @@ public class DeviceTreeNode implements FlexiTreeNode
 	public void setModel(DefaultTreeModel model) {
 		// TODO Auto-generated method stub
 		
-	}
-	public void addFlexiTreeNodeListener(FlexiTreeNodeListener ob)
-	{
-		listener.add(ob);
-	}
-	
-	public void informListenerChange(Object value)
-	{
-		Iterator iter = listener.iterator() ;
-		for(;iter.hasNext();)
-		{
-			((FlexiTreeNodeListener)iter.next()).nodeChanged(value);
-		}
 	}
 }

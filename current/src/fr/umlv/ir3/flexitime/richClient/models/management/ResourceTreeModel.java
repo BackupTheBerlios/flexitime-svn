@@ -3,6 +3,7 @@ package fr.umlv.ir3.flexitime.richClient.models.management;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -37,25 +38,14 @@ public class ResourceTreeModel extends DefaultTreeModel {
 	}	
 	
 	/**
-	 * To add a category
-	 * @param tree the tree of the categories
-	 * @param value the new category
-	 */
-	public void change(TreeNode tree,List value)
-	{
-		((FlexiTreeNode)tree).change(value);
-	}
-	
-	/**
 	 * To add a resource
 	 * @param tree the tree of the categories
 	 * @param value the new category
 	 * @throws FlexiException 
 	 */
-	public TreeNode add(TreeNode tree) throws FlexiException
+	public void add(TreeNode tree) throws FlexiException
 	{
-		TreeNode treeNode = ((FlexiTreeNode)tree).add();
-        return treeNode;
+		((FlexiTreeNode)tree).add();
 	}
 	
 	/**
@@ -77,12 +67,18 @@ public class ResourceTreeModel extends DefaultTreeModel {
 	 * Redefinition of the method valueForPathChanged
 	 * @param path the path
 	 * @param newValue the newValue 
+	 * @throws RemoteException 
 	 */
 	public void valueForPathChanged(TreePath path,Object newValue)
 	{
-		//System.out.println("path:"+ path+"  value:"+newValue );
+		
+        //System.out.println("path:"+ path+"  value:"+newValue );
 		FlexiTreeNode node = (FlexiTreeNode)path.getLastPathComponent();
-		node.setValue(newValue);
+		try {
+			node.setValue(newValue);
+		} catch (RemoteException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage(),"Modififcation impossible",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 }

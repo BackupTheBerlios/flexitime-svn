@@ -211,11 +211,7 @@ public class SubjectTreeNode implements FlexiTreeNode
 		/* (non-Javadoc)
 		 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 		 */
-		public TreeNode add() {
-		
-			//non utilisé
-			return null;
-		}
+		public void add() {}
 		
 		
 		/* (non-Javadoc)

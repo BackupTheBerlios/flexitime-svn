@@ -75,7 +75,7 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
 		this.building = building;
 		children = new ArrayList();
 		this.listener = new ArrayList();
-        RemoteDataManager.getManager().addDataListener(IDevice.class,this);
+        RemoteDataManager.getManager().addDataListener(IBuilding.class,this);
 	}
 	
 	/**
@@ -168,6 +168,13 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
 	{
 		return(building);	
 	}
+    
+    public void setBuilding(IBuilding building)
+    {
+        this.building =  building;
+        model.nodeChanged(this);
+    }
+    
 	/**
 	 * Redefinition of the method toString()
 	 * @return the name into a string
@@ -181,10 +188,9 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
-	public TreeNode add() throws FlexiException 
+	public void add() throws FlexiException 
     {
-	    IFloor floor = DataFactory.createFloor("Nouvel étage",building);
-		return(add(floor));
+	   DataFactory.createFloor("Nouvel étage",building);
 		
     }
 	
@@ -205,12 +211,6 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
         }
         
     }
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
-	 */
-	public void change(List value) {
-		//non utilisée
-	}
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
@@ -230,38 +230,21 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
         model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
     }
 
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
-	 */
-	public void setValue(Object newValue) {
-		//synchronized(this.cat)
-		//{
-			building.setName((String)newValue);
-			informListenerChange(newValue);
-			model.nodeChanged(this);
-		//}
-		
-	}
 
+    /* (non-Javadoc)
+     * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
+     */
+    public void setValue(Object newValue) throws RemoteException 
+    {
+        building.setName((String)newValue);
+        RemoteDataManager.getManager().saveOrUpdateBuilding(building);
+    }
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setModel(fr.umlv.ir3.flexitime.richClient.models.ResourceModel)
 	 */
 	public void setModel(DefaultTreeModel model) {
 		this.model = (ResourceTreeModel)model;
 		
-	}
-	public void addFlexiTreeNodeListener(FlexiTreeNodeListener ob)
-	{
-		listener.add(ob);
-	}
-	
-	public void informListenerChange(Object value)
-	{
-		Iterator iter = listener.iterator() ;
-		for(;iter.hasNext();)
-		{
-			((FlexiTreeNodeListener)iter.next()).nodeChanged(value);
-		}
 	}
 
     /* (non-Javadoc)

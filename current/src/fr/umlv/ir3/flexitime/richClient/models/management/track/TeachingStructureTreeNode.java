@@ -146,11 +146,7 @@ public class TeachingStructureTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
 	 */
-	public TreeNode add() {
-		//Non utilisée
-		System.out.println("- Add de group");
-		return null;
-	}
+	public void add() {}
 	
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)

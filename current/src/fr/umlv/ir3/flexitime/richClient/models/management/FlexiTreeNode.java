@@ -23,11 +23,8 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeList
  */
 public interface FlexiTreeNode extends TreeNode 
 {
-	public void change(List obj);
-	public TreeNode add()throws FlexiException ;
+	public void add()throws FlexiException ;
 	public void remove(TreeNode node) throws RemoteException, FlexiException;
-	public void setValue(Object newValue);
+	public void setValue(Object newValue) throws RemoteException;
 	public void setModel(DefaultTreeModel model);
-	public void addFlexiTreeNodeListener(FlexiTreeNodeListener ob);
-	public void informListenerChange(Object value);
 }

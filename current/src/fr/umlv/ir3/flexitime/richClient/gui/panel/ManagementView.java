@@ -34,8 +34,8 @@ public class ManagementView
 	{
 		/*List lstTrack = RemoteDataManager.getManager().getTracks();
         List lstDevice= RemoteDataManager.getManager().getDevices();
-        List lstBuilding = RemoteDataManager.getManager().getBuildings() ;
-        List lstTeacher =RemoteDataManager.getManager().getTeachers();*/
+        List lstBuilding = RemoteDataManager.getManager().getBuildings() ;*/
+        //List lstTeacher =RemoteDataManager.getManager().getTeachers();
         
         List lstTrack = new ArrayList();
         List lstDevice= new ArrayList();

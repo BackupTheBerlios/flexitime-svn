@@ -33,10 +33,14 @@ public class RootDeviceTreeNode extends RootTreeNode
     //   Constructeurs  //
     //==================// 
 	
-	public RootDeviceTreeNode(TreeNode parent,List lstDevice) throws RemoteException
+	/**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 4049637884510091060L;
+
+    public RootDeviceTreeNode(TreeNode parent,List lstDevice) throws RemoteException
 	{
 		super(parent,lstDevice);
-//      TODO verifier le try catch
         RemoteDataManager.getManager().addDataListener(IDevice.class,this);
 	}
 	
@@ -51,7 +55,6 @@ public class RootDeviceTreeNode extends RootTreeNode
 	public RootDeviceTreeNode(TreeNode parent,List lstDevice,DefaultTreeModel model) throws RemoteException
 	{
 		super(parent,lstDevice,model);
-//      TODO verifier le try catch
       RemoteDataManager.getManager().addDataListener(IDevice.class,this);
     }
 	
@@ -100,37 +103,14 @@ public class RootDeviceTreeNode extends RootTreeNode
 		return(list);
 	}
 
-	public TreeNode add() 
-	{
-		//synchronized(this.cat)
-		//{
-		/*ITrack track = DataFactory.createTrack("Nouvelle Filière");
-		TrackTreeNode child = new TrackTreeNode(this,track,model);
-		if(children.size()==0)
-		{
-			processChildren();
-		}
-		else
-		{
-			children.add(child);
-		}
-		model.nodesWereInserted(this,new int[]{children.size()-1});
-		return child;*/
-		return null;
-	}
+	public void add() {}
 	
-	
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
-	 */
-	public void change(List value) {
-		//Non utilisée
-	}
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(javax.swing.tree.TreeNode)
 	 */
-	public void remove(IDevice device) throws RemoteException, FlexiException {
+	public void remove(IDevice device) throws RemoteException, FlexiException 
+    {
 		System.out.println("delete device");
         RemoteDataManager.getManager().deleteDevice(device);
 

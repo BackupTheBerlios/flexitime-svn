@@ -82,8 +82,7 @@ public class TeacherListModel extends AbstractListModel {
 	public void add() throws FlexiException
 	{	
 		System.out.println("Add teacher");
-		lstTeacher.add(DataFactory.createTeacher("Nouveau Professeur",""));
-		this.fireIntervalAdded(this,lstTeacher.size()-1,lstTeacher.size());
+		DataFactory.createTeacher("Nouveau Professeur","");
 	}
     
     public void add(ITeacher teacher)
@@ -95,11 +94,13 @@ public class TeacherListModel extends AbstractListModel {
 	/**
 	 * To delete a party
 	 * @param index the party to be deleted
+	 * @throws FlexiException 
+	 * @throws RemoteException 
 	 */
-	public void remove(int index)
+	public void remove(int index) throws RemoteException, FlexiException
 	{
-			lstTeacher.remove(index);
-			this.fireIntervalRemoved(this,lstTeacher.size()-1,lstTeacher.size());
+			RemoteDataManager.getManager().deleteTeacher((ITeacher)lstTeacher.get(index));
+            this.fireIntervalRemoved(this,lstTeacher.size()-1,lstTeacher.size());
 	}
 	
     /**

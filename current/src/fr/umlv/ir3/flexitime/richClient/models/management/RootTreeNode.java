@@ -172,13 +172,8 @@ public abstract class RootTreeNode extends DataListenerImpl implements FlexiTree
 		this.model = model;
 	}
 
-	public abstract TreeNode add() throws FlexiException;
+	public abstract void add() throws FlexiException;
 	
-	
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
-	 */
-	abstract public void change(List value);
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(javax.swing.tree.TreeNode)
