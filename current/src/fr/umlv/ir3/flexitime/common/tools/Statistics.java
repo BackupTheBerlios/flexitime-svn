@@ -15,10 +15,10 @@ import java.util.Set;
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl;
-import fr.umlv.ir3.flexitime.common.data.ressources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.ressources.ITeacher;
-import fr.umlv.ir3.flexitime.common.data.ressources.impl.GroupImpl;
-import fr.umlv.ir3.flexitime.common.data.ressources.impl.TeacherImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl;
 
@@ -154,14 +154,17 @@ public class Statistics
      * @param args 
      */
     public static void main(String[] args){
-        TeacherImpl t1 = new TeacherImpl("Revuz","",new ArrayList(),"toto");
-        TeacherImpl t2 = new TeacherImpl("Forax","",new ArrayList(),"toto");
-        TeacherImpl t3 = new TeacherImpl("CalmeJane","",new ArrayList(),"toto");
-        GroupImpl g1 = new GroupImpl("Groupe 1",new ArrayList(),50);
-        GroupImpl g2 = new GroupImpl("Groupe 2",new ArrayList(),50);
-        CourseImpl c1 = new CourseImpl("cours1",1,4,null,new ArrayList(),1,"test");
-        CourseImpl c2 = new CourseImpl("cours2",1,2,null,new ArrayList(),1,"test2");
-        CourseImpl c3 = new CourseImpl("cours3",1,2,null,new ArrayList(),1,"test3");
+        TeacherImpl t1 = new TeacherImpl("Revuz");
+        TeacherImpl t2 = new TeacherImpl("Forax");
+        TeacherImpl t3 = new TeacherImpl("CalmeJane");
+        GroupImpl g1 = new GroupImpl("Groupe 1");
+        GroupImpl g2 = new GroupImpl("Groupe 2");
+        CourseImpl c1 = new CourseImpl("cours1");
+        c1.setNbHours(2);
+        CourseImpl c2 = new CourseImpl("cours2");
+        c2.setNbHours(2);
+        CourseImpl c3 = new CourseImpl("cours3");
+        c3.setNbHours(2);
         List lr1 = new ArrayList();
         List lr2 = new ArrayList();
         List lr3 = new ArrayList();
