@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+
+        <class name="bat.Batiment" table="batiments">
+                <id name="idBat" column="idBat" type="long">
+                        <generator class="native"/>
+                </id>
+                <property name="nomBat"/>
+                <set name="etages" inverse="true"  cascade="all" order-by="nomEtage asc">
+                        <key column="batiments_idBat"/>
+                        <one-to-many class="bat.Etage"/>
+                </set>
+        </class>
+        
+        <class name="bat.Etage" table="etages">
+        	<id name="idEtage" column="idEtage">
+        		<generator class="native"/>
+        	</id>
+        	<property name="nomEtage" />
+        	<many-to-one name="parent" column="batiments_idBat" not-null="true"/>
+        	<set name="salles" inverse="true"  cascade="all" order-by="nomSalle asc">
+                        <key column="etages_idEtage"/>
+                        <one-to-many class="bat.Salle"/>
+                </set>
+        </class>
+
+        <class name="bat.Salle" table="salles">
+        	<id name="idSalle" column="idSalle">
+        		<generator class="native"/>
+        	</id>
+        	<property name="nomSalle" />
+        	<property name="typeSalle" />
+        	<property name="nbplaces" />
+        	<many-to-one name="parent" column="etages_idEtage" not-null="true"/>
+        </class>
+
+
+</hibernate-mapping>
