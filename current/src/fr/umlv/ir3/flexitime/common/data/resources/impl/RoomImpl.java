@@ -35,7 +35,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
     // ====== //
     private int               type;
     private int               capacity;
-    private IFloor            parentFloor;
+    private IFloor            floor;
 
     // ============= //
     // Constructeurs //
@@ -104,7 +104,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
     public RoomImpl(String name, int type, int capacity, IFloor floor)
     {
         this(name, type, capacity);
-        this.parentFloor = floor;
+        this.floor = floor;
     }
 
     /**
@@ -127,7 +127,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
         super(name, busies);
         this.type = type;
         this.capacity = capacity;
-        this.parentFloor = floor;
+        this.floor = floor;
     }
 
     // ===========//
@@ -193,7 +193,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
      */
     public IFloor getFloor()
     {
-        return parentFloor;
+        return floor;
     }
 
     /**
@@ -206,6 +206,6 @@ public class RoomImpl extends ResourceImpl implements IRoom
      */
     public void setFloor(IFloor floor)
     {
-        this.parentFloor = floor;
+        this.floor = floor;
     }
 }

@@ -8,7 +8,7 @@
 	<flexi:portLDAP>389</flexi:portLDAP>
 	<flexi:pathUserLDAP>ou=Users,ou=Etudiant,dc=donvincenzo,dc=com</flexi:pathUserLDAP>
 	<flexi:pathGroupLDAP>ou=Groups,ou=Etudiant,dc=donvincenzo,dc=com</flexi:pathGroupLDAP>
-	<flexi:uriSMTPserver>smtp.neuf.fr</flexi:uriSMTPserver>
+	<flexi:uriSMTPserver>smtp.free.fr</flexi:uriSMTPserver>
 <!-- 
 Fac: 
         UriServerLDAP ldapetud.univ-mlv.fr

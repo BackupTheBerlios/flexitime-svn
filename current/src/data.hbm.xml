@@ -79,6 +79,7 @@
 				<key column="idRoom"/>
 				<property name="capacity"/>
 				<property name="type"/>
+				<many-to-one name="floor" column="idFloor" class="fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl"/>
 			</joined-subclass>
 
 			<!-- Device -->      

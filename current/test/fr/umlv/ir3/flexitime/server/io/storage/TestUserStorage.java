@@ -6,15 +6,15 @@
 package fr.umlv.ir3.flexitime.server.io.storage;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
-import net.sf.hibernate.Transaction;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.common.data.general.IFloor;
+import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
-import fr.umlv.ir3.flexitime.server.io.storage.admin.UserStorage;
 
 
 /**
@@ -33,13 +33,22 @@ public class TestUserStorage
 
     public static void main(String[] args) throws HibernateException, RemoteException, FlexiException
     {
-        IUser u = DataFactory.createUser("a", "a");
-        DataFactory.createUser("b", "b");
-        DataFactory.createUser("c", "c");
-        DataFactory.createUser("d", "d");
-        DataFactory.createUser("fappert", "popopopo");
-        DataFactory.createUser("valre", "popopopo");
-        DataFactory.createUser("flexitime", "flexitim");
+//        IUser u = DataFactory.createUser("a", "a");
+//        DataFactory.createUser("b", "b");
+//        DataFactory.createUser("c", "c");
+//        DataFactory.createUser("d", "d");
+//        DataFactory.createUser("fappert", "popopopo");
+//        DataFactory.createUser("valre", "popopopo");
+//        DataFactory.createUser("flexitime", "flexitim");
+        
+        
+        Session s = HibernateUtil.currentSession();
+        List<IRoom> lr = s.find("FROM RoomImpl");
+        
+        for(IRoom r : lr)
+        {
+            System.out.println(r.getFloor());
+        }
         
         //RemoteDataManager.getUserManager().save(u);
         
