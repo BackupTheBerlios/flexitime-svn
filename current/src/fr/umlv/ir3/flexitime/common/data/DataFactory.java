@@ -1328,6 +1328,29 @@ public class DataFactory
     }
     
     /**
+     * Create a new <em>LDAP</em> user  
+     *
+     * @param name
+     * @param rigths User privileges
+     * @param pref User preferences
+     * @return a new user 
+     * @throws FlexiException 
+     */
+    public static IUser createUser(String name, int rigths, IPreferences pref) throws FlexiException
+    {
+        IUser user = new UserImpl(name, rigths, pref);
+        try
+        {
+            user = RemoteDataManager.getUserManager().save(user);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        return user; 
+    }
+    
+    /**
      * Create a new <em>non-LDAP</em> user 
      *
      * @param name
@@ -1339,6 +1362,30 @@ public class DataFactory
     public static IUser createUser(String name, String pass, IPreferences pref) throws FlexiException
     {
         IUser user = new UserImpl(name, pass, pref);
+        try
+        {
+            user = RemoteDataManager.getUserManager().save(user);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        return user; 
+    }
+    
+    /**
+     * Create a new <em>non-LDAP</em> user 
+     *
+     * @param name
+     * @param pass
+     * @param rigths User privileges
+     * @param pref User preferences
+     * @return a new user 
+     * @throws FlexiException 
+     */
+    public static IUser createUser(String name, String pass, int rigths, IPreferences pref) throws FlexiException
+    {
+        IUser user = new UserImpl(name, pass, rigths, pref);
         try
         {
             user = RemoteDataManager.getUserManager().save(user);
