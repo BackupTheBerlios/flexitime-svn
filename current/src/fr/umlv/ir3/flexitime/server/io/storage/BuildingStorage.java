@@ -15,7 +15,7 @@ import net.sf.hibernate.Transaction;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 
 /**
- * Class that has the responsibility to persist IClass in database
+ * Class that has the responsibility to persist IBuilding in database
  * 
  * @version 0.1
  * 

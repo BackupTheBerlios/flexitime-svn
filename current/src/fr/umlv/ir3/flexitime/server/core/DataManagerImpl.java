@@ -15,10 +15,7 @@ import java.util.List;
 import net.sf.hibernate.HibernateException;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
@@ -53,11 +50,8 @@ import fr.umlv.ir3.flexitime.server.io.storage.TeachingStructureStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.TrackStorage;
 
 /**
- * DOCME Description explication supplémentaire si nécessaire in english
- * please... Que fait cette classe, qu'est-ce qu'elle représente, ...
- * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * Implementation of IDataListener
+ * Exposed via RMI in order to be contacted by clients
  */
 public class DataManagerImpl extends UnicastRemoteObject implements
         IDataManager
@@ -137,11 +131,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param building
-     * @return
+     * @return IBuilding
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateBuilding(fr.umlv.ir3.flexitime.common.data.general.IBuilding)
      */
@@ -172,10 +163,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @return
+     * @return a list of IBuilding
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getBuildings()
      */
@@ -196,9 +184,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param building
      * @return true if OK
      * @throws RemoteException
@@ -222,11 +207,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param _class
-     * @return
+     * @return IClass
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateClass(fr.umlv.ir3.flexitime.common.data.general.IClass,
      *      ITrack)
@@ -266,11 +248,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param track
-     * @return
+     * @return list of IClass
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getClasses(fr.umlv.ir3.flexitime.common.data.general.ITrack)
      */
@@ -292,11 +271,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param _class
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteClass(fr.umlv.ir3.flexitime.common.data.general.IClass)
      */
@@ -327,11 +303,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param course
-     * @return
+     * @return ICourse
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateCourse(fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse,
      *      ISubject)
@@ -371,11 +344,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param subject
-     * @return
+     * @return list of ICourse
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getCourses(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject)
      */
@@ -397,11 +367,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param course
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteCourse(fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse)
      */
@@ -433,11 +400,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param device
-     * @return
+     * @return IDevice
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateDevice(fr.umlv.ir3.flexitime.common.data.resources.IDevice)
      */
@@ -463,10 +427,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @return
+     * @return list of IDevice
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getDevices()
      */
@@ -487,11 +448,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param device
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteDevice(fr.umlv.ir3.flexitime.common.data.resources.IDevice)
      */
@@ -513,11 +471,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
+
      * @param floor
-     * @return
+     * @return IFloor
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateFloor(fr.umlv.ir3.flexitime.common.data.general.IFloor,
      *      IBuilding)
@@ -558,11 +514,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param building
-     * @return
+     * @return list of IFloor
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getFloors(fr.umlv.ir3.flexitime.common.data.general.IBuilding)
      */
@@ -584,11 +537,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param floor
-     * @return
+     * @return ture if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteFloor(fr.umlv.ir3.flexitime.common.data.general.IFloor)
      */
@@ -618,11 +568,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param group
-     * @return
+     * @return IGroup
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup,
      *      IClass)
@@ -662,11 +609,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param _class
-     * @return
+     * @return list of IGroup
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getGroups(fr.umlv.ir3.flexitime.common.data.general.IClass)
      */
@@ -688,11 +632,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param group
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup)
      */
@@ -721,15 +662,13 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         return true;
     }
 
+     
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * @param lesson 
+     * @param lresource 
+     * @return ILesson
+     * @throws RemoteException 
      * 
-     * @param lesson
-     * @return
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateLesson(fr.umlv.ir3.flexitime.common.data.activity.ILesson,
-     *      List <IResource>)
      */
     public ILesson saveOrUpdateLesson(ILesson lesson, List<IResource> lresource)
             throws RemoteException
@@ -947,27 +886,13 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         return lesson;
     }
 
-    /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param group
-     * @return
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getLessons(fr.umlv.ir3.flexitime.common.data.resources.IGroup)
-     */
-    public List<ILesson> getLessons(IGroup group) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     /**
      * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
      * 
      * @param lesson
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteLesson(fr.umlv.ir3.flexitime.common.data.activity.ILesson)
      */
@@ -1071,11 +996,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param room
-     * @return
+     * @return IRoom
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateRoom(fr.umlv.ir3.flexitime.common.data.resources.IRoom,
      *      IFloor)
@@ -1110,11 +1032,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param floor
-     * @return
+     * @return list of IRoom
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getRooms(fr.umlv.ir3.flexitime.common.data.general.IFloor)
      */
@@ -1135,11 +1054,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param room
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteRoom(fr.umlv.ir3.flexitime.common.data.resources.IRoom)
      */
@@ -1169,11 +1085,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param subject
-     * @return
+     * @return ISubject
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject,
      *      ISubjectsGroup)
@@ -1213,11 +1126,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param subjectsGroup
-     * @return
+     * @return list of ISubject
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getSubjects(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup)
      */
@@ -1239,11 +1149,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param subject
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject)
      */
@@ -1276,11 +1183,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param subjectsGroup
-     * @return
+     * @return ISubjectsGroup
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup,
      *      ITeachingStructure)
@@ -1321,11 +1225,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param _class
-     * @return
+     * @param ts
+     * @return list of ISubjectsGroup
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getSubjectsGroup(ITeachingStructure)
      */
@@ -1347,11 +1248,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param subjectsGroup
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup)
      */
@@ -1382,11 +1280,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param teacher
-     * @return
+     * @return ITeacher
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateTeacher(fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
      */
@@ -1414,10 +1309,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @return
+     * @return list of ITeacher
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getTeachers()
      */
@@ -1438,11 +1330,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param teacher
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteTeacher(fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
      */
@@ -1478,11 +1367,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param teachingStructure
-     * @return
+     * @return ITeachingStructure
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateTeachingStructure(fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure,
      *      IClass)
@@ -1518,11 +1404,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param _class
-     * @return
+     * @return ITeachingStructure
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getTeachingStructure(fr.umlv.ir3.flexitime.common.data.general.IClass)
      */
@@ -1547,11 +1430,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param teachingStructure
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteTeachingStructure(fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure)
      */
@@ -1577,11 +1457,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param track
-     * @return
+     * @return ITrack
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateTrack(fr.umlv.ir3.flexitime.common.data.general.ITrack)
      */
@@ -1607,10 +1484,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @return
+     * @return list of ITrack
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getTracks()
      */
@@ -1631,11 +1505,8 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param track
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteTrack(fr.umlv.ir3.flexitime.common.data.general.ITrack)
      */
@@ -1657,12 +1528,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param busy
      * @param parent
-     * @return
+     * @return IDeviceBusy
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateDeviceBusy(fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy,
      *      fr.umlv.ir3.flexitime.common.data.resources.IDevice)
@@ -1691,9 +1559,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param parent
      * @return list of busies
      * @throws RemoteException
@@ -1706,13 +1571,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
      * @param b
      * @param parent
-     * @return
+     * @return IBusy
      * @throws RemoteException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateResourceBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy, fr.umlv.ir3.flexitime.common.data.resources.IResource)
@@ -1753,17 +1614,13 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     }
     
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
      * @param b
      * @param parent
-     * @return
+     * @return true if OK
      * @throws RemoteException 
      * @throws FlexiException 
      * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteTeacherBusy(fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy, fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteResourceBusy(fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy, fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
      */
     public boolean deleteResourceBusy(IBusy b, IResource parent) throws RemoteException, FlexiException
     {
@@ -1801,11 +1658,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     //POUR LES TESTS
     
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @return
+     * @return IGroup
      * @throws RemoteException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getGroup()

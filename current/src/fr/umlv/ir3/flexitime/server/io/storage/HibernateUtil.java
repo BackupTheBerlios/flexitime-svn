@@ -13,7 +13,7 @@ import net.sf.hibernate.*;
 import net.sf.hibernate.cfg.*;
 
 /**
- * DOCME
+ * Singleton of SessionFactory to get and close an Hibernate Session
  * 
  * @version 300
  * 

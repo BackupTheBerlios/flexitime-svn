@@ -18,7 +18,7 @@ import fr.umlv.ir3.flexitime.server.core.DataManagerImpl;
 import fr.umlv.ir3.flexitime.server.core.admin.*;
 
 /**
- * DOCME
+ * Main Class for server
  * 
  * @version 300
  */

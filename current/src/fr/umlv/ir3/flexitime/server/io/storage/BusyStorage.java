@@ -12,23 +12,12 @@ import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
- * 
- * @version Verion ou révision SVN
- * 
+ * Busy storage 
  */
 public class BusyStorage
 {
     /**
      *  
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
      * @param busy
      * @throws HibernateException 
      * 
@@ -58,6 +47,10 @@ public class BusyStorage
         
     }
     
+    /**
+     * @param b
+     * @throws HibernateException
+     */
     public static void delete(IBusy b) throws HibernateException
     {
         Session s = null;

@@ -22,7 +22,7 @@ public class RemoteDataManager
 
     private static IDataManager          manager;
     private static IUserManager          userManager;
-    private static String                ipServer= "192.168.0.20";
+    private static String                ipServer;
     private static IConfigurationManager cfgManager;
     private static Registry              r;
 
@@ -54,18 +54,22 @@ public class RemoteDataManager
             catch (NotBoundException e1)
             {
                 // TODO Auto-generated catch block
-                e1.printStackTrace();
+                //e1.printStackTrace();
             }
 
             catch (RemoteException e)
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         return manager;
     }
 
+    /**
+     * 
+     * @return IUserManager
+     */
     public static IUserManager getUserManager()
     {
         if (userManager == null)
@@ -78,18 +82,22 @@ public class RemoteDataManager
             catch (NotBoundException e1)
             {
                 // TODO Auto-generated catch block
-                e1.printStackTrace();
+                //e1.printStackTrace();
             }
 
             catch (RemoteException e)
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         return userManager;
     }
 
+    /**
+     * 
+     * @return IConfigurationManager
+     */
     public static IConfigurationManager getConfigurationManager()
     {
         if (cfgManager == null)
@@ -102,13 +110,13 @@ public class RemoteDataManager
             catch (NotBoundException e1)
             {
                 // TODO Auto-generated catch block
-                e1.printStackTrace();
+                //e1.printStackTrace();
             }
 
             catch (RemoteException e)
             {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         return cfgManager;

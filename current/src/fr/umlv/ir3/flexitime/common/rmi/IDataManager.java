@@ -255,14 +255,7 @@ public interface IDataManager extends Remote
      */
     public ILesson saveOrUpdateLesson(ILesson lesson, List<IResource> lresource) throws RemoteException;
     
-    /**
-     *  
-     * get all datas managed by this manager
-     * @param group 
-     * @return all datas
-     * @throws RemoteException 
-     */
-    public List<ILesson> getLessons(IGroup group) throws RemoteException; 
+    
     /**
      *  
      * removes a data
@@ -472,5 +465,10 @@ public interface IDataManager extends Remote
     
     
     //POUR LES TEST//
+    /**
+     * @return IGroup
+     * @throws RemoteException 
+     * 
+     */
     public IGroup getGroup() throws RemoteException;
 }

@@ -23,10 +23,8 @@ import fr.umlv.ir3.flexitime.server.io.FlexiLDAP;
 import fr.umlv.ir3.flexitime.server.io.storage.admin.UserStorage;
 
 /**
- * UserManagerImpl - DOCME Description explication supplémentaire si nécessaire
- * in english please... Que fait cette classe, qu'est-ce qu'elle représente, ...
+ * UserManagerImpl - Implementation of IUserManager
  * 
- * @version Verion ou révision SVN
  * @author FlexiTeam - Valère
  */
 public class UserManager extends UnicastRemoteObject implements IUserManager
@@ -38,22 +36,29 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
     private static final long         serialVersionUID = 3689353204265400632L;
     private FlexiLDAP                 ldap;
     private Map<IUser, IUserListener> UsertoListener;
-    // private Set<IUser> ConnectedUser;
-    // private Set<IUserListener> listenerList;
     private Thread                    pollClientThread = new PollClientThread();
-    
-    private boolean doesThreadRun;
 
+    private boolean                   doesThreadRun;
+
+    /**
+     * 
+     * @throws RemoteException
+     */
     public UserManager() throws RemoteException
     {
         // On se connecte au server ldap en utilisant la config
         ldap = new FlexiLDAP();
-        // ConnectedUser = new CopyOnWriteArraySet<IUser>();
-        // listenerList = new CopyOnWriteArraySet<IUserListener>();
         UsertoListener = new ConcurrentHashMap<IUser, IUserListener>();
         pollClientThread.start();
     }
 
+    /**
+     * @param name
+     * @param passwd
+     * @return true if OK
+     * @throws RemoteException
+     * 
+     */
     public boolean ConnectToRich(String name, String passwd)
             throws RemoteException
     {
@@ -73,6 +78,13 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
         return false;
     }
 
+    /**
+     * @param name
+     * @param passwd
+     * @return true if OK
+     * @throws RemoteException
+     * 
+     */
     public boolean ConnectToLight(String name, String passwd)
             throws RemoteException
     {
@@ -88,8 +100,6 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
      * @param passwd
      * @see fr.umlv.ir3.flexitime.common.rmi.admin.IUserListener#checkUser(java.lang.String,
      *      java.lang.String)
-     * @author FlexiTeam - Valère
-     * @date 26 déc. 2004
      */
     private IUser checkUser(String name, String passwd) throws RemoteException
     {
@@ -143,7 +153,9 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
 
         // Si pas dans LDAP, vérif login/paas de la BDD
         // Si OK, retopurne user
-        if (passwd.compareTo(user.getPassword()) == 0 && ( user.getPrivilege() == IUser.ADMIN || user.getPrivilege() == IUser.SECRETARY) ) return user;
+        if (passwd.compareTo(user.getPassword()) == 0
+                && ( user.getPrivilege() == IUser.ADMIN || user.getPrivilege() == IUser.SECRETARY ))
+            return user;
 
         // Si login/pass invalide, retourne null
         return null;
@@ -153,7 +165,8 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
      * getUser allows to take a user in the BDD
      * 
      * @param name
-     * @return
+     * @return IUser associated with this name
+     * @throws RemoteException 
      */
     public IUser get(String name) throws RemoteException
     {
@@ -177,40 +190,41 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
      * addUser allows to add a user in the BDD
      * 
      * @param user
+     * @return IUser
+     * @throws RemoteException 
      * @see fr.umlv.ir3.flexitime.common.data.admin
-     * @author FlexiTeam - Famille
      */
     public IUser save(IUser user) throws RemoteException
     {
-//        // Un user de ldap ou non?
-//        // On verifie si il est dans le ldap
-//        List list = ldap.getAttribute("uid", FlexiLDAP.TYPE_USER, user
-//                .getName());
-//        if (list != null
-//                && ( (String) list.get(0) ).compareTo(user.getName()) != 0)
-//        {
-//            // Si l'utilisateur est dans le ldap
-//            // On lui cree un user avec une preference mais sans mot de passe
-//            // IUser user = new UserImpl(name,new PreferencesImpl(),true);
-//            // Puis on l'ajoute a la base de données
-//            // UserStorage.add(user);
-//        }
-//        else
-//        {
-//            // Si 'utilisteur n'est pas dans le ldap
-//            // On cree un user avec les preferences et le mot de passe local a
-//            // l'appli
-            try
-            {
-                // Puis on l'ajoute a la base de données
-                UserStorage.save(user);
-            }
-            catch (HibernateException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-//        }
+        // // Un user de ldap ou non?
+        // // On verifie si il est dans le ldap
+        // List list = ldap.getAttribute("uid", FlexiLDAP.TYPE_USER, user
+        // .getName());
+        // if (list != null
+        // && ( (String) list.get(0) ).compareTo(user.getName()) != 0)
+        // {
+        // // Si l'utilisateur est dans le ldap
+        // // On lui cree un user avec une preference mais sans mot de passe
+        // // IUser user = new UserImpl(name,new PreferencesImpl(),true);
+        // // Puis on l'ajoute a la base de données
+        // // UserStorage.add(user);
+        // }
+        // else
+        // {
+        // // Si 'utilisteur n'est pas dans le ldap
+        // // On cree un user avec les preferences et le mot de passe local a
+        // // l'appli
+        try
+        {
+            // Puis on l'ajoute a la base de données
+            UserStorage.save(user);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // }
 
         return user;
     }
@@ -219,8 +233,8 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
      * removeUser allows to remove a user in the BDD
      * 
      * @param user
+     * @throws RemoteException 
      * @see fr.umlv.ir3.flexitime.common.data.admin
-     * @author FlexiTeam - Famille
      */
     public void removeUser(IUser user) throws RemoteException
     {
@@ -240,8 +254,9 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
      * changeLocalPasswd allows to change the Password of a local user
      * 
      * @param name
+     * @param newPassword 
+     * @throws RemoteException 
      * @see fr.umlv.ir3.flexitime.common.data.admin
-     * @author FlexiTeam - Famille
      */
     public void changeLocalPasswd(String name, String newPassword)
             throws RemoteException
@@ -269,6 +284,12 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
 
     }
 
+    /**
+     * @param login 
+     * @return long name associated with given login
+     * @throws RemoteException 
+     * 
+     */
     public String getLongName(String login) throws RemoteException
     {
         // TODO gecos par le bon identifiant
@@ -296,11 +317,10 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
         }
 
     }
-    
-    
-    /** 
+
+    /**
      * @return List of all users
-     * @throws RemoteException 
+     * @throws RemoteException
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager#getAllUsers()
      */
@@ -314,7 +334,7 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
         {
             return new ArrayList<IUser>();
         }
-        
+
     }
 
     /**
@@ -341,12 +361,8 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
         }
 
     }
-    
 
     /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
      * @param u
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager#removeUserListener(fr.umlv.ir3.flexitime.common.data.admin.IUser)
@@ -358,8 +374,7 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
             UsertoListener.remove(u);
         }
 
-        if (UsertoListener.size() == 0) 
-            doesThreadRun = false;
+        if (UsertoListener.size() == 0) doesThreadRun = false;
 
     }
 
@@ -377,29 +392,34 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
             System.err.println("UserManager: starting thread");
             while (true)
             {
-                try {
+                try
+                {
                     sleep(2000);
 
-//                    synchronized(this) {
-//                        while (!doesThreadRun)
-//                        {}
-//                    }
-                } catch (InterruptedException e){
+                    // synchronized(this) {
+                    // while (!doesThreadRun)
+                    // {}
+                    // }
                 }
+                catch (InterruptedException e)
+                {}
 
                 for (Map.Entry<IUser, IUserListener> s : UsertoListener
                         .entrySet())
                 {
                     try
                     {
-                        System.out.println("UserManager: polling " + s.getValue().getUser().getName());
+                        System.out.println("UserManager: polling "
+                                + s.getValue().getUser().getName());
                         s.getValue().getUser();
                     }
                     catch (RemoteException e)
                     {
                         try
                         {
-                            System.err.println(s.getKey().getName() + " s'est déconnecté sauvagement, c'est mal!!!");
+                            System.err
+                                    .println(s.getKey().getName()
+                                            + " s'est déconnecté sauvagement, c'est mal!!!");
                             disconnect(s.getKey());
                         }
                         catch (RemoteException e1)

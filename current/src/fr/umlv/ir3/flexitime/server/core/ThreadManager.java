@@ -11,16 +11,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 
 /**
- * DOCME Description explication supplémentaire si nécessaire in english
- * please... Que fait cette classe, qu'est-ce qu'elle représente, ...
+ * ThreadManager
+ * Thread launched to notify clients that an event has occured
  * 
- * @version Verion ou révision SVN
- * @author FlexiTeam - Administrateur
  */
 public class ThreadManager extends Thread
 {
