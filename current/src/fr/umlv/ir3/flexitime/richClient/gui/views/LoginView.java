@@ -94,32 +94,7 @@ public class LoginView
             public void mouseExited(MouseEvent arg0)
             {}            
         });
-        final JPasswordField tfPass = new JPasswordField("password");  //$NON-NLS-1$
-        tfPass.setText("");//$NON-NLS-1$
-        tfPass.addMouseListener(new MouseListener() {
-
-            public void mouseClicked(MouseEvent arg0)
-            {
-                char[] tmp = tfPass.getPassword();
-                String temp = new String(tmp);
-                if(temp.compareTo("password") == 0)//$NON-NLS-1$
-                {
-                    tfPass.setText("");//$NON-NLS-1$//$NON-NLS-1$
-                }
-            }
-
-            public void mousePressed(MouseEvent arg0)
-            {}
-
-            public void mouseReleased(MouseEvent arg0)
-            {}
-
-            public void mouseEntered(MouseEvent arg0)
-            {}
-
-            public void mouseExited(MouseEvent arg0)
-            {}            
-        });
+        final JPasswordField tfPass = new JPasswordField();
         JButton butOK = new JButton("OK");//$NON-NLS-1$
         butOK.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0)

@@ -45,6 +45,7 @@ public class PreviousIntervalAction extends AbstractAction
         super("Reculer d'un interval de temps", icon);
         this.view = view;
     }
+    
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode

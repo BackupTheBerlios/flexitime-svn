@@ -11,11 +11,9 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
-import fr.umlv.ir3.flexitime.server.io.PrintUtilities;
 
 
 /**
@@ -25,8 +23,7 @@ import fr.umlv.ir3.flexitime.server.io.PrintUtilities;
  * Que fait cette classe, qu'est-ce qu'elle 
  * représente, ...
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 0.1
  * 
  */
 public class PrintAction extends AbstractAction

@@ -14,6 +14,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -59,6 +61,8 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
+import fr.umlv.ir3.flexitime.richClient.gui.views.UsersManagementView;
+import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
 
 /**
  * Client This class build an graphic interface for the user.
@@ -110,7 +114,7 @@ public class Client
     public Client()
     {
         frame = new JFrame(language.getText("appliTitle")); //$NON-NLS-1$
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setSize(800, 600);
         ImageIcon icon = new ImageIcon(getClass().getResource(language.getText("flexIcone32"))); //$NON-NLS-1$
         frame.setIconImage(icon.getImage());
@@ -120,16 +124,8 @@ public class Client
         frame.setContentPane(mainPanel);
         centerPanel = new JLayeredPane();
         mainPanel.add(centerPanel, BorderLayout.CENTER);
-
-        //initialisation des barres
-        initMenuBar();
-        initToolBar();
-        initStateBar();
         
-        frame.setVisible(true);
-        setStatus("Chargement");
-        
-        
+       
         //construction des 3 panels principaux
         accueilView = new MainView();
         exploitView = new ExploitationView();
@@ -142,6 +138,38 @@ public class Client
         accueilPanel = accueilView.getPanel();
         exploitPanel = (JPanel)exploitView.getPanel();
         mngmtPanel   = mngmtView.getPanel(); 
+        
+        //initialisation des barres
+        initMenuBar();
+        initToolBar();
+        initStateBar();
+        
+        frame.setVisible(true);
+        setStatus("Chargement");
+        
+        frame.addWindowListener(new WindowListener(){
+            public void windowActivated(WindowEvent arg0){}
+            public void windowClosed(WindowEvent arg0){}
+            public void windowClosing(WindowEvent arg0)
+            {
+                int res = JOptionPane.showConfirmDialog(null,language.getText("msg7"),language.getText("exit"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);  //$NON-NLS-1$//$NON-NLS-2$
+                if(res == JOptionPane.YES_OPTION)
+                {
+                    try {
+                        RemoteDataManager.getUserManager().disconnect(iUser);
+                    }
+                    catch (RemoteException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                    System.exit(0);                
+                }
+            }
+            public void windowDeactivated(WindowEvent arg0){}
+            public void windowDeiconified(WindowEvent arg0) {}
+            public void windowIconified(WindowEvent arg0){}
+            public void windowOpened(WindowEvent arg0){}
+        });
     }
     
 
@@ -385,37 +413,49 @@ public class Client
         
         menuFichier.add(new JSeparator());
         
+        //Gestion users
+        Action usersMngmt = new AbstractAction("Gestion des utilisateurs") {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                UsersManagementView umv = new UsersManagementView();
+                umv.printView(frame);
+            }
+        };
+        menuFichier.add(usersMngmt);
+        
+        menuFichier.add(new JSeparator());
+        
         //Logout
         Action logout = new AbstractAction(language.getText("logout")) {
-        public void actionPerformed(ActionEvent e)
-        {
-            int res = JOptionPane.showConfirmDialog(null,language.getText("msg6"),language.getText("logout"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
-            if(res == JOptionPane.YES_OPTION)
+            public void actionPerformed(ActionEvent e)
             {
-                setAccueilMode();
-                try
+                int res = JOptionPane.showConfirmDialog(null,language.getText("msg6"),language.getText("logout"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+                if(res == JOptionPane.YES_OPTION)
                 {
-                    RemoteDataManager.getUserManager().disconnect(iUser);
+                    setAccueilMode();
+                    try
+                    {
+                        RemoteDataManager.getUserManager().disconnect(iUser);
+                    }
+                    catch (RemoteException e1)
+                    {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                    iUser = null;
+                    //TODO loginView.reset();
+                    if( !checkLogin())
+                    {
+                        JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+                        System.exit(1);
+                    }
+                    
+                    //TODO JG, charger pref user notamment filière par défaut(si pas ds pref->afficher view)
+                    System.out.println("apres logout : charger "+ iUser.getName() + " prefs"); //$NON-NLS-1$ //$NON-NLS-2$
                 }
-                catch (RemoteException e1)
-                {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-                iUser = null;
-                //TODO loginView.reset();
-                if( !checkLogin())
-                {
-                    JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
-                    System.exit(1);
-                }
-                
-                //TODO JG, charger pref user notamment filière par défaut(si pas ds pref->afficher view)
-                System.out.println("apres logout : charger "+ iUser.getName() + " prefs"); //$NON-NLS-1$ //$NON-NLS-2$
+                else
+                {}
             }
-            else
-            {}
-        }
         };
         menuFichier.add(logout);
         
@@ -427,6 +467,13 @@ public class Client
                 int res = JOptionPane.showConfirmDialog(null,language.getText("msg7"),language.getText("exit"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);  //$NON-NLS-1$//$NON-NLS-2$
                 if(res == JOptionPane.YES_OPTION)
                 {
+                    try {
+                        RemoteDataManager.getUserManager().disconnect(iUser);
+                    }
+                    catch (RemoteException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                     System.exit(0);                
                 }
             }
