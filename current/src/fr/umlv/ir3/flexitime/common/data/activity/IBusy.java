@@ -7,7 +7,8 @@
 package fr.umlv.ir3.flexitime.common.data.activity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 
@@ -26,7 +27,7 @@ public interface IBusy extends Serializable, Comparable
      * 
      * @return the date of the beginning of the busy.
      */
-    Date getStartDate();
+    Timestamp getStartDate();
 
     /**
      * Changes the date of the beginning of the busy. <code>	
@@ -37,7 +38,7 @@ public interface IBusy extends Serializable, Comparable
      * @param daBusy
      *            the date of the beginning of the busy.
      */
-    void setStartDate(Date daBusy);
+    void setStartDate(Timestamp daBusy);
 
     /**
      * Returns the date of the end of the busy.
@@ -45,7 +46,7 @@ public interface IBusy extends Serializable, Comparable
      * 
      * @return the date of the end of the busy.
      */
-    Date getEndDate();
+    Timestamp getEndDate();
 
     /**
      * Changes the date of the end of the busy. <code>	
@@ -56,7 +57,7 @@ public interface IBusy extends Serializable, Comparable
      * @param daBusy
      *            the date of the end of the busy.
      */
-    void setEndDate(Date daBusy);
+    void setEndDate(Timestamp daBusy);
 
     /**
      * Get Gap for this Busy
