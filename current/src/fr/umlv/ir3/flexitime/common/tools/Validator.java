@@ -22,7 +22,7 @@ public class Validator
         char[] sec = section.toCharArray();
         for (int i = 0 ; i < sec.length ; i++)
         {
-            if(!(Character.isLetterOrDigit(sec[i])))
+            if((!(Character.isLetterOrDigit(sec[i]))) && (sec[i] != '-') && (sec[i] != '_'))
                 valid = false;
         }
         return valid;
