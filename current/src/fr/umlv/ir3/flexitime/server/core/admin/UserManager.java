@@ -143,7 +143,7 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
 
         // Si pas dans LDAP, vérif login/paas de la BDD
         // Si OK, retopurne user
-        if (passwd.compareTo(user.getPassword()) == 0) return user;
+        if (passwd.compareTo(user.getPassword()) == 0 && ( user.getPrivilege() == IUser.ADMIN || user.getPrivilege() == IUser.SECRETARY) ) return user;
 
         // Si login/pass invalide, retourne null
         return null;

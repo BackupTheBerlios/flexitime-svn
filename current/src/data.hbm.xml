@@ -79,7 +79,7 @@
 				<key column="idRoom"/>
 				<property name="capacity"/>
 				<property name="type"/>
-				<many-to-one name="floor" column="idfloor" class="fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl"/>
+				<many-to-one name="floor" column="idFloor" class="fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl"/>
 			</joined-subclass>
 
 			<!-- Device -->      
@@ -93,7 +93,7 @@
 				<key column="idGroup"/>
 				<property name="nbPerson"/>
 				
-				<many-to-one name="parentClass" column="idclass" class="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl"/>
+				<many-to-one name="parentClass" column="idClass" class="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl"/>
 			</joined-subclass>
 
 			<!-- Teacher -->      

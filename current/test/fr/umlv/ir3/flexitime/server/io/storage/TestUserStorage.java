@@ -34,26 +34,25 @@ public class TestUserStorage
 
     public static void main(String[] args) throws HibernateException, RemoteException, FlexiException
     {
-//        IUser u = DataFactory.createUser("a", "a");
-//        DataFactory.createUser("q", "q");
-//        DataFactory.createUser("w", "w");
-//        DataFactory.createUser("d", "d");
-//        DataFactory.createUser("fappert", "popopopo");
-//        DataFactory.createUser("valre", "popopopo");
-//        DataFactory.createUser("flexitime", "flexitim");
+        IUser u = DataFactory.createUser("a", "a");
+        DataFactory.createUser("q", "q");
+        DataFactory.createUser("w", "w");
+        DataFactory.createUser("d", "d");
+        DataFactory.createUser("fappert", "popopopo");
+        DataFactory.createUser("valre", "popopopo");
+        DataFactory.createUser("flexitime", "flexitim");
         
-        
-        Session s = HibernateUtil.currentSession();
-        List<IRoom> lr = s.find("FROM RoomImpl");
-        
-        for(IRoom r : lr)
-        {
-            System.out.println(r.getFloor());
-        }
-        
-        IGroup g = RemoteDataManager.getManager().getGroup();
-        
-        System.out.println(g.getName());
+//        Session s = HibernateUtil.currentSession();
+//        List<IRoom> lr = s.find("FROM RoomImpl");
+//        
+//        for(IRoom r : lr)
+//        {
+//            System.out.println(r.getFloor());
+//        }
+//        
+//        IGroup g = RemoteDataManager.getManager().getGroup();
+//        
+//        System.out.println(g.getName());
         
         //RemoteDataManager.getUserManager().save(u);
         
