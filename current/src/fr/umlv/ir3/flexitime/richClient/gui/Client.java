@@ -719,6 +719,7 @@ public class Client
                         RemoteDataManager.getUserManager().addUserListener(iUser, new userListener());
                     } catch (RemoteException e) {
                         JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+                        e.printStackTrace();
                     }    
                     return true;
                 }
@@ -790,12 +791,12 @@ public class Client
         if(exploitPanel==null)
         {
             setStatus("Chargement...");
-            FlexiProgressMonitor fpm = new FlexiProgressMonitor();
-            fpm.run();
+            //TODO FlexiProgressMonitor fpm = new FlexiProgressMonitor();
+            //fpm.run();
             exploitView = new ExploitationView();
             exploitPanel = (JPanel)exploitView.getPanel();
             centerPanel.add(exploitPanel, JLayeredPane.PALETTE_LAYER);
-            fpm.stop();
+            //fpm.stop();
             setStatus("Prêt");
         }
         centerPanel.moveToFront(exploitPanel);
@@ -818,8 +819,8 @@ public class Client
         if(mngmtPanel == null)
         {
             setStatus("Chargement...");
-            FlexiProgressMonitor fpm = new FlexiProgressMonitor();
-            fpm.run();
+            //TODO FlexiProgressMonitor fpm = new FlexiProgressMonitor();
+            //fpm.run();
             try {
                 mngmtView = new ManagementView();
             } catch (RemoteException e) {
@@ -828,7 +829,7 @@ public class Client
             }
             mngmtPanel   = mngmtView.getJSP(); 
             centerPanel.add(mngmtPanel, JLayeredPane.PALETTE_LAYER);
-            fpm.stop();
+            //fpm.stop();
             setStatus("Prêt");
         }
         centerPanel.moveToFront(mngmtPanel);
