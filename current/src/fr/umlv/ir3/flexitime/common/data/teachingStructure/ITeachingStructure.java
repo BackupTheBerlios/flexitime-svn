@@ -42,7 +42,7 @@ public interface ITeachingStructure extends IData
      * @param subjectsGroup the new SubjectsGroup
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addSubject(ISubjectsGroup subjectsGroup);
+    void addSubjectsGroup(ISubjectsGroup subjectsGroup);
 
     /**
      * Remove a SubjectsGroup of a TeachingStructure.
@@ -50,5 +50,5 @@ public interface ITeachingStructure extends IData
      * @param subjectsGroup the new SubjectsGroup
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeSubject(ISubjectsGroup subjectsGroup);
+    void removeSubjectsGroup(ISubjectsGroup subjectsGroup);
 }
