@@ -167,6 +167,7 @@
 		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl" table="tb_user" dynamic-update="true">
 			<key column="idUser"/>
 			<property name="password" />
+			<property name="privilege" />
 		</joined-subclass>
 				
 

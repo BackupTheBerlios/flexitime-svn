@@ -29,6 +29,8 @@ public class UserImpl extends DataImpl implements IUser
     // ===========//
     String                    password;
     IPreferences              preferences;
+    
+    private int privilege;
 
     // =============//
     // Constructeurs//
@@ -143,5 +145,27 @@ public class UserImpl extends DataImpl implements IUser
     public boolean isLdap()
     {
         return (password == null);
+    }
+    
+    
+    /** 
+     * @return privilege fot this user 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#getPrivilege()
+     */
+    public int getPrivilege()
+    {
+        return privilege;
+    }
+    
+    
+    /** 
+     * @param newPrivilege 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#setPrivilege(int)
+     */
+    public void setPrivilege(int newPrivilege)
+    {
+        privilege = newPrivilege;
     }
 }

@@ -71,5 +71,30 @@ public interface IUser extends IData
      * @see java.lang.Object#equals(java.lang.Object)
      */
     public boolean equals(Object obj);
+    
+    /**
+     * Returns privilege for this user
+     *
+     * @return privilege 
+     * 
+     */
+    public int getPrivilege();
+    
+    /**
+     *  
+     * Sets privilege for this user
+     *
+     * @param newPrivilege privilege to set
+     * 
+     */
+    public void setPrivilege(int newPrivilege);
+    
+    /** ADMIN */
+    public static int ADMIN = 0;
+    /** SECRETARY */
+    public static int SECRETARY = 1;
+    /** USER */
+    public static int USER = 2;
+    
 }
 
