@@ -11,11 +11,8 @@ import java.util.List;
 import fr.umlv.ir3.flexitime.common.data.Data;
 
 /**
- * Track - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Track
+ * A track is a list of differents classes
  * 
  * @version 0.1
  * 
@@ -24,7 +21,7 @@ import fr.umlv.ir3.flexitime.common.data.Data;
 public interface Track extends Data {
 	
 	/** 
-	 * getLstClass - DOCME Description
+	 * getLstClass
 	 * returns the list of class.
 	 * 
 	 *
@@ -36,7 +33,7 @@ public interface Track extends Data {
 	  List getLstClass();
 	  
 	 /** 
-	  * setLstClass - DOCME Description
+	  * setLstClass
 	  * changes the list of class .
 	  * 
 	  * @param lstClass the new list of Class
@@ -47,7 +44,7 @@ public interface Track extends Data {
 	  void setLstClass(List lstClass);
 	  
 	  /**
-	   * addClass - DOCME Description
+	   * addClass
 	   * add a class in a track
 	   *
 	   * @param pClass the Class added.
@@ -58,7 +55,7 @@ public interface Track extends Data {
 	  void addClass(Class pClass);
 	  
 	 /**
-	  * removeClass - DOCME Description
+	  * removeClass
 	  * remove a class in a track
 	  * 
 	  * @param pClass the Class removed.

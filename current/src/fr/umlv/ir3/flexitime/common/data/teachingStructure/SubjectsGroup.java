@@ -12,10 +12,7 @@ import fr.umlv.ir3.flexitime.common.data.Data;
 
 /**
  * SubjectsGroup - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ *This interface represents a SubjectsGroup which belong to a TeachingStructure
  * 
  * @version 0.1
  * 
@@ -25,7 +22,7 @@ public interface SubjectsGroup extends Data{
 
    
     /** 
-	 * getLstSubject - DOCME Description
+	 * getLstSubject
 	 * returns the list of Subject of SubjectsGroups .
 	 * 
 	 *
@@ -37,7 +34,7 @@ public interface SubjectsGroup extends Data{
 	  List getLstSubject();
 	  
 	  /** 
-	   * setLstSubject - DOCME Description
+	   * setLstSubject
 	   * changes the list of Subject of blocs.
 	   * 
 	   *
@@ -50,7 +47,7 @@ public interface SubjectsGroup extends Data{
 	  
 	  
 	  /** 
-	   * addSubject - DOCME Description
+	   * addSubject
 	   * add a Subject in a SubjectsGroup .
 	   * 
 	   *
@@ -62,7 +59,7 @@ public interface SubjectsGroup extends Data{
 	  void addSubject(Subject Subject);
 
 	    /** 
-		 * removeSubject - DOCME Description
+		 * removeSubject
 		 * remove a Subject of a SubjectsGroup.
 		 * 
 		 *

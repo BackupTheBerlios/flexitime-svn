@@ -8,10 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
 
 /**
  * Group - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ *This interface represents a group of studients who belong at the same Class
  * 
  * @version 0.1
  * 
@@ -20,7 +17,7 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
 public interface Group extends Resource {
 	
     /** 
-	 * getNbPerson - DOCME Description
+	 * getNbPerson
 	 * returns the number of persons of the group.
 	 * 
 	 *
@@ -32,7 +29,7 @@ public interface Group extends Resource {
     int getNbPerson();
 	  
     /** 
-	 * setNbPerson - DOCME Description
+	 * setNbPerson
 	 * changes the number of persons of the group.
 	 * 
 	 * @param nbPerson the number of persons of the group.

@@ -11,7 +11,7 @@ import java.util.List;
 import fr.umlv.ir3.flexitime.common.data.Data;
 /**
  * TeachingStructure - DOCME Description
- * The TeachingStructure represents a list of SubjectsGroups
+ * The TeachingStructure represents a list of SubjectsGroups defined for a Class
  * 
  * @version 0.1
  * 
@@ -20,7 +20,7 @@ import fr.umlv.ir3.flexitime.common.data.Data;
 public interface TeachingStructure extends Data {
     
     /** 
-	 * getLstSubjectsGroup - DOCME Description
+	 * getLstSubjectsGroup
 	 * returns the list of SubjectsGroups.
 	 * 
 	 *
@@ -32,7 +32,7 @@ public interface TeachingStructure extends Data {
     List getLstSubjectsGroup();
     
     /** 
-	 * setLstSubjectsGroup - DOCME Description
+	 * setLstSubjectsGroup
 	 * changes the list of SubjectsGroup of a teachingStructure.
 	 * 
 	 *
@@ -44,7 +44,7 @@ public interface TeachingStructure extends Data {
     void setLstSubjectsGroup(List lst);
     
     /** 
-	   * addSubjectsGroup - DOCME Description
+	   * addSubjectsGroup
 	   * add a SubjectsGroup in a TeachingStructure .
 	   * 
 	   *
@@ -56,7 +56,7 @@ public interface TeachingStructure extends Data {
 	  void addSubject(SubjectsGroup subjectsGroup);
 	  
 	  /** 
-		 * removeSubjectsGroup - DOCME Description
+		 * removeSubjectsGroup
 		 * remove a SubjectsGroup of a TeachingStructure.
 		 * 
 		 *

@@ -1,6 +1,6 @@
 /*
  * Created on 23 déc. 2004
- * by Famille
+ * by Guillaume GUERRIN
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
@@ -8,7 +8,7 @@ package fr.umlv.ir3.flexitime.common.data;
 
 
 /**
- * Data - DOCME Description
+ * Data 
  * This Interface represents a data
  * 
  * 
@@ -19,7 +19,7 @@ package fr.umlv.ir3.flexitime.common.data;
 public interface Data {
     
     /** 
-	 * getName - DOCME Description
+	 * getName  
 	 * returns the name of a data.
 	 * 
 	 *
@@ -31,7 +31,7 @@ public interface Data {
 	 String getName();
 
 	 /** 
-	  * setName - DOCME Description
+	  * setName 
 	  * changes the name of the data.
 	  * 
 	  *

@@ -6,11 +6,10 @@
  */
 package fr.umlv.ir3.flexitime.common.data.activity;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.Device;
 
 
 /**
- * DeviceBusy - DOCME Description
+ * DeviceBusy 
  * This interface represents the unavailabilities for a device
  * 
  * @version Révision 72
@@ -19,27 +18,20 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Device;
  */
 public interface DeviceBusy extends Busy {
     
-    /** 
-	   * getDevice - DOCME Description
-	   * returns the Device of the unavailabilities .
-	   * 
-	   *
-	   * @return the Device for this unavailabilities.
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     20 déc. 2004
-	   */	
-    Device getDevice();
+    public final static int REASON_BROCKEN=1;
+    public final static int REASON_LENDED=2;
+    public final static int REASON_IN_REPAIR=3;
+
 	  
 	  /** 
-	   * setDevice - DOCME Description
-	   * changes the Device of the unavailabilities.
+	   * setReason 
+	   * changes the Reason of the unavailabilities.
 	   * 
-	   * @param device the Device of the unavailabilities.
+	   * @param iReason the Reason of the unavailabilities.
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     20 déc. 2004
 	   */
-	  void setDevice(Device device);
+	  void setReason(int iReason);
 
 }

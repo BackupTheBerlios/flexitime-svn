@@ -12,11 +12,8 @@ import fr.umlv.ir3.flexitime.common.data.Data;
 import fr.umlv.ir3.flexitime.common.data.ressources.Room;
 
 /**
- * Floor - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Floor
+ *This class represents a floor with all parameters that it can have
  * 
  * @version 0.1
  * 
@@ -25,7 +22,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Room;
 public interface Floor extends Data {
 	
 	  /** 
-	   * getLstRoom - DOCME Description
+	   * getLstRoom
 	   * returns a list of rooms of a floor.
 	   * 
 	   *
@@ -37,7 +34,7 @@ public interface Floor extends Data {
 	  List getLstRoom();
 	  
 	  /** 
-	   * setLstRoom - DOCME Description
+	   * setLstRoom
 	   * changes a list of rooms of a floor.
 	   * 
 	   * @param lstRoom the new list of floor.
@@ -48,7 +45,7 @@ public interface Floor extends Data {
 	  void setLstRoom(List lstRoom);
 	  
 	  /**
-	   * addRoom - DOCME Description
+	   * addRoom
 	   * add a room in a floor
 	   *
 	   * @param room the new Room added.
@@ -59,7 +56,7 @@ public interface Floor extends Data {
 	  void addRoom(Room room);
 	  
 	  /**
-	   * removeRoom - DOCME Description
+	   * removeRoom
 	   * remove a room in a floor
 	   *
 	   * @param room the Room removed

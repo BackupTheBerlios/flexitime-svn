@@ -22,7 +22,7 @@ import java.util.Date;
 public class Time {
 	
     /**
-	 * str2Time - DOCME Description
+	 * str2Time
 	 * Allow to transform a String to a Time
 	 * 
 	 *
@@ -35,7 +35,7 @@ public class Time {
 	public static Time str2Time(String str){return null;}
 	
 	/** 
-	 * time2Str - DOCME Description
+	 * time2Str
 	 * Allow to transform a Time to a String
 	 * 
 	 *
@@ -48,7 +48,7 @@ public class Time {
 	public static String time2Str(Time t){return null;}
 	
     /**
-	 * time2Long - DOCME Description
+	 * time2Long
 	 * Allow to transform a Timee to a Long
 	 * 
 	 *
@@ -61,7 +61,7 @@ public class Time {
 	public static Long time2Long(Time t){return null;}
 	
     /**
-	 * long2Time - DOCME Description
+	 * long2Time
 	 * Allow to transform a Long to a Time
 	 * 
 	 *
@@ -74,7 +74,7 @@ public class Time {
 	public static Time long2Time(Long l){return null;}
 	
     /**
-	 * recupTime - DOCME Description
+	 * recupTime
 	 * Allow to recuperate the Time in a Date
 	 * 
 	 *
@@ -87,7 +87,7 @@ public class Time {
 	public static Time recupTime(Date da){return null;}
 	
     /**
-	 * recupDate - DOCME Description
+	 * recupDate
 	 * Allow to recuperate only the date in a Date
 	 * 
 	 *

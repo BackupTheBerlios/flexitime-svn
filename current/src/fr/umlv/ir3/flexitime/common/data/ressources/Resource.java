@@ -12,10 +12,7 @@ import fr.umlv.ir3.flexitime.common.data.activity.Busy;
 
 /**
  * Resource - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * This interface represents a resource
  * 
  * @version 0.1
  * 
@@ -25,7 +22,7 @@ public interface Resource extends Data {
 	
 	  
 	  /** 
-	   * getLstBusy - DOCME Description
+	   * getLstBusy
 	   * returns the list of unavailabilities of the resouce.
 	   * 
 	   *
@@ -37,7 +34,7 @@ public interface Resource extends Data {
 	  List getLstBusy();
 	  
 	  /** 
-	   * setLstBusy - DOCME Description
+	   * setLstBusy
 	   * changes the list of unavailabilities of the resouce.
 	   * 
 	   *
@@ -49,7 +46,7 @@ public interface Resource extends Data {
 	  void setLstBusy(List lstBusy);
 	  
 	  /** 
-	   * addBusy - DOCME Description
+	   * addBusy
 	   * add a unavailabilities in a Resource .
 	   * 
 	   *
@@ -61,7 +58,7 @@ public interface Resource extends Data {
 	  void addBusy(Busy busy);
 	  
 	  /** 
-	   * removeBusy - DOCME Description
+	   * removeBusy
 	   * remove a unavailabilities of a Resource.
 	   * 
 	   *

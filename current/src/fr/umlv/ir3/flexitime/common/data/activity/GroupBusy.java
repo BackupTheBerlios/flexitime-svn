@@ -10,7 +10,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Group;
 
 
 /**
- * GroupBusy - DOCME Description
+ * GroupBusy
  * This interface represents the unavailabilities for a group
  * 
  * @version Révision 72
@@ -19,27 +19,19 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Group;
  */
 public interface GroupBusy extends Busy {
     
-    /** 
-	   * getGroup - DOCME Description
-	   * returns the Group of the unavailabilities .
-	   * 
-	   *
-	   * @return the Group for this unavailabilities.
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     20 déc. 2004
-	   */	
-	  Group getGroup();
+    public final static int REASON_HOLLYDAYS=1;
+    public final static int REASON_WORK=2;
+
 	  
 	  /** 
-	   * setGroup - DOCME Description
-	   * changes the Group of the unavailabilities.
+	   * setReason 
+	   * changes the Reason of the unavailabilities.
 	   * 
-	   * @param group the Group of the unavailabilities.
+	   * @param iReason the Reason of the unavailabilities.
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     20 déc. 2004
 	   */
-	  void setGroup(Group group);
+	  void setReason(int iReason);
 
 }

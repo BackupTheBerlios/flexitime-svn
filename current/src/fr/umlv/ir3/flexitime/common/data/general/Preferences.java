@@ -1,5 +1,8 @@
 /*
  * Created on 13 déc. 2004
+ * by Adrien Bouvet
+ * 
+ * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.common.data.general;
 

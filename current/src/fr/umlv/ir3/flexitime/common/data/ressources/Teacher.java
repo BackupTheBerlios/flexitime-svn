@@ -8,10 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
 
 /**
  * Teacher - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ *This interface represents a teacher
  * 
  * @version 0.1
  * 
@@ -20,7 +17,7 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
 public interface Teacher extends Resource {
 	
     /** 
-	 * getSurName - DOCME Description
+	 * getSurName
 	 * returns the surname of the teacher.
 	 * 
 	 *
@@ -32,7 +29,7 @@ public interface Teacher extends Resource {
 	 String getSurName();
 	  
 	  /** 
-	   * setSurName - DOCME Description
+	   * setSurName
 	   * changes the surname of the teacher.
 	   * 
 	   * @param surName the new surname.
@@ -43,7 +40,7 @@ public interface Teacher extends Resource {
 	  void setSurName(String surName);
 	  
 	  /** 
-	   * getEmail - DOCME Description
+	   * getEmail
 	   * returns the email of the teacher.
 	   * 
 	   *
@@ -55,7 +52,7 @@ public interface Teacher extends Resource {
 	  String getEmail();
 	  
 	  /** 
-	   * setEmail - DOCME Description
+	   * setEmail
 	   * changes the email of the teacher.
 	   * 
 	   * @param email the new email.

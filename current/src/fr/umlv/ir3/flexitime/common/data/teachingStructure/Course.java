@@ -12,11 +12,8 @@ import fr.umlv.ir3.flexitime.common.data.Data;
 import fr.umlv.ir3.flexitime.common.data.ressources.Teacher;
 
 /**
- * Course - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Course
+ * This interface represents a course which belong to a subject
  * 
  * @version 0.1
  * 
@@ -25,7 +22,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Teacher;
 public interface Course extends Data {
 	
     /** 
-	 * getType - DOCME Description
+	 * getType
 	 * returns the type of the course.
 	 * 
 	 *
@@ -37,7 +34,7 @@ public interface Course extends Data {
 	  int getType();
 	  
 	  /** 
-	   * setType - DOCME Description
+	   * setType
 	   * changes the type of the course.
 	   * 
 	   * @param type the new type.
@@ -48,7 +45,7 @@ public interface Course extends Data {
 	  void setType(int type);
 	  
 	  /** 
-	   * getNbHours - DOCME Description
+	   * getNbHours
 	   * returns the number of hours of the course.
 	   * 
 	   *
@@ -60,7 +57,7 @@ public interface Course extends Data {
 	  int getNbHours();
 	  
 	  /** 
-	   * setNbHours - DOCME Description
+	   * setNbHours
 	   * changes the number of hours of the course.
 	   * 
 	   * @param nbHours the number of hours.me.
@@ -71,7 +68,7 @@ public interface Course extends Data {
 	  void setNbHours(int nbHours);
 	  
 	  /** 
-	   * getColor - DOCME Description
+	   * getColor
 	   * returns the color of the course.
 	   * 
 	   *
@@ -83,7 +80,7 @@ public interface Course extends Data {
 	  int getColor();
 	  
 	  /** 
-	   * setColor - DOCME Description
+	   * setColor
 	   * changes the color of the course.
 	   * 
 	   * @param color the new color.
@@ -94,7 +91,7 @@ public interface Course extends Data {
 	  void setColor(int color);
 	
 	  /** 
-	   * getLstTeacher - DOCME Description
+	   * getLstTeacher
 	   * returns the list of Teachers of a course .
 	   * 
 	   *
@@ -106,7 +103,7 @@ public interface Course extends Data {
 	  List getLstTeacher();
 	  
 	  /** 
-	   * setLstTeacher - DOCME Description
+	   * setLstTeacher
 	   * changes the list of Teacher of a course.
 	   * 
 	   * @param lstTeacher the list of Teacher  of a course.
@@ -118,7 +115,7 @@ public interface Course extends Data {
 
 	  
 	  /**
-	   * addTeacher - DOCME Description
+	   * addTeacher
 	   * add a teacher in a course
 	   *
 	   * @param teacher the Teacher added.
@@ -129,7 +126,7 @@ public interface Course extends Data {
 	  void addTeacher(Teacher teacher);
 	  
 	  /**
-	   * removeTeacher - DOCME Description
+	   * removeTeacher
 	   * remove a teacher of a course
 	   * 
 	   * @param teacher the Teacher removed.

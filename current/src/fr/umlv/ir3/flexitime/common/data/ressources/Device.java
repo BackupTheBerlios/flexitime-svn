@@ -7,11 +7,8 @@
 package fr.umlv.ir3.flexitime.common.data.ressources;
 
 /**
- * Device - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Device
+ * This interface represents a device as a videoprojector 
  * 
  * @version 0.1
  * 
@@ -20,7 +17,7 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
 public interface Device extends Resource {
 	
 	/** 
-	 * getType - DOCME Description
+	 * getType
 	 * returns the type of the device.
 	 * 
 	 *
@@ -32,7 +29,7 @@ public interface Device extends Resource {
 	 String getType();
 	  
 	 /** 
-	  * setType - DOCME Description
+	  * setType
 	  * changes the type of the device.
 	  * 
 	  * @param type the new type.

@@ -7,11 +7,10 @@
 package fr.umlv.ir3.flexitime.common.data.activity;
 
 
-import fr.umlv.ir3.flexitime.common.data.ressources.Teacher;
 
 
 /**
- * TeacherBusy - DOCME Description
+ * TeacherBusy
  * This interface represents the unavailabilities for a teacher
  * 
  * @version Révision 72
@@ -20,27 +19,23 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Teacher;
  */
 public interface TeacherBusy extends Busy{
     
-    /** 
-	   * getTeacher - DOCME Description
-	   * returns the Teacher of the unavailabilities .
-	   * 
-	   *
-	   * @return the Teacher for this unavailabilities.
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     20 déc. 2004
-	   */	
-	  Teacher getTeacher();
+	
+    public final static int REASON_WORK=1;
+    public final static int REASON_HOLLYDAYS=2;
+    public final static int REASON_SICK=3;
+    public final static int REASON_STAGE=4;
+    public final static int REASON_PERSO=5;
 	  
 	  /** 
-	   * setTeacher - DOCME Description
-	   * changes the Teacher of the unavailabilities.
+	   * setReason 
+	   * changes the Reason of the unavailabilities.
 	   * 
-	   * @param teacher the Teacher  of the unavailabilities.
+	   * @param iReason the Reason of the unavailabilities.
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     20 déc. 2004
 	   */
-	  void setTeacher(Teacher teacher);
+	  void setReason(int iReason);
+	  
 
 }

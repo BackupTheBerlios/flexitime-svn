@@ -13,12 +13,9 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Group;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.TeachingStructure;
 
 /**
- * Class - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
- * 
+ * Class
+ *This class represents a Class with all parameters that it can have
+ *A Class is a list of groups that works on the same SubjectsGroups.
  * @version 0.1
  * 
  * @author FlexiTeam - Guillaume GUERRIN
@@ -26,7 +23,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.TeachingStructure;
 public interface Class extends Data {
 	
 	  /** 
-	   * getNbGroup - DOCME Description
+	   * getNbGroup
 	   * returns the number of groups of a Class.
 	   * 
 	   *
@@ -38,18 +35,7 @@ public interface Class extends Data {
 	  int getNbGroup();
 	  
 	  /** 
-	   * setNbGroup - DOCME Description
-	   * changes the number of groups of a Class.
-	   * 
-	   * @param iNbGroup the new number of groups of a Class.
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     12 déc. 2004
-	   */
-	  void setNbGroup(int iNbGroup);
-	  
-	  /** 
-	   * getNbPerson - DOCME Description
+	   * getNbPerson
 	   * returns the number of person in a Class.
 	   * 
 	   *
@@ -60,19 +46,9 @@ public interface Class extends Data {
 	   */
 	  int getNbPerson();
 	  
-	  /** 
-	   * setNbPerson - DOCME Description
-	   *  changes the number of person in a Class.
-	   * 
-	   * @param iNbPerson the new number of person in a Class.
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     12 déc. 2004
-	   */
-	  void setNbPerson(int iNbPerson);
 	  
 	  /** 
-	   * getTeachingStructure - DOCME Description
+	   * getTeachingStructure
 	   * returns the teachingStructure of a Class.
 	   * 
 	   *
@@ -84,7 +60,7 @@ public interface Class extends Data {
 	  TeachingStructure getTeachingStructure();
 	  
 	  /** 
-	   * setTeachingStructure - DOCME Description
+	   * setTeachingStructure
 	   * changes the teachingStructure of a Class.
 	   * 
 	   * @param struc the new teachingStructure.
@@ -95,7 +71,7 @@ public interface Class extends Data {
 	  void setTeachingStructure(TeachingStructure struc);
 	  
 	  /** 
-	   * getLstGroups - DOCME Description
+	   * getLstGroups
 	   * returns the list of groups of a Class.
 	   * 
 	   *
@@ -107,7 +83,7 @@ public interface Class extends Data {
 	  List getLstGroups();
 	  
 	  /** 
-	   * setLstGroups - DOCME Description
+	   * setLstGroups
 	   * changes the list of groups of a Class.
 	   * 
 	   * @param lstGroup the new list of groups of a Class.
@@ -119,7 +95,7 @@ public interface Class extends Data {
 	  
 	  /**
 	   *  
-	   * addGroup - DOCME Description
+	   * addGroup
 	   * add a new group in the Class
 	   *
 	   * @param group the group added
@@ -131,7 +107,7 @@ public interface Class extends Data {
 	  
 	  /**
 	   *  
-	   * removeGroup - DOCME Description
+	   * removeGroup
 	   * remove a group from the Class
 	   *
 	   * @param group the group removed

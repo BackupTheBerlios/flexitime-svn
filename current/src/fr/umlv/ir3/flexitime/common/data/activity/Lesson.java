@@ -8,11 +8,14 @@ package fr.umlv.ir3.flexitime.common.data.activity;
 
 
 
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.Course;
+import java.util.List;
+
+import fr.umlv.ir3.flexitime.common.data.ressources.Resource;
+
 
 /**
- * Lesson - DOCME Description
- * 
+ * Lesson
+ * A lesson is an unavailabilities with different resources as teachers devices and groups
  * 
  * @version 0.1
  * 
@@ -21,38 +24,52 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.Course;
 public interface Lesson extends Busy{
    
 	  
-	  /** 
-	   * getCourse - DOCME Description
-	   * returns the course of the lesson.
+    /** 
+	   * getLstResource
+	   * returns the list of resources of a Lesson
 	   * 
-	   *		<code>	
-	   *				Course course = lesson.getCourse();
-	   *		</code>
 	   *
-	   *@return the course of the lesson.
+	   * @return the list of resources of a Lesson
+	   * 
+	   * @author   FlexiTeam - Guillaume GUERRIN
+	   * @date     12 déc. 2004
+	   */		  
+	  List getLstResource();
+	  
+	  /** 
+	   * setLstResource
+	   * changes the list of resources of a Lesson
+	   * 
+	   *
+	   * @param lstResource the new list of resources of a Lesson
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     12 déc. 2004
 	   */
-	  Course getCourse();
+	  void setLstResource(List lstResource);
 	  
 	  /** 
-	   * setCourse - DOCME Description
-	   * changes the course of the lesson.
+	   * addResource
+	   * add a Resource in a lesson .
 	   * 
-	   *		<code>	
-	   *				Course course = new Course();
-	   * 				lesson.setCourse(course);
-	   *		</code>
 	   *
-	   *@param course the course of the lesson.
+	   * @param resource the new Resource in a lesson.
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     12 déc. 2004
+	   * @date     20 déc. 2004
 	   */
-	  void setCourse(Course course);
+	  void addResource(Resource resource);
 	  
-
-	  
+	  /** 
+	   * removeResource
+	   * remove Resource in a lesson.
+	   * 
+	   *
+	   * @param resource the new Resource in a lesson
+	   * 
+	   * @author   FlexiTeam - Guillaume GUERRIN
+	   * @date     20 déc. 2004
+	   */	
+	  void removeResource(Resource resource);
 
 }

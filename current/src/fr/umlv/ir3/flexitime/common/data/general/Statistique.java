@@ -8,7 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.general;
 
 
 /**
- * Statistique - DOCME Description
+ * Statistique  - DOCME Description
  * explication supplémentaire si nécessaire
  * in english please...
  * Que fait cette classe, qu'est-ce qu'elle 

@@ -8,10 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
 
 /**
  * Room - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ *This interface represents a room which belong to a floor
  * 
  * @version 0.1
  * 
@@ -19,8 +16,13 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
  */
 public interface Room extends Resource {
 	
+    //Definition des types
+    public final static int TYPE_MACHINE=1;
+    public final static int TYPE_COURS=2;
+    public final static int TYPE_TP=3;
+
     /** 
-	 * getType - DOCME Description
+	 * getType
 	 * returns the type of the room.
 	 * 
 	 *
@@ -29,18 +31,18 @@ public interface Room extends Resource {
 	 * @author   FlexiTeam - Guillaume GUERRIN
 	 * @date     12 déc. 2004
 	 */	
-	  String getType();
+	  int getType();
 	  
 	  /** 
-	   * setType - DOCME Description
+	   * setType
 	   * changes the type of the room.
 	   * 
-	   * @param type the type of the room.
+	   * @param iType the type of the room.
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     12 déc. 2004
 	   */ 
-	  void setType(String type);
+	  void setType(int iType);
 	  
 	  /** 
 	   * getCapacity- DOCME Description
@@ -55,7 +57,7 @@ public interface Room extends Resource {
 	  String getCapacity();
 	  
 	  /** 
-	   * setCapacity - DOCME Description
+	   * setCapacity
 	   * changes the capacity of the room.
 	   * 
 	   * @param capacity the capacity of the room.

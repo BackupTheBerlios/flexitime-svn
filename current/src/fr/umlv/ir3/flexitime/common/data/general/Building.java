@@ -10,11 +10,8 @@ import java.util.List;
 import fr.umlv.ir3.flexitime.common.data.Data;
 
 /**
- * Building - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Building
+ * This interface represents a building with all parameters that it can have
  * 
  * @version 0.1
  * 
@@ -23,7 +20,7 @@ import fr.umlv.ir3.flexitime.common.data.Data;
 public interface Building extends Data {
 	
     /** 
-     * getNbFloor - DOCME Description
+     * getNbFloor
      * returns the number of floors of Building.
      * 
      *     <code>int i = lbuilding.getNbFloor()</code>
@@ -35,19 +32,9 @@ public interface Building extends Data {
      */
 	  int getNbFloor();
 
-	 /** 
-	  * setNbFloor - DOCME Description
-	  * changes the number of floorss of Building.
-	  * 
-	  *  @param iNbFloor the new number of floor.
-	  * 
-	  * @author   FlexiTeam - Guillaume GUERRIN
-	  * @date     12 déc. 2004
-	  */
-	  void setNbFloor(int iNbFloor);
 
 	  /** 
-	   * getLstFloor - DOCME Description
+	   * getLstFloor
 	   * returns a list of floors of Building.
 	   * 
 	   *
@@ -59,7 +46,7 @@ public interface Building extends Data {
 	  List getLstFloor();
 	  
 	  /** 
-	   * setLstFloor - DOCME Description
+	   * setLstFloor
 	   *  changes a list of the floor of Building.
 	   * 
 	   *
@@ -71,7 +58,7 @@ public interface Building extends Data {
 	  void setLstFloor(List lstFloor);
 	  
 	  /** 
-	   * addFloor - DOCME Description
+	   * addFloor
 	   *  add a floor in Building.
 	   * 
 	   *
@@ -83,7 +70,7 @@ public interface Building extends Data {
 	  void addFloor(Floor floor);
 	  
 	  /** 
-	   * removeFloor - DOCME Description
+	   * removeFloor
 	   * remove a floor in Building.
 	   * 
 	   *

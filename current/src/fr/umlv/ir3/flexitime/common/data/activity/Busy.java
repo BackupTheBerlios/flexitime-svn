@@ -7,14 +7,11 @@
 package fr.umlv.ir3.flexitime.common.data.activity;
 
 import java.util.Date;
-import java.util.List;
-
 import fr.umlv.ir3.flexitime.common.data.Data;
-import fr.umlv.ir3.flexitime.common.data.ressources.Resource;
 
 
 /**
- * Busy - DOCME Description
+ * Busy
  * Busy represents the unavailabilities
  * 
  * @version 0.1
@@ -22,158 +19,68 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Resource;
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface Busy extends Data{
-    
-    /** 
-     * getDate - DOCME Description
-     * returns the date of the lesson.
+
+    /**
+     * getStartDate 
+     * returns the date of the beginning of the busy.
      * 
      *     <code>Date date = lesson.getDate()</code>
-     *
-     * @return the date of the lesson.
+     * 
+     * @return the date of the beginning of the busy.
      * 
      * @author   FlexiTeam - Guillaume GUERRIN
      * @date     12 déc. 2004
+     * 
+     * @uml.property name="startDate"
      */
-	  Date getDate();
-	    
-	  /** 
-	     * setDate - DOCME Description
-	     * changes the date of the lesson.
-	     * 
-	     *		<code>	
-	     *				Date date = new Date();
-	     * 				lesson.setDate(date);
-	     * 		</code>
-	     *
-	     * @param daLesson the date of the lesson.
-	     * 
-	     * @author   FlexiTeam - Guillaume GUERRIN
-	     * @date     12 déc. 2004
-	     */
-	  void setDate(Date daLesson);
+    Date getStartDate();
+
+    /**
+     * setStartDate
+     * changes the date of the beginning of the busy.
+     * 
+     * 		<code>	
+     * 				Date date = new Date();
+     * 				lesson.setDate(date);
+     * 		</code>
+     * 
+     * @param daBusy the date of the beginning of the busy.
+     * 
+     * @author   FlexiTeam - Guillaume GUERRIN
+     * @date     12 déc. 2004
+     * 
+     * @uml.property name="startDate"
+     */
+    void setStartDate(Date daBusy);
+
 	  
 	  /** 
-	     * getBeginHour - DOCME Description
-	     *  returns the hours of the beginning of the lesson.e lesson.
-	     * 
-	     *		<code>	
-	     *				String str = lesson.getBeginHour();
-	     * 		</code>
-	     *
-	     * @return the hours of the beginning of the lesson.
-	     * 
-	     * @author   FlexiTeam - Guillaume GUERRIN
-	     * @date     12 déc. 2004
-	     */
-	  String getBeginHour();
-	  
-	  /** 
-	   * setBeginHour - DOCME Description
-	   * changes the hours of the beginning of the lesson.
+	   * getEndDate 
+	   * returns the date of the end of the busy.
 	   * 
-	   *		<code>	
-	   *				String str = new String();
-	   * 				lesson.setBeginHour(str);
-	   * 		</code>
+	   *     <code>Date date = busy.getDate()</code>
 	   *
-	   * @param strBeginHour hour of the beginning of the lesson.
+	   * @return the date of the end of the busy.
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     12 déc. 2004
 	   */
-	  void setBeginHour(String strBeginHour);
-	
-	  /** 
-	   * getEndHour - DOCME Description
-	   * returns the hours of the end of the lesson.
-	   * 
-	   *		<code>	
-	   *				String str = lesson.getEndHour();
-	   *		</code>
-	   * @return the hours of the end of the lesson.
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     12 déc. 2004
-	   */
-	  String getEndHour();
-	  
-	  /** 
-	   * setEndHour - DOCME Description
-	   * changes the hours of the end of the lesson.
-	   * 
-	   *		<code>	
-	   *				String str = new String();
-	   * 				lesson.setEndHour(str);
-	   *		</code>
-	   *
-	   *@param strEndHour the hours of the end of the lesson.
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     12 déc. 2004
-	   */
-	  void setEndHour(String strEndHour );
-	  
-	  /** 
-	   * getLstResources - DOCME Description
-	   * returns the list of resources of the lesson.
-	   * 
-	   *		<code>	
-	   *				List lst = lesson.getLstResources();
-	   *		</code>
-	   *
-	   *@return the list of resources of the lesson.
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     12 déc. 2004
-	   */
-	  List getLstResources();
-	  
-	  /** 
-	   * setLstResources - DOCME Description
-	   * changes the list of resources of the lesson.
-	   * 
-	   *		<code>	
-	   *				List lst = new List();
-	   * 				lesson.setLstResources(lst);
-	   *		</code>
-	   *
-	   *@param lstResources the list of resources of the lesson.
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     12 déc. 2004
-	   */
-	  void setLstResources(List lstResources);
-	  
-	  /** 
-	   * addResource - DOCME Description
-	   * add a resource in the lesson
-	   * 
-	   *		<code>	
-	   *				Resource resource = new Resource();
-	   * 				lesson.addResource(resource);
-	   *		</code>
-	   *
-	   * @param resource the resource added
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     12 déc. 2004
-	   */
-	  void addResource(Resource resource);
-	  
-	  /** 
-	   *  removeResource - DOCME Description
-	   *  remove a resource in the lesson
-	   * 
-	   *		<code>	
-	   *				Resource resource = new Resource();
-	   * 				lesson.removeResource(resource);
-	   *		</code>
-	   *
-	   * @param resource the resource removed
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     12 déc. 2004
-	   */
-	  void removeResource(Resource resource);
+		  Date getEndDate();
+		    
+		/** 
+		 * setEndDate
+		 * changes the date of the end of the busy.
+		 * 
+		 *		<code>	
+		 *				Date date = new Date();
+		 * 				busy.setDate(date);
+		 * 		</code>
+		 *
+		 * @param daBusy the date of the end of the busy.
+		 * 
+		 * @author   FlexiTeam - Guillaume GUERRIN
+		 * @date     12 déc. 2004
+		 */
+		  void setEndDate(Date daBusy);
 
 }

@@ -16,6 +16,19 @@ package fr.umlv.ir3.flexitime.richClient.gui.views;
  */
 public class LoginView {
     
+    /**
+     *  
+     * printView - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     *  
+     * 
+     * @see (si nécessaire)
+     * @author   FlexiTeam - Adrien Bouvet
+     * @date     26 déc. 2004
+     */
     void printView() {}
 
 }
