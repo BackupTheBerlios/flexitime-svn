@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructur
 
 
 /**
- * Defines a class which containes groups.
+ * Defines a class which contains groups.
  * 
  * @version 0.1
  * @see fr.umlv.ir3.flexitime.common.data.general.IClass
@@ -28,14 +28,19 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructur
  */
 public class ClassImpl implements IClass
 {
-    
-    private String name;
+    //===========//
+    //   Champs  //
+    //===========// 
+    private String strName;
     private int iNbGroup;
     private List listOfGroups;
     private int iNbPerson;
     private ITeachingStructure teachStruct;
     
-
+    
+    //==================//
+    //   Constructeurs  //
+    //==================//
     /**
      * Constructs a class.
      * 
@@ -46,12 +51,16 @@ public class ClassImpl implements IClass
      */
     public ClassImpl(String sName, List listOfGroups, ITeachingStructure struct)
     {
-        this.name = sName;
-        this.listOfGroups = listOfGroups;
+        this.strName = sName;
+        this.listOfGroups = new ArrayList(listOfGroups);
         this.teachStruct = struct;
         calculNbPersonAndNbGroup();
     }
 
+    
+    //=============//
+    //   Méthodes  //
+    //=============//
     /**
      * Calculates the number of persons and groups in this class.
      * <code>class.calculNbPersonAndNbGroup()</code>
@@ -154,7 +163,7 @@ public class ClassImpl implements IClass
      * Adds a group in the list of groups for this class.
      * <code>class.addGroup(group)</code>
      *
-     * @param group a group to add in the list.
+     * @param group a group to add to the list.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#addGroup(fr.umlv.ir3.flexitime.common.data.ressources.IGroup)
      */
@@ -190,7 +199,7 @@ public class ClassImpl implements IClass
      */
     public String getName()
     {
-        return name;
+        return strName;
     }
 
     /** 
@@ -203,7 +212,7 @@ public class ClassImpl implements IClass
      */
     public void setName(String name)
     {
-        this.name = name;
+        this.strName = name;
     }
 
 }

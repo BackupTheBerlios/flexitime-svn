@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 
 
 /**
- * Defines a track which containes classes.
+ * Defines a track which contains classes.
  *  
  * @version 0.1
  * @see fr.umlv.ir3.flexitime.common.data.general.ITrack
@@ -22,11 +22,16 @@ import fr.umlv.ir3.flexitime.common.data.general.ITrack;
  */
 public class TrackImpl implements ITrack
 {
-    
+    //===========//
+    //   Champs  //
+    //===========// 
     private List listOfClasses;
-    private String name;
+    private String strName;
     
-    
+
+    //==================//
+    //   Constructeurs  //
+    //==================//
     /**
      * Constructs a track. 
      * 
@@ -35,9 +40,13 @@ public class TrackImpl implements ITrack
      */
     public TrackImpl(String sName)
     {
-        name = sName;        
+        strName = sName;        
     }
     
+    
+    //=============//
+    //   Méthodes  //
+    //=============//
     /** 
      * Returns the list of classes in this track.
      * <code>List list = getLstClass()</code>
@@ -105,7 +114,7 @@ public class TrackImpl implements ITrack
      */
     public String getName()
     {
-        return name;
+        return strName;
     }
 
     /** 
@@ -119,7 +128,7 @@ public class TrackImpl implements ITrack
      */
     public void setName(String name)
     {
-        this.name = name;
+        this.strName = name;
     }
 
 }
