@@ -16,14 +16,14 @@ import java.util.Calendar;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public class Time
+public class FlexiTime
 {
     private Calendar cal;
     
     /**
      * Default constructor - Get the calendar now 
      */
-    public Time(){
+    public FlexiTime(){
         cal = Calendar.getInstance();
         cal.setFirstDayOfWeek(Calendar.MONDAY);
     }
@@ -31,8 +31,21 @@ public class Time
      * Constructor - Take a calendar
      * @param c a calendar
      */
-    public Time(Calendar c){
+    public FlexiTime(Calendar c){
         cal = c;
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
+    }
+    /**
+     * Constructor - Take all the element of a date
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @param minute
+     */
+    public FlexiTime(int year, int month, int day, int hour, int minute){
+        cal = Calendar.getInstance();
+        cal.set(year,month-1,day,hour,minute);
         cal.setFirstDayOfWeek(Calendar.MONDAY);
     }
     /** 
@@ -180,6 +193,19 @@ public class Time
         return cal.get(Calendar.SECOND);
     }
     /** 
+     * getWeek - get the week of the year
+     * 
+     *     <code>int w = time.getWeek()</code>
+     *
+     * @return Returns the week
+     * 
+     * @author   FlexiTeam - VF
+     * @date     6 janv. 2005
+     */
+    public int getWeek() {
+        return cal.get(Calendar.WEEK_OF_YEAR);
+    }
+    /** 
      * getYear - get the year
      * 
      *     <code>int y = time.getYear()</code>
@@ -278,100 +304,232 @@ public class Time
      * @author   FlexiTeam - VF
      * @date     6 janv. 2005
      */
-    public static int compare(Time t1,Time t2){
+    public static int compare(FlexiTime t1,FlexiTime t2){
         if(t1.getCal().compareTo(t2.getCal())==-1) return -1;
         else if(t1.getCal().compareTo(t2.getCal())==1) return 1;
         else return 0;
     }
     /** 
-     * rollDay - add or remove un number of day
+     * addDay - add or remove a number of day
      * 
-     *     <code>rollDay(2)</code>
+     *     <code>c.addDay(2)</code>
      *
      * @param number the number to add or remove 
      * 
      * @author   FlexiTeam - VF
      * @date     6 janv. 2005
      */
-    public void rollDay(int number){
+    public void addDay(int number){
         cal.add(Calendar.DAY_OF_MONTH,number);
     }
     /** 
-     * rollMonth - add or remove un number of month
+     * addMonth - add or remove a number of month
      * 
-     *     <code>rollMonth(2)</code>
+     *     <code>c.addMonth(2)</code>
      *
      * @param number the number of month to add or remove
      * 
      * @author   FlexiTeam - VF
      * @date     6 janv. 2005
      */
-    public void rollMonth(int number){
+    public void addMonth(int number){
         cal.add(Calendar.MONTH,number);
     }
     /** 
-     * rollYear - add or remove un number of year
+     * addYear - add or remove a number of year
      * 
-     *     <code>rollYear(2)</code>
+     *     <code>c.addYear(2)</code>
      *
      * @param number the number of year to add or remove
      * 
      * @author   FlexiTeam - VF
      * @date     6 janv. 2005
      */
-    public void rollYear(int number){
+    public void addYear(int number){
         cal.add(Calendar.YEAR,number);
     }
     /** 
-     * rollHour - add or remove un number of hour
+     * addHour - add or remove a number of hour
      * 
-     *     <code>rollHour(2)</code>
+     *     <code>c.addHour(2)</code>
      *
      * @param number the number of hour to add or remove
      * 
      * @author   FlexiTeam - VF
      * @date     6 janv. 2005
      */
-    public void rollHour(int number){
+    public void addHour(int number){
         cal.add(Calendar.HOUR_OF_DAY,number);
     }
     /** 
-     * rollMinute - add or remove un number of minute
+     * addMinute - add or remove a number of minute
      * 
-     *     <code>rollMinute(2)</code>
+     *     <code>c.addMinute(2)</code>
      *
      * @param number the number of minute to add or remove
      * 
      * @author   FlexiTeam - VF
      * @date     6 janv. 2005
      */
-    public void rollMinute(int number){
+    public void addMinute(int number){
         cal.add(Calendar.MINUTE,number);
     }
     /** 
-     * rollSecond - add or remove un number of seconds
+     * addSecond - add or remove a number of seconds
      * 
-     *     <code>rollSecond(2)</code>
+     *     <code>c.addSecond(2)</code>
      *
      * @param number the number of second to add or remove
      * 
      * @author   FlexiTeam - VF
      * @date     6 janv. 2005
      */
-    public void rollSecond(int number){
+    public void addSecond(int number){
         cal.add(Calendar.SECOND,number);
     }
     /** 
-     * rollMSecond - add or remove un number of milliseconds
+     * addMSecond - add or remove a number of milliseconds
      * 
-     *     <code>rollMSecond(2)</code>
+     *     <code>c.addMSecond(2)</code>
      *
      * @param number the number of milliseconds to add or remove
      * 
      * @author   FlexiTeam - VF
      * @date     6 janv. 2005
      */
-    public void rollMSecond(int number){
+    public void addMSecond(int number){
         cal.add(Calendar.MILLISECOND,number);
+    }
+    /** 
+     * addWeek - add or remove a number of week
+     * 
+     *     <code>c.addWeek(2)</code>
+     *
+     * @param number the number of week to add or remove
+     * 
+     * @author   FlexiTeam - VF
+     * @date     6 janv. 2005
+     */
+    public void addWeek(int number){
+        cal.add(Calendar.WEEK_OF_YEAR,number);
+    }
+    /** 
+     * getGapMSecond - Get the number of millisecond between two Time
+     * 
+     *     <code>long l = FlexiTime.getGapMSecond(t1,t2)</code>
+     *
+     * @param t1 a Time
+     * @param t2 a Time
+     * @return Returns the number of millisecond between two Time in long<br>
+     * 
+     * @author   FlexiTeam - VF
+     * @date     7 janv. 2005
+     */
+    public static long getGapMSecond(FlexiTime t1, FlexiTime t2){
+        long gap = (t2.getCal().getTimeInMillis() - t1.getCal().getTimeInMillis());
+        if (gap < 0) return -gap;
+        return gap;
+    }
+    /** 
+     * getGapMSecond - Get the number of second between two Time
+     * 
+     *     <code>long l = FlexiTime.getGapSecond(t1,t2)</code>
+     *
+     * @param t1 a Time
+     * @param t2 a Time
+     * @return Returns the number of second between two Time in long<br>
+     * 
+     * @author   FlexiTeam - VF
+     * @date     7 janv. 2005
+     */
+    public static long getGapSecond(FlexiTime t1, FlexiTime t2){
+        long gap = (t2.getCal().getTimeInMillis() - t1.getCal().getTimeInMillis()) / 1000;
+        if (gap < 0) return -gap;
+        return gap;
+    }
+    /** 
+     * getGapMinute - Get the number of minute between two Time
+     * 
+     *     <code>int i = FlexiTime.getGapMinute(t1,t2)</code>
+     *
+     * @param t1 a Time
+     * @param t2 a Time
+     * @return Returns the number of minute between two Time in int<br>
+     * Returns -1 if it can't get a int with the long
+     * 
+     * @author   FlexiTeam - VF
+     * @date     7 janv. 2005
+     */
+    public static int getGapMinute(FlexiTime t1, FlexiTime t2){
+        long gap = (t2.getCal().getTimeInMillis() - t1.getCal().getTimeInMillis()) / 60000;
+        try{
+            if (gap < 0) return (int)-gap;
+            return (int)gap;
+        }catch(Exception e){
+            return -1;
+        }
+    }
+    /** 
+     * getGapHour - Get the number of hour between two Time
+     * 
+     *     <code>int i = FlexiTime.getGapHour(t1,t2)</code>
+     *
+     * @param t1 a Time
+     * @param t2 a Time
+     * @return Returns the number of bour between two Time in int<br>
+     * Returns -1 if it can't get a int with the long
+     * 
+     * @author   FlexiTeam - VF
+     * @date     7 janv. 2005
+     */
+    public static int getGapHour(FlexiTime t1, FlexiTime t2){
+        long gap = (t2.getCal().getTimeInMillis() - t1.getCal().getTimeInMillis()) / 3600000;
+        try{
+            if (gap < 0) return (int)-gap;
+            return (int)gap;
+        }catch(Exception e){
+            return -1;
+        }
+    }
+    /** 
+     * getGapWeek - Get the number of week between two Time
+     * 
+     *     <code>int i = FlexiTime.getGapWeek(t1,t2)</code>
+     *
+     * @param t1 a Time
+     * @param t2 a Time
+     * @return Returns the number of week between two Time in int<br>
+     * 
+     * @author   FlexiTeam - VF
+     * @date     7 janv. 2005
+     */
+    public static int getGapWeek(FlexiTime t1, FlexiTime t2){
+        FlexiTime minTime;
+        FlexiTime maxTime;
+        int number = 0;
+        if(FlexiTime.compare(t1,t2)==-1){
+            minTime = t1;
+            maxTime = t2;
+        }else{
+            minTime = t2;
+            maxTime = t1;
+        }
+        if(minTime.getYear()==maxTime.getYear()) {
+            System.out.println(maxTime.getWeek()+" "+minTime.getWeek());
+            number = maxTime.getWeek() - minTime.getWeek();
+            if(number<0) number = maxTime.getWeek();
+            return number;
+        }
+        for(int i = 0;i<maxTime.getYear()-minTime.getYear()+1;i++){
+            if(i==0)number = number + minTime.getCal().getMaximum(Calendar.WEEK_OF_YEAR) - minTime.getWeek(); 
+            else if(i==maxTime.getYear()-minTime.getYear()) number = number + maxTime.getWeek();
+            else {
+                Calendar c = Calendar.getInstance();
+                c.set(Calendar.YEAR,minTime.getYear()+i);
+                number = number + c.getMaximum(Calendar.WEEK_OF_YEAR);
+            }
+        }
+        return number;
+                
     }
 }
