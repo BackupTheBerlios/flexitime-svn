@@ -68,7 +68,7 @@ public class PreferencesAction extends AbstractAction
         
         JFrame maFrame = new JFrame("Preferences");     
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("FlexiTime_icone32.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("../../pictures/FlexiTime_icone32.png"));
         
         FormLayout layout = new FormLayout(
                 "right:pref, 3dlu, pref, 3dlu, pref, 3dlu, pref, 30dlu, pref", // 9 columns
