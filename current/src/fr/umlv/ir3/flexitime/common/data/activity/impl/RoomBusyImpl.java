@@ -18,7 +18,7 @@ import fr.umlv.ir3.flexitime.common.tools.Gap;
  * REASON_CLOSED = 3;
  * 
  * 
- * @version 199
+ * @version 240
  * @see fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -67,6 +67,17 @@ public class RoomBusyImpl extends BusyImpl implements IRoomBusy
     {
         this(g);
         reason = iReason;
+    }
+    
+    /**
+     * Copy a room busy to create a new romm busy.
+     * 
+     * @param busy
+     *            the unavaibility to copy
+     */
+    public RoomBusyImpl(IRoomBusy busy)
+    {
+        this(busy.getGap(), busy.getReason());
     }
 
     // ===========//

@@ -11,32 +11,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
-import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
 /**
  * Defines all the preferences that can set a user.
  * 
- * @version 0.1
+ * @version 240
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
-public class PreferencesImpl extends DataImpl implements IPreferences 
+public class PreferencesImpl implements IPreferences 
 {
 	/**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3904961949799100468L;
-    //===========//
-	//   Champs  //
-	//===========// 
+    // ======== //
+	// Champs   //
+	// ======== // 
+    private Long idPref;
 	private int iHeightGap;
 	private int iLengthGap;
 	private List listOfColors;
 	
 	
-	//==================//
-	//   Constructeurs  //
-	//==================//
+	// ============= //
+	// Constructeurs //
+	// ============= //
     /**
      * Default constructor for a Preferences object.
      */
@@ -64,7 +64,25 @@ public class PreferencesImpl extends DataImpl implements IPreferences
 	//=============//
 	//   Méthodes  //
 	//=============//
-   
+    /**
+     * Getter for idPref
+     *
+     * @return id of the preference
+     */
+    public Long getIdPref()
+    {
+        return idPref;
+    }
+    
+    /**
+     * Setter fo idPref
+     * @param idPref id to set
+     * 
+     */
+    public void setIdPref(Long idPref)
+    {
+        this.idPref = idPref;
+    }
     
 	/**
 	 * Returns the height of a gap.

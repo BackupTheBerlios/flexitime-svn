@@ -6,7 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
@@ -14,7 +14,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 /**
  * Defines a teacher.
  * 
- * @version 205
+ * @version 240
  * @see fr.umlv.ir3.flexitime.common.data.resources.ITeacher
  * @see fr.umlv.ir3.flexitime.common.data.resources.impl.ResourceImpl
  * 
@@ -75,15 +75,15 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      *            a string.
      * @param firstName
      *            the first name of the teacher.
-     * @param listBusy
+     * @param busies
      *            a list of unavailibilities.
      * @param mail
      *            the email of the teacher.
      * 
      */
-    public TeacherImpl(String name, String firstName, String mail, List<IBusy> listBusy)
+    public TeacherImpl(String name, String firstName, String mail, Set<IBusy> busies)
     {
-        super(name, listBusy);
+        super(name, busies);
         this.firstName = firstName;
         email = mail;
     }

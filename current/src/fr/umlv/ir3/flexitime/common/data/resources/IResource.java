@@ -6,7 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources;
 
-import java.util.List;
+import java.util.Set;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
@@ -14,8 +14,8 @@ import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 /**
  * This interface represents a resource
  * 
- * @version 0.1
- * @author FlexiTeam - Guillaume GUERRIN
+ * @version 240
+ * @author FlexiTeam - Jérôme GUERS
  */
 public interface IResource extends IData
 {
@@ -24,23 +24,20 @@ public interface IResource extends IData
      * Returns the list of unavailabilities of the resouce.
      * 
      * @return the list of unavailabilities of the resource.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
-    List<IBusy> getLstBusy();
+    Set<IBusy> getSetBusy();
 
     /**
      * Changes the list of unavailabilities of the resouce.
      * 
-     * @param lstBusy the new unavailabilities.
-     * @author FlexiTeam - Guillaume GUERRIN
+     * @param setBusy the new unavailabilities.
      */
-    void setLstBusy(List<IBusy> lstBusy);
+    void setSetBusy(Set<IBusy> setBusy);
 
     /**
      * Add a unavailabilities in a Resource .
      * 
      * @param busy the new unavailabilitie
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     void addBusy(IBusy busy);
 
@@ -48,8 +45,6 @@ public interface IResource extends IData
      * Remove a unavailabilities of a Resource.
      * 
      * @param busy the new unavailabilitie
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     void removeBusy(IBusy busy);
-
 }

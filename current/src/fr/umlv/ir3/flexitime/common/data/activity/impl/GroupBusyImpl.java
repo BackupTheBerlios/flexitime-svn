@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.tools.Gap;
  * REASON_WORK      = 2;
  * 
  * 
- * @version 199
+ * @version 240
  * @see fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -63,6 +63,17 @@ public class GroupBusyImpl extends BusyImpl implements IGroupBusy
     {
         this(g);
         reason = iReason;
+    }
+    
+    /**
+     * Copy a group busy to create a new group busy.
+     * 
+     * @param busy
+     *            the unavaibility to copy
+     */
+    public GroupBusyImpl(IGroupBusy busy)
+    {
+        this(busy.getGap(), busy.getReason());
     }
     
     

@@ -1,6 +1,6 @@
 /*
  * Created on 13 janv. 2005
- * by Famille
+ * by Guillaume GUERRIN
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.common.data.admin;
@@ -9,12 +9,11 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 
 
 /**
- * IUser
- * represents the interface of a User
+ * Represents the interface of a User
  * 
- * @version 201
+ * @version 240
  * 
- * @author FlexiTeam - Guillaume GUERRIN
+ * @author FlexiTeam - Jérôme GUERS
  */
 public interface IUser extends IData
 { 
@@ -62,15 +61,22 @@ public interface IUser extends IData
     public void setLdap(boolean ldap);
     
     /**
-     * Return idUser
-     * @return Returns the idUser.
+     * Test the equality of two users.
+     * <ul>
+     * <li>If one user has an ID, the other must have one, else there are not
+     * equals.</li>
+     * <li>If any user has an ID, they must have the same name to be equals.
+     * </li>
+     * <li>Else, they must have the same ID.</li>
+     * </ul>
+     * 
+     * @param obj
+     *            other user to compare with
+     * @return <code>true</code> if this object is the same as the obj
+     *         argument; <code>false</code> otherwise.
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
      */
-    public Long getIdUser();
-    
-    /**
-     * Set idUser
-     * @param idUser The idUser to set.
-     */
-    public void setIdUser(Long idUser);
+    public boolean equals(Object obj);
 }
 

@@ -20,7 +20,19 @@ import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
  */
 public interface ICourse extends IData
 {
-
+    /**
+     * Comment for <code>CM</code>
+     */
+    public final static int   CM               = 1;
+    /**
+     * Comment for <code>TD</code>
+     */
+    public final static int   TD               = 2;
+    /**
+     * Comment for <code>TP</code>
+     */
+    public final static int   TP               = 3;
+    
     /**
      * Returns the type of the course.
      * 

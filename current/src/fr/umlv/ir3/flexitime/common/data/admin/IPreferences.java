@@ -1,25 +1,38 @@
 /*
  * Created on 13 janv. 2005
- * by Famille
+ * by Guillaume GUERRIN
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.common.data.admin;
 
+import java.io.Serializable;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.IData;
-
-
 /**
- * IPreferences
- * represents the interface of a Preference
+ * Represents the interface of a Preference
  * 
- * @version Verion ou révision SVN
+ * @version 240
  * 
- * @author FlexiTeam - Guillaume GUERRIN
+ * @author FlexiTeam - Jérôme GUERS
  */
-public interface IPreferences extends IData
+public interface IPreferences extends Serializable
 {
+    /**
+     * Returns id of the Preference
+     *
+     * @return id
+     * 
+     */
+    Long getIdPref();
+
+    /**
+     * Setter for the id
+     * 
+     * @param id Id to set 
+     * 
+     */
+    void setIdPref(Long id);
+    
     /**
 	 * Returns the height of a gap.
 	 * 

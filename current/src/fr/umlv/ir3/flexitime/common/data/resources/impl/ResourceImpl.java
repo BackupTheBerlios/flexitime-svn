@@ -5,8 +5,7 @@
  */
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
@@ -16,17 +15,17 @@ import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 /**
  * Defines an implementation of a ressource, it is extended by all the resource classes.
  * 
- * @version 0.1
+ * @version 240
  * @see fr.umlv.ir3.flexitime.common.data.resources.IResource
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
 public abstract class ResourceImpl extends DataImpl implements IResource
 {
     //===========//
 	//  Champs	 //
 	//===========//
-    private List<IBusy> lstBusy;
+    private Set<IBusy> setBusy;
     
     
 	//=============//
@@ -37,7 +36,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
 	 */
 	protected ResourceImpl()
 	{
-        lstBusy = new ArrayList<IBusy>();   
+        setBusy = new HashSet<IBusy>();
     }
 	
 	/**
@@ -48,20 +47,20 @@ public abstract class ResourceImpl extends DataImpl implements IResource
 	public ResourceImpl(String name)
 	{
 		super(name);
-		lstBusy = new ArrayList<IBusy>();
+		setBusy = new HashSet<IBusy>();
 	}
 	
     /**
      * Constructs a resource.
      * 
      * @param name  a string;
-     * @param listBusy a list of unavailibilities.
+     * @param busies a list of unavailibilities.
      * 
      */
-    public ResourceImpl(String name, List<IBusy> listBusy)
+    public ResourceImpl(String name, Set<IBusy> busies)
     {
         super(name);
-        this.lstBusy = listBusy;
+        this.setBusy = busies;
     }
 
     
@@ -74,26 +73,26 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      *
      * @return the list of unavailibilities.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#getLstBusy()
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#getSetBusy()
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public List<IBusy> getLstBusy()
+    public Set<IBusy> getSetBusy()
     {
-        return lstBusy;
+        return setBusy;
     }
 
     /** 
      * Sets a list of unavailibilities to a resource.
      * <code>resource.setLstBusy(lstBusy)</code>
      *
-     * @param lstBusy a list of unavailibilities.
+     * @param busies a list of unavailibilities.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#setLstBusy(java.util.List)
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#setSetBusy(java.util.Set)
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public void setLstBusy(List<IBusy> lstBusy)
+    public void setSetBusy(Set<IBusy> busies)
     {
-        this.lstBusy = lstBusy;
+        this.setBusy = busies;
     }
 
     /** 
@@ -107,7 +106,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      */
     public void addBusy(IBusy busy)
     {
-        lstBusy.add(busy);
+        setBusy.add(busy);
     }
 
     /** 
@@ -121,7 +120,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      */
     public void removeBusy(IBusy busy)
     {
-        lstBusy.remove(busy);
+        setBusy.remove(busy);
     }
 }
 

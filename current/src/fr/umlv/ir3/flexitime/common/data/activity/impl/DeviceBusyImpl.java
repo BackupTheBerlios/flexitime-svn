@@ -18,7 +18,7 @@ import fr.umlv.ir3.flexitime.common.tools.Gap;
  * REASON_IN_REPAIR = 3;
  * 
  * 
- * @version 199
+ * @version 240
  * @see fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -68,6 +68,17 @@ public class DeviceBusyImpl extends BusyImpl implements IDeviceBusy
     {
         this(g);
         reason = iReason;
+    }
+    
+    /**
+     * Copy a device busy to create a new device busy.
+     * 
+     * @param busy
+     *            the unavaibility to copy
+     */
+    public DeviceBusyImpl(IDeviceBusy busy)
+    {
+        this(busy.getGap(), busy.getReason());
     }
 
     // ===========//

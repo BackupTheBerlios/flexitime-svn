@@ -7,16 +7,15 @@
 package fr.umlv.ir3.flexitime.common.data.admin.impl;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
-import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
 /**
  * DOCME
  * 
- * @version 201
+ * @version 240
  * 
- * @author FlexiTeam - Guillaume GUERRIN
+ * @author FlexiTeam - Jérôme GUERS
  */
-public class ConfigImpl extends DataImpl implements IConfig
+public class ConfigImpl implements IConfig
 {
 
     /**
@@ -26,24 +25,25 @@ public class ConfigImpl extends DataImpl implements IConfig
     // ===========//
     // Champs //
     // ===========//
+    private Long idConfig;
     /** URI of the storage server */
-    private String            uriServerData    = null;
+    private String            uriServerData ;
     /** Name of database to store datas */
-    private String            nameBase         = null;
+    private String            nameBase;
     /** User who will be use to connect to the database */
-    private String            userBDD          = null;
+    private String            userBDD;
     /** Password who will be use to connect to the database */
-    private String            passBDD          = null;
+    private String            passBDD;
     /** URI of the directory */ 
     private String            uriServerLDAP;
     /** LDAP port */
     private int               portLDAP         = -1;
     /** LDAP path to user */
-    private String            pathUserLDAP     = null;
+    private String            pathUserLDAP;
     /** LDAP path to groups */
-    private String            pathGroupLDAP    = null;
+    private String            pathGroupLDAP;
     /** URI of the mail sender server */
-    private String            uriSMTPserver    = null;
+    private String            uriSMTPserver;
 
     // ==================//
     // Constructeurs //
@@ -54,9 +54,30 @@ public class ConfigImpl extends DataImpl implements IConfig
     public ConfigImpl()
     {}
 
-    // =============//
+    // ======== //
     // Méthodes //
-    // =============//
+    // ======== //
+    /**
+     * Getter for idConfig
+     *
+     * @return id of the configuration
+     * 
+     */
+    public Long getIdConfig()
+    {
+        return idConfig;
+    }
+    
+    /**
+     * Setter fo idConfig
+     * @param idConfig id to set
+     * 
+     */
+    public void setIdConfig(Long idConfig)
+    {
+        this.idConfig = idConfig;
+    }
+    
     /**
      * DOCME
      * 

@@ -18,7 +18,7 @@ import fr.umlv.ir3.flexitime.common.tools.Gap;
  * Defines an unavailibility for a course in the TimeTable. Contains a list of
  * associated resources, a start and an end date and a name.
  * 
- * @version 199
+ * @version 240
  * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -112,6 +112,39 @@ public class LessonImpl extends BusyImpl implements ILesson
         this(g, _course, l);
         lstTeacher.add(defaultTeach);
         lstGroup.add(group);
+    }
+    
+    /**
+     * Copy a lesson to create a new lesson.
+     * 
+     * @param lesson
+     *            the unavaibility to copy
+     */
+    public LessonImpl(ILesson lesson)
+    {
+        this(lesson.getGap(), lesson.getCourse(), lesson.getLength());
+        for (Iterator iter = lesson.getLstDevice().iterator() ; iter.hasNext() ;)
+        {
+            IDevice element = (IDevice) iter.next();
+            lstDevice.add(element);           
+        }
+        
+        for (Iterator iter = lesson.getLstGroup().iterator() ; iter.hasNext() ;)
+        {
+            IGroup element = (IGroup) iter.next();
+            lstGroup.add(element);
+        }
+        
+        for (Iterator iter = lesson.getLstRoom().iterator() ; iter.hasNext() ;)
+        {
+            IRoom element = (IRoom) iter.next();
+            lstRoom.add(element);
+        }
+        for (Iterator iter = lesson.getLstTeacher().iterator() ; iter.hasNext() ;)
+        {
+            ITeacher element = (ITeacher) iter.next();
+            lstTeacher.add(element);
+        }
     }
 
     // ===========//

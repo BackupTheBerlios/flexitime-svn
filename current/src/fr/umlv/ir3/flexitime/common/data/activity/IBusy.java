@@ -81,4 +81,21 @@ public interface IBusy extends Serializable, Comparable
      *            id to set
      */
     public void setIdBusy(Long idBusy);
+    
+    /**
+     * Compare two Busy.
+     * Only the start of the unavaibilities are compared.
+     * 
+     * @param o
+     *            the second busy to compare
+     * @return a negative integer, zero, or a positive integer as this object is
+     *         less than, equal to, or greater than the specified object.
+     * 
+     * @throws ClassCastException
+     *             if the specified object's type prevents it from being
+     *             compared to this Object.
+     * 
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    public int compareTo(Object o);
 }

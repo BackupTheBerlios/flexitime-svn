@@ -16,6 +16,20 @@ import fr.umlv.ir3.flexitime.common.data.general.IFloor;
  */
 public interface IRoom extends IResource
 {
+    // Definition des types
+    /**
+     * Comment for <code>TYPE_MACHINE</code>
+     */
+    public final static int   TYPE_MACHINE     = 1;
+    /**
+     * Comment for <code>TYPE_COURS</code>
+     */
+    public final static int   TYPE_COURS       = 2;
+    /**
+     * Comment for <code>TYPE_TP</code>
+     */
+    public final static int   TYPE_TP          = 3;
+    
     /**
      * Returns the type of the room.
      * 

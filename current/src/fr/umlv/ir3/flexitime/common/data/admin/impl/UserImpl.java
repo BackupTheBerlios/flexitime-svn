@@ -30,7 +30,6 @@ public class UserImpl extends DataImpl implements IUser
     String                    password;
     IPreferences              preferences;
     boolean                   ldap;
-    protected Long            idUser;
 
     // =============//
     // Constructeurs//
@@ -171,27 +170,6 @@ public class UserImpl extends DataImpl implements IUser
     }
 
     /**
-     * Return idUser
-     * 
-     * @return Returns the idUser.
-     */
-    public Long getIdUser()
-    {
-        return idUser;
-    }
-
-    /**
-     * Set idUser
-     * 
-     * @param idUser
-     *            The idUser to set.
-     */
-    public void setIdUser(Long idUser)
-    {
-        this.idUser = idUser;
-    }
-
-    /**
      * Test the equality of two users.
      * <ul>
      * <li>If one user has an ID, the other must have one, else there are not
@@ -211,12 +189,25 @@ public class UserImpl extends DataImpl implements IUser
     public boolean equals(Object obj)
     {
         if (obj == null) return false;
-        if (! ( obj instanceof UserImpl )) return false;
-        UserImpl other = (UserImpl) obj;
-        if ( ( ( idUser != 0 ) && ( other.getIdUser() == 0 ) )
-                || ( ( idUser == 0 ) && ( other.getIdUser() != 0 ) ))
+        if (! ( obj instanceof IUser )) return false;
+        IUser other = (IUser) obj;
+        if ( ( ( idData != null ) && ( other.getIdData() == null ) )
+                || ( ( idData == null ) && ( other.getIdData() != null ) ))
             return false;
-        if (idUser == 0) return this.getName().equals(other.getName());
-        return ( idUser == other.getIdUser() );
+        if (idData == null) return this.getName().equals(other.getName());
+        return ( idData == other.getIdData() );
+    }
+    
+    
+    /** 
+     * Calculate the lenght of the user name add to the ID
+     *
+     * @return hashcode of the user 
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode()
+    {
+        return (getName().length() + idData.intValue());
     }
 }

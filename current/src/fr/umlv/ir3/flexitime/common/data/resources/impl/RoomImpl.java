@@ -6,7 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
  * 
  * TYPE_MACHINE = 1; TYPE_COURS = 2; TYPE_TP = 3;
  * 
- * @version 205
+ * @version 240
  * @see fr.umlv.ir3.flexitime.common.data.resources.IRoom
  * @see fr.umlv.ir3.flexitime.common.data.resources.impl.ResourceImpl
  * 
@@ -33,20 +33,6 @@ public class RoomImpl extends ResourceImpl implements IRoom
     // ===========//
     // Champs //
     // ===========//
-    // Definition des types
-    /**
-     * Comment for <code>TYPE_MACHINE</code>
-     */
-    public final static int   TYPE_MACHINE     = 1;
-    /**
-     * Comment for <code>TYPE_COURS</code>
-     */
-    public final static int   TYPE_COURS       = 2;
-    /**
-     * Comment for <code>TYPE_TP</code>
-     */
-    public final static int   TYPE_TP          = 3;
-
     private int               type;
     private int               capacity;
     private IFloor            parentFloor;
@@ -130,13 +116,13 @@ public class RoomImpl extends ResourceImpl implements IRoom
      *            the number maximum of students whom can sit in the room.
      * @param floor
      *            the parent floor of this room.
-     * @param listBusy
+     * @param busies
      *            a list of unavailibilities
      */
     public RoomImpl(String name, int type, int capacity, IFloor floor,
-            List<IBusy> listBusy)
+            Set<IBusy> busies)
     {
-        super(name, listBusy);
+        super(name, busies);
         this.type = type;
         this.capacity = capacity;
         this.parentFloor = floor;

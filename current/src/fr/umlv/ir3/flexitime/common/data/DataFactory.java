@@ -60,6 +60,18 @@ public class DataFactory
     }
 
     /**
+     * Copy a device busy to create a new device busy.
+     * 
+     * @param busy
+     *            the unavaibility to copy
+     * @return a new unavaibility for a device
+     */
+    public static IDeviceBusy createDeviceBusy(IDeviceBusy busy)
+    {
+        return new DeviceBusyImpl(busy);
+    }
+
+    /**
      * DOCME
      * 
      * @param g
@@ -81,6 +93,18 @@ public class DataFactory
     {
         return new GroupBusyImpl(g, reason);
     }
+    
+    /**
+     * Copy a group busy to create a new group busy.
+     * 
+     * @param busy
+     *            the unavaibility to copy
+     * @return a new unavaibility for a group
+     */
+    public static IGroupBusy createGroupBusy(IGroupBusy busy)
+    {
+        return new GroupBusyImpl(busy);
+    }    
 
     /**
      * DOCME
@@ -122,6 +146,18 @@ public class DataFactory
     {
         return new LessonImpl(g, c, l, t, gr);
     }
+    
+    /**
+     * Copy a lesson to create a new lesson.
+     * 
+     * @param lesson
+     *            the unavaibility to copy
+     * @return a new lesson
+     */
+    public static ILesson createLesson(ILesson lesson)
+    {
+        return new LessonImpl(lesson);
+    }
 
     /**
      * DOCME
@@ -147,6 +183,18 @@ public class DataFactory
     }
 
     /**
+     * Copy a room busy to create a new room busy.
+     * 
+     * @param busy
+     *            the unavaibility to copy
+     * @return a new unavaibility for a device
+     */
+    public static IRoomBusy createRoomBusy(IRoomBusy busy)
+    {
+        return new RoomBusyImpl(busy);
+    }
+    
+    /**
      * DOCME
      * 
      * @param g
@@ -167,6 +215,18 @@ public class DataFactory
     public static ITeacherBusy createTeacherBusy(Gap g, int reason)
     {
         return new TeacherBusyImpl(g, reason);
+    }
+    
+    /**
+     * Copy a teacher busy to create a new teacher busy.
+     * 
+     * @param busy
+     *            the unavaibility to copy
+     * @return a new unavaibility for a device
+     */
+    public static ITeacherBusy createTeacherBusy(ITeacherBusy busy)
+    {
+        return new TeacherBusyImpl(busy);
     }
 
     // ======= //
@@ -323,7 +383,7 @@ public class DataFactory
      * @param parent
      * @return a new Course
      */
-    public static ICourse createCourse(String name, SubjectImpl parent, int type)
+    public static ICourse createCourse(String name, ISubject parent, int type)
     {
         ICourse temp = new CourseImpl(name, parent, type);
         parent.addCourse(temp);
@@ -342,7 +402,7 @@ public class DataFactory
      * @return a new Course all initilized
      * 
      */
-    public static ICourse createCourse(String name, SubjectImpl parent,
+    public static ICourse createCourse(String name, ISubject parent,
             int type, int defaultLength, int nbHours, Color color)
     {
         ICourse temp = new CourseImpl(name, parent, defaultLength, type,
@@ -364,7 +424,7 @@ public class DataFactory
      * @return a new Course all initilized
      * 
      */
-    public static ICourse createCourse(String name, SubjectImpl parent,
+    public static ICourse createCourse(String name, ISubject parent,
             int type, int defaultLength, int nbHours, Color color,
             List<ITeacher> listTeachers)
     {

@@ -6,7 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
@@ -29,20 +29,6 @@ public class DeviceImpl extends ResourceImpl implements IDevice
     // ===========//
     // Champs //
     // ===========//
-    // Definition des types
-    /**
-     * Comment for <code>VIDEOPROJECTOR</code>
-     */
-    public final static int   VIDEOPROJECTOR      = 1;
-    /**
-     * Comment for <code>TV</code>
-     */
-    public final static int   TV                  = 2;
-    /**
-     * Comment for <code>VIDEO_TAPE_RECORDER</code>
-     */
-    public final static int   VIDEO_TAPE_RECORDER = 3;
-    
     private int               type;
 
     // =============//
@@ -86,14 +72,14 @@ public class DeviceImpl extends ResourceImpl implements IDevice
      * 
      * @param name
      *            a string.
-     * @param listBusy
+     * @param busies
      *            a list of unavailibilities.
      * @param type
      *            the type of device.
      */
-    public DeviceImpl(String name, int type, List<IBusy> listBusy)
+    public DeviceImpl(String name, int type, Set<IBusy> busies)
     {
-        super(name, listBusy);
+        super(name, busies);
         this.type = type;
     }
 

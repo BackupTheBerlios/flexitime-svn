@@ -20,7 +20,7 @@ import fr.umlv.ir3.flexitime.common.tools.Gap;
  * REASON_PERSO     = 5;
  * 
  * 
- * @version 199
+ * @version 240
  * @see fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -70,10 +70,21 @@ public class TeacherBusyImpl extends BusyImpl implements ITeacherBusy
         this(g);
         reason = iReason;
     }
+    
+    /**
+     * Copy a teacher busy to create a new teacher busy.
+     * 
+     * @param busy
+     *            the unavaibility to copy
+     */
+    public TeacherBusyImpl(ITeacherBusy busy)
+    {
+        this(busy.getGap(), busy.getReason());
+    }
 
-    // ===========//
+    // ======== //
     // Méthodes //
-    // ===========//
+    // ======== //
     /**
      * Returns the reason of the unavailibility.
      * <code>int reason = getReason()</code>

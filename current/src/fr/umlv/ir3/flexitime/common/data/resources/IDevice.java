@@ -14,6 +14,19 @@ package fr.umlv.ir3.flexitime.common.data.resources;
  */
 public interface IDevice extends IResource
 {
+    // Definition des types
+    /**
+     * Comment for <code>VIDEOPROJECTOR</code>
+     */
+    public final static int   VIDEOPROJECTOR      = 1;
+    /**
+     * Comment for <code>TV</code>
+     */
+    public final static int   TV                  = 2;
+    /**
+     * Comment for <code>VIDEO_TAPE_RECORDER</code>
+     */
+    public final static int   VIDEO_TAPE_RECORDER = 3;
 
     /**
      * Returns the type of the device.

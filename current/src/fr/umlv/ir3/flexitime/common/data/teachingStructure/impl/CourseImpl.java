@@ -29,19 +29,6 @@ public class CourseImpl extends DataImpl implements ICourse
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3257852077735753267L;
-
-    /**
-     * Comment for <code>CM</code>
-     */
-    public final static int   CM               = 1;
-    /**
-     * Comment for <code>TD</code>
-     */
-    public final static int   TD               = 2;
-    /**
-     * Comment for <code>TP</code>
-     */
-    public final static int   TP               = 3;
     
     // ====== //
     // Champs //
@@ -74,7 +61,7 @@ public class CourseImpl extends DataImpl implements ICourse
      * @param type
      *            type of the course
      */
-    public CourseImpl(String name, SubjectImpl parent, int type)
+    public CourseImpl(String name, ISubject parent, int type)
     {
         super(name);
         this.parentSubject = parent;
@@ -99,7 +86,7 @@ public class CourseImpl extends DataImpl implements ICourse
      *            the parent subject of this course.
      * 
      */
-    public CourseImpl(String name, SubjectImpl parent, int type,
+    public CourseImpl(String name, ISubject parent, int type,
             int defaultLength, int nbHours, Color color)
     {
         this(name, parent, type);
@@ -127,7 +114,7 @@ public class CourseImpl extends DataImpl implements ICourse
      *            the parent subject of this course.
      * 
      */
-    public CourseImpl(String name, SubjectImpl parent, int type,
+    public CourseImpl(String name, ISubject parent, int type,
             int defaultLength, int nbHours, Color color,
             List<ITeacher> listTeachers)
     {

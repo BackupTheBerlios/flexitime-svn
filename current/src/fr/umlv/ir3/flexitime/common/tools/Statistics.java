@@ -5,26 +5,20 @@
  */
 package fr.umlv.ir3.flexitime.common.tools;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl;
+import fr.umlv.ir3.flexitime.common.data.*;
+import fr.umlv.ir3.flexitime.common.data.activity.*;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.*;
+import fr.umlv.ir3.flexitime.common.data.resources.*;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
 
 
 /**
  * Statistics - gets the statistics of a teacher or a group 
  * 
- * @version 0.1
+ * @version 240
  * 
  * @author FlexiTeam - VF
  */
@@ -105,7 +99,7 @@ public class Statistics
      */
     public static List getStatTeacher(ITeacher t){
         ArrayList<Statistics> list = new ArrayList<Statistics>();
-        Iterator it = t.getLstBusy().iterator();
+        Iterator it = t.getSetBusy().iterator();
         while(it.hasNext()){
             list.add(getCourses((ILesson)it.next()));            
         }
@@ -119,7 +113,7 @@ public class Statistics
      */
     public static List getStatGroup(IGroup g){
         ArrayList<Statistics> list = new ArrayList<Statistics>();
-        Iterator it = g.getLstBusy().iterator();
+        Iterator it = g.getSetBusy().iterator();
         while(it.hasNext()){
             list.add(getCourses((ILesson)it.next()));            
         }

@@ -69,9 +69,9 @@ public abstract class BusyImpl implements IBusy
                 .getTime());
     }
 
-    // ===========//
+    // ======== //
     // Méthodes //
-    // ===========//
+    // ======== //
     /**
      * Returns the start date of the unavailibility.
      * <code>Date date = getStartDate()</code>

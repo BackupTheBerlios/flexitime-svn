@@ -5,7 +5,7 @@
  */
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
@@ -15,10 +15,10 @@ import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 /**
  * Defines a group.
  * 
- * @version 0.1
+ * @version 240
  * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
 public class GroupImpl extends ResourceImpl implements IGroup
 {
@@ -71,13 +71,13 @@ public class GroupImpl extends ResourceImpl implements IGroup
      * Constructs a group.
      * 
      * @param name a string.
-     * @param listBusy a list of unavailibilities.
+     * @param busies a list of unavailibilities.
      * @param nbPerson the number of students in this group.
 	 * @param parentClass the parent class of this group.
      */
-    public GroupImpl(String name, int nbPerson, IClass parentClass, List<IBusy> listBusy)
+    public GroupImpl(String name, int nbPerson, IClass parentClass, Set<IBusy> busies)
     {
-        super(name, listBusy);
+        super(name, busies);
         this.nbPerson = nbPerson;
         this.parentClass = parentClass;
     }
