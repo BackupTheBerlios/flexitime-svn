@@ -10,6 +10,9 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager;
+import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
+
 
 
 /**
@@ -19,6 +22,7 @@ import java.rmi.registry.Registry;
 public class RemoteDataManager
 {
     private static IDataManager manager;
+    private static IUserManager userManager;
     private static String ipServer;
 
     /**
@@ -61,6 +65,32 @@ public class RemoteDataManager
             }
         }
         return manager;
+    }
+    
+    public static IUserManager getUserManager()
+    {
+        if(userManager == null)
+        {
+            try
+            {
+                Registry r = LocateRegistry.getRegistry(ipServer);
+                try
+                {
+                    userManager = (IUserManager) r.lookup("usermanager");
+                }
+                catch (NotBoundException e1)
+                {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+            catch (RemoteException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return userManager;
     }
 }
 

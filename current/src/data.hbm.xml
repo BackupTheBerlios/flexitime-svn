@@ -20,7 +20,7 @@
 		<!-- Building -->
 		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.general.impl.BuildingImpl" table="building" dynamic-update="true">
 			<key column="idBuilding"/>
-			<list name="lstFloor" cascade="all">
+			<list name="lstFloor" cascade="all" lazy="true">
 				<key column="idBuilding" />
 				<index column="posFloor" />
 				<one-to-many class="fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl" />
@@ -161,6 +161,13 @@
 			<many-to-one name="parentClass" class="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl" column="idClass"/>
 			
 		</joined-subclass>
+		
+		<!--User-->
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl" table="tb_user" dynamic-update="true">
+			<key column="idUser"/>
+			<property name="password" />
+		</joined-subclass>
+				
 
 	</class>
 

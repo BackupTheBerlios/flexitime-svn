@@ -1,0 +1,43 @@
+/*
+ * Created on 30 janv. 2005
+ * by Prâsad
+ * Copyright: GPL - UMLV(FR) - 2004/2005
+ */
+package fr.umlv.ir3.flexitime.server.io.storage;
+
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.Transaction;
+import fr.umlv.ir3.flexitime.common.data.DataFactory;
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.server.io.storage.admin.UserStorage;
+
+
+/**
+ * DOCME Description
+ * explication supplémentaire si nécessaire
+ * in english please...
+ * Que fait cette classe, qu'est-ce qu'elle 
+ * représente, ...
+ * 
+ * @version Verion ou révision SVN
+ * @see (si nécessaire)
+ * 
+ */
+public class TestUserStorage
+{
+
+    public static void main(String[] args) throws HibernateException
+    {
+//        IUser u = DataFactory.createUser("prasad", "prasad");
+//        
+//        UserStorage.save(u);
+        
+        IUser u2 = UserStorage.get("prasad");
+        
+        System.out.println(u2.getName());
+        UserStorage.delete(u2);
+        
+    }
+}
+
