@@ -44,9 +44,7 @@ public class HibernateUtil
             buffer.append(config.getUriServerData() + "/");
             buffer.append(config.getNameBase());
             
-            System.out.println(cfg.getProperty("hibernate.connection.url"));
             cfg.setProperty("hibernate.connection.url", buffer.toString());
-            System.out.println(cfg.getProperty("hibernate.connection.url"));
             cfg.setProperty("hibernate.connection.username", config.getUserBDD());
             cfg.setProperty("hibernate.connection.password", config.getPassBDD());
 
