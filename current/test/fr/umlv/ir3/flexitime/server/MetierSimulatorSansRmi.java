@@ -3,7 +3,7 @@
  * by binou
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.tools;
+package fr.umlv.ir3.flexitime.server;
 
 
 import java.awt.Color;
@@ -226,7 +226,7 @@ public class MetierSimulatorSansRmi
         List<IGroup> groups_cm = new ArrayList(1);
         groups_cm.add(ir3_grp1);
         groups_cm.add(ir3_grp2);
-        lesson1 = DataFactorySansRmi.createLesson(new Gap(2005,1,3,8,30,2005,1,3,10,30), j2ee_cours, groups_cm, roussel);
+        lesson1 = DataFactorySansRmi.createLesson(new Gap(2005,1,3,8,30,2005,1,3,10,30), j2ee_cours, groups_cm);
         lesson2 = DataFactorySansRmi.createLesson(new Gap(2005,1,3,13,45,2005,1,3,15,45), corba_cours, groups_cm, midonnet);        
         lesson3 = DataFactorySansRmi.createLesson(new Gap(2005,1,4,16,00,2005,1,4,18,00), gl_cours, groups_cm, revuz);
         lesson4 = DataFactorySansRmi.createLesson(new Gap(2005,1,5,8,30,2005,1,5,10,30), gl_td, groups_td, revuz);

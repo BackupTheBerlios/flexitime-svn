@@ -436,9 +436,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         
         //System.out.println("***model***");
         //System.out.println("Element changé en " + weekNumber + "," + dayNumber + "," + gapNumber);
-        IBusy busy = ((BusyBloc)this.getDayBloc(weekNumber, dayNumber).getElementAt(gapNumber)).getBusy();
-        System.out.println("size : " + ((ILesson)busy).getLstTeacher().size());
-        //fireContentsChanged()
+        BusyBloc busyBloc = (BusyBloc)this.getDayBloc(weekNumber, dayNumber).getElementAt(gapNumber);
+
+        fireContentsChanged(weekNumber,dayNumber,gapNumber,busyBloc.getNbGap());
     }
     
     

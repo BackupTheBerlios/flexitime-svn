@@ -71,6 +71,7 @@ public class BusyBloc
             try
             {
                 this.busy = DataFactory.createLesson(lesson);
+                //this.busy = lesson;
             }
             catch (FlexiException e)
             {
