@@ -4,33 +4,37 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package fr.umlv.ir3.flexitime.richClient.gui.panel;
+package fr.umlv.ir3.flexitime.richClient.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 
 
 /**
+ * The Flexitime official OutlookBar !
+ * 
+ * @version 1.1
  * @author binou
- *
- * The Flexitime custom outlookbar
  */
 public class FlexiBar extends JPanel
 {
 	/**
      * Comment for <code>serialVersionUID</code>
      */
-    private static final long serialVersionUID = 3256720676126536758L;
+    private static final long serialVersionUID = 3256438097209407029L;
+    
     
     private final int B_WIDTH = 90;
 	private final int B_HEIGHT = 20;
@@ -39,11 +43,12 @@ public class FlexiBar extends JPanel
 	
 	BoxLayout layout;
 	JPanel panel;
-	ArrayList<JComponent> listComponent;
+	List<JComponent> listComponent;
 	int currentSelected = -1;
 
 	
 	/**
+     * Creates a new FlexiBar
 	 * 
 	 */
 	public FlexiBar() {
@@ -51,27 +56,26 @@ public class FlexiBar extends JPanel
 		panel = new JPanel();
 		layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 		panel.setLayout(layout);
-		//panel.setSize(30,150);
 		panel.setPreferredSize(new Dimension(90,400));
 		add(panel);
 		
 		listComponent = new ArrayList<JComponent>();
 	}
 	
-	/** 
-	 * Create a new tab to the FlexiBar, with the specified 
+    /** 
+     * Create a new tab to the FlexiBar, with the specified 
      * title and the specified component inside the tab.
-	 *
-	 * @param title the title of the tab to be added
-	 * @param comp the component inserted in the tab 
-	 * 
-	 */
-	public void add(String title, JComponent comp)
-	{
+     *
+     * @param title the title of the tab to be added
+     * @param comp the component inserted in the tab 
+     * 
+     */
+    public void add(String title, JComponent comp)
+    {
         JButton button = new JButton(title);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("click");
+				//System.out.println("click");
 				setSelected((JButton)arg0.getSource());
 
 			}
@@ -80,22 +84,31 @@ public class FlexiBar extends JPanel
 		button.setMaximumSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
 		button.setPreferredSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
 		button.setAlignmentX(LEFT_ALIGNMENT);
-		comp.setMinimumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
-		comp.setMaximumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
+        JScrollPane pane = new JScrollPane(comp);
+        pane.setMinimumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
+        pane.setMaximumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
+        
+        
+		//comp.setMinimumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
+		//comp.setMaximumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
 		//comp.setPreferredSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
+        
 		comp.setAlignmentX(LEFT_ALIGNMENT);
+        pane.setAlignmentX(LEFT_ALIGNMENT);
+        
 		if(currentSelected == -1)
 		{
-			comp.setVisible(true);
+			pane.setVisible(true);
 			currentSelected=0;
 		}else
-			comp.setVisible(false);
+			pane.setVisible(false);
 		
 		listComponent.add(button);
-		listComponent.add(comp);
+		listComponent.add(pane);
 		
 		panel.add(button);
-		panel.add(comp);
+		panel.add(pane);
+        panel.validate();
 	}
 
 	private final void setSelected(JButton button)
@@ -106,7 +119,8 @@ public class FlexiBar extends JPanel
 		}
 		currentSelected = listComponent.indexOf(button);
 		((JComponent)listComponent.get(currentSelected+1)).setVisible(true);
-		
-		System.err.println("setSelected => " + currentSelected);
+		this.validate();
+        
+		//System.err.println("setSelected => " + currentSelected);
 	}
 }
