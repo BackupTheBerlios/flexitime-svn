@@ -63,9 +63,9 @@ public abstract class ResourceImpl extends DataImpl implements IResource
     }
 
     
-    //===========//
-    // Méthodes  //
-	//===========//
+    //========= //
+    // Méthodes //
+	//========= //
     /** 
      * Returns the list of unavailibilities.
      * <code>List l = resource.getLstBusy()</code>

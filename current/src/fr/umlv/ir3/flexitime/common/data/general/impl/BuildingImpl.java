@@ -3,63 +3,64 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
+
 package fr.umlv.ir3.flexitime.common.data.general.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
+import fr.umlv.ir3.flexitime.common.data.general.*;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
-
 
 /**
  * Defines a building which contains floors.
  * 
- * @version 205
+ * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding
  * 
  * @author FlexiTeam - Jérôme GUERS
  */
 public class BuildingImpl extends DataImpl implements IBuilding
 {
+
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3760850064486314295L;
-    //===========//
-    //   Champs  //
-    //===========// 
-    private List<IFloor> lstFloors;
-    
-    
-    //==================//
-    //   Constructeurs  //
-    //==================//   
-	/**
-	 * Default constructor for a building. 
-	 */
-	protected BuildingImpl()
-	{
-        lstFloors = new ArrayList<IFloor>();   
+    // ===========//
+    // Champs //
+    // ===========//
+    private List<IFloor>      lstFloors;
+
+    // ==================//
+    // Constructeurs //
+    // ==================//
+    /**
+     * Default constructor for a building.
+     */
+    protected BuildingImpl()
+    {
+        lstFloors = new ArrayList<IFloor>();
     }
-	
-	/**
-	 * Constructs a building with just a name in parameter.
-	 * 
-	 * @param name a string. 
-	 */
-	public BuildingImpl(String name)
-	{
-		super(name);
-		lstFloors = new ArrayList<IFloor>();
-	}
-	
+
+    /**
+     * Constructs a building with just a name in parameter.
+     * 
+     * @param name
+     *            a string.
+     */
+    public BuildingImpl(String name)
+    {
+        super(name);
+        lstFloors = new ArrayList<IFloor>();
+    }
+
     /**
      * Constructs a building.
      * 
-     * @param name a string.
-     * @param listFloors a list of floors contains by the building.
+     * @param name
+     *            a string.
+     * @param listFloors
+     *            a list of floors contains by the building.
      * 
      */
     public BuildingImpl(String name, List<IFloor> listFloors)
@@ -68,14 +69,13 @@ public class BuildingImpl extends DataImpl implements IBuilding
         this.lstFloors = listFloors;
     }
 
-    
-    //=============//
-    //   Méthodes  //
-    //=============//
-    /** 
+    // =============//
+    // Méthodes //
+    // =============//
+    /**
      * Returns the number of floors in this building.
      * <code>Int nbFloor = building.getNbFloor()</code>
-     *
+     * 
      * @return the number of floors in this building.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding#getNbFloor()
@@ -85,11 +85,11 @@ public class BuildingImpl extends DataImpl implements IBuilding
         return lstFloors.size();
     }
 
-    /** 
+    /**
      * Returns the list of floors in this building.
      * <code>List list = building.getLstFloor()</code>
-     *
-     * @return the list of floors in this building. 
+     * 
+     * @return the list of floors in this building.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding#getLstFloor()
      */
@@ -98,11 +98,12 @@ public class BuildingImpl extends DataImpl implements IBuilding
         return lstFloors;
     }
 
-    /** 
+    /**
      * Sets the list of floors from the list given in parameter.
      * <code>building.setLstFloor(lstFloor)</code>
-     *
-     * @param lstFloor the original list of floors for this building.
+     * 
+     * @param lstFloor
+     *            the original list of floors for this building.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding#setLstFloor(java.util.List)
      */
@@ -110,12 +111,12 @@ public class BuildingImpl extends DataImpl implements IBuilding
     {
         this.lstFloors = lstFloor;
     }
-    
-    /** 
-     * Adds a floor to the list.
-     * <code>building.addFloor(floor)</code>
-     *
-     * @param floor a floor to add to the list.
+
+    /**
+     * Adds a floor to the list. <code>building.addFloor(floor)</code>
+     * 
+     * @param floor
+     *            a floor to add to the list.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding#addFloor(fr.umlv.ir3.flexitime.common.data.general.IFloor)
      */
@@ -125,16 +126,59 @@ public class BuildingImpl extends DataImpl implements IBuilding
         floor.setParentBuilding(this);
     }
 
-    /** 
-     * Removes a floor of the list.
-     * <code>building.removeFloor(floor)</code>
-     *
-     * @param floor a floor to remove of the list.
+    /**
+     * Removes a floor of the list. <code>building.removeFloor(floor)</code>
+     * 
+     * @param floor
+     *            a floor to remove of the list.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding#removeFloor(fr.umlv.ir3.flexitime.common.data.general.IFloor)
      */
     public void removeFloor(IFloor floor)
     {
         lstFloors.remove(floor);
+    }
+
+    /**
+     * Test the equality of two building.
+     * <ul>
+     * <li>The two objects must be instance of IBuilding</li>
+     * <li>If one building has an ID, the other must have one, else there are
+     * not equals.</li>
+     * <li>If any building has an ID, they must have the same name to be
+     * equals.</li>
+     * <li>Else, they must have the same ID.</li>
+     * </ul>
+     * 
+     * @param obj
+     *            other building to compare with
+     * @return <code>true</code> if this object is the same as the obj
+     *         argument; <code>false</code> otherwise.
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    public boolean equals(Object obj)
+    {
+        if (obj == null) return false;
+        if (! ( obj instanceof IBuilding )) return false;
+        IBuilding other = (IBuilding) obj;
+        if ( ( ( idData != null ) && ( other.getIdData() == null ) )
+                || ( ( idData == null ) && ( other.getIdData() != null ) ))
+            return false;
+        if (idData == null)
+            return this.getName().equals(other.getName());
+        return ( idData == other.getIdData() );
+    }
+
+    /**
+     * Generated by the hashcode of the name.
+     * 
+     * @return a class hashcode
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode()
+    {
+        return this.getName().hashCode();
     }
 }

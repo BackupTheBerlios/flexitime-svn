@@ -3,6 +3,7 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
+
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.SortedSet;
@@ -10,7 +11,6 @@ import java.util.SortedSet;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-
 
 /**
  * Defines a group.
@@ -22,76 +22,84 @@ import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
  */
 public class GroupImpl extends ResourceImpl implements IGroup
 {
+
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3904677193450663986L;
-    //======== //
-	//  Champs //
-	//======== //
-    private int nbPerson; 
-    private IClass parentClass;
-    
-    
-	//============= //
-	//Constructeurs //
-    //============= //
-	/**
-	 * Default constructor for a group. 
-	 */
-	protected GroupImpl()
-	{
-     super();   
+    // ======== //
+    // Champs //
+    // ======== //
+    private int               nbPerson;
+    private IClass            parentClass;
+
+    // ============= //
+    // Constructeurs //
+    // ============= //
+    /**
+     * Default constructor for a group.
+     */
+    protected GroupImpl()
+    {
+        super();
     }
-	
-	/**
-	 * Constructs a group with just a name in parameter.
-	 * 
-	 * @param name a string.
-     * @param nbPerson number of person in this group
-	 */
-	public GroupImpl(String name, int nbPerson)
-	{
-		super(name);
+
+    /**
+     * Constructs a group with just a name in parameter.
+     * 
+     * @param name
+     *            a string.
+     * @param nbPerson
+     *            number of person in this group
+     */
+    public GroupImpl(String name, int nbPerson)
+    {
+        super(name);
         this.nbPerson = nbPerson;
-	}
-	
-	/**
-	 * Constructs a group with a name and a parent class in parameter.
-	 * 
-	 * @param name a string
-	 * @param nbPerson 
-	 * @param parentClass the parent class of this group
-	 */
-	public GroupImpl(String name, int nbPerson, IClass parentClass)
-	{
-		this(name, nbPerson);
-		this.parentClass = parentClass;
-	}
-	
+    }
+
+    /**
+     * Constructs a group with a name and a parent class in parameter.
+     * 
+     * @param name
+     *            a string
+     * @param nbPerson
+     * @param parentClass
+     *            the parent class of this group
+     */
+    public GroupImpl(String name, int nbPerson, IClass parentClass)
+    {
+        this(name, nbPerson);
+        this.parentClass = parentClass;
+    }
+
     /**
      * Constructs a group.
      * 
-     * @param name a string.
-     * @param busies a list of unavailibilities.
-     * @param nbPerson the number of students in this group.
-	 * @param parentClass the parent class of this group.
+     * @param name
+     *            a string.
+     * @param busies
+     *            a list of unavailibilities.
+     * @param nbPerson
+     *            the number of students in this group.
+     * @param parentClass
+     *            the parent class of this group.
      */
-    public GroupImpl(String name, int nbPerson, IClass parentClass, SortedSet<IBusy> busies)
+    public GroupImpl(String name, int nbPerson, IClass parentClass,
+            SortedSet<IBusy> busies)
     {
         super(name, busies);
         this.nbPerson = nbPerson;
         this.parentClass = parentClass;
     }
 
-    
-    //===========//
-    // Méthodes  //
-	//===========//
-    /** 
+    // ===========//
+    // Méthodes //
+    // ===========//
+    /**
      * Returns the number of students in this group.
      * <code>Int i = group.getNbPerson()</code>
-     *
+     * 
      * @return the number of students in this group.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#getNbPerson()
@@ -101,7 +109,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
         return nbPerson;
     }
 
-    /** 
+    /**
      * Sets the number of students in this group.
      * <code>group.setNbPerson(nbPerson)<code>
      *
@@ -113,36 +121,36 @@ public class GroupImpl extends ResourceImpl implements IGroup
     {
         this.nbPerson = nbPerson;
     }
-    
-	/** 
-	 * Returns the parent class of this group.
-	 * <code>ClassImpl c = group.getParentClass()</code>
-	 *
-	 * @return the parent class of this group.
-	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#getParentClass()
-	 */
-	public IClass getParentClass()
-	{
-		return parentClass;
-	}
 
-	/** 
-	 * Sets the parent class of this group.
-	 * <code>group.setParentClass(class)<code>
-	 *
-	 * @param parentClass the parent class of this group.
-	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#setParentClass(IClass)
-	 */ 
-	public void setParentClass(IClass parentClass)
-	{
-		this.parentClass = parentClass;
-	}
-    
-     /**
-     * Test the equality of two groups. Add a test to the equality of two
-     * datas by comparing the parent Class
+    /**
+     * Returns the parent class of this group.
+     * <code>ClassImpl c = group.getParentClass()</code>
+     * 
+     * @return the parent class of this group.
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#getParentClass()
+     */
+    public IClass getParentClass()
+    {
+        return parentClass;
+    }
+
+    /**
+     * Sets the parent class of this group.
+     * <code>group.setParentClass(class)<code>
+     *
+     * @param parentClass the parent class of this group.
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#setParentClass(IClass)
+     */
+    public void setParentClass(IClass parentClass)
+    {
+        this.parentClass = parentClass;
+    }
+
+    /**
+     * Test the equality of two groups. Add a test to the equality of two datas
+     * by comparing the parent Class
      * 
      * @param obj
      *            other group to compare with
@@ -150,16 +158,33 @@ public class GroupImpl extends ResourceImpl implements IGroup
      *         argument; <code>false</code> otherwise.
      * 
      * @see java.lang.Object#equals(java.lang.Object)
-     * @see fr.umlv.ir3.flexitime.common.data.impl.DataImpl#equals(java.lang.Object)
      */
     public boolean equals(Object obj)
     {
+        if (obj == null) return false;
+        if (! ( obj instanceof IGroup )) return false;
+        IGroup other = (IGroup) obj;
+        if ( ( ( idData != null ) && ( other.getIdData() == null ) )
+                || ( ( idData == null ) && ( other.getIdData() != null ) ))
+            return false;
         if (idData == null)
         {
-            if (super.equals(obj))
-                return parentClass.equals( ( (IGroup) obj ).getParentClass());
+            if (this.getName().equals(other.getName()))
+                return parentClass.equals(other.getParentClass());
             return false;
         }
-        return super.equals(obj);
+        return ( idData == other.getIdData() );
+    }
+
+    /**
+     * Generated by the hashcode of the name.
+     * 
+     * @return a class hashcode
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode()
+    {
+        return this.getName().hashCode();
     }
 }

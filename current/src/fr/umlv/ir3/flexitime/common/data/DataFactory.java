@@ -72,9 +72,9 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs an unavailibility for a group between a gap without reason.
      * 
-     * @param g
+     * @param g gap of the unavaibulity
      * @return a new unavaibility for a group
      */
     public static IGroupBusy createGroupBusy(Gap g)
@@ -83,10 +83,10 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs an unavailibility for a group between a gap for the reason specified.
      * 
-     * @param g
-     * @param reason
+     * @param g gap of the unavaibulity
+     * @param reason reason of the unavaibility
      * @return a new unavaibility for a group
      */
     public static IGroupBusy createGroupBusy(Gap g, int reason)
@@ -107,59 +107,83 @@ public class DataFactory
     }    
 
     /**
-     * DOCME
+     * Constructs an unavailibility for a course.
      * 
      * @param g
+     *            the gap between the unavailibility.
      * @param c
+     *            ICourse associated with this Lesson
+     * @param groups
+     *            group list who learn this lesson
      * @return a new lesson
      */
-    public static ILesson createLesson(Gap g, ICourse c)
+    public static ILesson createLesson(Gap g, ICourse c, List<IGroup> groups)
     {
-        return new LessonImpl(g, c);
+        ILesson lesson = new LessonImpl(g, c, groups);
+        // Action manager        
+        return lesson; 
     }
 
     /**
-     * DOCME
+     * Constructs an unavailibility for a course.
      * 
      * @param g
+     *            the gap between the unavailibility.
      * @param c
+     *            ICourse associated with this Lesson
+     * @param groups
+     *            group list who learn this lesson            
      * @param l
+     *            the length of the lesson
      * @return a new lesson
      */
-    public static ILesson createLesson(Gap g, ICourse c, int l)
+    public static ILesson createLesson(Gap g, ICourse c, List<IGroup> groups, int l)
     {
-        return new LessonImpl(g, c, l);
+        ILesson lesson = new LessonImpl(g, c, groups, l);
+        // Action manager
+        return lesson;
     }
 
     /**
-     * DOCME
+     * Constructs an unavailibility for a course.
      * 
      * @param g
+     *            the gap between the unavailibility.
      * @param c
+     *            ICourse associated with this Lesson
+     * @param groups
+     *            group list who learn this lesson
      * @param t
-     * @param gr
+     *            the teacher who teach these lesson
      * @return a new lesson
      */
-    public static ILesson createLesson(Gap g, ICourse c, ITeacher t,
-            IGroup gr)
+    public static ILesson createLesson(Gap g, ICourse c, List<IGroup> groups, ITeacher t)
     {
-        return new LessonImpl(g, c, t, gr);
+        ILesson lesson = new LessonImpl(g, c, groups, t);
+        // Action manager
+        return lesson;
     }
     
     /**
-     * DOCME
+     * Constructs an unavailibility for a course.
      * 
      * @param g
+     *            the gap between the unavailibility.
      * @param c
+     *            ICourse associated with this Lesson
+     * @param groups
+     *            group list who learn this lesson
      * @param l
+     *            the length of the lesson
      * @param t
-     * @param gr
+     *            the teacher who teach these lesson
      * @return a new lesson
      */
-    public static ILesson createLesson(Gap g, ICourse c, int l, ITeacher t,
-            IGroup gr)
+    public static ILesson createLesson(Gap g, ICourse c, List<IGroup> groups, int l , ITeacher t)
     {
-        return new LessonImpl(g, c, l, t, gr);
+        ILesson lesson = new LessonImpl(g, c, groups, l, t);
+        // Action manager
+        return lesson;
     }
     
     /**
@@ -175,9 +199,10 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs an unavailibility for a room without reason.
      * 
      * @param g
+     *            the gap between the unavailibility.
      * @return a new unavaibility for a room
      */
     public static IRoomBusy createRoomBusy(Gap g)
@@ -186,10 +211,12 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs an unavailibility for a room for the reason specified.
      * 
      * @param g
+     *            the gap between the unavailibility.
      * @param reason
+     *            an Integer representing the reason of the unavailibility.
      * @return a new unavaibility for a room
      */
     public static IRoomBusy createRoomBusy(Gap g, int reason)
@@ -210,9 +237,10 @@ public class DataFactory
     }
     
     /**
-     * DOCME
+     * Constructs an unavailibility for a teacher without reason.
      * 
      * @param g
+     *            the gap between the unavailibility.
      * @return a new unavaibility for a teacher
      */
     public static ITeacherBusy createTeacherBusy(Gap g)
@@ -221,10 +249,12 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs an unavailibility for a teacher for the reason specified.
      * 
      * @param g
+     *            the gap between the unavailibility.
      * @param reason
+     *            an Integer representing the reason of the unavailibility.
      * @return a new unavaibility for a teacher
      */
     public static ITeacherBusy createTeacherBusy(Gap g, int reason)
@@ -307,9 +337,10 @@ public class DataFactory
     // Resources //
     // ========= //
     /**
-     * DOCME
+     * Constructs a device with just a name in parameter.
      * 
      * @param name
+     *            a string.
      * @return a new device
      */
     public static IDevice createDevice(String name)
@@ -318,10 +349,12 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs a device with just a name in parameter.
      * 
      * @param name
+     *            a string.
      * @param type
+     *            type of the device
      * @return a new device
      */
     public static IDevice createDevice(String name, int type)
@@ -330,11 +363,11 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs a group with a name and a parent class in parameter.
      * 
-     * @param name
-     * @param nbPerson
-     * @param parent
+     * @param name a string
+     * @param nbPerson 
+     * @param parent the parent class of this group
      * @return a new group
      */
     public static IGroup createGroup(String name, int nbPerson, IClass parent)
@@ -345,12 +378,16 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs a room
      * 
      * @param name
+     *            name of the room
      * @param type
+     *            type of the room
      * @param capacity
+     *            capacity of the room
      * @param floor
+     *            the parent floor of this room
      * @return a new room
      */
     public static IRoom createRoom(String name, int type, int capacity,
@@ -362,10 +399,10 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs a teacher with just a name and a firstName in parameter.
      * 
      * @param name
-     * @param firstName
+     * @param firstName 
      * @return a new teacher
      */
     public static ITeacher createTeacher(String name, String firstName)
@@ -374,11 +411,11 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs a teacher.
      * 
      * @param name
-     * @param firstName
-     * @param mail
+     * @param firstName 
+     * @param mail 
      * @return a new teacher
      */
     public static ITeacher createTeacher(String name, String firstName,
@@ -391,11 +428,14 @@ public class DataFactory
     // Teaching //
     // ======== //
     /**
-     * DOCME
+     * Constructs a course with a name and the parent subject in parameter.
      * 
      * @param name
-     * @param type
+     *            a string.
      * @param parent
+     *            the parent subject of this course.
+     * @param type
+     *            type of the course
      * @return a new Course
      */
     public static ICourse createCourse(String name, ISubject parent, int type)
@@ -406,14 +446,20 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs a course.
      * 
      * @param name
-     * @param parent
-     * @param defaultLength
+     *            a string.
      * @param type
+     *            an int representing the type of the course.
      * @param nbHours
+     *            the number of hours for this course.
      * @param color
+     *            an int representing the color of the course.
+     * @param defaultLength
+     *            deault length of this course
+     * @param parent
+     *            the parent subject of this course.
      * @return a new Course all initilized
      * 
      */
@@ -427,15 +473,22 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs a course.
      * 
      * @param name
-     * @param parent
-     * @param defaultLength
+     *            a string.
      * @param type
+     *            an int representing the type of the course.
      * @param nbHours
+     *            the number of hours for this course.
      * @param color
+     *            an int representing the color of the course.
      * @param listTeachers
+     *            a list of teachers.
+     * @param defaultLength
+     *            deault length of this course
+     * @param parent
+     *            the parent subject of this course.
      * @return a new Course all initilized
      * 
      */
@@ -450,10 +503,13 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs a subject with a name and the parent subjects' group in
+     * parameter.
      * 
      * @param name
+     *            a string.
      * @param parent
+     *            the parent subjects' group of this subject.
      * @return a new Subject
      */
     public static ISubject createSubject(String name, ISubjectsGroup parent)
@@ -464,10 +520,13 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs a subjects' group with a name and the parent teaching
+     * structure in parameter.
      * 
      * @param name
+     *            a string.
      * @param parent
+     *            the parent teaching structure of this subjects' group.
      * @return a new Subject Group
      */
     public static ISubjectsGroup createSubjectsGroup(String name,
@@ -479,10 +538,12 @@ public class DataFactory
     }
 
     /**
-     * DOCME
+     * Constructs a teaching structure with just a name in parameter.
      * 
      * @param name
+     *            a string.
      * @param parent
+     *            the class who have this Teaching Structure
      * @return a new Teaching Structure
      */
     public static ITeachingStructure createTeachingStructure(String name,

@@ -3,6 +3,7 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
+
 package fr.umlv.ir3.flexitime.common.data.general.impl;
 
 import java.util.*;
@@ -13,11 +14,10 @@ import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 
-
 /**
  * Defines a class which contains groups.
  * 
- * @version 205
+ * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.general.IClass
  * @see fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl
  * @see fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl
@@ -26,62 +26,58 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
  */
 public class ClassImpl extends DataImpl implements IClass
 {
+
     /**
      * Comment for <code>serialVersionUID</code>
      */
-    private static final long serialVersionUID = 3257282513616711735L;
-    //===========//
-    //   Champs  //
-    //===========// 
-    private List<IGroup> lstGroups;
+    private static final long  serialVersionUID = 3257282513616711735L;
+    // ===========//
+    // Champs //
+    // ===========//
+    private List<IGroup>       lstGroups;
     private ITeachingStructure teachingStructure;
-    private ITrack parentTrack;
-    
-    
-    //==================//
-    //   Constructeurs  //
-    //==================//
-	/**
-	 * Default constructor for a class. 
-	 */
-	protected ClassImpl()
-	{
-        lstGroups = new ArrayList<IGroup>();   
+    private ITrack             parentTrack;
+
+    // ==================//
+    // Constructeurs //
+    // ==================//
+    /**
+     * Default constructor for a class.
+     */
+    protected ClassImpl()
+    {
+        lstGroups = new ArrayList<IGroup>();
     }
-	
-	/**
-	 * Constructs a class with just a name in parameter.
-	 * 
-	 * @param name a string.
-	 */
-	public ClassImpl(String name)
-	{
-		super(name);
-		lstGroups = new ArrayList<IGroup>();
-	}
-	
-	/**
-	 * Constructs a class with a name and the parent track in parameter.
-	 * 
-	 * @param name a string.
-	 * @param track the parent track.
-	 */
-	public ClassImpl(String name, ITrack track)
-	{
-		super(name);
-		this.parentTrack = track;
-		lstGroups = new ArrayList<IGroup>();
-	}
-	
+
+    /**
+     * Constructs a class with a name and the parent track in parameter.
+     * 
+     * @param name
+     *            a string.
+     * @param track
+     *            the parent track.
+     */
+    public ClassImpl(String name, ITrack track)
+    {
+        super(name);
+        this.parentTrack = track;
+        lstGroups = new ArrayList<IGroup>();
+    }
+
     /**
      * Constructs a class.
      * 
-     * @param sName a string for the name of this class.
-     * @param listOfGroups the list of groups in this class.
-     * @param struct the teaching structure of this class.
-	 * @param track the parent track.
+     * @param sName
+     *            a string for the name of this class.
+     * @param listOfGroups
+     *            the list of groups in this class.
+     * @param struct
+     *            the teaching structure of this class.
+     * @param track
+     *            the parent track.
      */
-    public ClassImpl(String sName, ITrack track, List<IGroup> listOfGroups, ITeachingStructure struct)
+    public ClassImpl(String sName, ITrack track, List<IGroup> listOfGroups,
+            ITeachingStructure struct)
     {
         super(sName);
         this.lstGroups = listOfGroups;
@@ -89,33 +85,32 @@ public class ClassImpl extends DataImpl implements IClass
         this.parentTrack = track;
     }
 
-    
-    //=============//
-    //   Méthodes  //
-    //=============//
+    // =============//
+    // Méthodes //
+    // =============//
     /**
      * Calculates the number of persons and groups in this class.
      * <code>class.calculNbPersonAndNbGroup()</code>
+     * 
      * @return number of personn in this class
-     *
+     * 
      */
     public int calculNbPerson()
     {
         int iNbPerson = 0;
         Iterator iter = lstGroups.iterator();
-        while(iter.hasNext())
+        while (iter.hasNext())
         {
-            GroupImpl gr = (GroupImpl)iter.next();
-            iNbPerson += gr.getNbPerson(); 
+            GroupImpl gr = (GroupImpl) iter.next();
+            iNbPerson += gr.getNbPerson();
         }
         return iNbPerson;
     }
-    
-    
-    /** 
+
+    /**
      * Returns the number of groups in this class.
      * <code>int nbGroup = class.getNbGroup()</code>
-     *
+     * 
      * @return the number of groups in this class.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#getNbGroup()
@@ -125,10 +120,10 @@ public class ClassImpl extends DataImpl implements IClass
         return lstGroups.size();
     }
 
-    /** 
+    /**
      * Returns the number of persons in this class.
      * <code>int nbPerson = class.getNbPerson()</code>
-     *
+     * 
      * @return the number of persons in this class.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#getNbPerson()
@@ -138,10 +133,10 @@ public class ClassImpl extends DataImpl implements IClass
         return calculNbPerson();
     }
 
-    /** 
+    /**
      * Returns the teaching structure of this class.
      * <code>ITeachingStructure teachingStructure = class.getTeachingStructure()</code>
-     *
+     * 
      * @return the teaching structure of this class.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#getTeachingStructure()
@@ -151,11 +146,12 @@ public class ClassImpl extends DataImpl implements IClass
         return teachingStructure;
     }
 
-    /** 
+    /**
      * Sets the teaching structure for this class.
      * <code>class.setTeachingStructure(struct)</code>
-     *
-     * @param struct a teaching structure.
+     * 
+     * @param struct
+     *            a teaching structure.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#setTeachingStructure(fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure)
      */
@@ -164,10 +160,10 @@ public class ClassImpl extends DataImpl implements IClass
         teachingStructure = struct;
     }
 
-    /** 
+    /**
      * Returns the list of groups in this class.
      * <code>List list = class.getLstGroups()</code>
-     *
+     * 
      * @return the list of groups in this class.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#getLstGroups()
@@ -177,11 +173,12 @@ public class ClassImpl extends DataImpl implements IClass
         return lstGroups;
     }
 
-    /** 
+    /**
      * Sets the list of groups for this class.
      * <code>class.setLstGroups(list)</code>
-     *
-     * @param lstGroup the original list of groups for this class. 
+     * 
+     * @param lstGroup
+     *            the original list of groups for this class.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#setLstGroups(java.util.List)
      */
@@ -190,11 +187,12 @@ public class ClassImpl extends DataImpl implements IClass
         lstGroups = lstGroup;
     }
 
-    /** 
+    /**
      * Adds a group in the list of groups for this class.
      * <code>class.addGroup(group)</code>
-     *
-     * @param group a group to add to the list.
+     * 
+     * @param group
+     *            a group to add to the list.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#addGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup)
      */
@@ -204,11 +202,12 @@ public class ClassImpl extends DataImpl implements IClass
         group.setParentClass(this);
     }
 
-    /** 
+    /**
      * Removes a group from the list of groups for this class.
      * <code>class.removeGroup(group)</code>
-     *
-     * @param group a group to remove of the list.
+     * 
+     * @param group
+     *            a group to remove of the list.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#removeGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup)
      */
@@ -216,31 +215,78 @@ public class ClassImpl extends DataImpl implements IClass
     {
         lstGroups.remove(group);
     }
-    
-	/** 
-	 * Returns the parent track of this class.
-	 * <code>TrackImpl track = class.getParentTrack()</code>
-	 *
-	 * @return the parent track of this class.
-	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.general.IClass#getParentTrack()
-	 */
-	public ITrack getParentTrack()
-	{
-		return parentTrack;
-	}
 
-	/**
-	 * Sets the parent track of this class.
-	 * <code>class.getParentTrack(track)</code>
-	 * 
-	 * @param track the parent track of this class.
-	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.general.IClass#setParentTrack(fr.umlv.ir3.flexitime.common.data.general.ITrack)
-	 */
-	public void setParentTrack(ITrack track)
-	{
-		this.parentTrack = track;
-	}
+    /**
+     * Returns the parent track of this class.
+     * <code>TrackImpl track = class.getParentTrack()</code>
+     * 
+     * @return the parent track of this class.
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.general.IClass#getParentTrack()
+     */
+    public ITrack getParentTrack()
+    {
+        return parentTrack;
+    }
+
+    /**
+     * Sets the parent track of this class.
+     * <code>class.getParentTrack(track)</code>
+     * 
+     * @param track
+     *            the parent track of this class.
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.general.IClass#setParentTrack(fr.umlv.ir3.flexitime.common.data.general.ITrack)
+     */
+    public void setParentTrack(ITrack track)
+    {
+        this.parentTrack = track;
+    }
+
+    /**
+     * Test the equality of two class.
+     * <ul>
+     * <li>The two objects must be instance of IClass</li>
+     * <li>If one class has an ID, the other must have one, else there are not
+     * equals.</li>
+     * <li>If any class has an ID, they must have the same name and the same
+     * parent to be equals.</li>
+     * <li>Else, they must have the same ID.</li>
+     * </ul>
+     * 
+     * @param obj
+     *            other class to compare with
+     * @return <code>true</code> if this object is the same as the obj
+     *         argument; <code>false</code> otherwise.
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    public boolean equals(Object obj)
+    {
+        if (obj == null) return false;
+        if (! ( obj instanceof IClass )) return false;
+        IClass other = (IClass) obj;
+        if ( ( ( idData != null ) && ( other.getIdData() == null ) )
+                || ( ( idData == null ) && ( other.getIdData() != null ) ))
+            return false;
+        if (idData == null)
+        {
+            if (this.getName().equals(other.getName()))
+                return parentTrack.equals(other.getParentTrack());
+            return false;
+        }
+        return ( idData == other.getIdData() );
+    }
+
+    /**
+     * Generated by the hashcode of the name.
+     * 
+     * @return a class hashcode
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode()
+    {
+        return this.getName().hashCode();
+    }
 }
-

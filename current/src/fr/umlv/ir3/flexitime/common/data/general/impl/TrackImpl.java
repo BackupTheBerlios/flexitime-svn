@@ -3,108 +3,111 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
+
 package fr.umlv.ir3.flexitime.common.data.general.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.data.general.*;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
-
 
 /**
  * Defines a track which contains classes.
- *  
- * @version 205
+ * 
+ * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.general.ITrack
  * 
  * @author FlexiTeam - Jérôme GUERS
  */
 public class TrackImpl extends DataImpl implements ITrack
 {
+
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3258126955743556917L;
-    //===========//
-    //   Champs  //
-    //===========// 
-    private List<IClass> lstClass;
+    // ===========//
+    // Champs //
+    // ===========//
+    private List<IClass>      lstClass;
 
-    //==================//
-    //   Constructeurs  //
-    //==================//
-	/**
-	 * Default constructor for a track. 
-	 */
-	protected TrackImpl()
-	{}
-	
-	
+    // ==================//
+    // Constructeurs //
+    // ==================//
     /**
-     * Constructs a track with just a name in parameter. 
+     * Default constructor for a track.
+     */
+    protected TrackImpl()
+    {
+        this.lstClass = new ArrayList<IClass>();
+    }
+
+    /**
+     * Constructs a track with just a name in parameter.
      * 
-     * @param sName a string.
+     * @param sName
+     *            a string.
      * 
      */
     public TrackImpl(String sName)
     {
-        super(sName);  
+        super(sName);
         this.lstClass = new ArrayList<IClass>();
     }
-    
-	/**
-	 * Constructs a track. 
-	 * 
-	 * @param sName a string.
-	 * @param listClasses a list of classes.
-	 */
-	public TrackImpl(String sName, List<IClass> listClasses)
-	{
-		super(sName);
-		this.lstClass = listClasses;		        
-	}
-    
-    //=============//
-    //   Méthodes  //
-    //=============//
-    /** 
+
+    /**
+     * Constructs a track.
+     * 
+     * @param sName
+     *            a string.
+     * @param listClasses
+     *            a list of classes.
+     */
+    public TrackImpl(String sName, List<IClass> listClasses)
+    {
+        super(sName);
+        this.lstClass = listClasses;
+    }
+
+    // =============//
+    // Méthodes //
+    // =============//
+    /**
      * Returns the list of classes in this track.
      * <code>List list = getLstClass()</code>
-     *
+     * 
      * @return the list of classes in this track.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.ITrack#getLstClass()
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public List<IClass> getLstClass()
     {
         return lstClass;
     }
 
-    /** 
+    /**
      * Creates a new arrayList based on the list given in parameter.
      * <code>setLstClass(lstClass)</code>
-     *
-     * @param lstClass the original list of classes in this track.  
+     * 
+     * @param lstClass
+     *            the original list of classes in this track.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.ITrack#setLstClass(java.util.List)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void setLstClass(List<IClass> lstClass)
     {
         this.lstClass = lstClass;
     }
 
-    /** 
+    /**
      * Adds a class to the list of classes contained by this track.
      * <code>addClass(pClass)</code>
-     *
-     * @param pClass a class to add to the list.
+     * 
+     * @param pClass
+     *            a class to add to the list.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.ITrack#addClass(fr.umlv.ir3.flexitime.common.data.general.IClass)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void addClass(IClass pClass)
     {
@@ -112,18 +115,60 @@ public class TrackImpl extends DataImpl implements ITrack
         pClass.setParentTrack(this);
     }
 
-    /** 
+    /**
      * Removes a class of the list of classes contained by this track.
      * <code>removeClass(pClass)</code>
-     *
-     * @param pClass a class to remove of the list.
+     * 
+     * @param pClass
+     *            a class to remove of the list.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.ITrack#removeClass(fr.umlv.ir3.flexitime.common.data.general.IClass)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void removeClass(IClass pClass)
     {
         lstClass.remove(pClass);
     }
-}
 
+    /**
+     * Test the equality of two track.
+     * <ul>
+     * <li>The two objects must be instance of ITrack</li>
+     * <li>If one track has an ID, the other must have one, else there are not
+     * equals.</li>
+     * <li>If any track has an ID, they must have the same name to be equals.
+     * </li>
+     * <li>Else, they must have the same ID.</li>
+     * </ul>
+     * 
+     * @param obj
+     *            other track to compare with
+     * @return <code>true</code> if this object is the same as the obj
+     *         argument; <code>false</code> otherwise.
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    public boolean equals(Object obj)
+    {
+        if (obj == null) return false;
+        if (! ( obj instanceof ITrack )) return false;
+        ITrack other = (ITrack) obj;
+        if ( ( ( idData != null ) && ( other.getIdData() == null ) )
+                || ( ( idData == null ) && ( other.getIdData() != null ) ))
+            return false;
+        if (idData == null) return this.getName().equals(other.getName());
+        return ( idData == other.getIdData() );
+    }
+    
+    
+    /** 
+     * Generated by the hashcode of the name.
+     *
+     * @return a track hashcode 
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode()
+    {
+        return this.getName().hashCode();
+    }
+}

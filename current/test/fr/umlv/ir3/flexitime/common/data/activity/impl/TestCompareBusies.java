@@ -37,7 +37,6 @@ public class TestCompareBusies extends TestCase
             IBusy element = (IBusy) iter.next();
             if(iter.hasNext())
             {
-                System.out.println(element.getStartDate());
                 if(element.getStartDate().compareTo(((IBusy)iter.next()).getStartDate()) > 0)
                     fail("Mauvais tri: " + element.getStartDate() + " > " + ((IBusy)iter.next()).getStartDate());
             }

@@ -56,7 +56,7 @@ public class LessonImpl extends BusyImpl implements ILesson
     }
     
     /**
-     * Constructs an unavailibility for a course.
+     * Constructs an unavailibility for a course without group.
      * 
      * @param g
      *            the gap between the unavailibility.
@@ -64,9 +64,31 @@ public class LessonImpl extends BusyImpl implements ILesson
      *            ICourse associated with this Lesson
      * 
      */
-    public LessonImpl(Gap g, ICourse _course)
+    private LessonImpl(Gap g, ICourse _course)
     {
-        this(g, _course, _course.getDefaultLength());
+        super(g);
+        lstDevice = new ArrayList<IDevice>();
+        lstRoom = new ArrayList<IRoom>();
+        lstTeacher = new ArrayList<ITeacher>();
+        lstGroup = new ArrayList<IGroup>();
+        
+        course = _course;
+    }
+    
+    /**
+     * Constructs an unavailibility for a course.
+     * 
+     * @param g
+     *            the gap between the unavailibility.
+     * @param _course
+     *            group list who learn this lesson
+     * @param groups
+     *            the group who learn this lesson            
+     * 
+     */
+    public LessonImpl(Gap g, ICourse _course, List<IGroup> groups)
+    {
+        this(g, _course, groups, _course.getDefaultLength());
     }
 
     /**
@@ -76,19 +98,17 @@ public class LessonImpl extends BusyImpl implements ILesson
      *            the gap between the unavailibility.
      * @param _course
      *            ICourse associated with this Lesson
+     * @param groups
+     *            group list who learn this lesson            
      * @param l
      *            the length of the lesson
      * 
      */
-    public LessonImpl(Gap g, ICourse _course, int l)
+    public LessonImpl(Gap g, ICourse _course, List<IGroup> groups, int l)
     {
-        super(g);
-        lstDevice = new ArrayList<IDevice>();
-        lstRoom = new ArrayList<IRoom>();
-        lstTeacher = new ArrayList<ITeacher>();
-        lstGroup = new ArrayList<IGroup>();
-
-        course = _course;
+        this(g, _course);
+        for (IGroup gElem : groups)
+            addResource(gElem);
         length = l;
     }
     
@@ -99,17 +119,14 @@ public class LessonImpl extends BusyImpl implements ILesson
      *            the gap between the unavailibility.
      * @param _course
      *            ICourse associated with this Lesson
+     * @param groups
+     *            group list who learn this lesson
      * @param defaultTeach
      *            the teacher who teach these lesson
-     * @param group
-     *            the group who learn this lesson
      */
-    public LessonImpl(Gap g, ICourse _course, ITeacher defaultTeach,
-            IGroup group)
+    public LessonImpl(Gap g, ICourse _course, List<IGroup> groups, ITeacher defaultTeach)
     {
-        this(g, _course, _course.getDefaultLength());
-        lstTeacher.add(defaultTeach);
-        lstGroup.add(group);
+        this(g, _course, groups, _course.getDefaultLength(), defaultTeach);
     }
 
     /**
@@ -119,19 +136,17 @@ public class LessonImpl extends BusyImpl implements ILesson
      *            the gap between the unavailibility.
      * @param _course
      *            ICourse associated with this Lesson
+     * @param groups
+     *            group list who learn this lesson
      * @param l
      *            the length of the lesson
      * @param defaultTeach
      *            the teacher who teach these lesson
-     * @param group
-     *            the group who learn this lesson
      */
-    public LessonImpl(Gap g, ICourse _course, int l , ITeacher defaultTeach,
-            IGroup group)
+    public LessonImpl(Gap g, ICourse _course, List<IGroup> groups, int l , ITeacher defaultTeach)
     {
-        this(g, _course, l);
-        lstTeacher.add(defaultTeach);
-        lstGroup.add(group);
+        this(g, _course, groups, l);
+        addResource(defaultTeach);
     }
     
     /**
@@ -142,34 +157,24 @@ public class LessonImpl extends BusyImpl implements ILesson
      */
     public LessonImpl(ILesson lesson)
     {
-        this(lesson.getGap(), lesson.getCourse(), lesson.getLength());
+        this(lesson.getGap(), lesson.getCourse());
+        length = lesson.getLength();
         for (Iterator iter = lesson.getLstDevice().iterator() ; iter.hasNext() ;)
-        {
-            IDevice element = (IDevice) iter.next();
-            lstDevice.add(element);           
-        }
+            addResource((IDevice)iter.next());
         
         for (Iterator iter = lesson.getLstGroup().iterator() ; iter.hasNext() ;)
-        {
-            IGroup element = (IGroup) iter.next();
-            lstGroup.add(element);
-        }
+            addResource((IGroup)iter.next());
         
         for (Iterator iter = lesson.getLstRoom().iterator() ; iter.hasNext() ;)
-        {
-            IRoom element = (IRoom) iter.next();
-            lstRoom.add(element);
-        }
+            addResource((IRoom)iter.next());
+        
         for (Iterator iter = lesson.getLstTeacher().iterator() ; iter.hasNext() ;)
-        {
-            ITeacher element = (ITeacher) iter.next();
-            lstTeacher.add(element);
-        }
+            addResource((ITeacher)iter.next());
     }
 
-    // ===========//
+    // ======== //
     // Méthodes //
-    // ===========//
+    // ======== //
 
     /**
      * Adds a resource to the list of resources contained by the lesson.
@@ -183,22 +188,18 @@ public class LessonImpl extends BusyImpl implements ILesson
     public void addResource(IResource resource)
     {
         if (resource instanceof IRoom)
-        {
             lstRoom.add((IRoom) resource);
-        }
-        else if (resource instanceof IDevice)
-        {
-            lstDevice.add((IDevice) resource);
-        }
-        else if (resource instanceof IGroup)
-        {
-            lstGroup.add((IGroup) resource);
-        }
-        else if (resource instanceof ITeacher)
-        {
-            lstTeacher.add((ITeacher) resource);
-        }
 
+        else if (resource instanceof IDevice)
+            lstDevice.add((IDevice) resource);
+
+        else if (resource instanceof IGroup)
+            lstGroup.add((IGroup) resource);
+
+        else if (resource instanceof ITeacher)
+            lstTeacher.add((ITeacher) resource);
+
+        resource.addBusy(this);
     }
 
     /**
@@ -213,21 +214,13 @@ public class LessonImpl extends BusyImpl implements ILesson
     public void removeResource(IResource resource)
     {
         if (resource instanceof IRoom)
-        {
             lstRoom.remove(resource);
-        }
         else if (resource instanceof IDevice)
-        {
-            lstDevice.remove(resource);
-        }
+           lstDevice.remove(resource);
         else if (resource instanceof IGroup)
-        {
             lstGroup.remove(resource);
-        }
         else if (resource instanceof ITeacher)
-        {
             lstTeacher.remove(resource);
-        }
     }
 
     /**
