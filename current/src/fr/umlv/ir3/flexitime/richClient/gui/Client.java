@@ -57,7 +57,6 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
-import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
 
 /**
  * Client This class build an graphic interface for the user.
@@ -198,7 +197,7 @@ public class Client
         //}else
         setAccueilMode();
         frame.setVisible(true);
-        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //TODO frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         return 0;
     }
 
@@ -731,7 +730,44 @@ public class Client
      */
     private static String checkLogin()
     {
-        String login = "";
+        String login = null;
+        String pass;
+        boolean test = false;
+        
+        while(test == false)
+        {
+            loginView.getFrame().setVisible(true);
+            
+            login = loginView.getLogin();
+            pass = loginView.getPass();
+            
+            //TODO JG, verifier user / login sur server (bdd flexitime)
+            //test fictif...
+            System.out.println("login="+login+", pass="+pass);
+            if(login.compareTo(pass) == 0)
+            {
+                System.out.println("ok");
+                test = true;
+            }
+            else
+            {
+                System.out.println("ko");
+            }
+        }
+
+        
+        return login;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*String login = "";
         char[] pass;
         while(login.compareTo("") == 0)
         {
@@ -761,7 +797,7 @@ public class Client
                 System.out.println("ko");
             }
         }
-        return login;
+        return login;*/
     }
     
     /**
@@ -857,7 +893,7 @@ public class Client
         }
         
         //gestion login
-        loginView = new LoginView();
+        loginView = new LoginView(frame);
         if( (user = checkLogin()) == null)
         {
             System.out.println("problème lors de l'authentification");

@@ -26,6 +26,8 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
+import fr.umlv.ir3.flexitime.server.io.FlexiMail;
+
 /**
  * This class draws a frame where the user can specify some options before
  * sending a mail.
@@ -42,9 +44,9 @@ public class MailView
      * <code>exemple d'appel de la methode</code>
      * 
      */
-    public void printView()
+    public void printView(String lienPJ)
     {
-        mailFrame = new JFrame("Envoie de Mails");     
+        mailFrame = new JFrame("Envoie d'un mail");     
         
         FormLayout layout = new FormLayout(
                 "right:pref, 3dlu, pref, 3dlu, pref, 3dlu, pref, pref", // 8 columns
@@ -121,10 +123,15 @@ public class MailView
         final JTextField tfSMTPServer = new JTextField();
         //TODO recuperer IP du fichier de conf !
         tfSMTPServer.setText("recuperer IP du fichier de conf !");
+        tfSMTPServer.setEditable(false);
         
         final JTextField tfFileAttached = new JTextField();
-        //TODO recuperer PJ....où ??
-        tfSMTPServer.setText("recuperer PJ.... où ??? !");
+        if(lienPJ!=null)
+        {
+            tfFileAttached.setText(lienPJ);            
+        }
+        tfFileAttached.setEditable(false);
+        
         
         final JTextArea taMessage = new JTextArea(); //TODO specifier taille ?
         taMessage.setText("<votre message ici>");
@@ -155,6 +162,18 @@ public class MailView
                 //créer un objet FlexiMail avec en params les valeurs des champs d la FlexiView
                 //FlexiMail.send()
                 //si oui afficher error
+                FlexiMail mail = new FlexiMail();
+                boolean ok = true;
+                if( (tfFrom.getText().compareTo("")!=0) && (tfFrom.getText().compareTo("<expéditeur>")!=0))
+                {
+                    mail.setFrom(tfFrom.getText());
+                }
+                else ok=false;
+                if( (tfFrom.getText().compareTo("")!=0) && (tfFrom.getText().compareTo("<expéditeur>")!=0))
+                {
+                    mail.setFrom(tfFrom.getText());
+                }
+                else ok=false;
             }            
         });
         JButton butErase = new JButton("Effacer");
@@ -187,7 +206,7 @@ public class MailView
         
         builder.addSeparator("Informations",    cc.xyw(1, 9, 8));
         builder.addLabel("SMTP Serveur :",      cc.xy (1, 11));
-        builder.add(tfSubject,                  cc.xyw(3, 11, 5));
+        builder.add(tfSMTPServer,                  cc.xyw(3, 11, 5));
         builder.addLabel("File Attached :",     cc.xy (1, 13));
         builder.add(tfFileAttached,             cc.xyw(3, 13, 5));
         
@@ -210,5 +229,4 @@ public class MailView
         mailFrame.setLocation(screenSize.width/2 - (labelSize.width/2), screenSize.height/2 - (labelSize.height/2));
         mailFrame.setVisible(true);
     }
-
 }

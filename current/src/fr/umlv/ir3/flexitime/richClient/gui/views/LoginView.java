@@ -7,6 +7,7 @@
 
 package fr.umlv.ir3.flexitime.richClient.gui.views;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -16,8 +17,10 @@ import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -33,8 +36,8 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author FlexiTeam - BOUVET Adrien
  */
 public class LoginView
-{
-    private JFrame loginFrame;
+{   
+    private JDialog loginFrame;
     private PanelBuilder builder;
     private String login = "";
     private char[] pass;
@@ -42,9 +45,9 @@ public class LoginView
     /**
      * DOCME
      */
-    public LoginView()
+    public LoginView(JFrame parentFrame)
     {
-        loginFrame = new JFrame("Authentification");     
+        loginFrame = new JDialog(parentFrame, "Authentification", true);     
         
         FormLayout layout = new FormLayout(
                 "right:pref, 3dlu, pref, 3dlu, pref, 3dlu, pref, 30dlu, pref", // 9 columns
@@ -118,6 +121,7 @@ public class LoginView
                 //si non :
                 login = tfLogin.getText();
                 pass = tfPass.getPassword();
+                loginFrame.setVisible(false);
                 //si oui afficher error
             }            
         });
@@ -155,7 +159,7 @@ public class LoginView
         
         loginFrame.add(builder.getPanel());  
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        loginFrame.setIconImage(icon.getImage());
+        //loginFrame.setIconImage(icon.getImage());
         loginFrame.setSize(400, 200);
         loginFrame.setResizable(false);
         //placement de la fenetre sur l'ecran
@@ -171,7 +175,7 @@ public class LoginView
      * 
      * @return an int indicating if the user is well logged in.
      */
-    public JFrame getFrame()
+    public JDialog getFrame()
     {
         return loginFrame;
     }
@@ -209,9 +213,9 @@ public class LoginView
      *
      * @return the password entered by the user.
      */
-    public char[] getPass()
+    public String getPass()
     {
-        return pass;        
+        return new String(pass);        
     }
     
     /** 

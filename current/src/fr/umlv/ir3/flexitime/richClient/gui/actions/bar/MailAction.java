@@ -55,7 +55,7 @@ public class MailAction extends AbstractAction
     public void actionPerformed(ActionEvent e)
     {
         MailView mail = new MailView();
-        mail.printView();
+        mail.printView(null);
     }
 
 }
