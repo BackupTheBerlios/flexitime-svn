@@ -32,10 +32,10 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
     FlexiLDAP ldap;
     List ConnectedUser;
     
-    public UserManager(IConfig config) throws RemoteException
+    public UserManager() throws RemoteException
     {
         //On se connecte au server ldap en utilisant la config
-        ldap = new FlexiLDAP(config.getUriServerLDAP(),config.getPortLDAP() ,config.getPathUserLDAP(), config.getPathGroupLDAP());
+        ldap = new FlexiLDAP();
         ConnectedUser = new ArrayList();
     }
     

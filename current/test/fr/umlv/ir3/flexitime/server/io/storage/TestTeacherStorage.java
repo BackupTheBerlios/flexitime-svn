@@ -5,9 +5,7 @@
  */
 package fr.umlv.ir3.flexitime.server.io.storage;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import net.sf.hibernate.HibernateException;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
@@ -15,28 +13,19 @@ import junit.framework.TestCase;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * DOCME
  * 
+ * @version 320
  * @author FlexiTeam - Jérôme GUERS
  */
 public class TestTeacherStorage extends TestCase
 {
     /**
-     *  
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * 
-     * @see (si nécessaire)
+     * DOCME
      */
     public void testStorage()
     {
-        TeacherImpl teacher = new TeacherImpl("Docteur REVUZ");
+        TeacherImpl teacher = new TeacherImpl("REVUZ", "Doiminique");
         
         try {
             TeacherStorage.save(teacher);
@@ -53,13 +42,12 @@ public class TestTeacherStorage extends TestCase
                     find = true;
                 }
             }
-/*            if(find == false)
+            if(find == false)
             {
               fail("Unable to save or to load !!");  
             }
-*/        } catch (HibernateException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (HibernateException e) {
+            fail("Erreur hibernate");
         }
        
     }

@@ -14,7 +14,7 @@ import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 /**
  * DOCME
  * 
- * @version 250
+ * @version 320
  * 
  * @author FlexiTeam - Jérôme GUERS
  */
@@ -40,7 +40,14 @@ public interface IConfigurationManager extends Remote
      * @param config 
      * @return if the configuration was well saved
      * @throws RemoteException 
+     * @throws FlexiException 
      */
-    public boolean save(IConfig config) throws RemoteException;
+    public boolean save(IConfig config) throws RemoteException, FlexiException;
+
+    /** 
+     * DOCME
+     * @throws FlexiException 
+     */
+    public void init() throws FlexiException;
 }
 

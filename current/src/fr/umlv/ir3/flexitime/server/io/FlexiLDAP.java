@@ -5,15 +5,13 @@
 
 package fr.umlv.ir3.flexitime.server.io;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.*;
 
-import javax.naming.Context;
-import javax.naming.NamingException;
-import javax.naming.directory.Attribute;
-import javax.naming.directory.Attributes;
+import javax.naming.*;
+import javax.naming.directory.*;
 import javax.naming.ldap.InitialLdapContext;
+
+import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 
 /**
  * @author Valère FOREL
@@ -21,7 +19,7 @@ import javax.naming.ldap.InitialLdapContext;
 public class FlexiLDAP
 {
 
-    //Type de conteneur (GROUP ou USER)
+    // Type de conteneur (GROUP ou USER)
     /**
      * Comment for <code>TYPE_USER</code>
      */
@@ -30,63 +28,44 @@ public class FlexiLDAP
      * Comment for <code>TYPE_GROUP</code>
      */
     public static final int    TYPE_GROUP = 2;
-    //Context LDAP
+    // Context LDAP
     private InitialLdapContext ctx        = null;
-    //Host du serveur LDAP
-    private String             serverLdap = null;
-    //Port de communication LDAP
-    private int                port       = -1;
-    //Chemin d'accèe aux utilisateurs
-    private String             pathUser   = null;
-    //Chemin d'accès aux groupes
-    private String             pathGroup  = null;
-    //Utilisateurs loggé courant
-    //private String             loginAs    = null;
+    // Host du serveur LDAP
+    private static String             serverLdap = null;
+    // Port de communication LDAP
+    private static int                port       = -1;
+    // Chemin d'accèe aux utilisateurs
+    private static String             pathUser   = null;
+    // Chemin d'accès aux groupes
+    private static String             pathGroup  = null;
 
-    /**
-     * Constructeur par défaut Initialise les attributs selon les paramètres de
-     * l'UMLV
+     /**
+     * DOCME
+     *
+     * @param config 
      */
-    public FlexiLDAP()
+    public static void setConfiguration(IConfig config)
     {
-        serverLdap = "ldapetud.univ-mlv.fr"; //$NON-NLS-1$
-        port = 389;
-        pathUser = "ou=Users,ou=Etudiant,dc=univ-mlv,dc=fr"; //$NON-NLS-1$
-        pathGroup = "ou=Groups,ou=Etudiant,dc=univ-mlv,dc=fr"; //$NON-NLS-1$
-    }
-
-    /**
-     * Constructeur avec arguments
-     * 
-     * @param serverLdap le hostname du serveur LDAP
-     * @param port le port LDAP
-     * @param pathUser le chemin d'accèe aux utilisateurs
-     * @param pathGroup le chemin d'accès aux groupes
-     */
-    public FlexiLDAP(String serverLdap, int port, String pathUser,
-            String pathGroup)
-    {
-        this.serverLdap = serverLdap;
-        this.port = port;
-        this.pathUser = pathUser;
-        this.pathGroup = pathGroup;
+        serverLdap = config.getUriServerLDAP();
+        port = config.getPortLDAP();
+        pathUser = config.getPathUserLDAP();
+        pathGroup = config.getPathGroupLDAP();
     }
 
     /**
      * Test la connexion d'un utilisateur
      * 
-     * @param name le login de l'utilisateur
-     * @param passwd le mot de passe de l'utilisateur
+     * @param name
+     *            le login de l'utilisateur
+     * @param passwd
+     *            le mot de passe de l'utilisateur
      * @return true si la connexion à réussi, false sinon
      */
     public boolean createConnection(String name, String passwd)
     {
-        // Si l'utilisateur est déjà loggé
-        //if (loginAs != null && loginAs.equals(name) && ctx != null)
-        //        return true;
         closeConnection();
         Hashtable env = new Hashtable();
-        //	Creation du Context Ldap
+        // Creation du Context Ldap
         env.put(Context.INITIAL_CONTEXT_FACTORY,
                 "com.sun.jndi.ldap.LdapCtxFactory"); //$NON-NLS-1$
         env
@@ -98,9 +77,9 @@ public class FlexiLDAP
 
         try
         {
-            //	Connexion au LDAP
+            // Connexion au LDAP
             ctx = new InitialLdapContext(env, null);
-            //loginAs = name;
+            // loginAs = name;
             return true;
             // Erreur de connexion
         }
@@ -114,9 +93,12 @@ public class FlexiLDAP
     /**
      * Retire les valeurs d'un attribut pour une ressource donnée
      * 
-     * @param component l'attribut
-     * @param type le type de ressource (utilisateur ou groupe)
-     * @param name le login ou nom de groupe
+     * @param component
+     *            l'attribut
+     * @param type
+     *            le type de ressource (utilisateur ou groupe)
+     * @param name
+     *            le login ou nom de groupe
      * @return une liste de valeurs correspondant à l'attribut demandé
      */
     public ArrayList getAttribute(String component, int type, String name)
@@ -169,34 +151,5 @@ public class FlexiLDAP
     public void closeConnection()
     {
         ctx = null;
-        //loginAs = null;
-    }
-
-    /**
-     * Test si l'utilisateur est déjà connecté
-     * 
-     * @param name le login de l'utilisateur
-     * @return true s'il est déjà connecté, false sinon
-     */
-   /* public boolean isConnected(String name)
-    {
-        if ( (name.equals(loginAs)) && (ctx != null)) return true;
-        return false;
-    }*/
-
-    /**
-     * @param pathGroup le chemin d'accès aux groupes
-     */
-    public void setPathGroup(String pathGroup)
-    {
-        this.pathGroup = pathGroup;
-    }
-
-    /**
-     * @param pathUser le chemin d'accès aux utilisateurs
-     */
-    public void setPathUser(String pathUser)
-    {
-        this.pathUser = pathUser;
     }
 }

@@ -22,11 +22,6 @@ import javax.swing.JScrollPane;
 
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.server.DataSimulator;
-import fr.umlv.ir3.flexitime.server.DataSimulatorSansRmi;
-
-
-
-
 
 
 /**

@@ -20,6 +20,9 @@ import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 import fr.umlv.ir3.flexitime.common.exception.*;
 import fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
+import fr.umlv.ir3.flexitime.richClient.io.FlexiMail;
+import fr.umlv.ir3.flexitime.server.io.FlexiLDAP;
+import fr.umlv.ir3.flexitime.server.io.storage.HibernateUtil;
 
 /**
  * Implement IConfig. This class return all the time the same configuration.
@@ -35,6 +38,54 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
     private static final long serialVersionUID = 3256442499634378288L;
     private static IConfig currentConfig;
     
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     * @throws FlexiException 
+     * 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager#init()
+     */
+    public void init() throws FlexiException
+    {
+        String fileName = System.getProperty(
+                "fr.umlv.ir3.flexitime.configfile", "flexiConfig.xml");
+        File f = new File(fileName);
+        InputSource inSrc;
+        try
+        {
+            inSrc = new InputSource(new FileReader(f));
+            inSrc.setSystemId(f.toURL().toExternalForm());
+
+            SAXConfHandler handler = new SAXConfHandler();
+            XMLReader xmlReader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
+
+            xmlReader.setContentHandler(handler);
+            xmlReader.parse(inSrc);
+            currentConfig = handler.getConfig();
+        }
+        catch (MalformedURLException e)
+        {}
+
+        catch (SAXException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("errConf1") + e.getMessage(), e.getCause());
+        }
+
+        catch (ParserConfigurationException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("errConf1") + e.getMessage(), e.getCause());
+        }
+        catch (IOException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("errConf2") + e.getMessage(), e.getCause());
+        }
+        
+        upDateConfig();
+    }
+
+    
     /**
      * DOCME
      * @throws RemoteException
@@ -42,6 +93,13 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
     public ConfigurationManager() throws RemoteException
     {
         super();
+    }
+    
+    private void upDateConfig() throws FlexiException
+    {
+        HibernateUtil.setConfiguration(currentConfig);
+        FlexiMail.setConfiguration(currentConfig);
+        FlexiLDAP.setConfiguration(currentConfig);
     }
 
     /**
@@ -61,39 +119,7 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
     {
         if (currentConfig == null)
         {
-            String fileName = System.getProperty(
-                    "fr.umlv.ir3.flexitime.configfile", "flexiConfig.xml");
-            File f = new File(fileName);
-            InputSource inSrc;
-            try
-            {
-                inSrc = new InputSource(new FileReader(f));
-                inSrc.setSystemId(f.toURL().toExternalForm());
-
-                SAXConfHandler handler = new SAXConfHandler();
-                XMLReader xmlReader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
-
-                xmlReader.setContentHandler(handler);
-                xmlReader.parse(inSrc);
-                currentConfig = handler.getConfig();
-
-            }
-            catch (MalformedURLException e)
-            {}
-
-            catch (SAXException e)
-            {
-                throw new FlexiException(FlexiLanguage.getInstance().getText("errConf1") + e.getMessage(), e.getCause());
-            }
-
-            catch (ParserConfigurationException e)
-            {
-                throw new FlexiException(FlexiLanguage.getInstance().getText("errConf1") + e.getMessage(), e.getCause());
-            }
-            catch (IOException e)
-            {
-                throw new FlexiException(FlexiLanguage.getInstance().getText("errConf2") + e.getMessage(), e.getCause());
-            }
+            init();
         }
         return currentConfig;
     }
@@ -103,9 +129,10 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
      * 
      * @param config
      * @return if the configuration was well saved
+     * @throws FlexiException 
      * @see fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager#save(fr.umlv.ir3.flexitime.common.data.admin.IConfig)
      */
-    public boolean save(IConfig config) throws RemoteException
+    public boolean save(IConfig config) throws RemoteException, FlexiException
     {
         boolean error = false;
 
@@ -160,6 +187,7 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
             closeElem(out, DTDConfiguration.root);
 
             currentConfig = config;
+            upDateConfig();
         }
         catch (IOException e)
         {

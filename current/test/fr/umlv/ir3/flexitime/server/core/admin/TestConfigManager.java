@@ -6,6 +6,7 @@
 package fr.umlv.ir3.flexitime.server.core.admin;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -13,6 +14,7 @@ import org.xml.sax.SAXException;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 import fr.umlv.ir3.flexitime.common.data.admin.impl.ConfigImpl;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import junit.framework.TestCase;
 
 
@@ -28,9 +30,14 @@ public class TestConfigManager extends TestCase
     public void testManager()
     {
         IConfig config = new ConfigImpl();
-        ConfigurationManager manager = new ConfigurationManager();
+        ConfigurationManager manager = null;
+        try {
+            manager = new ConfigurationManager();
+        } catch (RemoteException e1) {
+            fail("Erreur RMI");
+        }
         
-        // System.setProperty("fr.umlv.ir3.flexitime.configfile", "TestConfig.xml");
+        System.setProperty("fr.umlv.ir3.flexitime.configfile", "TestConfig.xml");
         
         config.setUriServerData("jdbc:postgresql://gontime.ath.cx:5432");
         config.setNameBase("flexitime");
@@ -50,16 +57,9 @@ public class TestConfigManager extends TestCase
                 fail("Load string error");
             if(!(config.getPortLDAP() == config2.getPortLDAP()))
                 fail("Load int error");
-            
-        } catch (IOException e) {
-            fail(e.getMessage());
-        }
-        catch (SAXException e)
-        {
-            fail(e.getMessage());
-        }
-        catch (ParserConfigurationException e)
-        {
+        } catch (RemoteException e) {
+            fail("Erreur RMI");
+        } catch (FlexiException e) {
             fail(e.getMessage());
         }
     }

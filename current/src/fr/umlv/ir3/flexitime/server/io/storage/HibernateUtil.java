@@ -24,24 +24,6 @@ public class HibernateUtil
 
     private static SessionFactory    sessionFactory;
 
-    static
-    {
-        try
-        {
-            // Crée la SessionFactory
-            Configuration cfg = new Configuration();
-            // cfg.setProperty("hibernate.show_sql", "true");
-
-            sessionFactory = cfg.configure().buildSessionFactory();
-        }
-        catch (HibernateException ex)
-        {
-            throw new RuntimeException(FlexiLanguage.getInstance().getText(
-                    "errHiber1")
-                    + ex.getMessage(), ex);
-        }
-    }
-
     private static final ThreadLocal session = new ThreadLocal();
 
     /**

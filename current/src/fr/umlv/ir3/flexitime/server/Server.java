@@ -7,19 +7,15 @@
 package fr.umlv.ir3.flexitime.server;
 
 import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+import java.rmi.*;
+import java.rmi.registry.*;
 
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
-import fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager;
-import fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager;
+import fr.umlv.ir3.flexitime.common.rmi.admin.*;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.server.core.DataManagerImpl;
-import fr.umlv.ir3.flexitime.server.core.admin.ConfigurationManager;
-import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
+import fr.umlv.ir3.flexitime.server.core.admin.*;
 
 /**
  * DOCME
@@ -49,13 +45,15 @@ public class Server
         try
         {
             IConfigurationManager cm = new ConfigurationManager();
+            cm.init();
+            
             IDataManager dm = new DataManagerImpl();
-            IUserManager um = new UserManager(cm.get());
-
+            IUserManager um = new UserManager();
+            
             Naming.rebind("ConfigManager", cm);
             Naming.rebind("manager", dm);
             Naming.rebind("usermanager", um);
-
+            
             System.out.println("Server running...");
         }
         catch (RemoteException e)
@@ -75,6 +73,5 @@ public class Server
             System.err.println(e.getMessage());
             System.exit(4);
         }
-
     }
 }

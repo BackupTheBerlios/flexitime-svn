@@ -27,7 +27,7 @@ public class TestFlexiLDAP extends TestCase
     {
         String name="fappert";
         String passwd = "popopopo";
-        FlexiLDAP ldap = new FlexiLDAP("gontime.ath.cx",389,"ou=Users,ou=Etudiant,dc=donvincenzo,dc=com","ou=Groups,ou=Etudiant,dc=donvincenzo,dc=com");
+        FlexiLDAP ldap = new FlexiLDAP();
         if(ldap.createConnection(name,passwd) != true)fail("CreateConnexion");
     }
     
@@ -35,7 +35,7 @@ public class TestFlexiLDAP extends TestCase
     {
         String name="fappert";
         String passwd = "popopopo";
-        FlexiLDAP ldap = new FlexiLDAP("gontime.ath.cx",389,"ou=Users,ou=Etudiant,dc=donvincenzo,dc=com","ou=Groups,ou=Etudiant,dc=donvincenzo,dc=com");
+        FlexiLDAP ldap = new FlexiLDAP();
         if(ldap.createConnection(name,passwd) != true)fail("CreateConnexion");
         ArrayList list = new ArrayList();
         if((list=ldap.getAttribute("uid",FlexiLDAP.TYPE_USER,"jguers"))==null)fail("Recuperation Attributs");
