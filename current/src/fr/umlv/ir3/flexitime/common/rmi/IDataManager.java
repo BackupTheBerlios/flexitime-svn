@@ -253,10 +253,11 @@ public interface IDataManager extends Remote
      * Adds a Data created by a client
      * Have to save Data and fire the add 
      * @param lesson 
+     * @param lresource TODO
      * @return true if OK
      * @throws RemoteException 
      */
-    public ILesson saveOrUpdateLesson(ILesson lesson) throws RemoteException;
+    public ILesson saveOrUpdateLesson(ILesson lesson, List<IResource> lresource) throws RemoteException;
     
     /**
      *  

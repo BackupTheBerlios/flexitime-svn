@@ -5,8 +5,10 @@
  */
 package fr.umlv.ir3.flexitime.server.core;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
