@@ -85,6 +85,7 @@
 
 		<copy todir="${build.dir}" file="${src.dir}/data.hbm.xml" />
 		<copy todir="${build.dir}" file="${src.dir}/hibernate.cfg.xml" />
+		<copy todir="${build.dir}" file="${src.dir}/str_fr.properties" />
 		<copy todir="${build.dir}" file="flexiConfig.xml" />
 
 		<property name="cp" refid="build.classpath" />
@@ -118,7 +119,7 @@
 	</target>
 
 	<target name="jar-client" depends="compile">
-		<jar jarfile="${build.dir}/${build.name}-client.jar" compress="true" basedir="${build.dest}" includes="**" excludes="data.hbm.xml; hibernate.cfg.xml; flexiConfig.xml; fr/umlv/ir3/flexitime/server/**">
+		<jar jarfile="${build.dir}/${build.name}-client.jar" compress="true" basedir="${build.dest}" includes="**; fr/umlv/ir3/flexitime/richClient/gui/pictures/*.png" excludes="data.hbm.xml; hibernate.cfg.xml; flexiConfig.xml; fr/umlv/ir3/flexitime/server/**">
 			<manifest>
 				<attribute name="Main-Class" value="fr.umlv.ir3.flexitime.richClient.gui.Client" />
 				<attribute name="Class-Path" value="${classpath}" />
