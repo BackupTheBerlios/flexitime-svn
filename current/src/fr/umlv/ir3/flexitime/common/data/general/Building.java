@@ -7,6 +7,7 @@
 package fr.umlv.ir3.flexitime.common.data.general;
 
 import java.util.List;
+import fr.umlv.ir3.flexitime.common.data.Data;
 
 /**
  * Building - DOCME Description
@@ -19,7 +20,7 @@ import java.util.List;
  * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Building extends General {
+public interface Building extends Data {
 	
     /** 
      * getNbFloor - DOCME Description
@@ -38,7 +39,7 @@ public interface Building extends General {
 	  * setNbFloor - DOCME Description
 	  * changes the number of floorss of Building.
 	  * 
-	  *  @param inbFloor the new number of floor.
+	  *  @param iNbFloor the new number of floor.
 	  * 
 	  * @author   FlexiTeam - Guillaume GUERRIN
 	  * @date     12 déc. 2004

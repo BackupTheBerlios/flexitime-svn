@@ -8,6 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.general;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.Data;
 import fr.umlv.ir3.flexitime.common.data.ressources.Group;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.TeachingStructure;
 
@@ -22,7 +23,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.TeachingStructure;
  * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Class extends General {
+public interface Class extends Data {
 	
 	  /** 
 	   * getNbGroup - DOCME Description
@@ -63,7 +64,7 @@ public interface Class extends General {
 	   * setNbPerson - DOCME Description
 	   *  changes the number of person in a Class.
 	   * 
-	   * @param iNbGroup the new number of person in a Class.
+	   * @param iNbPerson the new number of person in a Class.
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     12 déc. 2004

@@ -5,6 +5,9 @@
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.common.data.ressources;
+import java.util.List;
+
+import fr.umlv.ir3.flexitime.common.data.Data;
 import fr.umlv.ir3.flexitime.common.data.activity.Busy;
 
 /**
@@ -18,55 +21,56 @@ import fr.umlv.ir3.flexitime.common.data.activity.Busy;
  * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Resource {
+public interface Resource extends Data {
 	
-    /** 
-	 * getName - DOCME Description
-	 * returns the name of the resouce.
-	 * 
-	 *
-	 * @return the name of the resource.
-	 * 
-	 * @author   FlexiTeam - Guillaume GUERRIN
-	 * @date     12 déc. 2004
-	 */		
-	 String getName();
-
-	 /** 
-	  * setName - DOCME Description
-	  * changes the name of the resouce.
-	  * 
-	  *
-	  *  @param name the new name.
-	  * 
-	  * @author   FlexiTeam - Guillaume GUERRIN
-	  * @date     12 déc. 2004
-	  */	
-	  void setName(String name);
 	  
 	  /** 
-	   * getBusy - DOCME Description
-	   * returns the unavailabilities of the resouce.
+	   * getLstBusy - DOCME Description
+	   * returns the list of unavailabilities of the resouce.
 	   * 
 	   *
-	   * @return the unavailabilities of the resource.
+	   * @return the list of unavailabilities of the resource.
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     12 déc. 2004
 	   */		  
-	  Busy getBusy();
+	  List getLstBusy();
 	  
 	  /** 
-	   * setBusy - DOCME Description
-	   * changes the unavailabilities of the resouce.
+	   * setLstBusy - DOCME Description
+	   * changes the list of unavailabilities of the resouce.
 	   * 
 	   *
-	   * @param busy the new unavailabilities.
+	   * @param lstBusy the new unavailabilities.
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     12 déc. 2004
 	   */
-	  void setBusy(Busy busy);
+	  void setLstBusy(List lstBusy);
+	  
+	  /** 
+	   * addBusy - DOCME Description
+	   * add a unavailabilities in a Resource .
+	   * 
+	   *
+	   * @param busy the new unavailabilitie
+	   * 
+	   * @author   FlexiTeam - Guillaume GUERRIN
+	   * @date     20 déc. 2004
+	   */
+	  void addBusy(Busy busy);
+	  
+	  /** 
+	   * removeBusy - DOCME Description
+	   * remove a unavailabilities of a Resource.
+	   * 
+	   *
+	   * @param busy the new unavailabilitie
+	   * 
+	   * @author   FlexiTeam - Guillaume GUERRIN
+	   * @date     20 déc. 2004
+	   */	
+	  void removeBusy(Busy busy);
 
 
 }

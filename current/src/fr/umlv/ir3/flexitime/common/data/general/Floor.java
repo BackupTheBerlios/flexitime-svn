@@ -8,6 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.general;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.Data;
 import fr.umlv.ir3.flexitime.common.data.ressources.Room;
 
 /**
@@ -21,7 +22,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Room;
  * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Floor extends General {
+public interface Floor extends Data {
 	
 	  /** 
 	   * getLstRoom - DOCME Description
@@ -44,7 +45,7 @@ public interface Floor extends General {
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     12 déc. 2004
 	   */	
-	  void setLstRoom(List lstFloor);
+	  void setLstRoom(List lstRoom);
 	  
 	  /**
 	   * addRoom - DOCME Description

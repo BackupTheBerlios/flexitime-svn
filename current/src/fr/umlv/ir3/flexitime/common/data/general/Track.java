@@ -8,6 +8,8 @@ package fr.umlv.ir3.flexitime.common.data.general;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.Data;
+
 /**
  * Track - DOCME Description
  * explication supplémentaire si nécessaire
@@ -19,7 +21,7 @@ import java.util.List;
  * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Track extends General {
+public interface Track extends Data {
 	
 	/** 
 	 * getLstClass - DOCME Description
@@ -59,7 +61,7 @@ public interface Track extends General {
 	  * removeClass - DOCME Description
 	  * remove a class in a track
 	  * 
-	  * @param pclass the Class removed.
+	  * @param pClass the Class removed.
 	  * 
 	  * @author   FlexiTeam - Guillaume GUERRIN
 	  * @date     12 déc. 2004

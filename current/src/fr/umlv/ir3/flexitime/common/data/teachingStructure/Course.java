@@ -8,6 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.teachingStructure;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.Data;
 import fr.umlv.ir3.flexitime.common.data.ressources.Teacher;
 
 /**
@@ -21,7 +22,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Teacher;
  * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Course {
+public interface Course extends Data {
 	
     /** 
 	 * getType - DOCME Description
@@ -108,12 +109,12 @@ public interface Course {
 	   * setLstTeacher - DOCME Description
 	   * changes the list of Teacher of a course.
 	   * 
-	   * @param lstMatiere the list of Teacher  of a course.
+	   * @param lstTeacher the list of Teacher  of a course.
 	   * 
 	   * @author   FlexiTeam - Guillaume GUERRIN
 	   * @date     12 déc. 2004
 	   */
-	  void setLstTeacher(String lstTeacher);
+	  void setLstTeacher(List lstTeacher);
 
 	  
 	  /**

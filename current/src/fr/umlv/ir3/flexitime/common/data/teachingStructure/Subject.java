@@ -8,6 +8,8 @@ package fr.umlv.ir3.flexitime.common.data.teachingStructure;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.Data;
+
 /**
  * Subject - DOCME Description
  * explication supplémentaire si nécessaire
@@ -19,32 +21,7 @@ import java.util.List;
  * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Subject {
-
-    /** 
-	 * getName - DOCME Description
-	 * returns the name of the Subject.
-	 * 
-	 *
-	 * @return the name of the Subject.
-	 * 
-	 * @author   FlexiTeam - Guillaume GUERRIN
-	 * @date     12 déc. 2004
-	 */	
-	String getName();
-
-    /** 
-	 * setName - DOCME Description
-	 * changes the name of the Subject.
-	 * 
-	 *
-	 * @param name the new name.
-	 * 
-	 * @author   FlexiTeam - Guillaume GUERRIN
-	 * @date     12 déc. 2004
-	 */	
-	void setName(String name);
-
+public interface Subject extends Data{
 	  
     /** 
 	 * getLstCourse - DOCME Description
