@@ -16,21 +16,21 @@ import java.util.Calendar;
  * @version 0.1
  * @author FlexiTeam - FA
  */
-public class FlexiGap {
+public class Gap {
     //===========//
 	//  Champs   //
 	//===========//
-	private FlexiTime startDate;
-	private FlexiTime endDate;
+	private Time startDate;
+	private Time endDate;
     //=================//
 	//  Constructeurs  //
     //=================//
 	/**
 	 * Default constructor 
 	 */
-	public FlexiGap() {
-		this.startDate = new FlexiTime();
-		this.endDate = new FlexiTime();
+	public Gap() {
+		this.startDate = new Time();
+		this.endDate = new Time();
 	}
 	/**
 	 * Constructor - Take all the element of the two date
@@ -45,21 +45,21 @@ public class FlexiGap {
 	 * @param endHour
 	 * @param endMinute
 	 */
-	public FlexiGap(int startYear, int startMonth, int startDay, int startHour,
+	public Gap(int startYear, int startMonth, int startDay, int startHour,
 			int startMinute, int endYear, int endMonth, int endDay,
 			int endHour, int endMinute) {
-		this.startDate = new FlexiTime(startYear, startMonth, startDay, startHour, startMinute);
-		this.endDate = new FlexiTime(endYear, endMonth, endDay, endHour, endMinute);
+		this.startDate = new Time(startYear, startMonth, startDay, startHour, startMinute);
+		this.endDate = new Time(endYear, endMonth, endDay, endHour, endMinute);
 	}
 	/**
 	 * Constructor - Take the two calendar
 	 * @param startDate
 	 * @param endDate
 	 */
-	public FlexiGap(Calendar startDate, Calendar endDate) {
+	public Gap(Calendar startDate, Calendar endDate) {
 
-		this.startDate = new FlexiTime(startDate);
-		this.endDate = new FlexiTime(endDate);
+		this.startDate = new Time(startDate);
+		this.endDate = new Time(endDate);
 	}
 	/** 
 	 * getEndDate - DOCME Description
@@ -71,7 +71,7 @@ public class FlexiGap {
     //=============//
     //  Méthodes   //
 	//=============//
-	public FlexiTime getEndDate() {
+	public Time getEndDate() {
 		return endDate;
 	}
 	/** 
@@ -81,7 +81,7 @@ public class FlexiGap {
 	 *
 	 * @param endDate 
 	 */
-	public void setEndDate(FlexiTime endDate) {
+	public void setEndDate(Time endDate) {
 		this.endDate = endDate;
 	}
 	/** 
@@ -91,7 +91,7 @@ public class FlexiGap {
 	 *
 	 * @return the start date
 	 */
-	public FlexiTime getStartDate() {
+	public Time getStartDate() {
 		return startDate;
 	}
 	/** 
@@ -101,7 +101,7 @@ public class FlexiGap {
 	 *
 	 * @param startDate 
 	 */
-	public void setStartDate(FlexiTime startDate) {
+	public void setStartDate(Time startDate) {
 		this.startDate = startDate;
 	}
 }

@@ -15,7 +15,7 @@ import java.util.Calendar;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public class FlexiTime
+public class Time
 {
     //===========//
 	//  Champs   //
@@ -27,7 +27,7 @@ public class FlexiTime
     /**
      * Default constructor - Get the calendar now 
      */
-    public FlexiTime(){
+    public Time(){
         cal = Calendar.getInstance();
         cal.setFirstDayOfWeek(Calendar.MONDAY);
     }
@@ -35,7 +35,7 @@ public class FlexiTime
      * Constructor - Take a calendar
      * @param c a calendar
      */
-    public FlexiTime(Calendar c){
+    public Time(Calendar c){
         cal = c;
         cal.setFirstDayOfWeek(Calendar.MONDAY);
     }
@@ -47,7 +47,7 @@ public class FlexiTime
      * @param hour
      * @param minute
      */
-    public FlexiTime(int year, int month, int day, int hour, int minute){
+    public Time(int year, int month, int day, int hour, int minute){
         cal = Calendar.getInstance();
         cal.clear();
         cal.set(year,month-1,day,hour,minute,0);
@@ -226,7 +226,7 @@ public class FlexiTime
      * 1 if time1 is after time2<br>
      * 0 if it's equal  
      */
-    public static int compare(FlexiTime t1,FlexiTime t2){
+    public static int compare(Time t1,Time t2){
         if(t1.getCal().compareTo(t2.getCal())==-1) return -1;
         else if(t1.getCal().compareTo(t2.getCal())==1) return 1;
         else return 0;
@@ -323,7 +323,7 @@ public class FlexiTime
      * @param t2 a Time
      * @return Returns the number of millisecond between two Time in long<br>
      */
-    public static long getGapMSecond(FlexiTime t1, FlexiTime t2){
+    public static long getGapMSecond(Time t1, Time t2){
         long gap = (t2.getCal().getTimeInMillis() - t1.getCal().getTimeInMillis());
         if (gap < 0) return -gap;
         return gap;
@@ -337,7 +337,7 @@ public class FlexiTime
      * @param t2 a Time
      * @return Returns the number of second between two Time in long<br>
      */
-    public static long getGapSecond(FlexiTime t1, FlexiTime t2){
+    public static long getGapSecond(Time t1, Time t2){
         long gap = (t2.getCal().getTimeInMillis() - t1.getCal().getTimeInMillis()) / 1000;
         if (gap < 0) return -gap;
         return gap;
@@ -352,7 +352,7 @@ public class FlexiTime
      * @return Returns the number of minute between two Time in int<br>
      * Returns -1 if it can't get a int with the long
      */
-    public static int getGapMinute(FlexiTime t1, FlexiTime t2){
+    public static int getGapMinute(Time t1, Time t2){
         long gap = (t2.getCal().getTimeInMillis() - t1.getCal().getTimeInMillis()) / 60000;
         try{
             if (gap < 0) return (int)-gap;
@@ -371,7 +371,7 @@ public class FlexiTime
      * @return Returns the number of bour between two Time in int<br>
      * Returns -1 if it can't get a int with the long
      */
-    public static int getGapHour(FlexiTime t1, FlexiTime t2){
+    public static int getGapHour(Time t1, Time t2){
         long gap = (t2.getCal().getTimeInMillis() - t1.getCal().getTimeInMillis()) / 3600000;
         try{
             if (gap < 0) return (int)-gap;
@@ -389,11 +389,11 @@ public class FlexiTime
      * @param t2 a Time
      * @return Returns the number of week between two Time in int<br>
      */
-    public static int getGapWeek(FlexiTime t1, FlexiTime t2){
-        FlexiTime minTime;
-        FlexiTime maxTime;
+    public static int getGapWeek(Time t1, Time t2){
+        Time minTime;
+        Time maxTime;
         int number = 0;
-        if(FlexiTime.compare(t1,t2)==-1){
+        if(Time.compare(t1,t2)==-1){
             minTime = t1;
             maxTime = t2;
         }else{
@@ -416,6 +416,32 @@ public class FlexiTime
         }
         return number;          
     }
+    /** 
+     * countNbHour_HM - gets the number of hour (in float) between 2 Time<br>
+     * It doesn't take care of year, month, day
+     * <code>Time.countNbHour_HM(t1,t2)</code>
+     *
+     * @param begin the begin time
+     * @param end the end time
+     * @return Returns the number of hour
+     */
+    public static float countNbHour_HM(Time begin, Time end)
+    {
+        return (end.getHour() - begin.getHour()) + (((float)end.getMinute() - (float)begin.getMinute())/60);
+    }
+    /** 
+     * countNbMinute_HM - gets the number of minute between 2 Time<br>
+     * It doesn't take care of year, month, day
+     * <code>Time.countNbMinute_HM(t1,t2)</code>
+     *
+     * @param begin the begin time
+     * @param end the end time
+     * @return Returns the number of minute
+     */
+    public static int countNbMinute_HM(Time begin, Time end)
+    {
+        return ( (end.getHour() - begin.getHour()) * 60 + (end.getMinute() - begin.getMinute()));
+    } 
     //======================//
     //  Méthodes privées    //
 	//======================//
