@@ -10,8 +10,11 @@ package fr.umlv.ir3.flexitime.server.core;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import net.sf.hibernate.HibernateException;
+
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
+import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.server.io.storage.ClassStorage;
 
@@ -31,14 +34,17 @@ public class ClassManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#save(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void save(IData data) throws RemoteException
+    public boolean save(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof IClass) ClassStorage.save((IClass) data);
+        if(!(data instanceof IClass)) return false;
+        ClassStorage.save((IClass) data);
         notifyListener(data,DataEvent.TYPE_ADDED);  
+        return true;
     }
 
     /** 
@@ -48,13 +54,15 @@ public class ClassManager extends AbstractManager
      *
      * @return
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#get()
      * @author   FlexiTeam - Administrateur
      */
-    public List get() throws RemoteException
+    public List get(IData parent) throws RemoteException, HibernateException
     {
-        return ClassStorage.get();
+        if(parent instanceof ITrack)return ClassStorage.get((ITrack) parent);
+        return null;
     }
     /** 
      * DOCME Description
@@ -63,14 +71,17 @@ public class ClassManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#delete(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void delete(IData data) throws RemoteException
+    public boolean delete(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof IData) ClassStorage.delete((IClass) data);
+        if(!(data instanceof IData)) return false;
+        ClassStorage.delete((IClass) data);
         notifyListener(data,DataEvent.TYPE_REMOVED);
+        return true;
     }
     /** 
      * DOCME Description
@@ -79,14 +90,17 @@ public class ClassManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#update(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void update(IData data) throws RemoteException
+    public boolean update(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof IData) ClassStorage.update((IClass) data);
+        if(!(data instanceof IData)) return false;
+        ClassStorage.update((IClass) data);
         notifyListener(data,DataEvent.TYPE_CHANGED);
+        return true;
     }
 
 }

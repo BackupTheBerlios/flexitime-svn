@@ -10,6 +10,8 @@ package fr.umlv.ir3.flexitime.server.core;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import net.sf.hibernate.HibernateException;
+
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
@@ -30,14 +32,17 @@ public class DeviceManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#save(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void save(IData data) throws RemoteException
+    public boolean save(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof IDevice) DeviceStorage.save((IDevice) data);
+        if(!(data instanceof IDevice)) return false;
+        DeviceStorage.save((IDevice) data);
         notifyListener(data,DataEvent.TYPE_ADDED);
+        return true;
     }
 
     /** 
@@ -47,11 +52,12 @@ public class DeviceManager extends AbstractManager
      *
      * @return
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#get()
      * @author   FlexiTeam - Administrateur
      */
-    public List get() throws RemoteException
+    public List get(IData parent) throws RemoteException, HibernateException
     {
         return DeviceStorage.get();
     }
@@ -66,10 +72,12 @@ public class DeviceManager extends AbstractManager
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#delete(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void delete(IData data) throws RemoteException
+    public boolean delete(IData data) throws RemoteException
     {
-        if(data instanceof IDevice) DeviceStorage.delete((IDevice) data);
+        if(!(data instanceof IDevice)) return false;
+        DeviceStorage.delete((IDevice) data);
         notifyListener(data,DataEvent.TYPE_REMOVED);
+        return true;
     }
     /** 
      * DOCME Description
@@ -78,14 +86,17 @@ public class DeviceManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#update(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void update(IData data) throws RemoteException
+    public boolean update(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof IDevice) DeviceStorage.update((IDevice) data);
+        if(!(data instanceof IDevice)) return false;
+        DeviceStorage.update((IDevice) data);
         notifyListener(data,DataEvent.TYPE_REMOVED);
+        return true;
     }
 
 }

@@ -10,8 +10,11 @@ package fr.umlv.ir3.flexitime.server.core;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import net.sf.hibernate.HibernateException;
+
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.server.io.storage.SubjectsGroupStorage;
 
@@ -32,14 +35,17 @@ public class SubjectsGroupManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#save(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void save(IData data) throws RemoteException
+    public boolean save(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof ISubjectsGroup) SubjectsGroupStorage.save((ISubjectsGroup) data);
+        if(!(data instanceof ISubjectsGroup)) return false;
+        SubjectsGroupStorage.save((ISubjectsGroup) data);
         notifyListener(data,DataEvent.TYPE_ADDED);
+        return true;
     }
 
     /** 
@@ -49,13 +55,15 @@ public class SubjectsGroupManager extends AbstractManager
      *
      * @return
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#get()
      * @author   FlexiTeam - Administrateur
      */
-    public List get() throws RemoteException
+    public List get(IData parent) throws RemoteException, HibernateException
     {
-        return SubjectsGroupStorage.get();
+        if(parent instanceof ITeachingStructure)return SubjectsGroupStorage.get((ITeachingStructure) parent);
+        return null;
     }
     /** 
      * DOCME Description
@@ -64,14 +72,17 @@ public class SubjectsGroupManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#delete(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void delete(IData data) throws RemoteException
+    public boolean delete(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof ISubjectsGroup) SubjectsGroupStorage.delete((ISubjectsGroup) data);
+        if(!(data instanceof ISubjectsGroup)) return false;
+        SubjectsGroupStorage.delete((ISubjectsGroup) data);
         notifyListener(data,DataEvent.TYPE_REMOVED);
+        return true;
     }
     /** 
      * DOCME Description
@@ -80,14 +91,17 @@ public class SubjectsGroupManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#update(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void update(IData data) throws RemoteException
+    public boolean update(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof ISubjectsGroup) SubjectsGroupStorage.update((ISubjectsGroup) data);
+        if(!(data instanceof ISubjectsGroup)) return false;
+        SubjectsGroupStorage.update((ISubjectsGroup) data);
         notifyListener(data,DataEvent.TYPE_CHANGED);
+        return true;
     }
 
 }

@@ -30,7 +30,7 @@ public abstract class AbstractManager implements IDataManager
     /**
      * list of IDataListener
      */
-    private List listenerList = new ArrayList();
+    private List<IDataListener> listenerList = new ArrayList<IDataListener>();
     private final Lock lock = new ReentrantLock();
 
     /**
@@ -95,9 +95,9 @@ public abstract class AbstractManager implements IDataManager
      * 
      * @author   FlexiTeam - Administrateur
      */
-    public void unlock()
+    public synchronized void unlock()
     {
-        lock.unlock();       
+        if(lock.tryLock())lock.unlock();       
     }
     
 }

@@ -28,7 +28,7 @@ import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
  */
 public class ThreadManager extends Thread
 {
-    private List listenerList;
+    private List<IDataListener> listenerList;
     private IData data;
     private int property;
     /**
@@ -37,7 +37,7 @@ public class ThreadManager extends Thread
      * @param data
      * @param property
      */
-    public ThreadManager(List list, IData data, int property) {
+    public ThreadManager(List<IDataListener> list, IData data, int property) {
         this.listenerList = list;
         this.data = data;
         this.property = property;
@@ -53,7 +53,7 @@ public class ThreadManager extends Thread
      * @author   FlexiTeam - Administrateur
      */
     public void run() {
-        ArrayList toRemove = new ArrayList();
+        ArrayList<IDataListener> toRemove = new ArrayList<IDataListener>();
         for (Iterator iter = listenerList.iterator() ; iter.hasNext() ;)
         {
             IDataListener element = (IDataListener) iter.next();

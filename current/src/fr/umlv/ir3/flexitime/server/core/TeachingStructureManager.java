@@ -8,6 +8,8 @@ package fr.umlv.ir3.flexitime.server.core;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import net.sf.hibernate.HibernateException;
+
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
@@ -34,14 +36,17 @@ public class TeachingStructureManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#save(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void save(IData data) throws RemoteException
+    public boolean save(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof ITeachingStructure) TeachingStructureStorage.save((ITeachingStructure) data);
+        if(!(data instanceof ITeachingStructure)) return false;
+        TeachingStructureStorage.save((ITeachingStructure) data);
         notifyListener(data,DataEvent.TYPE_ADDED);
+        return true;
     }
 
     /** 
@@ -51,11 +56,12 @@ public class TeachingStructureManager extends AbstractManager
      *
      * @return
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#get()
      * @author   FlexiTeam - Administrateur
      */
-    public List get() throws RemoteException
+    public List get(IData parent) throws RemoteException, HibernateException
     {
         return TeachingStructureStorage.get();
     }
@@ -66,14 +72,17 @@ public class TeachingStructureManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#delete(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void delete(IData data) throws RemoteException
+    public boolean delete(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof ITeachingStructure) TeachingStructureStorage.delete((ITeachingStructure) data);
+        if(!(data instanceof ITeachingStructure)) return false;
+        TeachingStructureStorage.delete((ITeachingStructure) data);
         notifyListener(data,DataEvent.TYPE_REMOVED);
+        return true;
     }
     /** 
      * DOCME Description
@@ -82,14 +91,17 @@ public class TeachingStructureManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#update(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void update(IData data) throws RemoteException
+    public boolean update(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof ITeachingStructure) TeachingStructureStorage.update((ITeachingStructure) data);
+        if(!(data instanceof ITeachingStructure)) return false;
+        TeachingStructureStorage.update((ITeachingStructure) data);
         notifyListener(data,DataEvent.TYPE_CHANGED);
+        return true;
     }
 
 }

@@ -37,10 +37,12 @@ public class TeacherManager extends AbstractManager
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#save(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void save(IData data) throws RemoteException, HibernateException
+    public boolean save(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof ITeacher) TeacherStorage.save((ITeacher) data);
+        if(!(data instanceof ITeacher)) return false;
+        TeacherStorage.save((ITeacher) data);
         notifyListener(data,DataEvent.TYPE_ADDED);
+        return true;
     }
 
     /** 
@@ -55,7 +57,7 @@ public class TeacherManager extends AbstractManager
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#get()
      * @author   FlexiTeam - Administrateur
      */
-    public List get() throws RemoteException, HibernateException
+    public List get(IData parent) throws RemoteException, HibernateException
     {
         return TeacherStorage.get();
     }
@@ -71,10 +73,12 @@ public class TeacherManager extends AbstractManager
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#delete(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void delete(IData data) throws RemoteException, HibernateException
+    public boolean delete(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof ITeacher) TeacherStorage.delete((ITeacher) data);
+        if(!(data instanceof ITeacher)) return false;
+        TeacherStorage.delete((ITeacher) data);
         notifyListener(data,DataEvent.TYPE_REMOVED);
+        return true;
     }
     /** 
      * DOCME Description
@@ -88,10 +92,12 @@ public class TeacherManager extends AbstractManager
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#update(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void update(IData data) throws RemoteException, HibernateException
+    public boolean update(IData data) throws RemoteException, HibernateException
     {
-        if(data instanceof ITeacher) TeacherStorage.update((ITeacher) data);
+        if(!(data instanceof ITeacher)) return false;
+        TeacherStorage.update((ITeacher) data);
         notifyListener(data,DataEvent.TYPE_CHANGED);
+        return true;
     }
 
 }
