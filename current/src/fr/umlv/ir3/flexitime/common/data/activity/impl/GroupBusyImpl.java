@@ -34,6 +34,13 @@ public class GroupBusyImpl extends BusyImpl implements IGroupBusy
     //=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a group's unavailibility. 
+	 */
+	public GroupBusyImpl()
+	{}
+	
+	
     /**
      * Constructs an unavailibility for a group. 
      * 

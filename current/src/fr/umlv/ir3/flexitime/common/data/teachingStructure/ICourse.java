@@ -10,11 +10,12 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.ressources.ITeacher;
+import fr.umlv.ir3.flexitime.common.tools.FlexiColor;;
 
 /**
  * Represents a course which belong to a subject
  * 
- * @version 0.1
+ * @version 0.2
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface ICourse extends IData
@@ -52,6 +53,22 @@ public interface ICourse extends IData
      */
     void setNbHours(int nbHours);
 
+	/**
+	 * Returns the default length of the course.
+	 * 
+	 * @return the default length of the course.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+	int getDefaultLength();
+
+	/**
+	 * Sets the default length of the course.
+	 * 
+	 * @param hour the default length.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+	void setDefaultLength(int hour);
+
     /**
      * getColor returns the color of the course.
      * 
@@ -59,7 +76,7 @@ public interface ICourse extends IData
      * @author FlexiTeam - Guillaume GUERRIN
      * @date 12 déc. 2004
      */
-    int getColor();
+    FlexiColor getColor();
 
     /**
      * Changes the color of the course.
@@ -67,7 +84,7 @@ public interface ICourse extends IData
      * @param color the new color.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setColor(int color);
+    void setColor(FlexiColor color);
 
     /**
      * Returns the list of Teachers of a course .
@@ -100,5 +117,21 @@ public interface ICourse extends IData
      * @author FlexiTeam - Guillaume GUERRIN
      */
     void removeTeacher(ITeacher teacher);
+    
+	/**
+	 * Returns the subject to which the course belongs.
+	 * 
+	 * @return the subject to which the course belongs.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+	String getSubject();
+
+	/**
+	 * Sets the subject to which the course belongs.
+	 * 
+	 * @param subject the subject to which the course belongs.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+	void setSubject(String subject);
 
 }

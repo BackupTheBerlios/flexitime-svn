@@ -41,6 +41,13 @@ public class ClassImpl implements IClass
     //==================//
     //   Constructeurs  //
     //==================//
+	/**
+	 * Default constructor for a class. 
+	 */
+	public ClassImpl()
+	{}
+	
+	
     /**
      * Constructs a class.
      * 

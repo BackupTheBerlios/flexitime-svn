@@ -27,22 +27,32 @@ public class SubjectImpl implements ISubject
 	//===========//
     private String strName;
     private List listOfCourses;
+    private String strSubjectsGroup;
     
     
 	//=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a subject. 
+	 */
+	public SubjectImpl()
+	{}
+	
+	
     /**
      * Constructs a subject.
      * 
      * @param name a string.
      * @param listCourses a list of courses.
+     * @param subjectsGroup the name of the subjects' group to which the subject belongs.
      * 
      */
-    public SubjectImpl(String name, List listCourses)
+    public SubjectImpl(String name, List listCourses, String subjectsGroup)
     {
         this.strName = name;
         this.listOfCourses = new ArrayList(listCourses);
+        this.strSubjectsGroup = subjectsGroup;
     }
 
     
@@ -104,6 +114,33 @@ public class SubjectImpl implements ISubject
     {
         listOfCourses.remove(course);
     }
+
+	/** 
+	 * Returns the subjects' group to which the subject belongs.
+	 * <code>String n = subject.getSubjectsGroup()</code>
+	 *
+	 * @return the subjects' group to which the subject belongs.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#getSubjectsGroup()
+	 */
+	public String getSubjectsGroup()
+	{
+		return strSubjectsGroup;
+	}
+
+
+	/** 
+	 * Sets the subjects' group to which the subject belongs.
+	 * <code>subject.setSubjectsGroup(subjectsGroup)</code>
+	 *
+	 * @param subjectsGroup the subjects' group to which the subject belongs.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#setSubjectsGroup(java.lang.String)
+	 */
+	public void setSubjectsGroup(String subjectsGroup)
+	{
+		this.strSubjectsGroup = subjectsGroup;
+	}
 
     /** 
      * Returns the name of this subject.

@@ -32,6 +32,13 @@ public class TrackImpl implements ITrack
     //==================//
     //   Constructeurs  //
     //==================//
+	/**
+	 * Default constructor for a track. 
+	 */
+	public TrackImpl()
+	{}
+	
+	
     /**
      * Constructs a track. 
      * 

@@ -14,7 +14,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.IRoom;
 /**
  * Represents a floor with all parameters that it can have
  * 
- * @version 0.1
+ * @version 0.2
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface IFloor extends IData
@@ -51,5 +51,21 @@ public interface IFloor extends IData
      * @author FlexiTeam - Guillaume GUERRIN
      */
     void removeRoom(IRoom room);
+    
+	/**
+	 * Returns the building where the floor is.
+	 * 
+	 * @return the building where the floor is. 
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+    String getBuilding();
+    
+	/**
+	 * Sets the building where the floor is.
+	 * 
+	 * @param building the building where the floor is.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+    void setBuilding(String building);
 
 }

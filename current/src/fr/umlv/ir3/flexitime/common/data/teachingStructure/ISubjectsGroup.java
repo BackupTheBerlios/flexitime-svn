@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 /**
  * Represents a SubjectsGroup which belong to a TeachingStructure
  * 
- * @version 0.1
+ * @version 0.2
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface ISubjectsGroup extends IData
@@ -51,4 +51,20 @@ public interface ISubjectsGroup extends IData
      */
     void removeSubject(ISubject subject);
 
+	/**
+	 * Returns the teaching structure to which the subjects' group belongs.
+	 * 
+	 * @return the teaching structure to which the subjects' group belongs.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+	String getTeachStruct();
+
+	/**
+	 * Sets the teaching structure to which the subjects' group belongs.
+	 * 
+	 * @param struct the teaching structure to which the subjects' group belongs.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+	void setTeachStruct(String struct);
+	
 }

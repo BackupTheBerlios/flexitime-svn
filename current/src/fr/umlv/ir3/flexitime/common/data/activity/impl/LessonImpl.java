@@ -32,6 +32,12 @@ public class LessonImpl extends BusyImpl implements ILesson
     //=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a lesson's unavailibility. 
+	 */
+	public LessonImpl()
+	{}
+    
     /**
      * Constructs an unavailibility for a course. 
      * 

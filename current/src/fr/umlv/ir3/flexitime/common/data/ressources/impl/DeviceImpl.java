@@ -30,6 +30,13 @@ public class DeviceImpl extends ResourceImpl implements IDevice
 	//=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a device. 
+	 */
+	public DeviceImpl()
+	{}
+	
+	
     /**
      * Constructs a device.
      * 

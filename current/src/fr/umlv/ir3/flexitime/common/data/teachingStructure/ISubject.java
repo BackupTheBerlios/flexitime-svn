@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 /**
  * Represents a Subject which belong to a SubjectsGroup
  * 
- * @version 0.1
+ * @version 0.2
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface ISubject extends IData
@@ -50,5 +50,21 @@ public interface ISubject extends IData
      * @author FlexiTeam - Guillaume GUERRIN
      */
     void removeCourse(ICourse course);
+    
+	/**
+	 * Returns the subjects' group to which the subject belongs.
+	 * 
+	 * @return the subjects' group to which the subject belongs.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+	String getSubjectsGroup();
 
+	/**
+	 * Sets the subjects' group to which the subject belongs.
+	 * 
+	 * @param subjectsGroup the subjects' group to which the subject belongs.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+	void setSubjectsGroup(String subjectsGroup);
+	
 }

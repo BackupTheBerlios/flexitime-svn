@@ -30,6 +30,13 @@ public class GroupImpl extends ResourceImpl implements IGroup
 	//=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a group. 
+	 */
+	public GroupImpl()
+	{}
+	
+	
     /**
      * Constructs a group.
      * 

@@ -30,6 +30,13 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
 	//=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a teacher. 
+	 */
+	public TeacherImpl()
+	{}
+	
+	
     /**
      * DOCME
      * @param name

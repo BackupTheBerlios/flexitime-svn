@@ -30,11 +30,19 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	//===========//
     private int iType;
     private int iCapacity;
+    private String strFloor; 
     
     
 	//=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a room. 
+	 */
+	public RoomImpl()
+	{}
+	
+	
     /**
      * Constructs a room.
      * 
@@ -111,4 +119,32 @@ public class RoomImpl extends ResourceImpl implements IRoom
     {
         this.iCapacity = capacity;
     }
+    
+	/** 
+	 * Returns the floor where the room is.
+	 * <code>String s = room.getFloor()</code>
+	 *
+	 * @return the floor where the room is.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#getFloor()
+	 * @author   FlexiTeam - Adrien BOUVET
+	 */
+	public String getFloor()
+	{
+		return strFloor;
+	}
+
+	/** 
+	 * Sets the floor where the room is.
+	 * <code>room.setFloor(floor)</code>
+	 *
+	 * @param floor the floor where the room is.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#setFloor(java.lang.String)
+	 * @author   FlexiTeam - Adrien BOUVET
+	 */
+	public void setFloor(String floor)
+	{
+		this.strFloor = floor;
+	}
 }

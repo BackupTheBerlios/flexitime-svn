@@ -32,6 +32,13 @@ public abstract class ResourceImpl implements IResource
 	//=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a resource. 
+	 */
+	public ResourceImpl()
+	{}
+	
+	
     /**
      * Constructs a resource.
      * @param name  a string;

@@ -5,9 +5,11 @@
  */
 package fr.umlv.ir3.flexitime.common.data.activity.impl;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
+import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 
 /**
@@ -33,6 +35,12 @@ public abstract class BusyImpl implements IBusy
 	//=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for an unavailibility. 
+	 */
+	public BusyImpl()
+	{}
+	
     /**
      * Constructs an unavailibility for a device. 
      * 
@@ -106,6 +114,17 @@ public abstract class BusyImpl implements IBusy
     public void setEndDate(Date daEnd)
     {
         this.daEnd = daEnd;
+    }
+    
+    
+    public Gap getGap()
+    {
+    	Calendar calStart = Calendar.getInstance();
+    	calStart.setTime(this.daStart);
+		Calendar calEnd = Calendar.getInstance();
+		calEnd.setTime(this.daEnd);
+    	
+    	return new Gap(calStart, calEnd);
     }
 
     /** 

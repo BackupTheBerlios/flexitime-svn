@@ -15,7 +15,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 /**
  * Defines a subjects' group, it contains subjects.
  * 
- * @version 0.1
+ * @version 0.2
  * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup
  * 
  * @author FlexiTeam - Adrien BOUVET
@@ -27,22 +27,32 @@ public class SubjectsGroupImpl implements ISubjectsGroup
 	//===========//
     private String strName;
     private List listOfSubjects;
+    private String strTeachStruct;
     
     
 	//=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a subjects' group. 
+	 */
+	public SubjectsGroupImpl()
+	{}
+	
+	
     /**
      * Constructs a subjects' group.
      * 
      * @param name a string.
      * @param listSubjects a list of subjects.
+     * @param teachStruct the teaching structure to which the subjects' group belongs.
      * 
      */
-    public SubjectsGroupImpl(String name, List listSubjects)
+    public SubjectsGroupImpl(String name, List listSubjects, String teachStruct)
     {
         this.strName = name;
         this.listOfSubjects = new ArrayList(listSubjects);
+        this.strTeachStruct = teachStruct;
     }
 
     
@@ -56,7 +66,6 @@ public class SubjectsGroupImpl implements ISubjectsGroup
      * @return the list of subjects.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup#getLstSubject()
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public List getLstSubject()
     {
@@ -70,7 +79,6 @@ public class SubjectsGroupImpl implements ISubjectsGroup
      * @param lstSubject the list of subjects. 
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup#setLstSubject(java.util.List)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void setLstSubject(List lstSubject)
     {
@@ -84,7 +92,6 @@ public class SubjectsGroupImpl implements ISubjectsGroup
      * @param subject a subject to add to the list. 
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup#addSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void addSubject(ISubject subject)
     {
@@ -98,12 +105,37 @@ public class SubjectsGroupImpl implements ISubjectsGroup
      * @param subject a subject to remove of the list. 
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup#removeSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void removeSubject(ISubject subject)
     {
         listOfSubjects.remove(subject);
     }
+    
+	/** 
+	 * Returns the teaching structure to which the subjects' group belongs.
+	 * <code>String n = group.getTeachStruct()</code>
+	 *
+	 * @return the teaching structure to which the subjects' group belongs.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.ISubjectsGroup#getTeachStruct()
+	 */
+	public String getTeachStruct()
+	{
+		return strTeachStruct;
+	}
+
+	/** 
+	 * Sets the teaching structure to which the subjects' group belongs.
+	 * <code>group.setTeachStruct(struct)</code>
+	 *
+	 * @param struct the teaching structure to which the subjects' group belongs.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.ISubjectsGroup#setTeachStruct(java.lang.String)
+	 */
+	public void setTeachStruct(String struct)
+	{
+		this.strTeachStruct = struct;		
+	}
 
     /** 
      * Returns the name of the subjects' group.
@@ -112,7 +144,6 @@ public class SubjectsGroupImpl implements ISubjectsGroup
      * @return the name of the subjects' group.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public String getName()
     {
@@ -126,12 +157,11 @@ public class SubjectsGroupImpl implements ISubjectsGroup
      * @param name the name of the subjects' group. 
      * 
      * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void setName(String name)
     {
         this.strName = name;
     }
-
+    
 }
 

@@ -32,6 +32,13 @@ public class TeachingStructureImpl implements ITeachingStructure
 	//=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a teaching structure. 
+	 */
+	public TeachingStructureImpl()
+	{}
+	
+	
     /**
      * Constructs a teaching structure.
      * 

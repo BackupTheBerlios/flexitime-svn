@@ -27,22 +27,32 @@ public class FloorImpl implements IFloor
     //===========// 
     private String strName;
     private List listOfRooms; 
+    private String strBuilding;
     
     
     //==================//
     //   Constructeurs  //
     //==================//
+	/**
+	 * Default constructor for a floor. 
+	 */
+	public FloorImpl()
+	{}
+	
+	
     /**
      * Constructs a floor from a building.
      * 
      * @param name a string.
      * @param listRooms a list of rooms for this floor.
+     * @param building a string representing the name of the building where the floor is.
      * 
      */
-    public FloorImpl(String name, List listRooms)
+    public FloorImpl(String name, List listRooms, String building)
     {
         this.strName = name;
         this.listOfRooms = new ArrayList(listRooms);
+        this.strBuilding = building;
     }
     
     
@@ -100,7 +110,32 @@ public class FloorImpl implements IFloor
     {
         listOfRooms.remove(room);
     }
+    
+	/**
+	 * Returns the name of the building where the floor is.
+	 * <code>String s = floor.getBuilding()</code>
+	 * 
+	 * @return the name of the building where the floor is.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#getBuilding()
+	 */
+	public String getBuilding()
+	{
+		return strBuilding;
+	}
 
+	/**
+	 * Sets the building where the floor is.
+	 * 
+	 * @param strBuilding the building where the floor is.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#setBuilding(java.lang.String)
+	 */
+	public void setBuilding(String building)
+	{
+		this.strBuilding = building;
+	}
+	
     /** 
      * Returns the name of this floor.
      * <code>String name = floor.getName()</code>

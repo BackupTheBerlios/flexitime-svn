@@ -37,6 +37,13 @@ public class TeacherBusyImpl extends BusyImpl implements ITeacherBusy
     //=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a teacher's unavailibility. 
+	 */
+	public TeacherBusyImpl()
+	{}
+	
+	
     /**
      * Constructs an unavailibility for a teacher. 
      * 

@@ -35,7 +35,13 @@ public class DeviceBusyImpl extends BusyImpl implements IDeviceBusy
     //=============//
 	//Constructeurs//
     //=============//
-
+	/**
+	 * Default constructor for a device's unavailibility. 
+	 */
+	public DeviceBusyImpl()
+	{}
+	
+	
     /**
      * Constructs an unavailibility for a device. 
      * 

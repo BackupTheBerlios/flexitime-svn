@@ -9,7 +9,7 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
 /**
  * Represents a room which belong to a floor
  * 
- * @version 0.1
+ * @version 0.2
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface IRoom extends IResource
@@ -61,4 +61,19 @@ public interface IRoom extends IResource
      */
     void setCapacity(int capacity);
 
+	/**
+	 * Returns the floor where the room is.
+	 * 
+	 * @return the floor where the room is.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+	String getFloor();
+
+	/**
+	 * Sets the floor where the room is.
+	 * 
+	 * @param capacity the floor where the room is.
+	 * @author FlexiTeam - Adrien BOUVET
+	 */
+	void setFloor(String floor);
 }

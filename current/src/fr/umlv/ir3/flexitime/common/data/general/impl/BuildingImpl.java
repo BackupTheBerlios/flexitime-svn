@@ -32,6 +32,12 @@ public class BuildingImpl implements IBuilding
     //==================//
     //   Constructeurs  //
     //==================//   
+	/**
+	 * Default constructor for a building. 
+	 */
+	public BuildingImpl()
+	{}
+	
     /**
      * Constructs a building.
      * 

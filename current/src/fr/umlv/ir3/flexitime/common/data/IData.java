@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * Represents a data
  * 
- * @version Révision 72
+ * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface IData extends Serializable

@@ -10,6 +10,7 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.ressources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.tools.FlexiColor;
 
 
 /**
@@ -17,7 +18,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
  * It can be a CM, TD or TP.
  * It containes a list of professors associated to this course.
  * 
- * @version 0.1
+ * @version 0.2
  * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse
  * 
  * @author FlexiTeam - Adrien BOUVET
@@ -30,12 +31,22 @@ public class CourseImpl implements ICourse
     private String strName;
     private int iType;
     private int iNbHours;
-    private int iColor;
+    private FlexiColor color;
     private List listOfTeachers;
+    private int iDefaultLength;
+    private String strSubject;
+    
     
 	//=============//
 	//Constructeurs//
     //=============//
+	/**
+	 * Default constructor for a course. 
+	 */
+	public CourseImpl()
+	{}
+	
+	
     /**
      * Constructs a course.
      * 
@@ -44,15 +55,18 @@ public class CourseImpl implements ICourse
      * @param nbHours the number of hours for this course.
      * @param color an int representing the color of the course.
      * @param listTeachers a list of teachers.
+     * @param subject the subject to which this course belongs.
      * 
      */
-    public CourseImpl(String name, int type, int nbHours, int color, List listTeachers)
+    public CourseImpl(String name, int type, int nbHours, FlexiColor color, List listTeachers, int defaultLength, String subject)
     {
         this.strName = name;
         this.iType = type;
         this.iNbHours = nbHours;
-        this.iColor = color;
-        this.listOfTeachers = new ArrayList(listTeachers);        
+        this.color = color;
+        this.listOfTeachers = new ArrayList(listTeachers);
+        this.iDefaultLength = defaultLength;
+        this.strSubject = subject;
     }
 
     
@@ -115,6 +129,35 @@ public class CourseImpl implements ICourse
         this.iNbHours = nbHours;
     }
 
+
+	/** 
+	 * Returns the default length of the course.
+	 * <code>Int i = course.getDefaultLength()</code>
+	 *
+	 * @return the default length of the course.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#getDefaultLength()
+	 * @author   FlexiTeam - Adrien BOUVET
+	 */
+	public int getDefaultLength()
+	{
+		return iDefaultLength;
+	}
+
+	/** 
+	 * Sets the default length of the course.
+	 * <code>course.setDefaultLength(hour)</code>
+	 *
+	 * @param hour the default length. 
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#setDefaultLength(int)
+	 * @author   FlexiTeam - Adrien BOUVET
+	 */
+	public void setDefaultLength(int hour)
+	{
+		this.iDefaultLength = hour;		
+	}
+
     /** 
      * Returns the color of the course.
      * <code>Int i = course.getColor()</code>
@@ -124,9 +167,9 @@ public class CourseImpl implements ICourse
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#getColor()
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public int getColor()
+    public FlexiColor getColor()
     {
-        return iColor;
+        return color;
     }
 
     /** 
@@ -138,9 +181,9 @@ public class CourseImpl implements ICourse
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#setColor(int)
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public void setColor(int color)
+    public void setColor(FlexiColor color)
     {
-        this.iColor = color;
+        this.color = color;
     }
 
     /** 
@@ -198,6 +241,33 @@ public class CourseImpl implements ICourse
     {
         listOfTeachers.remove(teacher);
     }
+    
+	/** 
+	 * Returns the subject to which the course belongs.
+	 * <code>String n = course.getSubject()</code>
+	 *
+	 * @return the subject to which the course belongs.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.ICourse#getSubject()
+	 */
+	public String getSubject()
+	{
+		return strSubject;
+	}
+
+
+	/** 
+	 * Sets the subject to which the course belongs.
+	 * <code>course.setSubject(subject)</code>
+	 *
+	 * @param subjectsGroup the subject to which the course belongs.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.ICourse#setSubject(java.lang.String)
+	 */
+	public void setSubject(String subject)
+	{
+		this.strSubject = subject;
+	}
 
     /** 
      * Returns the name of this course.
@@ -226,6 +296,6 @@ public class CourseImpl implements ICourse
     {
         this.strName = name;
     }
-
+    
 }
 
