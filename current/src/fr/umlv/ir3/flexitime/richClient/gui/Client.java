@@ -40,6 +40,7 @@ import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.Plastic3DLookAndFeel;
 
 import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExploitationAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExportAction;
@@ -603,8 +604,9 @@ public class Client
      */
     private static int testIPServer(String ip)
     {
-        System.out.println("test connect " + ip);
-        //TODO recup registar du server => voir avec Prasad
+        RemoteDataManager.setIpServer(ip);
+        if(RemoteDataManager.getManager()==null)
+            return -1;
         return 0;
     }
     
