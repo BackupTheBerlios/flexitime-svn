@@ -218,6 +218,9 @@ public class Client
         
         return button;
     }
+    
+    
+    
     /**
      * initToolBar - DOCME Code This method creates the client's tool bar.
      * <code>exemple d'appel de la methode</code>
@@ -231,7 +234,7 @@ public class Client
         mainPanel.add(toolBar, BorderLayout.PAGE_START);
         
         //Imprimer
-        toolBar.add(createButton(PrintAction.getInstance()));
+        toolBar.add(PrintAction.getButton());
       
         //Export
         toolBar.add(createButton(ExportAction.getInstance()));
@@ -703,6 +706,7 @@ public class Client
      */
     public static void setExploitMode()
     {
+        PrintAction.getInstance().setEnabled(true);
         enableButGpExploit();
         centerPanel.moveToFront(exploitPanel);
         centerPanel.validate();
@@ -718,6 +722,7 @@ public class Client
      */
     public static void setMngmtMode()
     {
+        PrintAction.getInstance().setEnabled(false);
         disableButGpExploit();
         centerPanel.moveToFront(mngmtPanel);
         centerPanel.validate();
@@ -732,6 +737,7 @@ public class Client
      */
     public static void setAccueilMode()
     {
+        PrintAction.getInstance().setEnabled(false);
         disableButGpExploit();
         centerPanel.moveToFront(accueilPanel);
         centerPanel.validate();
