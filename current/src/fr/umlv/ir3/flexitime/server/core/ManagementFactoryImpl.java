@@ -9,10 +9,10 @@ package fr.umlv.ir3.flexitime.server.core;
 
 import java.util.Date;
 
-import fr.umlv.ir3.flexitime.common.data.activity.Busy;
-import fr.umlv.ir3.flexitime.common.data.activity.Lesson;
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.general.*;
-import fr.umlv.ir3.flexitime.common.data.general.Class;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.ressources.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
 import fr.umlv.ir3.flexitime.common.tools.Time;
@@ -37,7 +37,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public Teacher createTeacher(String name)
+    public ITeacher createTeacher(String name)
     {
         return null;
 
@@ -53,7 +53,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public Room createRoom(String name, Floor floor)
+    public IRoom createRoom(String name, IFloor floor)
     {
         return null;
     }
@@ -67,7 +67,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public Device createDevice(String name)
+    public IDevice createDevice(String name)
     {
         return null;
     }
@@ -82,7 +82,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public Group createGroup(String name, Class _class)
+    public IGroup createGroup(String name, IClass _class)
     {
         return null;
     }
@@ -96,7 +96,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public Track createTrack(String name)
+    public ITrack createTrack(String name)
     {
         return null;
     }
@@ -110,7 +110,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public Class createClass(String name)
+    public IClass createClass(String name)
     {
         return null;
     }
@@ -125,7 +125,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public SubjectsGroup createSubjectsGroup(String name, Class _class)
+    public ISubjectsGroup createSubjectsGroup(String name, IClass _class)
     {
         return null;
     }
@@ -140,7 +140,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public Subject createSubject(String name, SubjectsGroup subjectsGroup)
+    public ISubject createSubject(String name, ISubjectsGroup subjectsGroup)
     {
         return null;
     }
@@ -155,7 +155,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public Course createCourse(String name, Subject subject)
+    public ICourse createCourse(String name, ISubject subject)
     {
         return null;
     }
@@ -169,7 +169,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public Building createBuilding(String name)
+    public IBuilding createBuilding(String name)
     {
         return null;
     }
@@ -184,7 +184,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public Floor createFloor(String name, Building building)
+    public IFloor createFloor(String name, IBuilding building)
     {
         return null;
     }
@@ -203,7 +203,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Administrateur
      * @date 15 déc. 2004
      */
-    public Lesson createLesson(Date date, Time time, Resource resource)
+    public ILesson createLesson(Date date, Time time, IResource resource)
     {
         // TODO Auto-generated method stub
         return null;
@@ -223,7 +223,7 @@ public class ManagementFactoryImpl extends ManagementFactory
      * @author FlexiTeam - Administrateur
      * @date 15 déc. 2004
      */
-    public Busy createBusy(Date date, Time time, Resource resource)
+    public IBusy createBusy(Date date, Time time, IResource resource)
     {
         // TODO Auto-generated method stub
         return null;

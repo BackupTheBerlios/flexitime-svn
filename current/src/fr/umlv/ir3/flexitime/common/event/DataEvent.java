@@ -4,7 +4,7 @@
 
 package fr.umlv.ir3.flexitime.common.event;
 
-import fr.umlv.ir3.flexitime.common.data.Data;
+import fr.umlv.ir3.flexitime.common.data.IData;
 
 /**
  * DOCME Je ne sais pas à quoi cela sert! C'est juste pour ne plus avoir
@@ -18,7 +18,7 @@ public class DataEvent
     /**
      * DOCME
      */
-    public DataEvent(Data d, int i)
+    public DataEvent(IData d, int i)
     {
         super();
         // TODO Auto-generated constructor stub

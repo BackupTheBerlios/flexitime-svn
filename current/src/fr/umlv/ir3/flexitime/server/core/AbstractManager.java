@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.Data;
+import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
@@ -49,7 +49,7 @@ public abstract class AbstractManager implements IDataManager
      * @param d Data on which event has occured
      * @param property type of the event 
      */
-    protected void notifyListener(Data d, int property)
+    protected void notifyListener(IData d, int property)
     {
         ArrayList toRemove = new ArrayList();
         for (Iterator iter = listenerList.iterator() ; iter.hasNext() ;)

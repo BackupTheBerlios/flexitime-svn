@@ -9,7 +9,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.Data;
+import fr.umlv.ir3.flexitime.common.data.IData;
 
 
 /**
@@ -31,7 +31,7 @@ public interface IDataManager extends Remote
      * @throws RemoteException if not reachable
      * 
      */
-    public void add(Data d) throws RemoteException;
+    public void add(IData d) throws RemoteException;
     
     /**
      *  
@@ -54,7 +54,7 @@ public interface IDataManager extends Remote
      * @throws RemoteException if not reachable
      * 
      */
-    public boolean lock(Data d) throws RemoteException;
+    public boolean lock(IData d) throws RemoteException;
     
     /**
      *  
@@ -65,7 +65,7 @@ public interface IDataManager extends Remote
      * @throws RemoteException if not reachable 
      * 
      */
-    public void remove(Data d) throws RemoteException;
+    public void remove(IData d) throws RemoteException;
     
     /**
      *  
@@ -75,7 +75,7 @@ public interface IDataManager extends Remote
      * @throws RemoteException if not reachable 
      * 
      */
-    public void unlock(Data d) throws RemoteException;
+    public void unlock(IData d) throws RemoteException;
     
     /**
      *  
@@ -86,7 +86,7 @@ public interface IDataManager extends Remote
      * @throws RemoteException if not reachable
      * 
      */
-    public void update(Data d) throws RemoteException;
+    public void update(IData d) throws RemoteException;
     
 }
 

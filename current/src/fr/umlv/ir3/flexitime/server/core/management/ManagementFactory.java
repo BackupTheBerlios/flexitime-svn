@@ -11,10 +11,10 @@ import java.util.Date;
 
 import fr.umlv.ir3.flexitime.common.data.ressources.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
-import fr.umlv.ir3.flexitime.common.data.activity.Busy;
-import fr.umlv.ir3.flexitime.common.data.activity.Lesson;
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.general.*;
-import fr.umlv.ir3.flexitime.common.data.general.Class;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.tools.Time;
 
 /**
@@ -35,7 +35,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract Teacher createTeacher(String name);
+    public abstract ITeacher createTeacher(String name);
 
     /**
      * createRoom - creates a room
@@ -47,7 +47,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract Room createRoom(String name, Floor floor);
+    public abstract IRoom createRoom(String name, IFloor floor);
 
     /**
      * createDevice - creates a device
@@ -58,7 +58,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract Device createDevice(String name);
+    public abstract IDevice createDevice(String name);
 
     /**
      * createGroup - creates a group
@@ -70,7 +70,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract Group createGroup(String name, Class _class);
+    public abstract IGroup createGroup(String name, IClass _class);
 
     /**
      * createTrack - creates a Track
@@ -81,7 +81,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract Track createTrack(String name);
+    public abstract ITrack createTrack(String name);
 
     /**
      * createClass - creates a Class
@@ -92,7 +92,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract Class createClass(String name);
+    public abstract IClass createClass(String name);
 
     /**
      * createSubjectsGroup - create a group of subjects
@@ -104,7 +104,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract SubjectsGroup createSubjectsGroup(String name, Class _class);
+    public abstract ISubjectsGroup createSubjectsGroup(String name, IClass _class);
 
     /**
      * createSubject - creates a subject
@@ -116,8 +116,8 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract Subject createSubject(String name,
-            SubjectsGroup subjectsGroup);
+    public abstract ISubject createSubject(String name,
+            ISubjectsGroup subjectsGroup);
 
     /**
      * createCourse - create a course
@@ -129,7 +129,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract Course createCourse(String name, Subject subject);
+    public abstract ICourse createCourse(String name, ISubject subject);
 
     /**
      * createBuilding - creates a building
@@ -140,7 +140,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract Building createBuilding(String name);
+    public abstract IBuilding createBuilding(String name);
 
     /**
      * createFloor - creates a floor
@@ -152,7 +152,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract Floor createFloor(String name, Building building);
+    public abstract IFloor createFloor(String name, IBuilding building);
 
     /**
      * createLesson - creates a lesson
@@ -165,7 +165,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 15 déc. 2004
      */
-    public abstract Lesson createLesson(Date date, Time time, Resource resource);
+    public abstract ILesson createLesson(Date date, Time time, IResource resource);
 
     /**
      * createBusy - creates a unavaibility
@@ -178,7 +178,7 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Administrateur
      * @date 15 déc. 2004
      */
-    public abstract Busy createBusy(Date date, Time time, Resource resource);
+    public abstract IBusy createBusy(Date date, Time time, IResource resource);
 
     /**
      * getFactory - get the ManagementFactory
