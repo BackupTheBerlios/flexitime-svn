@@ -881,6 +881,17 @@ public class Client
      */
     public static void main(String[] args)
     {
+        // gestion fenetre principale
+        try
+        {
+            //definition d'un look&feel
+            //TODO garder celui-ci ?? en trouver un + bleu...
+            //lister LF d'un windows et les checker....
+            UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
+        }
+        catch (Exception e)
+        {}
+        
         // Splash image
         FlexiSplash splash = new FlexiSplash();
         splash.setVisible(true);
@@ -903,17 +914,6 @@ public class Client
         //TODO JG, charger pref user notamment filière par défaut(si pas ds pref->afficher view)
         System.out.println("charge "+ user + " prefs");
         PreferencesImpl prefs = new PreferencesImpl();
-        
-        // gestion fenetre principale
-        try
-        {
-            //definition d'un look&feel
-            //TODO garder celui-ci ?? en trouver un + bleu...
-            //lister LF d'un windows et les checker....
-            UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
-        }
-        catch (Exception e)
-        {}
         
         Client c = new Client();
         
