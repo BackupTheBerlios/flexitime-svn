@@ -76,11 +76,12 @@ public class BusyFactory
      *
      * @param g
      * @param c
+     * @param l 
      * @return a new lesson
      */
-    public static ILesson createLesson(Gap g, ICourse c)
+    public static ILesson createLesson(Gap g, ICourse c, int l)
     {
-        return new LessonImpl(g, c); 
+        return new LessonImpl(g, c, l); 
     }
     
     /**
@@ -88,13 +89,14 @@ public class BusyFactory
      *
      * @param g
      * @param c
+     * @param l 
      * @param t 
      * @param gr 
      * @return a new lesson
      */
-    public static ILesson createLesson(Gap g, ICourse c, ITeacher t, IGroup gr)
+    public static ILesson createLesson(Gap g, ICourse c, int l, ITeacher t, IGroup gr)
     {
-        return new LessonImpl(g, c, t, gr); 
+        return new LessonImpl(g, c, l, t, gr); 
     }
     
     /**

@@ -36,7 +36,9 @@ public abstract class ResourceImpl extends DataImpl implements IResource
 	 * Default constructor for a resource. 
 	 */
 	protected ResourceImpl()
-	{}
+	{
+        lstBusy = new ArrayList<IBusy>();   
+    }
 	
 	/**
 	 * Constructs a resource with just a name in parameter.
@@ -46,7 +48,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
 	public ResourceImpl(String name)
 	{
 		super(name);
-		this.lstBusy = new ArrayList<IBusy>();
+		lstBusy = new ArrayList<IBusy>();
 	}
 	
     /**
@@ -121,6 +123,5 @@ public abstract class ResourceImpl extends DataImpl implements IResource
     {
         lstBusy.remove(busy);
     }
-
 }
 

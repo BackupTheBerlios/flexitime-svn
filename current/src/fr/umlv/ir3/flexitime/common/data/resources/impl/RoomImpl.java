@@ -9,7 +9,6 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
-import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 
 
@@ -20,11 +19,11 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
  * TYPE_COURS   = 2;
  * TYPE_TP      = 3;
  * 
- * @version 0.1
+ * @version 205
  * @see fr.umlv.ir3.flexitime.common.data.resources.IRoom
  * @see fr.umlv.ir3.flexitime.common.data.resources.impl.ResourceImpl
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
 public class RoomImpl extends ResourceImpl implements IRoom
 {
@@ -58,49 +57,61 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	{
 		super(name);        
 	}
-	
-	/**
-	 * Constructs a room with a name and his parent in parameter.
-	 * 
-	 * @param name a string.
-	 * @param floor the parent floor of this room.
-	 * 
-	 */
-	public RoomImpl(String name, FloorImpl floor)
-	{
-		super(name);
-		this.parentFloor = floor;        
-	}
-	
+    
     /**
-     * Constructs a room.
-     * 
-     * @param name a string.
-     * @param listBusy a list of unavailibilities.
-     * @param type a type of room.
-     * @param capacity the number maximum of students whom can sit in the room.
-	 * @param floor the parent floor of this room. 
-     */
-    public RoomImpl(String name, List<IBusy> listBusy, int type, int capacity, FloorImpl floor)
-    {
-        super(name, listBusy);
-        this.type = type;
-        this.capacity = capacity;
-        this.parentFloor = floor;        
-    }
-
-    /**
-     * 
      * Constructs a room
+     * 
+     * @param name name of the room
+     * @param type type of the room
+     */
+    public RoomImpl(String name, int type)
+    {
+        this(name);
+        this.type = type;
+    }
+    
+    /**
+     * Constructs a room
+     * 
      * @param name name of the room
      * @param type type of the room
      * @param capacity capacity of the room
      */
     public RoomImpl(String name, int type, int capacity)
     {
-        super(name);
+        this(name, type);
+        this.capacity = capacity;
+    }
+    
+    /**
+     * Constructs a room
+     * 
+     * @param name name of the room
+     * @param type type of the room
+     * @param capacity capacity of the room
+     * @param floor the parent floor of this room 
+     */
+    public RoomImpl(String name, int type, int capacity, IFloor floor)
+    {
+        this(name, type, capacity);
+        this.parentFloor = floor;
+    }
+	
+    /**
+     * Constructs a room.
+     * 
+     * @param name a string.
+     * @param type a type of room.
+     * @param capacity the number maximum of students whom can sit in the room.
+	 * @param floor the parent floor of this room.
+     * @param listBusy a list of unavailibilities  
+     */
+    public RoomImpl(String name, int type, int capacity, IFloor floor, List<IBusy> listBusy)
+    {
+        super(name, listBusy);
         this.type = type;
         this.capacity = capacity;
+        this.parentFloor = floor;        
     }
     
     //===========//

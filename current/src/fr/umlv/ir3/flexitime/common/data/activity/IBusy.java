@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.tools.Gap;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface IBusy extends Serializable
+public interface IBusy extends Serializable, Comparable
 {
 
     /**

@@ -60,5 +60,17 @@ public interface IUser extends IData
     * @param ldap 
     */
     public void setLdap(boolean ldap);
+    
+    /**
+     * Return idUser
+     * @return Returns the idUser.
+     */
+    public Long getIdUser();
+    
+    /**
+     * Set idUser
+     * @param idUser The idUser to set.
+     */
+    public void setIdUser(Long idUser);
 }
 

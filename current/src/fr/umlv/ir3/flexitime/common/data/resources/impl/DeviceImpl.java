@@ -14,10 +14,10 @@ import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 /**
  * Defines a device.
  * 
- * @version 0.1
+ * @version 205
  * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
 public class DeviceImpl extends ResourceImpl implements IDevice
 {
@@ -38,7 +38,9 @@ public class DeviceImpl extends ResourceImpl implements IDevice
 	 * Default constructor for a device. 
 	 */
 	protected DeviceImpl()
-	{}
+	{
+     super();   
+    }
 	
 	/**
 	 * Constructs a device with just a name in parameter.
@@ -49,6 +51,18 @@ public class DeviceImpl extends ResourceImpl implements IDevice
 	{
 		super(name);
 	}
+    
+    /**
+     * Constructs a device with just a name in parameter.
+     * 
+     * @param name a string. 
+     * @param type type of the device
+     */
+    public DeviceImpl(String name, String type)
+    {
+        super(name);
+        this.type = type;
+    }
 	
     /**
      * Constructs a device.
@@ -56,9 +70,8 @@ public class DeviceImpl extends ResourceImpl implements IDevice
      * @param name a string.
      * @param listBusy a list of unavailibilities.
      * @param type the type of device.
-     * 
      */
-    public DeviceImpl(String name, List<IBusy> listBusy, String type)
+    public DeviceImpl(String name, String type, List<IBusy> listBusy)
     {
         super(name, listBusy);
         this.type = type;
@@ -75,7 +88,6 @@ public class DeviceImpl extends ResourceImpl implements IDevice
      * @return the type of device.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice#getType()
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public String getType()
     {
@@ -89,7 +101,6 @@ public class DeviceImpl extends ResourceImpl implements IDevice
      * @param type the type of device.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice#setType(java.lang.String)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void setType(String type)
     {

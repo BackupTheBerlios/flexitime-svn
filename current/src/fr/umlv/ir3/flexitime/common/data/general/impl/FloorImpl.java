@@ -5,11 +5,9 @@
  */
 package fr.umlv.ir3.flexitime.common.data.general.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
+import fr.umlv.ir3.flexitime.common.data.general.*;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 
@@ -17,10 +15,10 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 /**
  * Defines a floor which contains rooms.
  * 
- * @version 0.1
+ * @version 205
  * @see fr.umlv.ir3.flexitime.common.data.general.IFloor
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
 public class FloorImpl extends DataImpl implements IFloor
 {
@@ -42,7 +40,9 @@ public class FloorImpl extends DataImpl implements IFloor
 	 * Default constructor for a floor. 
 	 */
 	protected FloorImpl()
-	{}
+	{
+        lstRoom = new ArrayList<IRoom>();   
+    }
 	
 	/**
 	 * Constructs a floor from a building with just a name in parameter.
@@ -61,7 +61,7 @@ public class FloorImpl extends DataImpl implements IFloor
 	 * @param name a string.
 	 * @param building the building parent of this floor.
 	 */
-	public FloorImpl(String name, BuildingImpl building)
+	public FloorImpl(String name, IBuilding building)
 	{
 		super(name);
 		this.parentBuilding = building;
@@ -75,7 +75,7 @@ public class FloorImpl extends DataImpl implements IFloor
      * @param listRooms a list of rooms for this floor.
      * @param building a string representing the name of the building where the floor is.
      */
-    public FloorImpl(String name, List<IRoom> listRooms, BuildingImpl building)
+    public FloorImpl(String name, IBuilding building, List<IRoom> listRooms)
     {
         super(name);
         this.lstRoom = listRooms;
@@ -163,6 +163,5 @@ public class FloorImpl extends DataImpl implements IFloor
 	{
 		this.parentBuilding = building;
 	}
-	
 }
 

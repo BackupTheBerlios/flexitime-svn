@@ -5,12 +5,9 @@
  */
 package fr.umlv.ir3.flexitime.common.data.general.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.data.general.*;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
@@ -20,12 +17,12 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 /**
  * Defines a class which contains groups.
  * 
- * @version 0.2
+ * @version 205
  * @see fr.umlv.ir3.flexitime.common.data.general.IClass
  * @see fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl
  * @see fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
 public class ClassImpl extends DataImpl implements IClass
 {
@@ -48,7 +45,9 @@ public class ClassImpl extends DataImpl implements IClass
 	 * Default constructor for a class. 
 	 */
 	protected ClassImpl()
-	{}
+	{
+        lstGroups = new ArrayList<IGroup>();   
+    }
 	
 	/**
 	 * Constructs a class with just a name in parameter.
@@ -67,7 +66,7 @@ public class ClassImpl extends DataImpl implements IClass
 	 * @param name a string.
 	 * @param track the parent track.
 	 */
-	public ClassImpl(String name, TrackImpl track)
+	public ClassImpl(String name, ITrack track)
 	{
 		super(name);
 		this.parentTrack = track;
@@ -82,7 +81,7 @@ public class ClassImpl extends DataImpl implements IClass
      * @param struct the teaching structure of this class.
 	 * @param track the parent track.
      */
-    public ClassImpl(String sName, List<IGroup> listOfGroups, ITeachingStructure struct, TrackImpl track)
+    public ClassImpl(String sName, ITrack track, List<IGroup> listOfGroups, ITeachingStructure struct)
     {
         super(sName);
         this.lstGroups = listOfGroups;
@@ -97,6 +96,7 @@ public class ClassImpl extends DataImpl implements IClass
     /**
      * Calculates the number of persons and groups in this class.
      * <code>class.calculNbPersonAndNbGroup()</code>
+     * @return number of personn in this class
      *
      */
     public int calculNbPerson()

@@ -38,6 +38,7 @@ public class LessonImpl extends BusyImpl implements ILesson
     private List<ITeacher>    lstTeacher;
     private List<IGroup>      lstGroup;
     private ICourse           course;
+    private int               length;
 
     // =============//
     // Constructeurs//
@@ -61,9 +62,11 @@ public class LessonImpl extends BusyImpl implements ILesson
      *            the gap between the unavailibility.
      * @param _course
      *            ICourse associated with this Lesson
+     * @param l
+     *            the length of the lesson
      * 
      */
-    public LessonImpl(Gap g, ICourse _course)
+    public LessonImpl(Gap g, ICourse _course, int l)
     {
         super(g);
         lstDevice = new ArrayList<IDevice>();
@@ -72,6 +75,7 @@ public class LessonImpl extends BusyImpl implements ILesson
         lstGroup = new ArrayList<IGroup>();
 
         course = _course;
+        length = l;
     }
 
     /**
@@ -81,14 +85,17 @@ public class LessonImpl extends BusyImpl implements ILesson
      *            the gap between the unavailibility.
      * @param _course
      *            ICourse associated with this Lesson
+     * @param l
+     *            the length of the lesson
      * @param defaultTeach
      *            the teacher who teach these lesson
      * @param group
      *            the group who learn this lesson
      */
-    public LessonImpl(Gap g, ICourse _course, ITeacher defaultTeach, IGroup group)
+    public LessonImpl(Gap g, ICourse _course, int l, ITeacher defaultTeach,
+            IGroup group)
     {
-        this(g, _course);
+        this(g, _course, l);
         lstTeacher.add(defaultTeach);
         lstGroup.add(group);
     }
@@ -236,5 +243,26 @@ public class LessonImpl extends BusyImpl implements ILesson
     public void setCourse(ICourse _course)
     {
         course = _course;
+    }
+
+    /**
+     * Return length
+     * 
+     * @return Returns the length.
+     */
+    public int getLength()
+    {
+        return length;
+    }
+
+    /**
+     * Set length
+     * 
+     * @param length
+     *            The length to set.
+     */
+    public void setLength(int length)
+    {
+        this.length = length;
     }
 }

@@ -16,10 +16,10 @@ import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 /**
  * Defines a track which contains classes.
  *  
- * @version 0.1
+ * @version 205
  * @see fr.umlv.ir3.flexitime.common.data.general.ITrack
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
 public class TrackImpl extends DataImpl implements ITrack
 {
