@@ -11,11 +11,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sound.midi.SysexMessage;
-
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.DataFactorySansRmi;
-import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
@@ -23,7 +19,6 @@ import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl;
@@ -32,7 +27,6 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 
