@@ -51,7 +51,7 @@ import fr.umlv.ir3.flexitime.richClient.models.management.UsersListModel;
 /**
  * This class draws a frame where the super user can manage soft's users.
  * 
- * @version 0.1
+ * @version 0.2
  * @author FlexiTeam - BOUVET Adrien
  */
 public class UsersManagementView
@@ -89,10 +89,10 @@ public class UsersManagementView
      */
     public void printView(JFrame parentFrame)
     {
-        userMngmtView = new JDialog(parentFrame,
-                "Gestion des utilisateurs", true); //$NON-NLS-1$
+        userMngmtView = new JDialog(parentFrame, "Gestion des utilisateurs", true); //$NON-NLS-1$
 
-        // panel de gauche (liste)
+    /////////////////////////
+    //panel de gauche (liste)
         List<IUser> listOfUsers = null;
         try
         {
@@ -100,8 +100,8 @@ public class UsersManagementView
         }
         catch (RemoteException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, language.getText("errUserMngmt2"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE);
+            userMngmtView.dispose();
         }
         final UsersListModel userModel = new UsersListModel(listOfUsers);
         final JList list = new JList(userModel);
@@ -181,8 +181,8 @@ public class UsersManagementView
                 }
                 catch (RemoteException e)
                 {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, language.getText("errUserMngmt2"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE);
+                    userMngmtView.dispose();
                 }
             }
         };
@@ -205,8 +205,7 @@ public class UsersManagementView
                     Action[] action = null;
                     if (tmpList.getSelectedIndex() >= 0)
                     {
-                        name = new String[] { "Ajouter un utilisateur",
-                                "Supprimer" };
+                        name = new String[] { "Ajouter un utilisateur", "Supprimer" };
 
                         action = new Action[] { addUser, removeUser };
                     }
@@ -229,12 +228,11 @@ public class UsersManagementView
 
         listPanel = new JScrollPane(list);
 
-        // Panel de droite (infos)
+    /////////////////////////    
+    //Panel de droite (infos)
         FormLayout layout = new FormLayout(
-                "right:pref, 3dlu, pref, 3dlu, pref", // 5
-                // columns//$NON-NLS-1$
-                "9dlu, p, 3dlu, p, p, 3dlu, p, 3dlu, p, 9dlu, p"); // 11
-        // rows//$NON-NLS-1$
+                "right:pref, 3dlu, pref, 3dlu, pref, 15dlu", // 6 columns//$NON-NLS-1$
+                "9dlu, p, 3dlu, p, 3dlu, p, p, 3dlu, p, 3dlu, p, 9dlu, p"); // 13 rows//$NON-NLS-1$
 
         builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
@@ -243,10 +241,10 @@ public class UsersManagementView
         CellConstraints cc = new CellConstraints();
 
         // creation des components
+        JLabel labExplication = new JLabel("(Pour ajouter/supprimer : clic droit sur un user)");
         tfLogin = new JTextField();
         tfLogin.setText("<le login>");//$NON-NLS-1$
         tfLogin.addMouseListener(new MouseListener() {
-
             public void mouseClicked(MouseEvent arg0)
             {
                 if (tfLogin.getText().compareTo("<le login>") == 0)//$NON-NLS-1$
@@ -254,18 +252,10 @@ public class UsersManagementView
                     tfLogin.setText(""); //$NON-NLS-1$
                 }
             }
-
-            public void mousePressed(MouseEvent arg0)
-            {}
-
-            public void mouseReleased(MouseEvent arg0)
-            {}
-
-            public void mouseEntered(MouseEvent arg0)
-            {}
-
-            public void mouseExited(MouseEvent arg0)
-            {}
+            public void mousePressed(MouseEvent arg0) {}
+            public void mouseReleased(MouseEvent arg0) {}
+            public void mouseEntered(MouseEvent arg0) {}
+            public void mouseExited(MouseEvent arg0) {}
         });
         tfPass = new JTextField();
         tfPass.setEnabled(false);
@@ -295,6 +285,10 @@ public class UsersManagementView
         cbPermissions.setSelectedIndex(1);
         // cbPermissions.addActionListener(cbPermissions);
 
+        
+        //*******
+        //boutons
+        //*******
         butOK = new JButton("Ajouter");//$NON-NLS-1$
         butOK.setToolTipText("Ajouter ce nouvel utilisateur");
         butOK.addActionListener(new ActionListener() {
@@ -303,14 +297,14 @@ public class UsersManagementView
             {
                 if ( ( tfLogin.getText().compareTo("") != 0 && tfLogin.getText().compareTo("<le login>") != 0 ) && ( checkLDAP.isSelected() || tfPass.getText().compareTo("") != 0 )) //$NON-NLS-1$
                 {
-                    String s = "=>Ajouter " + tfLogin.getText();
+                    /*String s = "=>Ajouter " + tfLogin.getText();
                     if (checkLDAP.isSelected())
                         s += ", pass=<celui de ldap>";
                     else
                         s += ", pass=" + tfPass.getText();
                     s += ", droit="
                             + permissions[cbPermissions.getSelectedIndex()];
-                    System.out.println(s);
+                    System.out.println(s);*/
 
                     if (butOK.getText().compareTo("Modifier") == 0)
                     {
@@ -319,17 +313,15 @@ public class UsersManagementView
                             userSelected.setPassword(null);
                         else
                             userSelected.setPassword(tfPass.getText());
-                        userSelected.setPrivilege(cbPermissions
-                                .getSelectedIndex());
+                        userSelected.setPrivilege(cbPermissions.getSelectedIndex());
                         try
                         {
-                            RemoteDataManager.getUserManager().save(
-                                    userSelected);
+                            RemoteDataManager.getUserManager().save(userSelected);
                         }
                         catch (RemoteException e)
                         {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(null, language.getText("errUserMngmt2"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE);
+                            userMngmtView.dispose();
                         }
                     }
                     else
@@ -338,38 +330,28 @@ public class UsersManagementView
                         if (checkLDAP.isSelected())
                             try
                             {
-                                userSelected = DataFactory.createUser(tfLogin
-                                        .getText());
-                                // TODO prendre constructeur avec droits =>JG
+                                userSelected = DataFactory.createUser(tfLogin.getText(), cbPermissions.getSelectedIndex());
                             }
                             catch (FlexiException e)
                             {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
+                                JOptionPane.showMessageDialog(null, language.getText("errUserMngmt2"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE);
+                                userMngmtView.dispose();
                             }
                         else
                             try
                             {
-                                userSelected = DataFactory.createUser(tfLogin
-                                        .getText(), tfPass.getText()); // TODO
-                                                                        // prendre
-                                // constructeur avec
-                                // droits =>JG
-
+                                userSelected = DataFactory.createUser(tfLogin.getText(), tfPass.getText(), cbPermissions.getSelectedIndex()); 
                             }
                             catch (FlexiException e1)
                             {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
+                                JOptionPane.showMessageDialog(null, language.getText("errUserMngmt2"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE);
+                                userMngmtView.dispose();
                             }
                         userModel.addUser(userSelected);
                     }
                 }
                 else
-                    JOptionPane
-                            .showMessageDialog(
-                                    null,
-                                    language.getText("errUserMngmt1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+                    JOptionPane.showMessageDialog(null,language.getText("errUserMngmt1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             }
         });
         butErase = new JButton("Effacer");//$NON-NLS-1$
@@ -394,27 +376,33 @@ public class UsersManagementView
             }
         });
 
+        
+        
         // ajout des components au layout
-        builder.addLabel("Login :", cc.xy(1, 2)); //$NON-NLS-1$
-        builder.add(tfLogin, cc.xyw(3, 2, 3));
-        builder.add(checkLDAP, cc.xywh(1, 4, 1, 2));
-        builder.add(labLDAP1, cc.xyw(3, 4, 3));
-        builder.add(labLDAP2, cc.xyw(3, 5, 3));
-        builder.add(labPass, cc.xy(1, 7));
-        builder.add(tfPass, cc.xyw(3, 7, 3));
-        builder.addLabel("Droits :", cc.xy(1, 9));
-        builder.add(cbPermissions, cc.xyw(3, 9, 3));
-        builder.add(butOK, cc.xy(1, 11));
-        builder.add(butErase, cc.xy(3, 11));
-        builder.add(butCancel, cc.xy(5, 11));
+        builder.add(labExplication,     cc.xyw (1, 2, 6));
+        builder.addLabel("Login :",     cc.xy  (1, 4));
+        builder.add(tfLogin,            cc.xyw (3, 4, 3));
+        builder.add(checkLDAP,          cc.xywh(1, 6, 1, 2));
+        builder.add(labLDAP1,           cc.xyw (3, 6, 3));
+        builder.add(labLDAP2,           cc.xyw (3, 7, 3));
+        builder.add(labPass,            cc.xy  (1, 9));
+        builder.add(tfPass,             cc.xyw (3, 9, 3));
+        builder.addLabel("Droits :",    cc.xy  (1, 11));
+        builder.add(cbPermissions,      cc.xyw (3, 11, 3));
+        builder.add(butOK,              cc.xy  (1, 13));
+        builder.add(butErase,           cc.xy  (3, 13));
+        builder.add(butCancel,          cc.xy  (5, 13));
 
         infosPanel = builder.getPanel();
+        
+        Dimension dim = new Dimension(350,200);
+        infosPanel.setMinimumSize(dim);
+        infosPanel.setPreferredSize(dim);
 
         // panel split
-        jspListOfUsers = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listPanel,
-                infosPanel);
+        jspListOfUsers = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listPanel, infosPanel);
         jspListOfUsers.setOneTouchExpandable(true);
-        jspListOfUsers.setDividerLocation(150);
+        jspListOfUsers.setDividerLocation(100);
 
         // frame général
         userMngmtView.add(jspListOfUsers);
@@ -422,8 +410,8 @@ public class UsersManagementView
         // ImageIcon icon = new
         // ImageIcon(getClass().getResource("../pictures/FlexiTime_icone32.png"));//$NON-NLS-1$
         // userMngmtView.setIconImage(icon.getImage());
-        // userMngmtView.setSize(250, 200);
-        // userMngmtView.pack();
+        //userMngmtView.setSize(250, 200);
+        userMngmtView.pack();
         userMngmtView.setResizable(true);
         // placement de la fenetre sur l'ecran
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -444,7 +432,6 @@ public class UsersManagementView
     protected void setCurrentUser(IUser userTmp)
     {
         this.userSelected = userTmp;
-
     }
 
     /**
@@ -466,7 +453,6 @@ public class UsersManagementView
             menuItem.setText(name[i]);
             popMenu.add(menuItem);
         }
-        // popMenu.setVisible(true);
         return popMenu;
 
     }
@@ -488,6 +474,5 @@ public class UsersManagementView
             tfPass.setEnabled(false);
         }
         cbPermissions.setSelectedIndex(user.getPrivilege());
-
     }
 }
