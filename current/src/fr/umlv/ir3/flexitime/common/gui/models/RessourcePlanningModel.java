@@ -110,13 +110,14 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     {
         this.gapTime = this.gapUnit * this.gapMultiplicateur;
         this.nbWeeks = Time.getGapWeek(edtWeekGap.getStartDate(),edtWeekGap.getEndDate()) + 1 ;
+        
         this.nbGaps = 0;
         for (int i = 0; i < blocList.length; i++)
             this.nbGaps += countNbGap(blocList[i].countNbMinutes());
         
-        System.out.println("nbWeeks=" + nbWeeks); //$NON-NLS-1$
-        System.out.println("nbBlocs=" + this.blocList.length); //$NON-NLS-1$
-        System.out.println("nbGap=" + this.nbGaps); //$NON-NLS-1$
+        //System.out.println("nbWeeks=" + nbWeeks); //$NON-NLS-1$
+        //System.out.println("nbBlocs=" + this.blocList.length); //$NON-NLS-1$
+        //System.out.println("nbGap=" + this.nbGaps); //$NON-NLS-1$
     }
     
     private void initDataList()
@@ -533,6 +534,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.edtWeekGap.getStartDate().addWeek(-this.nbWeeks);
         this.edtWeekGap.getEndDate().addWeek(-this.nbWeeks);
 
+        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
+        
         this.initDataList();
     }
     
@@ -545,6 +549,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 //      TODO optimiser en ne faisant ke l'ajout
         this.edtWeekGap.getStartDate().addWeek(-1);
         this.edtWeekGap.getEndDate().addWeek(-1);
+        
+        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
 
         this.initDataList();
         
@@ -559,6 +566,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     {
         this.edtWeekGap.getEndDate().addWeek(-1);
         this.nbWeeks -= 1;
+        
+        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
 
         this.busyList.remove(this.busyList.size()-1);
         this.busyListImage.remove(this.busyListImage.size()-1);
@@ -573,6 +583,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.edtWeekGap.getEndDate().addWeek(1);
         this.nbWeeks += 1;
         
+        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
+        
         this.initDataList();
     }
     
@@ -585,6 +598,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     {
         this.edtWeekGap.getStartDate().addWeek(1);
         this.edtWeekGap.getEndDate().addWeek(1);
+        
+        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
         
         this.initDataList();
         
@@ -601,6 +617,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.gapMultiplicateur = this.gapMultiplicateur/2;
         this.initWorkingData();
         this.initDataList();
+        
+        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
     }
     
     /** 
@@ -613,6 +632,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.gapMultiplicateur = this.gapMultiplicateur*2;
         this.initWorkingData();
         this.initDataList();
+        
+        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
     }
 
 
