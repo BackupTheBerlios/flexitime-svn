@@ -11,6 +11,8 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.umlv.ir3.GL.test.edt.LessonBloc;
+
 import temp.*;
 
 
@@ -28,7 +30,7 @@ public class EDTModel
     private final String[] dayList = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"};
     private final int      nbDays  = 5;
     //TODO faire un JSlider pour assurer la cohérence
-    private final int      gapTime = 30;
+    private final int      gapTime = 60;
     private final Gap edtWeekGap;
     private final Gap[] blocList;
 
@@ -54,10 +56,14 @@ public class EDTModel
         super();
         
         this.edtWeekGap = new Gap(2005,1,3,0,0,2005,3,1,0,0);
+        
         System.out.println(edtWeekGap.getEndDate().getCal().get(Calendar.WEEK_OF_YEAR));
         System.out.println(edtWeekGap.getStartDate().getCal().get(Calendar.WEEK_OF_YEAR));
-        this.nbWeeks = edtWeekGap.getEndDate().getCal().get(Calendar.WEEK_OF_YEAR)
-        - edtWeekGap.getStartDate().getCal().get(Calendar.WEEK_OF_YEAR) + 1;
+        
+        this.nbWeeks = Time.getGapWeek(edtWeekGap.getStartDate(),edtWeekGap.getEndDate()) + 1 ;
+        //System.out.println("nbWeeks=" + nbWeeks);
+        //this.nbWeeks = edtWeekGap.getEndDate().getCal().get(Calendar.WEEK_OF_YEAR)
+        //- edtWeekGap.getStartDate().getCal().get(Calendar.WEEK_OF_YEAR) + 1;
         
         this.blocList = new Gap[4];
         this.blocList[0] = new Gap(1901,1,1,8,30,1901,1,1,10,30);
@@ -87,7 +93,15 @@ public class EDTModel
 
 
 
-
+    /**
+     * Return the number of week of the content data in the model
+     * 
+     * @return Returns the nbWeeks.
+     */
+    public int getNbWeeks()
+    {
+        return nbWeeks;
+    }
 
     /**
      * Returns the number of day in a week
@@ -100,20 +114,7 @@ public class EDTModel
     {
         return nbDays;
     }
-
-
     
-    /** 
-     * Returns the number of gap in a day
-     *
-     * @return the number of gap in a day
-     * 
-     * @author   FlexiTeam - binou
-     */
-    public int getNbGaps()
-    {
-        return this.nbGaps;
-    }
     
     /**
      * Returns the number of blocs in a day
@@ -125,6 +126,22 @@ public class EDTModel
 
         return blocList.length;
     }
+
+
+    
+    /** 
+     * Returns the number of gap in a day
+     *
+     * @return the number of gap in a day
+     * 
+     * @author   FlexiTeam - binou
+     */
+    public int getDayGapSize()
+    {
+        return this.nbGaps;
+    }
+    
+
     
 
     /** 
@@ -140,15 +157,7 @@ public class EDTModel
         return this.countNbGap(blocList[blocNumber].getStartDate(),blocList[blocNumber].getEndDate());
     }
 
-    /**
-     * Return the number of week of the content data in the model
-     * 
-     * @return Returns the nbWeeks.
-     */
-    public int getNbWeeks()
-    {
-        return nbWeeks;
-    }
+
 
     /**
      * Return an Integer which is the value of the week in its
@@ -237,10 +246,32 @@ public class EDTModel
     
 
     
-    private boolean isDropable(Object lesson)
+/*    public boolean isEmpty(int weekNumber, int dayNumber, int gapNumber,
+            int length)
     {
-        return false;
+        DayBloc dayBloc = ((DayBloc[]) this.busyListImage.get(weekNumber))[dayNumber];
+        return weekNumber != 0;
+    }*/
+    
+    /** 
+     * Allow to know if there is a lesson a the specified week, day and gap
+     *
+     * @param weekNumber the value of the week (0 is the first)
+     * @param dayNumber the value of the day (0 is the first)
+     * @param gapNumber the value of the gap (0 is the first)
+     * @return true if there's a lesson
+     * 
+     * @see (si nécessaire)
+     * @author   FlexiTeam - binou
+     */
+    public boolean isALesson(int weekNumber, int dayNumber, int gapNumber)
+    {
+        DayBloc bloc = ((DayBloc[])this.busyListImage.get(weekNumber))[dayNumber];
+        Object o = bloc.getElementAt(gapNumber);
+        return (o == null || o instanceof LessonBloc);
     }
+    
+    
 
     //***************************************************
     // usefull methods
@@ -422,35 +453,11 @@ public class EDTModel
             return this.representationList[gapNumber];
         }
     }
+
+
+
     
    
-    /**
-     * Encapsulate a Busy and is number of Gap
-     * 
-     * @version 1.0
-     * 
-     * @author FlexiTeam - binou
-     */
-    public class LessonBloc
-    {
-        Busy busy;
-        int nbGap;
 
-        public Busy getBusy()
-        {
-            return busy;
-        }
-        public int getNbGap()
-        {
-            return nbGap;
-        }
-
-        public LessonBloc(Busy busy, int nbGap)
-        {
-            this.busy=busy;
-            this.nbGap=nbGap;
-        }
-
-    }
 }
 

@@ -6,11 +6,16 @@
 package fr.umlv.ir3.GL.test.edt.renderer;
 
 
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 import fr.umlv.ir3.GL.test.edt.FlexiEDT;
 import fr.umlv.ir3.GL.test.edt.JLesson;
-import fr.umlv.ir3.GL.test.edt.model.EDTModel;
+import fr.umlv.ir3.GL.test.edt.LessonBloc;
 
 
 /**
@@ -53,15 +58,25 @@ public class EDTCellRenderer
         this.comp = null;
         if(elementAt != null)
         {
-            if(elementAt instanceof EDTModel.LessonBloc)
+            if(elementAt instanceof LessonBloc)
             {
                 //nous sommes bien dans le cas d'un Busy à placer
-                comp = new JLesson( (EDTModel.LessonBloc)elementAt ); 
+                comp = new JLesson( (LessonBloc)elementAt ); 
             }   
             else
             {
                 //cas d'un créneau vide à placer
                 comp = new JLesson(null);
+                /*JLabel label = new JLabel();
+                label.setText("");
+                label.setBackground(Color.WHITE);
+                label.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+                label.setPreferredSize(new Dimension(FlexiEDT.WEEK_WIDTH,FlexiEDT.GAP_HEIGTH*1));
+                label.setOpaque(true);
+                
+                
+                comp = label;*/
+                
                 /*if(week%2 == 0 && gap%2 == 0)
                     this.label.setBackground(FlexiColor.getColor(FlexiColor.lightblue));
                 else

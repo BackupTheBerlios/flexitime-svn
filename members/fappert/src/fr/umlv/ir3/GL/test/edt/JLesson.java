@@ -6,8 +6,12 @@
 package fr.umlv.ir3.GL.test.edt;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -15,10 +19,12 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
+import javax.swing.TransferHandler;
+import javax.swing.event.MouseInputAdapter;
 
-import fr.umlv.ir3.GL.test.edt.model.EDTModel;
 
-import temp.Busy;
+
 
 
 /**
@@ -33,60 +39,89 @@ import temp.Busy;
  * 
  * @author FlexiTeam - binou
  */
-public class JLesson extends JLabel implements MouseListener, MouseMotionListener
+public class JLesson extends JLabel //implements MouseListener, MouseMotionListener
 {
-    Busy busy;
-    int nbGaps=1;
+	LessonBloc lesson = null;
+    
+    boolean isSelected =false;
     
     private MouseEvent firstMouseEvent = null;
     private static boolean installInputMapBindings = true;
     
-    public JLesson(EDTModel.LessonBloc lesson)
+    public JLesson(LessonBloc lesson)
     {
-        addMouseListener(this);
-        addMouseMotionListener(this);
+    	this.lesson = lesson;
+    	
+    	
+		MouseEventForwarder forwarder = new MouseEventForwarder();
+		addMouseListener(forwarder);
+		addMouseMotionListener(forwarder);
         
         if(lesson == null)
         {
             this.setText("");
             this.setBackground(Color.WHITE);
             this.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+            this.setPreferredSize(new Dimension(FlexiEDT.WEEK_WIDTH,FlexiEDT.GAP_HEIGTH*1));
         }
         else
         {
-            this.busy = lesson.getBusy();
-	        this.nbGaps = lesson.getNbGap();
-	        this.setBackground(busy.getColor());
+	        this.setBackground(lesson.getBusy().getColor());
 	        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	        this.setFont(new Font("Serif", Font.PLAIN, 9));
-	        this.setText("<html>" + busy.getReason() + " " + busy.getGap().getStartDate().getTime()+ "/" + busy.getGap().getEndDate().getTime()+ "</html>");
+	        this.setText("<html>" + lesson.getBusy().getReason() + " " + lesson.getBusy().getGap().getStartDate().getTime()+ "/" + lesson.getBusy().getGap().getEndDate().getTime()+ "</html>");
+	        this.setToolTipText("<html>" + lesson.getBusy().getReason() + "<br>" + lesson.getBusy().getGap().getStartDate().getTime()+ "/" + lesson.getBusy().getGap().getEndDate().getTime()+ "<br> blablabla </html>");
+	        this.setPreferredSize(new Dimension(FlexiEDT.WEEK_WIDTH,FlexiEDT.GAP_HEIGTH*lesson.getNbGap()));
         }
-        this.setPreferredSize(new Dimension(FlexiEDT.WEEK_WIDTH,FlexiEDT.GAP_HEIGTH*this.nbGaps));
+        
         this.setOpaque(true);
             
     }
     
 
-    public Busy getBusy()
+    
+
+    
+    
+    /**
+     * DOCME
+     * @param comp
+     */
+    /*public JLesson(JLesson lesson)
     {
-        return busy;
-    }
-    public void setBusy(Busy busy)
+        this(new LessonBloc(lesson.getLesson()));
+    }*
+
+
+
+
+
+
+    public boolean isSelected()
+    { return isSelected;}
+    
+    private void setSelected(boolean value)
     {
-        this.busy = busy;
-    }
-    public int getNbGaps()
-    {
-        return nbGaps;
+        this.isSelected=value;
+        if(value)
+        {
+            this.setBorder(BorderFactory.createLineBorder(Color.RED));
+        }
+        else
+        {
+            System.out.println("BLACK at" + System.currentTimeMillis());
+            this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        }
     }
 
 
-    public void mousePressed(MouseEvent e) {
+    /*public void mousePressed(MouseEvent e) {
         
         //Don't bother to drag if there is no image.
-        if (busy == null) return;
+        if (lesson == null) return;
+
         
-        //System.out.println("mousePressed() at " +System.currentTimeMillis());
+        System.out.println("mousePressed() over " + getText());
 
         firstMouseEvent = e;
         e.consume();
@@ -95,7 +130,7 @@ public class JLesson extends JLabel implements MouseListener, MouseMotionListene
     public void mouseDragged(MouseEvent e) {
         
         //Don't bother to drag if the component displays no image.
-        if (busy == null) return;
+        if (lesson == null) return;
         
         //System.out.println("mouseDragged() at " +System.currentTimeMillis());
         
@@ -103,21 +138,24 @@ public class JLesson extends JLabel implements MouseListener, MouseMotionListene
             e.consume();
 
             //If they are holding down the control key, COPY rather than MOVE
-            //int ctrlMask = InputEvent.CTRL_DOWN_MASK;
-            //int action = ((e.getModifiersEx() & ctrlMask) == ctrlMask) ?
-            //      TransferHandler.COPY : TransferHandler.MOVE;
+            int ctrlMask = InputEvent.CTRL_DOWN_MASK;
+            int action = ((e.getModifiersEx() & ctrlMask) == ctrlMask) ?
+                  TransferHandler.COPY : TransferHandler.MOVE;
 
             int dx = Math.abs(e.getX() - firstMouseEvent.getX());
             int dy = Math.abs(e.getY() - firstMouseEvent.getY());
             //Arbitrarily define a 5-pixel shift as the
             //official beginning of a drag.
-            if (dx > 5 || dy > 5) {
+            if (dx > 1 || dy > 1) {
+                if(!this.isSelected())
+                    this.setSelected(true);
                 //This is a drag, not a click.
                 JComponent c = (JComponent)e.getSource();
-                System.out.println("handler.exportAsDrag() at " +System.currentTimeMillis());
-                //TransferHandler handler = c.getTransferHandler();
+                System.out.println("mouseDragged() : handler.exportAsDrag() at " +System.currentTimeMillis());
+                System.out.println("mouseDragged') : from " + getText());
+                TransferHandler handler = c.getTransferHandler();
                 //Tell the transfer handler to initiate the drag.
-                //handler.exportAsDrag(c, firstMouseEvent, action);
+                handler.exportAsDrag(c, firstMouseEvent, action);
                 firstMouseEvent = null;
             }
         }
@@ -125,6 +163,7 @@ public class JLesson extends JLabel implements MouseListener, MouseMotionListene
 
     public void mouseReleased(MouseEvent e) {
         firstMouseEvent = null;
+        //System.out.println("mouseReleased() over " + getText());
     }
 
     
@@ -144,21 +183,77 @@ public class JLesson extends JLabel implements MouseListener, MouseMotionListene
         return installInputMapBindings;
     }
 
-    public void mouseMoved(MouseEvent e) {}
 
-    public void mouseClicked(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e)
+    {
+    	//System.out.println("mouseClicked() over " + getText());
+    	this.setSelected(!this.isSelected());
+    }*/
 
-    public void mouseEntered(MouseEvent e)  {}
+  
+    
+	public LessonBloc getLesson() {
+		return lesson;
+	}
+	
+	public int getNbGaps()
+	{
+		if(lesson == null)
+			return 1;
+		else
+			return lesson.getNbGap();
+	}
+	
+	
+	final class MouseEventForwarder extends MouseInputAdapter {
+		public void mousePressed(MouseEvent e) {
+			Container parent = getParent();
+			if (parent != null) {
+				Point newPoint = SwingUtilities.convertPoint(JLesson.this, e.getPoint(), parent);
+				e.translatePoint(newPoint.x-e.getX(), newPoint.y-e.getY());
+				e.setSource(parent);
+				parent.dispatchEvent(e);
+			}
+		}
 
-    public void mouseExited(MouseEvent e)  {}
-    
-    
-    
-    
-    
-    
-    
-    
-    
+		public void mouseReleased(MouseEvent e) {
+			Container parent = getParent();
+			if (parent != null) {
+				Point newPoint = SwingUtilities.convertPoint(JLesson.this, e.getPoint(), parent);
+				e.translatePoint(newPoint.x-e.getX(), newPoint.y-e.getY());
+				e.setSource(parent);
+				parent.dispatchEvent(e);			
+			}
+		}
+
+		public void mouseDragged(MouseEvent e) {
+			Container parent = getParent();
+			if (parent != null) {
+				Point newPoint = SwingUtilities.convertPoint(JLesson.this, e.getPoint(), parent);
+				e.translatePoint(newPoint.x-e.getX(), newPoint.y-e.getY());
+				e.setSource(parent);
+				parent.dispatchEvent(e);
+			}
+		}
+	}
+
+
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return 
+     * 
+     * @see (si nécessaire)
+     * @author   FlexiTeam - binou
+     */
+    public Component getClone()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+	
+	
 }
 
