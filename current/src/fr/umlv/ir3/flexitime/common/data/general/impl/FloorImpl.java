@@ -118,10 +118,10 @@ public class FloorImpl extends DataImpl implements IFloor
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#addRoom(fr.umlv.ir3.flexitime.common.data.resources.IRoom)
      */
-    public void addRoom(IRoom room)
+    public boolean addRoom(IRoom room)
     {
-        lstRoom.add(room);
         room.setFloor(this);
+        return lstRoom.add(room);
     }
 
     /**
@@ -132,9 +132,9 @@ public class FloorImpl extends DataImpl implements IFloor
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#removeRoom(fr.umlv.ir3.flexitime.common.data.resources.IRoom)
      */
-    public void removeRoom(IRoom room)
+    public boolean removeRoom(IRoom room)
     {
-        lstRoom.remove(room);
+        return lstRoom.remove(room);
     }
 
     /**

@@ -269,6 +269,6 @@ public class PreferencesImpl implements IPreferences
         if (! ( obj instanceof IPreferences )) return false;
         if ( ( ( (IPreferences) obj ).getIdPref() == null )
                 || ( idPref == null )) return false;
-        return ( idPref == ( (IPreferences) obj ).getIdPref() );
+        return ( idPref.equals(( (IPreferences) obj ).getIdPref() ));
     }
 }

@@ -265,9 +265,9 @@ public class CourseImpl extends DataImpl implements ICourse
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#addTeacher(fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
      */
-    public void addTeacher(ITeacher teacher)
+    public boolean addTeacher(ITeacher teacher)
     {
-        lstTeacher.add(teacher);
+        return lstTeacher.add(teacher);
     }
 
     /**
@@ -278,9 +278,9 @@ public class CourseImpl extends DataImpl implements ICourse
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#removeTeacher(fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
      */
-    public void removeTeacher(ITeacher teacher)
+    public boolean removeTeacher(ITeacher teacher)
     {
-        lstTeacher.remove(teacher);
+        return lstTeacher.remove(teacher);
     }
 
     /**

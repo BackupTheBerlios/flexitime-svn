@@ -39,15 +39,17 @@ public interface ITrack extends IData
      * Add a class in a track
      * 
      * @param pClass the Class added.
+     * @return false if class was not added
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addClass(IClass pClass);
+    boolean addClass(IClass pClass);
 
     /**
      * Remove a class in a track
      * 
      * @param pClass the Class removed.
+     * @return false if class was not removed
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeClass(IClass pClass);
+    boolean removeClass(IClass pClass);
 }

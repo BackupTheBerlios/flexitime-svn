@@ -1,43 +1,41 @@
 /*
  * Created on 5 janv. 2005
- * by Famille
+ * by Guillaume GUERRIN
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.common.data.general.impl;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
+import fr.umlv.ir3.flexitime.common.data.general.IFloor;
+
 import junit.framework.TestCase;
 
 
 /**
- * TestBuildingImpl - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Test BuildingImpl
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 285
  * 
- * @author FlexiTeam - Famille
+ * @author FlexiTeam - Guillaume GUERRIN
  */
 public class TestBuildingImpl extends TestCase {
 
     String strName = "toto";
-    List lstFloor  = new ArrayList();
+    List<IFloor> lstFloor  = new ArrayList<IFloor>();
     BuildingImpl building = new BuildingImpl(strName,lstFloor);
 
+    /**
+     * 
+     *
+     */
     public void testGetNbFloor()
     {
-        FloorImpl floor1 = new FloorImpl("titi");
+        FloorImpl floor1 = new FloorImpl("titi", building);
         building.addFloor(floor1);
-        building.addFloor( new FloorImpl("tutu"));
+        building.addFloor( new FloorImpl("tutu", building));
         
         if(building.getNbFloor() != 2)
             fail("Erreur NbFloor");
@@ -49,11 +47,15 @@ public class TestBuildingImpl extends TestCase {
         
     }
     
+    /**
+     * 
+     *
+     */
     public void testLstFloor()
     {
-        FloorImpl floor1 = new FloorImpl("titi");
+        FloorImpl floor1 = new FloorImpl("titi", building);
         building.addFloor(floor1);
-        building.addFloor( new FloorImpl("tutu"));
+        building.addFloor( new FloorImpl("tutu", building));
         
         if( ((FloorImpl)(building.getLstFloor().get(0))).getName().compareTo("titi") != 0 )
             fail("erreur Lecture des Floor");

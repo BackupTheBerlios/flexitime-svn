@@ -199,10 +199,10 @@ public class ClassImpl extends DataImpl implements IClass
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#addGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup)
      */
-    public void addGroup(IGroup group)
+    public boolean addGroup(IGroup group)
     {
-        lstGroups.add(group);
         group.setParentClass(this);
+        return lstGroups.add(group);
     }
 
     /**
@@ -214,9 +214,9 @@ public class ClassImpl extends DataImpl implements IClass
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#removeGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup)
      */
-    public void removeGroup(IGroup group)
+    public boolean removeGroup(IGroup group)
     {
-        lstGroups.remove(group);
+        return lstGroups.remove(group);
     }
 
     /**

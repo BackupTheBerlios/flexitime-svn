@@ -7,7 +7,6 @@
 package fr.umlv.ir3.flexitime.common.data;
 
 import java.awt.Color;
-import java.rmi.RemoteException;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.*;

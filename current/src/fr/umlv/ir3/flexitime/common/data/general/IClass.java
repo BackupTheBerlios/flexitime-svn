@@ -76,17 +76,19 @@ public interface IClass extends IData
      * Add a new group in the Class
      * 
      * @param group the group added
+     * @return false if group was not added
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addGroup(IGroup group);
+    boolean addGroup(IGroup group);
 
     /**
      * Remove a group from the Class
      * 
      * @param group the group removed
+     * @return false if group was not removed
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeGroup(IGroup group);
+    boolean removeGroup(IGroup group);
     
 	/** 
 	 * Returns the parent track of this class.
@@ -101,5 +103,4 @@ public interface IClass extends IData
 	 * @param track the parent track of this class.
 	 */
 	public void setParentTrack(ITrack track);
-
 }

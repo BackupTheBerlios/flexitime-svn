@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 /**
  * Defines a subject, it containes courses.
  * 
- * @version 245
+ * @version 285
  * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -98,10 +98,10 @@ public class SubjectImpl extends DataImpl implements ISubject
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject#addCourse(fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse)
      */
-    public void addCourse(ICourse course)
+    public boolean addCourse(ICourse course)
     {
-        lstCourse.add(course);
         course.setParentSubject(this);
+        return lstCourse.add(course);
     }
 
     /**
@@ -112,9 +112,9 @@ public class SubjectImpl extends DataImpl implements ISubject
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject#removeCourse(fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse)
      */
-    public void removeCourse(ICourse course)
+    public boolean removeCourse(ICourse course)
     {
-        lstCourse.remove(course);
+        return lstCourse.remove(course);
     }
 
     /**

@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 /**
  * Defines a subjects' group, it contains subjects.
  * 
- * @version 245
+ * @version 285
  * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -98,10 +98,10 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup#addSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject)
      */
-    public void addSubject(ISubject subject)
+    public boolean addSubject(ISubject subject)
     {
-        lstSubject.add(subject);
         subject.setParentSubjectsGroup(this);
+        return lstSubject.add(subject);
     }
 
     /**
@@ -112,9 +112,9 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup#removeSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject)
      */
-    public void removeSubject(ISubject subject)
+    public boolean removeSubject(ISubject subject)
     {
-        lstSubject.remove(subject);
+        return lstSubject.remove(subject);
     }
 
     /**

@@ -66,13 +66,16 @@ public class TestStatistics extends TestCase {
         Set<IResource> lr3 = new HashSet<IResource>();
         
         //Creation des liste de lessons
-        ILesson li1 = DataFactory.createLesson(new Gap(), c1, 2);
-        li1.addResource(t1);
-        li1.addResource(g1);
+        List<IGroup> lstG1 = new ArrayList<IGroup>();
+        List<IGroup> lstG2 = new ArrayList<IGroup>();
         
-       	ILesson li2 = DataFactory.createLesson(new Gap(), c2, 4);
+        lstG1.add(g1);
+        lstG2.add(g2);
+        ILesson li1 = DataFactory.createLesson(new Gap(), c1, lstG1);
+        li1.addResource(t1);
+        
+       	ILesson li2 = DataFactory.createLesson(new Gap(), c2, lstG2);
         li1.addResource(t2);
-        li1.addResource(g2);
        	
     	//Creation list des profs
     	List<ITeacher> lstProfs = new ArrayList<ITeacher>();

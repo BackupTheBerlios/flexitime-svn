@@ -24,34 +24,32 @@ public interface ITeachingStructure extends IData
      * Returns the list of SubjectsGroups.
      * 
      * @return the list of SubjectsGroups.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
-    List<ISubjectsGroup> getLstSubjectsGroup();
+    public List<ISubjectsGroup> getLstSubjectsGroup();
 
     /**
      * Changes the list of SubjectsGroup of a
      * teachingStructure.
      * 
      * @param lst the new list of SubjectsGroups.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setLstSubjectsGroup(List<ISubjectsGroup> lst);
+    public void setLstSubjectsGroup(List<ISubjectsGroup> lst);
 
     /**
      * Add a SubjectsGroup in a TeachingStructure .
      * 
      * @param subjectsGroup the new SubjectsGroup
-     * @author FlexiTeam - Guillaume GUERRIN
+     * @return false if subject group was not added
      */
-    void addSubjectsGroup(ISubjectsGroup subjectsGroup);
+    public boolean addSubjectsGroup(ISubjectsGroup subjectsGroup);
 
     /**
      * Remove a SubjectsGroup of a TeachingStructure.
      * 
      * @param subjectsGroup the new SubjectsGroup
-     * @author FlexiTeam - Guillaume GUERRIN
+     * @return false if subject group was not removed
      */
-    void removeSubjectsGroup(ISubjectsGroup subjectsGroup);
+    public boolean removeSubjectsGroup(ISubjectsGroup subjectsGroup);
     
     /**
      *  

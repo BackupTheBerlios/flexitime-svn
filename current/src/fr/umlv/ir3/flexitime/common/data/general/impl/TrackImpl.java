@@ -110,10 +110,10 @@ public class TrackImpl extends DataImpl implements ITrack
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.ITrack#addClass(fr.umlv.ir3.flexitime.common.data.general.IClass)
      */
-    public void addClass(IClass pClass)
+    public boolean addClass(IClass pClass)
     {
-        lstClass.add(pClass);
         pClass.setParentTrack(this);
+        return lstClass.add(pClass);
     }
 
     /**
@@ -125,8 +125,8 @@ public class TrackImpl extends DataImpl implements ITrack
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.ITrack#removeClass(fr.umlv.ir3.flexitime.common.data.general.IClass)
      */
-    public void removeClass(IClass pClass)
+    public boolean removeClass(IClass pClass)
     {
-        lstClass.remove(pClass);
+        return lstClass.remove(pClass);
     }
 }

@@ -47,7 +47,7 @@ public class TestTime extends TestCase
     {
 //      Creation des time avec : le 06/12/2004 qui est un lundi 
         Time time = new Time(2004, 12, 6, 12, 00);
-        if(time.getDate().compareTo("06/12/2004") != 0 ) fail();
+        if(time.getShortDate().compareTo("06/12/2004") != 0 ) fail();
     }
     public void testGetHour()
     {
@@ -68,7 +68,7 @@ public class TestTime extends TestCase
 //      Creation des time avec : le 06/12/2004 
         Time time = new Time(2004, 12, 6, 12, 00);
         time.addDay(7);//si on ajoute 7 jours on obtient le lundi 13 decembre 2004
-        if(time.getDate().compareTo("13/12/2004") != 0 ) fail();
+        if(time.getShortDate().compareTo("13/12/2004") != 0 ) fail();
     }
     
     public void testAddWeek()
@@ -76,7 +76,7 @@ public class TestTime extends TestCase
 //      Creation des time avec : le 06/12/2004 
         Time time = new Time(2004, 12, 6, 12, 00);
         time.addWeek(1);//si on ajoute 1semaine on obtient le lundi 13 decembre 2004
-        if(time.getDate().compareTo("13/12/2004") != 0 ) fail();
+        if(time.getShortDate().compareTo("13/12/2004") != 0 ) fail();
     }
     
     public void testAddMonth()
@@ -84,7 +84,7 @@ public class TestTime extends TestCase
 //      Creation des time avec : le 06/12/2004
         Time time = new Time(2004, 12, 6, 12, 00);
         time.addMonth(3);
-        if(time.getDate().compareTo("06/03/2005") != 0 ) fail();
+        if(time.getShortDate().compareTo("06/03/2005") != 0 ) fail();
     }
     
     public void testAddYear()
@@ -92,7 +92,7 @@ public class TestTime extends TestCase
 //      Creation des time avec : le 06/12/2004 
         Time time = new Time(2004, 12, 6, 12, 00);
         time.addYear(2);
-        if(time.getDate().compareTo("06/12/2006") != 0 ) fail();
+        if(time.getShortDate().compareTo("06/12/2006") != 0 ) fail();
     }
     
     public void testAddHour()

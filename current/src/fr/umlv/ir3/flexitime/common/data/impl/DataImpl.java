@@ -57,7 +57,6 @@ public abstract class DataImpl implements IData
     public void setName(String name)
     {
         this.name = name;
-
     }
 
     /**
@@ -107,7 +106,7 @@ public abstract class DataImpl implements IData
         if (! ( this.getClass().equals(obj.getClass()) )) return false;
         if ( ( ( (IData) obj ).getIdData() == null ) || ( idData == null ))
             return false;
-        return ( idData == ( (IData) obj ).getIdData() );
+        return ( idData.equals(( (IData) obj ).getIdData()) );
     }
 
     /**

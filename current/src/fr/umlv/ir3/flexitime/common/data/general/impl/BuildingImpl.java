@@ -122,10 +122,10 @@ public class BuildingImpl extends DataImpl implements IBuilding
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding#addFloor(fr.umlv.ir3.flexitime.common.data.general.IFloor)
      */
-    public void addFloor(IFloor floor)
+    public boolean addFloor(IFloor floor)
     {
-        lstFloors.add(floor);
         floor.setParentBuilding(this);
+        return lstFloors.add(floor);
     }
 
     /**
@@ -136,8 +136,8 @@ public class BuildingImpl extends DataImpl implements IBuilding
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding#removeFloor(fr.umlv.ir3.flexitime.common.data.general.IFloor)
      */
-    public void removeFloor(IFloor floor)
+    public boolean removeFloor(IFloor floor)
     {
-        lstFloors.remove(floor);
+        return lstFloors.remove(floor);
     }
 }

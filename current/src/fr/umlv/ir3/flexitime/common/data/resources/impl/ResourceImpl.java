@@ -102,9 +102,9 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#addBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy)
      */
-    public void addBusy(IBusy busy)
+    public boolean addBusy(IBusy busy)
     {
-        setBusy.add(busy);
+        return setBusy.add(busy);
     }
 
     /** 
@@ -115,9 +115,9 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#removeBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy)
      */
-    public void removeBusy(IBusy busy)
+    public boolean removeBusy(IBusy busy)
     {
-        setBusy.remove(busy);
+        return setBusy.remove(busy);
     }
 }
 

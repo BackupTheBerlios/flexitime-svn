@@ -38,13 +38,15 @@ public interface IResource extends IData
      * Add a unavailabilities in a Resource .
      * 
      * @param busy the new unavailabilitie
+     * @return false if busy was not added
      */
-    void addBusy(IBusy busy);
+    boolean addBusy(IBusy busy);
 
     /**
      * Remove a unavailabilities of a Resource.
      * 
      * @param busy the new unavailabilitie
+     * @return false if busy was not removed
      */
-    void removeBusy(IBusy busy);
+    boolean removeBusy(IBusy busy);
 }

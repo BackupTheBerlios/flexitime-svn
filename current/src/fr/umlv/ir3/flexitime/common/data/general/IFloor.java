@@ -19,7 +19,6 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
  */
 public interface IFloor extends IData
 {
-
     /**
      * Returns a list of rooms of a floor.
      * 
@@ -40,17 +39,19 @@ public interface IFloor extends IData
      * Add a room in a floor
      * 
      * @param room the new Room added.
+     * @return false if room was not added
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addRoom(IRoom room);
+    boolean addRoom(IRoom room);
 
     /**
      * Remove a room in a floor
      * 
      * @param room the Room removed
+     * @return false if room was not deleted
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeRoom(IRoom room);
+    boolean removeRoom(IRoom room);
     
 	/**
 	 * Returns the building where the floor is.
@@ -67,5 +68,4 @@ public interface IFloor extends IData
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
     void setParentBuilding(IBuilding building);
-
 }

@@ -215,7 +215,7 @@ public abstract class BusyImpl implements IBusy
         if (! ( this.getClass().equals(obj.getClass()) )) return false;
         if ( ( ( (IBusy) obj ).getIdBusy() == null ) || ( idBusy == null ))
             return false;
-        return ( idBusy == ( (IBusy) obj ).getIdBusy() );
+        return ( idBusy.equals(( (IBusy) obj ).getIdBusy() ));
     }
 
     /**

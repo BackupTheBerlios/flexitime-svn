@@ -49,15 +49,17 @@ public interface IBuilding extends IData
      * Add a floor in Building.
      * 
      * @param floor the floor added.
+     * @return false if floor was not added
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addFloor(IFloor floor);
+    boolean addFloor(IFloor floor);
 
     /**
      * Remove a floor in Building.
      * 
      * @param floor the floor removed.
+     * @return false if floor was not removed
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeFloor(IFloor floor);
+    boolean removeFloor(IFloor floor);
 }
