@@ -10,6 +10,7 @@ import java.util.*;
 
 import net.sf.hibernate.HibernateException;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
+import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
@@ -22,29 +23,29 @@ import junit.framework.TestCase;
  * @version 320
  * @author FlexiTeam - Jérôme GUERS
  */
-public class TestTeacherStorage extends TestCase
+public class TestBuildingStorage extends TestCase
 {
     /**
      * DOCME
      */
     public void testStorage()
     {
-        ITeacher teacher = null;
+        IBuilding building = null;
     
-        List allTeacher = null;
+        List allBuilding = null;
         try
         {
-            teacher = DataFactory.createTeacher("REVUZ", "Banane","revuz@boulet.fr");
-            allTeacher = RemoteDataManager.getManager().getTeachers();
+            building = DataFactory.createBuilding("BuildingDeValre");
+            allBuilding = RemoteDataManager.getManager().getBuildings();
         }catch (Exception e1){
-            fail("TeacherStorage:testStorage()");
+            fail("BuildingStorage:testStorage()");
         }
         boolean find =  false;
         
-        for (Iterator iter = allTeacher.iterator() ; iter.hasNext() ;)
+        for (Iterator iter = allBuilding.iterator() ; iter.hasNext() ;)
         {
-            ITeacher element = (ITeacher) iter.next();
-            if(element.equals(teacher))
+            IBuilding element = (IBuilding) iter.next();
+            if(element.equals(building))
             {
                 System.out.println(element.getName());
                 find = true;

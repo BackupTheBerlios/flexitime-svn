@@ -5,7 +5,7 @@
  * Window - Preferences - Java - Code Style - Code Templates
  */
 
-package fr.umlv.ir3.flexitime.server.io;
+package fr.umlv.ir3.flexitime.common.tools;
 
 import java.awt.Component;
 import java.awt.Graphics;
