@@ -119,13 +119,8 @@
 	</target>
 
 	<target name="jar-client" depends="compile">
-		<jar jarfile="${build.dir}/${build.name}-client.jar" compress="true" basedir="${build.dest}" >
-			<fileset dir="${build.dest}">
-				<include name="fr/umlv/ir3/flexitime/common/**; fr/umlv/ir3/flexitime/richClient/**"/>
-			</fileset>
-			<fileset dir="${src.dir}">
-				<include name="fr/umlv/ir3/flexitime/richClient/pictures/*.png"/>
-			</fileset>
+		<jar jarfile="${build.dir}/${build.name}-client.jar" compress="true" basedir="${build.dest}" includes="fr/umlv/ir3/flexitime/common/**; fr/umlv/ir3/flexitime/richClient/**" >
+			<zipfileset dir="${src.dir}/fr/umlv/ir3/flexitime/richClient/gui/pictures" prefix="fr/umlv/ir3/flexitime/richClient/gui/pictures" />
 			<manifest>
 				<attribute name="Main-Class" value="fr.umlv.ir3.flexitime.richClient.gui.Client" />
 				<attribute name="Class-Path" value="${classpath}" />
