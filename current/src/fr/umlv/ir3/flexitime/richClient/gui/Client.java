@@ -467,13 +467,14 @@ public class Client
                 int res = JOptionPane.showConfirmDialog(null,language.getText("msg7"),language.getText("exit"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);  //$NON-NLS-1$//$NON-NLS-2$
                 if(res == JOptionPane.YES_OPTION)
                 {
+                    /* Demande trop de temps ;-)
                     try {
                         RemoteDataManager.getUserManager().disconnect(iUser);
                     }
                     catch (RemoteException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
-                    }
+                    }*/
                     System.exit(0);                
                 }
             }

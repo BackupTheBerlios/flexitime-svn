@@ -9,6 +9,8 @@ package fr.umlv.ir3.flexitime.richClient.gui.panel;
 
 import java.awt.Dimension;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Properties;
 
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
@@ -35,13 +37,29 @@ public class MainView
         JEditorPane editorPanel = new JEditorPane();
         editorPanel.setEditable(false);
         editorPanel.addHyperlinkListener(new HyperlinkListener() {
-            
-            public void hyperlinkUpdate(HyperlinkEvent arg0)
-            {
-                System.out.println("ouvir naviguateur..");
+            public void hyperlinkUpdate(HyperlinkEvent e) {
+                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) 
+                {
+                    URL url = e.getURL();
+                    Properties sys = System.getProperties();
+                    String os = sys.getProperty("os.name");
+                    Runtime r = Runtime.getRuntime();
+                    try
+                    {
+                        if (os.endsWith("NT") || os.endsWith("2000") || os.endsWith("XP"))
+                        r.exec("cmd /c start "+url);
+                    else
+                        r.exec("start "+url);
+                    }
+                    catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    } 
+                 }
+                //System.out.println("Ouvrir la page dans un browser !");                
             }
-            
         });
+        
         java.net.URL helpURL = MainView.class.getResource("accueil.html");
         if (helpURL != null) {
             try {

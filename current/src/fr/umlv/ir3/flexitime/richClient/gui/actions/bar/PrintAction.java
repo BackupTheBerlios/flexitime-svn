@@ -11,9 +11,11 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
+import fr.umlv.ir3.flexitime.server.io.PrintUtilities;
 
 
 /**
@@ -100,7 +102,7 @@ public class PrintAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent e)
     {
-        //JComponent compo = exploitView.getPrintableComponent();
-        //PrintUtilities.printComponent(compo);
+        JComponent compo = exploitView.getPrintableComponent();
+        PrintUtilities.printComponent(compo);
     }
 }

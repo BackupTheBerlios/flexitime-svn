@@ -62,7 +62,7 @@ public class UsersManagementView
     private JScrollPane          listPanel;
     private JPanel               infosPanel;
     private PanelBuilder         builder;
-    private String[]             permissions = { "admin", "secretary", "user" };
+    private String[]             permissions = { "administrateur", "secrétaire", "utilisateur" };
 
     private JTextField           tfLogin;
     private JTextField           tfPass;
