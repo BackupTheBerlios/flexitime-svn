@@ -133,5 +133,4 @@ public interface ICourse extends IData
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
 	void setParentSubject(ISubject subject);
-
 }

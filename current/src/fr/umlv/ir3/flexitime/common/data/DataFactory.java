@@ -319,12 +319,34 @@ public class DataFactory
      * DOCME
      * 
      * @param name
+     * @param type
      * @param parent
      * @return a new Course
      */
-    public static ICourse createCourse(String name, SubjectImpl parent)
+    public static ICourse createCourse(String name, SubjectImpl parent, int type)
     {
-        ICourse temp = new CourseImpl(name, parent);
+        ICourse temp = new CourseImpl(name, parent, type);
+        parent.addCourse(temp);
+        return temp;
+    }
+
+    /**
+     * DOCME
+     * 
+     * @param name
+     * @param parent
+     * @param defaultLength
+     * @param type
+     * @param nbHours
+     * @param color
+     * @return a new Course all initilized
+     * 
+     */
+    public static ICourse createCourse(String name, SubjectImpl parent,
+            int type, int defaultLength, int nbHours, Color color)
+    {
+        ICourse temp = new CourseImpl(name, parent, defaultLength, type,
+                nbHours, color);
         parent.addCourse(temp);
         return temp;
     }
@@ -343,11 +365,11 @@ public class DataFactory
      * 
      */
     public static ICourse createCourse(String name, SubjectImpl parent,
-            int defaultLength, int type, int nbHours, Color color,
+            int type, int defaultLength, int nbHours, Color color,
             List<ITeacher> listTeachers)
     {
-        ICourse temp = new CourseImpl(name, parent, defaultLength, type, nbHours,
-                color, listTeachers);
+        ICourse temp = new CourseImpl(name, parent, defaultLength, type,
+                nbHours, color, listTeachers);
         parent.addCourse(temp);
         return temp;
     }
@@ -365,29 +387,31 @@ public class DataFactory
         parent.addSubject(temp);
         return temp;
     }
-    
+
     /**
      * DOCME
-     *
+     * 
      * @param name
      * @param parent
-     * @return a new Subject Group 
+     * @return a new Subject Group
      */
-    public static ISubjectsGroup createSubjectsGroup(String name, ITeachingStructure parent)
+    public static ISubjectsGroup createSubjectsGroup(String name,
+            ITeachingStructure parent)
     {
         ISubjectsGroup temp = new SubjectsGroupImpl(name, parent);
         parent.addSubjectsGroup(temp);
         return temp;
     }
-    
+
     /**
      * DOCME
-     *
+     * 
      * @param name
      * @param parent
-     * @return a new Teaching Structure 
+     * @return a new Teaching Structure
      */
-    public static ITeachingStructure createTeachingStructure(String name, IClass parent)
+    public static ITeachingStructure createTeachingStructure(String name,
+            IClass parent)
     {
         ITeachingStructure temp = new TeachingStructureImpl(name, parent);
         parent.setTeachingStructure(temp);

@@ -127,7 +127,7 @@ public class TimeBloc
     {
         this.startMin = startMin;
     }
-    
+
     /**
      * Gets the number of minute for this bloc
      * 
@@ -135,68 +135,61 @@ public class TimeBloc
      */
     public int countNbMinutes()
     {
-        return (this.endHour - this.startHour) * 60 - (this.endMin - this.startMin); 
+        return ( this.endHour - this.startHour ) * 60
+                - ( this.endMin - this.startMin );
     }
-    
+
     /**
-     * Gets the number of minute between the beginning 
-     * of the bloc and the Time
+     * Gets the number of minute between the beginning of the bloc and the Time
      * 
-     * @param t a Time in the bloc 
+     * @param t
+     *            a Time in the bloc
      * 
      * @return Number of minute
      */
-    /*public int countNbMinutesBefore(Time t)
+    public int countNbMinutesBefore(Time t)
     {
-        //if(this.isInclude(t))
-            return (t.getHour() - this.startHour) * 60 + (t.getMinute() - this.startMin);
-        //return -1;
-    }*/
-    
+        if (this.include(t))
+            return ( t.getHour() - this.startHour ) * 60
+                    + ( t.getMinute() - this.startMin );
+        return -1;
+    }
+
     /**
-     * Gets the number of minute between the Time
-     * and the ending of the bloc
-     * @param t a Time in the bloc 
+     * Gets the number of minute between the Time and the ending of the bloc
+     * 
+     * @param t
+     *            a Time in the bloc
      * 
      * @return Number of minute
      */
-    /*public int countNbMinutesAfter(Time t)
+    public int countNbMinutesAfter(Time t)
     {
-        //if(this.isInclude(t))
-            return (this.endHour - t.getHour()) * 60 + (this.endMin - t.getMinute());
-        //return -1;
-    }*/
-    
-    /** 
+        if (this.include(t))
+            return ( this.endHour - t.getHour() ) * 60
+                    + ( this.endMin - t.getMinute() );
+        return -1;
+    }
+
+    /**
      * Determines if a Time is included in the bloc
      * 
      * the start Time could be equal, but not the end Time
-     *
-     * @param t a Time to compare
+     * 
+     * @param t
+     *            a Time to compare
      * @return true if the Time is include in the bloc
      * 
      */
-    /*public boolean isInclude(Time t)
+    public boolean include(Time t)
     {
-        return  ( (t.getHour()-this.startHour)*60 - (t.getMinute()-this.startMin)  ) >= 0  &&  (  (this.endHour-t.getHour())*60 - (this.endMin-t.getMinute())  )  > 0;
-    }*/
-    
-    public Time getStartDate()
-    {
-        return new Time(1900,1,1,this.startHour,this.startMin);
+        if ( ( t.getHour() > startHour )
+                || ( ( t.getHour() == startHour ) && ( t.getMinute() >= startMin ) ))
+        {
+            if ( ( t.getHour() < endHour )
+                    || ( ( t.getHour() == endHour ) && ( t.getMinute() < endMin ) ))
+                return true;
+        }
+        return false;
     }
-    
-    /** 
-     * @return  sdq
-     * 
-     */
-    public Time getEndDate()
-    {
-        return new Time(1900,1,1,this.endHour,this.endMin);
-    }
-    
-    
-    
-    
-    
 }

@@ -29,9 +29,9 @@ public class CourseImpl extends DataImpl implements ICourse
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3257852077735753267L;
-    // ===========//
+    // ====== //
     // Champs //
-    // ===========//
+    // ====== //
     private int               type;
     private int               nbHours;
     private Color             color;
@@ -39,9 +39,9 @@ public class CourseImpl extends DataImpl implements ICourse
     private int               defaultLength;
     private ISubject          parentSubject;
 
-    // =============//
-    // Constructeurs//
-    // =============//
+    // ============= //
+    // Constructeurs //
+    // ============= //
     /**
      * Default constructor for a course.
      */
@@ -57,12 +57,41 @@ public class CourseImpl extends DataImpl implements ICourse
      *            a string.
      * @param parent
      *            the parent subject of this course.
+     * @param type
+     *            type of the course
      */
-    public CourseImpl(String name, SubjectImpl parent)
+    public CourseImpl(String name, SubjectImpl parent, int type)
     {
         super(name);
         this.parentSubject = parent;
+        this.type = type;
         lstTeacher = new ArrayList<ITeacher>();
+    }
+    
+    /**
+     * Constructs a course.
+     * 
+     * @param name
+     *            a string.
+     * @param type
+     *            an int representing the type of the course.
+     * @param nbHours
+     *            the number of hours for this course.
+     * @param color
+     *            an int representing the color of the course.
+     * @param defaultLength
+     *            deault length of this course
+     * @param parent
+     *            the parent subject of this course.
+     * 
+     */
+    public CourseImpl(String name, SubjectImpl parent, int type, int defaultLength,
+            int nbHours, Color color)
+    {
+        this(name, parent, type);
+        this.nbHours = nbHours;
+        this.color = color;
+        this.defaultLength = defaultLength;
     }
 
     /**
@@ -84,16 +113,11 @@ public class CourseImpl extends DataImpl implements ICourse
      *            the parent subject of this course.
      * 
      */
-    public CourseImpl(String name, SubjectImpl parent, int defaultLength,
-            int type, int nbHours, Color color, List<ITeacher> listTeachers)
+    public CourseImpl(String name, SubjectImpl parent, int type, int defaultLength,
+            int nbHours, Color color, List<ITeacher> listTeachers)
     {
-        super(name);
-        this.type = type;
-        this.nbHours = nbHours;
-        this.color = color;
-        this.lstTeacher = listTeachers;
-        this.defaultLength = defaultLength;
-        this.parentSubject = parent;
+        this(name, parent, type, defaultLength, nbHours, color);
+        lstTeacher = listTeachers;
     }
 
     // ===========//
