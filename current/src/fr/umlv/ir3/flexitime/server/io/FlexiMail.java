@@ -1,7 +1,7 @@
 /*
  * 
  */
-package FlexiMail;
+package fr.umlv.ir3.flexitime.server.io;
 
 import java.util.Properties;
 import javax.activation.DataHandler;
