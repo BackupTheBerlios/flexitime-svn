@@ -1093,7 +1093,7 @@ public class DataFactory
     public static ICourse createCourse(String name, ISubject parent,
             int type, int defaultLength, int nbHours, Color color) throws FlexiException
     {
-        ICourse temp = new CourseImpl(name, parent, defaultLength, type,
+        ICourse temp = new CourseImpl(name, parent, type, defaultLength, 
                 nbHours, color);
         try
         {
@@ -1132,7 +1132,7 @@ public class DataFactory
             int type, int defaultLength, int nbHours, Color color,
             List<ITeacher> listTeachers) throws FlexiException
     {
-        ICourse temp = new CourseImpl(name, parent, defaultLength, type,
+        ICourse temp = new CourseImpl(name, parent, type, defaultLength,
                 nbHours, color, listTeachers);
         try
         {
