@@ -75,6 +75,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     //TODO faire un JSlider pour assurer la cohérence
     //TODO idée => fusionner les 2 listes pour gain de place
     //TODO gérer la fusion horizontalement !! ca serait top
+    
+    //TODO controler les ajouts (ex 9h30 9h30 de prasad)
 
     
     /**
@@ -473,6 +475,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     {
         ILesson lesson = null;
         
+        System.out.println("id Course : " + course.getIdData());
+        System.out.println("id Teacher : " + teacher.getIdData());
+        
         if(! (ressource instanceof IGroup) )
             System.err.println("MPF !!!! c pas un group ! commment faire un addLesson() ??");
         try
@@ -484,14 +489,14 @@ public class RessourcePlanningModel extends AbstractPlanningModel
                 grpLst = new ArrayList(((IGroup)ressource).getParentClass().getLstGroups());
             if (teacher == null)
 
-                lesson = DataFactorySansRmi.createLesson(
+                lesson = DataFactory.createLesson(
                         getGap(weekNumber, dayNumber, gapNumber,length),
                         course, 
                         grpLst, 
                         length
                         );
             else
-                lesson = DataFactorySansRmi.createLesson(
+                lesson = DataFactory.createLesson(
                         getGap(weekNumber, dayNumber, gapNumber,length),
                         course, 
                         grpLst, 
