@@ -8,9 +8,10 @@
 package fr.umlv.ir3.flexitime.richClient.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Image;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.net.URL;
+import java.util.Calendar;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -18,27 +19,33 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
+import javax.swing.border.BevelBorder;
 
 import com.jgoodies.plaf.HeaderStyle;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.Plastic3DLookAndFeel;
 
+import fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExploitationAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExportAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.GestionAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.HistoryAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LargerTimeTableAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LoginAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.NextWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreferencesAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PrintAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerTimeTableAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.StatsAction;
 
 /**
@@ -49,59 +56,52 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.StatsAction;
  */
 public class Client
 {
-
+    // ====== //
+    // Champs //
+    // ====== //
     private JFrame frame;
     private JPanel panel;
+    private JPanel jp_status;
+    private JLabel status;
+    private static FlexiLanguage language;
+    static
+    {
+        language = FlexiLanguage.getInstance();
+    }
 
+    
+    // ============ //
+    // Constructeur //
+    // ============ //
     /**
      * DOCME
      */
     public Client()
     {
-        frame = new JFrame("Flexitime");
+        frame = new JFrame(language.getText("appliTitle"));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         panel = new JPanel(new BorderLayout());
         frame.setContentPane(panel);
-
-        run();
-
-        frame.setVisible(true);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-    /**
-     * main - DOCME Code This main method instanciates an Client object and call
-     * the run() method on it. <code>exemple d'appel de la methode</code>
-     * 
-     * @param args
-     * @author FlexiTeam - Adrien Bouvet
-     * @date 14 déc. 2004
-     */
-    public static void main(String[] args)
-    {
-        try
-        {
-            UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
-        }
-        catch (Exception e)
-        {}
-
-        Client c = new Client();
-    }
-
+    
+    // ======== //
+    // Méthodes //
+    // ======== //
     /**
      * run - DOCME Code This method runs the Client object.
      * <code>exemple d'appel de la methode</code>
      * 
      * @return an int which indicates if the method is well finished.
-     * @author FlexiTeam - Adrien Bouvet
-     * @date 14 déc. 2004
      */
     int run()
     {
         initMenuBar();
         initToolBar();
+        initStateBar();
+        frame.setVisible(true);
+        //TODO frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         return 0;
     }
 
@@ -110,6 +110,7 @@ public class Client
         JButton button = new JButton();
         button.setIcon((Icon)action.getValue(Action.SMALL_ICON));
         button.setToolTipText((String)action.getValue(Action.NAME));
+        button.addActionListener(action);
         
         return button;
     }
@@ -117,53 +118,172 @@ public class Client
      * initToolBar - DOCME Code This method creates the client's tool bar.
      * <code>exemple d'appel de la methode</code>
      * 
-     * @return an int which indicates if the method is well finished.
-     * @author FlexiTeam - Adrien Bouvet
-     * @date 14 déc. 2004
      */
     void initToolBar()
     {
-        JToolBar tb = new JToolBar();
-        tb.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
-        panel.add(tb, BorderLayout.PAGE_START);
+        JToolBar toolBar = new JToolBar();
+        toolBar.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
+        panel.add(toolBar, BorderLayout.PAGE_START);
         
         //Imprimer
-        tb.add(createButton(PrintAction.getInstance()));
-        
+        toolBar.add(createButton(PrintAction.getInstance()));
+      
         //Export
-        tb.add(createButton(ExportAction.getInstance()));
+        toolBar.add(createButton(ExportAction.getInstance()));
         
         //Mail
-        tb.add(createButton(MailAction.getInstance()));
+        toolBar.add(createButton(MailAction.getInstance()));
         
-        tb.addSeparator();
+        toolBar.addSeparator();
         
         //Gestion
-        tb.add(createButton(GestionAction.getInstance()));
+        toolBar.add(createButton(GestionAction.getInstance()));
         
         //Exploitation
-        tb.add(createButton(ExploitationAction.getInstance()));
+        toolBar.add(createButton(ExploitationAction.getInstance()));
         
         //Historique
-        tb.add(createButton(HistoryAction.getInstance()));
+        toolBar.add(createButton(HistoryAction.getInstance()));
         
         //Stats
-        tb.add(createButton(StatsAction.getInstance()));
+        toolBar.add(createButton(StatsAction.getInstance()));
         
-        tb.addSeparator();
+        toolBar.addSeparator();
+        
+        //plage + large
+        toolBar.add(createButton((LargerTimeTableAction.getInstance())));
+        
+        //plage + petite
+        toolBar.add(createButton((SmallerTimeTableAction.getInstance())));
         
         //Back
-        tb.add(createButton(PreviousWeekAction.getInstance()));
+        toolBar.add(createButton(PreviousWeekAction.getInstance()));
         
         //Forward
-        tb.add(createButton(NextWeekAction.getInstance()));
+        toolBar.add(createButton(NextWeekAction.getInstance()));
         
         
         
+        toolBar.addSeparator();
+        toolBar.addSeparator();
+        toolBar.addSeparator();
+        toolBar.addSeparator();
         
-
+        
+        //date actuelle
+        JLabel labDateAct = new JLabel() ;
+        Font v = new Font("Arial", Font.BOLD, 12);
+        labDateAct.setFont(v);
+        int jSemaine, jMois, mois, annee ;
+        Calendar now = Calendar.getInstance() ;
+        String dateActuelle ="";
+        jSemaine = now.get(Calendar.DAY_OF_WEEK);
+        jMois = now.get(Calendar.DAY_OF_MONTH);
+        mois = now.get(Calendar.MONTH);
+        annee = now.get(Calendar.YEAR);
+        dateActuelle += jourSemaine(jSemaine);
+        dateActuelle += ", "+ Integer.toString(jMois) + " " ;
+        dateActuelle += moisDeLannee(mois);
+        dateActuelle += " "+ Integer.toString(annee) + " | ";
+        labDateAct.setText(dateActuelle);
+        toolBar.add(labDateAct);
+        
+        //filière actuelle
+        JLabel labTrackAct = new JLabel();
+        labTrackAct.setFont(v);
+        String filiereActuelle = language.getText("track") + " : ";
+        /*TODO if( (String s = UserImpl.getTrack()) != null)
+        {
+            filiereActuelle += s;
+        }
+        else*/
+            filiereActuelle += "aucune";
+        labTrackAct.setText(filiereActuelle);
+        toolBar.add(labTrackAct);
     }
 
+    
+    
+    
+    
+    
+    /**
+     *  
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param j an integer representing the actual day.
+     * @return the french translation for the actual day.
+     * 
+     */
+    private String jourSemaine(int j)
+    {
+        switch(j)
+        {
+            case 1 :
+                return "Dimanche" ;
+            case 2 :
+                return "Lundi" ;
+            case 3 :
+                return "Mardi" ;
+            case 4 :
+                return "Mercredi" ;
+            case 5 :
+                return "Jeudi" ;
+            case 6 :
+                return "Vendredi" ;
+            case 7 :
+                return "Samedi" ;
+        }
+        return "inconnu";
+    }
+    
+    /**
+     *  
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param j an integer representing the actual month.
+     * @return the french translation for the actual month.
+     * 
+     */
+    private String moisDeLannee(int j)
+    {
+        switch(j)
+            {
+            case 0 :
+                return "Janvier" ;
+            case 1 :
+                return "Février" ;
+            case 2 :
+                return "Mars" ;
+            case 3 :
+                return "Avril" ;
+            case 4 :
+                return "Mai" ;
+            case 5 :
+                return "Juin" ;
+            case 6 :
+                return "Juillet" ;
+            case 7 :
+                return "Août" ;
+            case 8 :
+                return "Septembre" ;
+            case 9 :
+                return "Octobre" ;
+            case 10 :
+                return "Novembre" ;
+            case 11 :
+                return "Décembre" ;
+            }
+        return "inconnu";
+    }   
+    
+    
+    
+    
     /**
      * initMenuBar - DOCME Code This method creates the client's menu bar.
      * <code>exemple d'appel de la methode</code>
@@ -173,23 +293,25 @@ public class Client
      */
     void initMenuBar()
     {
-        JMenuBar jmb = new JMenuBar();
-        jmb.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
 
-        // File//
-        JMenu fichier = new JMenu("Fichier");
-        jmb.add(fichier);
+        //////////
+        // File //
+        //////////
+        JMenu menuFichier = new JMenu("Fichier");
+        menuBar.add(menuFichier);
 
         Action log = LoginAction.getInstance();
-        fichier.add(log);
-        fichier.add(new JSeparator());
+        menuFichier.add(log);
+        menuFichier.add(new JSeparator());
 
         Action pref = PreferencesAction.getInstance();
-        fichier.add(pref);
+        menuFichier.add(pref);
 
         Action print = PrintAction.getInstance();
-        fichier.add(print);
-        fichier.add(new JSeparator());
+        menuFichier.add(print);
+        menuFichier.add(new JSeparator());
         
         Action impor = new AbstractAction("Importer") {
 
@@ -200,11 +322,11 @@ public class Client
             }
 
         };
-        fichier.add(impor);
+        menuFichier.add(impor);
         
         Action export = ExportAction.getInstance();
-        fichier.add(export);
-        fichier.add(new JSeparator());
+        menuFichier.add(export);
+        menuFichier.add(new JSeparator());
         
         Action quit = new AbstractAction("Quitter") {
 
@@ -215,32 +337,38 @@ public class Client
             }
 
         };
-        fichier.add(quit);
+        menuFichier.add(quit);
 
-        // Mail//
-        JMenu mail = new JMenu("Mail");
-        jmb.add(mail);
+        
+        //////////
+        // Mail //
+        //////////
+        JMenu menuMail = new JMenu("Mail");
+        menuBar.add(menuMail);
         
         Action sendView = MailAction.getInstance();
-        mail.add(sendView);
+        menuMail.add(sendView);
 
         Action sendFormatedMail = new AbstractAction("Envoyer Mail pré formaté") {
 
             public void actionPerformed(ActionEvent e)
             {
-            // TODO Auto-generated method stub
-
+                // TODO Auto-generated method stub
+                //ouvrir vue mail
             }
 
         };
-        mail.add(sendFormatedMail);
+        menuMail.add(sendFormatedMail);
 
-        // Affichage//
-        JMenu affichage = new JMenu("Affichage");
-        jmb.add(affichage);
+        
+        ///////////////
+        // Affichage //
+        ///////////////
+        JMenu menuAffichage = new JMenu("Affichage");
+        menuBar.add(menuAffichage);
         
         JMenu mode = new JMenu("Mode");
-        affichage.add(mode);
+        menuAffichage.add(mode);
         
         Action gestion = GestionAction.getInstance();
         mode.add(gestion);
@@ -252,39 +380,42 @@ public class Client
         mode.add(historique);
         
         Action stats = StatsAction.getInstance();
-        affichage.add(stats);
+        menuAffichage.add(stats);
 
-
+        
+        
+        ///////////////////
         // Administration//
+        ///////////////////
 
-        // Aide//
-        JMenu aide = new JMenu("Aide");
-        jmb.add(aide);
+        // Aide en ligne //
+        JMenu menuAide = new JMenu("Aide");
+        menuBar.add(menuAide);
         
         Action aideenligne = new AbstractAction("Aide...") {
 
             public void actionPerformed(ActionEvent e)
             {
-            // TODO Auto-generated method stub
-
+                // TODO Auto-generated method stub
+                //ouvre la fenetre aide en ligne
             }
 
         };
-        aide.add(aideenligne);
+        menuAide.add(aideenligne);
         
+        // a propos //
         Action apropos = new AbstractAction("A propos...") {
 
             public void actionPerformed(ActionEvent e)
             {
-            // TODO Auto-generated method stub
-
+                // TODO Auto-generated method stub
+                //ouvre la fenetre a propos
             }
 
         };
-        aide.add(apropos);
+        menuAide.add(apropos);
 
-        frame.setJMenuBar(jmb);
-
+        frame.setJMenuBar(menuBar);
     }
 
     /**
@@ -296,19 +427,92 @@ public class Client
      */
     void initStateBar()
     {
-
+        jp_status = new JPanel();
+        jp_status.setLayout(new BorderLayout());
+        status = new JLabel("Prêt");
+        jp_status.add(status, BorderLayout.CENTER);
+        jp_status.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        
+        frame.getContentPane().add(jp_status,BorderLayout.SOUTH);
+    }
+    
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param etat the new state to print in the status bar.
+     * 
+     */
+    public void setStatus(String etat)
+    {
+        JLabel lab = new JLabel(etat);
+        this.status = lab;
+        //TODO faire un refresh du panel ??
     }
 
     /**
-     * Icon Loader
+     * DOCME Icon Loader
      * @param c class from where to get ressource
      * @param fileName name of ressource
+     * @return an icon.
      */
     public static Icon getIcon(Class c, String fileName) {
         URL url = c.getResource(fileName);
         if (url == null)
             return null;
         return new ImageIcon(url);
+    }
+    
+    
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return an int indicating if the method is well finished.
+     * 
+     */
+    public static int initConf()
+    {
+        //1/ check si existance fichier conf en local
+        //2/ si oui try contact @server
+            //si ok, continuer traitement
+            //si ko, ouvrir vue demande @server
+        //3/ si non ouvrir vue demande @server puis retour en 2/
+        return 0;
+    }
+    
+  
+    // ==== //
+    // Main //
+    // ==== //
+    /**
+     * main - DOCME Code This main method instanciates an Client object and call
+     * the run() method on it. <code>exemple d'appel de la methode</code>
+     * 
+     * @param args
+     * @author FlexiTeam - Adrien Bouvet
+     * @date 14 déc. 2004
+     */
+    public static void main(String[] args)
+    {
+        
+        initConf();
+        
+        try
+        {
+            //definition d'un look&feel
+            //TODO garder celui-ci ??
+            UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
+        }
+        catch (Exception e)
+        {}
+
+        Client c = new Client();
+        c.run();
     }
 
 }

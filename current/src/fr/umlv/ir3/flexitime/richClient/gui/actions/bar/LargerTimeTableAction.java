@@ -1,6 +1,6 @@
 /*
- * Created on 16 janv. 2005
- * by Prâsad
+ * Created on 20 janv. 2005
+ * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.actions.bar;
@@ -20,41 +20,40 @@ import fr.umlv.ir3.flexitime.richClient.gui.Client;
  * Que fait cette classe, qu'est-ce qu'elle 
  * représente, ...
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 0.1
  * 
+ * @author FlexiTeam - Adrien BOUVET
  */
-public class PrintAction extends AbstractAction
+public class LargerTimeTableAction extends AbstractAction
 {
-    private static PrintAction action;
-    private static Icon icon = Client.getIcon(PrintAction.class, "../../pictures/_print.png");
+    private static LargerTimeTableAction action;
+    private static Icon icon = Client.getIcon(LargerTimeTableAction.class, "../../pictures/_zoom+.png");
     
-    public static PrintAction getInstance()
+    public static LargerTimeTableAction getInstance()
     {
         if(action==null)
-            action = new PrintAction();
+            action = new LargerTimeTableAction();
         
         return action;
     }
 
-    protected PrintAction()
+    protected LargerTimeTableAction()
     {
-        super("Imprimer", icon);
+        super("Agrandir la plage", icon);
     }
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
      *
-     * @param e 
+     * @param arg0 
      * 
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent arg0)
     {
-    // TODO Auto-generated method stub
-        System.out.println("printAction");
-
+        // TODO Auto-generated method stub
+        
     }
 
 }
