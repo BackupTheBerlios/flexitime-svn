@@ -361,10 +361,10 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
                 try {
                     sleep(2000);
 
-                    synchronized(this) {
-                        while (!doesThreadRun)
-                        {}
-                    }
+//                    synchronized(this) {
+//                        while (!doesThreadRun)
+//                        {}
+//                    }
                 } catch (InterruptedException e){
                 }
 
