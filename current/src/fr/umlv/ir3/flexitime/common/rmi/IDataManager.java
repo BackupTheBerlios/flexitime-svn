@@ -34,7 +34,7 @@ public interface IDataManager extends Remote
      * @throws HibernateException
      * 
      */
-    public void save(IData d) throws RemoteException, HibernateException;
+    public boolean save(IData d) throws RemoteException, HibernateException;
     
     /**
      *  
@@ -46,7 +46,7 @@ public interface IDataManager extends Remote
      * @throws HibernateException
      * 
      */
-    public List get() throws RemoteException, HibernateException; 
+    public List get(IData parent) throws RemoteException, HibernateException; 
     
     /**
      * locks a data 
@@ -71,7 +71,7 @@ public interface IDataManager extends Remote
      * @throws HibernateException
      * 
      */
-    public void delete(IData d) throws RemoteException, HibernateException;
+    public boolean delete(IData d) throws RemoteException, HibernateException;
     
     /**
      *  
@@ -93,7 +93,7 @@ public interface IDataManager extends Remote
      * @throws HibernateException
      * 
      */
-    public void update(IData d) throws RemoteException, HibernateException;
+    public boolean update(IData d) throws RemoteException, HibernateException;
     
 }
 
