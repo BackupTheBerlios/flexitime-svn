@@ -41,7 +41,7 @@ public class FlexiLDAP
     //Chemin d'accès aux groupes
     private String             pathGroup  = null;
     //Utilisateurs loggé courant
-    private String             loginAs    = null;
+    //private String             loginAs    = null;
 
     /**
      * Constructeur par défaut Initialise les attributs selon les paramètres de
@@ -82,8 +82,8 @@ public class FlexiLDAP
     public boolean createConnection(String name, String passwd)
     {
         // Si l'utilisateur est déjà loggé
-        if (loginAs != null && loginAs.equals(name) && ctx != null)
-                return true;
+        //if (loginAs != null && loginAs.equals(name) && ctx != null)
+        //        return true;
         closeConnection();
         Hashtable env = new Hashtable();
         //	Creation du Context Ldap
@@ -100,7 +100,7 @@ public class FlexiLDAP
         {
             //	Connexion au LDAP
             ctx = new InitialLdapContext(env, null);
-            loginAs = name;
+            //loginAs = name;
             return true;
             // Erreur de connexion
         }
@@ -169,7 +169,7 @@ public class FlexiLDAP
     public void closeConnection()
     {
         ctx = null;
-        loginAs = null;
+        //loginAs = null;
     }
 
     /**
@@ -178,11 +178,11 @@ public class FlexiLDAP
      * @param name le login de l'utilisateur
      * @return true s'il est déjà connecté, false sinon
      */
-    public boolean isConnected(String name)
+   /* public boolean isConnected(String name)
     {
         if ( (name.equals(loginAs)) && (ctx != null)) return true;
         return false;
-    }
+    }*/
 
     /**
      * @param pathGroup le chemin d'accès aux groupes
