@@ -95,7 +95,7 @@ public class LoginView
             {}            
         });
         final JPasswordField tfPass = new JPasswordField("password");  //$NON-NLS-1$
-        tfPass.setText("password");//$NON-NLS-1$
+        tfPass.setText("");//$NON-NLS-1$
         tfPass.addMouseListener(new MouseListener() {
 
             public void mouseClicked(MouseEvent arg0)
