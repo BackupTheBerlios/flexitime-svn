@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project xmlns:j="jelly:core" xmlns:ant="jelly:ant" xmlns:u="jelly:util">
+<project xmlns:j="jelly:core" xmlns:ant="jelly:ant" >
 	<goal name="jar">
+		<j:set property="maven.jar.mainclass" value="fr.umlv.ir3.flexitime.richClient.gui.Client" />
 		<attainGoal name="jar:jar"/>
 		<move file="${maven.build.dir}/${maven.final.name}.jar" tofile="${basedir}/bin/${maven.final.name}.jar"/>
+	</goal>
+	<goal name="flexi:server">
+		<ant:java classname="fr.umlv.ir3.flexitime.server.Server" />
+	</goal>
+	<goal name="flexi:client">
+		<ant:java classname="fr.umlv.ir3.flexitime.richClient.gui.Client" />
 	</goal>
 </project>

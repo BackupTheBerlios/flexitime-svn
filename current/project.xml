@@ -24,8 +24,6 @@
 	</description>
   <shortDescription>University Courses Manager</shortDescription>
   <url>http://flexitime.free.fr</url>
-  <siteAddress>generated-docs</siteAddress>
-  <siteDirectory>/home/groups/flexitime/htdocs/webDevState</siteDirectory>
   <repository>
     <connection>scm|svn|svn+ssh://svn.berlios.de/svnroot/repos/flexitime/current</connection>
     <developerConnection>scm|svn|svn+ssh://jguers@svn.berlios.de/svnroot/repos/flexitime/current</developerConnection>
@@ -213,35 +211,14 @@
   </dependencies>
   
   <build>
-    <sourceDirectory>${base.dir}/src</sourceDirectory>
-    <unitTestSourceDirectory>${base.dir}/test</unitTestSourceDirectory>
+    <sourceDirectory>src</sourceDirectory>
+    
+    <unitTestSourceDirectory>test</unitTestSourceDirectory>
     <unitTest>
-      <includes>
-        <include>**/*Test.java</include>
-      </includes>
-    <resources>
-	   	<resource>
-		  <directory>${basedir}/src</directory>
-			  <includes>
-			    <include>src/hibernate.cfg.xml</include>
-   			    <include>src/data.hbm.xml</include>
-				<include>src/str_fr.properties</include>
-			  </includes>
-		</resource>
-      </resources>
-    </unitTest>
-    <resources>
-      <resource>
-		<directory>${basedir}/src</directory>
-		<targetPath>de/berlios/chronos/business</targetPath>
-			<includes>
-		  		<include>*.hbm.xml</include>
-		  		<include>str_fr.properties</include>
-			</includes>
-      </resource>
-    </resources>
-    <reports>
-    </reports>
-  </build>
+		<includes>
+        	<include>**/Test*.java</include>
+		</includes>
+     </unitTest>
+   </build>
 </project>
 
