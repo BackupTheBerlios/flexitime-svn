@@ -5,6 +5,7 @@
  */
 package fr.umlv.ir3.flexitime.common.data.teachingStructure.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
@@ -12,134 +13,123 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Defines a teaching structure, it contains subjects' groups.
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 0.1
+ * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
 public class TeachingStructureImpl implements ITeachingStructure
 {
-
+    //===========//
+	//  Champs	 //
+	//===========//
+    private String strName;
+    private List listOfSubjectsGroups;
+    
+    
+	//=============//
+	//Constructeurs//
+    //=============//
     /**
-     * DOCME
+     * Constructs a teaching structure.
      * 
+     * @param name a string.
+     * @param listSubjectsGroup the list of subjects' groups.
      */
-    public TeachingStructureImpl()
+    public TeachingStructureImpl(String name, List listSubjectsGroup)
     {
-        super();
-        // TODO Auto-generated constructor stub
+        this.strName = name;
+        this.listOfSubjectsGroups = new ArrayList(listSubjectsGroup);
     }
 
-    /**
-     * DOCME
-     * @param struct
-     */
-    public TeachingStructureImpl(ITeachingStructure struct)
-    {
-        
-        // TODO Auto-generated constructor stub
-    }
-
+    
+    //===========//
+    // Méthodes  //
+	//===========//
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Returns the list of subjects' groups.
+     * <code>List l = struct.getLstSubjectsGroup()</code>
      *
-     * @return 
+     * @return the list of subjects' groups.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#getLstSubjectsGroup()
      * @author   FlexiTeam - Adrien BOUVET
      */
     public List getLstSubjectsGroup()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return listOfSubjectsGroups;
     }
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Sets the list of subjects' groups
+     * <code>struct.setLstSubjectsGroup(lst)</code>
      *
-     * @param lst 
+     * @param lst the list of subjects' groups. 
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#setLstSubjectsGroup(java.util.List)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void setLstSubjectsGroup(List lst)
     {
-    // TODO Auto-generated method stub
-
+        listOfSubjectsGroups = new ArrayList(lst);
     }
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Adds a subjects' group to the list.
+     * <code>struct.addSubjectsGroup(subjectsGroup)</code>
      *
-     * @param subjectsGroup 
+     * @param subjectsGroup the subjects' group to add to the list.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#addSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup)
+     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#addSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup)
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public void addSubject(ISubjectsGroup subjectsGroup)
+    public void addSubjectsGroup(ISubjectsGroup subjectsGroup)
     {
-    // TODO Auto-generated method stub
-
+        listOfSubjectsGroups.add(subjectsGroup);
     }
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Removes a subjects' group of the list.
+     * <code>struct.removeSubjectsGroup(subjectsGroup)</code>
      *
-     * @param subjectsGroup 
+     * @param subjectsGroup the subjects' group to remove of the list.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#removeSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup)
+     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#removeSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup)
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public void removeSubject(ISubjectsGroup subjectsGroup)
+    public void removeSubjectsGroup(ISubjectsGroup subjectsGroup)
     {
-    // TODO Auto-generated method stub
-
+        listOfSubjectsGroups.remove(subjectsGroup);
     }
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Returns the name of the teaching structure.
+     * <code>String n = struct.getName()</code>
      *
-     * @return 
+     * @return the name of the teaching structure.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
      * @author   FlexiTeam - Adrien BOUVET
      */
     public String getName()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return strName;
     }
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Sets the name of the teaching structure.
+     * <code>struct.setName(name)</code>
      *
-     * @param name 
+     * @param name the name of the teaching structure.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void setName(String name)
     {
-    // TODO Auto-generated method stub
-
+        this.strName = name;
     }
 
 }
