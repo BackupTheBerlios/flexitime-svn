@@ -33,7 +33,7 @@ public class ClassImpl extends DataImpl implements IClass
     //===========//
     //   Champs  //
     //===========// 
-    private List listOfGroups;
+    private List lstGroups;
     private ITeachingStructure teachStruct;
     private ITrack parentTrack;
     
@@ -55,7 +55,7 @@ public class ClassImpl extends DataImpl implements IClass
 	public ClassImpl(String name)
 	{
 		super(name);
-		listOfGroups = new ArrayList();
+		lstGroups = new ArrayList();
 	}
 	
 	/**
@@ -68,21 +68,21 @@ public class ClassImpl extends DataImpl implements IClass
 	{
 		super(name);
 		this.parentTrack = track;
-		listOfGroups = new ArrayList();
+		lstGroups = new ArrayList();
 	}
 	
     /**
      * Constructs a class.
      * 
      * @param sName a string for the name of this class.
-     * @param listOfGroups the list of groups in this class.
+     * @param lstGroups the list of groups in this class.
      * @param struct the teaching structure of this class.
 	 * @param track the parent track.
      */
     public ClassImpl(String sName, List listOfGroups, ITeachingStructure struct, TrackImpl track)
     {
         super(sName);
-        this.listOfGroups = new ArrayList(listOfGroups);
+        this.lstGroups = new ArrayList(listOfGroups);
         this.teachStruct = struct;
         this.parentTrack = track;
     }
@@ -99,7 +99,7 @@ public class ClassImpl extends DataImpl implements IClass
     public int calculNbPerson()
     {
         int iNbPerson = 0;
-        Iterator iter = listOfGroups.iterator();
+        Iterator iter = lstGroups.iterator();
         while(iter.hasNext())
         {
             GroupImpl gr = (GroupImpl)iter.next();
@@ -119,7 +119,7 @@ public class ClassImpl extends DataImpl implements IClass
      */
     public int getNbGroup()
     {
-        return listOfGroups.size();
+        return lstGroups.size();
     }
 
     /** 
@@ -171,7 +171,7 @@ public class ClassImpl extends DataImpl implements IClass
      */
     public List getLstGroups()
     {
-        return listOfGroups;
+        return lstGroups;
     }
 
     /** 
@@ -184,7 +184,7 @@ public class ClassImpl extends DataImpl implements IClass
      */
     public void setLstGroups(List lstGroup)
     {
-        listOfGroups = new ArrayList(lstGroup);
+        lstGroups = new ArrayList(lstGroup);
     }
 
     /** 
@@ -197,7 +197,7 @@ public class ClassImpl extends DataImpl implements IClass
      */
     public void addGroup(IGroup group)
     {
-        listOfGroups.add(group);
+        lstGroups.add(group);
     }
 
     /** 
@@ -210,7 +210,7 @@ public class ClassImpl extends DataImpl implements IClass
      */
     public void removeGroup(IGroup group)
     {
-        listOfGroups.remove(group);
+        lstGroups.remove(group);
     }
     
 	/** 

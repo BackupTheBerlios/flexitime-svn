@@ -26,7 +26,7 @@ public class TrackImpl extends DataImpl implements ITrack
     //===========//
     //   Champs  //
     //===========// 
-    private List listOfClasses;
+    private List lstClass;
 
     //==================//
     //   Constructeurs  //
@@ -47,7 +47,7 @@ public class TrackImpl extends DataImpl implements ITrack
     public TrackImpl(String sName)
     {
         super(sName);  
-        this.listOfClasses = new ArrayList();
+        this.lstClass = new ArrayList();
     }
     
 	/**
@@ -59,7 +59,7 @@ public class TrackImpl extends DataImpl implements ITrack
 	public TrackImpl(String sName, List listClasses)
 	{
 		super(sName);
-		this.listOfClasses = new ArrayList(listClasses);		        
+		this.lstClass = new ArrayList(listClasses);		        
 	}
     
     //=============//
@@ -76,7 +76,7 @@ public class TrackImpl extends DataImpl implements ITrack
      */
     public List getLstClass()
     {
-        return listOfClasses;
+        return lstClass;
     }
 
     /** 
@@ -90,7 +90,7 @@ public class TrackImpl extends DataImpl implements ITrack
      */
     public void setLstClass(List lstClass)
     {
-        listOfClasses = new ArrayList(lstClass);
+        this.lstClass = new ArrayList(lstClass);
     }
 
     /** 
@@ -104,7 +104,7 @@ public class TrackImpl extends DataImpl implements ITrack
      */
     public void addClass(IClass pClass)
     {
-        listOfClasses.add(pClass);
+        lstClass.add(pClass);
     }
 
     /** 
@@ -118,7 +118,7 @@ public class TrackImpl extends DataImpl implements ITrack
      */
     public void removeClass(IClass pClass)
     {
-        listOfClasses.remove(pClass);
+        lstClass.remove(pClass);
     }
 }
 

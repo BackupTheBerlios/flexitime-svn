@@ -31,6 +31,7 @@ public abstract class BusyImpl implements IBusy
     private Date daStart;
     private Date daEnd;
     private String strName;
+    protected Long idBusy;
     
 	//=============//
 	//Constructeurs//
@@ -168,5 +169,27 @@ public abstract class BusyImpl implements IBusy
 
     }
 
+    /**
+     * Getter for id of the Busy
+     *
+     * @return id of the busy
+     * 
+     */
+    public Long getIdBusy()
+    {
+        return idBusy;
+    }
+    
+    /**
+     *  
+     * Setter of id
+     * @param idBusy id to set 
+     * 
+     * @see (si nécessaire)
+     */
+    public void setIdBusy(Long idBusy)
+    {
+        this.idBusy = idBusy;
+    }
 }
 

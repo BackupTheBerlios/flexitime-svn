@@ -26,7 +26,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
     //===========//
 	//  Champs	 //
 	//===========//
-    private List listOfBusy;
+    private List lstBusy;
     
     
 	//=============//
@@ -46,7 +46,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
 	public ResourceImpl(String name)
 	{
 		super(name);
-		this.listOfBusy = new ArrayList();
+		this.lstBusy = new ArrayList();
 	}
 	
     /**
@@ -59,7 +59,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
     public ResourceImpl(String name, List listBusy)
     {
         super(name);
-        this.listOfBusy = new ArrayList(listBusy);
+        this.lstBusy = new ArrayList(listBusy);
     }
 
     
@@ -77,7 +77,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      */
     public List getLstBusy()
     {
-        return listOfBusy;
+        return lstBusy;
     }
 
     /** 
@@ -91,7 +91,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      */
     public void setLstBusy(List lstBusy)
     {
-        listOfBusy = new ArrayList(lstBusy);
+        this.lstBusy = new ArrayList(lstBusy);
     }
 
     /** 
@@ -105,7 +105,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      */
     public void addBusy(IBusy busy)
     {
-        listOfBusy.add(busy);
+        lstBusy.add(busy);
     }
 
     /** 
@@ -119,7 +119,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      */
     public void removeBusy(IBusy busy)
     {
-        listOfBusy.remove(busy);
+        lstBusy.remove(busy);
     }
 
 }

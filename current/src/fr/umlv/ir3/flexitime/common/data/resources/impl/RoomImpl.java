@@ -30,8 +30,8 @@ public class RoomImpl extends ResourceImpl implements IRoom
     //===========//
 	//  Champs	 //
 	//===========//
-    private int iType;
-    private int iCapacity;
+    private int type;
+    private int capacity;
     private IFloor parentFloor; 
     
     
@@ -79,8 +79,8 @@ public class RoomImpl extends ResourceImpl implements IRoom
     public RoomImpl(String name, List listBusy, int type, int capacity, FloorImpl floor)
     {
         super(name, listBusy);
-        this.iType = type;
-        this.iCapacity = capacity;
+        this.type = type;
+        this.capacity = capacity;
         this.parentFloor = floor;        
     }
 
@@ -99,21 +99,21 @@ public class RoomImpl extends ResourceImpl implements IRoom
      */
     public int getType()
     {
-        return iType;
+        return type;
     }
 
     /** 
      * Sets the type of the room.
-     * <code>room.setType(iType)</code>
+     * <code>room.setType(type)</code>
      *
-     * @param iType the type of the room.
+     * @param type the type of the room.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#setType(int)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void setType(int iType)
     {
-        this.iType = iType;
+        this.type = iType;
     }
 
     /** 
@@ -127,7 +127,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
      */
     public int getCapacity()
     {
-        return iCapacity;
+        return capacity;
     }
 
     /** 
@@ -141,7 +141,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
      */
     public void setCapacity(int capacity)
     {
-        this.iCapacity = capacity;
+        this.capacity = capacity;
     }
     
 	/** 

@@ -27,7 +27,7 @@ public class FloorImpl extends DataImpl implements IFloor
     //===========//
     //   Champs  //
     //===========// 
-    private List listOfRooms; 
+    private List lstRoom; 
     private IBuilding parentBuilding;
     
     
@@ -48,7 +48,7 @@ public class FloorImpl extends DataImpl implements IFloor
 	public FloorImpl(String name)
 	{
 		super(name);
-		listOfRooms = new ArrayList();
+		lstRoom = new ArrayList();
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class FloorImpl extends DataImpl implements IFloor
 	{
 		super(name);
 		this.parentBuilding = building;
-		listOfRooms = new ArrayList();
+		lstRoom = new ArrayList();
 	}
 	
     /**
@@ -74,7 +74,7 @@ public class FloorImpl extends DataImpl implements IFloor
     public FloorImpl(String name, List listRooms, BuildingImpl building)
     {
         super(name);
-        this.listOfRooms = new ArrayList(listRooms);
+        this.lstRoom = new ArrayList(listRooms);
         this.parentBuilding = building;
     }
     
@@ -92,7 +92,7 @@ public class FloorImpl extends DataImpl implements IFloor
      */
     public List getLstRoom()
     {
-        return listOfRooms;
+        return lstRoom;
     }
 
     /** 
@@ -105,7 +105,7 @@ public class FloorImpl extends DataImpl implements IFloor
      */
     public void setLstRoom(List lstRoom)
     {
-        this.listOfRooms = new ArrayList(lstRoom);
+        this.lstRoom = new ArrayList(lstRoom);
     }
 
     /** 
@@ -118,7 +118,8 @@ public class FloorImpl extends DataImpl implements IFloor
      */
     public void addRoom(IRoom room)
     {
-        listOfRooms.add(room);
+        lstRoom.add(room);
+        room.setFloor(this);
     }
 
     /** 
@@ -131,7 +132,7 @@ public class FloorImpl extends DataImpl implements IFloor
      */
     public void removeRoom(IRoom room)
     {
-        listOfRooms.remove(room);
+        lstRoom.remove(room);
     }
     
 	/**

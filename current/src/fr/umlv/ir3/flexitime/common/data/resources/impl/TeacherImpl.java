@@ -24,8 +24,8 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
     //===========//
 	//  Champs	 //
 	//===========//
-    private String strFirstName;
-    private String strEmail;
+    private String firstName;
+    private String email;
     
 	//=============//
 	//Constructeurs//
@@ -58,8 +58,8 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
     public TeacherImpl(String name, String firstName, List listBusy, String email)
     {
         super(name, listBusy);
-        this.strFirstName = firstName;        
-        this.strEmail = email;
+        this.firstName = firstName;        
+        this.email = email;
     }
 
     
@@ -76,7 +76,7 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      */
     public String getFirstName()
     {
-        return strFirstName;
+        return firstName;
     }
 
     /** 
@@ -89,7 +89,7 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      */
     public void setFirstName(String firstName)
     {
-        this.strFirstName = firstName;
+        this.firstName = firstName;
     }
 
     /** 
@@ -102,7 +102,7 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      */
     public String getEmail()
     {
-        return strEmail;
+        return email;
     }
 
     /** 
@@ -115,7 +115,7 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      */
     public void setEmail(String email)
     {
-        this.strEmail = email;
+        this.email = email;
     }
 }
 

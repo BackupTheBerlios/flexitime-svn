@@ -19,6 +19,7 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 public abstract class DataImpl implements IData
 {
     private String name;
+    protected Long idData = null;
 
     protected DataImpl()
     {
@@ -52,6 +53,28 @@ public abstract class DataImpl implements IData
     {
         this.name = name;
 
+    }
+    
+    /**
+     * Getter for idData
+     *
+     * @return id of the data
+     * 
+     */
+    public Long getIdData()
+    {
+        return idData;
+    }
+    
+    /**
+     *  
+     * Setter fo idData
+     * @param idData id to set
+     * 
+     */
+    public void setIdData(Long idData)
+    {
+        this.idData = idData;
     }
 }
 

@@ -26,7 +26,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
     //===========//
 	//  Champs	 //
 	//===========//
-    private int iNbPerson; 
+    private int nbPerson; 
     private IClass parentClass;
     
     
@@ -72,7 +72,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
     public GroupImpl(String name, List listBusy, int nbPerson, ClassImpl parentClass)
     {
         super(name, listBusy);
-        this.iNbPerson = nbPerson;
+        this.nbPerson = nbPerson;
         this.parentClass = parentClass;
     }
 
@@ -90,7 +90,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
      */
     public int getNbPerson()
     {
-        return iNbPerson;
+        return nbPerson;
     }
 
     /** 
@@ -103,7 +103,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
      */
     public void setNbPerson(int nbPerson)
     {
-        this.iNbPerson = nbPerson;
+        this.nbPerson = nbPerson;
     }
     
 	/** 

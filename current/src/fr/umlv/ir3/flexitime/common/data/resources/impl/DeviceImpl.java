@@ -24,7 +24,7 @@ public class DeviceImpl extends ResourceImpl implements IDevice
     //===========//
 	//  Champs	 //
 	//===========//
-    private String strType;
+    private String type;
     
     
 	//=============//
@@ -57,7 +57,7 @@ public class DeviceImpl extends ResourceImpl implements IDevice
     public DeviceImpl(String name, List listBusy, String type)
     {
         super(name, listBusy);
-        this.strType = type;
+        this.type = type;
     }
 
     
@@ -75,7 +75,7 @@ public class DeviceImpl extends ResourceImpl implements IDevice
      */
     public String getType()
     {
-        return strType;
+        return type;
     }
 
     /** 
@@ -89,6 +89,6 @@ public class DeviceImpl extends ResourceImpl implements IDevice
      */
     public void setType(String type)
     {
-        this.strType = type;
+        this.type = type;
     }
 }

@@ -26,7 +26,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
     //===========//
     //   Champs  //
     //===========// 
-    private List listOfFloors;
+    private List lstFloors;
     
     
     //==================//
@@ -46,7 +46,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
 	public BuildingImpl(String name)
 	{
 		super(name);
-		listOfFloors = new ArrayList();
+		lstFloors = new ArrayList();
 	}
 	
     /**
@@ -59,7 +59,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
     public BuildingImpl(String name, List listFloors)
     {
         super(name);
-        this.listOfFloors = new ArrayList(listFloors);
+        this.lstFloors = new ArrayList(listFloors);
     }
 
     
@@ -76,7 +76,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
      */
     public int getNbFloor()
     {
-        return listOfFloors.size();
+        return lstFloors.size();
     }
 
     /** 
@@ -89,7 +89,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
      */
     public List getLstFloor()
     {
-        return listOfFloors;
+        return lstFloors;
     }
 
     /** 
@@ -102,7 +102,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
      */
     public void setLstFloor(List lstFloor)
     {
-        listOfFloors = new ArrayList(lstFloor);
+        this.lstFloors = new ArrayList(lstFloor);
     }
 
     /** 
@@ -115,7 +115,8 @@ public class BuildingImpl extends DataImpl implements IBuilding
      */
     public void addFloor(IFloor floor)
     {
-        listOfFloors.add(floor);
+        lstFloors.add(floor);
+        floor.setBuilding(this);
     }
 
     /** 
@@ -128,6 +129,6 @@ public class BuildingImpl extends DataImpl implements IBuilding
      */
     public void removeFloor(IFloor floor)
     {
-        listOfFloors.remove(floor);
+        lstFloors.remove(floor);
     }
 }
