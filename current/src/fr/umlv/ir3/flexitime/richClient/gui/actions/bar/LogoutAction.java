@@ -21,21 +21,21 @@ import javax.swing.AbstractAction;
  * @see (si nécessaire)
  * 
  */
-public class LoginAction extends AbstractAction
+public class LogoutAction extends AbstractAction
 {
-    private static LoginAction action;
+    private static LogoutAction action;
     
-    public static LoginAction getInstance()
+    public static LogoutAction getInstance()
     {
         if(action==null)
-            action = new LoginAction();
+            action = new LogoutAction();
         
         return action;
     }
 
-    protected LoginAction()
+    protected LogoutAction()
     {
-        super("Se loguer");
+        super("Se déloguer");
     }
     /** 
      * DOCME Description
