@@ -17,7 +17,9 @@
 		<property name="build.dir" value="${basedir}/build" />
 		<property name="build.dest" value="${build.dir}/classes" />
 		<property name="build.tests.dest" value="${build.dir}/classes-test" />
+		<property name="build.javadoc" value="${build.dir}/classes-api" />
 
+		<property name="packages" value="fr.umlv.ir3.flexitime.*" />
 		<property name="packages-common" value="fr.umlv.ir3.flexitime.common.*" />
 		<property name="packages-client" value="fr.umlv.ir3.flexitime.richClient.*" />
 		<property name="packages-server" value="fr.umlv.ir3.flexitime.server.*" />
@@ -82,6 +84,7 @@
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${build.dest}" />
 		<mkdir dir="${build.tests.dest}" />
+		<mkdir dir="${build.javadoc}" />
 
 		<copy todir="${build.dir}" file="${src.dir}/data.hbm.xml" />
 		<copy todir="${build.dir}" file="${src.dir}/hibernate.cfg.xml" />
@@ -96,6 +99,11 @@
 				<include name="${libs.dir}/**" />
 			</fileset>
 		</copy>
+	</target>
+
+	<!-- JAVADOC -->
+	<target name="javadoc" depends="prepare" description="Creates the API documentatio">
+		<javadoc packagenames="${packages}" sourcepath="${src.dir}" destdir="${build.javadoc}" classpath="${classpath}" author="true" version="true" use="true" windowtitle="${build.name} API" doctitle="${name}" bottom="Copyright &#169; 2005 FlexiTeam." />
 	</target>
 
 	<!-- COMPILATION -->
@@ -132,14 +140,16 @@
 	</target>
 
 	<target name="jar-src">
-		<jar jarfile="${build.dir}/${build.name}-src.jar" compress="true" basedir="${src.dir}">
+		<jar jarfile="${build.dir}/${build.name}-src.jar" compress="true" basedir="${src.dir}" includes="fr/umlv/ir3/flexitime/**" >
+			<zipfileset dir="${basedir}">
+				<include name="build.xml"/>
+			</zipfileset>
 			<fileset dir="${src.dir}">
-				<include name="fr/umlv/ir3/flexitime/**; ../build.xml; str_fr.properties; hibernate.cfg.xml; data.hbm.xml" />
 				<exclude name="**/.svn" />
 			</fileset>
 		</jar>
 	</target>
-	
+
 	<target name="jar-test">
 		<jar jarfile="${build.dir}/${build.name}-test.jar" compress="true" basedir="${src.tests.dir}">
 			<fileset dir="${src.tests.dir}">
@@ -148,12 +158,17 @@
 			</fileset>
 		</jar>
 	</target>
+	
+	<target name="zip-api" depends="javadoc">
+		<zip destfile="${build.dir}/${build.name}-api.zip" basedir="${build.dir}/${build.javadoc}" />
+	</target>
 
 	<target name="war" depends="prepare">
 		<war destfile="${build.dir}/${build.name}.war" basedir="${j2ee.dir}" webxml="${j2ee.dir}/WEB-INF/web.xml" />
 	</target>
 
-	<target name="release" depends="war, jar-client, jar-server, jar-src">
+	<target name="release" depends="war, jar-client, jar-server, jar-src, jar-test">
+		<zip destfile="${build.dir}/${build.name}-RC.zip" basedir="${build.dir}" includes="*" excludes="classes*"/>
 	</target>
 
 	<!-- Tests -->
