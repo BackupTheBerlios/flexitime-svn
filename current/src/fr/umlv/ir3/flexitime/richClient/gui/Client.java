@@ -356,6 +356,7 @@ public class Client
 
         //Print
         Action print = PrintAction.getInstance();
+        PrintAction.setExploitView(exploitView);
         menuFichier.add(print);
         
         menuFichier.add(new JSeparator());
@@ -611,7 +612,7 @@ public class Client
         String serverIP = " "; //$NON-NLS-1$
         while(res!=0)
         {
-            serverIP = JOptionPane.showInputDialog(language.getText("errConf")); //$NON-NLS-1$
+            serverIP = JOptionPane.showInputDialog(language.getText("errClientConf")); //$NON-NLS-1$
             res = testIPServer(serverIP);
         }
     }
@@ -658,17 +659,15 @@ public class Client
             pass = loginView.getPass();
             
             //TODO JG, verifier user / login sur server (bdd flexitime)
-            UserManager um;
 			try {
-				um = new UserManager();
-				if(um.ConnectToRich(login, pass))
+				if(RemoteDataManager.getUserManager().ConnectToRich(login, pass))
                 {
-                    System.out.println("Test fictif : login="+login+", pass="+pass + " => OK");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
+                    System.out.println("login="+login+", pass="+pass + " => OK");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
                     test = true;                
                 }
                 else
                 {
-                    System.out.println("Test fictif : login="+login+", pass="+pass + " => KO");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+                    System.out.println("login="+login+", pass="+pass + " => KO");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
                 }
             } catch (RemoteException e) {
                 JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -794,7 +793,7 @@ public class Client
         // gestion contact du serveur
         if( initConf() != 0 )
         {
-            JOptionPane.showMessageDialog(null, language.getText("errConf2"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+            JOptionPane.showMessageDialog(null, language.getText("errClientConf2"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             System.exit(1);
         }
         

@@ -60,6 +60,6 @@ public class MailPreFormatedTeacherAction extends AbstractAction
         //construire une mailView avec le champ From, To, Subject et PJ rempli
         //envoyer le mail kan la secrétaire appuie sur OK
         MailView mail = new MailView();
-        mail.printView();
+        mail.printView(null);
     }
 }

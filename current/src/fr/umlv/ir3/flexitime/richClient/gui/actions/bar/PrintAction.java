@@ -11,8 +11,11 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
+import fr.umlv.ir3.flexitime.server.io.PrintUtilities;
 
 
 /**
@@ -31,6 +34,7 @@ public class PrintAction extends AbstractAction
     private static PrintAction action;
     private static Icon icon = Client.getIcon(PrintAction.class, "../../pictures/_print.png");
     private static JButton button;
+    private static ExploitationView exploitView;
     
     protected PrintAction()
     {
@@ -83,6 +87,11 @@ public class PrintAction extends AbstractAction
         button.setEnabled(newValue);
     }
     
+    public static void setExploitView(ExploitationView _exploitView)
+    {
+        exploitView = _exploitView;        
+    }
+    
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -94,7 +103,7 @@ public class PrintAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent e)
     {
-        // TODO Auto-generated method stub
-        System.out.println("printAction");
+        //JComponent compo = exploitView.getPrintableComponent();
+        //PrintUtilities.printComponent(compo);
     }
 }
