@@ -122,7 +122,8 @@ public class BuildingTreeNode implements FlexiTreeNode
 	 * @see javax.swing.tree.TreeNode#isLeaf()
 	 */
 	public boolean isLeaf() {
-		return building.getLstFloor().size()==0;
+		if(building.getLstFloor() == null) return true;
+		else return false;
 	}
 
 	/* (non-Javadoc)
@@ -216,6 +217,7 @@ public class BuildingTreeNode implements FlexiTreeNode
 		//synchronized(cat.getParent())
 		//{
 			building.removeFloor(((FloorTreeNode)childNode).getFloor());
+			//TODO Enlevé floor de la base
 			int index = children.indexOf(childNode);
 			children.remove(childNode);	
 			model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});

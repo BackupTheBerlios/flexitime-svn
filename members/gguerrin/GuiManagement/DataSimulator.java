@@ -141,7 +141,7 @@ public class DataSimulator
 		IFloor floorDes2 = DataFactory.createFloor("Etage2",buildingDes);
 
 		
-		//Construction des salles
+		/*//Construction des salles
 		IRoom RoomCop11 = DataFactory.createRoom("Salle Cop11",0,30,floorCop1);
 		IRoom RoomCop12 = DataFactory.createRoom("Salle Cop12",1,20,floorCop1);
 		IRoom RoomCop13 = DataFactory.createRoom("Salle Cop13",2,10,floorCop1);
@@ -180,7 +180,7 @@ public class DataSimulator
 		IRoom RoomDes13 = DataFactory.createRoom("Salle Des13",2,10,floorDes1);
 		IRoom RoomDes14 = DataFactory.createRoom("Salle Des14",1,10,floorDes1);
 		IRoom RoomDes15 = DataFactory.createRoom("Salle Des15",2,20,floorDes1);
-		
+		*/
 		lstBuilding.add(buildingCop);
 		lstBuilding.add(buildingRab);
 		lstBuilding.add(buildingDes);

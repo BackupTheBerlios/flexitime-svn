@@ -50,6 +50,10 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	 */
 	private String name;
 	/**
+	 * The int of the type
+	 */
+	private int type;
+	/**
 	 * The list of the sub categories
 	 */
 	private List children;
@@ -60,10 +64,11 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
     //   Constructeurs  //
     //==================// 
 	
-	public TypeDeviceTreeNode(TreeNode parent,String name,List lstDevice)
+	public TypeDeviceTreeNode(TreeNode parent,String name,int type,List lstDevice)
 	{
 		this.parent = parent;
 		this.name=name;
+		this.type =type;
 		this.lstDevice = lstDevice;
 	}
 	
@@ -74,9 +79,9 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	 * @param factory the BuckFactory
 	 * @param model the model
 	 */
-	public TypeDeviceTreeNode(TreeNode parent,String name,List lstDevice,DefaultTreeModel model)
+	public TypeDeviceTreeNode(TreeNode parent,String name,int type,List lstDevice,DefaultTreeModel model)
 	{
-		this(parent,name,lstDevice);
+		this(parent,name,type,lstDevice);
 		this.model=model;
 		children = new ArrayList();
 	}
@@ -125,7 +130,8 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	 * @see javax.swing.tree.TreeNode#isLeaf()
 	 */
 	public boolean isLeaf() {
-		return lstDevice.size()==0;
+		if(lstDevice == null) return true;
+		else return false;
 	}
 
 	/* (non-Javadoc)
@@ -172,8 +178,9 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	public TreeNode add() 
 	{
 
-			IDevice device= DataFactory.createDevice("Nouvelle Promotion");
-			device.setType(0);
+			IDevice device= DataFactory.createDevice("Nouveau Matériel");
+			device.setType(type);
+			lstDevice.add( device);
 			DeviceTreeNode child = new DeviceTreeNode(this,device,model);
 			if(children.size()==0)
 			{
@@ -217,6 +224,7 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	 */
 	public void remove(TreeNode childNode) {
 		lstDevice.remove(((DeviceTreeNode)childNode).getDevice());
+		((RootDeviceTreeNode)this.getParent()).getList().remove(((DeviceTreeNode)childNode).getDevice());
 		//Effacement du device dans la base
 		int index = children.indexOf(childNode);
 		children.remove(childNode);	
@@ -228,8 +236,7 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
 	 */
 	public void setValue(Object newValue) {
-		/*track.setName((String)newValue);
-		model.nodeChanged(this);*/
+		//non utilisée
 		
 	}
 

@@ -124,7 +124,8 @@ public class TrackTreeNode implements FlexiTreeNode
 	 * @see javax.swing.tree.TreeNode#isLeaf()
 	 */
 	public boolean isLeaf() {
-		return track.getLstClass().size()==0;
+		if(track.getLstClass() == null) return true;
+		else return false;
 	}
 
 	/* (non-Javadoc)

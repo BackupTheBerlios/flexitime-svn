@@ -78,15 +78,15 @@ public class RootDeviceTreeNode extends RootTreeNode
 				((ArrayList)map.get(new Integer(dev.getType()))).add(dev);
 			}
 		}
-		Iterator TypeDeviceIte = map.keySet().iterator();
-		for(;TypeDeviceIte.hasNext();)
+		Iterator TypeDeviceIte = map.keySet().iterator();	
+		for(int i=0;i<IDevice.class.getFields().length;i++)
 		{
-			Integer type = (Integer)TypeDeviceIte.next();
 			String name = new String();
-			name += type;
-			List lstDevice = (List)map.get(type);
-			
-			list.add(new TypeDeviceTreeNode(this,name,lstDevice,model));
+			name += IDevice.class.getFields()[i].getName() ;
+			List lstDevice;
+			if(map.get(new Integer(i))!= null )lstDevice = (List)map.get(i);
+			else lstDevice = new ArrayList();
+			list.add(new TypeDeviceTreeNode(this,name,i,lstDevice,model));
 		}
 		this.children =list;
 		return(list);
@@ -96,7 +96,7 @@ public class RootDeviceTreeNode extends RootTreeNode
 	{
 		//synchronized(this.cat)
 		//{
-		ITrack track = DataFactory.createTrack("Nouvelle Filière");
+		/*ITrack track = DataFactory.createTrack("Nouvelle Filière");
 		TrackTreeNode child = new TrackTreeNode(this,track,model);
 		if(children.size()==0)
 		{
@@ -107,7 +107,8 @@ public class RootDeviceTreeNode extends RootTreeNode
 			children.add(child);
 		}
 		model.nodesWereInserted(this,new int[]{children.size()-1});
-		return child;
+		return child;*/
+		return null;
 	}
 	
 	

@@ -125,7 +125,8 @@ public class FloorTreeNode implements FlexiTreeNode
 	 * @see javax.swing.tree.TreeNode#isLeaf()
 	 */
 	public boolean isLeaf() {
-		return floor.getLstRoom().size()==0;
+		if(floor.getLstRoom() == null) return true;
+		else return false;
 	}
 
 	/* (non-Javadoc)
@@ -161,14 +162,15 @@ public class FloorTreeNode implements FlexiTreeNode
 			}
 		}
 		Iterator TypeRoomIte = map.keySet().iterator();
-		for(;TypeRoomIte.hasNext();)
+		for(int i=0;i<IRoom.class.getFields().length;i++)
 		{
-			Integer type = (Integer)TypeRoomIte.next();
 			String name = new String();
-			name += type;
-			List lstRoom = (List)map.get(type);
+			name += IRoom.class.getFields()[i].getName() ;
+			List lstRoom;
+			if(map.get(new Integer(i))!= null )lstRoom = (List)map.get(i);
+			else lstRoom = new ArrayList();
 			
-			list.add(new TypeRoomTreeNode(this,name,lstRoom,model));
+			list.add(new TypeRoomTreeNode(this,name,i,lstRoom,model));
 		}
 		this.children =list;
 		return(list);
@@ -192,20 +194,8 @@ public class FloorTreeNode implements FlexiTreeNode
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
 	public TreeNode add() {
-		//synchronized(this.cat)
-		//{
-				IRoom room = DataFactory.createRoom("Nouveau type",0,10,floor);
-				FloorTreeNode child = new FloorTreeNode(this,floor,model);
-				if(children.size()==0)
-				{
-					processChildren();
-				}
-				else
-				{
-					children.add(child);
-				}
-				model.nodesWereInserted(this,new int[]{children.size()-1});
-				return child;
+		//non utilisé
+		return null;
 	}
 	
 	
@@ -213,23 +203,7 @@ public class FloorTreeNode implements FlexiTreeNode
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
 	public TreeNode add(List value) {
-		//synchronized(this.cat)
-		//{
-			/*if(value.size() == 2)
-			{
-				IGroup groupe = DataFactory.createGroup((String)value.get(0),((Integer)value.get(1)).intValue(),iClass);
-				GroupTreeNode child = new GroupTreeNode(this,groupe,model);
-				if(children.size()==0)
-				{
-					processChildren();
-				}
-				else
-				{
-					children.add(child);
-				}
-				model.nodesWereInserted(this,new int[]{children.size()-1});
-				return child;
-			}*/
+			//non utilisée
 			return null;
 	}
 
@@ -238,13 +212,7 @@ public class FloorTreeNode implements FlexiTreeNode
 	 */
 	public void remove(TreeNode childNode) 
 	{
-		//synchronized(cat.getParent())
-		//{
-			//floor.removeRoom(((FloorTreeNode)childNode).getFloor());
-			//int index = children.indexOf(childNode);
-			//children.remove(childNode);	
-			//model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
-		//}
+		//non utilisée
 		
 	}
 

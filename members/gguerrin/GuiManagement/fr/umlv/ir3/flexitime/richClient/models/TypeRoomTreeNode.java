@@ -49,6 +49,10 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	 */
 	private String name;
 	/**
+	 * The name of the type
+	 */
+	private int type;
+	/**
 	 * The list of the sub categories
 	 */
 	private List children;
@@ -59,10 +63,11 @@ public class TypeRoomTreeNode implements FlexiTreeNode
     //   Constructeurs  //
     //==================// 
 	
-	public TypeRoomTreeNode(TreeNode parent,String name,List lstRoom)
+	public TypeRoomTreeNode(TreeNode parent,String name,int type,List lstRoom)
 	{
 		this.parent = parent;
 		this.name=name;
+		this.type= type;
 		this.lstRoom = lstRoom;
 	}
 	
@@ -73,9 +78,9 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	 * @param factory the BuckFactory
 	 * @param model the model
 	 */
-	public TypeRoomTreeNode(TreeNode parent,String name,List lstRoom,DefaultTreeModel model)
+	public TypeRoomTreeNode(TreeNode parent,String name,int type,List lstRoom,DefaultTreeModel model)
 	{
-		this(parent,name,lstRoom);
+		this(parent,name,type,lstRoom);
 		this.model=model;
 		children = new ArrayList();
 	}
@@ -124,7 +129,8 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	 * @see javax.swing.tree.TreeNode#isLeaf()
 	 */
 	public boolean isLeaf() {
-		return lstRoom.size()==0;
+		if(lstRoom == null) return true;
+		else return false;
 	}
 
 	/* (non-Javadoc)
@@ -170,10 +176,10 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	 */
 	public TreeNode add() 
 	{
-
-		/*	IRoom room= DataFactory.createRoom("Nouvelle Salle",0,10,this.getParent());
-			room.setType(0);
-			DeviceTreeNode child = new DeviceTreeNode(this,device,model);
+			IRoom room= DataFactory.createRoom("Nouvelle Salle",type,0,((FloorTreeNode)this.getParent()).getFloor());
+			room.setType(type);
+			RoomTreeNode child = new RoomTreeNode(this,room,model);
+			lstRoom.add(room);
 			if(children.size()==0)
 			{
 				processChildren();
@@ -183,8 +189,7 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 				children.add(child);
 			}
 			model.nodesWereInserted(this,new int[]{children.size()-1});
-			return child;*/
-		return null;
+			return child;
 	}
 	
 	
@@ -217,7 +222,8 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	 */
 	public void remove(TreeNode childNode) {
 		lstRoom.remove(((RoomTreeNode)childNode).getRoom());
-		//Effacement du device dans la base
+		((FloorTreeNode)this.getParent()).getFloor().getLstRoom().remove(((RoomTreeNode)childNode).getRoom());
+		//Effacement du room dans la base
 		int index = children.indexOf(childNode);
 		children.remove(childNode);	
 		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});

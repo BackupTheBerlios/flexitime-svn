@@ -19,6 +19,7 @@ import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 
 
 /**
@@ -123,7 +124,8 @@ public class ClassTreeNode implements FlexiTreeNode
 	 * @see javax.swing.tree.TreeNode#isLeaf()
 	 */
 	public boolean isLeaf() {
-		return iClass.getLstGroups().size()==0;
+		if(iClass.getLstGroups() == null) return true;
+		else return false;
 	}
 
 	/* (non-Javadoc)
@@ -146,6 +148,9 @@ public class ClassTreeNode implements FlexiTreeNode
 		{
 			list.add(new GroupTreeNode(this,(IGroup)iClass.getLstGroups().get(i),model));
 		}
+		//Ajout de la teachingStructure
+		//if(iClass.getTeachingStructure()==null)iClass.setTeachingStructure(DataFactory.crea);
+		list.add(new TeachingStructureTreeNode(this,iClass.getTeachingStructure(),model));
 		this.children =list;
 		return(list);
 	}

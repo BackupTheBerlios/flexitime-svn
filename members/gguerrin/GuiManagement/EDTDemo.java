@@ -49,6 +49,8 @@ public class EDTDemo
         
         //FlexiPlanning fe = new FlexiPlanning(new DefaultPlanningModel());
         ManagementView managementView = new ManagementView(DataSimulator.createTrackList(),DataSimulator.createDeviceList(),DataSimulator.createRoomList());
+        //ManagementView managementView = new ManagementView(null,null,null);
+        //ManagementView managementView = new ManagementView(new ArrayList(),new ArrayList(),new ArrayList());
         container.add(new JScrollPane(createPanelForComponent(managementView.getPanel(),null)), BorderLayout.CENTER);
         
     }

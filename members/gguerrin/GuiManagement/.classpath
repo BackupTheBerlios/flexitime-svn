@@ -2,6 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/Famille/Mes documents/ingé2k/GL/forms-1.0.5.jar"/>
+	<classpathentry kind="lib" path="E:/Documents perso/Guillaume/inge2000/ir3/flexitime/current/lib/activation.jar"/>
+	<classpathentry kind="lib" path="E:/Documents perso/Guillaume/inge2000/ir3/flexitime/current/lib/forms-1.0.5.jar"/>
+	<classpathentry kind="lib" path="E:/Documents perso/Guillaume/inge2000/ir3/flexitime/current/lib/looks-1.2.2.jar"/>
+	<classpathentry kind="lib" path="E:/Documents perso/Guillaume/inge2000/ir3/flexitime/current/lib/mail.jar"/>
+	<classpathentry kind="lib" path="E:/Documents perso/Guillaume/inge2000/ir3/flexitime/current/lib/hibernate/hibernate2.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

@@ -76,6 +76,7 @@ public class RootRoomTreeNode extends RootTreeNode
 		//{
 		IBuilding build = DataFactory.createBuilding("Nouveau Batiment");
 		BuildingTreeNode child = new BuildingTreeNode(this,build,model);
+		lst.add(build);
 		if(children.size()==0)
 		{
 			processChildren();
@@ -115,7 +116,7 @@ public class RootRoomTreeNode extends RootTreeNode
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(javax.swing.tree.TreeNode)
 	 */
 	public void remove(TreeNode childNode) {
-		lst.remove(((DeviceTreeNode)childNode).getDevice());
+		lst.remove(((BuildingTreeNode)childNode).getBuilding());
 		int index = children.indexOf(childNode);
 		children.remove(childNode);	
 		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});

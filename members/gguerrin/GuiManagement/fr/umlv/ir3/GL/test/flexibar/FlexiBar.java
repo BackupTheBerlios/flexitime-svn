@@ -32,9 +32,9 @@ public class FlexiBar extends JPanel
      */
     private static final long serialVersionUID = 3256720676126536758L;
     
-    private final int B_WIDTH = 90;
+    private final int B_WIDTH = 120;
 	private final int B_HEIGHT = 20;
-	private final int P_WIDTH = 90;
+	private final int P_WIDTH = 120;
 	private final int P_HEIGHT = Integer.MAX_VALUE;
 	
 	BoxLayout layout;
@@ -52,7 +52,7 @@ public class FlexiBar extends JPanel
 		layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 		panel.setLayout(layout);
 		//panel.setSize(30,150);
-		panel.setPreferredSize(new Dimension(90,400));
+		panel.setPreferredSize(new Dimension(P_WIDTH,400));
 		add(panel);
 		
 		listComponent = new ArrayList<JComponent>();

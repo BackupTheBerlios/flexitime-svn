@@ -33,19 +33,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
     // ===========//
     // Champs //
     // ===========//
-    // Definition des types
-    /**
-     * Comment for <code>TYPE_MACHINE</code>
-     */
-    public final static int   TYPE_MACHINE     = 1;
-    /**
-     * Comment for <code>TYPE_COURS</code>
-     */
-    public final static int   TYPE_COURS       = 2;
-    /**
-     * Comment for <code>TYPE_TP</code>
-     */
-    public final static int   TYPE_TP          = 3;
+    
 
     private int               type;
     private int               capacity;

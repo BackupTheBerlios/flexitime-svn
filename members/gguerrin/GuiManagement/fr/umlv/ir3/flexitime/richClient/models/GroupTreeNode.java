@@ -192,7 +192,7 @@ public class GroupTreeNode  implements FlexiTreeNode
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setModel(fr.umlv.ir3.flexitime.richClient.models.ResourceModel)
 	 */
 	public void setModel(DefaultTreeModel model) {
-		// TODO Auto-generated method stub
+		this.model=model;
 		
 	}
 

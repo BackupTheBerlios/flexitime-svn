@@ -29,7 +29,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @see (si nécessaire)
  * @author FlexiTeam - Adrien Bouvet
  */
-public class DevicesView extends JPanel
+public class DevicesView extends JLabel
 {
 	public DevicesView()
 	{

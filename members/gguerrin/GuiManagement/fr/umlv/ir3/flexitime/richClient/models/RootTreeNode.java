@@ -125,8 +125,8 @@ public abstract class RootTreeNode implements FlexiTreeNode
 	 */
 	public boolean isLeaf() 
 	{
-		if(lst!= null)return lst.size()==0;
-		return true;
+		if(lst == null)return true;
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -136,6 +136,10 @@ public abstract class RootTreeNode implements FlexiTreeNode
 		return Collections.enumeration(processChildren());
 	}
 	
+	public List getList()
+	{
+		return lst;
+	}
 	/**
 	 * Creates dynamiquely the list of the children when the user click on the "plus"
 	 * @return the list of sub categories
