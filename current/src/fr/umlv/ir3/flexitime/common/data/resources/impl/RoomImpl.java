@@ -6,7 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.util.Set;
+import java.util.SortedSet;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
  * 
  * TYPE_MACHINE = 1; TYPE_COURS = 2; TYPE_TP = 3;
  * 
- * @version 240
+ * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.resources.IRoom
  * @see fr.umlv.ir3.flexitime.common.data.resources.impl.ResourceImpl
  * 
@@ -30,21 +30,23 @@ public class RoomImpl extends ResourceImpl implements IRoom
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3256719568024974134L;
-    // ===========//
+    // ====== //
     // Champs //
-    // ===========//
+    // ====== //
     private int               type;
     private int               capacity;
     private IFloor            parentFloor;
 
-    // =============//
-    // Constructeurs//
-    // =============//
+    // ============= //
+    // Constructeurs //
+    // ============= //
     /**
      * Default constructor for a room.
      */
     protected RoomImpl()
-    {}
+    {
+        super();
+    }
 
     /**
      * Constructs a room with just a name in parameter.
@@ -120,7 +122,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
      *            a list of unavailibilities
      */
     public RoomImpl(String name, int type, int capacity, IFloor floor,
-            Set<IBusy> busies)
+            SortedSet<IBusy> busies)
     {
         super(name, busies);
         this.type = type;

@@ -9,8 +9,8 @@ package fr.umlv.ir3.flexitime.common.data.resources;
 /**
  * Represents a device as a videoprojector
  * 
- * @version 0.1
- * @author FlexiTeam - Guillaume GUERRIN
+ * @version 245
+ * @author FlexiTeam - Jérôme GUERS
  */
 public interface IDevice extends IResource
 {
@@ -32,7 +32,6 @@ public interface IDevice extends IResource
      * Returns the type of the device.
      * 
      * @return the type of the device.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     int getType();
 
@@ -40,8 +39,6 @@ public interface IDevice extends IResource
      * Changes the type of the device.
      * 
      * @param type the new type.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     void setType(int type);
-
 }

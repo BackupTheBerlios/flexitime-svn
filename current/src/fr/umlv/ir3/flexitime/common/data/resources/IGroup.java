@@ -11,8 +11,8 @@ import fr.umlv.ir3.flexitime.common.data.general.IClass;
 /**
  * Represents a group of studients who belong at the same Class
  * 
- * @version 0.2
- * @author FlexiTeam - Guillaume GUERRIN
+ * @version 245
+ * @author FlexiTeam - Jérôme GUERS
  */
 public interface IGroup extends IResource
 {
@@ -21,7 +21,6 @@ public interface IGroup extends IResource
      * Returns the number of persons of the group.
      * 
      * @return the number of persons of the group.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     int getNbPerson();
 
@@ -29,7 +28,6 @@ public interface IGroup extends IResource
      * Changes the number of persons of the group.
      * 
      * @param nbPerson the number of persons of the group.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     void setNbPerson(int nbPerson);
     
@@ -37,7 +35,6 @@ public interface IGroup extends IResource
 	 * Returns the parent class of this group.
 	 *
 	 * @return the parent class of this group.
-     * @author FlexiTeam - Adrien BOUVET
 	 */
 	public IClass getParentClass();
 
@@ -45,8 +42,6 @@ public interface IGroup extends IResource
 	 * Sets the parent class of this group.
 	 *
 	 * @param parentClass the parent class of this group.
-     * @author FlexiTeam - Adrien BOUVET
 	 */ 
 	public void setParentClass(IClass parentClass);
-
 }

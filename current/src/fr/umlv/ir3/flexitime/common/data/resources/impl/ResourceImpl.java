@@ -15,7 +15,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 /**
  * Defines an implementation of a ressource, it is extended by all the resource classes.
  * 
- * @version 240
+ * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.resources.IResource
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -25,7 +25,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
     //===========//
 	//  Champs	 //
 	//===========//
-    private Set<IBusy> setBusy;
+    private SortedSet<IBusy> setBusy;
     
     
 	//=============//
@@ -36,7 +36,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
 	 */
 	protected ResourceImpl()
 	{
-        setBusy = new HashSet<IBusy>();
+        setBusy = new TreeSet<IBusy>();
     }
 	
 	/**
@@ -47,7 +47,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
 	public ResourceImpl(String name)
 	{
 		super(name);
-		setBusy = new HashSet<IBusy>();
+		setBusy = new TreeSet<IBusy>();
 	}
 	
     /**
@@ -55,9 +55,8 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * 
      * @param name  a string;
      * @param busies a list of unavailibilities.
-     * 
      */
-    public ResourceImpl(String name, Set<IBusy> busies)
+    public ResourceImpl(String name, SortedSet<IBusy> busies)
     {
         super(name);
         this.setBusy = busies;
@@ -74,9 +73,8 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * @return the list of unavailibilities.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#getSetBusy()
-     * @author   FlexiTeam - Adrien BOUVET
      */
-    public Set<IBusy> getSetBusy()
+    public SortedSet<IBusy> getSetBusy()
     {
         return setBusy;
     }
@@ -87,10 +85,9 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      *
      * @param busies a list of unavailibilities.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#setSetBusy(java.util.Set)
-     * @author   FlexiTeam - Adrien BOUVET
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#setSetBusy(java.util.SortedSet)
      */
-    public void setSetBusy(Set<IBusy> busies)
+    public void setSetBusy(SortedSet<IBusy> busies)
     {
         this.setBusy = busies;
     }
@@ -102,7 +99,6 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * @param busy an unavilibility.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#addBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void addBusy(IBusy busy)
     {
@@ -116,7 +112,6 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * @param busy the unavailibility to remove.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#removeBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void removeBusy(IBusy busy)
     {

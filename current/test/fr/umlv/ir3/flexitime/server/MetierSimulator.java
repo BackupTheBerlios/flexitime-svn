@@ -269,7 +269,7 @@ public class MetierSimulator
     /** 
      * @return dsfsd
      */
-    public static List getLessonsList()
+    public static List<ILesson> getLessonsList()
     {
         List<ILesson> res = new ArrayList<ILesson>(3);
         res.add(DataFactory.createLesson(new Gap(2005,1,3,8,30,2005,1,3,10,30) , new CourseImpl("Corba",null,120, 1,50,Color.YELLOW,null) , 120 )   );

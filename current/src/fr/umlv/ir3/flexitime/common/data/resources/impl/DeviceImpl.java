@@ -6,7 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.util.Set;
+import java.util.SortedSet;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
@@ -14,7 +14,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 /**
  * Defines a device.
  * 
- * @version 205
+ * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -77,7 +77,7 @@ public class DeviceImpl extends ResourceImpl implements IDevice
      * @param type
      *            the type of device.
      */
-    public DeviceImpl(String name, int type, Set<IBusy> busies)
+    public DeviceImpl(String name, int type, SortedSet<IBusy> busies)
     {
         super(name, busies);
         this.type = type;

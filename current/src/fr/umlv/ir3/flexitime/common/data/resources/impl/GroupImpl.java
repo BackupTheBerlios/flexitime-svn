@@ -5,7 +5,7 @@
  */
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.util.Set;
+import java.util.SortedSet;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
@@ -15,7 +15,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 /**
  * Defines a group.
  * 
- * @version 240
+ * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -26,21 +26,23 @@ public class GroupImpl extends ResourceImpl implements IGroup
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3904677193450663986L;
-    //===========//
-	//  Champs	 //
-	//===========//
+    //======== //
+	//  Champs //
+	//======== //
     private int nbPerson; 
     private IClass parentClass;
     
     
-	//=============//
-	//Constructeurs//
-    //=============//
+	//============= //
+	//Constructeurs //
+    //============= //
 	/**
 	 * Default constructor for a group. 
 	 */
 	protected GroupImpl()
-	{}
+	{
+     super();   
+    }
 	
 	/**
 	 * Constructs a group with just a name in parameter.
@@ -75,7 +77,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
      * @param nbPerson the number of students in this group.
 	 * @param parentClass the parent class of this group.
      */
-    public GroupImpl(String name, int nbPerson, IClass parentClass, Set<IBusy> busies)
+    public GroupImpl(String name, int nbPerson, IClass parentClass, SortedSet<IBusy> busies)
     {
         super(name, busies);
         this.nbPerson = nbPerson;

@@ -6,7 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.util.Set;
+import java.util.SortedSet;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
@@ -14,7 +14,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 /**
  * Defines a teacher.
  * 
- * @version 240
+ * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.resources.ITeacher
  * @see fr.umlv.ir3.flexitime.common.data.resources.impl.ResourceImpl
  * 
@@ -27,20 +27,22 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3906369333239427639L;
-    // ===========//
+    // ====== //
     // Champs //
-    // ===========//
+    // ====== //
     private String            firstName;
     private String            email;
 
-    // =============//
-    // Constructeurs//
-    // =============//
+    // ============= //
+    // Constructeurs //
+    // ============= //
     /**
      * Default constructor for a teacher.
      */
     protected TeacherImpl()
-    {}
+    {
+        super();
+    }
 
     /**
      * Constructs a teacher with just a name and a firstName in parameter.
@@ -81,7 +83,7 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      *            the email of the teacher.
      * 
      */
-    public TeacherImpl(String name, String firstName, String mail, Set<IBusy> busies)
+    public TeacherImpl(String name, String firstName, String mail, SortedSet<IBusy> busies)
     {
         super(name, busies);
         this.firstName = firstName;
