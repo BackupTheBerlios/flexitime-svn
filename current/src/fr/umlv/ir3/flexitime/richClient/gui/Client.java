@@ -48,15 +48,32 @@ import com.jgoodies.plaf.HeaderStyle;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.Plastic3DLookAndFeel;
 
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Time;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.*;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExploitationAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExportAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.GestionAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.HistoryAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LargerGapAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LargerTimeTableAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailPreFormatedClassAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailPreFormatedTeacherAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.NextIntervalAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.NextWeekAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreferencesAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousIntervalAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousWeekAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PrintAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerGapAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerTimeTableAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.StatsAction;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
-import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
 
 /**
  * Client This class build an graphic interface for the user.
@@ -93,6 +110,7 @@ public class Client
     private static JButton butNextInterval;
     private static JLabel labTrackAct;
     private static FlexiLanguage language;
+    private static IUser iUser;
     static
     {
         language = FlexiLanguage.getInstance();
@@ -388,7 +406,16 @@ public class Client
             {
                 setAccueilMode();
                 user = null;
-                //TODO loginView.reset();
+                try
+                {
+                    RemoteDataManager.getUserManager().disconnect(iUser);
+                    //TODO loginView.reset();
+                }
+                catch (RemoteException e1)
+                {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
                 if( (user = checkLogin()) == null)
                 {
                     JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -663,7 +690,8 @@ public class Client
 				if(RemoteDataManager.getUserManager().ConnectToRich(login, pass))
                 {
                     System.out.println("login="+login+", pass="+pass + " => OK");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
-                    test = true;                
+                    test = true;          
+                    iUser = RemoteDataManager.getUserManager().get(login);
                 }
                 else
                 {

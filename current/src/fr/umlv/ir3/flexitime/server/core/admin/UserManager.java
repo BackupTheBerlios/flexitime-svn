@@ -241,4 +241,21 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
         
     }
 
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param user
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager#disconnect(fr.umlv.ir3.flexitime.common.data.admin.IUser)
+     */
+    public void disconnect(IUser user) throws RemoteException
+    {
+        if(ConnectedUser.contains(user.getName()))
+            ConnectedUser.remove(user.getName());
+
+    }
 }

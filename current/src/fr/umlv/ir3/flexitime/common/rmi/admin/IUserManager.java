@@ -68,6 +68,8 @@ public interface IUserManager extends Remote
      * @throws RemoteException 
      */
     public String getLongName(String login)throws RemoteException;
+    
+    public void disconnect(IUser user) throws RemoteException;
 }
 
 
