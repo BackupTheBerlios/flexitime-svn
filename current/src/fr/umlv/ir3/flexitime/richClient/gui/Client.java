@@ -13,6 +13,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.LayoutManager;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -48,6 +49,8 @@ import javax.swing.JToolBar;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
+import org.jgroups.SetStateEvent;
+
 import com.jgoodies.plaf.HeaderStyle;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.Plastic3DLookAndFeel;
@@ -58,7 +61,7 @@ import fr.umlv.ir3.flexitime.common.rmi.admin.IUserListener;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.*;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.MainPanel;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
@@ -83,10 +86,10 @@ public class Client
     private static JPanel exploitPanel;
     private static ManagementView mngmtView;
     private static JSplitPane mngmtPanel;
-    private static MainView accueilView;
+    private static MainPanel accueilView;
     private static JScrollPane accueilPanel;
     private JPanel jp_status;
-    private JLabel status;
+    private static JLabel status;
     private static ButtonGroup butGpExploit;
     private static JButton butLargerGap;
     private static JButton butSmallerGap;
@@ -116,6 +119,7 @@ public class Client
         frame = new JFrame(language.getText("appliTitle")); //$NON-NLS-1$
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setSize(800, 600);
+        
         ImageIcon icon = new ImageIcon(getClass().getResource(language.getText("flexIcone32"))); //$NON-NLS-1$
         frame.setIconImage(icon.getImage());
         
@@ -124,20 +128,9 @@ public class Client
         frame.setContentPane(mainPanel);
         centerPanel = new JLayeredPane();
         mainPanel.add(centerPanel, BorderLayout.CENTER);
-        
        
-        //construction des 3 panels principaux
-        accueilView = new MainView();
-        exploitView = new ExploitationView();
-        try {
-            mngmtView = new ManagementView();
-        } catch (RemoteException e) {
-            JOptionPane.showMessageDialog(null, language.getText("errMngmt1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
-            setAccueilMode();
-        }
+        accueilView = new MainPanel();
         accueilPanel = accueilView.getPanel();
-        exploitPanel = (JPanel)exploitView.getPanel();
-        mngmtPanel   = mngmtView.getJSP(); 
         
         //initialisation des barres
         initMenuBar();
@@ -224,15 +217,12 @@ public class Client
             }
         });
         centerPanel.add(accueilPanel, JLayeredPane.PALETTE_LAYER);
-        centerPanel.add(exploitPanel, JLayeredPane.PALETTE_LAYER);
-        centerPanel.add(mngmtPanel, JLayeredPane.PALETTE_LAYER);
         //TODO if(user!=null && user.getPrefs().getDefaultTrack() != null)
         //{ setExploitMode() Mettre une filière en paramètre ???????
         //}else
         setAccueilMode();
-        //frame.setVisible(true);
         setStatus("Prêt");
-        //TODO frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         return 0;
     }
 
@@ -588,10 +578,9 @@ public class Client
      * @param etat the new state to print in the status bar.
      * 
      */
-    public void setStatus(String etat)
+    public static void setStatus(String etat)
     {
-        this.status.setText(etat);
-        //jp_status.validate();
+        status.setText(etat);
     }
 
     /**
@@ -798,6 +787,17 @@ public class Client
         PrintAction.getInstance().setEnabled(true);
         labTrackAct.setVisible(true);
         enableButGpExploit();
+        if(exploitPanel==null)
+        {
+            setStatus("Chargement...");
+            FlexiProgressMonitor fpm = new FlexiProgressMonitor();
+            fpm.run();
+            exploitView = new ExploitationView();
+            exploitPanel = (JPanel)exploitView.getPanel();
+            centerPanel.add(exploitPanel, JLayeredPane.PALETTE_LAYER);
+            fpm.stop();
+            setStatus("Prêt");
+        }
         centerPanel.moveToFront(exploitPanel);
         centerPanel.validate();
         centerPanel.repaint();
@@ -815,6 +815,22 @@ public class Client
         PrintAction.getInstance().setEnabled(false);
         labTrackAct.setVisible(false);
         disableButGpExploit();
+        if(mngmtPanel == null)
+        {
+            setStatus("Chargement...");
+            FlexiProgressMonitor fpm = new FlexiProgressMonitor();
+            fpm.run();
+            try {
+                mngmtView = new ManagementView();
+            } catch (RemoteException e) {
+                JOptionPane.showMessageDialog(null, language.getText("errMngmt1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+                setAccueilMode();
+            }
+            mngmtPanel   = mngmtView.getJSP(); 
+            centerPanel.add(mngmtPanel, JLayeredPane.PALETTE_LAYER);
+            fpm.stop();
+            setStatus("Prêt");
+        }
         centerPanel.moveToFront(mngmtPanel);
         centerPanel.validate();
         centerPanel.repaint();
