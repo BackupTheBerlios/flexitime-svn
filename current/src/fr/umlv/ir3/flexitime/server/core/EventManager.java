@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
@@ -25,27 +28,27 @@ import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 public class EventManager
 {
 
-    private final HashMap<Class, List<IDataListener>> map = new HashMap<Class, List<IDataListener>>();
+    private final ConcurrentHashMap<Class, List<IDataListener>> map = new ConcurrentHashMap<Class, List<IDataListener>>();
 
     public void addDataListener(Class _class, IDataListener listener)
     {
-        synchronized (map)
-        {
+        //synchronized (map)
+        //{
             List<IDataListener> l = map.get(_class);
             if (l == null)
             {
-                l = new ArrayList<IDataListener>();
+                l = new CopyOnWriteArrayList<IDataListener>();
                 map.put(_class, l);
             }
 
             l.add(listener);
-        }
+        //}
     }
 
     public void removeDataListener(Class _class, IDataListener listener)
     {
-        synchronized (map)
-        {
+//        synchronized (map)
+//        {
             List<IDataListener> l = map.get(_class);
             if (l == null) return;
 
@@ -53,7 +56,7 @@ public class EventManager
             {
                 l.remove(listener);
             }
-        }
+//        }
     }
 
     public void fireDataChanged(Class _class, DataEvent event)

@@ -50,8 +50,8 @@ public class ThreadManager extends Thread
     public void run()
     {
         ArrayList<IDataListener> toRemove = new ArrayList<IDataListener>();
-        synchronized (listenerList)
-        {
+        //synchronized (listenerList)
+        //{
             for (Iterator iter = listenerList.iterator() ; iter.hasNext() ;)
             {
                 IDataListener element = (IDataListener) iter.next();
@@ -66,7 +66,7 @@ public class ThreadManager extends Thread
                     toRemove.add(element);
                 }
             }
-        }
+        //}
 
         if (!toRemove.isEmpty())
         {
