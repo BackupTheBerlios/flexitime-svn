@@ -56,6 +56,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
+import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
 
 /**
  * Client This class build an graphic interface for the user.
@@ -657,8 +658,24 @@ public class Client
             pass = loginView.getPass();
             
             //TODO JG, verifier user / login sur server (bdd flexitime)
+            UserManager um;
+			try {
+				um = new UserManager();
+				if(um.ConnectToRich(login, pass))
+                {
+                    System.out.println("Test fictif : login="+login+", pass="+pass + " => OK");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
+                    test = true;                
+                }
+                else
+                {
+                    System.out.println("Test fictif : login="+login+", pass="+pass + " => KO");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+                }
+            } catch (RemoteException e) {
+                JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+            }
+            
             //test fictif...
-            if(login.compareTo(pass) == 0)
+            /*if(login.compareTo(pass) == 0)
             {
                 System.out.println("Test fictif : login="+login+", pass="+pass + " => OK");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
                 test = true;
@@ -666,7 +683,7 @@ public class Client
             else
             {
                 System.out.println("Test fictif : login="+login+", pass="+pass + " => KO");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-            }
+            }*/
         }
         
         return login;
