@@ -26,12 +26,9 @@ public class TestCompareBusies extends TestCase
 {
     public void testCompare()
     {
-        List<ILesson> lessons = MetierSimulator.getLessonsList();
-        IGroup group = new GroupImpl("IR3", 22);
-        for (ILesson lesson : lessons)
-            group.addBusy(lesson);            
+        IGroup group = MetierSimulator.getGroup2IR3();
         
-        SortedSet<IBusy> set = group.getSetBusy();
+        Set<IBusy> set = group.getSetBusy();
         for (Iterator iter = set.iterator() ; iter.hasNext() ;)
         {
             IBusy element = (IBusy) iter.next();
