@@ -37,9 +37,18 @@ public class GroupBusyImpl extends BusyImpl implements IGroupBusy
 	/**
 	 * Default constructor for a group's unavailibility. 
 	 */
-	public GroupBusyImpl()
+	protected GroupBusyImpl()
 	{}
 	
+	/**
+	 * Constructs an unavailibility for a group with just a name in parameter. 
+	 * 
+	 * @param strName a string.
+	 */
+	public GroupBusyImpl(String strName)
+	{
+		super(strName);          
+	}
 	
     /**
      * Constructs an unavailibility for a group. 
@@ -55,8 +64,6 @@ public class GroupBusyImpl extends BusyImpl implements IGroupBusy
         super(strName,daStart,daEnd);
         reason = iReason;           
     }
-    
-    
     
     
     //===========//

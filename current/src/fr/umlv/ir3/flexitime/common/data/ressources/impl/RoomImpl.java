@@ -3,11 +3,12 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.data.ressources.impl;
+package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.IRoom;
+import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 
 
 /**
@@ -30,7 +31,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	//===========//
     private int iType;
     private int iCapacity;
-    private String strFloor; 
+    private FloorImpl parentFloor; 
     
     
 	//=============//
@@ -39,9 +40,31 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	/**
 	 * Default constructor for a room. 
 	 */
-	public RoomImpl()
+	protected RoomImpl()
 	{}
 	
+	/**
+	 * Constructs a room with just a name in parameter.
+	 * 
+	 * @param name a string.
+	 */
+	public RoomImpl(String name)
+	{
+		super(name);        
+	}
+	
+	/**
+	 * Constructs a room with a name and his parent in parameter.
+	 * 
+	 * @param name a string.
+	 * @param floor the parent floor of this room.
+	 * 
+	 */
+	public RoomImpl(String name, FloorImpl floor)
+	{
+		super(name);
+		this.parentFloor = floor;        
+	}
 	
     /**
      * Constructs a room.
@@ -50,14 +73,14 @@ public class RoomImpl extends ResourceImpl implements IRoom
      * @param listBusy a list of unavailibilities.
      * @param type a type of room.
      * @param capacity the number maximum of students whom can sit in the room.
-     * 
+	 * @param floor the parent floor of this room. 
      */
-    public RoomImpl(String name, List listBusy, int type, int capacity)
+    public RoomImpl(String name, List listBusy, int type, int capacity, FloorImpl floor)
     {
         super(name, listBusy);
         this.iType = type;
         this.iCapacity = capacity;
-        
+        this.parentFloor = floor;        
     }
 
     
@@ -129,9 +152,9 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#getFloor()
 	 * @author   FlexiTeam - Adrien BOUVET
 	 */
-	public String getFloor()
+	public FloorImpl getFloor()
 	{
-		return strFloor;
+		return parentFloor;
 	}
 
 	/** 
@@ -143,8 +166,8 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#setFloor(java.lang.String)
 	 * @author   FlexiTeam - Adrien BOUVET
 	 */
-	public void setFloor(String floor)
+	public void setFloor(FloorImpl floor)
 	{
-		this.strFloor = floor;
+		this.parentFloor = floor;
 	}
 }

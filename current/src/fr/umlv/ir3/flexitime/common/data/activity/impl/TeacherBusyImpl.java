@@ -40,9 +40,18 @@ public class TeacherBusyImpl extends BusyImpl implements ITeacherBusy
 	/**
 	 * Default constructor for a teacher's unavailibility. 
 	 */
-	public TeacherBusyImpl()
+	protected TeacherBusyImpl()
 	{}
 	
+	/**
+	 * Constructs an unavailibility for a teacher with just a name in parameter. 
+	 * 
+	 * @param strName a string. 
+	 */
+	public TeacherBusyImpl(String strName)
+	{
+		super(strName);         
+	}
 	
     /**
      * Constructs an unavailibility for a teacher. 

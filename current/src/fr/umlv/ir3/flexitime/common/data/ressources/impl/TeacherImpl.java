@@ -3,11 +3,11 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.data.ressources.impl;
+package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 
 
 /**
@@ -33,16 +33,26 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
 	/**
 	 * Default constructor for a teacher. 
 	 */
-	public TeacherImpl()
+	protected TeacherImpl()
 	{}
 	
+	/**
+	 * Constructs a teacher with just a name in parameter.
+	 * 
+	 * @param name a string.
+	 */
+	public TeacherImpl(String name)
+	{
+		super(name);
+	}
 	
     /**
-     * DOCME
-     * @param name
-     * @param firstName
-     * @param listBusy
-     * @param email
+     * Constructs a teacher.
+     * 
+     * @param name a string.
+     * @param firstName the first name of the teacher.
+     * @param listBusy a list of unavailibilities.
+     * @param email the email of the teacher.
      * 
      */
     public TeacherImpl(String name, String firstName, List listBusy, String email)

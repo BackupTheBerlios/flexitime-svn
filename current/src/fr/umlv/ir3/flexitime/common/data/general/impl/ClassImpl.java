@@ -10,8 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.ressources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.ressources.impl.GroupImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructureImpl;
 
@@ -19,7 +19,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructur
 /**
  * Defines a class which contains groups.
  * 
- * @version 0.1
+ * @version 0.2
  * @see fr.umlv.ir3.flexitime.common.data.general.IClass
  * @see fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl
  * @see fr.umlv.ir3.flexitime.common.data.ressources.impl.GroupImpl
@@ -36,6 +36,7 @@ public class ClassImpl implements IClass
     private List listOfGroups;
     private int iNbPerson;
     private ITeachingStructure teachStruct;
+    private TrackImpl parentTrack;
     
     
     //==================//
@@ -44,9 +45,30 @@ public class ClassImpl implements IClass
 	/**
 	 * Default constructor for a class. 
 	 */
-	public ClassImpl()
+	protected ClassImpl()
 	{}
 	
+	/**
+	 * Constructs a class with just a name in parameter.
+	 * 
+	 * @param name a string.
+	 */
+	public ClassImpl(String name)
+	{
+		this.strName = name;
+	}
+	
+	/**
+	 * Constructs a class with a name and the parent track in parameter.
+	 * 
+	 * @param name a string.
+	 * @param track the parent track.
+	 */
+	public ClassImpl(String name, TrackImpl track)
+	{
+		this.strName = name;
+		this.parentTrack = track;
+	}
 	
     /**
      * Constructs a class.
@@ -54,14 +76,15 @@ public class ClassImpl implements IClass
      * @param sName a string for the name of this class.
      * @param listOfGroups the list of groups in this class.
      * @param struct the teaching structure of this class.
-     * 
+	 * @param track the parent track.
      */
-    public ClassImpl(String sName, List listOfGroups, ITeachingStructure struct)
+    public ClassImpl(String sName, List listOfGroups, ITeachingStructure struct, TrackImpl track)
     {
         this.strName = sName;
         this.listOfGroups = new ArrayList(listOfGroups);
         this.teachStruct = struct;
         calculNbPersonAndNbGroup();
+        this.parentTrack = track;
     }
 
     
@@ -195,6 +218,32 @@ public class ClassImpl implements IClass
         iNbPerson -= group.getNbPerson();
         iNbGroup--;
     }
+    
+	/** 
+	 * Returns the parent track of this class.
+	 * <code>TrackImpl track = class.getParentTrack()</code>
+	 *
+	 * @return the parent track of this class.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.general.IClass#getParentTrack()
+	 */
+	public TrackImpl getParentTrack()
+	{
+		return parentTrack;
+	}
+
+	/**
+	 * Sets the parent track of this class.
+	 * <code>class.getParentTrack(track)</code>
+	 * 
+	 * @param track the parent track of this class.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.general.IClass#setParentTrack(fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl)
+	 */
+	public void setParentTrack(TrackImpl track)
+	{
+		this.parentTrack = track;
+	}
 
     /** 
      * Returns the name of this class.

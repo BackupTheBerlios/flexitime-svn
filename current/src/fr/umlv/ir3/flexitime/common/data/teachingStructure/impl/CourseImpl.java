@@ -5,12 +5,12 @@
  */
 package fr.umlv.ir3.flexitime.common.data.teachingStructure.impl;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
-import fr.umlv.ir3.flexitime.common.tools.FlexiColor;
 
 
 /**
@@ -18,7 +18,7 @@ import fr.umlv.ir3.flexitime.common.tools.FlexiColor;
  * It can be a CM, TD or TP.
  * It containes a list of professors associated to this course.
  * 
- * @version 0.2
+ * @version 0.3
  * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse
  * 
  * @author FlexiTeam - Adrien BOUVET
@@ -31,10 +31,10 @@ public class CourseImpl implements ICourse
     private String strName;
     private int iType;
     private int iNbHours;
-    private FlexiColor color;
+    private Color color;
     private List listOfTeachers;
     private int iDefaultLength;
-    private String strSubject;
+    private SubjectImpl parentSubject;
     
     
 	//=============//
@@ -43,9 +43,30 @@ public class CourseImpl implements ICourse
 	/**
 	 * Default constructor for a course. 
 	 */
-	public CourseImpl()
+	protected CourseImpl()
 	{}
 	
+	/**
+	 * Constructs a course with just a name in parameter.
+	 * 
+	 * @param name a string.
+	 */
+	public CourseImpl(String name)
+	{
+		this.strName = name;
+	}
+	
+	/**
+	 * Constructs a course with a name and the parent subject in parameter.
+	 * 
+	 * @param name a string.
+	 * @param subject the parent subject of this course.
+	 */
+	public CourseImpl(String name, SubjectImpl subject)
+	{
+		this.strName = name;
+		this.parentSubject = subject;
+	}
 	
     /**
      * Constructs a course.
@@ -55,10 +76,10 @@ public class CourseImpl implements ICourse
      * @param nbHours the number of hours for this course.
      * @param color an int representing the color of the course.
      * @param listTeachers a list of teachers.
-     * @param subject the subject to which this course belongs.
+	 * @param subject the parent subject of this course.
      * 
      */
-    public CourseImpl(String name, int type, int nbHours, FlexiColor color, List listTeachers, int defaultLength, String subject)
+    public CourseImpl(String name, int type, int nbHours, Color color, List listTeachers, int defaultLength, SubjectImpl subject)
     {
         this.strName = name;
         this.iType = type;
@@ -66,7 +87,7 @@ public class CourseImpl implements ICourse
         this.color = color;
         this.listOfTeachers = new ArrayList(listTeachers);
         this.iDefaultLength = defaultLength;
-        this.strSubject = subject;
+        this.parentSubject = subject;
     }
 
     
@@ -167,7 +188,7 @@ public class CourseImpl implements ICourse
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#getColor()
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public FlexiColor getColor()
+    public Color getColor()
     {
         return color;
     }
@@ -181,7 +202,7 @@ public class CourseImpl implements ICourse
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#setColor(int)
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public void setColor(FlexiColor color)
+    public void setColor(Color color)
     {
         this.color = color;
     }
@@ -244,29 +265,29 @@ public class CourseImpl implements ICourse
     
 	/** 
 	 * Returns the subject to which the course belongs.
-	 * <code>String n = course.getSubject()</code>
+	 * <code>SubjectImpl s = course.getParentSubject()</code>
 	 *
 	 * @return the subject to which the course belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ICourse#getSubject()
+	 * @see fr.umlv.ir3.flexitime.common.data.ICourse#getParentSubject()
 	 */
-	public String getSubject()
+	public SubjectImpl getParentSubject()
 	{
-		return strSubject;
+		return parentSubject;
 	}
 
 
 	/** 
 	 * Sets the subject to which the course belongs.
-	 * <code>course.setSubject(subject)</code>
+	 * <code>course.setParentSubject(subject)</code>
 	 *
 	 * @param subjectsGroup the subject to which the course belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ICourse#setSubject(java.lang.String)
+	 * @see fr.umlv.ir3.flexitime.common.data.ICourse#setPArentSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl)
 	 */
-	public void setSubject(String subject)
+	public void setParentSubject(SubjectImpl subject)
 	{
-		this.strSubject = subject;
+		this.parentSubject = subject;
 	}
 
     /** 

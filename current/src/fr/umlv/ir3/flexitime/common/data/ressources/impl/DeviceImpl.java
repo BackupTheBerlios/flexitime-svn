@@ -3,11 +3,11 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.data.ressources.impl;
+package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.IDevice;
+import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 
 
 /**
@@ -33,9 +33,18 @@ public class DeviceImpl extends ResourceImpl implements IDevice
 	/**
 	 * Default constructor for a device. 
 	 */
-	public DeviceImpl()
+	protected DeviceImpl()
 	{}
 	
+	/**
+	 * Constructs a device with just a name in parameter.
+	 * 
+	 * @param name a string. 
+	 */
+	public DeviceImpl(String name)
+	{
+		super(name);
+	}
 	
     /**
      * Constructs a device.

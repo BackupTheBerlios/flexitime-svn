@@ -38,9 +38,18 @@ public class RoomBusyImpl extends BusyImpl implements IRoomBusy
 	/**
 	 * Default constructor for a room's unavailibility. 
 	 */
-	public RoomBusyImpl()
+	protected RoomBusyImpl()
 	{}
 	
+	/**
+	 * Constructs an unavailibility for a room with just a name in parameter. 
+	 * 
+	 * @param strName a string.
+	 */
+	public RoomBusyImpl(String strName)
+	{
+		super(strName);         
+	}
 	
     /**
      * Constructs an unavailibility for a room. 

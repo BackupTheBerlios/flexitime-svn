@@ -38,8 +38,18 @@ public abstract class BusyImpl implements IBusy
 	/**
 	 * Default constructor for an unavailibility. 
 	 */
-	public BusyImpl()
+	protected BusyImpl()
 	{}
+	
+	/**
+	 * Constructs an unavailibility for a device with just a name in parameter. 
+	 * 
+	 * @param strName the name of the busy
+	 */
+	public BusyImpl(String strName)
+	{
+		this.strName = strName;    
+	}
 	
     /**
      * Constructs an unavailibility for a device. 

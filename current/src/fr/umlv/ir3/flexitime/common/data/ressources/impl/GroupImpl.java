@@ -3,11 +3,12 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.data.ressources.impl;
+package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 
 
 /**
@@ -25,6 +26,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
 	//  Champs	 //
 	//===========//
     private int iNbPerson; 
+    private ClassImpl parentClass;
     
     
 	//=============//
@@ -33,9 +35,30 @@ public class GroupImpl extends ResourceImpl implements IGroup
 	/**
 	 * Default constructor for a group. 
 	 */
-	public GroupImpl()
+	protected GroupImpl()
 	{}
 	
+	/**
+	 * Constructs a group with just a name in parameter.
+	 * 
+	 * @param name a string.
+	 */
+	public GroupImpl(String name)
+	{
+		super(name);
+	}
+	
+	/**
+	 * Constructs a group with a name and a parent class in parameter.
+	 * 
+	 * @param name a string.
+	 * @param parentClass the parent class of this group.
+	 */
+	public GroupImpl(String name, ClassImpl parentClass)
+	{
+		super(name);
+		this.parentClass = parentClass;
+	}
 	
     /**
      * Constructs a group.
@@ -43,12 +66,13 @@ public class GroupImpl extends ResourceImpl implements IGroup
      * @param name a string.
      * @param listBusy a list of unavailibilities.
      * @param nbPerson the number of students in this group.
-     * 
+	 * @param parentClass the parent class of this group.
      */
-    public GroupImpl(String name, List listBusy, int nbPerson)
+    public GroupImpl(String name, List listBusy, int nbPerson, ClassImpl parentClass)
     {
         super(name, listBusy);
         this.iNbPerson = nbPerson;
+        this.parentClass = parentClass;
     }
 
     
@@ -62,7 +86,6 @@ public class GroupImpl extends ResourceImpl implements IGroup
      * @return the number of students in this group.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#getNbPerson()
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public int getNbPerson()
     {
@@ -76,10 +99,35 @@ public class GroupImpl extends ResourceImpl implements IGroup
      * @param nbPerson the number of students in this group.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#setNbPerson(int)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void setNbPerson(int nbPerson)
     {
         this.iNbPerson = nbPerson;
     }
+    
+	/** 
+	 * Returns the parent class of this group.
+	 * <code>ClassImpl c = group.getParentClass()</code>
+	 *
+	 * @return the parent class of this group.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#getParentClass()
+	 */
+	public ClassImpl getParentClass()
+	{
+		return parentClass;
+	}
+
+	/** 
+	 * Sets the parent class of this group.
+	 * <code>group.setParentClass(class)<code>
+	 *
+	 * @param parentClass the parent class of this group.
+	 * 
+	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#setParentClass(int)
+	 */ 
+	public void setParentClass(ClassImpl parentClass)
+	{
+		this.parentClass = parentClass;
+	}
 }

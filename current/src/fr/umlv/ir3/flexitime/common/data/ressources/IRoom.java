@@ -4,7 +4,9 @@
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 
-package fr.umlv.ir3.flexitime.common.data.ressources;
+package fr.umlv.ir3.flexitime.common.data.resources;
+
+import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
 
 /**
  * Represents a room which belong to a floor
@@ -67,7 +69,7 @@ public interface IRoom extends IResource
 	 * @return the floor where the room is.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-	String getFloor();
+	FloorImpl getFloor();
 
 	/**
 	 * Sets the floor where the room is.
@@ -75,5 +77,5 @@ public interface IRoom extends IResource
 	 * @param capacity the floor where the room is.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-	void setFloor(String floor);
+	void setFloor(FloorImpl floor);
 }

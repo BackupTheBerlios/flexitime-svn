@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
-import fr.umlv.ir3.flexitime.common.data.ressources.IRoom;
+import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 
 
 /**
@@ -27,7 +27,7 @@ public class FloorImpl implements IFloor
     //===========// 
     private String strName;
     private List listOfRooms; 
-    private String strBuilding;
+    private BuildingImpl parentBuilding;
     
     
     //==================//
@@ -36,9 +36,30 @@ public class FloorImpl implements IFloor
 	/**
 	 * Default constructor for a floor. 
 	 */
-	public FloorImpl()
+	protected FloorImpl()
 	{}
 	
+	/**
+	 * Constructs a floor from a building with just a name in parameter.
+	 * 
+	 * @param name a string.
+	 */
+	public FloorImpl(String name)
+	{
+		this.strName = name;
+	}
+	
+	/**
+	 * Constructs a floor from a building with a name and his parent in parameter.
+	 * 
+	 * @param name a string.
+	 * @param building the building parent of this floor.
+	 */
+	public FloorImpl(String name, BuildingImpl building)
+	{
+		this.strName = name;
+		this.parentBuilding = building;
+	}
 	
     /**
      * Constructs a floor from a building.
@@ -46,13 +67,12 @@ public class FloorImpl implements IFloor
      * @param name a string.
      * @param listRooms a list of rooms for this floor.
      * @param building a string representing the name of the building where the floor is.
-     * 
      */
-    public FloorImpl(String name, List listRooms, String building)
+    public FloorImpl(String name, List listRooms, BuildingImpl building)
     {
         this.strName = name;
         this.listOfRooms = new ArrayList(listRooms);
-        this.strBuilding = building;
+        this.parentBuilding = building;
     }
     
     
@@ -119,9 +139,9 @@ public class FloorImpl implements IFloor
 	 * 
 	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#getBuilding()
 	 */
-	public String getBuilding()
+	public BuildingImpl getBuilding()
 	{
-		return strBuilding;
+		return parentBuilding;
 	}
 
 	/**
@@ -131,9 +151,9 @@ public class FloorImpl implements IFloor
 	 * 
 	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#setBuilding(java.lang.String)
 	 */
-	public void setBuilding(String building)
+	public void setBuilding(BuildingImpl building)
 	{
-		this.strBuilding = building;
+		this.parentBuilding = building;
 	}
 	
     /** 

@@ -9,11 +9,12 @@ package fr.umlv.ir3.flexitime.common.data.teachingStructure;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectsGroupImpl;
 
 /**
  * Represents a Subject which belong to a SubjectsGroup
  * 
- * @version 0.2
+ * @version 0.3
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface ISubject extends IData
@@ -57,7 +58,7 @@ public interface ISubject extends IData
 	 * @return the subjects' group to which the subject belongs.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-	String getSubjectsGroup();
+	SubjectsGroupImpl getParentSubjectsGroup();
 
 	/**
 	 * Sets the subjects' group to which the subject belongs.
@@ -65,6 +66,6 @@ public interface ISubject extends IData
 	 * @param subjectsGroup the subjects' group to which the subject belongs.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-	void setSubjectsGroup(String subjectsGroup);
+	void setParentSubjectsGroup(SubjectsGroupImpl subjectsGroup);
 	
 }

@@ -27,7 +27,7 @@ public class SubjectImpl implements ISubject
 	//===========//
     private String strName;
     private List listOfCourses;
-    private String strSubjectsGroup;
+    private SubjectsGroupImpl parentSubjectsGroup;
     
     
 	//=============//
@@ -36,23 +36,43 @@ public class SubjectImpl implements ISubject
 	/**
 	 * Default constructor for a subject. 
 	 */
-	public SubjectImpl()
+	protected SubjectImpl()
 	{}
 	
+	/**
+	 * Constructs a subject with just a name in parameter.
+	 * 
+	 * @param name a string.
+	 */
+	public SubjectImpl(String name)
+	{
+		this.strName = name;
+	}
+	
+	/**
+	 * Constructs a subject with a name and the parent subjects' group in parameter.
+	 * 
+	 * @param name a string.
+	 * @param subjectsGroup the parent subjects' group of this subject.
+	 */
+	public SubjectImpl(String name, SubjectsGroupImpl subjectsGroup)
+	{
+		this.strName = name;
+		this.parentSubjectsGroup = subjectsGroup;
+	}
 	
     /**
      * Constructs a subject.
      * 
      * @param name a string.
      * @param listCourses a list of courses.
-     * @param subjectsGroup the name of the subjects' group to which the subject belongs.
-     * 
+     * @param subjectsGroup	the parent subjects' group of this subject. 
      */
-    public SubjectImpl(String name, List listCourses, String subjectsGroup)
+    public SubjectImpl(String name, List listCourses, SubjectsGroupImpl subjectsGroup)
     {
         this.strName = name;
         this.listOfCourses = new ArrayList(listCourses);
-        this.strSubjectsGroup = subjectsGroup;
+        this.parentSubjectsGroup = subjectsGroup;
     }
 
     
@@ -117,29 +137,29 @@ public class SubjectImpl implements ISubject
 
 	/** 
 	 * Returns the subjects' group to which the subject belongs.
-	 * <code>String n = subject.getSubjectsGroup()</code>
+	 * <code>SubjectsGroupImpl s = subject.getParentSubjectsGroup()</code>
 	 *
 	 * @return the subjects' group to which the subject belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#getSubjectsGroup()
+	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#getParentSubjectsGroup()
 	 */
-	public String getSubjectsGroup()
+	public SubjectsGroupImpl getParentSubjectsGroup()
 	{
-		return strSubjectsGroup;
+		return parentSubjectsGroup;
 	}
 
 
 	/** 
 	 * Sets the subjects' group to which the subject belongs.
-	 * <code>subject.setSubjectsGroup(subjectsGroup)</code>
+	 * <code>subject.setParentSubjectsGroup(subjectsGroup)</code>
 	 *
 	 * @param subjectsGroup the subjects' group to which the subject belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#setSubjectsGroup(java.lang.String)
+	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#setParentSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectsGroupImpl)
 	 */
-	public void setSubjectsGroup(String subjectsGroup)
+	public void setParentSubjectsGroup(SubjectsGroupImpl subjectsGroup)
 	{
-		this.strSubjectsGroup = subjectsGroup;
+		this.parentSubjectsGroup = subjectsGroup;
 	}
 
     /** 

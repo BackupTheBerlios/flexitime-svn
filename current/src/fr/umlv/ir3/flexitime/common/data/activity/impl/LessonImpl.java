@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.ressources.IResource;
+import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 
 
 /**
@@ -35,9 +35,19 @@ public class LessonImpl extends BusyImpl implements ILesson
 	/**
 	 * Default constructor for a lesson's unavailibility. 
 	 */
-	public LessonImpl()
+	protected LessonImpl()
 	{}
     
+	/**
+	 * Constructs an unavailibility for a course with just a name in parameter. 
+	 * 
+	 * @param strName a string. 
+	 */
+	public LessonImpl(String strName)
+	{
+		super(strName);
+	}
+	
     /**
      * Constructs an unavailibility for a course. 
      * 

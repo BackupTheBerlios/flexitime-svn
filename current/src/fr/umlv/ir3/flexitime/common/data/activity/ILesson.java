@@ -8,7 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.activity;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.IResource;
+import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 
 /**
  * A lesson is an unavailabilities with different resources as teachers, devices and groups

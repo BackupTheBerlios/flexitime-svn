@@ -23,7 +23,6 @@ public class Preferences
 	//===========// 
 	private int iHeightGap;
 	private int iLengthGap;
-	private int iThickLine;
 	private List listOfColors;
 	
 	
@@ -33,17 +32,16 @@ public class Preferences
     /**
      * Default constructor for a Preferences object.
      */
-    public Preferences()
+	protected Preferences()
     {}
 
 	/**
 	 * Default constructor for a Preferences object.
 	 */
-	public Preferences(int heightGap, int lengthGap, int thickLine, List listColors)
+	public Preferences(int heightGap, int lengthGap, List listColors)
 	{
 		this.iHeightGap = heightGap;
 		this.iLengthGap = lengthGap;
-		this.iThickLine = thickLine;
 		this.listOfColors = new ArrayList(listColors);		
 	}
 	
@@ -57,7 +55,9 @@ public class Preferences
      */
     void load()
     {
-
+    	//connex rmi
+    	//recup prefManager
+    	//prefmanager.get attributes
     }
 
     /**
@@ -65,7 +65,9 @@ public class Preferences
      */
     void save()
     {
-
+    	//connex rmi
+    	//recup PrefManager
+    	//prefManager.set attributes
     }
     
 	/**
@@ -89,7 +91,9 @@ public class Preferences
 	}
 
 	/**
-	 * @return
+	 * Returns the length of a gap.
+	 * 
+	 * @return the length of a gap.
 	 */
 	public int getLengthGap()
 	{
@@ -97,7 +101,9 @@ public class Preferences
 	}
 
 	/**
-	 * @param lengthGap
+	 * Sets the length of a gap.
+	 * 
+	 * @param lengthGap the length of a gap.
 	 */
 	public void setLengthGap(int lengthGap)
 	{
@@ -105,22 +111,8 @@ public class Preferences
 	}
 
 	/**
-	 * @return
-	 */
-	public int getThickLine()
-	{
-		return iThickLine;
-	}
-
-	/**
-	 * @param thickLine
-	 */
-	public void setThickLine(int thickLine)
-	{
-		this.iThickLine = thickLine;
-	}
-
-	/**
+	 * Returns the list of  
+	 * 
 	 * @return
 	 */
 	public List getListOfColors()

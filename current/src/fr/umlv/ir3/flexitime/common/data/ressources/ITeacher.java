@@ -4,7 +4,7 @@
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 
-package fr.umlv.ir3.flexitime.common.data.ressources;
+package fr.umlv.ir3.flexitime.common.data.resources;
 
 /**
  * Represents a teacher

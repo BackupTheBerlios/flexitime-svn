@@ -35,8 +35,18 @@ public class BuildingImpl implements IBuilding
 	/**
 	 * Default constructor for a building. 
 	 */
-	public BuildingImpl()
+	protected BuildingImpl()
 	{}
+	
+	/**
+	 * Constructs a building with just a name in parameter.
+	 * 
+	 * @param name a string. 
+	 */
+	public BuildingImpl(String name)
+	{
+		this.strName = name;
+	}
 	
     /**
      * Constructs a building.

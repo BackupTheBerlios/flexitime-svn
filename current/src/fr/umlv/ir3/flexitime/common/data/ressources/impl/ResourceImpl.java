@@ -3,13 +3,13 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.data.ressources.impl;
+package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
-import fr.umlv.ir3.flexitime.common.data.ressources.IResource;
+import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 
 
 /**
@@ -35,12 +35,22 @@ public abstract class ResourceImpl implements IResource
 	/**
 	 * Default constructor for a resource. 
 	 */
-	public ResourceImpl()
+	protected ResourceImpl()
 	{}
 	
+	/**
+	 * Constructs a resource with just a name in parameter.
+	 * 
+	 * @param name  a string;
+	 */
+	public ResourceImpl(String name)
+	{
+		this.strName = name;
+	}
 	
     /**
      * Constructs a resource.
+     * 
      * @param name  a string;
      * @param listBusy a list of unavailibilities.
      * 

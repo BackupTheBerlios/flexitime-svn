@@ -35,21 +35,32 @@ public class TrackImpl implements ITrack
 	/**
 	 * Default constructor for a track. 
 	 */
-	public TrackImpl()
+	protected TrackImpl()
 	{}
 	
 	
     /**
-     * Constructs a track. 
+     * Constructs a track with just a name in parameter. 
      * 
      * @param sName a string.
      * 
      */
     public TrackImpl(String sName)
     {
-        strName = sName;        
+        this.strName = sName;        
     }
     
+	/**
+	 * Constructs a track. 
+	 * 
+	 * @param sName a string.
+	 * @param listClasses a list of classes.
+	 */
+	public TrackImpl(String sName, List listClasses)
+	{
+		this.strName = sName;
+		this.listOfClasses = new ArrayList(listClasses);		        
+	}
     
     //=============//
     //   Méthodes  //

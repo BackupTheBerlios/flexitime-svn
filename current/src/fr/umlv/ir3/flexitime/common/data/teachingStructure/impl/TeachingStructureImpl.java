@@ -35,9 +35,18 @@ public class TeachingStructureImpl implements ITeachingStructure
 	/**
 	 * Default constructor for a teaching structure. 
 	 */
-	public TeachingStructureImpl()
+	protected TeachingStructureImpl()
 	{}
 	
+	/**
+	 * Constructs a teaching structure with just a name in parameter.
+	 * 
+	 * @param name a string.
+	 */
+	public TeachingStructureImpl(String name)
+	{
+		this.strName = name;
+	}
 	
     /**
      * Constructs a teaching structure.
