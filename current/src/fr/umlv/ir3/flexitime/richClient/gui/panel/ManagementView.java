@@ -1,11 +1,15 @@
 package fr.umlv.ir3.flexitime.richClient.gui.panel;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -70,7 +74,49 @@ public class ManagementView
         jSP.add(panel2,  JSplitPane.LEFT,1);
         jSP.setDividerLocation(180 + jSP.getInsets().left);
         jSP.setDividerSize(3);
+/*jSP.addMouseListener(new MouseListener(){
 
+    public void mouseClicked(MouseEvent arg0)
+    {
+        if(jSP.getComponents().length >0)
+        {
+            
+        }
+        
+    }
+    public void recursSize(Component comp)
+    {
+       for(int i=0;i<comp.getComponentCount();i++)
+       {
+           recursSize(comp.);
+       }
+    }
+    
+    public void mousePressed(MouseEvent arg0)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void mouseReleased(MouseEvent arg0)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void mouseEntered(MouseEvent arg0)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void mouseExited(MouseEvent arg0)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+    
+});*/
         //jSP.setContinuousLayout(true);
 	}
 	

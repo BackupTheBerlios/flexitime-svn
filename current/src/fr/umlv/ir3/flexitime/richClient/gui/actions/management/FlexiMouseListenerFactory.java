@@ -11,11 +11,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.Action;
+import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.DeviceTreeNode;
@@ -273,7 +277,7 @@ public class FlexiMouseListenerFactory
 	 * @param panelParent
 	 * @return
 	 */    
-	public static MouseListener createSubjectsGroupMouseLister()
+	public static MouseListener createSubjectsGroupMouseLister(final JComponent parentPanel)
 	{
 		MouseListener mouseLis = new MouseListener()
         {
@@ -321,7 +325,6 @@ public class FlexiMouseListenerFactory
 					popMenu = createPopupMenu(name,action);
 					popMenu.show(arg0.getComponent(),arg0.getX(),arg0.getY());
 				}
-				
 			}
     		
     		public void mousePressed(MouseEvent arg0) {

@@ -147,7 +147,7 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
                     Object[] tabSubjectsGroup = event.getSubObjects();
                     for(int i=0;i<tabSubjectsGroup.length;i++)
                     {
-                        subjectsGroupAdded((ISubjectsGroup)tabSubjectsGroup[i]);
+                        add((ISubjectsGroup)tabSubjectsGroup[i]);
                     }
                     break;
                 }

@@ -11,6 +11,8 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.dnd.DropTarget;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -27,6 +29,8 @@ import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeSelectionModel;
@@ -58,7 +62,7 @@ public class OutlookBarManagement
     //JList list;
 
 
-    public OutlookBarManagement(/*JPanel*/JComponent panelParent,List listTrack,List listDevice,List listBuilding,List listTeacher) throws RemoteException 
+    public OutlookBarManagement(final /*JPanel*/JComponent panelParent,List listTrack,List listDevice,List listBuilding,List listTeacher) throws RemoteException 
     {
 
         this.panelParent = panelParent;

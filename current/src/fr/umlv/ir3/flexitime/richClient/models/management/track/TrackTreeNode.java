@@ -229,7 +229,7 @@ public class TrackTreeNode extends DataListenerImpl implements  FlexiTreeNode
         ClassTreeNode childNode = searchChild(iClass);
         if(childNode != null)
         {
-            track.removeClass(((ClassTreeNode)childNode).getIClass());
+            //track.removeClass(((ClassTreeNode)childNode).getIClass());
             int index = children.indexOf(childNode);
             children.remove(childNode); 
             model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
@@ -273,7 +273,7 @@ public class TrackTreeNode extends DataListenerImpl implements  FlexiTreeNode
                     Object[] tabClass = event.getSubObjects();
                     for(int i=0;i<tabClass.length;i++)
                     {
-                        classAdded((IClass)tabClass[i]);
+                        add((IClass)tabClass[i]);
                     }
                     break;
                 }

@@ -33,7 +33,7 @@ public class TeacherViewModel extends DataListenerImpl
     public TeacherViewModel(ITeacher teacher) throws RemoteException
     {
         this.teacher=teacher;
-        RemoteDataManager.getManager().addDataListener(IFloor.class,this);
+        RemoteDataManager.getManager().addDataListener(ITeacher.class,this);
     }
     
     public void setValue(String[] values) throws RemoteException

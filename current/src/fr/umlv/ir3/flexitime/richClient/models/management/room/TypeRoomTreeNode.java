@@ -198,14 +198,7 @@ public class TypeRoomTreeNode implements FlexiTreeNode
         System.out.println("Add room");
         lstRoom.add(room);
         RoomTreeNode child = new RoomTreeNode(this,room,model);
-        if(children.size()==0)
-        {
-            processChildren();
-        }
-        else
-        {
-            children.add(child);
-        }
+        children.add(child);
         model.nodesWereInserted(this,new int[]{children.size()-1});
         return child;
     }
@@ -222,7 +215,7 @@ public class TypeRoomTreeNode implements FlexiTreeNode
         RoomTreeNode childNode = searchChild(room);
         if(childNode != null)
         {
-            lstRoom.remove(room);
+            //lstRoom.remove(room);
             int index = children.indexOf(childNode);
             children.remove(childNode); 
             model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});

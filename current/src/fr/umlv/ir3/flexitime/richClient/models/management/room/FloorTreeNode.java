@@ -255,7 +255,7 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
                     Object[] tabRoom = (Object[])event.getSubObjects();
                     for(int i=0;i<tabRoom.length;i++)
                     {
-                        floor.addRoom((IRoom)tabRoom[i]);
+                        //floor.addRoom((IRoom)tabRoom[i]);
                         TypeRoomTreeNode trtn = searchChild(((IRoom)tabRoom[i]).getType());
                         if(trtn != null)
                         {
@@ -271,8 +271,8 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
                    {
                        TypeRoomTreeNode tdtn = searchChild(((IRoom)tabRoom[i]).getType());
                        if(tdtn!=null)
-                       {
-                           tdtn.changedRoom((IRoom)tabRoom[i]);
+                       { 
+                        tdtn.changedRoom((IRoom)tabRoom[i]);
                        }
                    }
                    break; 

@@ -224,7 +224,7 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
     public void remove(IFloor floor)
     {
         FloorTreeNode childNode = searchChild(floor);
-        building.removeFloor(((FloorTreeNode)childNode).getFloor());
+        //building.removeFloor(((FloorTreeNode)childNode).getFloor());
         int index = children.indexOf(childNode);
         children.remove(childNode); 
         model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});

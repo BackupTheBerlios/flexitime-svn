@@ -71,7 +71,7 @@ public class TeachingStructureView implements FlexiTreeNodeListener
         {
         RootTreeNode rootSubjectsGroupTree = new RootSubjectsGroupTreeNode(null,teachingStructure);
         JTree subjectsGroupTree = createJTree(rootSubjectsGroupTree);
-        subjectsGroupTree.addMouseListener(FlexiMouseListenerFactory.createSubjectsGroupMouseLister());
+        subjectsGroupTree.addMouseListener(FlexiMouseListenerFactory.createSubjectsGroupMouseLister(mainPanel));
         subjectsGroupTree.addTreeSelectionListener(FlexiSelectionListenerFactory.createSubjectsGroupTreeSelectionListener(this.mainPanel));
         JScrollPane scrollBloc = new JScrollPane(subjectsGroupTree);
         scrollBloc.setPreferredSize(new Dimension(200,100));

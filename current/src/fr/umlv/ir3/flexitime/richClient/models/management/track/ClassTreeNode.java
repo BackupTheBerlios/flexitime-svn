@@ -212,7 +212,7 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
    
     public void groupAdded(IGroup group)
     {
-        iClass.addGroup(group);
+        //iClass.addGroup(group);
         add(group);
     }
     
@@ -236,7 +236,7 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
             GroupTreeNode childNode = searchChild(group);  
             if(childNode !=null)
             {
-                iClass.removeGroup(group);
+                //iClass.removeGroup(group);
                 int index = children.indexOf(childNode);
                 children.remove(childNode); 
                 model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
@@ -269,41 +269,45 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
         IClass iClass = (IClass)event.getSource();
         if(this.iClass.equals(iClass))
         {
-            int type = event.getEventType();
-            switch(type)
+            if(event.getPropertyName().equals("lstGroup"))
             {
-                case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+                System.out.println("je modifie un groupe");
+                int type = event.getEventType();
+                switch(type)
                 {
-                    Object[] tabGroup = event.getSubObjects();
-                    for(int i=0;i<tabGroup.length;i++)
+                    case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
                     {
-                        groupAdded((IGroup)tabGroup[i]);
+                        Object[] tabGroup = event.getSubObjects();
+                        for(int i=0;i<tabGroup.length;i++)
+                        {
+                                groupAdded((IGroup)tabGroup[i]);
+                        }
+                        break;
                     }
-                    break;
-                }
-                case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
-                {
-                    Object[] tabGroup = event.getSubObjects();
-                   for(int i=0;i<tabGroup.length;i++)
-                   {
-                       GroupTreeNode ctn = searchChild((IGroup)tabGroup[i]);
-                       if(ctn!=null)
-                       {   
-                           ctn.setGroup((IGroup)tabGroup[i]);
+                    case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
+                    {
+                        Object[] tabGroup = event.getSubObjects();
+                       for(int i=0;i<tabGroup.length;i++)
+                       {
+                           GroupTreeNode ctn = searchChild((IGroup)tabGroup[i]);
+                           if(ctn!=null)
+                           {   
+                               ctn.setGroup((IGroup)tabGroup[i]);
+                           }
                        }
-                   }
-                   break; 
-                }
-                case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
-                {
-                    Object[] tabGroup = event.getSubObjects();
-                    for(int i=0;i<tabGroup.length;i++)
-                    {
-                        remove((IGroup)tabGroup[i]);
+                       break; 
                     }
-                    break;   
+                    case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+                    {
+                        Object[] tabGroup = event.getSubObjects();
+                        for(int i=0;i<tabGroup.length;i++)
+                        {
+                            remove((IGroup)tabGroup[i]);
+                        }
+                        break;   
+                    }
+          
                 }
-      
             }
         }
     }

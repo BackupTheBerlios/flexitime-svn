@@ -50,6 +50,7 @@ import fr.umlv.ir3.flexitime.richClient.models.management.room.TypeRoomTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.CourseTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.CourseViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectsGroupTreeNode;
@@ -329,7 +330,8 @@ public class FlexiSelectionListenerFactory
     						}
     						else if(tmpTreeNode instanceof CourseTreeNode)
     						{
-    							CourseView courseView = new CourseView(tmpTree.getModel(),tmpTree);
+    							CourseViewModel model = new CourseViewModel(((CourseTreeNode)tmpTreeNode).getCourse());
+                                CourseView courseView = new CourseView(model);
     							panel1.add(new JScrollPane(courseView.getPanel()), BorderLayout.CENTER);
     							panel1.setBorder(BorderFactory.createTitledBorder("Cours"));
     							

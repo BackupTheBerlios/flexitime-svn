@@ -114,7 +114,7 @@ public class RootRoomTreeNode extends RootTreeNode
 		BuildingTreeNode childNode=searchChild(building);
         if(childNode != null)
         {
-            lst.remove(building);
+            //lst.remove(building);
             int index = children.indexOf(childNode);
             children.remove(index);	
             model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
@@ -132,7 +132,7 @@ public class RootRoomTreeNode extends RootTreeNode
         {
             case DataEvent.TYPE_PROPERTY_ADDED:
             {
-                buildingAdded(building);
+               add(building);
                 break;
             }
             case DataEvent.TYPE_PROPERTY_CHANGED :
