@@ -192,4 +192,18 @@ public class TimeBloc
         }
         return false;
     }
+
+    public Time getStartDate()
+    {
+        return new Time(1900, 1, 1, this.startHour, this.startMin);
+    }
+
+    /**
+     * @return sdq
+     * 
+     */
+    public Time getEndDate()
+    {
+        return new Time(1900, 1, 1, this.endHour, this.endMin);
+    }
 }
