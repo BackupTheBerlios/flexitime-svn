@@ -6,6 +6,7 @@
 package fr.umlv.ir3.flexitime.common.rmi.admin;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 
@@ -23,12 +24,12 @@ import fr.umlv.ir3.flexitime.common.data.admin.IUser;
  */
 public interface IUserManager extends Remote
 {
-    public boolean ConnectToRich(String name, String password);
-    public boolean ConnectToLight(String name, String password);
-    public IUser get(String name);
-    public void save(String name, String password);
-    public void removeUser(String name);
-    public void changeLocalPasswd(String name,String newPassword);
+    public boolean ConnectToRich(String name, String password) throws RemoteException;
+    public boolean ConnectToLight(String name, String password) throws RemoteException;
+    public IUser get(String name) throws RemoteException;
+    public void save(String name, String password) throws RemoteException;
+    public void removeUser(String name) throws RemoteException;
+    public void changeLocalPasswd(String name,String newPassword) throws RemoteException;
 }
 
 
