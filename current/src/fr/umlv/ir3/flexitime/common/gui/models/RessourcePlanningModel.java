@@ -19,12 +19,12 @@ import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
-import fr.umlv.ir3.flexitime.richClient.models.exploitation.course.CourseAdapter;
 
 
 /**
@@ -460,26 +460,26 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 		fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+newBusyBloc.getNbGap()-1 );
 	}
     
-    public void addElement(int weekNumber, int dayNumber, int gapNumber, int length, CourseAdapter courseAdapter)
+    public void addElement(int weekNumber, int dayNumber, int gapNumber, int length, ICourse course, ITeacher teacher)
     {
         try
         {
             ILesson lesson;
-            if (courseAdapter.getTeacher() == null)
+            if (teacher == null)
 
                 lesson = DataFactorySansRmi.createLesson(
                         getGap(weekNumber, dayNumber, gapNumber,length),
-                        courseAdapter.getCourse(), 
+                        course, 
                         new ArrayList(), 
                         length
                         );
             else
                 lesson = DataFactorySansRmi.createLesson(
                         getGap(weekNumber, dayNumber, gapNumber,length),
-                        courseAdapter.getCourse(), 
+                        course, 
                         new ArrayList(), 
                         length,
-                        courseAdapter.getTeacher()
+                        teacher
                         );
         }
         catch (FlexiException e)
