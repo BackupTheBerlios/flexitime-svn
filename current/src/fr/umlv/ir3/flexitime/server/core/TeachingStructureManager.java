@@ -13,6 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.server.io.storage.TeacherStorage;
+import fr.umlv.ir3.flexitime.server.io.storage.TeachingStructureStorage;
 
 
 /**
