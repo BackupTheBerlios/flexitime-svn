@@ -10,6 +10,8 @@ package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ import com.jgoodies.forms.layout.FormLayout;
 
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
+import fr.umlv.ir3.flexitime.common.tools.Validator;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListModel;
@@ -82,26 +85,32 @@ public class TeacherView
 		firstName = new JTextField(model.getTeacher().getFirstName());
 		email = new JTextField(model.getTeacher().getEmail());
 		
-		//Definition des document listener
-		// Pour Nom et prenom
-		DocumentListener documentListener = new DocumentListener(){
+		//Definition des keylistener
+//       Pour Nom et prenom
+		KeyListener keyl=new KeyListener() 
+        {
 
-			public void insertUpdate(DocumentEvent arg0) 
-			{
-					okButton.setEnabled(true);
-					cancelButton.setEnabled(true);
-					errorLabel.setVisible(false);
-			}
-			
-			public void removeUpdate(DocumentEvent arg0) 
-			{
-				insertUpdate(arg0);
-			}
-			
-			public void changedUpdate(DocumentEvent arg0) {}	
-		};
-		//Pour l'email
-		DocumentListener emailListener = new DocumentListener(){
+            public void keyTyped(KeyEvent e){}
+            public void keyPressed(KeyEvent e){}
+            public void keyReleased(KeyEvent e)
+            {
+//              Pour l'email
+                if(Validator.validMail(email.getText()))
+               {
+                   okButton.setEnabled(true);
+                   cancelButton.setEnabled(true);
+                   errorLabel.setVisible(false);
+               }
+               else
+               {
+                   errorLabel.setText("Email non valide");
+                   errorLabel.setVisible(true);
+               }
+            }
+        };
+		
+		
+		/*DocumentListener emailListener = new DocumentListener(){
 
 			public void insertUpdate(DocumentEvent arg0) 
 			{
@@ -131,11 +140,7 @@ public class TeacherView
 					cancelButton.setEnabled(true);
 					errorLabel.setVisible(false);
             	}	
-				else
-				{
-					errorLabel.setText("Email non valide");
-					errorLabel.setVisible(true);
-				}
+				
 					
 			}
 			
@@ -145,11 +150,11 @@ public class TeacherView
 			}
 			
 			public void changedUpdate(DocumentEvent arg0) {}	
-		};
+		};*/
 		
-		name.getDocument().addDocumentListener(documentListener);
-		firstName.getDocument().addDocumentListener(documentListener);
-		email.getDocument().addDocumentListener(emailListener);
+		name.addKeyListener(keyl);
+		firstName.addKeyListener(keyl);
+		email.addKeyListener(keyl);
 		//Mise en place des actions des boutons
 		okButton.addActionListener(new ActionListener(){
 
@@ -187,11 +192,11 @@ public class TeacherView
 		//layout.setRowGroups(new int[][]{{1, 3, 5}});
 		panel.setLayout(layout);
 		CellConstraints cc = new CellConstraints();
-		panel.add(new JLabel("Nom:"), cc.xy (2, 2));
+		panel.add(new JLabel("Nom :"), cc.xy (2, 2));
 		panel.add(name, cc.xy(4, 2));
-		panel.add(new JLabel("Prénom:"), cc.xy(6, 2));
+		panel.add(new JLabel("Prénom :"), cc.xy(6, 2));
 		panel.add(firstName, cc.xy (8, 2));
-		panel.add(new JLabel("Email:"), cc.xy(2, 4));
+		panel.add(new JLabel("Email :"), cc.xy(2, 4));
 		panel.add(email, cc.xyw (4, 4,3));
 		panel.add(errorLabel,cc.xyw(4,5,4));
 		panel.add(okButton, cc.xy (6, 7));

@@ -10,6 +10,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
@@ -149,39 +151,36 @@ public class CourseView
         if(model.getCourse().getColor()!=null)buttonCoul.setBackground(model.getCourse().getColor());
 		name = new JTextField(model.getCourse().getName());
 		nbHourTotal = new JTextField(""+model.getCourse().getNbHours());
-        time = new JTextField(""+model.getCourse().getNbHours());
+        time = new JTextField(""+model.getCourse().getDefaultLength());
 		
-		//Creation d'un document listener
-        DocumentListener documentListener = new DocumentListener(){
+		//Creation d'un key listener
+        KeyListener keylName=new KeyListener() 
+        {
 
-			public void insertUpdate(DocumentEvent arg0) {
-                try{
+            public void keyTyped(KeyEvent e){}
+            public void keyPressed(KeyEvent e){}
+            public void keyReleased(KeyEvent e)
+            {
+                 try{
                     Integer number = Integer.valueOf(nbHourTotal.getText()).intValue();   
                     Integer number2 = Integer.valueOf(time.getText()).intValue();
                     okButton.setEnabled(true);
-					cancelButton.setEnabled(true);
+                    cancelButton.setEnabled(true);
                     errorLabel.setVisible(false);
                 }
-                catch(NumberFormatException e){
+                catch(NumberFormatException ex){
                     if(nbHourTotal.getText().length()>9)errorLabel.setText("Valeur excessive");
                     else errorLabel.setText("Valeur numérique uniquement");
                     errorLabel.setVisible(true);
                     okButton.setEnabled(false);
                     cancelButton.setEnabled(false);
                 } 
-			}
-
-			public void removeUpdate(DocumentEvent arg0) {
-				insertUpdate(arg0);
-			}
-
-			public void changedUpdate(DocumentEvent arg0) {}
-			
-			
-		};
-		name.getDocument().addDocumentListener(documentListener);
-        nbHourTotal.getDocument().addDocumentListener(documentListener);
-        time.getDocument().addDocumentListener(documentListener);
+            }
+        };
+     
+		name.addKeyListener(keylName);
+        nbHourTotal.addKeyListener(keylName);
+        time.addKeyListener(keylName);
 		
         ////////////////////////////////////////
         //Mise en place des actions des boutons

@@ -243,7 +243,7 @@ public class TypeCourseTreeNode implements FlexiTreeNode
     public void changedCourse(ICourse course)
     {
         CourseTreeNode childNode= searchChild(course);
-        childNode.setCourse(course);
+        if(childNode!=null)childNode.setCourse(course);
     }
 
 	/* (non-Javadoc)

@@ -9,6 +9,8 @@ package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.rmi.RemoteException;
 
 import javax.swing.AbstractButton;
@@ -69,25 +71,18 @@ public class TrackView
 		okButton.setEnabled(false);
 		cancelButton.setEnabled(false);
 		name = new JTextField(model.getTrack().getName());
-		name.getDocument().addDocumentListener(new DocumentListener(){
+		KeyListener keyl=new KeyListener() 
+        {
 
-			public void insertUpdate(DocumentEvent arg0) {
-				okButton.setEnabled(true);
-				cancelButton.setEnabled(true);
-				
-			}
-
-			public void removeUpdate(DocumentEvent arg0) {
-				insertUpdate(arg0);
-			}
-
-			public void changedUpdate(DocumentEvent arg0) {
-				
-			}
-			
-			
-		});
-
+            public void keyTyped(KeyEvent e){}
+            public void keyPressed(KeyEvent e){}
+            public void keyReleased(KeyEvent e)
+            {
+                okButton.setEnabled(true);
+                cancelButton.setEnabled(true);
+            }
+        };
+        name.addKeyListener(keyl);
 		//Mise en place des actions des boutons
 		okButton.addActionListener(new ActionListener(){
 
@@ -119,7 +114,7 @@ public class TrackView
 		//layout.setRowGroups(new int[][]{{1, 3, 5}});
 		panel.setLayout(layout);
 		CellConstraints cc = new CellConstraints();
-		panel.add(new JLabel("Nom:"), cc.xy (2, 2));
+		panel.add(new JLabel("Nom :"), cc.xy (2, 2));
 		panel.add(name, cc.xyw(4, 2, 2));
 		panel.add(okButton, cc.xy (6, 4));
 		panel.add(cancelButton,cc.xy (8, 4));

@@ -51,8 +51,9 @@ public class FlexiBar extends JPanel
 	 */
 	public FlexiBar() {
 		super(new BorderLayout());
-		panel = new JPanel();
-		layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+		panel = new JPanel(new BorderLayout());
+		
+        layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 		panel.setLayout(layout);
 		//panel.setPreferredSize(new Dimension(B_WIDTH,400));
         add(panel);
@@ -82,7 +83,7 @@ public class FlexiBar extends JPanel
 		//button.setMinimumSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
 		//button.setMaximumSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
 		button.setPreferredSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
-        button.setMaximumSize(new Dimension(this.P_HEIGHT,this.B_HEIGHT));
+       button.setMaximumSize(new Dimension(this.P_HEIGHT,this.B_HEIGHT));
 		
 
         button.setAlignmentX(LEFT_ALIGNMENT);
@@ -106,9 +107,7 @@ public class FlexiBar extends JPanel
 		
 		listComponent.add(button);
 		listComponent.add(pane);
-		
-		panel.add(button);
-        //button.setPreferredSize(button.getParent().getPreferredSize());
+        panel.add(button);
         panel.add(pane);
         panel.validate();
 	}

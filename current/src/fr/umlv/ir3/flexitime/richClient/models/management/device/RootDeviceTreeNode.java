@@ -103,7 +103,7 @@ public class RootDeviceTreeNode extends RootTreeNode
 		{
 			String name = language.getText("deviceType"+i) ;
             List lstDevice;
-			if(map.get(new Integer(i))!= null )lstDevice = (List)map.get(i);
+			if(map.get(new Integer(i))!= null )lstDevice = (List)map.get(new Integer(i));
 			else lstDevice = new ArrayList();
 			list.add(new TypeDeviceTreeNode(this,name,i,lstDevice,model));
 		}

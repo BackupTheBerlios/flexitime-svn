@@ -7,6 +7,8 @@ package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.rmi.RemoteException;
 
 import javax.swing.JButton;
@@ -82,22 +84,18 @@ public class ClassView
 		nbGroup = new JLabel(""+model.getIClass().getNbGroup());
 		//nbGroup = new JTextField(""+((ClassTreeNode)tree.getSelectionPath().getLastPathComponent()).getIClass().getNbGroup());
 		nbGroup.setEnabled(false);
-		DocumentListener documentListener = new DocumentListener(){
+		KeyListener keylName=new KeyListener() 
+        {
 
-			public void insertUpdate(DocumentEvent arg0) {
-		            okButton.setEnabled(true);
-					cancelButton.setEnabled(true);
-			}
-
-			public void removeUpdate(DocumentEvent arg0) {
-				insertUpdate(arg0);
-			}
-
-			public void changedUpdate(DocumentEvent arg0) {}
-			
-			
-		};
-		name.getDocument().addDocumentListener(documentListener);
+            public void keyTyped(KeyEvent e){}
+            public void keyPressed(KeyEvent e){}
+            public void keyReleased(KeyEvent e)
+            {
+                okButton.setEnabled(true);
+                cancelButton.setEnabled(true);
+            }
+        };
+		name.addKeyListener(keylName);
 		//Mise en place des actions des boutons
 		okButton.addActionListener(new ActionListener(){
 
@@ -130,11 +128,11 @@ public class ClassView
 		//layout.setRowGroups(new int[][]{{1, 3, 5}});
 		panel.setLayout(layout);
 		CellConstraints cc = new CellConstraints();
-		panel.add(new JLabel(language.getText("formName")+":"), cc.xy (2, 2));
+		panel.add(new JLabel(language.getText("formName")+" :"), cc.xy (2, 2));
 		panel.add(name, cc.xyw(4, 2, 2));
-		panel.add(new JLabel(language.getText("nbGroup")+":"), cc.xyw (4, 4,3));
+		panel.add(new JLabel(language.getText("nbGroup")+" :"), cc.xyw (4, 4,3));
 		panel.add(nbGroup, cc.xy (6, 4));
-		panel.add(new JLabel(language.getText("nbPerson")+":"), cc.xyw (4, 6,3));
+		panel.add(new JLabel(language.getText("nbPerson")+" :"), cc.xyw (4, 6,3));
 		panel.add(nbPerson, cc.xy (6, 6));
 		panel.add(okButton, cc.xy (8, 8));
 		panel.add(cancelButton,cc.xy (10, 8));

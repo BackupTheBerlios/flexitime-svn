@@ -183,7 +183,7 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
 				String name = new String();
 				name += language.getText("courseType"+i);
 				List lstCourse;
-				if(map.get(new Integer(i-1))!= null )lstCourse = (List)map.get(i-1);
+				if(map.get(new Integer(i))!= null )lstCourse = (List)map.get(new Integer(i));
 				else lstCourse = new ArrayList();
 				list.add(new TypeCourseTreeNode(this,name,i,lstCourse,model));
 			}
@@ -262,7 +262,10 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
                         {
                             subject.addCourse((ICourse)tabCourse[i]);
                             TypeCourseTreeNode tctn = searchChild(((ICourse)tabCourse[i]).getType());
-                            tctn.add((ICourse)tabCourse[i]);
+                            if(tctn !=null)
+                            {
+                                tctn.add((ICourse)tabCourse[i]);
+                            }
                         }
                         break;
                     }

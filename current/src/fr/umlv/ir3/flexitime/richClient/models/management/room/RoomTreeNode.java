@@ -133,8 +133,8 @@ public class RoomTreeNode implements FlexiTreeNode
 	}
     public void setRoom(IRoom room)
     {
-       // this.room = room;
-        model.nodeChanged(this);
+            this.room = room;
+            model.nodeChanged(this);
     }
 
 	public String toString()
