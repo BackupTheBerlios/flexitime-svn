@@ -54,9 +54,6 @@ public class FlexiMail
         {
             msg = createHeaderMessage(from, to, subject);
             
-            // On attache le fichier desiré avec JAF
-            MimeBodyPart[] files_attachments = createAttachFile(files);
-            
             // On cree le corps du message
             MimeBodyPart message_body = new MimeBodyPart();
             message_body.setContent(body, "text/plain");
@@ -66,11 +63,14 @@ public class FlexiMail
 
             // On ajoute enfin les deux partie: le corps et le fichier
             multipart_message.addBodyPart(message_body);
-            for (int i = 0 ; i < files_attachments.length ; i++)
+            // On attache le fichier desiré avec JAF
+            if(files != null)
             {
-                multipart_message.addBodyPart(files_attachments[i]);
+                MimeBodyPart[] files_attachments = createAttachFile(files);
+                for (int i = 0 ; i < files_attachments.length ; i++)
+                    multipart_message.addBodyPart(files_attachments[i]);
             }
-            
+           
             // enfin on ajoute cette multi partie au message
             msg.setContent(multipart_message);
             

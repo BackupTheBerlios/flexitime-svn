@@ -7,51 +7,44 @@
 
 package fr.umlv.ir3.flexitime.richClient.gui.views;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.StringTokenizer;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.event.*;
 
 import com.jgoodies.forms.builder.PanelBuilder;
-import com.jgoodies.forms.layout.CellConstraints;
-import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.debug.FormDebugPanel;
+import com.jgoodies.forms.layout.*;
 
-import fr.umlv.ir3.flexitime.server.io.FlexiMail;
+import fr.umlv.ir3.flexitime.common.tools.*;
+import fr.umlv.ir3.flexitime.richClient.io.FlexiMail;
 
 /**
  * This class draws a frame where the user can specify some options before
  * sending a mail.
  * 
- * @version 0.1
+ * @version 325
  * @author FlexiTeam - BOUVET Adrien
  */
 public class MailView
 {
     private JFrame mailFrame;
-
+    
     /**
-     * printView - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
+     * DOCME
      */
-    public void printView(String lienPJ)
+    public void printView(final String[] lienPJ)
     {
-        mailFrame = new JFrame("Envoie d'un mail");     
+        final FlexiLanguage language = FlexiLanguage.getInstance();
+        mailFrame = new JFrame(language.getText("mailFrameName"));
         
         FormLayout layout = new FormLayout(
                 "right:pref, 3dlu, pref, 3dlu, pref, 3dlu, pref, pref", // 8 columns
                 "p, 3dlu, p, 3dlu, p, 3dlu, p, 9dlu, p, 3dlu, p, 3dlu, p, 9dlu, p, 3dlu, p, 9dlu, p");      // 19 rows
-        
         
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
@@ -60,123 +53,184 @@ public class MailView
         CellConstraints cc = new CellConstraints();
 
         //creation des components
+        final JButton butOK = new JButton(language.getText("ok"));
+        final JButton butErase = new JButton(language.getText("erase"));
+        final JButton butCancel= new JButton(language.getText("cancel"));
+        
+        final JLabel errorLabel = new JLabel();
+
         final JTextField tfFrom = new JTextField();
-        tfFrom.setText("<expéditeur>");
+        tfFrom.setText(language.getText("templateSender"));
         tfFrom.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent arg0)
+
+            public void mouseClicked(MouseEvent e)
             {
-                if(tfFrom.getText().compareTo("<expéditeur>") == 0)
+                if(tfFrom.getText().equals(language.getText("templateSender")))
                 {
                     tfFrom.setText("");   
                 }
             }
-            public void mousePressed(MouseEvent arg0)
+
+            public void mousePressed(MouseEvent e)
             {}
-            public void mouseReleased(MouseEvent arg0)
+
+            public void mouseReleased(MouseEvent e)
             {}
-            public void mouseEntered(MouseEvent arg0)
+
+            public void mouseEntered(MouseEvent e)
             {}
-            public void mouseExited(MouseEvent arg0)
-            {}            
+
+            public void mouseExited(MouseEvent e)
+            {}
         });
         
         final JTextField tfTo = new JTextField();
-        tfTo.setText("<destinataire>");
+        tfTo.setText(language.getText("templateDest"));
+        tfTo.setAutoscrolls(true);
         tfTo.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent arg0)
+
+            public void mouseClicked(MouseEvent e)
             {
-                if(tfTo.getText().compareTo("<destinataire>") == 0)
+                if(tfTo.getText().equals(language.getText("templateDest")))
                 {
-                    tfTo.setText("");
+                    tfTo.setText("");   
                 }
             }
-            public void mousePressed(MouseEvent arg0)
+
+            public void mousePressed(MouseEvent e)
             {}
-            public void mouseReleased(MouseEvent arg0)
+
+            public void mouseReleased(MouseEvent e)
             {}
-            public void mouseEntered(MouseEvent arg0)
+
+            public void mouseEntered(MouseEvent e)
             {}
-            public void mouseExited(MouseEvent arg0)
-            {}            
+
+            public void mouseExited(MouseEvent e)
+            {}
         });
         
-        final JTextField tfSubject = new JTextField();
-        tfSubject.setText("<sujet>");
-        tfSubject.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent arg0)
+        DocumentListener addDL = new DocumentListener() {
+
+            public void insertUpdate(DocumentEvent e)
             {
-                if(tfSubject.getText().compareTo("<sujet>") == 0)
+                if(!(Validator.validMail(tfFrom.getText())))
+                {
+                    errorLabel.setText(language.getText("errMail1"));
+                    butOK.setEnabled(false);
+                }
+                else if(!(Validator.validMultiMails(tfTo.getText())))
+                {
+                    errorLabel.setText(language.getText("errMail2"));
+                    butOK.setEnabled(false);
+                }
+                else
+                    butOK.setEnabled(true);
+            }
+
+            public void removeUpdate(DocumentEvent e)
+            {
+                insertUpdate(e);
+            }
+
+            public void changedUpdate(DocumentEvent e)
+            {
+                insertUpdate(e);
+            }
+        };
+        tfFrom.getDocument().addDocumentListener(addDL);
+        tfTo.getDocument().addDocumentListener(addDL);
+        
+        final JTextField tfSubject = new JTextField();
+        tfSubject.setText(language.getText("templateSubj"));
+        tfSubject.addMouseListener(new MouseListener() {
+
+            public void mouseClicked(MouseEvent e)
+            {
+                if(tfSubject.getText().equals(language.getText("templateSubj")))
                 {
                     tfSubject.setText("");   
                 }
             }
-            public void mousePressed(MouseEvent arg0)
+
+            public void mousePressed(MouseEvent e)
             {}
-            public void mouseReleased(MouseEvent arg0)
+
+            public void mouseReleased(MouseEvent e)
             {}
-            public void mouseEntered(MouseEvent arg0)
+
+            public void mouseEntered(MouseEvent e)
             {}
-            public void mouseExited(MouseEvent arg0)
-            {}            
+
+            public void mouseExited(MouseEvent e)
+            {}
         });
-        
-        final JTextField tfSMTPServer = new JTextField();
-        //TODO recuperer IP du fichier de conf !
-        tfSMTPServer.setText("recuperer IP du fichier de conf !");
-        tfSMTPServer.setEditable(false);
         
         final JTextField tfFileAttached = new JTextField();
         if(lienPJ!=null)
         {
-            tfFileAttached.setText(lienPJ);            
+            StringBuffer buffer = new StringBuffer();
+            for (int i = 0 ; i < lienPJ.length ; i++)
+            {
+                buffer.append(lienPJ[i]);
+                buffer.append("; ");
+            }
+            tfFileAttached.setText(buffer.toString());            
         }
         tfFileAttached.setEditable(false);
         
         
         final JTextArea taMessage = new JTextArea(); //TODO specifier taille ?
-        taMessage.setText("<votre message ici>");
+        taMessage.setText(language.getText("templateMess"));
         taMessage.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent arg0)
+
+            public void mouseClicked(MouseEvent e)
             {
-                if(taMessage.getText().compareTo("<votre message ici>") == 0)
+                if(taMessage.getText().equals(language.getText("templateMess")))
                 {
                     taMessage.setText("");   
                 }
             }
-            public void mousePressed(MouseEvent arg0)
+
+            public void mousePressed(MouseEvent e)
             {}
-            public void mouseReleased(MouseEvent arg0)
+
+            public void mouseReleased(MouseEvent e)
             {}
-            public void mouseEntered(MouseEvent arg0)
+
+            public void mouseEntered(MouseEvent e)
             {}
-            public void mouseExited(MouseEvent arg0)
-            {}            
+
+            public void mouseExited(MouseEvent e)
+            {}
         });
         
-        JButton butOK = new JButton("OK");
         butOK.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0)
             {
-                //TODO tester si champs vides
-                //si non :
-                //créer un objet FlexiMail avec en params les valeurs des champs d la FlexiView
-                //FlexiMail.send()
-                //si oui afficher error
-                FlexiMail mail = new FlexiMail();
-                boolean ok = true;
-                if( (tfFrom.getText().compareTo("")!=0) && (tfFrom.getText().compareTo("<expéditeur>")!=0))
+                String from = tfFrom.getText();
+                
+                StringTokenizer semicolon = new StringTokenizer(tfTo.getText(), ";");
+                ArrayList<String> addrDest = new ArrayList<String>();
+                while(semicolon.hasMoreTokens())
                 {
-                    mail.setFrom(tfFrom.getText());
+                    String token = semicolon.nextToken();
+                    StringTokenizer coma = new StringTokenizer(token, ",");
+                    while(coma.hasMoreTokens())
+                        addrDest.add(coma.nextToken());
                 }
-                else ok=false;
-                if( (tfFrom.getText().compareTo("")!=0) && (tfFrom.getText().compareTo("<expéditeur>")!=0))
-                {
-                    mail.setFrom(tfFrom.getText());
-                }
-                else ok=false;
+                String[] to = new String[addrDest.size()];
+                for (int i = 0 ; i < to.length ; i++)
+                    to[i] = addrDest.get(i);
+                
+                String subject = tfSubject.getText();
+                String mess = taMessage.getText();
+                    
+                FlexiMail.send(from, to, subject, mess, lienPJ);
+                mailFrame.dispose();
             }            
         });
-        JButton butErase = new JButton("Effacer");
+        
         butErase.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0)
             {
@@ -186,7 +240,7 @@ public class MailView
                 taMessage.setText("");
             }            
         });
-        JButton butCancel = new JButton("Annuler");
+        
         butCancel.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0)
             {
@@ -194,30 +248,27 @@ public class MailView
             }            
         });
         
-
+        //TODO : placer errorLabel
         //ajout des components au layout
-        builder.addSeparator("En-Tête",         cc.xyw(1, 1, 8));
-        builder.addLabel("From :",              cc.xy (1, 3));
+        builder.addSeparator(language.getText("mailLblHead"),         cc.xyw(1, 1, 8));
+        builder.addLabel(language.getText("mailLblSender"),              cc.xy (1, 3));
         builder.add(tfFrom,                     cc.xyw(3, 3, 5));
-        builder.addLabel("To :",                cc.xy (1, 5));
+        builder.addLabel(language.getText("mailLblDest"),                cc.xy (1, 5));
         builder.add(tfTo,                       cc.xyw(3, 5, 5));
-        builder.addLabel("Subject :",           cc.xy (1, 7));
+        builder.addLabel(language.getText("mailLblSubj"),           cc.xy (1, 7));
         builder.add(tfSubject,                  cc.xyw(3, 7, 5));
         
-        builder.addSeparator("Informations",    cc.xyw(1, 9, 8));
-        builder.addLabel("SMTP Serveur :",      cc.xy (1, 11));
-        builder.add(tfSMTPServer,                  cc.xyw(3, 11, 5));
-        builder.addLabel("File Attached :",     cc.xy (1, 13));
+        builder.addLabel(language.getText("mailLblFiles"),     cc.xy (1, 13));
         builder.add(tfFileAttached,             cc.xyw(3, 13, 5));
         
-        builder.addSeparator("Messages",        cc.xyw(1, 15, 8));        
+        builder.addSeparator(language.getText("mailLblMess"),        cc.xyw(1, 15, 8));        
         builder.add(taMessage,                  cc.xyw(1, 17, 8));
         
         builder.add(butOK,                      cc.xy (3, 19));
         builder.add(butErase,                   cc.xy (5, 19));
         builder.add(butCancel,                  cc.xy (7, 19));
         
-        mailFrame.add(builder.getPanel());  
+        mailFrame.add(builder.getPanel());
         mailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ImageIcon icon = new ImageIcon(getClass().getResource("../pictures/FlexiTime_icone32.png"));
         mailFrame.setIconImage(icon.getImage());

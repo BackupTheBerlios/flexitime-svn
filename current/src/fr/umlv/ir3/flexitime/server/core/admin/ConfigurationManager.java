@@ -71,16 +71,16 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
 
         catch (SAXException e)
         {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("errConf1") + e.getMessage(), e.getCause());
+            throw new FlexiException(FlexiLanguage.getInstance().getText("errServerConf1") + e.getMessage(), e.getCause());
         }
 
         catch (ParserConfigurationException e)
         {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("errConf1") + e.getMessage(), e.getCause());
+            throw new FlexiException(FlexiLanguage.getInstance().getText("errServerConf1") + e.getMessage(), e.getCause());
         }
         catch (IOException e)
         {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("errConf2") + e.getMessage(), e.getCause());
+            throw new FlexiException(FlexiLanguage.getInstance().getText("errServerConf2") + e.getMessage(), e.getCause());
         }
         
         upDateConfig();
