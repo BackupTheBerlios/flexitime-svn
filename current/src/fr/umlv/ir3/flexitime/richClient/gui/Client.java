@@ -8,10 +8,13 @@
 package fr.umlv.ir3.flexitime.richClient.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,6 +32,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
@@ -80,7 +84,7 @@ public class Client
     private static JFrame frame;
     private static LoginView loginView;
     private static JPanel mainPanel;
-    private static JPanel centerPanel;
+    private static JLayeredPane centerPanel;
     private static JPanel exploitPanel;
     private static JPanel mngmtPanel;
     private static JScrollPane accueilPanel;
@@ -111,7 +115,7 @@ public class Client
         //gestion conteneurs
         mainPanel = new JPanel(new BorderLayout());
         frame.setContentPane(mainPanel);
-        centerPanel = new JPanel(new FlowLayout());
+        centerPanel = new JLayeredPane();
         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
         
@@ -127,13 +131,13 @@ public class Client
             System.out.println("mngmtView inouvrable");
 		}
         accueilPanel = accueilView.getPanel();
-        accueilPanel.setPreferredSize(frame.getSize());
-        accueilPanel.revalidate();
+        //accueilPanel.setPreferredSize(frame.getSize());
+        //accueilPanel.revalidate();
         exploitPanel = (JPanel)exploitView.getPanel();
-        exploitPanel.setPreferredSize(frame.getSize());
-        exploitPanel.revalidate();
+        //exploitPanel.setPreferredSize(frame.getSize());
+        //exploitPanel.revalidate();
         mngmtPanel   = mngmtView.getPanel(); 
-        mngmtPanel.setPreferredSize(new Dimension(1000,1000));
+        //mngmtPanel.setPreferredSize(new Dimension(1000,1000));
     }
     
 
@@ -153,15 +157,68 @@ public class Client
         initToolBar();
         initStateBar();
 
-        centerPanel.add(accueilPanel);
-        centerPanel.add(exploitPanel);
-        centerPanel.add(mngmtPanel);
+        centerPanel.setLayout(new LayoutManager() {
+            public void addLayoutComponent(String s, Component c) {
+            }
+            public void removeLayoutComponent(Component c) {
+            }
+
+            public Dimension preferredLayoutSize(Container parent) {
+                int w = 0, h = 0;
+                int n = parent.getComponentCount();
+                System.out.println("preferred");
+                for (int i = 0; i < n; i++) {
+                    Component c = parent.getComponent(i);
+                    System.out.println(c + "\n\t" + c.getPreferredSize());
+                    w = Math.max(w, c.getPreferredSize().width);
+                    h = Math.max(h, c.getPreferredSize().height);
+                }
+                System.out.println(w + ", " + h);
+                //return parent.getBounds().getSize();
+                return new Dimension(w, h);
+            }
+
+            public Dimension minimumLayoutSize(Container parent) {
+                int w = 0, h = 0;
+                int n = parent.getComponentCount();
+                System.out.println("minimum");
+                for (int i = 0; i < n; i++) {
+                    Component c = parent.getComponent(i);
+                    w = Math.max(w, c.getPreferredSize().width);
+                    h = Math.max(h, c.getPreferredSize().height);
+                }
+                return parent.getMaximumSize();
+                //return new Dimension(w, h);
+            }
+
+            public void layoutContainer(Container parent) {
+                int n = parent.getComponentCount();
+                for (int i = 0; i < n; i++) {
+                    Component c = parent.getComponent(i);
+                    //System.out.println(c);
+                    //c.setBounds(parent.getBounds());
+                    c.setBounds(0, 0, parent.getWidth(), parent.getHeight());
+                }
+            }
+        });
+        centerPanel.add(accueilPanel, JLayeredPane.PALETTE_LAYER);
+        centerPanel.add(exploitPanel, JLayeredPane.PALETTE_LAYER);
+        centerPanel.add(mngmtPanel, JLayeredPane.PALETTE_LAYER);
         setAccueilMode();
         frame.setVisible(true);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         return 0;
     }
 
+    /**
+     *  
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param action
+     * @return a button
+     */
     private static JButton createButton(Action action)
     {
         JButton button = new JButton();
@@ -700,9 +757,12 @@ public class Client
      */
     public static void setExploitMode()
     {
-        accueilPanel.setVisible(false);
-        mngmtPanel.setVisible(false);
-        exploitPanel.setVisible(true);
+        //accueilPanel.setVisible(false);
+        //mngmtPanel.setVisible(false);
+        //exploitPanel.setVisible(true);
+        centerPanel.moveToFront(exploitPanel);
+        centerPanel.validate();
+        centerPanel.repaint();
     }
     
     
@@ -714,9 +774,12 @@ public class Client
      */
     public static void setMngmtMode()
     {
-        accueilPanel.setVisible(false);
-        mngmtPanel.setVisible(true);
-        exploitPanel.setVisible(false);
+        //accueilPanel.setVisible(false);
+        //mngmtPanel.setVisible(true);
+        //exploitPanel.setVisible(false);
+        centerPanel.moveToFront(mngmtPanel);
+        centerPanel.validate();
+        centerPanel.repaint();
     }
     
     /** 
@@ -727,9 +790,12 @@ public class Client
      */
     public static void setAccueilMode()
     {
-        accueilPanel.setVisible(true);
-        mngmtPanel.setVisible(false);
-        exploitPanel.setVisible(false);
+        //accueilPanel.setVisible(true);
+        //mngmtPanel.setVisible(false);
+        //exploitPanel.setVisible(false);
+        centerPanel.moveToFront(accueilPanel);
+        centerPanel.validate();
+        centerPanel.repaint();
     }
   
     // ==== //
