@@ -55,6 +55,19 @@ public class HibernateUtil
         }
     }
 
+    static{
+        Configuration cfg = new Configuration();
+        try
+        {
+            sessionFactory = cfg.configure().buildSessionFactory();
+        }
+        catch (HibernateException e)
+        {
+//            throw new FlexiException(FlexiLanguage.getInstance().getText(
+//                    "errHiber1")
+//                    + e.getMessage(), e);
+        }
+    }
     /**
      * 
      * Get current Hibernate Session
