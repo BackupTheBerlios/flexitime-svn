@@ -1,0 +1,156 @@
+// Decompiled by DJ v3.7.7.81 Copyright 2004 Atanas Neshkov  Date: 16/12/2004 11:01:50
+// Home Page : http://members.fortunecity.com/neshkov/dj.html  - Check often for new version!
+// Decompiler options: packimports(3) 
+
+package fr.umlv.ir3.GL.flexitime.server.core;
+
+import fr.umlv.ir3.GL.flexitime.client.listener.TeacherListener;
+import fr.umlv.ir3.GL.flexitime.common.ressource.Teacher;
+import java.lang.reflect.Method;
+import java.rmi.*;
+import java.rmi.server.*;
+import java.util.List;
+
+// Referenced classes of package fr.umlv.ir3.GL.flexitime.server.core:
+//            ITeacherCore
+
+public final class TeacherCore_Stub extends RemoteStub
+    implements ITeacherCore, Remote
+{
+
+    public TeacherCore_Stub(RemoteRef ref)
+    {
+        super(ref);
+    }
+
+    public void addMetierListener(TeacherListener $param_TeacherListener_1)
+        throws RemoteException
+    {
+        try
+        {
+            super.ref.invoke(this, $method_addMetierListener_0, new Object[] {
+                $param_TeacherListener_1
+            }, 0x3fdd49f3d09055d2L);
+        }
+        catch(RuntimeException e)
+        {
+            throw e;
+        }
+        catch(RemoteException e)
+        {
+            throw e;
+        }
+        catch(Exception e)
+        {
+            throw new UnexpectedException("undeclared checked exception", e);
+        }
+    }
+
+    static Class _mthclass$(String class$)
+    {
+        try
+        {
+            return Class.forName(class$);
+        }
+        catch(ClassNotFoundException forName)
+        {
+            throw new NoClassDefFoundError(forName.getMessage());
+        }
+    }
+
+    public Teacher createTeacher(String $param_String_1, String $param_String_2, String $param_String_3)
+        throws RemoteException
+    {
+        try
+        {
+            Object $result = super.ref.invoke(this, $method_createTeacher_1, new Object[] {
+                $param_String_1, $param_String_2, $param_String_3
+            }, 0xea56ef7322e56437L);
+            return (Teacher)$result;
+        }
+        catch(RuntimeException e)
+        {
+            throw e;
+        }
+        catch(RemoteException e)
+        {
+            throw e;
+        }
+        catch(Exception e)
+        {
+            throw new UnexpectedException("undeclared checked exception", e);
+        }
+    }
+
+    public void deleteTeacher(Teacher $param_Teacher_1)
+        throws RemoteException
+    {
+        try
+        {
+            super.ref.invoke(this, $method_deleteTeacher_2, new Object[] {
+                $param_Teacher_1
+            }, 0x5716aebb53cd7d52L);
+        }
+        catch(RuntimeException e)
+        {
+            throw e;
+        }
+        catch(RemoteException e)
+        {
+            throw e;
+        }
+        catch(Exception e)
+        {
+            throw new UnexpectedException("undeclared checked exception", e);
+        }
+    }
+
+    public List getTeachers()
+        throws RemoteException
+    {
+        try
+        {
+            Object $result = super.ref.invoke(this, $method_getTeachers_3, null, 0x9f1bb07477acb76eL);
+            return (List)$result;
+        }
+        catch(RuntimeException e)
+        {
+            throw e;
+        }
+        catch(RemoteException e)
+        {
+            throw e;
+        }
+        catch(Exception e)
+        {
+            throw new UnexpectedException("undeclared checked exception", e);
+        }
+    }
+
+    private static final long serialVersionUID = 2L;
+    private static Method $method_addMetierListener_0;
+    private static Method $method_createTeacher_1;
+    private static Method $method_deleteTeacher_2;
+    private static Method $method_getTeachers_3;
+
+    static 
+    {
+        try
+        {
+            $method_addMetierListener_0 = (fr.umlv.ir3.GL.flexitime.server.core.ITeacherCore.class).getMethod("addMetierListener", new Class[] {
+                fr.umlv.ir3.GL.flexitime.client.listener.TeacherListener.class
+            });
+            $method_createTeacher_1 = (fr.umlv.ir3.GL.flexitime.server.core.ITeacherCore.class).getMethod("createTeacher", new Class[] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            });
+            $method_deleteTeacher_2 = (fr.umlv.ir3.GL.flexitime.server.core.ITeacherCore.class).getMethod("deleteTeacher", new Class[] {
+                fr.umlv.ir3.GL.flexitime.common.ressource.Teacher.class
+            });
+            $method_getTeachers_3 = (fr.umlv.ir3.GL.flexitime.server.core.ITeacherCore.class).getMethod("getTeachers", new Class[0]);
+        }
+        catch(NoSuchMethodException _ex)
+        {
+            throw new NoSuchMethodError("stub class initialization failed");
+        }
+    }
+}
