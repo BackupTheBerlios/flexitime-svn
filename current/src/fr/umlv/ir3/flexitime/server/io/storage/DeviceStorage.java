@@ -68,11 +68,11 @@ public class DeviceStorage
      * @throws HibernateException 
      * 
      */
-    public static List get() throws HibernateException
+    public static List<IDevice> get() throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<IDevice> l = null;
         try
         {
             s = HibernateUtil.currentSession();
@@ -129,6 +129,7 @@ public class DeviceStorage
      * Deletes a device from the database
      *
      * @param device IDevice to delete
+     * @throws HibernateException 
      * 
      */
     public static void delete(IDevice device) throws HibernateException

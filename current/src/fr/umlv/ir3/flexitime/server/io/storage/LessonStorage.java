@@ -68,11 +68,11 @@ public class LessonStorage
      * @throws HibernateException 
      * 
      */
-    public static List get() throws HibernateException
+    public static List<ILesson> get() throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<ILesson> l = null;
         try
         {
             s = HibernateUtil.currentSession();

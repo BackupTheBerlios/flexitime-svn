@@ -199,7 +199,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
      * <code>exemple d'appel de la methode</code>
      * 
      * @param building
-     * @return
+     * @return true if OK
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteBuilding(fr.umlv.ir3.flexitime.common.data.general.IBuilding)
      */
@@ -1454,7 +1454,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
      * <code>exemple d'appel de la methode</code>
      *
      * @param parent
-     * @return
+     * @return list of busies
      * @throws RemoteException 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getBusies(fr.umlv.ir3.flexitime.common.data.resources.IResource)

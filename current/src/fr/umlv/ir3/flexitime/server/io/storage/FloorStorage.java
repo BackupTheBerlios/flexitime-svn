@@ -73,11 +73,11 @@ public class FloorStorage
      * @throws HibernateException 
      * 
      */
-    public static List get(IBuilding parent) throws HibernateException
+    public static List<IFloor> get(IBuilding parent) throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<IFloor> l = null;
         try
         {
             s = HibernateUtil.currentSession();

@@ -72,11 +72,11 @@ public class GroupStorage
      * @throws HibernateException 
      * 
      */
-    public static List get(IClass parent) throws HibernateException
+    public static List<IGroup> get(IClass parent) throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<IGroup> l = null;
         try
         {
             s = HibernateUtil.currentSession();

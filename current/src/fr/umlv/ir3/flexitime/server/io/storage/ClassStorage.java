@@ -74,11 +74,11 @@ public class ClassStorage
      * @throws HibernateException
      * 
      */
-    public static List get(ITrack parent) throws HibernateException
+    public static List<IClass> get(ITrack parent) throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<IClass> l = null;
         try
         {
             s = HibernateUtil.currentSession();

@@ -72,11 +72,11 @@ public class BuildingStorage
      * @throws HibernateException
      * 
      */
-    public static List get() throws HibernateException
+    public static List<IBuilding> get() throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<IBuilding> l = null;
         try
         {
             s = HibernateUtil.currentSession();

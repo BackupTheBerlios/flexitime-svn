@@ -72,11 +72,11 @@ public class SubjectStorage
      * @throws HibernateException 
      * 
      */
-    public static List get(ISubjectsGroup parent) throws HibernateException
+    public static List<ISubject> get(ISubjectsGroup parent) throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<ISubject> l = null;
         try
         {
             s = HibernateUtil.currentSession();

@@ -72,11 +72,11 @@ public class CourseStorage
      * @throws HibernateException 
      * 
      */
-    public static List get(ISubject parent) throws HibernateException
+    public static List<ICourse> get(ISubject parent) throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<ICourse> l = null;
         try
         {
             s = HibernateUtil.currentSession();

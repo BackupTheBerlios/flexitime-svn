@@ -72,11 +72,11 @@ public class SubjectsGroupStorage
      * @throws HibernateException 
      * 
      */
-    public static List get(ITeachingStructure parent) throws HibernateException
+    public static List<ISubjectsGroup> get(ITeachingStructure parent) throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<ISubjectsGroup> l = null;
         try
         {
             s = HibernateUtil.currentSession();

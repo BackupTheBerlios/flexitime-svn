@@ -5,20 +5,14 @@
  */
 package fr.umlv.ir3.flexitime.common.rmi;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Base implementation of IDataListener
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * All IDataListener implementation must extends this in order to be exposed via RMI
  * 
  */
 public abstract class DataListenerImpl extends UnicastRemoteObject implements IDataListener

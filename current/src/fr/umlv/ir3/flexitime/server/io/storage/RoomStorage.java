@@ -73,11 +73,11 @@ public class RoomStorage
      * @throws HibernateException 
      * 
      */
-    public static List get(IFloor parent) throws HibernateException
+    public static List<IRoom> get(IFloor parent) throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<IRoom> l = null;
         try
         {
             s = HibernateUtil.currentSession();

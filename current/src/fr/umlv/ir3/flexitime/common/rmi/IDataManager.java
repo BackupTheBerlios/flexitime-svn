@@ -10,6 +10,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
@@ -21,6 +22,7 @@ import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
@@ -377,6 +379,7 @@ public interface IDataManager extends Remote
      * @param teacher 
      * @return true if OK
      * @throws RemoteException 
+     * @throws FlexiException 
      */
     public boolean deleteTeacher(ITeacher teacher) throws RemoteException, FlexiException;
     
@@ -438,28 +441,40 @@ public interface IDataManager extends Remote
     /**
      * @param d
      * @param parent
-     * @return
+     * @return IdeviceBusy
+     * @throws RemoteException 
      */
     public IDeviceBusy saveOrUpdateDeviceBusy(IDeviceBusy d, IDevice parent) throws RemoteException;
 
     /**
      * @param group
      * @param parent
-     * @return
+     * @return IGroupBusy
+     * @throws RemoteException 
      */
     public IGroupBusy saveOrUpdateGroupBusy(IGroupBusy group, IGroup parent) throws RemoteException;
 
     /**
      * @param r
      * @param parent
-     * @return
+     * @return IRoomBusy
+     * @throws RemoteException 
      */
     public IRoomBusy saveOrUpdateRoomBusy(IRoomBusy r, IRoom parent) throws RemoteException;
 
     /**
      * @param t
      * @param parent
-     * @return
+     * @return ITeacherBusy
+     * @throws RemoteException 
      */
     public ITeacherBusy saveOrUpdateTeacherBusy(ITeacherBusy t, ITeacher parent) throws RemoteException;
+    
+    /**
+     * 
+     * @param parent
+     * @return List of busies
+     * @throws RemoteException
+     */
+    public List<IBusy> getBusies(IResource parent) throws RemoteException;
 }

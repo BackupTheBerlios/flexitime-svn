@@ -68,11 +68,11 @@ public class TeacherStorage
      * @return List of ITeacher
      * @throws HibernateException
      */
-    public static List get() throws HibernateException
+    public static List<ITeacher> get() throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<ITeacher> l = null;
         try
         {
             s = HibernateUtil.currentSession();

@@ -13,20 +13,23 @@ import java.rmi.registry.Registry;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
- * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * Singleton used for communication with the server
  * 
  */
 public class RemoteDataManager
 {
     private static IDataManager manager;
+    private static String ipServer = "localhost";
 
+    /**
+     * Sets the adress of Server 
+     * @param ip IP or name of the server
+     */
+    public static void setIpServer(String ip)
+    {
+     ipServer = ip;   
+    }
+    
     /**
      *  
      * Getter for the remote IDataManager
@@ -40,7 +43,7 @@ public class RemoteDataManager
         {
             try
             {
-                Registry r = LocateRegistry.getRegistry("localhost");
+                Registry r = LocateRegistry.getRegistry(ipServer);
                 try
                 {
                     manager = (IDataManager) r.lookup("manager");
