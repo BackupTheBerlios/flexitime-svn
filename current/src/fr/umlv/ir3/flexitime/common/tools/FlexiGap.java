@@ -17,8 +17,14 @@ import java.util.Calendar;
  * @author FlexiTeam - FA
  */
 public class FlexiGap {
+    //===========//
+	//  Champs   //
+	//===========//
 	private FlexiTime startDate;
 	private FlexiTime endDate;
+    //=================//
+	//  Constructeurs  //
+    //=================//
 	/**
 	 * Default constructor 
 	 */
@@ -60,11 +66,11 @@ public class FlexiGap {
 	 * 
 	 *     <code>exemple d'appel de la methode</code>
 	 *
-	 * @return 
-	 * 
-	 * @author   FlexiTeam - VF
-	 * @date     7 janv. 2005
+	 * @return the end date
 	 */
+    //=============//
+    //  Méthodes   //
+	//=============//
 	public FlexiTime getEndDate() {
 		return endDate;
 	}
@@ -74,9 +80,6 @@ public class FlexiGap {
 	 *     <code>exemple d'appel de la methode</code>
 	 *
 	 * @param endDate 
-	 * 
-	 * @author   FlexiTeam - VF
-	 * @date     7 janv. 2005
 	 */
 	public void setEndDate(FlexiTime endDate) {
 		this.endDate = endDate;
@@ -86,10 +89,7 @@ public class FlexiGap {
 	 * 
 	 *     <code>exemple d'appel de la methode</code>
 	 *
-	 * @return 
-	 * 
-	 * @author   FlexiTeam - VF
-	 * @date     7 janv. 2005
+	 * @return the start date
 	 */
 	public FlexiTime getStartDate() {
 		return startDate;
@@ -100,9 +100,6 @@ public class FlexiGap {
 	 *     <code>exemple d'appel de la methode</code>
 	 *
 	 * @param startDate 
-	 * 
-	 * @author   FlexiTeam - VF
-	 * @date     7 janv. 2005
 	 */
 	public void setStartDate(FlexiTime startDate) {
 		this.startDate = startDate;

@@ -8,6 +8,12 @@
 package fr.umlv.ir3.flexitime.common.tools;
 
 import java.awt.Color;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * FlexiColor - Description Belong a big number of color
@@ -17,48 +23,9 @@ import java.awt.Color;
  */
 public class FlexiColor
 {
-    /** 
-     * getColor - get a color with a String "#xxyyzz"
-     * 
-     *     <code>Color c = FlexiColor.get(FlexiColor.black);</code>
-     *
-     * @param c the color in "#xxyyzz" format
-     * @return Returns the color
-     * 
-     * @author   FlexiTeam - VF
-     * @date     6 janv. 2005
-     */
-    public static Color getColor(String c){
-        return Color.decode(c);
-    }
-    /** 
-     * brighter - get a brighter color than the color in args
-     * 
-     *     <code>Color newc = FlexiColor.brighter(c);</code>
-     *
-     * @param c the color you want to bright
-     * @return Returns the color brightered
-     * 
-     * @author   FlexiTeam - VF
-     * @date     6 janv. 2005
-     */
-    public static Color brighter(Color c){
-        return c.brighter();
-    }
-    /** 
-     * darker - get a darker color than the color in args
-     * 
-     *     <code>Color newc = FlexiColor.darker(c);</code>
-     *
-     * @param c the color you want to dark
-     * @return Returns the color darkered
-     * 
-     * @author   FlexiTeam - VF
-     * @date     6 janv. 2005
-     */
-    public static Color darker(Color c){
-        return c.darker();
-    }
+	//==============//
+    //  Propriétés  //
+	//==============//
     public final static String black = "#000000";
     public final static String navy  = "#000080";
     public final static String darkblue = "#00008b";
@@ -199,4 +166,62 @@ public class FlexiColor
     public final static String lightyellow = "#ffffe0";
     public final static String ivory = "#fffff0";
     public final static String white = "#ffffff";
+    //================//
+    //  Constructeur  //
+	//================//   
+    private FlexiColor(){}
+    //======================//
+    //  Méthodes statiques  //
+	//======================//
+    /** 
+     * getColor - get a color with a String "#xxyyzz"
+     * 
+     *     <code>Color c = FlexiColor.get(FlexiColor.black);</code>
+     *
+     * @param c the color in "#xxyyzz" format
+     * @return Returns the color
+     */
+    public static Color getColor(String c){
+        return Color.decode(c);
+    }
+    /** 
+     * brighter - get a brighter color than the color in args
+     * 
+     *     <code>Color newc = FlexiColor.brighter(c);</code>
+     *
+     * @param c the color you want to bright
+     * @return Returns the color brightered
+     */
+    public static Color brighter(Color c){
+        return c.brighter();
+    }
+    /** 
+     * darker - get a darker color than the color in args
+     * 
+     *     <code>Color newc = FlexiColor.darker(c);</code>
+     *
+     * @param c the color you want to dark
+     * @return Returns the color darkered
+     */
+    public static Color darker(Color c){
+        return c.darker();
+    }
+    /** 
+     * getAllColors - gets all the color in a List
+     * <code>List l = FlexiColor.getAllColors()</code>
+     *
+     * @return Returns the list of the color
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException 
+     */
+    public static List getAllColors() throws IllegalArgumentException, IllegalAccessException{
+        ArrayList l = new ArrayList();
+        FlexiColor color = new FlexiColor();
+        Field[] f = color.getClass().getFields();
+        for(int i=0;i<f.length;i++){
+            String s = (String)f[i].get(f[i].getName());
+            l.add(s);
+        }
+        return l;
+    }
 }
