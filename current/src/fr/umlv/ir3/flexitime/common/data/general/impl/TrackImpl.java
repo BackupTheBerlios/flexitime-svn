@@ -23,6 +23,10 @@ import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
  */
 public class TrackImpl extends DataImpl implements ITrack
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3258126955743556917L;
     //===========//
     //   Champs  //
     //===========// 
@@ -59,7 +63,7 @@ public class TrackImpl extends DataImpl implements ITrack
 	public TrackImpl(String sName, List listClasses)
 	{
 		super(sName);
-		this.lstClass = new ArrayList(listClasses);		        
+		this.lstClass = listClasses;		        
 	}
     
     //=============//
@@ -90,7 +94,7 @@ public class TrackImpl extends DataImpl implements ITrack
      */
     public void setLstClass(List lstClass)
     {
-        this.lstClass = new ArrayList(lstClass);
+        this.lstClass = lstClass;
     }
 
     /** 

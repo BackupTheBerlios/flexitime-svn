@@ -23,6 +23,10 @@ import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
  */
 public class BuildingImpl extends DataImpl implements IBuilding
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3760850064486314295L;
     //===========//
     //   Champs  //
     //===========// 
@@ -59,7 +63,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
     public BuildingImpl(String name, List listFloors)
     {
         super(name);
-        this.lstFloors = new ArrayList(listFloors);
+        this.lstFloors = listFloors;
     }
 
     
@@ -102,7 +106,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
      */
     public void setLstFloor(List lstFloor)
     {
-        this.lstFloors = new ArrayList(lstFloor);
+        this.lstFloors = lstFloor;
     }
 
     /** 

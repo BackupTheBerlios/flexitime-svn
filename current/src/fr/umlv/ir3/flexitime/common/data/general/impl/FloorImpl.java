@@ -24,6 +24,10 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
  */
 public class FloorImpl extends DataImpl implements IFloor
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3977585800848159025L;
     //===========//
     //   Champs  //
     //===========// 
@@ -74,7 +78,7 @@ public class FloorImpl extends DataImpl implements IFloor
     public FloorImpl(String name, List listRooms, BuildingImpl building)
     {
         super(name);
-        this.lstRoom = new ArrayList(listRooms);
+        this.lstRoom = listRooms;
         this.parentBuilding = building;
     }
     
@@ -105,7 +109,7 @@ public class FloorImpl extends DataImpl implements IFloor
      */
     public void setLstRoom(List lstRoom)
     {
-        this.lstRoom = new ArrayList(lstRoom);
+        this.lstRoom = lstRoom;
     }
 
     /** 

@@ -9,6 +9,7 @@ package fr.umlv.ir3.flexitime.common.data.activity;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.resources.IResource;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 
 /**
  * A lesson is an unavailabilities with different resources as teachers, devices and groups
@@ -18,23 +19,6 @@ import fr.umlv.ir3.flexitime.common.data.resources.IResource;
  */
 public interface ILesson extends IBusy
 {
-
-    /**
-     * Returns the list of resources of a Lesson
-     * 
-     * @return the list of resources of a Lesson
-     * @author FlexiTeam - Guillaume GUERRIN
-     */
-    List getLstResource();
-
-    /**
-     * Changes the list of resources of a Lesson
-     * 
-     * @param lstResource the new list of resources of a Lesson
-     * @author FlexiTeam - Guillaume GUERRIN
-     */
-    void setLstResource(List lstResource);
-
     /**
      * Add a Resource in a lesson .
      * 
@@ -50,5 +34,60 @@ public interface ILesson extends IBusy
      * @author FlexiTeam - Guillaume GUERRIN
      */
     void removeResource(IResource resource);
+    
+    /**
+     * Getter for List of ITeacher
+     * @return List of ITeacher
+     */
+    public List getLstTeacher();
+    /**
+     * Setter for List of ITeacher
+     * @param lteacher List to set
+     */
+    public void setLstTeacher(List lteacher); 
+    
+    /**
+     * Getter for List of IDevice
+     * @return List of IDevice
+     */
+    public List getLstDevice();
+    /**
+     * Setter for List of IDevice
+     * @param ldevice List to set
+     */
+    public void setLstDevice(List ldevice);
+    
+    /**
+     * Getter for List of IRoom
+     * @return List of IRoom
+     */
+    public List getLstRoom();
+    /**
+     * Setter for List of IGroup
+     * @param lroom List to set
+     */
+    public void setLstRoom(List lroom);
+    /**
+     * Getter for List of IGroup
+     * @return List of IGroup
+     */
+    public List getLstGroup();
+    /**
+     * Setter for List of IGroup
+     * @param lgroup List to set
+     */
+    public void setLstGroup(List lgroup);
+    
+    /**
+     * Getter for ICourse contained in this Busy
+     * @return ICourse
+     */
+    public ICourse getCourse();
+    /**
+     * Setter for ICourse
+     * @param _course ICourse to set
+     */
+    public void setCourse(ICourse _course);
+    
 
 }

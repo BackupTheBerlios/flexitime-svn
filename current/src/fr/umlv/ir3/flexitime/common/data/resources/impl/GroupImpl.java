@@ -16,13 +16,16 @@ import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
  * Defines a group.
  * 
  * @version 0.1
- * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup
- * @see fr.umlv.ir3.flexitime.common.data.ressources.impl.ResourceImpl
+ * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
 public class GroupImpl extends ResourceImpl implements IGroup
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3904677193450663986L;
     //===========//
 	//  Champs	 //
 	//===========//
@@ -97,7 +100,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
      *
      * @return the number of students in this group.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#getNbPerson()
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#getNbPerson()
      */
     public int getNbPerson()
     {
@@ -110,7 +113,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
      *
      * @param nbPerson the number of students in this group.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#setNbPerson(int)
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#setNbPerson(int)
      */
     public void setNbPerson(int nbPerson)
     {
@@ -123,7 +126,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
 	 *
 	 * @return the parent class of this group.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#getParentClass()
+	 * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#getParentClass()
 	 */
 	public IClass getParentClass()
 	{
@@ -136,7 +139,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
 	 *
 	 * @param parentClass the parent class of this group.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#setParentClass(int)
+	 * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#setParentClass(IClass)
 	 */ 
 	public void setParentClass(IClass parentClass)
 	{

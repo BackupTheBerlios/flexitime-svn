@@ -28,6 +28,10 @@ import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
  */
 public class TeacherBusyImpl extends BusyImpl implements ITeacherBusy
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3256445785217577008L;
     //===========//
 	//  Champs	 //
 	//===========//

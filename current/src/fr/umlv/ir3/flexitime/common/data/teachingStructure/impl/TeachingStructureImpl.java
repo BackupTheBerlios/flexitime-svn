@@ -23,6 +23,10 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
  */
 public class TeachingStructureImpl extends DataImpl implements ITeachingStructure
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3256721771226083378L;
     //===========//
 	//  Champs	 //
 	//===========//
@@ -58,7 +62,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
     public TeachingStructureImpl(String name, List listSubjectsGroup)
     {
         super(name);
-        this.lstSubjectsGroup = new ArrayList(listSubjectsGroup);
+        this.lstSubjectsGroup = listSubjectsGroup;
     }
 
     
@@ -90,7 +94,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
      */
     public void setLstSubjectsGroup(List lst)
     {
-        lstSubjectsGroup = new ArrayList(lst);
+        lstSubjectsGroup = lst;
     }
 
     /** 

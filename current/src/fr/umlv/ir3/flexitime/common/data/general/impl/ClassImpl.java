@@ -24,12 +24,16 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructur
  * @version 0.2
  * @see fr.umlv.ir3.flexitime.common.data.general.IClass
  * @see fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl
- * @see fr.umlv.ir3.flexitime.common.data.ressources.impl.GroupImpl
+ * @see fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
 public class ClassImpl extends DataImpl implements IClass
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3257282513616711735L;
     //===========//
     //   Champs  //
     //===========// 
@@ -82,7 +86,7 @@ public class ClassImpl extends DataImpl implements IClass
     public ClassImpl(String sName, List listOfGroups, ITeachingStructure struct, TrackImpl track)
     {
         super(sName);
-        this.lstGroups = new ArrayList(listOfGroups);
+        this.lstGroups = listOfGroups;
         this.teachingStructure = struct;
         this.parentTrack = track;
     }
@@ -184,7 +188,7 @@ public class ClassImpl extends DataImpl implements IClass
      */
     public void setLstGroups(List lstGroup)
     {
-        lstGroups = new ArrayList(lstGroup);
+        lstGroups = lstGroup;
     }
 
     /** 

@@ -42,7 +42,7 @@ public class Preferences
 	{
 		this.iHeightGap = heightGap;
 		this.iLengthGap = lengthGap;
-		this.listOfColors = new ArrayList(listColors);		
+		this.listOfColors = listColors;		
 	}
 	
 

@@ -20,13 +20,17 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
  * TYPE_TP      = 3;
  * 
  * @version 0.1
- * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom
- * @see fr.umlv.ir3.flexitime.common.data.ressources.impl.ResourceImpl
+ * @see fr.umlv.ir3.flexitime.common.data.resources.IRoom
+ * @see fr.umlv.ir3.flexitime.common.data.resources.impl.ResourceImpl
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
 public class RoomImpl extends ResourceImpl implements IRoom
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3256719568024974134L;
     //===========//
 	//  Champs	 //
 	//===========//
@@ -107,7 +111,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
      *
      * @return the type of the room.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#getType()
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IRoom#getType()
      * @author   FlexiTeam - Adrien BOUVET
      */
     public int getType()
@@ -119,9 +123,9 @@ public class RoomImpl extends ResourceImpl implements IRoom
      * Sets the type of the room.
      * <code>room.setType(type)</code>
      *
-     * @param type the type of the room.
+     * @param iType the type of the room.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#setType(int)
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IRoom#setType(int)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void setType(int iType)
@@ -135,7 +139,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
      *
      * @return the capacity of the room.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#getCapacity()
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IRoom#getCapacity()
      * @author   FlexiTeam - Adrien BOUVET
      */
     public int getCapacity()
@@ -149,7 +153,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
      *
      * @param capacity the capacity of the room.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#setCapacity(int)
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IRoom#setCapacity(int)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void setCapacity(int capacity)
@@ -163,7 +167,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	 *
 	 * @return the floor where the room is.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#getFloor()
+	 * @see fr.umlv.ir3.flexitime.common.data.resources.IRoom#getFloor()
 	 * @author   FlexiTeam - Adrien BOUVET
 	 */
 	public IFloor getFloor()
@@ -177,7 +181,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	 *
 	 * @param floor the floor where the room is.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#setFloor(java.lang.String)
+	 * @see fr.umlv.ir3.flexitime.common.data.resources.IRoom#setFloor(IFloor)
 	 * @author   FlexiTeam - Adrien BOUVET
 	 */
 	public void setFloor(IFloor floor)

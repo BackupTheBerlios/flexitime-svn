@@ -9,6 +9,8 @@ package fr.umlv.ir3.flexitime.common.data.activity;
 import java.io.Serializable;
 import java.util.Date;
 
+import fr.umlv.ir3.flexitime.common.tools.Gap;
+
 /**
  * Represents the unavailabilities
  * 
@@ -60,4 +62,12 @@ public interface IBusy extends Serializable
      */
     void setEndDate(Date daBusy);
 
+    /**
+     *  
+     *Get Gap for this Busy
+     *
+     * @return Gap
+     * 
+     */
+    public Gap getGap();
 }

@@ -74,7 +74,7 @@ public interface IRoom extends IResource
 	/**
 	 * Sets the floor where the room is.
 	 * 
-	 * @param capacity the floor where the room is.
+	 * @param floor the floor where the room is.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
 	void setFloor(IFloor floor);

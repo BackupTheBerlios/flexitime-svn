@@ -24,6 +24,10 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
  */
 public class SubjectImpl extends DataImpl implements ISubject
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3546637698719692343L;
     //===========//
 	//  Champs	 //
 	//===========//
@@ -73,7 +77,7 @@ public class SubjectImpl extends DataImpl implements ISubject
     public SubjectImpl(String name, List listCourses, SubjectsGroupImpl subjectsGroup)
     {
         super(name);
-        this.lstCourse = new ArrayList(listCourses);
+        this.lstCourse = listCourses;
         this.parentSubjectsGroup = subjectsGroup;
     }
 
@@ -106,7 +110,7 @@ public class SubjectImpl extends DataImpl implements ISubject
      */
     public void setLstCourse(List lstCourse)
     {
-        this.lstCourse = new ArrayList(lstCourse);
+        this.lstCourse = lstCourse;
     }
 
     /** 
@@ -144,7 +148,7 @@ public class SubjectImpl extends DataImpl implements ISubject
 	 *
 	 * @return the subjects' group to which the subject belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#getParentSubjectsGroup()
+	 * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject#getParentSubjectsGroup()
 	 */
 	public ISubjectsGroup getParentSubjectsGroup()
 	{
@@ -158,7 +162,7 @@ public class SubjectImpl extends DataImpl implements ISubject
 	 *
 	 * @param subjectsGroup the subjects' group to which the subject belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#setParentSubjectsGroup(ISubjectsGroup)
+	 * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject#setParentSubjectsGroup(ISubjectsGroup)
 	 */
 	public void setParentSubjectsGroup(ISubjectsGroup subjectsGroup)
 	{

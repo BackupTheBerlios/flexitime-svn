@@ -14,13 +14,17 @@ import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
  * Defines a teacher.
  * 
  * @version 0.1
- * @see fr.umlv.ir3.flexitime.common.data.ressources.ITeacher
- * @see fr.umlv.ir3.flexitime.common.data.ressources.impl.ResourceImpl
+ * @see fr.umlv.ir3.flexitime.common.data.resources.ITeacher
+ * @see fr.umlv.ir3.flexitime.common.data.resources.impl.ResourceImpl
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
 public class TeacherImpl extends ResourceImpl implements ITeacher
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3906369333239427639L;
     //===========//
 	//  Champs	 //
 	//===========//
@@ -72,7 +76,7 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      *
      * @return the first name of the teacher.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.ITeacher#getFirstName()
+     * @see fr.umlv.ir3.flexitime.common.data.resources.ITeacher#getFirstName()
      */
     public String getFirstName()
     {
@@ -85,7 +89,7 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      *
      * @param firstName the first name of the teacher.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.ITeacher#setFirstName(java.lang.String)
+     * @see fr.umlv.ir3.flexitime.common.data.resources.ITeacher#setFirstName(java.lang.String)
      */
     public void setFirstName(String firstName)
     {
@@ -98,7 +102,7 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      *
      * @return the email adress of the teacher. 
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.ITeacher#getEmail()
+     * @see fr.umlv.ir3.flexitime.common.data.resources.ITeacher#getEmail()
      */
     public String getEmail()
     {
@@ -111,7 +115,7 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      *
      * @param email the email adress of the teacher. 
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.ITeacher#setEmail(java.lang.String)
+     * @see fr.umlv.ir3.flexitime.common.data.resources.ITeacher#setEmail(java.lang.String)
      */
     public void setEmail(String email)
     {

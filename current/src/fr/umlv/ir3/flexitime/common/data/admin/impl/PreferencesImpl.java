@@ -21,7 +21,11 @@ import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
  */
 public class PreferencesImpl extends DataImpl implements IPreferences 
 {
-	//===========//
+	/**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3904961949799100468L;
+    //===========//
 	//   Champs  //
 	//===========// 
 	private int iHeightGap;

@@ -21,6 +21,10 @@ import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
  */
 public class ConfigImpl extends DataImpl implements IConfig
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3258408452245172793L;
     //===========//
 	//  Champs	 //
 	//===========//

@@ -24,6 +24,10 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
  */
 public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3689355416107038776L;
     //===========//
 	//  Champs	 //
 	//===========//
@@ -73,7 +77,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
     public SubjectsGroupImpl(String name, List listSubjects, TeachingStructureImpl teachStruct)
     {
         super(name);
-        this.lstSubject = new ArrayList(listSubjects);
+        this.lstSubject = listSubjects;
         this.parentTeachStruct = teachStruct;
     }
 
@@ -104,7 +108,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
      */
     public void setLstSubject(List lstSubject)
     {
-        this.lstSubject = new ArrayList(lstSubject);
+        this.lstSubject = lstSubject;
     }
 
     /** 
@@ -140,7 +144,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
 	 *
 	 * @return the teaching structure to which the subjects' group belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ISubjectsGroup#getParentTeachStruct()
+	 * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup#getParentTeachStruct()
 	 */
 	public ITeachingStructure getParentTeachStruct()
 	{
@@ -153,7 +157,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
 	 *
 	 * @param struct the teaching structure to which the subjects' group belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ISubjectsGroup#setParentTeachStruct(ITeachingStructure)
+	 * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup#setParentTeachStruct(ITeachingStructure)
 	 */
 	public void setParentTeachStruct(ITeachingStructure struct)
 	{

@@ -25,6 +25,10 @@ import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
  */
 public class GroupBusyImpl extends BusyImpl implements IGroupBusy
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3257288028304127033L;
     //===========//
 	//  Champs	 //
 	//===========//

@@ -24,6 +24,10 @@ import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 public class UserImpl extends DataImpl implements IUser
 {
 
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 4049641187222499896L;
     //===========//
 	//  Champs	 //
 	//===========//

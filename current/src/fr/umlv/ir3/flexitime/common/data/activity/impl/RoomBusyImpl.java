@@ -26,6 +26,10 @@ import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
  */
 public class RoomBusyImpl extends BusyImpl implements IRoomBusy
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3546365028442977075L;
     //===========//
 	//  Champs	 //
 	//===========//

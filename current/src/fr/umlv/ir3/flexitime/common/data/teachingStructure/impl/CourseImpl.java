@@ -27,6 +27,10 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
  */
 public class CourseImpl extends DataImpl implements ICourse
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3257852077735753267L;
     //===========//
 	//  Champs	 //
 	//===========//
@@ -77,6 +81,7 @@ public class CourseImpl extends DataImpl implements ICourse
      * @param nbHours the number of hours for this course.
      * @param color an int representing the color of the course.
      * @param listTeachers a list of teachers.
+     * @param defaultLength deault length of this course
 	 * @param subject the parent subject of this course.
      * 
      */
@@ -86,11 +91,19 @@ public class CourseImpl extends DataImpl implements ICourse
         this.type = type;
         this.nbHours = nbHours;
         this.color = color;
-        this.lstTeacher = new ArrayList(listTeachers);
+        this.lstTeacher = listTeachers;
         this.defaultLength = defaultLength;
         this.parentSubject = subject;
     }
-    
+    /**
+     * Constructs a Course
+     * 
+     * @param name name of this course
+     * @param type type of this course
+     * @param nbHours length in hours of this course
+     * @param color color
+     * @param defaultLength defult lenghth of this course
+     */
     public CourseImpl(String name, int type, int nbHours, Color color, int defaultLength)
     {
         super(name);
@@ -210,7 +223,7 @@ public class CourseImpl extends DataImpl implements ICourse
      *
      * @param color a color represented by an int.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#setColor(int)
+     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#setColor(Color)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void setColor(Color color)
@@ -243,7 +256,7 @@ public class CourseImpl extends DataImpl implements ICourse
      */
     public void setLstTeacher(List lstTeacher)
     {
-        this.lstTeacher = new ArrayList(lstTeacher);
+        this.lstTeacher = lstTeacher;
     }
 
     /** 
@@ -252,7 +265,7 @@ public class CourseImpl extends DataImpl implements ICourse
      *
      * @param teacher a teacher.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#addTeacher(fr.umlv.ir3.flexitime.common.data.ressources.ITeacher)
+     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#addTeacher(fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void addTeacher(ITeacher teacher)
@@ -266,7 +279,7 @@ public class CourseImpl extends DataImpl implements ICourse
      *
      * @param teacher a teacher.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#removeTeacher(fr.umlv.ir3.flexitime.common.data.ressources.ITeacher)
+     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#removeTeacher(fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void removeTeacher(ITeacher teacher)
@@ -280,7 +293,7 @@ public class CourseImpl extends DataImpl implements ICourse
 	 *
 	 * @return the subject to which the course belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ICourse#getParentSubject()
+	 * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#getParentSubject()
 	 */
 	public ISubject getParentSubject()
 	{
@@ -292,9 +305,9 @@ public class CourseImpl extends DataImpl implements ICourse
 	 * Sets the subject to which the course belongs.
 	 * <code>course.setParentSubject(subject)</code>
 	 *
-	 * @param subjectsGroup the subject to which the course belongs.
+	 * @param subject the subject to which the course belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ICourse#setPArentSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl)
+	 * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#setParentSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl)
 	 */
 	public void setParentSubject(ISubject subject)
 	{

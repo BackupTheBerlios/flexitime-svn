@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IResource;
  * Defines an implementation of a ressource, it is extended by all the resource classes.
  * 
  * @version 0.1
- * @see fr.umlv.ir3.flexitime.common.data.ressources.IResource
+ * @see fr.umlv.ir3.flexitime.common.data.resources.IResource
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
@@ -59,7 +59,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
     public ResourceImpl(String name, List listBusy)
     {
         super(name);
-        this.lstBusy = new ArrayList(listBusy);
+        this.lstBusy = listBusy;
     }
 
     
@@ -72,7 +72,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      *
      * @return the list of unavailibilities.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IResource#getLstBusy()
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#getLstBusy()
      * @author   FlexiTeam - Adrien BOUVET
      */
     public List getLstBusy()
@@ -86,12 +86,12 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      *
      * @param lstBusy a list of unavailibilities.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IResource#setLstBusy(java.util.List)
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#setLstBusy(java.util.List)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void setLstBusy(List lstBusy)
     {
-        this.lstBusy = new ArrayList(lstBusy);
+        this.lstBusy = lstBusy;
     }
 
     /** 
@@ -100,7 +100,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      *
      * @param busy an unavilibility.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IResource#addBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy)
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#addBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void addBusy(IBusy busy)
@@ -114,7 +114,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      *
      * @param busy the unavailibility to remove.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IResource#removeBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy)
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#removeBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void removeBusy(IBusy busy)

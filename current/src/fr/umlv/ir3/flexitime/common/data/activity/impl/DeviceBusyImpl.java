@@ -26,7 +26,11 @@ import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
  */
 public class DeviceBusyImpl extends BusyImpl implements IDeviceBusy
 {
-	//===========//
+	/**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3544667382438965552L;
+    //===========//
 	//  Champs   //
 	//===========//
     private int reason;

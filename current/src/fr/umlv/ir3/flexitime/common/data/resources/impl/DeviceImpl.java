@@ -14,13 +14,16 @@ import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
  * Defines a device.
  * 
  * @version 0.1
- * @see fr.umlv.ir3.flexitime.common.data.ressources.IDevice
- * @see fr.umlv.ir3.flexitime.common.data.ressources.impl.ResourceImpl
+ * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
 public class DeviceImpl extends ResourceImpl implements IDevice
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3689070659724849206L;
     //===========//
 	//  Champs	 //
 	//===========//
@@ -70,7 +73,7 @@ public class DeviceImpl extends ResourceImpl implements IDevice
      *
      * @return the type of device.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IDevice#getType()
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice#getType()
      * @author   FlexiTeam - Adrien BOUVET
      */
     public String getType()
@@ -84,7 +87,7 @@ public class DeviceImpl extends ResourceImpl implements IDevice
      *
      * @param type the type of device.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IDevice#setType(java.lang.String)
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice#setType(java.lang.String)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void setType(String type)
