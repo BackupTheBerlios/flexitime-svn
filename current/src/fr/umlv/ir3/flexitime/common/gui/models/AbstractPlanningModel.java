@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.richClient.event.PlanningDataEvent;
-import fr.umlv.ir3.flexitime.richClient.event.PlanningDataListener;
-
+import fr.umlv.ir3.flexitime.common.gui.event.PlanningDataEvent;
+import fr.umlv.ir3.flexitime.common.gui.event.PlanningDataListener;
 
 
 

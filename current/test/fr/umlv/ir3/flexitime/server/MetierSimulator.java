@@ -205,18 +205,49 @@ public class MetierSimulator
         corba_cours = DataFactory.createCourse("Cours Corba", ir3_bloc2_sub1 , CourseImpl.CM, 120, 20 , Color.CYAN, createList(midonnet));
         corba_td = DataFactory.createCourse("TD Corba", ir3_bloc2_sub1 , CourseImpl.TD, 120, 20 , Color.BLUE, createList(midonnet));
         
-        lesson1 = DataFactory.createLesson(new Gap(2005,1,3,8,30,2005,1,3,10,30), j2ee_cours);
-        lesson2 = DataFactory.createLesson(new Gap(2005,1,3,13,45,2005,1,3,15,45), corba_cours);
+        lesson1 = DataFactory.createLesson(new Gap(2005,1,3,8,30,2005,1,3,10,30), j2ee_cours, roussel, ir3_grp2);
+        lesson2 = DataFactory.createLesson(new Gap(2005,1,3,13,45,2005,1,3,15,45), corba_cours, midonnet, ir3_grp2);
         
-        lesson3 = DataFactory.createLesson(new Gap(2005,1,3,16,00,2005,1,3,17,00), j2ee_td, 60);
-        lesson4 = DataFactory.createLesson(new Gap(2005,1,3,8,30,2005,1,3,10,30), j2ee_cours);
-        lesson5 = DataFactory.createLesson(new Gap(2005,1,3,8,30,2005,1,3,10,30), j2ee_cours);
+        lesson3 = DataFactory.createLesson(new Gap(2005,1,4,16,00,2005,1,4,18,00), gl_cours, revuz, ir3_grp2);
+        lesson4 = DataFactory.createLesson(new Gap(2005,1,5,8,30,2005,1,5,10,30), gl_td, revuz, ir3_grp2);
+        lesson5 = DataFactory.createLesson(new Gap(2005,1,6,8,30,2005,1,6,10,30), corba_td, roussel , ir3_grp2);
+        
+        lesson1.addResource(salle2017);
+        lesson2.addResource(salle2017);
+        lesson3.addResource(salle2017);
+        lesson4.addResource(salle2027);
+        lesson5.addResource(salle2027);
+        
+        System.out.println("ajout de lesson");
+        ir3_grp2.addBusy(lesson1);
+        System.out.println("ajout de lesson");
+        ir3_grp2.addBusy(lesson2);
+        System.out.println("ajout de lesson");
+        ir3_grp2.addBusy(lesson3);
+        System.out.println("ajout de lesson");
+        ir3_grp2.addBusy(lesson4);
+        System.out.println("ajout de lesson");
+        ir3_grp2.addBusy(lesson5);
+        
+        roussel.addBusy(lesson1);
+        midonnet.addBusy(lesson2);
+        revuz.addBusy(lesson3);
+        revuz.addBusy(lesson4);
+        roussel.addBusy(lesson5);
+        
+        salle2017.addBusy(lesson1);
+        salle2017.addBusy(lesson2);
+        salle2017.addBusy(lesson3);
+        salle2027.addBusy(lesson4);
+        salle2027.addBusy(lesson5);
+        
+
+        
+        
+        
         
         // to be continued...
         
-        
-        
-
     }
     
     public static List createList(Object o)
@@ -224,6 +255,13 @@ public class MetierSimulator
         ArrayList list = new ArrayList(3);
         list.add(o);
         return list;
+    }
+    
+    public static IGroup getGroup2IR3()
+    {
+        generate();
+        System.out.println("Nb busy for ir3_grp2 = " +  ir3_grp2.getSetBusy().size());
+        return ir3_grp2;
     }
     
     

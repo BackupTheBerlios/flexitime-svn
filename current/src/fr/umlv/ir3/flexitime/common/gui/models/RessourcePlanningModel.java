@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
+import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 import fr.umlv.ir3.flexitime.common.tools.Time;
@@ -41,7 +43,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     private final int      nbDays  = 5;
     //TODO faire un JSlider pour assurer la cohérence
     private final int      gapTime = 60;
-    private final Gap edtWeekGap;
+    private final Gap edtWeekGap = new Gap(2005,1,3,0,0,2005,2,31,0,0);
     private final TimeBloc[] blocList;
 
 
@@ -66,12 +68,12 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     /**
      * DOCME
      */
-    public RessourcePlanningModel()
+    public RessourcePlanningModel(IResource ressource)
     {
         super();
-        
-        this.edtWeekGap = new Gap(2005,1,3,0,0,2005,3,1,0,0);
-        
+     
+        Set ressourceSet = ressource.getSetBusy();
+        //ressourceSet.
         this.nbWeeks = Time.getGapWeek(edtWeekGap.getStartDate(),edtWeekGap.getEndDate()) + 1 ;
         
         /*this.blocList = new Gap[4];
@@ -96,13 +98,20 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.busyList = new ArrayList<List[]>(nbWeeks);
         this.busyListImage = new ArrayList<DayBloc[]>(nbWeeks);
         
-        this.initialyseDatas(MetierSimulator.getLessonsList());
+        //this.initialyseDatas(MetierSimulator.getLessonsList());
+        this.initialyseDatas(ressourceSet);
         //this.initialyseDatas(null);
         this.initialyseImage();
         
         System.out.println("nbWeeks=" + nbWeeks);
         System.out.println("nbBlocs=" + this.blocList.length);
         System.out.println("nbGap=" + this.nbGaps);
+        
+        for(Object busy : ressourceSet)
+        {
+            IBusy bus = (IBusy)busy;
+            System.out.println("Busy : " + bus.getStartDate() + " => " + bus.getEndDate());
+        }
 
     }
 
@@ -298,6 +307,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
      */
     public boolean isALesson(int weekNumber, int dayNumber, int gapNumber)
     {
+        if(weekNumber >= this.nbWeeks || dayNumber >= this.nbDays || gapNumber >= this.nbGaps)
+            return false;
+        //System.out.println(weekNumber + "_" + dayNumber + "_" + gapNumber);
         DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
         Object o = bloc.getElementAt(gapNumber);
         return (o == null || o instanceof BusyBloc);
@@ -332,7 +344,73 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 	}
     
     
-    
+       /** 
+     * DOCME Description
+     */
+    public void increase()
+    {
+        //this.edtWeekGap;
+    }
+
+
+
+    /** 
+     * DOCME Description
+     */
+    public void decrease()
+    {
+        this.busyList.remove(0);
+        this.busyListImage.remove(0);
+        this.nbWeeks -= 1;
+    }
+
+
+
+    /** 
+     * DOCME Description
+     */
+    public void stepOver()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+
+    /** 
+     * DOCME Description
+     */
+    public void stepBack()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+
+    /** 
+     * DOCME Description
+     */
+    public void fullStepOver()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+
+    /** 
+     * DOCME Description
+     */
+    public void fullStepBack()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+
+
     
     
     
@@ -372,7 +450,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
      * Prend un liste de des Busy ordonnées et la reconstruis dans la structure Liste de semaine\liste de jour\liste de busy
      *
      */
-    private void initialyseDatas(List datas)
+    private void initialyseDatas(Set<IBusy> datas)
     {
         Iterator iter;
         if(datas != null)
@@ -405,17 +483,20 @@ public class RessourcePlanningModel extends AbstractPlanningModel
                 dayNumber = curBusy.getGap().getStartDate().getIDayOfWeek();
                 if(dayList[dayNumber] == null)
                     dayList[dayNumber] = new ArrayList<IBusy>(1);
+                System.out.println("ajout de " + curBusy);
                 dayList[dayNumber].add(curBusy);
                 if(iter.hasNext())
                     curBusy = (IBusy)iter.next();
                 else
                     stop = true;
             }
-            
-            
         }
     }
     
+    private int getWeekNumber(IBusy curBusy)
+    {
+        return curBusy.getGap().getStartDate().getWeek() - this.edtWeekGap.getStartDate().getWeek();
+    }
     
     private boolean isInWeek(IBusy curBusy, int week)
     {
@@ -486,6 +567,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
             for (Iterator iter = list.iterator() ; iter.hasNext() ;)
             {
                 IBusy busy = (IBusy) iter.next();
+                System.out.println("Busy : " + busy.getStartDate() + " => " + busy.getEndDate());
                 
                 //***************************************************************
                 //  On cherche le premier bloc ki contient la date de debut du Busy
@@ -506,7 +588,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
                     firstGap = precSizeBloc;
                     
 
-                //System.out.println("Bloc pour le debut : " + curBloc);
+                System.out.println("Bloc pour le debut : " + curBloc);
                 
                 
                 
@@ -540,8 +622,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
                     }
                 }
                     
-                //System.out.println("Bloc pour la fin : " + curBloc);
-                //System.out.println("Cours du gap " + firstGap + " au " + lastGap);
+                System.out.println("Bloc pour la fin : " + curBloc);
+                System.out.println("Cours du gap " + firstGap + " au " + lastGap);
                 
                 //on place le LessonBloc sur le premier créneau
                 this.representationList[firstGap] = new BusyBloc(busy,lastGap-firstGap+1);
@@ -565,5 +647,5 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         }
     }
 
-}
 
+} 
