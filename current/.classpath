@@ -38,5 +38,7 @@
 	<classpathentry kind="lib" path="lib/hibernate/xalan-2.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/xerces-2.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/forms-1.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/looks-1.2.2.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
