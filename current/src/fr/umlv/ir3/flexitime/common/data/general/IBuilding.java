@@ -7,7 +7,7 @@
 package fr.umlv.ir3.flexitime.common.data.general;
 
 import java.util.List;
-import fr.umlv.ir3.flexitime.common.data.Data;
+import fr.umlv.ir3.flexitime.common.data.IData;
 
 /**
  * Represents a building with all parameters that it can
@@ -16,7 +16,7 @@ import fr.umlv.ir3.flexitime.common.data.Data;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Building extends Data
+public interface IBuilding extends IData
 {
 
     /**
@@ -50,7 +50,7 @@ public interface Building extends Data
      * @param floor the floor added.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addFloor(Floor floor);
+    void addFloor(IFloor floor);
 
     /**
      * Remove a floor in Building.
@@ -58,5 +58,5 @@ public interface Building extends Data
      * @param floor the floor removed.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeFloor(Floor floor);
+    void removeFloor(IFloor floor);
 }

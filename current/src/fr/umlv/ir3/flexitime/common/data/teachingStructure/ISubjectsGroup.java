@@ -8,7 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.teachingStructure;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.Data;
+import fr.umlv.ir3.flexitime.common.data.IData;
 
 /**
  * Represents a SubjectsGroup which belong to a TeachingStructure
@@ -16,7 +16,7 @@ import fr.umlv.ir3.flexitime.common.data.Data;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface SubjectsGroup extends Data
+public interface ISubjectsGroup extends IData
 {
 
     /**
@@ -41,7 +41,7 @@ public interface SubjectsGroup extends Data
      * @param Subject the new Subject
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addSubject(Subject Subject);
+    void addSubject(ISubject Subject);
 
     /**
      * Remove a Subject of a SubjectsGroup.
@@ -49,6 +49,6 @@ public interface SubjectsGroup extends Data
      * @param subject the new Subject
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeSubject(Subject subject);
+    void removeSubject(ISubject subject);
 
 }

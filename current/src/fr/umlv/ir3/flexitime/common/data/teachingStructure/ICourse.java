@@ -8,8 +8,8 @@ package fr.umlv.ir3.flexitime.common.data.teachingStructure;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.Data;
-import fr.umlv.ir3.flexitime.common.data.ressources.Teacher;
+import fr.umlv.ir3.flexitime.common.data.IData;
+import fr.umlv.ir3.flexitime.common.data.ressources.ITeacher;
 
 /**
  * Represents a course which belong to a subject
@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Teacher;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Course extends Data
+public interface ICourse extends IData
 {
 
     /**
@@ -91,7 +91,7 @@ public interface Course extends Data
      * @param teacher the Teacher added.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addTeacher(Teacher teacher);
+    void addTeacher(ITeacher teacher);
 
     /**
      * Remove a teacher of a course
@@ -99,6 +99,6 @@ public interface Course extends Data
      * @param teacher the Teacher removed.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeTeacher(Teacher teacher);
+    void removeTeacher(ITeacher teacher);
 
 }

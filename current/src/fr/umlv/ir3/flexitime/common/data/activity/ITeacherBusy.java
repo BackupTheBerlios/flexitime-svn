@@ -12,13 +12,28 @@ package fr.umlv.ir3.flexitime.common.data.activity;
  * @version Révision 72
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface TeacherBusy extends Busy
+public interface ITeacherBusy extends IBusy
 {
 
+    /**
+     * Comment for <code>REASON_WORK</code>
+     */
     public final static int REASON_WORK      = 1;
+    /**
+     * Comment for <code>REASON_HOLLYDAYS</code>
+     */
     public final static int REASON_HOLLYDAYS = 2;
+    /**
+     * Comment for <code>REASON_SICK</code>
+     */
     public final static int REASON_SICK      = 3;
+    /**
+     * Comment for <code>REASON_STAGE</code>
+     */
     public final static int REASON_STAGE     = 4;
+    /**
+     * Comment for <code>REASON_PERSO</code>
+     */
     public final static int REASON_PERSO     = 5;
 
     /**

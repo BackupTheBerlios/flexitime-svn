@@ -6,19 +6,27 @@
 
 package fr.umlv.ir3.flexitime.common.data.activity;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.Group;
-
 /**
- * Represents the unavailabilities for a group
+ * Represents the unavailabilities for a Room
  * 
  * @version Révision 72
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface GroupBusy extends Busy
+public interface IRoomBusy extends IBusy
 {
 
-    public final static int REASON_HOLLYDAYS = 1;
-    public final static int REASON_WORK      = 2;
+    /**
+     * Comment for <code>REASON_IN_WORK</code>
+     */
+    public final static int REASON_IN_WORK = 1;
+    /**
+     * Comment for <code>REASON_LENDED</code>
+     */
+    public final static int REASON_LENDED  = 2;
+    /**
+     * Comment for <code>REASON_CLOSED</code>
+     */
+    public final static int REASON_CLOSED  = 3;
 
     /**
      * Changes the Reason of the unavailabilities.
@@ -27,4 +35,5 @@ public interface GroupBusy extends Busy
      * @author FlexiTeam - Guillaume GUERRIN
      */
     void setReason(int iReason);
+
 }

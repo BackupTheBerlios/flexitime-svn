@@ -13,7 +13,7 @@ package fr.umlv.ir3.flexitime.common.data.general;
  * @version Verion ou révision SVN
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Statistique
+public interface IStatistique
 {
 
 }

@@ -6,8 +6,9 @@
 
 package fr.umlv.ir3.flexitime.common.data.activity;
 
+import java.io.Serializable;
 import java.util.Date;
-import fr.umlv.ir3.flexitime.common.data.Data;
+import fr.umlv.ir3.flexitime.common.data.IData;
 
 /**
  * Represents the unavailabilities
@@ -15,7 +16,7 @@ import fr.umlv.ir3.flexitime.common.data.Data;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Busy extends Data
+public interface IBusy extends IData, Serializable
 {
 
     /**

@@ -8,9 +8,9 @@ package fr.umlv.ir3.flexitime.common.data.general;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.Data;
-import fr.umlv.ir3.flexitime.common.data.ressources.Group;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.TeachingStructure;
+import fr.umlv.ir3.flexitime.common.data.IData;
+import fr.umlv.ir3.flexitime.common.data.ressources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 
 /**
  * Represents a Class with all parameters that it can have.
@@ -19,7 +19,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.TeachingStructure;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Class extends Data
+public interface IClass extends IData
 {
 
     /**
@@ -44,7 +44,7 @@ public interface Class extends Data
      * @return the teachingStructure of a Class.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    TeachingStructure getTeachingStructure();
+    ITeachingStructure getTeachingStructure();
 
     /**
      * Changes the teachingStructure of a Class.
@@ -52,7 +52,7 @@ public interface Class extends Data
      * @param struc the new teachingStructure.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setTeachingStructure(TeachingStructure struc);
+    void setTeachingStructure(ITeachingStructure struc);
 
     /**
      * Returns the list of groups of a Class.
@@ -76,7 +76,7 @@ public interface Class extends Data
      * @param group the group added
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addGroup(Group group);
+    void addGroup(IGroup group);
 
     /**
      * Remove a group from the Class
@@ -84,5 +84,5 @@ public interface Class extends Data
      * @param group the group removed
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeGroup(Group group);
+    void removeGroup(IGroup group);
 }

@@ -8,8 +8,8 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.Data;
-import fr.umlv.ir3.flexitime.common.data.activity.Busy;
+import fr.umlv.ir3.flexitime.common.data.IData;
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 
 /**
  * This interface represents a resource
@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.data.activity.Busy;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Resource extends Data
+public interface IResource extends IData
 {
 
     /**
@@ -42,7 +42,7 @@ public interface Resource extends Data
      * @param busy the new unavailabilitie
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addBusy(Busy busy);
+    void addBusy(IBusy busy);
 
     /**
      * Remove a unavailabilities of a Resource.
@@ -50,6 +50,6 @@ public interface Resource extends Data
      * @param busy the new unavailabilitie
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeBusy(Busy busy);
+    void removeBusy(IBusy busy);
 
 }

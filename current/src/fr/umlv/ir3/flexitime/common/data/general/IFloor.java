@@ -8,8 +8,8 @@ package fr.umlv.ir3.flexitime.common.data.general;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.Data;
-import fr.umlv.ir3.flexitime.common.data.ressources.Room;
+import fr.umlv.ir3.flexitime.common.data.IData;
+import fr.umlv.ir3.flexitime.common.data.ressources.IRoom;
 
 /**
  * Represents a floor with all parameters that it can have
@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Room;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Floor extends Data
+public interface IFloor extends IData
 {
 
     /**
@@ -42,7 +42,7 @@ public interface Floor extends Data
      * @param room the new Room added.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addRoom(Room room);
+    void addRoom(IRoom room);
 
     /**
      * Remove a room in a floor
@@ -50,6 +50,6 @@ public interface Floor extends Data
      * @param room the Room removed
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeRoom(Room room);
+    void removeRoom(IRoom room);
 
 }

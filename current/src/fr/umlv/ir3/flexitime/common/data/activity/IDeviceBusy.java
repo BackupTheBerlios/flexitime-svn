@@ -12,11 +12,20 @@ package fr.umlv.ir3.flexitime.common.data.activity;
  * @version Révision 72
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface DeviceBusy extends Busy
+public interface IDeviceBusy extends IBusy
 {
 
+    /**
+     * Comment for <code>REASON_BROCKEN</code>
+     */
     public final static int REASON_BROCKEN   = 1;
+    /**
+     * Comment for <code>REASON_LENDED</code>
+     */
     public final static int REASON_LENDED    = 2;
+    /**
+     * Comment for <code>REASON_IN_REPAIR</code>
+     */
     public final static int REASON_IN_REPAIR = 3;
 
     /**

@@ -12,7 +12,7 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Group extends Resource
+public interface IGroup extends IResource
 {
 
     /**

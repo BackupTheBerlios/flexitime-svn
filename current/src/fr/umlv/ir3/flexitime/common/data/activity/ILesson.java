@@ -8,7 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.activity;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.Resource;
+import fr.umlv.ir3.flexitime.common.data.ressources.IResource;
 
 /**
  * A lesson is an unavailabilities with different resources as teachers, devices and groups
@@ -16,7 +16,7 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Resource;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Lesson extends Busy
+public interface ILesson extends IBusy
 {
 
     /**
@@ -41,7 +41,7 @@ public interface Lesson extends Busy
      * @param resource the new Resource in a lesson.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addResource(Resource resource);
+    void addResource(IResource resource);
 
     /**
      * Remove Resource in a lesson.
@@ -49,6 +49,6 @@ public interface Lesson extends Busy
      * @param resource the new Resource in a lesson
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeResource(Resource resource);
+    void removeResource(IResource resource);
 
 }

@@ -8,7 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.general;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.Data;
+import fr.umlv.ir3.flexitime.common.data.IData;
 
 /**
  * Regroupe differents classes
@@ -16,7 +16,7 @@ import fr.umlv.ir3.flexitime.common.data.Data;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Track extends Data
+public interface ITrack extends IData
 {
 
     /**
@@ -41,7 +41,7 @@ public interface Track extends Data
      * @param pClass the Class added.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void addClass(Class pClass);
+    void addClass(IClass pClass);
 
     /**
      * Remove a class in a track
@@ -49,5 +49,5 @@ public interface Track extends Data
      * @param pClass the Class removed.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void removeClass(Class pClass);
+    void removeClass(IClass pClass);
 }

@@ -12,7 +12,7 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Device extends Resource
+public interface IDevice extends IResource
 {
 
     /**

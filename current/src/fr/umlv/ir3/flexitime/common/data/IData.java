@@ -6,13 +6,15 @@
 
 package fr.umlv.ir3.flexitime.common.data;
 
+import java.io.Serializable;
+
 /**
  * Represents a data
  * 
  * @version Révision 72
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Data
+public interface IData extends Serializable
 {
 
     /**
