@@ -404,7 +404,7 @@ public class Client
                 }
                 iUser = null;
                 //TODO loginView.reset();
-                if( checkLogin())
+                if( !checkLogin())
                 {
                     JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
                     System.exit(1);
@@ -687,6 +687,7 @@ public class Client
                     }    
                     return true;
                 }
+                
                 JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             } catch (RemoteException e) {
                 JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -860,7 +861,7 @@ public class Client
         
         //gestion login
         loginView = new LoginView(frame);
-        if( checkLogin() )
+        if( !checkLogin() )
         {
             JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             System.exit(1);
