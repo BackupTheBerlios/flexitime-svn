@@ -8,48 +8,21 @@ package fr.umlv.ir3.flexitime.common.data;
 
 import java.awt.Color;
 import java.rmi.RemoteException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.DeviceBusyImpl;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.GroupBusyImpl;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.RoomBusyImpl;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.TeacherBusyImpl;
-import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
-import fr.umlv.ir3.flexitime.common.data.general.impl.BuildingImpl;
-import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
-import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
-import fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl;
-import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.resources.IResource;
-import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
-import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectsGroupImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructureImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.*;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.*;
+import fr.umlv.ir3.flexitime.common.data.admin.*;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.*;
+import fr.umlv.ir3.flexitime.common.data.general.*;
+import fr.umlv.ir3.flexitime.common.data.general.impl.*;
+import fr.umlv.ir3.flexitime.common.data.resources.*;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
-import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
-import fr.umlv.ir3.flexitime.common.tools.Gap;
+import fr.umlv.ir3.flexitime.common.tools.*;
 
 /**
  * Create all datas from specific parameters. This class contains only statics
@@ -73,6 +46,7 @@ public class DataFactory
      * @param parent
      *              IDevice this Busy belongs to 
      * @return a new unavaibility for a device
+     * @throws FlexiException 
      */
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent) throws FlexiException
     {
@@ -100,6 +74,7 @@ public class DataFactory
      * @param reason
      *            the reason if the unavaibility
      * @return a new unavaibility for a device
+     * @throws FlexiException 
      */
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent, int reason) throws FlexiException
     {
@@ -122,6 +97,7 @@ public class DataFactory
      * 
      * @param busy
      *            the unavaibility to copy
+     * @param parent 
      * @return a new unavaibility for a device
      * @throws FlexiException 
      */
@@ -144,6 +120,7 @@ public class DataFactory
      * Constructs an unavailibility for a group between a gap without reason.
      * 
      * @param g gap of the unavaibulity
+     * @param parent 
      * @return a new unavaibility for a group
      * @throws FlexiException 
      */
@@ -167,6 +144,7 @@ public class DataFactory
      * Constructs an unavailibility for a group between a gap for the reason specified.
      * 
      * @param g gap of the unavaibulity
+     * @param parent 
      * @param reason reason of the unavaibility
      * @return a new unavaibility for a group
      * @throws FlexiException 
@@ -191,6 +169,7 @@ public class DataFactory
      * 
      * @param busy
      *            the unavaibility to copy
+     * @param parent 
      * @return a new unavaibility for a group
      * @throws FlexiException 
      */
@@ -393,6 +372,7 @@ public class DataFactory
      * 
      * @param g
      *            the gap between the unavailibility.
+     * @param parent 
      * @return a new unavaibility for a room
      * @throws FlexiException 
      */
@@ -431,6 +411,7 @@ public class DataFactory
      * 
      * @param busy
      *            the unavaibility to copy
+     * @param parent 
      * @return a new unavaibility for a device
      * @throws FlexiException 
      */
@@ -454,6 +435,7 @@ public class DataFactory
      * 
      * @param g
      *            the gap between the unavailibility.
+     * @param parent 
      * @return a new unavaibility for a teacher
      * @throws FlexiException 
      */
@@ -478,6 +460,7 @@ public class DataFactory
      * 
      * @param g
      *            the gap between the unavailibility.
+     * @param parent 
      * @param reason
      *            an Integer representing the reason of the unavailibility.
      * @return a new unavaibility for a teacher
@@ -504,6 +487,7 @@ public class DataFactory
      * 
      * @param busy
      *            the unavaibility to copy
+     * @param parent 
      * @return a new unavaibility for a device
      * @throws FlexiException 
      */
@@ -963,5 +947,95 @@ public class DataFactory
         }
         parent.setTeachingStructure(temp);
         return temp;
+    }
+    
+    // ===== //
+    // Admin //
+    // ===== //
+    /** 
+     * Create a new default user preferences
+     *
+     * @return default user preferences
+     */
+    public static IPreferences createPreferences()
+    {
+        IPreferences pref = new PreferencesImpl();
+        // TODO sauvegarde hibernate
+        return pref;
+    }
+    
+    /** 
+     * Create a new user preferences
+     * @param height in pixel of gap
+     * @param width in pixel of gap
+     * @param length in minute of gap
+     * @param week color used for the week header
+     * @param day color used for the day
+     * @param gap color used for the gap
+     *
+     * @return user preferences
+     */
+    public static IPreferences createPreferences(int height, int width, int length, Color week, Color day,
+            Color gap)
+    {
+        IPreferences pref = new PreferencesImpl(height, width, length, week, day, gap);
+        // TODO sauvegarde hibernate
+        return pref;
+    }
+
+    /**
+     * Create a new <em>ldap</em> user with default preferences 
+     *
+     * @param name
+     * @return a new user 
+     */
+    public static IUser createUser(String name)
+    {
+        IUser user = new UserImpl(name);
+        // TODO sauvegarde hibernate
+        return user; 
+    }
+    
+    /**
+     * Create a new <em>non-ldap</em> user with default preferences 
+     *
+     * @param name
+     * @param pass
+     * @return a new user 
+     */
+    public static IUser createUser(String name, String pass)
+    {
+        IUser user = new UserImpl(name, pass);
+        // TODO sauvegarde hibernate
+        return user; 
+    }
+    
+    /**
+     * Create a new <em>LDAP</em> user  
+     *
+     * @param name
+     * @param pref User preferences
+     * @return a new user 
+     */
+    public static IUser createUser(String name, IPreferences pref)
+    {
+        IUser user = new UserImpl(name, pref);
+        // TODO sauvegarde hibernate
+        return user; 
+    }
+    
+    /**
+     * Create a new <em>non-LDAP</em> user 
+     *
+     * @param name
+     * @param pass
+     * @param pref User preferences
+     * @return a new user 
+     */
+    public static IUser createUser(String name, String pass, IPreferences pref)
+    {
+        IUser user = new UserImpl(name, pass, pref);
+        // TODO sauvegarde hibernate
+        return user; 
     }
 }

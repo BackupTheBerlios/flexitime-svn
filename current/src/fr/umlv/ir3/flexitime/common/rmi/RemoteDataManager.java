@@ -19,7 +19,7 @@ import java.rmi.registry.Registry;
 public class RemoteDataManager
 {
     private static IDataManager manager;
-    private static String ipServer = "localhost";
+    private static String ipServer;
 
     /**
      * Sets the adress of Server 
