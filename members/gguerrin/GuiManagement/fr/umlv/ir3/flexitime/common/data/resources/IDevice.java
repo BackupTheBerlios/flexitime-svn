@@ -21,7 +21,7 @@ public interface IDevice extends IResource
      * @return the type of the device.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    String getType();
+    int getType();
 
     /**
      * Changes the type of the device.
@@ -29,6 +29,6 @@ public interface IDevice extends IResource
      * @param type the new type.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setType(String type);
+    void setType(int type);
 
 }

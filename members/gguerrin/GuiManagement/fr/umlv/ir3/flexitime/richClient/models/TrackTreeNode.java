@@ -13,9 +13,12 @@ import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
+import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 
 
 
@@ -26,7 +29,7 @@ import fr.umlv.ir3.flexitime.common.data.general.ITrack;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class TrackTreeNode implements TreeNode
+public class TrackTreeNode implements FlexiTreeNode
 {
 	//===========//
     //   Champs  //
@@ -147,6 +150,11 @@ public class TrackTreeNode implements TreeNode
 		this.children =list;
 		return(list);
 	}
+	
+	public ITrack getTrack()
+	{
+		return track;
+	}
 	/**
 	 * Redefinition of the method toString()
 	 * @return the name into a string
@@ -154,6 +162,79 @@ public class TrackTreeNode implements TreeNode
 	public String toString()
 	{
 		return track.getName();
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
+	 */
+	public TreeNode add() 
+	{
+
+			IClass iClass = DataFactory.createClass("Nouvelle Promotion",track);
+			ClassTreeNode child = new ClassTreeNode(this,iClass,model);
+			if(children.size()==0)
+			{
+				processChildren();
+			}
+			else
+			{
+				children.add(child);
+			}
+			model.nodesWereInserted(this,new int[]{children.size()-1});
+			return child;
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
+	 */
+	public TreeNode add(List value) {
+		if(value.size() == 1)
+		{
+			IClass iClass = DataFactory.createClass((String)value.get(0),track);
+			ClassTreeNode child = new ClassTreeNode(this,iClass,model);
+			if(children.size()==0)
+			{
+				processChildren();
+			}
+			else
+			{
+				children.add(child);
+			}
+			model.nodesWereInserted(this,new int[]{children.size()-1});
+			return child;
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
+	 */
+	public void remove(TreeNode childNode) {
+		track.removeClass(((ClassTreeNode)childNode).getIClass());
+		int index = children.indexOf(childNode);
+		children.remove(childNode);	
+		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
+	 */
+	public void setValue(Object newValue) {
+		track.setName((String)newValue);
+		model.nodeChanged(this);
+		
+	}
+
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setModel(fr.umlv.ir3.flexitime.richClient.models.ResourceModel)
+	 */
+	public void setModel(DefaultTreeModel model) {
+		this.model= (ResourceModel)model;
+		
 	}
 
 }

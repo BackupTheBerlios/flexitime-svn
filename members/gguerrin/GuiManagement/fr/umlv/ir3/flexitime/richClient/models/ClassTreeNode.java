@@ -13,10 +13,13 @@ import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
+import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+
 
 /**
  * @author Famille
@@ -24,7 +27,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ClassTreeNode implements TreeNode 
+public class ClassTreeNode implements FlexiTreeNode 
 {
 	//===========//
     //   Champs  //
@@ -32,12 +35,12 @@ public class ClassTreeNode implements TreeNode
 	/**
 	* The model
 	*/
-	private DefaultTreeModel model;
+	private ResourceModel model;
 	
 	/**
 	 * The parent
 	 */
-	private final TreeNode parent;
+	private final FlexiTreeNode parent;
 	
 	/**
 	 * The class
@@ -55,10 +58,11 @@ public class ClassTreeNode implements TreeNode
     //   Constructeurs  //
     //==================// 
 	
-	public ClassTreeNode(TreeNode parent,IClass iClass)
+	public ClassTreeNode(FlexiTreeNode parent,IClass iClass)
 	{
 		this.parent = parent;
 		this.iClass = iClass;
+		children = new ArrayList();
 	}
 	
 	/**
@@ -68,10 +72,10 @@ public class ClassTreeNode implements TreeNode
 	 * @param factory the BuckFactory
 	 * @param model the model
 	 */
-	public ClassTreeNode(TreeNode parent,IClass iClass,DefaultTreeModel model)
+	public ClassTreeNode(FlexiTreeNode parent,IClass iClass,DefaultTreeModel model)
 	{
 		this(parent,iClass);
-		this.model=model;
+		this.model= (ResourceModel)model;
 		children = new ArrayList();
 	}
 	
@@ -82,8 +86,8 @@ public class ClassTreeNode implements TreeNode
 	/* (non-Javadoc)
 	 * @see javax.swing.tree.TreeNode#getChildAt(int)
 	 */
-	public TreeNode getChildAt(int childIndex) {
-		return (TreeNode)processChildren().get(childIndex);
+	public FlexiTreeNode getChildAt(int childIndex) {
+		return (FlexiTreeNode)processChildren().get(childIndex);
 	}
 
 	/* (non-Javadoc)
@@ -96,7 +100,7 @@ public class ClassTreeNode implements TreeNode
 	/* (non-Javadoc)
 	 * @see javax.swing.tree.TreeNode#getParent()
 	 */
-	public TreeNode getParent() {
+	public FlexiTreeNode getParent() {
 		return parent;
 	}
 
@@ -157,5 +161,86 @@ public class ClassTreeNode implements TreeNode
 	public String toString()
 	{
 		return iClass.getName();
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
+	 */
+	public TreeNode add() {
+		//synchronized(this.cat)
+		//{
+				IGroup groupe = DataFactory.createGroup("Nouveau Groupe",0,iClass);
+				GroupTreeNode child = new GroupTreeNode(this,groupe,model);
+				if(children.size()==0)
+				{
+					processChildren();
+				}
+				else
+				{
+					children.add(child);
+				}
+				model.nodesWereInserted(this,new int[]{children.size()-1});
+				return child;
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
+	 */
+	public TreeNode add(List value) {
+		//synchronized(this.cat)
+		//{
+			if(value.size() == 2)
+			{
+				IGroup groupe = DataFactory.createGroup((String)value.get(0),((Integer)value.get(1)).intValue(),iClass);
+				GroupTreeNode child = new GroupTreeNode(this,groupe,model);
+				if(children.size()==0)
+				{
+					processChildren();
+				}
+				else
+				{
+					children.add(child);
+				}
+				model.nodesWereInserted(this,new int[]{children.size()-1});
+				return child;
+			}
+			return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
+	 */
+	public void remove(TreeNode childNode) 
+	{
+		//synchronized(cat.getParent())
+		//{
+			iClass.removeGroup(((GroupTreeNode)childNode).getGroup());
+			int index = children.indexOf(childNode);
+			children.remove(childNode);	
+			model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+		//}
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
+	 */
+	public void setValue(Object newValue) {
+		//synchronized(this.cat)
+		//{
+			iClass.setName((String)newValue);
+			model.nodeChanged(this);
+		//}
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setModel(fr.umlv.ir3.flexitime.richClient.models.ResourceModel)
+	 */
+	public void setModel(DefaultTreeModel model) {
+		this.model = (ResourceModel)model;
+		
 	}
 }

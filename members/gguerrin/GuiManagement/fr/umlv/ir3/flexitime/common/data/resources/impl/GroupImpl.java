@@ -9,7 +9,6 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 
 
@@ -47,33 +46,25 @@ public class GroupImpl extends ResourceImpl implements IGroup
 	 * Constructs a group with just a name in parameter.
 	 * 
 	 * @param name a string.
+     * @param nbPerson number of person in this group
 	 */
-	public GroupImpl(String name)
+	public GroupImpl(String name, int nbPerson)
 	{
 		super(name);
+        this.nbPerson = nbPerson;
 	}
 	
 	/**
 	 * Constructs a group with a name and a parent class in parameter.
 	 * 
-	 * @param name a string.
-	 * @param parentClass the parent class of this group.
+	 * @param name a string
+	 * @param nbPerson 
+	 * @param parentClass the parent class of this group
 	 */
-	public GroupImpl(String name, ClassImpl parentClass)
+	public GroupImpl(String name, int nbPerson, IClass parentClass)
 	{
-		super(name);
+		this(name, nbPerson);
 		this.parentClass = parentClass;
-	}
-	
-	/**
-	 * Constructs a group with a name and a number of person
-	 * @param name name of the group
-	 * @param nbPerson number of person in this group
-	 */
-	public GroupImpl(String name, int nbPerson)
-	{
-	    super(name);
-	    this.nbPerson = nbPerson;
 	}
 	
     /**
@@ -84,7 +75,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
      * @param nbPerson the number of students in this group.
 	 * @param parentClass the parent class of this group.
      */
-    public GroupImpl(String name, List<IBusy> listBusy, int nbPerson, ClassImpl parentClass)
+    public GroupImpl(String name, int nbPerson, IClass parentClass, List<IBusy> listBusy)
     {
         super(name, listBusy);
         this.nbPerson = nbPerson;

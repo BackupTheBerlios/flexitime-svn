@@ -16,10 +16,10 @@ import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 /**
  * Defines a building which contains floors.
  * 
- * @version 0.1
+ * @version 205
  * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
 public class BuildingImpl extends DataImpl implements IBuilding
 {
@@ -40,7 +40,9 @@ public class BuildingImpl extends DataImpl implements IBuilding
 	 * Default constructor for a building. 
 	 */
 	protected BuildingImpl()
-	{}
+	{
+        lstFloors = new ArrayList<IFloor>();   
+    }
 	
 	/**
 	 * Constructs a building with just a name in parameter.
@@ -108,7 +110,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
     {
         this.lstFloors = lstFloor;
     }
-
+    
     /** 
      * Adds a floor to the list.
      * <code>building.addFloor(floor)</code>

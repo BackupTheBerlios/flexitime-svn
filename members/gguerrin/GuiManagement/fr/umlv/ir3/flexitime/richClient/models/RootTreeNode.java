@@ -1,5 +1,5 @@
 /*
- * Created on 18 janv. 2005
+ * Created on 20 janv. 2005
  *
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
+import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 
 /**
@@ -22,29 +23,30 @@ import fr.umlv.ir3.flexitime.common.data.general.ITrack;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class RootTreeNode implements TreeNode{
+public abstract class RootTreeNode implements FlexiTreeNode
+{
 //	===========//
     //   Champs  //
     //===========// 
 	/**
 	* The model
 	*/
-	private DefaultTreeModel model;
+	protected DefaultTreeModel model;
 	
 	/**
 	 * The parent
 	 */
-	private final TreeNode parent;
+	protected final TreeNode parent;
 	
 	/**
-	 * The track
+	 * The list
 	 */
-	private List lstTrack;
+	protected List lst;
 
 	/**
 	 * The list of the sub categories
 	 */
-	private List children;
+	protected List children;
 	
 	 
 	
@@ -55,7 +57,8 @@ public class RootTreeNode implements TreeNode{
 	public RootTreeNode(TreeNode parent,List lstTrack)
 	{
 		this.parent = parent;
-		this.lstTrack = lstTrack;
+		if( lstTrack==null)lst=new ArrayList();
+		else this.lst = lstTrack;
 		children = new ArrayList();
 	}
 	
@@ -66,9 +69,9 @@ public class RootTreeNode implements TreeNode{
 	 * @param factory the BuckFactory
 	 * @param model the model
 	 */
-	public RootTreeNode(TreeNode parent,List lstTrack,DefaultTreeModel model)
+	public RootTreeNode(TreeNode parent,List lst,DefaultTreeModel model)
 	{
-		this(parent,lstTrack);
+		this(parent,lst);
 		this.model=model;
 	}
 	
@@ -80,7 +83,12 @@ public class RootTreeNode implements TreeNode{
 	 * @see javax.swing.tree.TreeNode#getChildAt(int)
 	 */
 	public TreeNode getChildAt(int childIndex) {
-		return (TreeNode)processChildren().get(childIndex);
+		if(childIndex>=0)
+			{
+			TreeNode node =(TreeNode)processChildren().get(childIndex);
+			return node;
+			}
+		return null;
 	}
 
 	/* (non-Javadoc)
@@ -115,8 +123,10 @@ public class RootTreeNode implements TreeNode{
 	/* (non-Javadoc)
 	 * @see javax.swing.tree.TreeNode#isLeaf()
 	 */
-	public boolean isLeaf() {
-		return lstTrack.size()==0;
+	public boolean isLeaf() 
+	{
+		if(lst!= null)return lst.size()==0;
+		return true;
 	}
 
 	/* (non-Javadoc)
@@ -130,25 +140,14 @@ public class RootTreeNode implements TreeNode{
 	 * Creates dynamiquely the list of the children when the user click on the "plus"
 	 * @return the list of sub categories
 	 */
-	public List processChildren()
-	{
-		if(children.size()>0)return children;
-		
-		ArrayList list = new ArrayList(lstTrack.size());
-		for(int i = 0;i<lstTrack.size();i++)
-		{
-			list.add(new TrackTreeNode(this,(ITrack)lstTrack.get(i),model));
-		}
-		this.children =list;
-		return(list);
-	}
+	public abstract List processChildren();
 	/**
 	 * Redefinition of the method toString()
 	 * @return the name into a string
 	 */
 	public String toString()
 	{
-		return null;
+		return "root";
 	}
 	/**
 	 * To get the model
@@ -164,5 +163,26 @@ public class RootTreeNode implements TreeNode{
 	 */
 	public void setModel(DefaultTreeModel model) {
 		this.model = model;
+	}
+
+	public abstract TreeNode add();
+	
+	
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
+	 */
+	abstract public TreeNode add(List value);
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(javax.swing.tree.TreeNode)
+	 */
+	abstract public void remove(TreeNode childNode);
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(java.lang.Object)
+	 */
+	public void setValue(Object newValue) {
+		// Non utilisée
+		
 	}
 }

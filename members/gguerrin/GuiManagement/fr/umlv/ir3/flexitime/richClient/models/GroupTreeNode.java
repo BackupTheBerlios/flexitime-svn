@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
@@ -23,7 +24,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GroupTreeNode  implements TreeNode 
+public class GroupTreeNode  implements FlexiTreeNode 
 {
 //	===========//
     //   Champs  //
@@ -126,7 +127,10 @@ public class GroupTreeNode  implements TreeNode
 	public Enumeration children() {
 		return null;
 	}
-	
+	public IGroup getGroup()
+	{
+		return group;
+	}
 	/**
 	 * Creates dynamiquely the list of the children when the user click on the "plus"
 	 * @return the list of sub categories
@@ -147,4 +151,50 @@ public class GroupTreeNode  implements TreeNode
 	{
 		return group.getName();
 	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
+	 */
+	public TreeNode add() {
+		//Non utilisée
+		System.out.println("- Add de group");
+		return null;
+	}
+	
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
+	 */
+	public TreeNode add(List obj) {
+		//Non utilisée
+		System.out.println("- Add de group");
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
+	 */
+	public void remove(TreeNode node) {
+		//Non Utilisée
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
+	 */
+	public void setValue(Object newValue) {
+		group.setName((String)newValue);
+		model.nodeChanged(this);
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setModel(fr.umlv.ir3.flexitime.richClient.models.ResourceModel)
+	 */
+	public void setModel(DefaultTreeModel model) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

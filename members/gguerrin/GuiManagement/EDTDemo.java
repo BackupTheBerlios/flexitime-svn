@@ -18,17 +18,11 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
-
-import fr.umlv.ir3.GL.test.flexibar.MyOutlookBar;
-import fr.umlv.ir3.GL.test.flexibar.TestOutlookBar;
+import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
-import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
-import fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.DevicesView;
+
 
 
 
@@ -47,53 +41,15 @@ public class EDTDemo
     {
         container.setLayout(new BorderLayout());
         //JButton b1 = new JButton("b1");
-        //Construction des Track
-        ITrack track1 = new TrackImpl("IR");
-        ITrack track2 = new TrackImpl("MF");
-        ITrack track3 = new TrackImpl("EI");
-        //Construction des class
-        IClass class1 = new ClassImpl("IR1");
-        IClass class2 = new ClassImpl("IR2");
-        IClass class3 = new ClassImpl("IR3");
-        IClass class4 = new ClassImpl("MF1");
-        //Construction des groupes
-        IGroup group1 = new GroupImpl("group1");
-        IGroup group2 = new GroupImpl("group2");
         
-        //Initialisation des class
-        class1.addGroup(group1);
-        class1.addGroup(group2);
-        class2.addGroup(group1);
-        class2.addGroup(group2);
-        class3.addGroup(group1);
-        class3.addGroup(group2);
-        class4.addGroup(group1);
-        //Initialisaion des track
-        track1.addClass(class1);
-        track1.addClass(class2);
-        track1.addClass(class3);
-        track2.addClass(class1);
-        track2.addClass(class2);
-        track2.addClass(class3);
-        track3.addClass(class4);
-        List lstTrack = new ArrayList();
-        lstTrack.add(track1);
-        lstTrack.add(track2);
-        lstTrack.add(track3);
-       MyOutlookBar fb1 = new MyOutlookBar(lstTrack);
-       container.add(createPanelForComponent(fb1.getPanel(),"Visualiser..."), BorderLayout.WEST);
-        //TestOutlookBar fb1 = new TestOutlookBar();
-       //container.add(createPanelForComponent(fb1,"Visualiser..."), BorderLayout.WEST);
-        //TestOutlookBar fb2 = new TestOutlookBar();
-       // container.add(createPanelForComponent(fb2,"Ajouter..."), BorderLayout.EAST);
         JButton b3 = new JButton("b3");
         container.add(createPanelForComponent(b3,"Toolbar"), BorderLayout.NORTH);
         JButton b4 = new JButton("b4");
         container.add(createPanelForComponent(b4,"StatusBar"), BorderLayout.SOUTH);
         
         //FlexiPlanning fe = new FlexiPlanning(new DefaultPlanningModel());
-        DevicesView deviceView = new DevicesView();
-        container.add(new JScrollPane(createPanelForComponent(deviceView,"Matériel")), BorderLayout.CENTER);
+        ManagementView managementView = new ManagementView(DataSimulator.createTrackList(),DataSimulator.createDeviceList(),DataSimulator.createRoomList());
+        container.add(new JScrollPane(createPanelForComponent(managementView.getPanel(),null)), BorderLayout.CENTER);
         
     }
     
