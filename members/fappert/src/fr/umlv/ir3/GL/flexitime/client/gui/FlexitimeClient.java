@@ -8,7 +8,6 @@ package fr.umlv.ir3.GL.flexitime.client.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -44,11 +43,13 @@ public class FlexitimeClient extends JPanel {
 		list = new JList(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		JScrollPane listView = new JScrollPane(list);
-		listView.setPreferredSize(new Dimension(300, 100));
+		listView.setPreferredSize(new Dimension(200, 700));
 		
 		JButton addButton = new JButton("Add");
+		addButton.setPreferredSize(new Dimension(80,20));
 		addButton.addActionListener(new AddTeacherListener(listModel));
 		JButton removeButton = new JButton("Remove");
+		removeButton.setPreferredSize(new Dimension(80,20));
 		removeButton.addActionListener(new RemoveTeacherListener(listModel,list));
 
 
