@@ -7,9 +7,9 @@
     </description>
 
     <tasks color="#8cb6ce">
-        <task id="195" name="Développement" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="30" complete="1" fixed-start="false" priority="1" expand="true">
-            <task id="2006" name="Préparation des outils de travail" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="9" complete="0" fixed-start="false" priority="1" expand="true">
-                <task id="2007" name="Finition du FlexiGuide" color="#8cb6ce" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="4/1/2005" duration="6" complete="0" fixed-start="false" priority="1" expand="true">
+        <task id="195" name="Développement" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="30" complete="12" fixed-start="false" priority="1" expand="true">
+            <task id="2006" name="Préparation des outils de travail" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="9" complete="6" fixed-start="false" priority="1" expand="true">
+                <task id="2007" name="Finition du FlexiGuide" color="#8cb6ce" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="4/1/2005" duration="6" complete="10" fixed-start="false" priority="1" expand="true">
                     <notes>
                         Modification des erreurs signalées
                         Recherche du plugin 1.5
@@ -27,14 +27,14 @@
                     </notes>
                 </task>
             </task>
-            <task id="1590" name="flexitime.common" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="6" complete="10" fixed-start="false" priority="1" expand="true">
-                <task id="1740" name="flexitime.common.data" color="#8cb6ce" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="4/1/2005" duration="6" complete="0" fixed-start="false" priority="1" expand="true">
-                    <task id="1741" name="Dév flexitime.common.data" color="#8cb6ce" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="4/1/2005" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
-                    <task id="1742" name="Test flexitime.common.data" color="#8cb6ce" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="4/1/2005" duration="3" complete="0" fixed-start="false" priority="1" expand="true"/>
+            <task id="1590" name="flexitime.common" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="6" complete="66" fixed-start="false" priority="1" expand="true">
+                <task id="1740" name="flexitime.common.data" color="#8cb6ce" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="4/1/2005" duration="6" complete="89" fixed-start="false" priority="1" expand="true">
+                    <task id="1741" name="Dév flexitime.common.data" color="#8cb6ce" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="4/1/2005" duration="6" complete="90" fixed-start="false" priority="1" expand="true"/>
+                    <task id="1742" name="Test flexitime.common.data" color="#8cb6ce" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="4/1/2005" duration="3" complete="90" fixed-start="false" priority="1" expand="true"/>
                 </task>
-                <task id="1743" name="flexitime.common.tools" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="3" complete="0" fixed-start="false" priority="1" expand="true">
-                    <task id="1744" name="Dev flexitime.common.tools" color="#8cb6ce" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="4/1/2005" duration="3" complete="0" fixed-start="false" priority="1" expand="true"/>
-                    <task id="1745" name="Test flexitime.common.tools" color="#8cb6ce" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="4/1/2005" duration="3" complete="0" fixed-start="false" priority="1" expand="true"/>
+                <task id="1743" name="flexitime.common.tools" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="3" complete="92" fixed-start="false" priority="1" expand="true">
+                    <task id="1744" name="Dev flexitime.common.tools" color="#8cb6ce" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="4/1/2005" duration="3" complete="95" fixed-start="false" priority="1" expand="true"/>
+                    <task id="1745" name="Test flexitime.common.tools" color="#8cb6ce" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="4/1/2005" duration="3" complete="90" fixed-start="false" priority="1" expand="true"/>
                 </task>
                 <task id="1747" name="flexitime.common.rmi" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="3" complete="0" fixed-start="false" priority="1" expand="true">
                     <task id="1755" name="Dev flexitime.common.rmi" color="#8cb6ce" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="4/1/2005" duration="3" complete="0" fixed-start="false" priority="1" expand="true"/>
@@ -53,9 +53,9 @@
                         <task id="1800" name="Dev flexitime.server.core.management" color="#8cb6ce" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="15/1/2005" duration="2" complete="0" fixed-start="false" priority="1" expand="true"/>
                         <task id="1801" name="Test flexitime.server.core.management" color="#8cb6ce" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="17/1/2005" duration="2" complete="0" fixed-start="false" priority="1" expand="true"/>
                     </task>
-                    <task id="1760" name="flexitime.server.core.admin" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="7/1/2005" duration="3" complete="0" fixed-start="false" priority="1" expand="true">
-                        <task id="1798" name="Dev flexitime.server.core.admin" color="#8cb6ce" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="7/1/2005" duration="3" complete="0" fixed-start="false" priority="1" expand="true"/>
-                        <task id="1799" name="Test flexitime.server.core.admin" color="#8cb6ce" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="7/1/2005" duration="3" complete="0" fixed-start="false" priority="1" expand="true"/>
+                    <task id="1760" name="flexitime.server.core.admin" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="7/1/2005" duration="6" complete="0" fixed-start="false" priority="1" expand="true">
+                        <task id="1798" name="Dev flexitime.server.core.admin" color="#8cb6ce" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="7/1/2005" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
+                        <task id="1799" name="Test flexitime.server.core.admin" color="#8cb6ce" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="7/1/2005" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
                     </task>
                 </task>
                 <task id="1757" name="flexitime.server.io" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="7/1/2005" duration="22" complete="0" fixed-start="false" priority="1" expand="true">
@@ -78,22 +78,22 @@
                         <task id="1785" name="Test flexitime.server.io.FlexiMail" color="#8cb6ce" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="7/1/2005" duration="4" complete="0" fixed-start="false" priority="1" expand="true"/>
                     </task>
                     <task id="1790" name="flexitime.server.io.storage" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="7/1/2005" duration="10" complete="0" fixed-start="false" priority="1" expand="true">
-                        <task id="1791" name="Dev flexitime.server.io.storage" color="#8cb6ce" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="7/1/2005" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
+                        <task id="1791" name="Dev flexitime.server.io.storage" color="#8cb6ce" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="7/1/2005" duration="10" complete="0" fixed-start="false" priority="1" expand="true"/>
                         <task id="1792" name="Test flexitime.server.io.storage" color="#8cb6ce" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="11/1/2005" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
                     </task>
                 </task>
             </task>
-            <task id="1738" name="flexitime.richClient" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="20" complete="0" fixed-start="false" priority="1" expand="true">
-                <task id="2009" name="flexitime.richClient.main" color="#8cb6ce" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="13/1/2005" duration="4" complete="0" fixed-start="false" priority="1" expand="true"/>
+            <task id="1738" name="flexitime.richClient" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="22" complete="16" fixed-start="false" priority="1" expand="true">
+                <task id="2009" name="flexitime.richClient.main" color="#8cb6ce" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="22/1/2005" duration="4" complete="0" fixed-start="false" priority="1" expand="true"/>
                 <task id="1772" name="flexitime.richClient.models" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="17/1/2005" duration="5" complete="0" fixed-start="false" priority="1" expand="true">
                     <task id="1802" name="Dev flexitime.richClient.models" color="#8cb6ce" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="17/1/2005" duration="5" complete="0" fixed-start="false" priority="1" expand="true"/>
                     <task id="1803" name="Test flexitime.richClient.models" color="#8cb6ce" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="17/1/2005" duration="5" complete="0" fixed-start="false" priority="1" expand="true"/>
                 </task>
-                <task id="1773" name="flexitime.richClient.gui" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="20" complete="0" fixed-start="false" priority="1" expand="true">
+                <task id="1773" name="flexitime.richClient.gui" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="20" complete="22" fixed-start="false" priority="1" expand="true">
                     <task id="1774" name="flexitime.richClient.gui.actions" color="#8cb6ce" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="13/1/2005" duration="4" complete="0" fixed-start="false" priority="1" expand="true"/>
-                    <task id="1775" name="flexitime.richClient.gui.panel" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="18" complete="0" fixed-start="false" priority="1" expand="true">
+                    <task id="1775" name="flexitime.richClient.gui.panel" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="4/1/2005" duration="18" complete="29" fixed-start="false" priority="1" expand="true">
                         <task id="1777" name="flexitime.richClient.gui.panel.management" color="#8cb6ce" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="17/1/2005" duration="5" complete="0" fixed-start="false" priority="1" expand="true"/>
-                        <task id="1778" name="flexitime.richClient.gui.panel.exploitation" color="#8cb6ce" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="4/1/2005" duration="7" complete="0" fixed-start="false" priority="1" expand="true"/>
+                        <task id="1778" name="flexitime.richClient.gui.panel.exploitation" color="#8cb6ce" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="4/1/2005" duration="7" complete="50" fixed-start="false" priority="1" expand="true"/>
                     </task>
                     <task id="1776" name="flexitime.richClient.gui.views" color="#8cb6ce" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="19/1/2005" duration="5" complete="0" fixed-start="false" priority="1" expand="true"/>
                 </task>
@@ -137,8 +137,8 @@
         <allocation task-id="1797" resource-id="4" load="100.0"/>
         <allocation task-id="1800" resource-id="5" load="100.0"/>
         <allocation task-id="1801" resource-id="4" load="100.0"/>
-        <allocation task-id="1798" resource-id="6" load="50.0"/>
-        <allocation task-id="1799" resource-id="6" load="50.0"/>
+        <allocation task-id="1798" resource-id="6" load="25.0"/>
+        <allocation task-id="1799" resource-id="6" load="25.0"/>
         <allocation task-id="1771" resource-id="6" load="50.0"/>
         <allocation task-id="1779" resource-id="6" load="100.0"/>
         <allocation task-id="1780" resource-id="0" load="30.0"/>
@@ -161,8 +161,8 @@
         <allocation task-id="1749" resource-id="0" load="50.0"/>
         <allocation task-id="1751" resource-id="4" load="100.0"/>
         <allocation task-id="1752" resource-id="6" load="100.0"/>
-        <allocation task-id="1753" resource-id="5" load="100.0"/>
         <allocation task-id="1753" resource-id="3" load="100.0"/>
+        <allocation task-id="1753" resource-id="5" load="100.0"/>
         <allocation task-id="1754" resource-id="7" load="100.0"/>
     </allocations>
 
