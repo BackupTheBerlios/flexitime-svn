@@ -7,25 +7,27 @@
 
 package fr.umlv.ir3.flexitime.common.rmi;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 
 /**
- * IDataListener - DOCME Description explication supplémentaire si nécessaire in
- * english please... Que fait cette classe, qu'est-ce qu'elle représente, ...
+ * IDataListener -  Interface that all dustant listeners have to implement
+ * Extends Remote in order to be called remotely.
  * 
- * @version Verion ou révision SVN
+ * @version 1.0
  * @author FlexiTeam - Valère
  */
-public interface IDataListener
+public interface IDataListener extends Remote
 {
 
     /**
-     * changed - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     *  
+     * Called when a data has changed 
+     * @param data Data that has changed
+     * @throws RemoteException when method is not reachable through RMI
      * 
-     * @param data
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
      */
-    public void dataChanged(DataEvent data);
+    public void dataChanged(DataEvent data) throws RemoteException;
 }

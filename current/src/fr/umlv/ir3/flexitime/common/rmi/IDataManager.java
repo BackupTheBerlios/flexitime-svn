@@ -1,10 +1,8 @@
 /*
- * Created on 26 déc. 2004
- * by Valère
- * 
+ * Created on 4 janv. 2005
+ * by Prâsad
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-
 package fr.umlv.ir3.flexitime.common.rmi;
 
 import java.rmi.Remote;
@@ -13,81 +11,82 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.Data;
 
+
 /**
- * AbstractManager - DOCME Description explication supplémentaire si nécessaire
- * in english please... Que fait cette classe, qu'est-ce qu'elle représente, ...
+ * Interface for all Data managers
+ * extends Remote to be called remotely
  * 
- * @version 0.1
- * @author FlexiTeam - Valère
+ * @version 1.0
+ * @see java.rmi.Remote
+ * 
+ * @author FlexiTeam - Prâsad
  */
 public interface IDataManager extends Remote
 {
-
     /**
-     * getDatas - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Adds a Data created by a client
+     * Have to save Data and fire the add 
      * 
-     * @return
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
+     * @param d Data to be added
+     * @throws RemoteException if not reachable
+     * 
      */
-    public List get() throws RemoteException;
-
+    public void add(Data d) throws RemoteException;
+    
     /**
-     * createData - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     *  
+     * get all datas managed by this manager
      * 
-     * @param data
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
+     * @return all datas
+     * 
+     * @throws RemoteException if not reachable 
+     * 
      */
-    public void create(Data data) throws RemoteException;
-
+    public List get() throws RemoteException; 
+    
     /**
-     * updateData - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * locks a data 
      * 
-     * @param data
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
+     * @param d data to lock
+     * 
+     * @return true if data can be locked, flase otherwise
+     * 
+     * @throws RemoteException if not reachable
+     * 
      */
-    public void update(Data data) throws RemoteException;
-
+    public boolean lock(Data d) throws RemoteException;
+    
     /**
-     * removeData - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     *  
+     * removes a data
+     * have to delete data from storage and inform clients
      * 
-     * @param data
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
+     * @param d Data to remove
+     * @throws RemoteException if not reachable 
+     * 
      */
-    public void remove(Data data) throws RemoteException;
-
+    public void remove(Data d) throws RemoteException;
+    
     /**
-     * lock - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     *  
+     * unlocks a data
+     *
+     * @param d Data to unlock
+     * @throws RemoteException if not reachable 
      * 
-     * @param data
-     * @return
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
      */
-    public boolean lock(Data data) throws RemoteException;
-
+    public void unlock(Data d) throws RemoteException;
+    
     /**
-     * unlock - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     *  
+     * updates a data
+     * have to store the object and informs clients
+     *
+     * @param d Data to be updated
+     * @throws RemoteException if not reachable
      * 
-     * @param data
-     * @return
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
      */
-    public boolean unlock(Data data) throws RemoteException;
+    public void update(Data d) throws RemoteException;
+    
 }
+
