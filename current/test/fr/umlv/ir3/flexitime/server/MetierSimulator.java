@@ -11,8 +11,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.midi.SysexMessage;
+
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.DataFactorySansRmi;
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
@@ -20,6 +23,7 @@ import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl;
@@ -255,6 +259,19 @@ public class MetierSimulator
         lesson9 = DataFactory.createLesson(new Gap(2005,1,28,8,30,2005,1,28,10,30), corba_td, groups_td, roussel);
         
         //RemoteDataManager.getManager().deleteLesson(lesson9);
+
+        
+        for(IResource r : lesson1.getAllResources())
+        {
+            System.out.println(r.getName()+" " +r);
+            for(IBusy b : r.getSetBusy())
+                System.out.println("\t" + b);
+        }
+        System.out.println("Groupe 2");
+        for(IBusy b : ir3_grp2.getSetBusy())
+            System.out.println("\t" + b);
+        
+
         
         
         lesson1.addResource(ir1_grp1);

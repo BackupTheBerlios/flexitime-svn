@@ -327,6 +327,11 @@ public class DataFactory
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
         
+        lesson.getSetGroup().clear();
+        lesson.getSetDevice().clear();
+        lesson.getSetRoom().clear();
+        lesson.getSetTeacher().clear();
+        
         for(IResource elem : l)
             lesson.addResource(elem);
         
@@ -364,6 +369,11 @@ public class DataFactory
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+
+        lesson.getSetGroup().clear();
+        lesson.getSetDevice().clear();
+        lesson.getSetRoom().clear();
+        lesson.getSetTeacher().clear();
         
         for(IResource elem : lr)
             lesson.addResource(elem);
@@ -402,6 +412,11 @@ public class DataFactory
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        
+        lesson.getSetGroup().clear();
+        lesson.getSetDevice().clear();
+        lesson.getSetRoom().clear();
+        lesson.getSetTeacher().clear();
         
         for(IResource elem : l)
         {
@@ -445,6 +460,11 @@ public class DataFactory
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+
+        lesson.getSetGroup().clear();
+        lesson.getSetDevice().clear();
+        lesson.getSetRoom().clear();
+        lesson.getSetTeacher().clear();
         
         for(IResource elem : lr)
         {
@@ -492,7 +512,19 @@ public class DataFactory
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }    
+        }
+
+        lesson.getSetGroup().clear();
+        lesson.getSetDevice().clear();
+        lesson.getSetRoom().clear();
+        lesson.getSetTeacher().clear();
+        
+        for(IResource elem : l)
+        {
+            lesson.addResource(elem);
+            System.out.println(elem.getClass() +" " + elem.getSetBusy());
+        }
+        
         return les;
     }
 
