@@ -13,9 +13,9 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 import fr.umlv.ir3.flexitime.common.tools.Time;
-import fr.umlv.ir3.flexitime.common.tools.lang.FlexiLanguage;
 import fr.umlv.ir3.flexitime.server.MetierSimulator;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.LessonBloc;
 

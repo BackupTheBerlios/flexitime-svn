@@ -23,6 +23,11 @@ public class DataEvent extends EventObject implements Serializable
     //============//
     
     /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3978141062810318644L;
+
+    /**
      * Indicates that the data has been added added
      */
     public final static int TYPE_ADDED=1;

@@ -4,12 +4,11 @@
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 
-package fr.umlv.ir3.flexitime.common.tools.lang;
+package fr.umlv.ir3.flexitime.common.tools;
 
 import java.text.*;
 import java.util.*;
 
-import fr.umlv.ir3.flexitime.common.tools.Time;
 
 /**
  * Class for the language

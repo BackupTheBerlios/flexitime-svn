@@ -36,6 +36,9 @@ public class Preferences
 
 	/**
 	 * Default constructor for a Preferences object.
+	 * @param heightGap 
+	 * @param lengthGap 
+	 * @param listColors 
 	 */
 	public Preferences(int heightGap, int lengthGap, List listColors)
 	{
@@ -112,7 +115,7 @@ public class Preferences
 	/**
 	 * Returns the list of  
 	 * 
-	 * @return
+	 * @return all the color
 	 */
 	public List getListOfColors()
 	{

@@ -54,6 +54,20 @@ public class LessonImpl extends BusyImpl implements ILesson
         lstTeacher = new ArrayList<ITeacher>();
         lstGroup = new ArrayList<IGroup>();
     }
+    
+    /**
+     * Constructs an unavailibility for a course.
+     * 
+     * @param g
+     *            the gap between the unavailibility.
+     * @param _course
+     *            ICourse associated with this Lesson
+     * 
+     */
+    public LessonImpl(Gap g, ICourse _course)
+    {
+        this(g, _course, _course.getDefaultLength());
+    }
 
     /**
      * Constructs an unavailibility for a course.

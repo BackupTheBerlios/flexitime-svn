@@ -8,7 +8,6 @@ package fr.umlv.ir3.flexitime.common.tools;
 
 import java.util.Calendar;
 
-import fr.umlv.ir3.flexitime.common.tools.lang.FlexiLanguage;
 
 /**
  * Description Tool for time. <br>

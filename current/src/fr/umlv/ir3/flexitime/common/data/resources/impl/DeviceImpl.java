@@ -3,13 +3,13 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
+
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
-
 
 /**
  * Defines a device.
@@ -21,88 +21,106 @@ import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
  */
 public class DeviceImpl extends ResourceImpl implements IDevice
 {
+
     /**
      * Comment for <code>serialVersionUID</code>
      */
-    private static final long serialVersionUID = 3689070659724849206L;
-    //===========//
-	//  Champs	 //
-	//===========//
-    private String type;
+    private static final long serialVersionUID    = 3689070659724849206L;
+    // ===========//
+    // Champs //
+    // ===========//
+    // Definition des types
+    /**
+     * Comment for <code>VIDEOPROJECTOR</code>
+     */
+    public final static int   VIDEOPROJECTOR      = 1;
+    /**
+     * Comment for <code>TV</code>
+     */
+    public final static int   TV                  = 2;
+    /**
+     * Comment for <code>VIDEO_TAPE_RECORDER</code>
+     */
+    public final static int   VIDEO_TAPE_RECORDER = 3;
     
-    
-	//=============//
-	//Constructeurs//
-    //=============//
-	/**
-	 * Default constructor for a device. 
-	 */
-	protected DeviceImpl()
-	{
-     super();   
+    private int               type;
+
+    // =============//
+    // Constructeurs//
+    // =============//
+    /**
+     * Default constructor for a device.
+     */
+    protected DeviceImpl()
+    {
+        super();
     }
-	
-	/**
-	 * Constructs a device with just a name in parameter.
-	 * 
-	 * @param name a string. 
-	 */
-	public DeviceImpl(String name)
-	{
-		super(name);
-	}
-    
+
     /**
      * Constructs a device with just a name in parameter.
      * 
-     * @param name a string. 
-     * @param type type of the device
+     * @param name
+     *            a string.
      */
-    public DeviceImpl(String name, String type)
+    public DeviceImpl(String name)
+    {
+        super(name);
+    }
+
+    /**
+     * Constructs a device with just a name in parameter.
+     * 
+     * @param name
+     *            a string.
+     * @param type
+     *            type of the device
+     */
+    public DeviceImpl(String name, int type)
     {
         super(name);
         this.type = type;
     }
-	
+
     /**
      * Constructs a device.
      * 
-     * @param name a string.
-     * @param listBusy a list of unavailibilities.
-     * @param type the type of device.
+     * @param name
+     *            a string.
+     * @param listBusy
+     *            a list of unavailibilities.
+     * @param type
+     *            the type of device.
      */
-    public DeviceImpl(String name, String type, List<IBusy> listBusy)
+    public DeviceImpl(String name, int type, List<IBusy> listBusy)
     {
         super(name, listBusy);
         this.type = type;
     }
 
-    
-    //===========//
-    // Méthodes  //
-	//===========//
-    /** 
-     * Returns the type of the device.
-     * <code>Int i = device.getType()</code>
-     *
+    // ===========//
+    // Méthodes //
+    // ===========//
+    /**
+     * Returns the type of the device. <code>Int i = device.getType()</code>
+     * 
      * @return the type of device.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice#getType()
      */
-    public String getType()
+    public int getType()
     {
         return type;
     }
 
-    /** 
-     * Sets the type of device.
-     * <code>device.setType(type)</code>
-     *
-     * @param type the type of device.
+    /**
+     * Sets the type of device. <code>device.setType(type)</code>
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice#setType(java.lang.String)
+     * @param type
+     *            the type of device.
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice#setType(int)
      */
-    public void setType(String type)
+    public void setType(int type)
     {
         this.type = type;
     }
