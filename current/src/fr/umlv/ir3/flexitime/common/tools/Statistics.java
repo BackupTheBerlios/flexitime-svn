@@ -7,19 +7,16 @@ package fr.umlv.ir3.flexitime.common.tools;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
-import fr.umlv.ir3.flexitime.common.data.IData;
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl;
 
 
@@ -41,10 +38,11 @@ public class Statistics
     //-------------//
     // clé = nom du cours
     // valeur = nombre d'heure
-    private HashMap coursesTodo = null;
-    private HashMap coursesDone = null;
+    private String courseName = null;
+    private int nbHours = 0;
     // nom des groupes
-    private List groups = null;
+    private List<String> groups = null;
+    private boolean done = false;
     //--------------//
     // Constructeur //
     //--------------//
@@ -52,10 +50,8 @@ public class Statistics
      * Constructor
      * 
      */
-    public Statistics(){
-        coursesDone = new HashMap();
-        coursesTodo = new HashMap();
-        groups = new ArrayList();
+    private Statistics(){
+        groups = new ArrayList<String>();
     }
     //-------------//
     // Méthodes    //
@@ -67,18 +63,11 @@ public class Statistics
      *
      * @return Returns the courses
      */
-    public HashMap getCoursesDone(){
-        return coursesDone;
+    public String getCourseName(){
+        return courseName;
     }
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @return Returns the courses
-     */
-    public HashMap getCoursesTodo(){
-        return coursesTodo;
+    private void setCourse(String courseName){
+        this.courseName = courseName;
     }
     /** 
      * DOCME Description
@@ -90,6 +79,9 @@ public class Statistics
     public List getGroups(){
         return groups;
     }
+    private void addGroup(String group){
+        groups.add(group);
+    }
     /** 
      * getStatTeacher - gets the Statistiques of a teacher<br>
      *
@@ -98,8 +90,20 @@ public class Statistics
      * @param t the teacher
      * @return Returns the stats of the teacher
      */
+    public boolean getDone(){
+        return done;
+    }
+    private void setDone(boolean bool){
+        done = bool;
+    }
+    public int getNbHours(){
+        return nbHours;
+    }
+    private void setNbHours(int nb){
+        this.nbHours = nb;
+    }
     public static List getStatTeacher(ITeacher t){
-        ArrayList list = new ArrayList();
+        ArrayList<Statistics> list = new ArrayList<Statistics>();
         Iterator it = t.getLstBusy().iterator();
         while(it.hasNext()){
             list.add(getCourses((ILesson)it.next()));            
@@ -115,7 +119,7 @@ public class Statistics
      * @return Returns the stats of the group
      */
     public static List getStatGroup(IGroup g){
-        ArrayList list = new ArrayList();
+        ArrayList<Statistics> list = new ArrayList<Statistics>();
         Iterator it = g.getLstBusy().iterator();
         while(it.hasNext()){
             list.add(getCourses((ILesson)it.next()));            
@@ -124,21 +128,16 @@ public class Statistics
     }
     private static Statistics getCourses(ILesson lesson){
         Statistics stat = new Statistics();
-        boolean isDone = false;
-        if(lesson.getEndDate().compareTo(new Time(2004,2,2,2,2).getCal().getTime())<=0) isDone = true;
-        else isDone = false;
-        List l = lesson.getLstResource();
-        Iterator itl = l.iterator();
-        while(itl.hasNext()){
-            IData res = (IData)itl.next();
-            if(res instanceof ICourse){
-                int nbHeure = ((ICourse)res).getNbHours();
-            	if(isDone == true) stat.getCoursesDone().put(res.getName(),new Integer(nbHeure));
-                else stat.getCoursesTodo().put(res.getName(),new Integer(nbHeure));
-            }
-            if(res instanceof IGroup){
-                stat.getGroups().add(((IGroup)res).getName());
-            }
+
+        if(lesson.getEndDate().compareTo(new Time(2004,2,2,2,2).getCal().getTime())<=0) stat.setDone(true);
+        else stat.setDone(false);;
+        stat.setCourse(lesson.getCourse().getName());
+        stat.setNbHours(lesson.getCourse().getNbHours());
+        List lg = lesson.getLstGroup();
+        Iterator itlg = lg.iterator();
+        while(itlg.hasNext()){
+            IGroup res = (IGroup)itlg.next();
+            stat.addGroup(res.getName());
         }
         return stat;
     }
@@ -165,47 +164,47 @@ public class Statistics
         c2.setNbHours(2);
         CourseImpl c3 = new CourseImpl("cours3");
         c3.setNbHours(2);
-        List lr1 = new ArrayList();
-        List lr2 = new ArrayList();
-        List lr3 = new ArrayList();
-        lr1.add(t1);
-        lr1.add(g1);
-        lr1.add(g2);
-        lr1.add(c1);
-        lr2.add(t2);
-        lr2.add(g1);
-        lr2.add(c2);
-        lr3.add(t3);
-        lr3.add(g2);
-        lr3.add(c3);
-        LessonImpl li1 = new LessonImpl("Cours Revuz",new Date(),new Date());
-        li1.setLstResource(lr1);
-        LessonImpl li2 = new LessonImpl("TD Forax",new Date(),new Date());
-        li2.setLstResource(lr2);
-        LessonImpl li3 = new LessonImpl("TD Calmejane",new Date(),new Date());
-        li3.setLstResource(lr3);
-        List busy1 = new ArrayList();
+        LessonImpl li1 = new LessonImpl("Cours Revuz");
+        li1.addResource(t1);
+        li1.addResource(g1);
+        li1.addResource(g2);
+        li1.setCourse(c1);
+        li1.setStartDate(new Date());
+        li1.setEndDate(new Date());
+        LessonImpl li2 = new LessonImpl("TD Forax");
+        li2.addResource(t2);
+        li2.addResource(g1);
+        li2.setCourse(c2);
+        li2.setStartDate(new Date());
+        li2.setEndDate(new Date());
+        LessonImpl li3 = new LessonImpl("TD Calmejane");
+        li3.addResource(t3);
+        li3.addResource(g2);
+        li3.setCourse(c3);
+        li3.setStartDate(new Date());
+        li3.setEndDate(new Date());
+        List<IBusy> busy1 = new ArrayList<IBusy>();
         busy1.add(li1);
-        List busy2 = new ArrayList();
+        List<IBusy> busy2 = new ArrayList<IBusy>();
         busy2.add(li2);
-        List busy3 = new ArrayList();
+        List<IBusy> busy3 = new ArrayList<IBusy>();
         busy3.add(li3);
         t1.setLstBusy(busy1);
         t2.setLstBusy(busy2);
         t3.setLstBusy(busy3);
-        List busy4 = new ArrayList();
+        List<IBusy> busy4 = new ArrayList<IBusy>();
         busy4.add(li1);
         busy4.add(li2);
-        List busy5 = new ArrayList();
+        List<IBusy> busy5 = new ArrayList<IBusy>();
         busy5.add(li1);
         busy5.add(li3);
         g1.setLstBusy(busy4);
         g2.setLstBusy(busy5);
-        List lstProfs = new ArrayList();
+        List<ITeacher> lstProfs = new ArrayList<ITeacher>();
         lstProfs.add(t1);
         lstProfs.add(t2);
         lstProfs.add(t3);
-        List lstGroupes = new ArrayList();
+        List<IGroup> lstGroupes = new ArrayList<IGroup>();
         lstGroupes.add(g1);
         lstGroupes.add(g2);
         
@@ -224,19 +223,8 @@ public class Statistics
 		        while(itGroup.hasNext()){
 		            System.out.println(itGroup.next());
 		        }
-		        System.out.println("Les cours sont:");
-		        Set keyDone = stat.getCoursesDone().keySet();
-	            Set keyTodo = stat.getCoursesTodo().keySet();
-		        Iterator itDone = keyDone.iterator();
-		        Iterator itTodo = keyTodo.iterator();
-		        while(itDone.hasNext()){
-		            String title = (String)itDone.next();
-		            System.out.println(title+" : "+stat.getCoursesDone().get(title)+"h effectuées");
-		        }
-		        while(itTodo.hasNext()){
-		            String title = (String)itTodo.next();
-		            System.out.println(title+" : "+stat.getCoursesTodo().get(title)+"h non effectuées");
-		        }
+		        System.out.println("Le cours est:");
+	            System.out.println(stat.getCourseName()+" : "+stat.getNbHours()+"h effectuées");
 	        }
         }
         Iterator itLstGroups = lstGroupes.iterator();
@@ -249,19 +237,8 @@ public class Statistics
 	        while(itGroup.hasNext()){
 	            System.out.println("----");
 	            Statistics stat = (Statistics) itGroup.next(); 
-	            System.out.println("Les cours sont:");
-	            Set keyDone = stat.getCoursesDone().keySet();
-	            Set keyTodo = stat.getCoursesTodo().keySet();
-		        Iterator itDone = keyDone.iterator();
-		        Iterator itTodo = keyTodo.iterator();
-		        while(itDone.hasNext()){
-		            String title = (String)itDone.next();
-		            System.out.println(title+" : "+stat.getCoursesDone().get(title)+"h effectuées");
-		        }
-		        while(itTodo.hasNext()){
-		            String title = (String)itTodo.next();
-		            System.out.println(title+" : "+stat.getCoursesTodo().get(title)+"h non effectuées");
-		        }
+	            System.out.println("Le cours est:");
+	            System.out.println(stat.getCourseName()+" : "+stat.getNbHours()+"h effectuées");
 	        }
         }
     }
