@@ -3,14 +3,13 @@
  * by Prâsad
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.richClient.event;
+package fr.umlv.ir3.flexitime.common.rmi;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
 
 
 /**
