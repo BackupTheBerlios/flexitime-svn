@@ -72,6 +72,10 @@ public class Gap {
 
         this((Calendar)gap.getStartDate().getCal().clone(), (Calendar)gap.getEndDate().getCal().clone());
     }
+    public Gap(Time t1,Time t2){
+        startDate = t1;
+        endDate = t2;
+    }
     
     
     //=============//
