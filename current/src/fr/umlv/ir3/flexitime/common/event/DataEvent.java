@@ -81,15 +81,7 @@ public class DataEvent extends EventObject
         this.subIndicies = subIndicies;
     }
 
-    /**
-     * the object on which the property changes.
-     * 
-     * @return the object on which the property changes.
-     */
-    public Object getObject()
-    {
-        return getSource();
-    }
+    
 
     /**
      * returns the name of the property that was changed.
@@ -143,7 +135,7 @@ public class DataEvent extends EventObject
      */
     public String toString()
     {
-        return getClass().getName() + "[item=" + getObject() + " property="  //$NON-NLS-1$//$NON-NLS-2$
+        return getClass().getName() + "[object=" + getSource() + " property="  //$NON-NLS-1$//$NON-NLS-2$
                 + propertyName + " eventType=" + eventType + " subObjects="  //$NON-NLS-1$//$NON-NLS-2$
                 + Arrays.asList(subObjects) + " subIndicies=" //$NON-NLS-1$
                 + toString(subIndicies) + ']';
@@ -178,5 +170,19 @@ public class DataEvent extends EventObject
     /**
      * Constant that indicates that property has been removed
      */
-    public final static int       TYPE_PROPERTY_REMOVED = 4;
+    public final static int       TYPE_PROPERTY_REMOVED = 3;
+    /**
+     * Constant that indicates that a subData of property has changed
+     */
+    public final static int       TYPE_PROPERTY_SUBDATA_CHANGED = 4;
+    /**
+     * Constant that indicates that a subData of property has been added
+     */
+    public final static int       TYPE_PROPERTY_SUBDATA_ADDED = 5;
+    /**
+     * Constant that indicates that a subData of property has been removed
+     */
+    public final static int       TYPE_PROPERTY_SUBDATA_REMOVED = 6;
+    
+    
 }

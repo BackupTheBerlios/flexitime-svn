@@ -8,10 +8,10 @@ package fr.umlv.ir3.flexitime.server.core;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import net.sf.hibernate.HibernateException;
-
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
@@ -29,8 +29,15 @@ import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
 import fr.umlv.ir3.flexitime.server.io.storage.BuildingStorage;
+import fr.umlv.ir3.flexitime.server.io.storage.ClassStorage;
+import fr.umlv.ir3.flexitime.server.io.storage.CourseStorage;
+import fr.umlv.ir3.flexitime.server.io.storage.DeviceStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.FloorStorage;
+import fr.umlv.ir3.flexitime.server.io.storage.GroupStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.RoomStorage;
+import fr.umlv.ir3.flexitime.server.io.storage.SubjectStorage;
+import fr.umlv.ir3.flexitime.server.io.storage.TeacherStorage;
+import fr.umlv.ir3.flexitime.server.io.storage.TrackStorage;
 
 /**
  * DOCME Description explication supplémentaire si nécessaire in english
@@ -197,8 +204,29 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean saveOrUpdateClass(IClass _class) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return false;
+        int type = _class.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+
+        try
+        {
+            TrackStorage.save(_class.getParentTrack());
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+
+        int indices = _class.getParentTrack().getLstClass().indexOf(_class);
+        manager
+                .fireDataChanged(
+                        ITrack.class,
+                        new DataEvent(
+                                _class.getParentTrack(),
+                                "lstClass", type, new Object[] { _class }, new int[] { indices })); //$NON-NLS-1$
+
+        return true;
     }
 
     /**
@@ -212,8 +240,19 @@ public class DataManagerImpl implements IDataManager
      */
     public List<IClass> getClasses(ITrack track) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return null;
+        List<IClass> l;
+
+        try
+        {
+            l = ClassStorage.get(track);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            l = new ArrayList<IClass>();
+        }
+        return l;
     }
 
     /**
@@ -227,8 +266,27 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean deleteClass(IClass _class) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return false;
+        int indice = _class.getParentTrack().getLstClass().indexOf(_class);
+
+        try
+        {
+            ClassStorage.delete(_class);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+
+        manager
+                .fireDataChanged(
+                        ITrack.class,
+                        new DataEvent(
+                                _class.getParentTrack(),
+                                "lstClass", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { _class }, new int[] { indice })); //$NON-NLS-1$
+
+        return true;
     }
 
     /**
@@ -242,8 +300,29 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean saveOrUpdateCourse(ICourse course) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return false;
+        int type = course.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+
+        try
+        {
+            SubjectStorage.save(course.getParentSubject());
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+
+        int indices = course.getParentSubject().getLstCourse().indexOf(course);
+        manager
+                .fireDataChanged(
+                        ICourse.class,
+                        new DataEvent(
+                                course.getParentSubject(),
+                                "lstCourse", type, new Object[] { course }, new int[] { indices })); //$NON-NLS-1$
+
+        return true;
     }
 
     /**
@@ -257,8 +336,19 @@ public class DataManagerImpl implements IDataManager
      */
     public List<ICourse> getCourses(ISubject subject) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return null;
+        List<ICourse> l;
+
+        try
+        {
+            l = CourseStorage.get(subject);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            l = new ArrayList<ICourse>();
+        }
+        return l;
     }
 
     /**
@@ -272,8 +362,27 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean deleteCourse(ICourse course) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return false;
+        int indice = course.getParentSubject().getLstCourse().indexOf(course);
+
+        try
+        {
+            CourseStorage.delete(course);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+
+        manager
+                .fireDataChanged(
+                        ISubject.class,
+                        new DataEvent(
+                                course.getParentSubject(),
+                                "lstCourse", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { course }, new int[] { indice })); //$NON-NLS-1$
+
+        return true;
     }
 
     /**
@@ -287,8 +396,23 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean saveOrUpdateDevice(IDevice device) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return false;
+        int type = device.getIdData() == null ? DataEvent.TYPE_PROPERTY_ADDED
+                : DataEvent.TYPE_PROPERTY_CHANGED;
+
+        try
+        {
+            DeviceStorage.save(device);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+
+        manager.fireDataChanged(IDevice.class, new DataEvent(device, "", type)); //$NON-NLS-1$
+
+        return true;
     }
 
     /**
@@ -301,8 +425,18 @@ public class DataManagerImpl implements IDataManager
      */
     public List<IDevice> getDevices() throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return null;
+        List<IDevice> l;
+        try
+        {
+            l = DeviceStorage.get();
+        }
+        catch (HibernateException e)
+        {
+
+            e.printStackTrace();
+            l = new ArrayList<IDevice>();
+        }
+        return l;
     }
 
     /**
@@ -316,8 +450,19 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean deleteDevice(IDevice device) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return false;
+        try
+        {
+            DeviceStorage.delete(device);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+        manager.fireDataChanged(IDevice.class, new DataEvent(device,
+                "", DataEvent.TYPE_PROPERTY_REMOVED)); //$NON-NLS-1$
+        return true;
     }
 
     /**
@@ -331,8 +476,8 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean saveOrUpdateFloor(IFloor floor) throws RemoteException
     {
-        int type = floor.getIdData() == null ? DataEvent.TYPE_PROPERTY_ADDED
-                : DataEvent.TYPE_PROPERTY_CHANGED;
+        int type = floor.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
         try
         {
@@ -411,7 +556,7 @@ public class DataManagerImpl implements IDataManager
                         IBuilding.class,
                         new DataEvent(
                                 floor.getParentBuilding(),
-                                "lstFloor", DataEvent.TYPE_PROPERTY_REMOVED, new Object[] { floor }, new int[] { indice })); //$NON-NLS-1$
+                                "lstFloor", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { floor }, new int[] { indice })); //$NON-NLS-1$
 
         return true;
     }
@@ -427,8 +572,29 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean saveOrUpdateGroup(IGroup group) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return false;
+        int type = group.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+
+        try
+        {
+            ClassStorage.save(group.getParentClass());
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+
+        int indices = group.getParentClass().getLstGroups().indexOf(group);
+        manager
+                .fireDataChanged(
+                        IClass.class,
+                        new DataEvent(
+                                group.getParentClass(),
+                                "lstClass", type, new Object[] { group }, new int[] { indices })); //$NON-NLS-1$
+
+        return true;
     }
 
     /**
@@ -442,8 +608,19 @@ public class DataManagerImpl implements IDataManager
      */
     public List<IGroup> getGroups(IClass _class) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return null;
+        List<IGroup> l;
+
+        try
+        {
+            l = GroupStorage.get(_class);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            l = new ArrayList<IGroup>();
+        }
+        return l;
     }
 
     /**
@@ -457,8 +634,27 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean deleteGroup(IGroup group) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return false;
+        int indice = group.getParentClass().getLstGroups().indexOf(group);
+
+        try
+        {
+            GroupStorage.delete(group);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+
+        manager
+                .fireDataChanged(
+                        IClass.class,
+                        new DataEvent(
+                                group.getParentClass(),
+                                "lstGroup", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { group }, new int[] { indice })); //$NON-NLS-1$
+
+        return true;
     }
 
     /**
@@ -472,8 +668,89 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean saveOrUpdateLesson(ILesson lesson) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return false;
+        int type = lesson.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+
+        for (Iterator<IGroup> it = lesson.getLstGroup().iterator() ; it
+                .hasNext() ;)
+        {
+            IGroup g = it.next();
+            try
+            {
+                GroupStorage.save(g);
+            }
+            catch (HibernateException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return false;
+            }
+            int indice = g.getLstBusy().indexOf(lesson);
+            manager.fireDataChanged(IGroup.class, new DataEvent(g, "lstBusy",
+                    type, new Object[] { lesson }, new int[] { indice }));
+
+        }
+
+        for (Iterator<IDevice> it = lesson.getLstDevice().iterator() ; it
+                .hasNext() ;)
+        {
+            IDevice d = it.next();
+            try
+            {
+                DeviceStorage.save(d);
+            }
+            catch (HibernateException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return false;
+            }
+            int indice = d.getLstBusy().indexOf(lesson);
+            manager.fireDataChanged(IDevice.class, new DataEvent(d, "lstBusy",
+                    type, new Object[] { lesson }, new int[] { indice }));
+
+        }
+
+        for (Iterator<IRoom> it = lesson.getLstRoom().iterator() ; it.hasNext() ;)
+        {
+            IRoom r = it.next();
+            try
+            {
+                RoomStorage.save(r);
+            }
+            catch (HibernateException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return false;
+            }
+            int indice = r.getLstBusy().indexOf(lesson);
+            manager.fireDataChanged(IRoom.class, new DataEvent(r, "lstBusy",
+                    type, new Object[] { lesson }, new int[] { indice }));
+
+        }
+        
+        for (Iterator<ITeacher> it = lesson.getLstTeacher().iterator() ; it
+                .hasNext() ;)
+        {
+            ITeacher t = it.next();
+            try
+            {
+                TeacherStorage.save(t);
+            }
+            catch (HibernateException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return false;
+            }
+            int indice = t.getLstBusy().indexOf(lesson);
+            manager.fireDataChanged(ITeacher.class, new DataEvent(t, "lstBusy",
+                    type, new Object[] { lesson }, new int[] { indice }));
+
+        }
+
+        return true;
     }
 
     /**
@@ -517,8 +794,8 @@ public class DataManagerImpl implements IDataManager
      */
     public boolean saveOrUpdateRoom(IRoom room) throws RemoteException
     {
-        int type = room.getIdData() == null ? DataEvent.TYPE_PROPERTY_ADDED
-                : DataEvent.TYPE_PROPERTY_CHANGED;
+        int type = room.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
         try
         {
@@ -591,7 +868,7 @@ public class DataManagerImpl implements IDataManager
                         IFloor.class,
                         new DataEvent(
                                 room.getFloor(),
-                                "lstRoom", DataEvent.TYPE_PROPERTY_REMOVED, new Object[] { room }, new int[] { indice })); //$NON-NLS-1$
+                                "lstRoom", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { room }, new int[] { indice })); //$NON-NLS-1$
 
         return true;
     }
