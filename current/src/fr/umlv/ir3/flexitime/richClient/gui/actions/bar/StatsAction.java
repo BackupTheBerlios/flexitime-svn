@@ -27,7 +27,7 @@ public class StatsAction extends AbstractAction
      */
     private static final long serialVersionUID = 3546356219414460215L;
     private static StatsAction action;
-    private static Icon icon = Client.getIcon(StatsAction.class, "../../pictures/_stats.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_stats.png");
     
     public static StatsAction getInstance()
     {

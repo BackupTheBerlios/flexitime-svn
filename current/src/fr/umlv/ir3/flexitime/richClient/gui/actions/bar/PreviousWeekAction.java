@@ -28,7 +28,7 @@ public class PreviousWeekAction extends AbstractAction
      */
     private static final long serialVersionUID = 3257847679773062195L;
     private static PreviousWeekAction action;
-    private static Icon icon = Client.getIcon(PreviousWeekAction.class, "../../pictures/_back.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_back.png");
     
     private static ExploitationView view;
     

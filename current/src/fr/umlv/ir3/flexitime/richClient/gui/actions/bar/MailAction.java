@@ -24,7 +24,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
 public class MailAction extends AbstractAction
 {
     private static MailAction action;
-    private static Icon icon = Client.getIcon(MailAction.class, "../../pictures/_mail.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_mail.png");
     
     public static MailAction getInstance()
     {

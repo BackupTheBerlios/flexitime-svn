@@ -28,7 +28,7 @@ public class MailPreFormatedTeacherAction extends AbstractAction
      */
     private static final long serialVersionUID = 3258415040573747763L;
     private static MailPreFormatedTeacherAction action;
-    private static Icon icon = Client.getIcon(MailPreFormatedTeacherAction.class, "../../pictures/_mail.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_mail.png");
     
     public static MailPreFormatedTeacherAction getInstance()
     {

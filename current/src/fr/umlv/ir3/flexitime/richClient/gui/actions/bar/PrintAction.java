@@ -32,7 +32,7 @@ public class PrintAction extends AbstractAction
      */
     private static final long serialVersionUID = 4049635689815749687L;
     private static PrintAction action;
-    private static Icon icon = Client.getIcon(PrintAction.class, "../../pictures/_print.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_print.png");
     private static JButton button;
     private static ExploitationView exploitView;
     

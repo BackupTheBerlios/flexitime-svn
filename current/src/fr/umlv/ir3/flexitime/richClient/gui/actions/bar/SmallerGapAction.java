@@ -28,7 +28,7 @@ public class SmallerGapAction extends AbstractAction
      */
     private static final long serialVersionUID = 3258134660914885430L;
     private static SmallerGapAction action;
-    private static Icon icon = Client.getIcon(SmallerGapAction.class, "../../pictures/_gapSmall2.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_gapSmall2.png");
     
     private static ExploitationView view;
     

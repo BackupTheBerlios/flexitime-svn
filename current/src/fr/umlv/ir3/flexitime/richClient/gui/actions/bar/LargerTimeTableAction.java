@@ -29,7 +29,7 @@ public class LargerTimeTableAction extends AbstractAction
      */
     private static final long serialVersionUID = 3904960871661910327L;
     private static LargerTimeTableAction action;
-    private static Icon icon = Client.getIcon(LargerTimeTableAction.class, "../../pictures/_zoom+.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_zoom+.png");
     
     private static ExploitationView view;
     

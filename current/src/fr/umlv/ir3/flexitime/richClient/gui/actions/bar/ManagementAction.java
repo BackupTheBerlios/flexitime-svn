@@ -27,7 +27,7 @@ public class ManagementAction extends AbstractAction
      */
     private static final long serialVersionUID = 3256718485576234549L;
     private static ManagementAction action;
-    private static Icon icon = Client.getIcon(ManagementAction.class, "../../pictures/_gestion.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_gestion.png");
     
     public static ManagementAction getInstance()
     {

@@ -27,7 +27,7 @@ public class HistoryAction extends AbstractAction
      */
     private static final long serialVersionUID = 4051048575008191539L;
     private static HistoryAction action;
-    private static Icon icon = Client.getIcon(HistoryAction.class, "../../pictures/_history.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_history.png");
     
     public static HistoryAction getInstance()
     {

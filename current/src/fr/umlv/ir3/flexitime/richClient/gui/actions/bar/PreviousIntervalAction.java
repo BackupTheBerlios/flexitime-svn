@@ -28,7 +28,7 @@ public class PreviousIntervalAction extends AbstractAction
      */
     private static final long serialVersionUID = 3258407352582879286L;
     private static PreviousIntervalAction action;
-    private static Icon icon = Client.getIcon(PreviousIntervalAction.class, "../../pictures/_backFull.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_backFull.png");
     
     private static ExploitationView view;
     

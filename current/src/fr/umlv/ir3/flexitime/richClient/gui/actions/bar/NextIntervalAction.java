@@ -28,7 +28,7 @@ public class NextIntervalAction extends AbstractAction
      */
     private static final long serialVersionUID = 3257002155331630389L;
     private static NextIntervalAction action;
-    private static Icon icon = Client.getIcon(NextIntervalAction.class, "../../pictures/_forwardFull.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_forwardFull.png");
     
     private static ExploitationView view;
     
