@@ -6,22 +6,13 @@
 package fr.umlv.ir3.flexitime.richClient.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.Toolkit;
-import java.awt.font.FontRenderContext;
-import java.awt.font.TextLayout;
-import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRootPane;
-import javax.swing.border.Border;
 
 /**
  * DOCME Description
@@ -43,6 +34,8 @@ public class FlexiSplash extends JFrame
         setUndecorated(true);
         getRootPane().setWindowDecorationStyle(JRootPane.NONE); //set no border
         
+        
+        //TODO icone deconne....
         ImageIcon splashImage = new ImageIcon(getClass().getResource("FlexiSplash.png"));
         JLabel lab = new JLabel(splashImage);
         

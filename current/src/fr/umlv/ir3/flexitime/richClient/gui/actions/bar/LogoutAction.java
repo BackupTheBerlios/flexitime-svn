@@ -1,6 +1,6 @@
 /*
  * Created on 16 janv. 2005
- * by Prâsad
+ * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.actions.bar;
@@ -18,7 +18,7 @@ import javax.swing.AbstractAction;
  * représente, ...
  * 
  * @version 0.1
- * 
+ * @author FlexiTeam - Adrien BOUVET
  */
 public class LogoutAction extends AbstractAction
 {

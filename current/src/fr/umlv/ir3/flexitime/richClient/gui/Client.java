@@ -1,6 +1,6 @@
 /*
  * Created on 12 déc. 2004
- * by Adrien Bouvet
+ * by Adrien BOUVET
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
@@ -39,6 +39,7 @@ import com.jgoodies.plaf.HeaderStyle;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.Plastic3DLookAndFeel;
 
+import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExploitationAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExportAction;
@@ -62,7 +63,7 @@ import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
  * Client This class build an graphic interface for the user.
  * 
  * @version 0.1
- * @author FlexiTeam - Adrien Bouvet
+ * @author FlexiTeam - Adrien BOUVET
  */
 public class Client
 {
@@ -70,6 +71,7 @@ public class Client
     // Champs //
     // ====== //
     private JFrame frame;
+    private static LoginView loginView;
     private JPanel panel;
     private JPanel jp_status;
     private JLabel status;
@@ -312,16 +314,21 @@ public class Client
         //////////
         // File //
         //////////
+        // Fichier
         JMenu menuFichier = new JMenu("Fichier");
         menuBar.add(menuFichier);
 
+        //Preferences
         Action pref = PreferencesAction.getInstance();
         menuFichier.add(pref);
 
+        //Print
         Action print = PrintAction.getInstance();
         menuFichier.add(print);
+        
         menuFichier.add(new JSeparator());
         
+        //Import
         Action impor = new AbstractAction("Importer") {
 
             public void actionPerformed(ActionEvent e)
@@ -333,13 +340,39 @@ public class Client
         };
         menuFichier.add(impor);
         
+        //Export
         Action export = ExportAction.getInstance();
         menuFichier.add(export);
+        
         menuFichier.add(new JSeparator());
         
-        Action logout = LogoutAction.getInstance();
+        //Logout
+        Action logout = new AbstractAction("Logout") {
+        public void actionPerformed(ActionEvent e)
+        {
+            int res = JOptionPane.showConfirmDialog(null,"Souhaitez-vous réellement vous délogger?","Se désauthentifier",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+            if(res == JOptionPane.YES_OPTION)
+            {
+                //TODO fermer panel exploit et/ou mngmt
+                user = null;
+                loginView.setLogin("");
+                loginView.setRepack(); //TODO ne marche pas ....
+                if( (user = checkLogin()) == null)
+                {
+                    System.out.println("problème lors de l'authentification");
+                    System.exit(1);
+                }
+                
+                //TODO JG, charger pref user notamment filière par défaut(si pas ds pref->afficher view)
+                System.out.println("apres logout : charge "+ user + " prefs");
+            }
+            else
+            {}
+        }
+        };
         menuFichier.add(logout);
         
+        //Quitter
         Action quit = new AbstractAction("Quitter") {
 
             public void actionPerformed(ActionEvent e)
@@ -356,7 +389,6 @@ public class Client
                     //System.out.println("NO quit");   
                 }
             }
-
         };
         menuFichier.add(quit);
 
@@ -587,7 +619,7 @@ public class Client
      * @return the name of the user logged in.
      * 
      */
-    private static String checkLogin(LoginView loginView)
+    private static String checkLogin()
     {
         String login = "";
         char[] pass;
@@ -595,6 +627,9 @@ public class Client
         {
             loginView.getFrame().setVisible(true);
             
+            //System.out.println("new login="+loginView.getLogin());
+            
+
             //tant que l'utilisateur n'a pas rentré de login
             while( (login=loginView.getLogin()) == "" ) {}
             pass = loginView.getPass();
@@ -644,15 +679,16 @@ public class Client
         }
         
         //gestion login
-        LoginView login = new LoginView();
-        if( (user = checkLogin(login)) == null)
+        loginView = new LoginView();
+        if( (user = checkLogin()) == null)
         {
             System.out.println("problème lors de l'authentification");
             System.exit(1);
         }
         
-        //charger pref user notamment filière par défaut(si pas ds pref, -> view)
+        //TODO JG, charger pref user notamment filière par défaut(si pas ds pref->afficher view)
         System.out.println("charge "+ user + " prefs");
+        PreferencesImpl prefs = new PreferencesImpl();
         
         // gestion fenetre principale
         try
@@ -661,6 +697,7 @@ public class Client
             //TODO garder celui-ci ?? en trouver un + bleu...
             //lister LF d'un windows et les checker....
             UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
+            //System.out.println(UIManager.getSystemLookAndFeelClassName());
         }
         catch (Exception e)
         {}

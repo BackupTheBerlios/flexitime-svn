@@ -164,4 +164,16 @@ public class LoginView
     {
         return pass;        
     }
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     * 
+     */
+    public void setRepack()
+    {
+        //TODO Ne marche pas ...
+        loginFrame.pack();
+    }
 }
