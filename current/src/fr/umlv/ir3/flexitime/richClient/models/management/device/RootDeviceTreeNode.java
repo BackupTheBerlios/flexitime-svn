@@ -1,8 +1,7 @@
 /*
- * Created on 20 janv. 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.device;
 
@@ -23,10 +22,8 @@ import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 
 /**
- * @author Famille
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Represents a tree node for a root device
+ * @author GUERRIN Guillaume
  */
 public class RootDeviceTreeNode extends RootTreeNode
 {
@@ -87,16 +84,19 @@ public class RootDeviceTreeNode extends RootTreeNode
 		for(;ite.hasNext();)
 		{
 			IDevice dev = (IDevice)ite.next();
-			if(!map.containsKey(new Integer(dev.getType())))
-			{
-				ArrayList Devicelist = new ArrayList();
-				Devicelist.add(dev);
-				map.put(new Integer(dev.getType()),Devicelist);
-			}
-			else
-			{
-				((ArrayList)map.get(new Integer(dev.getType()))).add(dev);
-			}
+    		if(dev!=null)
+            {
+                if(!map.containsKey(new Integer(dev.getType())))
+    			{
+    				ArrayList Devicelist = new ArrayList();
+    				Devicelist.add(dev);
+    				map.put(new Integer(dev.getType()),Devicelist);
+    			}
+    			else
+    			{
+    				((ArrayList)map.get(new Integer(dev.getType()))).add(dev);
+    			}
+            }
 		}
 		Iterator TypeDeviceIte = map.keySet().iterator();	
 		for(int i=1;i<=IDevice.class.getFields().length;i++)

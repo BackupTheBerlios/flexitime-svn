@@ -32,12 +32,9 @@ import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.TrackViewModel;
 
 /**
- * TrackView - DOCME Description explication supplémentaire si nécessaire in
- * english please... Que fait cette classe, qu'est-ce qu'elle représente, ...
- * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
- * @author FlexiTeam - Adrien Bouvet
+ * TrackView
+ * represents the view of a track
+ * @author Guillaume GUERRIN
  */
 public class TrackView
 {

@@ -1,8 +1,7 @@
 /*
- * Created on 20 janv. 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.actions.management;
 
@@ -20,10 +19,8 @@ import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListModel;
 
 /**
- * @author Famille
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * represents the différents actions that a user can to do on the model of a teacher
+ * @author Guillaume GUERRIN
  */
 public class TeacherActions 
 {

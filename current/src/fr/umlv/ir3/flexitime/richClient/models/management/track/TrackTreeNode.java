@@ -1,8 +1,7 @@
 /*
- * Created on 18 janv. 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.track;
 
@@ -35,10 +34,8 @@ import fr.umlv.ir3.flexitime.richClient.models.management.room.FloorTreeNode;
 
 
 /**
- * @author Famille
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Represents a tree node for a track
+ * @author GUERRIN Guillaume
  */
 public class TrackTreeNode extends DataListenerImpl implements  FlexiTreeNode
 {
@@ -157,7 +154,7 @@ public class TrackTreeNode extends DataListenerImpl implements  FlexiTreeNode
 		if(children.size()>0)return children;
 		for(int i = 0;i<track.getLstClass().size();i++)
 		{
-			add((IClass)track.getLstClass().get(i));
+			if(track.getLstClass().get(i)!=null)add((IClass)track.getLstClass().get(i));
 		}
 		return children;
 	}

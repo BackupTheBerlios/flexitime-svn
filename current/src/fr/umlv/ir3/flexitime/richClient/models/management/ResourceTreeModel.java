@@ -1,3 +1,8 @@
+/*
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
+ */
 package fr.umlv.ir3.flexitime.richClient.models.management;
 
 import java.rmi.RemoteException;
@@ -13,10 +18,8 @@ import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 
 
 /**
- * @author Famille
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Represents a model for a treeNode 
+ * @author GUERRIN Guillaume
  */
 public class ResourceTreeModel extends DefaultTreeModel {
 

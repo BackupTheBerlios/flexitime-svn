@@ -36,12 +36,9 @@ import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomViewModel;
 
 
 /**
- * RoomsView - DOCME Description explication supplémentaire si nécessaire in
- * english please... Que fait cette classe, qu'est-ce qu'elle représente, ...
- * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
- * @author FlexiTeam - Adrien Bouvet
+ * RoomsView
+ * represents the view of a room
+ * @author Guillaume GUERRIN
  */
 public class RoomsView
 {

@@ -27,12 +27,9 @@ import fr.umlv.ir3.flexitime.richClient.models.management.device.DevicesViewMode
 import fr.umlv.ir3.flexitime.richClient.models.management.track.TrackViewModel;
 
 /**
- * DevicesView - DOCME Description explication supplémentaire si nécessaire in
- * english please... Que fait cette classe, qu'est-ce qu'elle représente, ...
- * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
- * @author FlexiTeam - Adrien Bouvet
+ * DevicesView
+ * represents the view of a device
+ * @author Guillaume GUERRIN
  */
 public class DevicesView
 {

@@ -1,3 +1,8 @@
+/*
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
+ */
 package fr.umlv.ir3.flexitime.richClient.models.management.teacher;
 
 import java.rmi.RemoteException;
@@ -20,8 +25,8 @@ import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeN
 
 
 /**
- * The class PeopleListModel is the model for the people list
- * @author AIME Séverine and GUERRIN Guillaume
+ * Represents a the model for a List of Teachers in a course
+ * @author GUERRIN Guillaume
  */
 public class CourseTeacherListModel extends AbstractListModel {
 
@@ -33,9 +38,6 @@ public class CourseTeacherListModel extends AbstractListModel {
 	
 	/**
 	 * The contructor by intialising
-	 * @param factory the BuckFactory
-	 * @param book the book
-	 * @param people the people
 	 * @throws RemoteException 
 	 */ 
 	public CourseTeacherListModel(List lstTeacher,ICourse course) throws RemoteException
@@ -73,7 +75,7 @@ public class CourseTeacherListModel extends AbstractListModel {
 
 	/**
 	 * To get the party specified by its index
-	 * @param the index of the party searched
+	 * @param index index of the party searched
 	 * @return the party searched
 	 */
 	public Object getElementAt(int index)

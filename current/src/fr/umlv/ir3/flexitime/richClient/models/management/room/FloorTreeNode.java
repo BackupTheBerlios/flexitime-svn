@@ -1,8 +1,7 @@
 /*
- * Created on 20 janv. 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.room;
 
@@ -32,10 +31,8 @@ import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;
 
 /**
- * @author Famille
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Represents a tree node for a floor
+ * @author GUERRIN Guillaume
  */
 public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 {

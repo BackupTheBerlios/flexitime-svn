@@ -1,8 +1,7 @@
 /*
- * Created on 28 janv. 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.renderers;
 
@@ -19,10 +18,9 @@ import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeN
 
 
 /**
- * @author Famille
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * FlexiTreeRenderer
+ * allows to change the renderer ofa tree node
+ * @author Guillaume GUERRIN
  */
 public class FlexiTreeRenderer extends DefaultTreeCellRenderer
 {
@@ -37,18 +35,18 @@ public class FlexiTreeRenderer extends DefaultTreeCellRenderer
         
         if( value instanceof RootTreeNode)
         {
-            System.out.println("RootTreeNode");
+            //System.out.println("RootTreeNode");
             comp.setIcon(new JLabel().getIcon());
         }
         else if  (value instanceof TypeDeviceTreeNode)
         {
-            System.out.println("TypeDeviceTreeNode");
+            //System.out.println("TypeDeviceTreeNode");
             ImageIcon ic=new ImageIcon(FlexiTreeRenderer.class.getResource("/fr/umlv/ir3/flexitime/richClient/gui/pictures/_materiel.png"));
             comp.setIcon(ic);
         }
         else if  (value instanceof DeviceTreeNode)
         {
-            System.out.println("DeviceTreeNode");
+            //System.out.println("DeviceTreeNode");
         }
         return comp;
     }

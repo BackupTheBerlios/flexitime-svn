@@ -1,6 +1,6 @@
 /*
- * Created on 1 févr. 2005
- * by Adrien BOUVET
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.models.management;
@@ -13,15 +13,8 @@ import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
- * 
- * @version 0.1
- * 
- * @author FlexiTeam - Adrien BOUVET
+ * Represents the model for a List of user
+ * @author GUERRIN Guillaume
  */
 public class UsersListModel extends AbstractListModel
 {

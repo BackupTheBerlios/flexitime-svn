@@ -1,8 +1,7 @@
 /*
- * Created on 23 janv. 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure;
 
@@ -27,10 +26,8 @@ import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassTreeNode;
 
 /**
- * @author Famille
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Represents a tree node for a root of subjectsGroup 
+ * @author GUERRIN Guillaume
  */
 public class RootSubjectsGroupTreeNode extends RootTreeNode
 {
@@ -78,7 +75,7 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
 		if(children.size()>0)return children;
 		for(int i = 0;i<lst.size();i++)
 		{
-			add((ISubjectsGroup)lst.get(i));
+			if(lst.get(i)!=null)add((ISubjectsGroup)lst.get(i));
 		}
 		return children;
 	}

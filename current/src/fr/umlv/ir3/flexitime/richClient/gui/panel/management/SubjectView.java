@@ -1,8 +1,7 @@
 /*
- * Created on 28 janv. 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 
@@ -27,10 +26,9 @@ import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.Subj
 
 
 /**
- * @author Famille
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * subjectsGroupView
+ * represents the view of a subject
+ * @author Guillaume GUERRIN
  */
 public class SubjectView
 {

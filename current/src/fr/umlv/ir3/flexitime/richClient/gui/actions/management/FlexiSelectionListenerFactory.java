@@ -68,10 +68,8 @@ import fr.umlv.ir3.flexitime.richClient.models.management.track.TrackTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.TrackViewModel;
 
 /**
- * @author Famille
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * represents différents Listeners that I must to inform
+ * @author Guillaume GUERRIN
  */
 public class FlexiSelectionListenerFactory 
 {

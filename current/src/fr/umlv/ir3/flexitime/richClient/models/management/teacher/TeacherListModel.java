@@ -1,3 +1,8 @@
+/*
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
+ */
 package fr.umlv.ir3.flexitime.richClient.models.management.teacher;
 
 import java.rmi.RemoteException;
@@ -18,8 +23,8 @@ import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeN
 
 
 /**
- * The class PeopleListModel is the model for the people list
- * @author AIME Séverine and GUERRIN Guillaume
+ * Represents a the model for a List of Teachers
+ * @author GUERRIN Guillaume
  */
 public class TeacherListModel extends AbstractListModel {
 

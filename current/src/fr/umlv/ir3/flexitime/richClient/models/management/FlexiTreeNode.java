@@ -1,8 +1,7 @@
 /*
- * Created on 19 janv. 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Created on 12 jan. 2004
+ * by Guillaume GUERRIN
+ * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.models.management;
 
@@ -16,10 +15,9 @@ import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 
 /**
- * @author Famille
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Represents the interface of a tree Node 
+ * All Our TreeNode implements this class
+ * @author GUERRIN Guillaume
  */
 public interface FlexiTreeNode extends TreeNode 
 {
