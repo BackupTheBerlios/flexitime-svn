@@ -12,6 +12,7 @@
 		<property name="deprecation" value="off" />
 		<property name="src.dir" value="${basedir}/src" />
 		<property name="src.tests.dir" value="${basedir}/test" />
+		<property name="j2ee.dir" value="${basedir}/j2ee" />
 		<property name="libs.dir" value="lib" />
 		<property name="build.dir" value="${basedir}/build" />
 		<property name="build.dest" value="${build.dir}/classes" />
@@ -87,6 +88,12 @@
 		<copy todir="${build.dir}" file="flexiConfig.xml" />
 
 		<property name="cp" refid="build.classpath" />
+
+		<copy todir="${build.dir}">
+			<fileset dir="${basedir}">
+				<include name="${libs.dir}/**" />
+			</fileset>
+		</copy>
 	</target>
 
 	<!-- COMPILATION -->
@@ -102,14 +109,7 @@
 
 	<!-- JARS & WAR -->
 	<target name="jar-server" depends="compile">
-		<jar jarfile="${build.dir}/${build.name}-server.jar" compress="true" basedir="${build.dest}">
-			<fileset dir="${build.dest}">
-				<include name="**" />
-				<exclude name="fr/umlv/ir3/flexitime/richClient/**" />
-			</fileset>
-			<fileset dir="${basedir}">
-				<include name="${libs.dir}/**" />
-			</fileset>
+		<jar jarfile="${build.dir}/${build.name}-server.jar" compress="true" basedir="${build.dest}" include="**" exclude="fr/umlv/ir3/flexitime/richClient/**">
 			<manifest>
 				<attribute name="Main-Class" value="fr.umlv.ir3.flexitime.server.Server" />
 				<attribute name="Class-Path" value="${classpath}" />
@@ -118,14 +118,7 @@
 	</target>
 
 	<target name="jar-client" depends="compile">
-		<jar jarfile="${build.dir}/${build.name}-client.jar" compress="true" basedir="${build.dest}">
-			<fileset dir="${build.dest}">
-				<include name="**" />
-				<exclude name="data.hbm.xml; hibernate.cfg.xml; flexiConfig.xml; fr/umlv/ir3/flexitime/server/**" />
-			</fileset>
-			<fileset dir="${basedir}">
-				<include name="${libs.dir}/**" />
-			</fileset>
+		<jar jarfile="${build.dir}/${build.name}-client.jar" compress="true" basedir="${build.dest}" include="**" exclude="data.hbm.xml; hibernate.cfg.xml; flexiConfig.xml; fr/umlv/ir3/flexitime/server/**">
 			<manifest>
 				<attribute name="Main-Class" value="fr.umlv.ir3.flexitime.richClient.gui.Client" />
 				<attribute name="Class-Path" value="${classpath}" />
@@ -138,7 +131,7 @@
 	</target>
 
 	<target name="war" depends="prepare">
-
+		<war destfile="${build.dir}/${build.name}.war" basedir="${j2ee.dir}" webxml="${j2ee.dir}/WEB-INF/web.xml" />
 	</target>
 
 	<target name="release" depends="war, jar-client, jar-server, jar-src">

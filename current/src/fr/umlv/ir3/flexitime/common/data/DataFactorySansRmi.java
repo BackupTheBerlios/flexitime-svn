@@ -7,7 +7,6 @@
 package fr.umlv.ir3.flexitime.common.data;
 
 import java.awt.Color;
-import java.rmi.RemoteException;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.*;
@@ -790,7 +789,7 @@ public class DataFactorySansRmi
             int type, int defaultLength, int nbHours, Color color,
             List<ITeacher> listTeachers) throws FlexiException
     {
-        ICourse temp = new CourseImpl(name, parent, defaultLength, type,
+        ICourse temp = new CourseImpl(name, parent, type, defaultLength, 
                 nbHours, color, listTeachers);
         parent.addCourse(temp);
 //        try
