@@ -66,7 +66,10 @@ public class LoginView
 
             public void mouseClicked(MouseEvent arg0)
             {
-                tfLogin.setText("");
+                if(tfLogin.getText().compareTo("<votre nom>") == 0)
+                {
+                    tfLogin.setText("");   
+                }
             }
 
             public void mousePressed(MouseEvent arg0)
@@ -87,7 +90,12 @@ public class LoginView
 
             public void mouseClicked(MouseEvent arg0)
             {
-                tfPass.setText("");
+                char[] tmp = tfPass.getPassword();
+                String temp = new String(tmp);
+                if(temp.compareTo("password") == 0)
+                {
+                    tfPass.setText("");
+                }
             }
 
             public void mousePressed(MouseEvent arg0)

@@ -27,6 +27,8 @@ import java.util.Calendar;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -236,6 +238,7 @@ public class Client
     void initToolBar()
     {
         JToolBar toolBar = new JToolBar();
+        toolBar.setLayout(new BoxLayout(toolBar, BoxLayout.X_AXIS));
         toolBar.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
         mainPanel.add(toolBar, BorderLayout.PAGE_START);
         
@@ -277,8 +280,7 @@ public class Client
         //toolBar.add(createButton(NextWeekAction.getInstance()));
         
         
-        
-        //toolBar.add
+        toolBar.add(Box.createHorizontalGlue());
         
         
         //date actuelle
@@ -308,7 +310,7 @@ public class Client
             filiereActuelle += s;
         }
         else*/
-            filiereActuelle += "aucune";
+            filiereActuelle += "aucune  ";
         labTrackAct.setText(filiereActuelle);
         toolBar.add(labTrackAct);
     }
@@ -757,9 +759,6 @@ public class Client
      */
     public static void setExploitMode()
     {
-        //accueilPanel.setVisible(false);
-        //mngmtPanel.setVisible(false);
-        //exploitPanel.setVisible(true);
         centerPanel.moveToFront(exploitPanel);
         centerPanel.validate();
         centerPanel.repaint();
@@ -774,9 +773,6 @@ public class Client
      */
     public static void setMngmtMode()
     {
-        //accueilPanel.setVisible(false);
-        //mngmtPanel.setVisible(true);
-        //exploitPanel.setVisible(false);
         centerPanel.moveToFront(mngmtPanel);
         centerPanel.validate();
         centerPanel.repaint();
@@ -790,9 +786,6 @@ public class Client
      */
     public static void setAccueilMode()
     {
-        //accueilPanel.setVisible(true);
-        //mngmtPanel.setVisible(false);
-        //exploitPanel.setVisible(false);
         centerPanel.moveToFront(accueilPanel);
         centerPanel.validate();
         centerPanel.repaint();
