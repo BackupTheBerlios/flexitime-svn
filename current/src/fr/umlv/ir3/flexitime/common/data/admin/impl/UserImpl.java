@@ -6,14 +6,14 @@
 
 package fr.umlv.ir3.flexitime.common.data.admin.impl;
 
-import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
-import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.common.data.DataFactory;
+import fr.umlv.ir3.flexitime.common.data.admin.*;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
 /**
  * DOCME
  * 
- * @version 205
+ * @version 260
  * 
  * @author FlexiTeam - Jérôme GUERS
  */
@@ -29,7 +29,6 @@ public class UserImpl extends DataImpl implements IUser
     // ===========//
     String                    password;
     IPreferences              preferences;
-    boolean                   ldap;
 
     // =============//
     // Constructeurs//
@@ -45,7 +44,7 @@ public class UserImpl extends DataImpl implements IUser
      */
     public UserImpl(String name)
     {
-        super(name);
+        this(name, null, DataFactory.createPreferences());
     }
 
     /**
@@ -53,17 +52,11 @@ public class UserImpl extends DataImpl implements IUser
      * DOCME
      * 
      * @param name
-     * @param password
-     * @param preferences
-     * @param ldap
+     * @param pass
      */
-    public UserImpl(String name, String password, IPreferences preferences,
-            boolean ldap)
+    public UserImpl(String name, String pass)
     {
-        super(name);
-        this.password = password;
-        this.preferences = preferences;
-        this.ldap = ldap;
+        this(name, pass, DataFactory.createPreferences());
     }
 
     /**
@@ -71,14 +64,11 @@ public class UserImpl extends DataImpl implements IUser
      * DOCME
      * 
      * @param name
-     * @param preferences
-     * @param ldap
+     * @param pref
      */
-    public UserImpl(String name, IPreferences preferences, boolean ldap)
+    public UserImpl(String name, IPreferences pref)
     {
-        super(name);
-        this.preferences = preferences;
-        this.ldap = ldap;
+        this(name, null, pref);
     }
 
     /**
@@ -86,19 +76,19 @@ public class UserImpl extends DataImpl implements IUser
      * DOCME
      * 
      * @param name
-     * @param password
-     * @param ldap
+     * @param pass
+     * @param pref
      */
-    public UserImpl(String name, String password, boolean ldap)
+    public UserImpl(String name, String pass, IPreferences pref)
     {
         super(name);
-        this.password = password;
-        this.ldap = ldap;
+        password = pass;
+        preferences = pref;
     }
 
-    // ===========//
+    // ======== //
     // Méthodes //
-    // ===========//
+    // ======== //
     /**
      * DOCME
      * 
@@ -145,69 +135,13 @@ public class UserImpl extends DataImpl implements IUser
     public void setPreferences(IPreferences preferences)
     {
         this.preferences = preferences;
-
     }
-
+    
     /**
-     * Return DOCME
-     * 
      * @return Returns the ldap.
      */
     public boolean isLdap()
     {
-        return ldap;
-    }
-
-    /**
-     * Set DOCME
-     * 
-     * @param ldap
-     *            The ldap to set.
-     */
-    public void setLdap(boolean ldap)
-    {
-        this.ldap = ldap;
-    }
-
-    /**
-     * Test the equality of two users.
-     * <ul>
-     * <li>If one user has an ID, the other must have one, else there are not
-     * equals.</li>
-     * <li>If any user has an ID, they must have the same name to be equals.
-     * </li>
-     * <li>Else, they must have the same ID.</li>
-     * </ul>
-     * 
-     * @param obj
-     *            other user to compare with
-     * @return <code>true</code> if this object is the same as the obj
-     *         argument; <code>false</code> otherwise.
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    public boolean equals(Object obj)
-    {
-        if (obj == null) return false;
-        if (! ( obj instanceof IUser )) return false;
-        IUser other = (IUser) obj;
-        if ( ( ( idData != null ) && ( other.getIdData() == null ) )
-                || ( ( idData == null ) && ( other.getIdData() != null ) ))
-            return false;
-        if (idData == null) return this.getName().equals(other.getName());
-        return ( idData == other.getIdData() );
-    }
-    
-    
-    /** 
-     * Calculate the lenght of the user name add to the ID
-     *
-     * @return hashcode of the user 
-     * 
-     * @see java.lang.Object#hashCode()
-     */
-    public int hashCode()
-    {
-        return (getName().length() + idData.intValue());
+        return (password == null);
     }
 }

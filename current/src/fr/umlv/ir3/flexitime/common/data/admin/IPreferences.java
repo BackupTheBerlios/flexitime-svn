@@ -5,8 +5,10 @@
  */
 package fr.umlv.ir3.flexitime.common.data.admin;
 
+import java.awt.Color;
 import java.io.Serializable;
-import java.util.List;
+
+import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 
 /**
  * Represents the interface of a Preference
@@ -60,19 +62,74 @@ public interface IPreferences extends Serializable
 	 * @param lengthGap the length of a gap.
 	 */
 	public void setLengthGap(int lengthGap);
+    
+    /**
+     * Return widthGap
+     * @return Returns the widthGap.
+     */
+    public int getWidthGap();
+    
+    /**
+     * Set widthGap
+     * @param widthGap The widthGap to set.
+     */
+    public void setWidthGap(int widthGap);
+    
+    /**
+     * Return cDayHeader
+     * 
+     * @return Returns the cDayHeader.
+     */
+    public Color getCDayHeader();
+
+    /**
+     * Set cDayHeader
+     * 
+     * @param dayHeader
+     *            The cDayHeader to set.
+     */
+    public void setCDayHeader(Color dayHeader);
+
+    /**
+     * Return cGapHeader
+     * 
+     * @return Returns the cGapHeader.
+     */
+    public Color getCGapHeader();
+
+    /**
+     * Set cGapHeader
+     * 
+     * @param gapHeader
+     *            The cGapHeader to set.
+     */
+    public void setCGapHeader(Color gapHeader);
+
+    /**
+     * Return cWeekHeader
+     * 
+     * @return Returns the cWeekHeader.
+     */
+    public Color getCWeekHeader();
+
+    /**
+     * Set cWeekHeader
+     * 
+     * @param weekHeader
+     *            The cWeekHeader to set.
+     */
+    public void setCWeekHeader(Color weekHeader);
 	
-	/**
-	 * getListOfColors
-	 * Returns the list of  
-	 * 
-	 * @return the list of Color
-	 *
-	 */
-	public List getListOfColors();
-	
-	/**
-	 * @param listOfColors
-	 */
-	public void setListOfColors(List listOfColors);
+    /**
+     * Return defaultTrack
+     * @return Returns the defaultTrack.
+     */
+    public ITrack getDefaultTrack();
+
+    /**
+     * Set defaultTrack
+     * @param defaultTrack The defaultTrack to set.
+     */
+    public void setDefaultTrack(ITrack defaultTrack);
 }
 

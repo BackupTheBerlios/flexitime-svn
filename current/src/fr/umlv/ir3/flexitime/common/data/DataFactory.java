@@ -12,6 +12,10 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.*;
 import fr.umlv.ir3.flexitime.common.data.activity.impl.*;
+import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl;
 import fr.umlv.ir3.flexitime.common.data.general.*;
 import fr.umlv.ir3.flexitime.common.data.general.impl.*;
 import fr.umlv.ir3.flexitime.common.data.resources.*;
@@ -19,8 +23,8 @@ import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.common.tools.*;
-import fr.umlv.ir3.flexitime.richClient.event.RemoteDataManager;
 
 /**
  * Create all datas from specific parameters. This class contains only statics
@@ -882,5 +886,95 @@ public class DataFactory
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
         return temp;
+    }
+
+    // ===== //
+    // Admin //
+    // ===== //
+    /** 
+     * Create a new default user preferences
+     *
+     * @return default user preferences
+     */
+    public static IPreferences createPreferences()
+    {
+        IPreferences pref = new PreferencesImpl();
+        // TODO sauvegarde hibernate
+        return pref;
+    }
+    
+    /** 
+     * Create a new user preferences
+     * @param height in pixel of gap
+     * @param width in pixel of gap
+     * @param length in minute of gap
+     * @param week color used for the week header
+     * @param day color used for the day
+     * @param gap color used for the gap
+     *
+     * @return user preferences
+     */
+    public static IPreferences createPreferences(int height, int width, int length, Color week, Color day,
+            Color gap)
+    {
+        IPreferences pref = new PreferencesImpl(height, width, length, week, day, gap);
+        // TODO sauvegarde hibernate
+        return pref;
+    }
+
+    /**
+     * Create a new <em>ldap</em> user with default preferences 
+     *
+     * @param name
+     * @return a new user 
+     */
+    public static IUser createUser(String name)
+    {
+        IUser user = new UserImpl(name);
+        // TODO sauvegarde hibernate
+        return user; 
+    }
+    
+    /**
+     * Create a new <em>non-ldap</em> user with default preferences 
+     *
+     * @param name
+     * @param pass
+     * @return a new user 
+     */
+    public static IUser createUser(String name, String pass)
+    {
+        IUser user = new UserImpl(name, pass);
+        // TODO sauvegarde hibernate
+        return user; 
+    }
+    
+    /**
+     * Create a new <em>LDAP</em> user  
+     *
+     * @param name
+     * @param pref User preferences
+     * @return a new user 
+     */
+    public static IUser createUser(String name, IPreferences pref)
+    {
+        IUser user = new UserImpl(name, pref);
+        // TODO sauvegarde hibernate
+        return user; 
+    }
+    
+    /**
+     * Create a new <em>non-LDAP</em> user 
+     *
+     * @param name
+     * @param pass
+     * @param pref User preferences
+     * @return a new user 
+     */
+    public static IUser createUser(String name, String pass, IPreferences pref)
+    {
+        IUser user = new UserImpl(name, pass, pref);
+        // TODO sauvegarde hibernate
+        return user; 
     }
 }

@@ -52,13 +52,6 @@ public interface IUser extends IData
      * @return a boolean 
      */
     public boolean isLdap();
-   
-    /**
-    * DOCME
-    *
-    * @param ldap 
-    */
-    public void setLdap(boolean ldap);
     
     /**
      * Test the equality of two users.
