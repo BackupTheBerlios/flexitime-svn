@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="FlexiTime" company="FlexiTime" webLink="http://flexitime.free.fr" view-date="1/10/2004" view-zoom="3" version="1.10.1">
+<project name="FlexiTime" company="FlexiTime" webLink="http://flexitime.free.fr" view-date="1/10/2004" view-zoom="4" version="1.10.1">
 <!-- -->    <description>
         Gestion des emplois du Temps
         Projet de Génie Logiciel &#47; Informatique Réseaux 3° année
@@ -23,7 +23,7 @@
             </notes>
             <depend id="22" type="2"/>
         </task>
-        <task id="22" name="Gestion du planning" color="#9999ff" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="14/9/2004" duration="161" complete="30" fixed-start="false" priority="1" expand="true">
+        <task id="22" name="Gestion du planning" color="#9999ff" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="14/9/2004" duration="161" complete="39" fixed-start="false" priority="1" expand="true">
             <task id="26" name="Répartition des tâches CDC" color="#9999ff" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="14/9/2004" duration="3" complete="100" fixed-start="false" priority="1" expand="false">
                 <depend id="12" type="2"/>
             </task>
@@ -38,8 +38,9 @@
                 </notes>
             </task>
             <task id="28" name="Définition de l'état d'avancement" color="#9999ff" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="26/9/2004" duration="4" complete="100" fixed-start="false" priority="1" expand="false"/>
-            <task id="27" name="Répartition des tâches futures" color="#9999ff" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="26/9/2004" duration="149" complete="27" fixed-start="false" priority="1" expand="false"/>
-            <task id="288" name="Suivi de l'avancement" color="#9999ff" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="26/9/2004" duration="149" complete="27" fixed-start="false" priority="1" expand="false"/>
+            <task id="27" name="Répartition des tâches futures" color="#9999ff" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="26/9/2004" duration="149" complete="37" fixed-start="false" priority="1" expand="false"/>
+            <task id="288" name="Suivi de l'avancement" color="#9999ff" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="26/9/2004" duration="149" complete="37" fixed-start="false" priority="1" expand="false"/>
+            <task id="789" name="Mise en place du tableau d'avancement" color="#9999ff" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="19/11/2004" duration="4" complete="0" fixed-start="false" priority="1" expand="true"/>
         </task>
         <task id="0" name="Cahier Des Charges" color="#009999" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="17/9/2004" duration="17" complete="100" fixed-start="false" priority="1" expand="false">
             <task id="12" name="Répartition des tâches" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="true" start="17/9/2004" duration="0" complete="100" fixed-start="true" priority="1" expand="false">
@@ -124,7 +125,7 @@
             <task id="9" name="Rendu Pré-Cahier des Charges" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="true" start="30/9/2004" duration="0" complete="100" fixed-start="true" priority="1" expand="false"/>
             <task id="10" name="Signature du Cahier des Charges" color="#8cb6ce" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="true" start="4/10/2004" duration="0" complete="100" fixed-start="false" priority="1" expand="false"/>
         </task>
-        <task id="24" name="Mise en place de la communication" color="#ffcccc" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="22/9/2004" duration="45" complete="100" fixed-start="false" priority="1" expand="true">
+        <task id="24" name="Mise en place de la communication" color="#ffcccc" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="22/9/2004" duration="45" complete="100" fixed-start="false" priority="1" expand="false">
             <task id="106" name="Ouverture du compte Hébergeur" color="#ffcccc" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="22/9/2004" duration="1" complete="100" fixed-start="false" priority="1" expand="false">
                 <notes>
                     10min
@@ -144,7 +145,7 @@
             </task>
             <task id="109" name="Création compte SVN" color="#ffcccc" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="25/9/2004" duration="1" complete="100" fixed-start="false" priority="1" expand="false">
                 <notes>
-                    Recherche d'un hébergeur SVN : 2h
+                    Recherche d'un hé
                 </notes>
             </task>
             <task id="30" name="Description des outils de gestions" color="#ffcccc" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="22/10/2004" duration="15" complete="100" fixed-start="false" priority="1" expand="false">
@@ -154,7 +155,7 @@
                 </notes>
             </task>
         </task>
-        <task id="29" name="Cahier des Charges Fonctionnelles" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="5/10/2004" duration="33" complete="99" fixed-start="true" priority="1" expand="true">
+        <task id="29" name="Cahier des Charges Fonctionnelles" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="5/10/2004" duration="33" complete="100" fixed-start="true" priority="1" expand="false">
             <task id="420" name="Formation à la réalisation des UC" color="#006666" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="5/10/2004" duration="1" complete="100" fixed-start="false" priority="1" expand="true">
                 <notes>
                     2h de réunion entre chefs de projet pour échanger les connaissances de chaque groupe
@@ -166,7 +167,7 @@
                 </notes>
                 <depend id="511" type="2"/>
             </task>
-            <task id="511" name="Réalisation des diagrammes UC" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true">
+            <task id="511" name="Réalisation des diagrammes UC" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="false">
                 <task id="512" name="UC Visu infos des enseignants &#38; stats" color="#006666" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true">
                     <notes>
                         6h
@@ -216,7 +217,7 @@
                 </notes>
                 <depend id="645" type="2"/>
             </task>
-            <task id="645" name="Première relecture et mise en commun" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="28/10/2004" duration="1" complete="0" fixed-start="false" priority="1" expand="true">
+            <task id="645" name="Première relecture et mise en commun" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="28/10/2004" duration="1" complete="100" fixed-start="false" priority="1" expand="true">
                 <notes>
                     4h de réunion pour mise en accord des définitions réalisées
                 </notes>
@@ -234,22 +235,61 @@
                 </notes>
             </task>
         </task>
-        <task id="191" name="Spécification de l'IG" color="#006600" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="9/11/2004" duration="9" complete="0" fixed-start="true" priority="1" expand="true">
-            <task id="285" name="Zoning de l'interface" color="#006600" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="9/11/2004" duration="3" complete="0" fixed-start="false" priority="1" expand="true">
+        <task id="191" name="Spécification de l'IG" color="#006600" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="9/11/2004" duration="10" complete="100" fixed-start="true" priority="1" expand="true">
+            <task id="285" name="Zoning de l'interface" color="#006600" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="9/11/2004" duration="3" complete="100" fixed-start="false" priority="1" expand="true">
                 <notes>
-                    Travail perso puis 2 réunions pour la définition des zones
+                    FA : 2h
+                    PR : 3h
+                    
+                    FA - JG - PR : 1h30
                 </notes>
                 <depend id="525" type="2"/>
                 <depend id="526" type="2"/>
                 <depend id="527" type="2"/>
             </task>
-            <task id="525" name="Définition des Boites de dialogue mineures" color="#006600" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="12/11/2004" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
-            <task id="526" name="Description de la fenêtre principale" color="#006600" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="12/11/2004" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
-            <task id="527" name="Définition des boîtes de dialogues complexes" color="#006600" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="12/11/2004" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
-            <task id="284" name="Définition de la Charte Graphique" color="#006600" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="10/11/2004" duration="8" complete="0" fixed-start="false" priority="1" expand="false"/>
+            <task id="525" name="Définition du mode Gestion" color="#006600" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="12/11/2004" duration="7" complete="100" fixed-start="false" priority="1" expand="true">
+                <notes>
+                    PR : 8h
+                </notes>
+            </task>
+            <task id="526" name="Description de la fenêtre principale" color="#006600" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="12/11/2004" duration="4" complete="100" fixed-start="false" priority="1" expand="true">
+                <notes>
+                    JG : 4h
+                </notes>
+            </task>
+            <task id="777" name="Définition des fenêtres de paramètres" color="#006600" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="16/11/2004" duration="3" complete="100" fixed-start="false" priority="1" expand="true">
+                <notes>
+                    JG : 3h
+                </notes>
+            </task>
+            <task id="527" name="Définition du mode Exploitation" color="#006600" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="12/11/2004" duration="7" complete="100" fixed-start="false" priority="1" expand="true">
+                <notes>
+                    FA : 10h
+                </notes>
+            </task>
+            <task id="284" name="Définition de la Charte Graphique" color="#006600" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="10/11/2004" duration="5" complete="100" fixed-start="false" priority="1" expand="false">
+                <notes>
+                    AB : 1h30
+                </notes>
+            </task>
+            <task id="776" name="Relecture &#38; construction de la documentation finale" color="#006600" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="15/11/2004" duration="4" complete="100" fixed-start="false" priority="1" expand="true">
+                <notes>
+                    AB : 6h
+                </notes>
+            </task>
+            <task id="778" name="Définition du client léger" color="#006600" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="15/11/2004" duration="4" complete="100" fixed-start="false" priority="1" expand="true">
+                <notes>
+                    GG : 5h
+                </notes>
+            </task>
+            <task id="779" name="Définition des fenetres d'export" color="#006600" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="15/11/2004" duration="4" complete="100" fixed-start="false" priority="1" expand="true">
+                <notes>
+                    VF : 4h
+                </notes>
+            </task>
         </task>
         <task id="193" name="Cahier des charges techniques" color="#003300" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="19/10/2004" duration="73" complete="30" fixed-start="true" priority="1" expand="true">
-            <task id="279" name="Pré-Rapport technique" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="19/10/2004" duration="18" complete="100" fixed-start="true" priority="1" expand="true">
+            <task id="279" name="Pré-Rapport technique" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="19/10/2004" duration="18" complete="100" fixed-start="true" priority="1" expand="false">
                 <task id="521" name="Elaboration des besoin" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="19/10/2004" duration="2" complete="100" fixed-start="false" priority="1" expand="true">
                     <notes>
                         1h30
@@ -274,13 +314,67 @@
                     </notes>
                 </task>
             </task>
-            <task id="281" name="Etude technique" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="9/11/2004" duration="16" complete="0" fixed-start="true" priority="1" expand="true">
-                <task id="528" name="Test des différentes SGBDR" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="9/11/2004" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
-                <task id="530" name="Tests des bibliothèques Java-LDAP" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="15/11/2004" duration="5" complete="0" fixed-start="false" priority="1" expand="true"/>
-                <task id="532" name="Choix du serveur d'application" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="20/11/2004" duration="5" complete="0" fixed-start="false" priority="1" expand="true"/>
-                <task id="529" name="Manipulation des fichiers (XML, Exports, ...)" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="9/11/2004" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
-                <task id="531" name="Test des bibliothèques Applications réparties" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="15/11/2004" duration="6" complete="0" fixed-start="false" priority="1" expand="true"/>
-                <task id="533" name="Test des bibliothèques d'envoi de mail" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="22/11/2004" duration="3" complete="0" fixed-start="false" priority="1" expand="true"/>
+            <task id="281" name="Etude technique" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="9/11/2004" duration="27" complete="18" fixed-start="true" priority="1" expand="true">
+                <task id="780" name="Apprentissage de LDAP" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="9/11/2004" duration="6" complete="100" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        VF : 1h
+                    </notes>
+                </task>
+                <task id="529" name="Manipulation des fichiers (XML, Exports, ...)" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="9/11/2004" duration="16" complete="59" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        GG : 3h30
+                    </notes>
+                </task>
+                <task id="528" name="Test des différentes SGBDR" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="19/11/2004" duration="6" complete="0" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        VF :
+                        - Qualification des différentes SGBDR &#38; choix justifié (Prévu 4h) :
+                        
+                    </notes>
+                </task>
+                <task id="782" name="Choix de la bibliothèque d'IG" color="#003300" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="19/11/2004" duration="8" complete="0" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        Documentation sur Swing, SWT et JFace
+                        Présentation à l'équipe et présentation de la préférence
+                    </notes>
+                    <depend id="783" type="2"/>
+                </task>
+                <task id="783" name="Définition de l'interface de défintion d'un EDT" color="#003333" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="27/11/2004" duration="9" complete="0" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        Recherche des existants
+                        Si pas d'existant, développement de notre API propre
+                    </notes>
+                </task>
+                <task id="784" name="Test d'API d'Impression" color="#003300" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="19/11/2004" duration="3" complete="0" fixed-start="false" priority="1" expand="true"/>
+                <task id="786" name="Test JUnit" color="#003300" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="19/11/2004" duration="6" complete="0" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        Préparation d'une documentation d'utilisation de JUnit
+                    </notes>
+                </task>
+                <task id="788" name="Point bilan et d'avancement" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="true" start="26/11/2004" duration="0" complete="0" fixed-start="true" priority="1" expand="true"/>
+                <task id="785" name="Gestion du Drag&#38;Drop" color="#003300" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="22/11/2004" duration="5" complete="0" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        Recherche sur la gestion Java du Drag&#38;Drop
+                        Préparation d'une API propre
+                    </notes>
+                </task>
+                <task id="787" name="Outils de compilation" color="#003300" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="24/11/2004" duration="5" complete="0" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        Test - comparaison - choix de l'outil de compilation (Ant-Maven)
+                        Préparation d'une doc d'utilisation
+                    </notes>
+                </task>
+                <task id="532" name="Choix du serveur d'application" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="25/11/2004" duration="4" complete="0" fixed-start="false" priority="1" expand="true"/>
+                <task id="533" name="Test des bibliothèques d'envoi de mail" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="25/11/2004" duration="4" complete="0" fixed-start="false" priority="1" expand="true"/>
+                <task id="530" name="Tests des bibliothèques Java-LDAP" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="29/11/2004" duration="7" complete="0" fixed-start="false" priority="1" expand="true"/>
+                <task id="531" name="Test des bibliothèques Applications réparties" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="29/11/2004" duration="7" complete="0" fixed-start="false" priority="1" expand="true"/>
+                <task id="781" name="Test d'hibernate" color="#003300" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="30/11/2004" duration="6" complete="30" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        PR :
+                        - Qualification d'Hibernate (Prévu 4h) :
+                        26&#47;10&#47;04 : 30 min
+                    </notes>
+                </task>
             </task>
             <task id="282" name="Description de l'architecture logicielle" color="#003300" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="23/11/2004" duration="37" complete="0" fixed-start="false" priority="1" expand="false"/>
         </task>
@@ -303,6 +397,7 @@
         <allocation task-id="28" resource-id="0" load="30"/>
         <allocation task-id="27" resource-id="0" load="10"/>
         <allocation task-id="288" resource-id="0" load="10"/>
+        <allocation task-id="789" resource-id="0" load="80"/>
         <allocation task-id="1" resource-id="3" load="100"/>
         <allocation task-id="20" resource-id="4" load="100"/>
         <allocation task-id="16" resource-id="3" load="100"/>
@@ -311,16 +406,16 @@
         <allocation task-id="15" resource-id="5" load="80"/>
         <allocation task-id="19" resource-id="5" load="80"/>
         <allocation task-id="18" resource-id="7" load="100"/>
-        <allocation task-id="187" resource-id="5" load="20"/>
         <allocation task-id="187" resource-id="3" load="50"/>
+        <allocation task-id="187" resource-id="5" load="20"/>
         <allocation task-id="190" resource-id="4" load="100"/>
         <allocation task-id="9" resource-id="0" load="100"/>
-        <allocation task-id="10" resource-id="7" load="100"/>
         <allocation task-id="10" resource-id="4" load="100"/>
-        <allocation task-id="10" resource-id="6" load="100"/>
-        <allocation task-id="10" resource-id="5" load="100"/>
         <allocation task-id="10" resource-id="3" load="100"/>
         <allocation task-id="10" resource-id="0" load="100"/>
+        <allocation task-id="10" resource-id="7" load="100"/>
+        <allocation task-id="10" resource-id="5" load="100"/>
+        <allocation task-id="10" resource-id="6" load="100"/>
         <allocation task-id="106" resource-id="4" load="10"/>
         <allocation task-id="107" resource-id="4" load="10"/>
         <allocation task-id="108" resource-id="4" load="40"/>
@@ -328,53 +423,66 @@
         <allocation task-id="30" resource-id="4" load="50"/>
         <allocation task-id="30" resource-id="0" load="30"/>
         <allocation task-id="420" resource-id="0" load="80"/>
-        <allocation task-id="421" resource-id="7" load="100"/>
         <allocation task-id="421" resource-id="4" load="100"/>
-        <allocation task-id="421" resource-id="6" load="100"/>
-        <allocation task-id="421" resource-id="5" load="100"/>
         <allocation task-id="421" resource-id="3" load="100"/>
         <allocation task-id="421" resource-id="0" load="80"/>
+        <allocation task-id="421" resource-id="7" load="100"/>
+        <allocation task-id="421" resource-id="5" load="100"/>
+        <allocation task-id="421" resource-id="6" load="100"/>
         <allocation task-id="512" resource-id="3" load="100"/>
         <allocation task-id="513" resource-id="4" load="100"/>
         <allocation task-id="514" resource-id="6" load="100"/>
         <allocation task-id="515" resource-id="0" load="80"/>
         <allocation task-id="516" resource-id="5" load="100"/>
         <allocation task-id="517" resource-id="7" load="100"/>
-        <allocation task-id="518" resource-id="7" load="100"/>
         <allocation task-id="518" resource-id="4" load="100"/>
-        <allocation task-id="518" resource-id="6" load="100"/>
-        <allocation task-id="518" resource-id="5" load="100"/>
         <allocation task-id="518" resource-id="3" load="100"/>
         <allocation task-id="518" resource-id="0" load="80"/>
+        <allocation task-id="518" resource-id="7" load="100"/>
+        <allocation task-id="518" resource-id="5" load="100"/>
+        <allocation task-id="518" resource-id="6" load="100"/>
         <allocation task-id="267" resource-id="3" load="100"/>
         <allocation task-id="268" resource-id="7" load="100"/>
         <allocation task-id="268" resource-id="5" load="100"/>
-        <allocation task-id="645" resource-id="7" load="100"/>
         <allocation task-id="645" resource-id="4" load="50"/>
-        <allocation task-id="645" resource-id="6" load="50"/>
-        <allocation task-id="645" resource-id="5" load="100"/>
         <allocation task-id="645" resource-id="3" load="100"/>
         <allocation task-id="645" resource-id="0" load="50"/>
+        <allocation task-id="645" resource-id="7" load="100"/>
+        <allocation task-id="645" resource-id="5" load="100"/>
+        <allocation task-id="645" resource-id="6" load="50"/>
+        <allocation task-id="269" resource-id="3" load="50"/>
         <allocation task-id="269" resource-id="7" load="100"/>
         <allocation task-id="269" resource-id="5" load="100"/>
-        <allocation task-id="269" resource-id="3" load="50"/>
         <allocation task-id="270" resource-id="3" load="50"/>
-        <allocation task-id="285" resource-id="7" load="100"/>
         <allocation task-id="285" resource-id="3" load="100"/>
         <allocation task-id="285" resource-id="0" load="80"/>
-        <allocation task-id="525" resource-id="0" load="80"/>
-        <allocation task-id="526" resource-id="7" load="100"/>
+        <allocation task-id="285" resource-id="7" load="100"/>
+        <allocation task-id="525" resource-id="7" load="100"/>
+        <allocation task-id="526" resource-id="0" load="80"/>
+        <allocation task-id="777" resource-id="0" load="80"/>
         <allocation task-id="527" resource-id="3" load="100"/>
         <allocation task-id="284" resource-id="4" load="100"/>
+        <allocation task-id="776" resource-id="4" load="100"/>
+        <allocation task-id="778" resource-id="6" load="50"/>
+        <allocation task-id="779" resource-id="5" load="100"/>
         <allocation task-id="521" resource-id="6" load="100"/>
         <allocation task-id="522" resource-id="6" load="100"/>
         <allocation task-id="523" resource-id="6" load="50"/>
+        <allocation task-id="780" resource-id="5" load="100"/>
+        <allocation task-id="529" resource-id="6" load="50"/>
         <allocation task-id="528" resource-id="5" load="100"/>
-        <allocation task-id="530" resource-id="5" load="100"/>
+        <allocation task-id="782" resource-id="7" load="100"/>
+        <allocation task-id="783" resource-id="4" load="100"/>
+        <allocation task-id="783" resource-id="3" load="100"/>
+        <allocation task-id="784" resource-id="3" load="100"/>
+        <allocation task-id="786" resource-id="4" load="100"/>
+        <allocation task-id="785" resource-id="3" load="100"/>
+        <allocation task-id="787" resource-id="0" load="80"/>
         <allocation task-id="532" resource-id="5" load="100"/>
-        <allocation task-id="529" resource-id="6" load="100"/>
-        <allocation task-id="531" resource-id="6" load="100"/>
         <allocation task-id="533" resource-id="6" load="100"/>
+        <allocation task-id="530" resource-id="5" load="100"/>
+        <allocation task-id="531" resource-id="6" load="100"/>
+        <allocation task-id="781" resource-id="7" load="50"/>
     </allocations>
 
 
