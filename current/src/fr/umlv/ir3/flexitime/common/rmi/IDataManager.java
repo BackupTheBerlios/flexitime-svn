@@ -108,12 +108,13 @@ public interface IDataManager extends Remote
 
     /**
      * Adds a Data created by a client Have to save Data and fire the add
-     * 
      * @param _class
+     * @param parent TODO
+     * 
      * @return true if OK
      * @throws RemoteException
      */
-    public IClass saveOrUpdateClass(IClass _class) throws RemoteException;
+    public IClass saveOrUpdateClass(IClass _class, ITrack parent) throws RemoteException;
 
     /**
      * get all datas managed by this manager
@@ -136,12 +137,13 @@ public interface IDataManager extends Remote
 
     /**
      * Adds a Data created by a client Have to save Data and fire the add
-     * 
      * @param course
+     * @param parent TODO
+     * 
      * @return true if OK
      * @throws RemoteException
      */
-    public ICourse saveOrUpdateCourse(ICourse course) throws RemoteException;
+    public ICourse saveOrUpdateCourse(ICourse course, ISubject parent) throws RemoteException;
 
     /**
      * get all datas managed by this manager
@@ -193,10 +195,11 @@ public interface IDataManager extends Remote
      * Adds a Data created by a client
      * Have to save Data and fire the add 
      * @param floor 
+     * @param param TODO
      * @return true if OK
      * @throws RemoteException 
      */
-    public IFloor saveOrUpdateFloor(IFloor floor) throws RemoteException;
+    public IFloor saveOrUpdateFloor(IFloor floor, IBuilding param) throws RemoteException;
     
     /**
      *  
@@ -221,10 +224,11 @@ public interface IDataManager extends Remote
      * Adds a Data created by a client
      * Have to save Data and fire the add 
      * @param group 
+     * @param parent TODO
      * @return true if OK
      * @throws RemoteException 
      */
-    public IGroup saveOrUpdateGroup(IGroup group) throws RemoteException;
+    public IGroup saveOrUpdateGroup(IGroup group, IClass parent) throws RemoteException;
     
     /**
      *  
@@ -276,10 +280,11 @@ public interface IDataManager extends Remote
      * Adds a Data created by a client
      * Have to save Data and fire the add 
      * @param room 
+     * @param parent TODO
      * @return true if OK
      * @throws RemoteException 
      */
-    public IRoom saveOrUpdateRoom(IRoom room) throws RemoteException;
+    public IRoom saveOrUpdateRoom(IRoom room, IFloor parent) throws RemoteException;
     
     /**
      *  
@@ -304,10 +309,11 @@ public interface IDataManager extends Remote
      * Adds a Data created by a client
      * Have to save Data and fire the add 
      * @param subject 
+     * @param parent TODO
      * @return true if OK
      * @throws RemoteException 
      */
-    public ISubject saveOrUpdateSubject(ISubject subject) throws RemoteException;
+    public ISubject saveOrUpdateSubject(ISubject subject, ISubjectsGroup parent) throws RemoteException;
     
     /**
      *  
@@ -332,10 +338,11 @@ public interface IDataManager extends Remote
      * Adds a Data created by a client
      * Have to save Data and fire the add 
      * @param subjectsGroup 
+     * @param parent TODO
      * @return true if OK
      * @throws RemoteException 
      */
-    public ISubjectsGroup saveOrUpdateSubjectsGroup(ISubjectsGroup subjectsGroup) throws RemoteException;
+    public ISubjectsGroup saveOrUpdateSubjectsGroup(ISubjectsGroup subjectsGroup, ITeachingStructure parent) throws RemoteException;
     
     /**
      *  
@@ -387,10 +394,11 @@ public interface IDataManager extends Remote
      * Adds a Data created by a client
      * Have to save Data and fire the add 
      * @param teachingStructure 
+     * @param parent TODO
      * @return true if OK
      * @throws RemoteException 
      */
-    public ITeachingStructure saveOrUpdateTeachingStructure(ITeachingStructure teachingStructure) throws RemoteException;
+    public ITeachingStructure saveOrUpdateTeachingStructure(ITeachingStructure teachingStructure, IClass parent) throws RemoteException;
     
     /**
      *  

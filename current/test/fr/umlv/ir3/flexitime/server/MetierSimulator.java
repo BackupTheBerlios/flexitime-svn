@@ -127,6 +127,10 @@ public class MetierSimulator
     private static ILesson lesson9;
 
 
+    static
+    {
+     generate();   
+    }
 
     public static void generate()
     {
@@ -154,15 +158,15 @@ public class MetierSimulator
         salle2017 = DataFactory.createRoom("2017", RoomImpl.TYPE_COURS, 60, deuxiemme);
         salle3012 = DataFactory.createRoom("3012", RoomImpl.TYPE_COURS, 70, troisieme);
         videoproj1 = DataFactory.createDevice("VideoProj1", IDevice.VIDEOPROJECTOR);
-        videoproj2 = DataFactory.createDevice("VideoProj1", IDevice.VIDEOPROJECTOR);
+        videoproj2 = DataFactory.createDevice("VideoProj2", IDevice.VIDEOPROJECTOR);
         tv1 = DataFactory.createDevice("TV1", IDevice.TV);
         tv2 = DataFactory.createDevice("TV2", IDevice.TV);
         magneto1 = DataFactory.createDevice("magneto1", IDevice.VIDEO_TAPE_RECORDER);
         magneto2 = DataFactory.createDevice("magneto2", IDevice.VIDEO_TAPE_RECORDER);
         
         ir = DataFactory.createTrack("Informatique & Réseaux");
-        mfpi = DataFactory.createTrack("Informatique & Réseaux");
-        gm = DataFactory.createTrack("Informatique & Réseaux");
+        mfpi = DataFactory.createTrack("MFPI");
+        gm = DataFactory.createTrack("GM");
         ir1 = DataFactory.createClass("1ere année" , ir);
         ir2 = DataFactory.createClass("2eme année" , ir);
         ir3 = DataFactory.createClass("3eme année" , ir);
@@ -193,8 +197,8 @@ public class MetierSimulator
         
         
         ts_ir1 = DataFactory.createTeachingStructure("ts ir 1", ir1);
-        ts_ir2 = DataFactory.createTeachingStructure("ts ir 1", ir2);
-        ts_ir3 = DataFactory.createTeachingStructure("ts ir 1", ir3);
+        ts_ir2 = DataFactory.createTeachingStructure("ts ir 2", ir2);
+        ts_ir3 = DataFactory.createTeachingStructure("ts ir 3", ir3);
         ts_gm1 = DataFactory.createTeachingStructure("ts gm 1", gm1);
         ts_gm2 = DataFactory.createTeachingStructure("ts gm 2", gm2);
         ts_gm3 = DataFactory.createTeachingStructure("ts gm 3", gm3);
@@ -286,20 +290,20 @@ public class MetierSimulator
     
     public static IGroup getGroup2IR3()
     {
-        generate();
+        //generate();
         //System.out.println("Nb busy for ir3_grp2 = " +  ir3_grp2.getSetBusy().size());
         return ir3_grp2;
     }
     
     public static List getTeacherListe()
     {
-        generate();
+        //generate();
         return teacherLst;
     }
     
     public static ITeacher getRoussel()
     {
-        generate();
+        //generate();
         return roussel;
     }
     

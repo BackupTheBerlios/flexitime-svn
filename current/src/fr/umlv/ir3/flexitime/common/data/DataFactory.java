@@ -492,17 +492,17 @@ public class DataFactory
     public static IClass createClass(String name, ITrack parent) throws FlexiException
     {
         IClass class1 = new ClassImpl(name, parent);
-        parent.addClass(class1);
+        
         
         try
         {
-            class1 = RemoteDataManager.getManager().saveOrUpdateClass(class1);
+            class1 = RemoteDataManager.getManager().saveOrUpdateClass(class1, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addClass(class1);
         return class1;
     }
 
@@ -519,15 +519,16 @@ public class DataFactory
     public static IFloor createFloor(String name, IBuilding parent) throws FlexiException
     {
         IFloor floor = new FloorImpl(name, parent);
-        parent.addFloor(floor);
+        
         try
         {
-            floor = RemoteDataManager.getManager().saveOrUpdateFloor(floor);
+            floor = RemoteDataManager.getManager().saveOrUpdateFloor(floor, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addFloor(floor);
         return floor;
     }
 
@@ -616,15 +617,16 @@ public class DataFactory
     public static IGroup createGroup(String name, int nbPerson, IClass parent) throws FlexiException
     {
         IGroup group = new GroupImpl(name, nbPerson, parent);
-        parent.addGroup(group);
+        
         try
         {
-            group = RemoteDataManager.getManager().saveOrUpdateGroup(group);
+            group = RemoteDataManager.getManager().saveOrUpdateGroup(group, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addGroup(group);
         return group;
     }
 
@@ -646,15 +648,16 @@ public class DataFactory
             IFloor floor) throws FlexiException
     {
         IRoom room = new RoomImpl(name, type, capacity, floor);
-        floor.addRoom(room);
+        
         try
         {
-            room = RemoteDataManager.getManager().saveOrUpdateRoom(room);
+            room = RemoteDataManager.getManager().saveOrUpdateRoom(room, floor);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }    
+        }
+        floor.addRoom(room);
         return room;
     }
 
@@ -722,15 +725,16 @@ public class DataFactory
     public static ICourse createCourse(String name, ISubject parent, int type) throws FlexiException
     {
         ICourse temp = new CourseImpl(name, parent, type);
-        parent.addCourse(temp);
+        
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateCourse(temp);
+            temp = RemoteDataManager.getManager().saveOrUpdateCourse(temp, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addCourse(temp);
         return temp;
     }
 
@@ -758,15 +762,15 @@ public class DataFactory
     {
         ICourse temp = new CourseImpl(name, parent, defaultLength, type,
                 nbHours, color);
-        parent.addCourse(temp);
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateCourse(temp);
+            temp = RemoteDataManager.getManager().saveOrUpdateCourse(temp, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addCourse(temp);
         return temp;
     }
 
@@ -797,15 +801,15 @@ public class DataFactory
     {
         ICourse temp = new CourseImpl(name, parent, defaultLength, type,
                 nbHours, color, listTeachers);
-        parent.addCourse(temp);
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateCourse(temp);
+            temp = RemoteDataManager.getManager().saveOrUpdateCourse(temp, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addCourse(temp);
         return temp;
     }
 
@@ -823,15 +827,16 @@ public class DataFactory
     public static ISubject createSubject(String name, ISubjectsGroup parent) throws FlexiException
     {
         ISubject temp = new SubjectImpl(name, parent);
-        parent.addSubject(temp);
+        
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateSubject(temp);
+            temp = RemoteDataManager.getManager().saveOrUpdateSubject(temp, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }    
+        }
+        parent.addSubject(temp);
         return temp;
     }
 
@@ -850,15 +855,16 @@ public class DataFactory
             ITeachingStructure parent) throws FlexiException
     {
         ISubjectsGroup temp = new SubjectsGroupImpl(name, parent);
-        parent.addSubjectsGroup(temp);
+        
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateSubjectsGroup(temp);
+            temp = RemoteDataManager.getManager().saveOrUpdateSubjectsGroup(temp, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }    
+        }
+        parent.addSubjectsGroup(temp);
         return temp;
     }
 
@@ -876,15 +882,16 @@ public class DataFactory
             IClass parent) throws FlexiException
     {
         ITeachingStructure temp = new TeachingStructureImpl(name, parent);
-        parent.setTeachingStructure(temp);
+        
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateTeachingStructure(temp);
+            temp = RemoteDataManager.getManager().saveOrUpdateTeachingStructure(temp, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.setTeachingStructure(temp);
         return temp;
     }
 

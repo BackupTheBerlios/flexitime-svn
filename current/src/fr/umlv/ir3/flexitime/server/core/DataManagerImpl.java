@@ -222,20 +222,26 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
     /**
      * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
      * @param _class
+     * 
      * @return
      * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateClass(fr.umlv.ir3.flexitime.common.data.general.IClass)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateClass(fr.umlv.ir3.flexitime.common.data.general.IClass, ITrack)
      */
-    public IClass saveOrUpdateClass(IClass _class) throws RemoteException
+    public IClass saveOrUpdateClass(IClass _class, ITrack parent) throws RemoteException
     {
-        int type = _class.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
-
+        int type;
+        if(_class.getIdData() == null)
+        {
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_ADDED;
+            parent.addClass(_class);
+        }
+        else
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+        
         try
         {
-            TrackStorage.save(_class.getParentTrack());
+            TrackStorage.save(parent);
         }
         catch (HibernateException e)
         {
@@ -316,20 +322,26 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
     /**
      * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
      * @param course
+     * 
      * @return
      * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateCourse(fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateCourse(fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse, ISubject)
      */
-    public ICourse saveOrUpdateCourse(ICourse course) throws RemoteException
+    public ICourse saveOrUpdateCourse(ICourse course, ISubject parent) throws RemoteException
     {
-        int type = course.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+        int type;
+        if(course.getIdData() == null)
+        {
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_ADDED;
+            parent.addCourse(course);
+        }
+        else
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
         try
         {
-            SubjectStorage.save(course.getParentSubject());
+            SubjectStorage.save(parent);
         }
         catch (HibernateException e)
         {
@@ -490,16 +502,22 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
     /**
      * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
      * @param floor
+     * 
      * @return
      * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateFloor(fr.umlv.ir3.flexitime.common.data.general.IFloor)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateFloor(fr.umlv.ir3.flexitime.common.data.general.IFloor, IBuilding)
      */
-    public IFloor saveOrUpdateFloor(IFloor floor) throws RemoteException
+    public IFloor saveOrUpdateFloor(IFloor floor, IBuilding parent) throws RemoteException
     {
-        int type = floor.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+        int type;
+        if(floor.getIdData() == null)
+        {
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_ADDED;
+            parent.addFloor(floor);
+        }
+        else
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
         try
         {
@@ -512,6 +530,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
             return null;
         }
 
+        System.err.println(floor.getIdData());
         int indices = floor.getParentBuilding().getLstFloor().indexOf(floor);
         manager
                 .fireDataChanged(
@@ -584,20 +603,26 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
     /**
      * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
      * @param group
+     * 
      * @return
      * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateGroup(fr.umlv.ir3.flexitime.common.data.resources.IGroup, IClass)
      */
-    public IGroup saveOrUpdateGroup(IGroup group) throws RemoteException
+    public IGroup saveOrUpdateGroup(IGroup group, IClass parent) throws RemoteException
     {
-        int type = group.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+        int type;
+        if(group.getIdData() == null)
+        {
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_ADDED;
+            parent.addGroup(group);
+        }
+        else
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
         try
         {
-            ClassStorage.save(group.getParentClass());
+            ClassStorage.save(parent);
         }
         catch (HibernateException e)
         {
@@ -890,20 +915,26 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
     /**
      * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
      * @param room
+     * 
      * @return
      * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateRoom(fr.umlv.ir3.flexitime.common.data.resources.IRoom)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateRoom(fr.umlv.ir3.flexitime.common.data.resources.IRoom, IFloor)
      */
-    public IRoom saveOrUpdateRoom(IRoom room) throws RemoteException
+    public IRoom saveOrUpdateRoom(IRoom room, IFloor parent) throws RemoteException
     {
-        int type = room.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+        int type;
+        if(room.getIdData() == null)
+        {
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_ADDED;
+            parent.addRoom(room);
+        }
+        else
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
         try
         {
-            FloorStorage.save(room.getFloor());
+            FloorStorage.save(parent);
         }
         catch (HibernateException e)
         {
@@ -978,20 +1009,26 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
     /**
      * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
      * @param subject
+     * 
      * @return
      * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject, ISubjectsGroup)
      */
-    public ISubject saveOrUpdateSubject(ISubject subject) throws RemoteException
+    public ISubject saveOrUpdateSubject(ISubject subject, ISubjectsGroup parent) throws RemoteException
     {
-        int type = subject.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+        int type;
+        if(subject.getIdData() == null)
+        {
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_ADDED;
+            parent.addSubject(subject);
+        }
+        else
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
         try
         {
-            SubjectsGroupStorage.save(subject.getParentSubjectsGroup());
+            SubjectsGroupStorage.save(parent);
         }
         catch (HibernateException e)
         {
@@ -1069,21 +1106,27 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
     /**
      * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
      * @param subjectsGroup
+     * 
      * @return
      * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup, ITeachingStructure)
      */
-    public ISubjectsGroup saveOrUpdateSubjectsGroup(ISubjectsGroup subjectsGroup)
+    public ISubjectsGroup saveOrUpdateSubjectsGroup(ISubjectsGroup subjectsGroup, ITeachingStructure parent)
             throws RemoteException
     {
-        int type = subjectsGroup.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+        int type;
+        if(subjectsGroup.getIdData() == null)
+        {
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_ADDED;
+            parent.addSubjectsGroup(subjectsGroup);
+        }
+        else
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
         try
         {
-            TeachingStructureStorage.save(subjectsGroup.getParentTeachStruct());
+            TeachingStructureStorage.save(parent);
         }
         catch (HibernateException e)
         {
@@ -1251,21 +1294,27 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
     /**
      * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
      * @param teachingStructure
+     * 
      * @return
      * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateTeachingStructure(fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateTeachingStructure(fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure, IClass)
      */
     public ITeachingStructure saveOrUpdateTeachingStructure(
-            ITeachingStructure teachingStructure) throws RemoteException
+            ITeachingStructure teachingStructure, IClass parent) throws RemoteException
     {
-        int type = teachingStructure.getIdData() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+        int type;
+        if(teachingStructure.getIdData() == null)
+        {
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_ADDED;
+            parent.setTeachingStructure(teachingStructure);
+        }
+        else
+            type = DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
         try
         {
-            ClassStorage.save(teachingStructure.getParentClass());
+            ClassStorage.save(parent);
         }
         catch (HibernateException e)
         {
