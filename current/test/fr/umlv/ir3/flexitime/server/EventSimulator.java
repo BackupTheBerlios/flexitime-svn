@@ -360,6 +360,36 @@ public class EventSimulator
         
     }
 
+    static class TeachingStructureListener extends DataListenerImpl
+    {
+
+        /**
+         * @throws RemoteException
+         */
+        protected TeachingStructureListener() throws RemoteException
+        {
+            super();
+            // TODO Auto-generated constructor stub
+        }
+
+        /**
+         * Comment for <code>serialVersionUID</code>
+         */
+        private static final long serialVersionUID = 3256728372607268407L;
+
+        /** 
+         * @param event
+         * @throws RemoteException 
+         * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
+         */
+        public void dataChanged(DataEvent event) throws RemoteException
+        {
+            System.out.println("Event de TeachingStructure\t"+event);
+            
+        }
+        
+    }
+    
     public static void main(String[] args) throws RemoteException
     {
         RemoteDataManager.getManager().addDataListener(IBuilding.class, new BuildingListener());
@@ -373,11 +403,11 @@ public class EventSimulator
         RemoteDataManager.getManager().addDataListener(IClass.class, new ClassListener());
         RemoteDataManager.getManager().addDataListener(IGroup.class, new GroupListener());
         
+        RemoteDataManager.getManager().addDataListener(ISubjectsGroup.class, new SubjectsGroupListener());
         RemoteDataManager.getManager().addDataListener(ISubject.class, new SubjectListener());
         RemoteDataManager.getManager().addDataListener(ICourse.class, new CourseListener());
-        RemoteDataManager.getManager().addDataListener(ISubjectsGroup.class, new SubjectsGroupListener());
+        RemoteDataManager.getManager().addDataListener(ISubjectsGroup.class, new TeachingStructureListener());
         
-        //MetierSimulator.getRoussel();
     }
 }
 

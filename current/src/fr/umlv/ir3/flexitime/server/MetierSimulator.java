@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
+import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
@@ -236,6 +237,10 @@ public class MetierSimulator
         gl_td = DataFactory.createCourse("TD GL", ir3_bloc1_sub2 , ICourse.TD, 120, 20 , Color.BLUE, createList(revuz));
         corba_cours = DataFactory.createCourse("Cours Corba", ir3_bloc2_sub1 , ICourse.CM, 120, 20 , Color.CYAN, createList(midonnet));
         corba_td = DataFactory.createCourse("TD Corba", ir3_bloc2_sub1 , ICourse.TD, 120, 20 , Color.BLUE, createList(midonnet));
+        
+        IGroupBusy busyGrp = DataFactory.createGroupBusy(new Gap(2005,1,24,8,30,2005,1,24,10,30), ir3_grp2, IGroupBusy.REASON_HOLLYDAYS, "Vacances de Noel");
+        IGroupBusy busyGrp1 = DataFactory.createGroupBusy(new Gap(2005,1,25,8,30,2005,1,25,10,30), ir3_grp2, IGroupBusy.REASON_WORK);
+        IGroupBusy busyGrp2 = DataFactory.createGroupBusy(new Gap(2005,1,26,8,30,2005,1,26,10,30), ir3_grp2, IGroupBusy.REASON_HOLLYDAYS);
         
         List<IGroup> groups_td = new ArrayList(1);
         groups_td.add(ir3_grp2);

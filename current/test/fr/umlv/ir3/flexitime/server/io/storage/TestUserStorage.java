@@ -49,9 +49,10 @@ public class TestUserStorage
         DataFactory.createUser("q", "q");
         DataFactory.createUser("w", "w");
         DataFactory.createUser("d", "d");
-        DataFactory.createUser("fappert", "popopopo");
+        DataFactory.createUser("fappert", IUser.ADMIN);
         DataFactory.createUser("valre", "popopopo");
         DataFactory.createUser("flexitime", "flexitim");
+        
             
 //        Session s = HibernateUtil.currentSession();
 //        List<IRoom> lr = s.find("FROM RoomImpl");
