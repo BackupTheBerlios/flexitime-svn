@@ -296,7 +296,7 @@
                 </notes>
             </task>
         </task>
-        <task id="193" name="Cahier des charges techniques" color="#003300" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="19/10/2004" duration="73" complete="52" fixed-start="true" priority="1" expand="true">
+        <task id="193" name="Cahier des charges techniques" color="#003300" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="19/10/2004" duration="73" complete="54" fixed-start="true" priority="1" expand="true">
             <task id="279" name="Pré-Rapport technique" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="19/10/2004" duration="18" complete="100" fixed-start="true" priority="1" expand="false">
                 <task id="521" name="Elaboration des besoin" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="19/10/2004" duration="2" complete="100" fixed-start="false" priority="1" expand="false">
                     <notes>
@@ -322,7 +322,7 @@
                     </notes>
                 </task>
             </task>
-            <task id="281" name="Etude technique" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="9/11/2004" duration="27" complete="58" fixed-start="true" priority="1" expand="true">
+            <task id="281" name="Etude technique" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="9/11/2004" duration="27" complete="62" fixed-start="true" priority="1" expand="true">
                 <task id="780" name="Apprentissage de LDAP" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="9/11/2004" duration="6" complete="100" fixed-start="false" priority="1" expand="true">
                     <notes>
                         Découverte de l'arbre de l'annuaire de l'université (Prévu 2h)
@@ -369,8 +369,8 @@
                 </task>
                 <task id="785" name="Gestion du Drag&#38;Drop" color="#003300" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="22/11/2004" duration="5" complete="75" fixed-start="false" priority="1" expand="true">
                     <notes>
-                        * Recherche sur la gestion Java du Drag&#38;Drop (Prévu 4h)
-                        * Préparation d'une FlexiAPI (Prévu 6h)
+                        * Recherche sur la gese&#34;&#62;
+                        edactio
                     </notes>
                 </task>
                 <task id="787" name="Outils de compilation" color="#003300" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="29/11/2004" duration="5" complete="0" fixed-start="false" priority="1" expand="true">
@@ -386,7 +386,7 @@
                         30&#47;11&#47;2004 1h
                     </notes>
                 </task>
-                <task id="533" name="Test des bibliothèques d'envoi de mail" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="25/11/2004" duration="4" complete="0" fixed-start="false" priority="2" expand="true">
+                <task id="533" name="Test des bibliothèques d'envoi de mail" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="25/11/2004" duration="4" complete="85" fixed-start="false" priority="2" expand="true">
                     <notes>
                         * Recherche des bibliothèques permettant d'interagir avec le client mail (Prévu 3h)
                         * Recherche des API d'envoi direct (Prévu 1h)
@@ -420,11 +420,8 @@
             <task id="282" name="Description de l'architecture logicielle" color="#003300" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="29/11/2004" duration="24" complete="1" fixed-start="false" priority="1" expand="true">
                 <task id="1047" name="Répartition du travail -&#62; Architecture" color="#003300" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="29/11/2004" duration="2" complete="20" fixed-start="false" priority="1" expand="true">
                     <notes>
-                        * VF : Découpage de l'application en paquetage (Prévu 4h)
-                        * JG : Validation + répartition des tâches (Prévu 2h)
-                        
-                        Réflexion VF 29&#47;11 30min
-                        VF Création de la doc 30&#47;11 2h 
+                        * VF : Découpage de l'application en 
+                        edactio
                     </notes>
                 </task>
                 <task id="1321" name="Definition du MCD" color="#003300" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="6/12/2004" duration="2" complete="0" fixed-start="false" priority="1" expand="true"/>
@@ -461,15 +458,15 @@
         <allocation task-id="15" resource-id="5" load="80.0"/>
         <allocation task-id="19" resource-id="5" load="80.0"/>
         <allocation task-id="18" resource-id="7" load="100.0"/>
-        <allocation task-id="187" resource-id="5" load="20.0"/>
         <allocation task-id="187" resource-id="3" load="50.0"/>
+        <allocation task-id="187" resource-id="5" load="20.0"/>
         <allocation task-id="190" resource-id="4" load="100.0"/>
         <allocation task-id="9" resource-id="0" load="100.0"/>
-        <allocation task-id="10" resource-id="5" load="100.0"/>
+        <allocation task-id="10" resource-id="3" load="100.0"/>
         <allocation task-id="10" resource-id="0" load="100.0"/>
         <allocation task-id="10" resource-id="6" load="100.0"/>
-        <allocation task-id="10" resource-id="3" load="100.0"/>
         <allocation task-id="10" resource-id="7" load="100.0"/>
+        <allocation task-id="10" resource-id="5" load="100.0"/>
         <allocation task-id="10" resource-id="4" load="100.0"/>
         <allocation task-id="106" resource-id="4" load="10.0"/>
         <allocation task-id="107" resource-id="4" load="10.0"/>
@@ -478,11 +475,11 @@
         <allocation task-id="30" resource-id="0" load="30.0"/>
         <allocation task-id="30" resource-id="4" load="50.0"/>
         <allocation task-id="420" resource-id="0" load="80.0"/>
-        <allocation task-id="421" resource-id="5" load="100.0"/>
+        <allocation task-id="421" resource-id="3" load="100.0"/>
         <allocation task-id="421" resource-id="0" load="80.0"/>
         <allocation task-id="421" resource-id="6" load="100.0"/>
-        <allocation task-id="421" resource-id="3" load="100.0"/>
         <allocation task-id="421" resource-id="7" load="100.0"/>
+        <allocation task-id="421" resource-id="5" load="100.0"/>
         <allocation task-id="421" resource-id="4" load="100.0"/>
         <allocation task-id="512" resource-id="3" load="100.0"/>
         <allocation task-id="513" resource-id="4" load="100.0"/>
@@ -490,27 +487,27 @@
         <allocation task-id="515" resource-id="0" load="80.0"/>
         <allocation task-id="516" resource-id="5" load="100.0"/>
         <allocation task-id="517" resource-id="7" load="100.0"/>
-        <allocation task-id="518" resource-id="5" load="100.0"/>
+        <allocation task-id="518" resource-id="3" load="100.0"/>
         <allocation task-id="518" resource-id="0" load="80.0"/>
         <allocation task-id="518" resource-id="6" load="100.0"/>
-        <allocation task-id="518" resource-id="3" load="100.0"/>
         <allocation task-id="518" resource-id="7" load="100.0"/>
+        <allocation task-id="518" resource-id="5" load="100.0"/>
         <allocation task-id="518" resource-id="4" load="100.0"/>
         <allocation task-id="267" resource-id="3" load="100.0"/>
-        <allocation task-id="268" resource-id="5" load="100.0"/>
         <allocation task-id="268" resource-id="7" load="100.0"/>
-        <allocation task-id="645" resource-id="5" load="100.0"/>
+        <allocation task-id="268" resource-id="5" load="100.0"/>
+        <allocation task-id="645" resource-id="3" load="100.0"/>
         <allocation task-id="645" resource-id="0" load="50.0"/>
         <allocation task-id="645" resource-id="6" load="50.0"/>
-        <allocation task-id="645" resource-id="3" load="100.0"/>
         <allocation task-id="645" resource-id="7" load="100.0"/>
+        <allocation task-id="645" resource-id="5" load="100.0"/>
         <allocation task-id="645" resource-id="4" load="50.0"/>
-        <allocation task-id="269" resource-id="5" load="100.0"/>
         <allocation task-id="269" resource-id="3" load="50.0"/>
         <allocation task-id="269" resource-id="7" load="100.0"/>
+        <allocation task-id="269" resource-id="5" load="100.0"/>
         <allocation task-id="270" resource-id="3" load="50.0"/>
-        <allocation task-id="285" resource-id="0" load="80.0"/>
         <allocation task-id="285" resource-id="3" load="100.0"/>
+        <allocation task-id="285" resource-id="0" load="80.0"/>
         <allocation task-id="285" resource-id="7" load="100.0"/>
         <allocation task-id="525" resource-id="7" load="100.0"/>
         <allocation task-id="526" resource-id="0" load="80.0"/>
@@ -540,11 +537,11 @@
         <allocation task-id="530" resource-id="5" load="100.0"/>
         <allocation task-id="531" resource-id="6" load="100.0"/>
         <allocation task-id="781" resource-id="7" load="50.0"/>
-        <allocation task-id="1047" resource-id="5" load="100.0"/>
         <allocation task-id="1047" resource-id="0" load="30.0"/>
+        <allocation task-id="1047" resource-id="5" load="100.0"/>
         <allocation task-id="1321" resource-id="3" load="100.0"/>
-        <allocation task-id="1051" resource-id="5" load="100.0"/>
         <allocation task-id="1051" resource-id="3" load="100.0"/>
+        <allocation task-id="1051" resource-id="5" load="100.0"/>
     </allocations>
 
 
