@@ -301,7 +301,7 @@
                 </notes>
             </task>
         </task>
-        <task id="193" name="Cahier des charges techniques" color="#003300" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="19/10/2004" duration="73" complete="43" fixed-start="true" priority="1" expand="true">
+        <task id="193" name="Cahier des charges techniques" color="#003300" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="19/10/2004" duration="73" complete="46" fixed-start="true" priority="1" expand="true">
             <task id="279" name="Pré-Rapport technique" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="19/10/2004" duration="18" complete="100" fixed-start="true" priority="1" expand="false">
                 <task id="521" name="Elaboration des besoin" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="19/10/2004" duration="2" complete="100" fixed-start="false" priority="1" expand="false">
                     <notes>
@@ -327,7 +327,7 @@
                     </notes>
                 </task>
             </task>
-            <task id="281" name="Etude technique" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="9/11/2004" duration="27" complete="44" fixed-start="true" priority="1" expand="true">
+            <task id="281" name="Etude technique" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="9/11/2004" duration="27" complete="48" fixed-start="true" priority="1" expand="true">
                 <task id="780" name="Apprentissage de LDAP" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="9/11/2004" duration="6" complete="100" fixed-start="false" priority="1" expand="true">
                     <notes>
                         Découverte de l'arbre de l'annuaire de l'université (Prévu 2h)
@@ -348,6 +348,7 @@
                         Recherche d'info et consignation 1h le 12&#47;11 et 2h le 18&#47;11
                         MAJ doc 2h le 20&#47;11
                         MAJ doc 1h le 25&#47;11
+                        MAJ doc 1h le 28&#47;11
                     </notes>
                 </task>
                 <task id="782" name="Choix de la bibliothèque d'IG" color="#003300" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="19/11/2004" duration="8" complete="95" fixed-start="false" priority="1" expand="true">
@@ -399,10 +400,11 @@
                     </notes>
                 </task>
                 <task id="788" name="Point bilan et d'avancement" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="true" start="26/11/2004" duration="0" complete="0" fixed-start="true" priority="1" expand="true"/>
-                <task id="532" name="Choix du serveur d'application" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="25/11/2004" duration="4" complete="0" fixed-start="false" priority="1" expand="true">
+                <task id="532" name="Choix du serveur d'application" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="25/11/2004" duration="4" complete="20" fixed-start="false" priority="1" expand="true">
                     <notes>
                         * Recherche de documentation sur les différents serveurs d'applications présents sur le pré-cahier technique (Prévu 4h)
                         * Documentation - justification du choix réalisé (Prévu 4h)
+                        Recherche de documentation 1h 28&#47;11
                     </notes>
                 </task>
                 <task id="533" name="Test des bibliothèques d'envoi de mail" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="25/11/2004" duration="4" complete="0" fixed-start="false" priority="1" expand="true">
@@ -412,12 +414,13 @@
                         * Réalisation d'une FlexiAPI d'envoi de mail (Prévu 4h)
                     </notes>
                 </task>
-                <task id="530" name="Tests des bibliothèques Java-LDAP" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="1/12/2004" duration="5" complete="20" fixed-start="false" priority="1" expand="true">
+                <task id="530" name="Tests des bibliothèques Java-LDAP" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="1/12/2004" duration="5" complete="80" fixed-start="false" priority="1" expand="true">
                     <notes>
                         * Etude de l'utilisation de LDAP en JAVA (Prévu 4h)
                         * Réalisation d'une FlexiAPI (Prévu 6h)
                         
                         Developpement d'un classe FlexiLDAP 1h repartie sur le semaine de 22&#47;11 au 26&#47;11
+                        MAJ doc 30min 28&#47;11
                     </notes>
                 </task>
                 <task id="531" name="Test des bibliothèques Applications réparties" color="#003300" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="29/11/2004" duration="7" complete="0" fixed-start="false" priority="1" expand="true">
