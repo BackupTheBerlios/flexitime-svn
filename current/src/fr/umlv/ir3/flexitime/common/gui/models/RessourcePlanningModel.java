@@ -4,7 +4,7 @@
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 
-package fr.umlv.ir3.flexitime.richClient.models;
+package fr.umlv.ir3.flexitime.common.gui.models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,7 +17,6 @@ import fr.umlv.ir3.flexitime.common.tools.Gap;
 import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
 import fr.umlv.ir3.flexitime.server.MetierSimulator;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.BusyBloc;
 
 
 
@@ -29,7 +28,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.BusyBloc;
  * @version Verion ou révision SVN
  * @author FlexiTeam - binou
  */
-public class DefaultPlanningModel extends AbstractPlanningModel
+public class RessourcePlanningModel extends AbstractPlanningModel
 {
     private static FlexiLanguage language;
     static
@@ -59,7 +58,6 @@ public class DefaultPlanningModel extends AbstractPlanningModel
     
     //TODO idée => fusionner les 2 listes pour gain de place
     
-    
 
 
     //TODO gérer la fusion horizontalement !! ca serait top
@@ -68,7 +66,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
     /**
      * DOCME
      */
-    public DefaultPlanningModel()
+    public RessourcePlanningModel()
     {
         super();
         

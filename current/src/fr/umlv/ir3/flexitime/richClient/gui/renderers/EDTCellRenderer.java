@@ -10,9 +10,9 @@ package fr.umlv.ir3.flexitime.richClient.gui.renderers;
 
 import javax.swing.JComponent;
 
-import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.FlexiPlanning;
+import fr.umlv.ir3.flexitime.common.gui.models.BusyBloc;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JRessourcePlanning;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JBusy;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.BusyBloc;
 
 
 
@@ -39,7 +39,7 @@ public class EDTCellRenderer
      * 
      * @see EDTCellRenderer
      */
-    public JComponent getEDTCellRendererComponent(FlexiPlanning flexiEDT, Object elementAt, int week, int day, int gap)
+    public JComponent getEDTCellRendererComponent(JRessourcePlanning flexiEDT, Object elementAt, int week, int day, int gap)
     {
         this.comp = null;
         if(elementAt != null)

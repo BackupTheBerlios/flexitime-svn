@@ -3,7 +3,7 @@
  * by binou
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.richClient.models;
+package fr.umlv.ir3.flexitime.common.gui.models;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -87,7 +87,7 @@ public abstract class AbstractPlanningModel implements PlanningModel
      * @param source the <code>PlanningModel</code> that changed, typically "this"
      * @param lowerGap one end of the interval
      * @param upperGap the other end of the interval
-     * @see DefaultPlanningModel
+     * @see RessourcePlanningModel
      */
     protected void fireContentsChanged(int week, int day, int lowerGap, int upperGap)
     {
@@ -110,7 +110,7 @@ public abstract class AbstractPlanningModel implements PlanningModel
      * @param source the <code>PlanningModel</code> that changed, typically "this"
      * @param lowerGap one end of the interval
      * @param upperGap the other end of the interval
-     * @see DefaultPlanningModel
+     * @see RessourcePlanningModel
      */
     protected void fireIntervalAdded(int week, int day, int lowerGap, int upperGap)
     {
@@ -134,7 +134,7 @@ public abstract class AbstractPlanningModel implements PlanningModel
      *               including <code>lowerGap</code>
      * @param upperGap the other end of the interval,
      *               including <code>upperGap</code>
-     * @see DefaultPlanningModel
+     * @see RessourcePlanningModel
      */
     protected void fireIntervalRemoved(int week, int day, int lowerGap, int upperGap)
     {

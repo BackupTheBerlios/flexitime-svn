@@ -14,7 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.FlexiPlanning;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JRessourcePlanning;
 
 
 
@@ -55,7 +55,7 @@ public class EDTCellHeaderRenderer
      * 
      * @see EDTCellRenderer
      */
-    public JComponent getEDTCellHeaderRendererComponent(FlexiPlanning edt, Object object, int headerType)
+    public JComponent getEDTCellHeaderRendererComponent(JRessourcePlanning edt, Object object, int headerType)
     {
         
         switch(headerType)
@@ -65,7 +65,7 @@ public class EDTCellHeaderRenderer
                 {
                     Integer i = (Integer)object;
                     this.label = new JLabel();
-                    this.label.setPreferredSize(new Dimension(FlexiPlanning.WEEK_WIDTH,FlexiPlanning.DAY_HEIGTH));
+                    this.label.setPreferredSize(new Dimension(JRessourcePlanning.WEEK_WIDTH,JRessourcePlanning.DAY_HEIGTH));
                     this.label.setBackground(Color.decode("#483d8b"));
                     this.label.setText("sem. " + i.intValue());
                 }
@@ -75,7 +75,7 @@ public class EDTCellHeaderRenderer
                 {
                     String text = (String)object;
                     this.label = new JLabel();
-                    this.label.setPreferredSize(new Dimension(FlexiPlanning.DAY_COLUMN_WIDTH,FlexiPlanning.DAY_HEIGTH));
+                    this.label.setPreferredSize(new Dimension(JRessourcePlanning.DAY_COLUMN_WIDTH,JRessourcePlanning.DAY_HEIGTH));
                     this.label.setBackground(Color.decode("#483d8b"));
                     this.label.setText(text);
                 }
@@ -85,7 +85,7 @@ public class EDTCellHeaderRenderer
                 {
                     String text = (String)object;
                     this.label = new JLabel();
-                    this.label.setPreferredSize(new Dimension(FlexiPlanning.DAY_COLUMN_WIDTH,FlexiPlanning.GAP_HEIGTH));
+                    this.label.setPreferredSize(new Dimension(JRessourcePlanning.DAY_COLUMN_WIDTH,JRessourcePlanning.GAP_HEIGTH));
                     this.label.setBackground(Color.decode("#4682b4"));
                     this.label.setText(text);
                     this.label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -96,7 +96,7 @@ public class EDTCellHeaderRenderer
                 {
                     Calendar calendar = (Calendar)object;
                     this.label = new JLabel();
-                    this.label.setPreferredSize(new Dimension(FlexiPlanning.WEEK_WIDTH,FlexiPlanning.DAY_HEIGTH));
+                    this.label.setPreferredSize(new Dimension(JRessourcePlanning.WEEK_WIDTH,JRessourcePlanning.DAY_HEIGTH));
                     this.label.setBackground(Color.decode("#4169e1"));
                     this.label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                     this.label.setText(

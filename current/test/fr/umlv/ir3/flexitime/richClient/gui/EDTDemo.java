@@ -18,8 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.FlexiPlanning;
-import fr.umlv.ir3.flexitime.richClient.models.DefaultPlanningModel;
+import fr.umlv.ir3.flexitime.common.gui.models.RessourcePlanningModel;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JRessourcePlanning;
 
 
 
@@ -47,7 +47,7 @@ public class EDTDemo
         JButton b4 = new JButton("b4");
         container.add(createPanelForComponent(b4,"StatusBar"), BorderLayout.SOUTH);
         
-        FlexiPlanning fe = new FlexiPlanning(new DefaultPlanningModel());
+        JRessourcePlanning fe = new JRessourcePlanning(new RessourcePlanningModel());
         container.add(new JScrollPane(createPanelForComponent(fe,"EDT")), BorderLayout.CENTER);
         
     }

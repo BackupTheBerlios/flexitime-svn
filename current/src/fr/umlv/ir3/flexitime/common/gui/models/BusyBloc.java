@@ -4,7 +4,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation;
+package fr.umlv.ir3.flexitime.common.gui.models;
 
 
 
