@@ -3,8 +3,10 @@ import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.*;
@@ -26,14 +28,13 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.management.*;
 public class ManagementView 
 {
 	JPanel panel;
-	
 	/**
 	 * 
 	 */
 	public ManagementView(List lstTrack,List lstDevice,List lstBuilding,List lstTeacher) 
 	{
 		panel = new JPanel(new BorderLayout());
-		OutlookBarManagement fb1 = new OutlookBarManagement(panel,lstTrack,lstDevice,lstBuilding,lstTeacher);
+        OutlookBarManagement fb1 = new OutlookBarManagement(panel,lstTrack,lstDevice,lstBuilding,lstTeacher);
 		//NameView trackView = new NameView((IData)lstTrack.get(0));
 		JPanel panel1 = new JPanel(new BorderLayout());
         //panel1.add(new JScrollPane(trackView.getPanel()), BorderLayout.CENTER);
@@ -51,4 +52,5 @@ public class ManagementView
 	{
 		return panel;
 	}
+
 }

@@ -61,14 +61,15 @@ public class OutlookBarManagement
 {
 	//static JFrame frame;
 	JPanel panelOutlookBar;
-	JPanel panelParent;
+	JComponent panelParent;
+    //JPanel panelParent;
     //JList list;
 
 
-    public OutlookBarManagement(JPanel panelParent,List listTrack,List listDevice,List listBuilding,List listTeacher) {
+    public OutlookBarManagement(/*JPanel*/JComponent panelParent,List listTrack,List listDevice,List listBuilding,List listTeacher) {
         this.panelParent = panelParent;
     	panelOutlookBar = new JPanel(new BorderLayout());
-    	
+    	//panelOutlookBar.setPreferredSize();
     	//Create a list model and a list for the Teachers.
         TeacherListModel listModel = new TeacherListModel(listTeacher);
         JList list = new JList(listModel);

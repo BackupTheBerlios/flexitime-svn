@@ -7,15 +7,18 @@
 package fr.umlv.ir3.flexitime.richClient.gui.actions.management;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -59,7 +62,7 @@ public class FlexiSelectionListenerFactory
 	 * @param panelParent
 	 * @return
 	 */
-	public static TreeSelectionListener createTrackTreeSelectionListener(final JPanel panelParent)
+	public static TreeSelectionListener createTrackTreeSelectionListener(final JComponent/*JPanel*/ panelParent)
 	{
 		TreeSelectionListener selectionListener = new TreeSelectionListener()
 		{
@@ -98,7 +101,8 @@ public class FlexiSelectionListenerFactory
 							panel1.setBorder(BorderFactory.createTitledBorder("Structure d'enseignement"));
 						}
 						panelParent.remove(0);
-						panelParent.add(panel1, BorderLayout.CENTER,0);
+                        //((JSplitPane)panelParent).setRightComponent(panel1);
+                        panelParent.add(panel1, BorderLayout.CENTER,0);
 						panelParent.validate() ;
 						panelParent.repaint();
 					}
@@ -113,7 +117,7 @@ public class FlexiSelectionListenerFactory
 	 * @param panelParent
 	 * @return
 	 */
-	public static TreeSelectionListener createDeviceTreeSelectionListener(final JPanel panelParent)
+	public static TreeSelectionListener createDeviceTreeSelectionListener(final JComponent/*JPanel*/ panelParent)
 	{
 		TreeSelectionListener selectionListener = new TreeSelectionListener()
 		{
@@ -140,8 +144,9 @@ public class FlexiSelectionListenerFactory
 							
 						}
 						panelParent.remove(0);
+                        //((JSplitPane)panelParent).setRightComponent(panel1);                      
 						panelParent.add(panel1, BorderLayout.CENTER,0);
-						panelParent.validate() ;
+                        panelParent.validate() ;
 						panelParent.repaint();
 					}
 				}
@@ -156,7 +161,7 @@ public class FlexiSelectionListenerFactory
 	 * @param panelParent
 	 * @return
 	 */
-	public static TreeSelectionListener createRoomTreeSelectionListener(final JPanel panelParent)    
+	public static TreeSelectionListener createRoomTreeSelectionListener(final JComponent/*JPanel*/ panelParent)    
 	{
 		TreeSelectionListener selectionListener = new TreeSelectionListener()
 		{
@@ -195,7 +200,8 @@ public class FlexiSelectionListenerFactory
 						}
 						panelParent.remove(0);
 						panelParent.add(panel1, BorderLayout.CENTER,0);
-						panelParent.validate() ;
+						//((JSplitPane)panelParent).setRightComponent(panel1);              
+                        panelParent.validate() ;
 						panelParent.repaint();
 					}
 				}
@@ -209,7 +215,7 @@ public class FlexiSelectionListenerFactory
 	 * @param panelParent
 	 * @return
 	 */
-	public static ListSelectionListener createTeacherListSelectionListener(final JPanel panelParent)    
+	public static ListSelectionListener createTeacherListSelectionListener(final JComponent/*JPanel*/ panelParent)    
 	{
 		ListSelectionListener selectionListener = new ListSelectionListener()
 		{
@@ -223,8 +229,9 @@ public class FlexiSelectionListenerFactory
 		        panel1.setBorder(BorderFactory.createTitledBorder("Professeur"));
 		        panel1.setVisible( true);
 		        panelParent.remove(0);
-		        panelParent.add(panel1, BorderLayout.CENTER,0);
-		        panelParent.validate() ;
+                panelParent.add(panel1, BorderLayout.CENTER,0);
+                //((JSplitPane)panelParent).setRightComponent(panel1);
+                panelParent.validate() ;
 		        panelParent.repaint();
 			}
 	        	
@@ -237,7 +244,7 @@ public class FlexiSelectionListenerFactory
 	 * @param panelParent
 	 * @return
 	 */
-	public static TreeSelectionListener createSubjectsGroupTreeSelectionListener(final JPanel panelParent)
+	public static TreeSelectionListener createSubjectsGroupTreeSelectionListener(final JComponent/*JPanel*/ panelParent)
 	{
 		TreeSelectionListener selectionListener = new TreeSelectionListener()
 		{
@@ -274,9 +281,12 @@ public class FlexiSelectionListenerFactory
 							panel1.setBorder(BorderFactory.createTitledBorder("Cours"));
 							
 						}
-						panelParent.remove(0);
-						panelParent.add(panel1, BorderLayout.CENTER,0);
-						panelParent.validate() ;
+                        panel1.setMaximumSize(new Dimension(10,10));
+                        panelParent.remove(0);
+						//panelParent.add(panel1,JSplitPane.RIGHT,0);
+                        panelParent.add(panel1, BorderLayout.CENTER,0);
+						//((JSplitPane)panelParent).setRightComponent(panel1);
+                        panelParent.validate() ;
 						panelParent.repaint();
 					}
 				}

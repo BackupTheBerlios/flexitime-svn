@@ -7,6 +7,7 @@
 
 package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -64,7 +65,7 @@ public class NameView implements FlexiTreeNodeListener
 	private void create()
 	{
 		panel = new JPanel();
-		okButton = new JButton("Appliquer");
+        okButton = new JButton("Appliquer");
 		cancelButton=new JButton("Annuler");
 		okButton.setEnabled(false);
 		cancelButton.setEnabled(false);
