@@ -1,5 +1,5 @@
 /*
- * Created on 13 déc. 2004
+ * Created on 14 déc. 2004
  * by Valère FOREL
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
@@ -8,39 +8,38 @@ package fr.umlv.ir3.flexitime.server.core.admin;
 
 
 /**
- * Users - Creates a list of users who can use the program
+ * User - represents a user who can use this program
  * 
- * @version 0.1
+ * @version Verion ou révision SVN
  * 
  * @author FlexiTeam - Valère FOREL
  */
-public class Users {
-    User getUser(String name){
-        return null;}
+public class User {
     /** 
-     * addUser - adds a user une the list
+     * getName - DOCME Description
+     * Quel service est rendu par cette méthode
      * 
      *     <code>exemple d'appel de la methode</code>
      *
-     * @param name
-     * @param passwd 
-     * 
-     * @author   FlexiTeam - Valère FOREL
-     * @date     13 déc. 2004
-     */
-    void addUser(String name, String passwd){}
-    User removeUser(String name){
-        return null;}
-    /** 
-     * checkUser - check if a user exists
-     * 
-     *     <code>exemple d'appel de la methode</code>
-     *
-     * @param name 
+     * @return 
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     14 déc. 2004
      */
-    void checkUser(String name){}
-    
+    public String getName(){
+        return null;}
+    /** 
+     * getMail - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @return 
+     * 
+     * @author   FlexiTeam - Valère FOREL
+     * @date     14 déc. 2004
+     */
+    public String getMail(){
+        return null;}
+
 }

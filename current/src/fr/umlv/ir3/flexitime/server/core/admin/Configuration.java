@@ -14,6 +14,6 @@ package fr.umlv.ir3.flexitime.server.core.admin;
  * 
  * @author FlexiTeam - Valère FOREL
  */
-public interface Configuration {
+public class Configuration {
 
 }
