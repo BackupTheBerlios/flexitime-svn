@@ -26,39 +26,33 @@ public class ConfigImpl extends DataImpl implements IConfig
     // ===========//
     // Champs //
     // ===========//
-    private String            serverData;
-    private String            serverLDAP;
-    // Port de communication LDAP
+    /** URI of the storage server */
+    private String            uriServerData    = null;
+    /** Name of database to store datas */
+    private String            nameBase         = null;
+    /** User who will be use to connect to the database */
+    private String            userBDD          = null;
+    /** Password who will be use to connect to the database */
+    private String            passBDD          = null;
+    /** URI of the directory */ 
+    private String            uriServerLDAP;
+    /** LDAP port */
     private int               portLDAP         = -1;
-    // Chemin d'accèe aux utilisateurs
+    /** LDAP path to user */
     private String            pathUserLDAP     = null;
-    // Chemin d'accès aux groupes
+    /** LDAP path to groups */
     private String            pathGroupLDAP    = null;
+    /** URI of the mail sender server */
+    private String            uriSMTPserver    = null;
 
     // ==================//
     // Constructeurs //
     // ==================//
-    protected ConfigImpl()
-    {}
-
     /**
-     * DOCME
-     * 
-     * @param serverData
-     * @param serverLDAP
-     * @param portLDAP
-     * @param pathUserLDAP
-     * @param pathGroupLDAP
+     * Construct an empty configuration object
      */
-    public ConfigImpl(String serverData, String serverLDAP, int portLDAP,
-            String pathUserLDAP, String pathGroupLDAP)
-    {
-        this.serverData = serverData;
-        this.serverLDAP = serverLDAP;
-        this.portLDAP = portLDAP;
-        this.pathUserLDAP = pathUserLDAP;
-        this.pathGroupLDAP = pathGroupLDAP;
-    }
+    public ConfigImpl()
+    {}
 
     // =============//
     // Méthodes //
@@ -66,38 +60,13 @@ public class ConfigImpl extends DataImpl implements IConfig
     /**
      * DOCME
      * 
-     * @return the URI of server data
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.admin.IConfig#getServerData()
-     */
-    public String getServerData()
-    {
-        return ( serverData );
-    }
-
-    /**
-     * DOCME
-     * 
-     * @param serverData
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.admin.IConfig#setServerData(java.lang.String)
-     */
-    public void setServerData(String serverData)
-    {
-        this.serverData = serverData;
-
-    }
-
-    /**
-     * DOCME
-     * 
      * @return the URI of the LDAP server
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.admin.IConfig#getServerLDAP()
+     * @see fr.umlv.ir3.flexitime.common.data.admin.IConfig#getUriServerLDAP()
      */
-    public String getServerLDAP()
+    public String getUriServerLDAP()
     {
-        return serverLDAP;
+        return uriServerLDAP;
     }
 
     /**
@@ -105,11 +74,11 @@ public class ConfigImpl extends DataImpl implements IConfig
      * 
      * @param serverLDAP
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.admin.IConfig#setServerLDAP(java.lang.String)
+     * @see fr.umlv.ir3.flexitime.common.data.admin.IConfig#setUriServerLDAP(java.lang.String)
      */
-    public void setServerLDAP(String serverLDAP)
+    public void setUriServerLDAP(String serverLDAP)
     {
-        this.serverLDAP = serverLDAP;
+        this.uriServerLDAP = serverLDAP;
     }
 
     /**
@@ -173,5 +142,98 @@ public class ConfigImpl extends DataImpl implements IConfig
     public void setPortLDAP(int portLDAP)
     {
         this.portLDAP = portLDAP;
+    }
+
+    /**
+     * Return uriSMTPserver
+     * 
+     * @return Returns the uriSMTPserver.
+     */
+    public String getUriSMTPserver()
+    {
+        return uriSMTPserver;
+    }
+
+    /**
+     * Set uriSMTPserver
+     * 
+     * @param uriSMTPserver
+     *            The uriSMTPserver to set.
+     */
+    public void setUriSMTPserver(String uriSMTPserver)
+    {
+        this.uriSMTPserver = uriSMTPserver;
+    }
+    
+    /**
+     * Return nameBase
+     * @return Returns the nameBase.
+     */
+    public String getNameBase()
+    {
+        return nameBase;
+    }
+    
+    /**
+     * Set nameBase
+     * @param nameBase The nameBase to set.
+     */
+    public void setNameBase(String nameBase)
+    {
+        this.nameBase = nameBase;
+    }
+    
+    /**
+     * Return passBDD
+     * @return Returns the passBDD.
+     */
+    public String getPassBDD()
+    {
+        return passBDD;
+    }
+    
+    /**
+     * Set passBDD
+     * @param passBDD The passBDD to set.
+     */
+    public void setPassBDD(String passBDD)
+    {
+        this.passBDD = passBDD;
+    }
+    
+    /**
+     * Return uriServerData
+     * @return Returns the uriServerData.
+     */
+    public String getUriServerData()
+    {
+        return uriServerData;
+    }
+
+    /**
+     * Set uriServerData
+     * @param uriServerData The uriServerData to set.
+     */
+    public void setUriServerData(String uriServerData)
+    {
+        this.uriServerData = uriServerData;
+    }
+
+    /**
+     * Return userBDD
+     * @return Returns the userBDD.
+     */
+    public String getUserBDD()
+    {
+        return userBDD;
+    }
+    
+    /**
+     * Set userBDD
+     * @param userBDD The userBDD to set.
+     */
+    public void setUserBDD(String userBDD)
+    {
+        this.userBDD = userBDD;
     }
 }

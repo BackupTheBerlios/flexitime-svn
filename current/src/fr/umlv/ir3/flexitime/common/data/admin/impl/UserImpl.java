@@ -3,15 +3,15 @@
  * by Guillaume GUERRIN
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
+
 package fr.umlv.ir3.flexitime.common.data.admin.impl;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
-
 /**
- * DOCME 
+ * DOCME
  * 
  * @version 201
  * 
@@ -24,80 +24,85 @@ public class UserImpl extends DataImpl implements IUser
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 4049641187222499896L;
-    //===========//
-	//  Champs	 //
-	//===========//
-    String password;
-   IPreferences preferences;
-   boolean ldap;
-    
+    // ===========//
+    // Champs //
+    // ===========//
+    String                    password;
+    IPreferences              preferences;
+    boolean                   ldap;
 
-    //=============//
-	//Constructeurs//
-    //=============//
-    protected UserImpl(){}
-    
+    // =============//
+    // Constructeurs//
+    // =============//
+    protected UserImpl()
+    {}
+
     /**
      * 
      * DOCME
+     * 
      * @param name
      */
     public UserImpl(String name)
     {
         super(name);
     }
-    
+
     /**
      * 
      * DOCME
+     * 
      * @param name
      * @param password
      * @param preferences
      * @param ldap
      */
-    public UserImpl(String name,String password,IPreferences preferences,boolean ldap)
+    public UserImpl(String name, String password, IPreferences preferences,
+            boolean ldap)
     {
         super(name);
-        this.password = password ;
-        this.preferences = preferences ;
-        this.ldap =ldap;
+        this.password = password;
+        this.preferences = preferences;
+        this.ldap = ldap;
     }
-    
+
     /**
      * 
      * DOCME
+     * 
      * @param name
      * @param preferences
      * @param ldap
      */
-    public UserImpl(String name,IPreferences preferences,boolean ldap)
+    public UserImpl(String name, IPreferences preferences, boolean ldap)
     {
         super(name);
-        this.preferences = preferences ;
-        this.ldap =ldap;
+        this.preferences = preferences;
+        this.ldap = ldap;
     }
-    
+
     /**
      * 
      * DOCME
+     * 
      * @param name
      * @param password
      * @param ldap
      */
-    public UserImpl(String name,String password,boolean ldap)
+    public UserImpl(String name, String password, boolean ldap)
     {
         super(name);
-        this.password = password ;
-        this.ldap =ldap;
+        this.password = password;
+        this.ldap = ldap;
     }
-    
-    //===========//
-    // Méthodes  //
-	//===========//
-    /** 
+
+    // ===========//
+    // Méthodes //
+    // ===========//
+    /**
      * DOCME
      * 
-     * @return user password 
+     * @return user password
      * 
      * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#getPassword()
      */
@@ -106,22 +111,22 @@ public class UserImpl extends DataImpl implements IUser
         return password;
     }
 
-    /** 
+    /**
      * DOCME
-     *
-     * @param password 
+     * 
+     * @param password
      * 
      * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#setPassword(java.lang.String)
      */
     public void setPassword(String password)
     {
-    	this.password = password;
+        this.password = password;
     }
 
-    /** 
+    /**
      * DOCME
      * 
-     * @return user preferences 
+     * @return user preferences
      * 
      * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#getPreferences()
      */
@@ -130,10 +135,10 @@ public class UserImpl extends DataImpl implements IUser
         return preferences;
     }
 
-    /** 
+    /**
      * DOCME
      * 
-     * @param preferences 
+     * @param preferences
      * 
      * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#setPreferences(fr.umlv.ir3.flexitime.common.data.admin.IPreferences)
      */
@@ -142,22 +147,44 @@ public class UserImpl extends DataImpl implements IUser
         this.preferences = preferences;
 
     }
-    
+
     /**
      * Return DOCME
+     * 
      * @return Returns the ldap.
      */
     public boolean isLdap()
     {
         return ldap;
     }
+
     /**
      * Set DOCME
-     * @param ldap The ldap to set.
+     * 
+     * @param ldap
+     *            The ldap to set.
      */
     public void setLdap(boolean ldap)
     {
         this.ldap = ldap;
     }
+    
+    /** 
+     * Test the equality of two users.
+     *
+     * @param obj other user to compare with
+     * @return <code>true</code> if this object is the same as the obj
+     *          argument; <code>false</code> otherwise.
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    public boolean equals(Object obj)
+    {
+        if(obj == null)
+            return false;
+        if(!(obj instanceof UserImpl))
+            return false;
+        UserImpl other = (UserImpl)obj;
+        return this.getName().equals(other.getName());
+    }
 }
-

@@ -19,26 +19,6 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 public interface IConfig extends IData
 {
     /**
-     *  getServerData
-     * returns the address of the server
-     *
-     * @return the address of the server
-     * 
-     * @author   FlexiTeam - Guillaume GUERRIN
-     */
-    public String getServerData();
-    
-    /**
-     *  setServerData
-     * set the address of the server
-     *
-     * @param address the address of the server
-     * 
-     * @author   FlexiTeam - Guillaume GUERRIN
-     */
-    public void setServerData(String address);
-    
-    /**
      *  getServerLDAP
      * returns the address of the server
      *
@@ -46,7 +26,7 @@ public interface IConfig extends IData
      * 
      * @author   FlexiTeam - Guillaume GUERRIN
      */
-    public String getServerLDAP();
+    public String getUriServerLDAP();
     
     /**
      *  setServerLDAP
@@ -56,7 +36,7 @@ public interface IConfig extends IData
      * 
      * @author   FlexiTeam - Guillaume GUERRIN
      */
-    public void setServerLDAP(String address);
+    public void setUriServerLDAP(String address);
     
     /**
      * Return DOCME
