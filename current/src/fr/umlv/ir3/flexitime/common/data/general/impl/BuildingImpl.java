@@ -46,6 +46,7 @@ public class BuildingImpl implements IBuilding
 	public BuildingImpl(String name)
 	{
 		this.strName = name;
+		listOfFloors = new ArrayList();
 	}
 	
     /**

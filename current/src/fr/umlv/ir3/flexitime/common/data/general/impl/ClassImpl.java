@@ -32,9 +32,7 @@ public class ClassImpl implements IClass
     //   Champs  //
     //===========// 
     private String strName;
-    private int iNbGroup;
     private List listOfGroups;
-    private int iNbPerson;
     private ITeachingStructure teachStruct;
     private TrackImpl parentTrack;
     
@@ -56,6 +54,7 @@ public class ClassImpl implements IClass
 	public ClassImpl(String name)
 	{
 		this.strName = name;
+		listOfGroups = new ArrayList();
 	}
 	
 	/**
@@ -68,6 +67,7 @@ public class ClassImpl implements IClass
 	{
 		this.strName = name;
 		this.parentTrack = track;
+		listOfGroups = new ArrayList();
 	}
 	
     /**
@@ -83,7 +83,6 @@ public class ClassImpl implements IClass
         this.strName = sName;
         this.listOfGroups = new ArrayList(listOfGroups);
         this.teachStruct = struct;
-        calculNbPersonAndNbGroup();
         this.parentTrack = track;
     }
 
@@ -96,17 +95,16 @@ public class ClassImpl implements IClass
      * <code>class.calculNbPersonAndNbGroup()</code>
      *
      */
-    public void calculNbPersonAndNbGroup()
+    public int calculNbPerson()
     {
-        iNbGroup = 0;
-        iNbPerson = 0;
+        int iNbPerson = 0;
         Iterator iter = listOfGroups.iterator();
         while(iter.hasNext())
         {
             GroupImpl gr = (GroupImpl)iter.next();
-            iNbPerson += gr.getNbPerson();
-            iNbGroup++;  
+            iNbPerson += gr.getNbPerson(); 
         }
+        return iNbPerson;
     }
     
     
@@ -120,7 +118,7 @@ public class ClassImpl implements IClass
      */
     public int getNbGroup()
     {
-        return iNbGroup;
+        return listOfGroups.size();
     }
 
     /** 
@@ -133,7 +131,7 @@ public class ClassImpl implements IClass
      */
     public int getNbPerson()
     {
-        return iNbPerson;
+        return calculNbPerson();
     }
 
     /** 
@@ -186,7 +184,6 @@ public class ClassImpl implements IClass
     public void setLstGroups(List lstGroup)
     {
         listOfGroups = new ArrayList(lstGroup);
-        calculNbPersonAndNbGroup();
     }
 
     /** 
@@ -200,8 +197,6 @@ public class ClassImpl implements IClass
     public void addGroup(IGroup group)
     {
         listOfGroups.add(group);
-        iNbPerson += group.getNbPerson();
-        iNbGroup++;
     }
 
     /** 
@@ -215,8 +210,6 @@ public class ClassImpl implements IClass
     public void removeGroup(IGroup group)
     {
         listOfGroups.remove(group);
-        iNbPerson -= group.getNbPerson();
-        iNbGroup--;
     }
     
 	/** 

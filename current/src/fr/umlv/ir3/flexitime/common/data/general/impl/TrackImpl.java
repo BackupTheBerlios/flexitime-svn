@@ -47,7 +47,8 @@ public class TrackImpl implements ITrack
      */
     public TrackImpl(String sName)
     {
-        this.strName = sName;        
+        this.strName = sName;  
+        this.listOfClasses = new ArrayList();
     }
     
 	/**

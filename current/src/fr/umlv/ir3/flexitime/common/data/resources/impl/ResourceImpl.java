@@ -46,6 +46,7 @@ public abstract class ResourceImpl implements IResource
 	public ResourceImpl(String name)
 	{
 		this.strName = name;
+		this.listOfBusy = new ArrayList();
 	}
 	
     /**

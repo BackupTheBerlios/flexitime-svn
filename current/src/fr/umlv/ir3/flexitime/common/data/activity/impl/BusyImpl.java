@@ -48,7 +48,7 @@ public abstract class BusyImpl implements IBusy
 	 */
 	public BusyImpl(String strName)
 	{
-		this.strName = strName;    
+		this.strName = strName;
 	}
 	
     /**

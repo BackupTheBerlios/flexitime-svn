@@ -47,6 +47,7 @@ public class FloorImpl implements IFloor
 	public FloorImpl(String name)
 	{
 		this.strName = name;
+		listOfRooms = new ArrayList();
 	}
 	
 	/**
@@ -59,6 +60,7 @@ public class FloorImpl implements IFloor
 	{
 		this.strName = name;
 		this.parentBuilding = building;
+		listOfRooms = new ArrayList();
 	}
 	
     /**
