@@ -6,9 +6,15 @@
  */
 package fr.umlv.ir3.flexitime.server.core.management.impl;
 
+import java.util.Date;
+
+import fr.umlv.ir3.flexitime.common.data.activity.Busy;
+import fr.umlv.ir3.flexitime.common.data.activity.Lesson;
 import fr.umlv.ir3.flexitime.common.data.general.*;
+import fr.umlv.ir3.flexitime.common.data.general.Class;
 import fr.umlv.ir3.flexitime.common.data.ressources.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
+import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.server.core.management.*;
 
 
@@ -47,8 +53,7 @@ public class ManagementFactoryImpl extends ManagementFactory{
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Rooms = Room */
-    public Rooms createRoom(String name, Floor floor) {
+    public Room createRoom(String name, Floor floor) {
         return null;
     }
     /**
@@ -68,18 +73,16 @@ public class ManagementFactoryImpl extends ManagementFactory{
     /**
      * createGroup - creates a group
      * 
-     *     <code>Group g = myFactory.createGroup("name", aPromotion)A VOIR</code>
+     *     <code>Group g = myFactory.createGroup("name", aClass)</code>
      *
      * @param name name of the group
-     * @param promotion promotion which the group depends
+     * @param _class class which the group depends
      * @return a Group
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Groups = Group */
-    /* A VOIR Promotion = ?? */
-    public Groups createGroup(String name, Promotion promotion) {
+    public Group createGroup(String name, Class _class) {
         return null;
     }
     /**
@@ -93,72 +96,66 @@ public class ManagementFactoryImpl extends ManagementFactory{
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR  Filere = Track */
-    public Filiere createTrack(String name) {
+    public Track createTrack(String name) {
         return null;
     } 
     /**
-     * createPromotion - creates a Promotion A VOIR
+     * createClass - creates a Class
      * 
-     *     <code>Promotion p = myFactory.createPromotion("name", aTrack) A VOIR</code>
+     *     <code>Class c = myFactory.createClass("name", aTrack)</code>
      *
-     * @param name name of the promotion A VOIR
-     * @return a Promotion A VOIR
+     * @param name name of the class
+     * @return a Class
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Promotion = ?? */
-    public Promotion createPromotion(String name) {
+    public Class createClass(String name) {
         return null;
     } 
     /**
-     * createBloc - create a bloc
+     * createSubjectsGroup - create a group of subjects
      * 
-     *     <code>Bloc b = myFactory.createBloc("name", aPromotion)A VOIR</code>
+     *     <code>SubjectsGroup b = myFactory.createBloc("name", aClass)</code>
      *
-     * @param name name of the bloc
-     * @param promotion promotion which the bloc depends
-     * @return a BLoc
+     * @param name name of the group of subjects
+     * @param _class class which the group of subjects depends
+     * @return a SubjectsGroup
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Promotion = ?? */
-    public Bloc createBloc(String name, Promotion promotion) {
+    public SubjectsGroup createSubjectsGroup(String name, Class _class) {
         return null;
     } 
     /**
-     * createMatiere - creates a matiere A VOIR
+     * createSubject - creates a subject
      * 
-     *     <code>Matiere m = myFactory.createMatiere("name", aBloc)A VOIR</code>
+     *     <code>Subject s = myFactory.createSubject("name", aSubjectsGroup)</code>
      *
-     * @param name name of the matiere A VOIR
-     * @param bloc bloc which the matiere depends
-     * @return a Bloc
+     * @param name name of the subject
+     * @param subjectsGroup group of subjects which the subject depends
+     * @return a Subject
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Matiere = Subject */
-    public Matiere createMatiere(String name, Bloc bloc) {
+    public Subject createSubject(String name, SubjectsGroup subjectsGroup) {
         return null;
     } 
     /**
      * createCourse - create a course
      * 
-     *     <code>Cours c = myFactory.createCourse("name", aMatiere) A VOIR</code>
+     *     <code>Cours c = myFactory.createCourse("name", aSubject)</code>
      *
      * @param name name of the course
-     * @param matiere matiere which the course depends
+     * @param subject subject which the course depends
      * @return a Course
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Cours = Course */
-    /* A VOIR Matiere = Subject */
-    public Cours createCourse(String name, Matiere matiere) {
+    public Course createCourse(String name, Subject subject) {
         return null;
     } 
     /**
@@ -189,7 +186,46 @@ public class ManagementFactoryImpl extends ManagementFactory{
      */
     public Floor createFloor(String name, Building building) {
         return null;
-    } 
+    }
+    /** 
+     * createLesson - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param date
+     * @param time
+     * @param resource
+     * @return 
+     * 
+     * @see fr.umlv.ir3.flexitime.server.core.management.ManagementFactory#createLesson(java.util.Date, fr.umlv.ir3.flexitime.common.tools.Time, fr.umlv.ir3.flexitime.common.data.ressources.Resource)
+     * @author   FlexiTeam - Administrateur
+     * @date     15 déc. 2004
+     */
+    public Lesson createLesson(Date date, Time time, Resource resource) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    /** 
+     * createBusy - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param date
+     * @param time
+     * @param resource
+     * @return 
+     * 
+     * @see fr.umlv.ir3.flexitime.server.core.management.ManagementFactory#createBusy(java.util.Date, fr.umlv.ir3.flexitime.common.tools.Time, fr.umlv.ir3.flexitime.common.data.ressources.Resource)
+     * @author   FlexiTeam - Administrateur
+     * @date     15 déc. 2004
+     */
+    public Busy createBusy(Date date, Time time, Resource resource) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
 
 }

@@ -7,6 +7,7 @@
 package fr.umlv.ir3.flexitime.server.core.management;
 
 import fr.umlv.ir3.flexitime.common.data.general.*;
+import fr.umlv.ir3.flexitime.common.data.ressources.Room;
 
 
 /**
@@ -52,5 +53,89 @@ public interface BuildingsManager {
      * @date     13 déc. 2004
      */
     Building removeBuilding(String name);
-
+    /** 
+     * getFloor - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param name
+     * @param building
+     * @return 
+     * 
+     * @author   FlexiTeam - Administrateur
+     * @date     15 déc. 2004
+     */
+    Floor getFloor(String name, Building building);
+    /** 
+     * addFloor - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param floor
+     * @param building 
+     * 
+     * @author   FlexiTeam - Administrateur
+     * @date     15 déc. 2004
+     */
+    void addFloor(Floor floor, Building building);
+    /** 
+     * removeFloor - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param name
+     * @param building
+     * @return 
+     * 
+     * @author   FlexiTeam - Administrateur
+     * @date     15 déc. 2004
+     */
+    Floor removeFloor(String name, Building building);
+    /** 
+     * getRoom - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param name
+     * @param building
+     * @param floor
+     * @return 
+     * 
+     * @author   FlexiTeam - Administrateur
+     * @date     15 déc. 2004
+     */
+    Room getRoom(String name, Building building, Floor floor);
+    /** 
+     * addRoom - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param room
+     * @param building
+     * @param floor 
+     * 
+     * @author   FlexiTeam - Administrateur
+     * @date     15 déc. 2004
+     */
+    void addRoom(Room room, Building building, Floor floor);
+    /** 
+     * removeRoom - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param name
+     * @param building
+     * @param floor
+     * @return 
+     * 
+     * @author   FlexiTeam - Administrateur
+     * @date     15 déc. 2004
+     */
+    Room removeRoom(String name, Building building, Floor floor);
 }

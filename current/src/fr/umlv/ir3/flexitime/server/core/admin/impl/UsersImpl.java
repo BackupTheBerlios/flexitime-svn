@@ -14,7 +14,7 @@ package fr.umlv.ir3.flexitime.server.core.admin.impl;
  * 
  * @author FlexiTeam - Valère FOREL
  */
-public class UsersImpl implements fr.umlv.ir3.flexitime.server.core.admin.Users {
+public class UsersImpl{
 
     /** 
      * addUser - DOCME Description

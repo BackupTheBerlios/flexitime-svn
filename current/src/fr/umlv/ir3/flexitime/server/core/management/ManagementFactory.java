@@ -6,9 +6,15 @@
  */
 package fr.umlv.ir3.flexitime.server.core.management;
 
+import java.util.Date;
+
 import fr.umlv.ir3.flexitime.common.data.ressources.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
+import fr.umlv.ir3.flexitime.common.data.activity.Busy;
+import fr.umlv.ir3.flexitime.common.data.activity.Lesson;
 import fr.umlv.ir3.flexitime.common.data.general.*;
+import fr.umlv.ir3.flexitime.common.data.general.Class;
+import fr.umlv.ir3.flexitime.common.tools.Time;
 
 /**
  * ManagementFactory - Creates all the ressources needed
@@ -42,8 +48,7 @@ public abstract class ManagementFactory {
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Rooms = Room */
-    public abstract Rooms createRoom(String name, Floor floor);
+    public abstract Room createRoom(String name, Floor floor);
     /**
      * createDevice - creates a device
      * 
@@ -59,18 +64,16 @@ public abstract class ManagementFactory {
     /**
      * createGroup - creates a group
      * 
-     *     <code>Group g = myFactory.createGroup("name", aPromotion)A VOIR</code>
+     *     <code>Group g = myFactory.createGroup("name", aClass)</code>
      *
      * @param name name of the group
-     * @param promotion promotion which the group depends
+     * @param _class class which the group depends
      * @return a Group
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Groups = Group */
-    /* A VOIR Promotion = ?? */
-    public abstract Groups createGroup(String name, Promotion promotion);
+    public abstract Group createGroup(String name, Class _class);
     /**
      * createTrack - creates a Track
      * 
@@ -82,64 +85,58 @@ public abstract class ManagementFactory {
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR  Filere = Track */
-    public abstract Filiere createTrack(String name); 
+    public abstract Track createTrack(String name); 
     /**
-     * createPromotion - creates a Promotion A VOIR
+     * createClass - creates a Class 
      * 
-     *     <code>Promotion p = myFactory.createPromotion("name", aTrack) A VOIR</code>
+     *     <code>Class c = myFactory.createClass("name", aTrack)</code>
      *
-     * @param name name of the promotion A VOIR
-     * @return a Promotion A VOIR
+     * @param name name of the class 
+     * @return a Class 
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Promotion = ?? */
-    public abstract Promotion createPromotion(String name); 
+    public abstract Class createClass(String name); 
     /**
-     * createBloc - create a bloc
+     * createSubjectsGroup - create a group of subjects
      * 
-     *     <code>Bloc b = myFactory.createBloc("name", aPromotion)A VOIR</code>
+     *     <code>SubjectsGroup b = myFactory.createBloc("name", aClass)</code>
      *
-     * @param name name of the bloc
-     * @param promotion promotion which the bloc depends
-     * @return a BLoc
+     * @param name name of the group of subjects
+     * @param _class class which the group of subjects depends
+     * @return a SubjectsGroup
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Promotion = ?? */
-    public abstract Bloc createBloc(String name, Promotion promotion); 
+    public abstract SubjectsGroup createSubjectsGroup(String name, Class _class); 
     /**
-     * createMatiere - creates a matiere A VOIR
+     * createSubject - creates a subject
      * 
-     *     <code>Matiere m = myFactory.createMatiere("name", aBloc)A VOIR</code>
+     *     <code>Subject m = myFactory.createSubject("name", aSubjectsGroup)</code>
      *
-     * @param name name of the matiere A VOIR
-     * @param bloc bloc which the matiere depends
-     * @return a Bloc
+     * @param name name of the subject
+     * @param subjectsGroup groups of subjects which the subject depends
+     * @return a SubjectsGroup
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Matiere = Subject */
-    public abstract Matiere createMatiere(String name, Bloc bloc); 
+    public abstract Subject createSubject(String name, SubjectsGroup subjectsGroup); 
     /**
      * createCourse - create a course
      * 
-     *     <code>Cours c = myFactory.createCourse("name", aMatiere) A VOIR</code>
+     *     <code>Course c = myFactory.createCourse("name", aSubject)</code>
      *
      * @param name name of the course
-     * @param matiere matiere which the course depends
+     * @param subject subject which the course depends
      * @return a Course
      * 
      * @author   FlexiTeam - Valère FOREL
      * @date     13 déc. 2004
      */
-    /* A VOIR Cours = Course */
-    /* A VOIR Matiere = Subject */
-    public abstract Cours createCourse(String name, Matiere matiere); 
+    public abstract Course createCourse(String name, Subject subject); 
     /**
      * createBuilding - creates a building
      * 
@@ -165,6 +162,34 @@ public abstract class ManagementFactory {
      * @date     13 déc. 2004
      */
     public abstract Floor createFloor(String name, Building building); 
+    /** 
+     * createLesson - creates a lesson
+     * 
+     *     <code>Lesson l = myManagementFactory.createLesson(date,time,resource)</code>
+     *
+     * @param date date of the lesson
+     * @param time time of the lesson
+     * @param resource resource which is plannified
+     * @return a Lesson
+     * 
+     * @author   FlexiTeam - Valère FOREL
+     * @date     15 déc. 2004
+     */
+    public abstract Lesson createLesson(Date date, Time time, Resource resource);
+    /** 
+     * createBusy - creates a unavaibility
+     * 
+     *     <code>Busy b = myManagementFactory.createBusy(date,time,resource)</code>
+     *
+     * @param date date of the unavaibility
+     * @param time time of the unavaibility
+     * @param resource resource which is plannified
+     * @return a Busy
+     * 
+     * @author   FlexiTeam - Administrateur
+     * @date     15 déc. 2004
+     */
+    public abstract Busy createBusy(Date date, Time time, Resource resource);
     /**
      * getFactory - get the ManagementFactory
      * 

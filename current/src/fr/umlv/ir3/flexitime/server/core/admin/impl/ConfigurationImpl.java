@@ -14,7 +14,6 @@ package fr.umlv.ir3.flexitime.server.core.admin.impl;
  * 
  * @author FlexiTeam - Valère FOREL
  */
-public class ConfigurationImpl implements
-        fr.umlv.ir3.flexitime.server.core.admin.Configuration {
+public class ConfigurationImpl{
 
 }
