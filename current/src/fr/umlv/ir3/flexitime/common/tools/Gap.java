@@ -62,23 +62,19 @@ public class Gap {
 		this.startDate = new Time(startDate);
 		this.endDate = new Time(endDate);
 	}
-	/** 
-	 * getEndDate - DOCME Description
-	 * 
-	 *     <code>exemple d'appel de la methode</code>
+    //=============//
+    //  Méthodes   //
+    //=============//
+    /** 
+	 * getEndDate -
 	 *
 	 * @return the end date
 	 */
-    //=============//
-    //  Méthodes   //
-	//=============//
 	public Time getEndDate() {
 		return endDate;
 	}
 	/** 
-	 * setEndDate - DOCME Description
-	 * 
-	 *     <code>exemple d'appel de la methode</code>
+	 * setEndDate - 
 	 *
 	 * @param endDate 
 	 */
@@ -86,9 +82,7 @@ public class Gap {
 		this.endDate = endDate;
 	}
 	/** 
-	 * getStartDate - DOCME Description
-	 * 
-	 *     <code>exemple d'appel de la methode</code>
+	 * getStartDate - 
 	 *
 	 * @return the start date
 	 */
@@ -96,9 +90,7 @@ public class Gap {
 		return startDate;
 	}
 	/** 
-	 * setStartDate - DOCME Description
-	 * 
-	 *     <code>exemple d'appel de la methode</code>
+	 * setStartDate - 
 	 *
 	 * @param startDate 
 	 */
@@ -107,8 +99,6 @@ public class Gap {
 	}
 	/** 
 	 * getGap - Gets a Gap with 2 Date
-	 * 
-	 * <code>FlexiGap.getGap(start,end)</code>
 	 *
 	 * @param start the start Date
 	 * @param end the end Date

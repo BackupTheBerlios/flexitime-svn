@@ -58,8 +58,6 @@ public class Time
 	//=============//
     /** 
      * getYear - get the year
-     * 
-     *     <code>int y = time.getYear()</code>
      *
      * @return Returns the year
      */
@@ -67,10 +65,8 @@ public class Time
         return cal.get(Calendar.YEAR);
     }
     /** 
-     * getIMonth - get the month
-     * 
-     *     <code>int m = time.getIMonth()</code>
-     * January = 1
+     * getIMonth - get the month<br>
+     * January = 1<br>
      * December = 12
      *
      * @return Returns the month
@@ -80,8 +76,6 @@ public class Time
     }
     /** 
      * getStrMonth - get the Month in String
-     * 
-     *     <code>int m = time.getStrMonth()</code>
      *
      * @return Returns the month in String
      */
@@ -90,8 +84,6 @@ public class Time
     }
     /** 
      * getWeek - get the week of the year
-     * 
-     *     <code>int w = time.getWeek()</code>
      *
      * @return Returns the week
      */
@@ -100,8 +92,6 @@ public class Time
     }
     /** 
      * getIDay - get the day in the month
-     * 
-     *     <code>int d = time.getIDay()</code>
      *
      * @return Returns the day in the month
      */
@@ -109,10 +99,8 @@ public class Time
         return cal.get(Calendar.DAY_OF_MONTH);
     }
     /** 
-     * getIDay - get the day in week
-     * 
-     *     <code>int d = time.getIDayOfWeek()</code>
-     * Monday = 0
+     * getIDay - get the day in week<br>
+     * Monday = 0<br>
      * Sunday = 6
      *
      * @return Returns the day in the week
@@ -124,8 +112,6 @@ public class Time
     } 
     /** 
      * getStrDay - get the day in String
-     * 
-     *     <code>String d = time.getStrDay()</code>
      *
      * @return Returns the day in String
      */
@@ -136,8 +122,6 @@ public class Time
     }
     /** 
      * getHour - get the hour in 24H
-     * 
-     *     <code>int h = time.getHour()</code>
      *
      * @return Returns the hour in 24H
      */
@@ -146,8 +130,6 @@ public class Time
     }
     /** 
      * getMinute - get the minutes
-     * 
-     *     <code>int min = time.getMinute()</code>
      *
      * @return Returns the minutes
      */
@@ -156,8 +138,6 @@ public class Time
     }
     /** 
      * getSecond - get the seconds
-     * 
-     *     <code>int s = time.getSecond()</code>
      *
      * @return Returns the seconds
      */
@@ -166,8 +146,6 @@ public class Time
     }
     /** 
      * getMSecond - get the milliseconds
-     * 
-     *     <code>int ms = time.getMSecond()</code>
      *
      * @return Returns the milliseconds
      */
@@ -176,8 +154,6 @@ public class Time
     }
     /** 
      * getDate - get the date in dd/mm/yyyy
-     * 
-     *     <code>String date = time.getDate()</code>
      *
      * @return Returns the date
      */
@@ -188,8 +164,6 @@ public class Time
     }
     /** 
      * getStrDate - get the date in "strDay iDay strMonth year"
-     * 
-     *     <code>String date = time.getStrDate()</code>
      *
      * @return Returns the date
      */
@@ -198,8 +172,6 @@ public class Time
     }
     /** 
      * getFullTime - get the time in "hh:mm:ss:mms"
-     * 
-     *     <code>String t = time.getFullTime()</code>
      *
      * @return Returns the time
      */
@@ -213,8 +185,6 @@ public class Time
     }
     /** 
      * getTime - get the time in "hh:mm:ss:mms"
-     * 
-     *     <code>String t = time.getTime()</code>
      *
      * @return Returns the time
      */
@@ -225,8 +195,6 @@ public class Time
     }
     /** 
      * getCal - get the calendar
-     * 
-     *     <code>Calendar c = time.getgetCal()</code>
      *
      * @return Returns the calendar
      */
@@ -235,8 +203,6 @@ public class Time
     }
     /** 
      * compare - compare 2 Time
-     * 
-     *     <code>int c = Time.compare(time1,time2)</code>
      *
      * @param t1 a Time
      * @param t2 a Time
@@ -251,8 +217,6 @@ public class Time
     }
     /** 
      * addDay - add or remove a number of day
-     * 
-     *     <code>c.addDay(2)</code>
      *
      * @param number the number to add or remove 
      */
@@ -261,8 +225,6 @@ public class Time
     }
     /** 
      * addMonth - add or remove a number of month
-     * 
-     *     <code>c.addMonth(2)</code>
      *
      * @param number the number of month to add or remove
      */
@@ -271,8 +233,6 @@ public class Time
     }
     /** 
      * addYear - add or remove a number of year
-     * 
-     *     <code>c.addYear(2)</code>
      *
      * @param number the number of year to add or remove
      */
@@ -281,8 +241,6 @@ public class Time
     }
     /** 
      * addHour - add or remove a number of hour
-     * 
-     *     <code>c.addHour(2)</code>
      *
      * @param number the number of hour to add or remove
      */
@@ -291,8 +249,6 @@ public class Time
     }
     /** 
      * addMinute - add or remove a number of minute
-     * 
-     *     <code>c.addMinute(2)</code>
      *
      * @param number the number of minute to add or remove
      */
@@ -301,8 +257,6 @@ public class Time
     }
     /** 
      * addSecond - add or remove a number of seconds
-     * 
-     *     <code>c.addSecond(2)</code>
      *
      * @param number the number of second to add or remove
      */
@@ -311,8 +265,6 @@ public class Time
     }
     /** 
      * addMSecond - add or remove a number of milliseconds
-     * 
-     *     <code>c.addMSecond(2)</code>
      *
      * @param number the number of milliseconds to add or remove
      */
@@ -321,8 +273,6 @@ public class Time
     }
     /** 
      * addWeek - add or remove a number of week
-     * 
-     *     <code>c.addWeek(2)</code>
      *
      * @param number the number of week to add or remove
      */
@@ -334,8 +284,6 @@ public class Time
 	//======================//
     /** 
      * getGapMSecond - Get the number of millisecond between two Time
-     * 
-     *     <code>long l = FlexiTime.getGapMSecond(t1,t2)</code>
      *
      * @param t1 a Time
      * @param t2 a Time
@@ -348,8 +296,6 @@ public class Time
     }
     /** 
      * getGapMSecond - Get the number of second between two Time
-     * 
-     *     <code>long l = FlexiTime.getGapSecond(t1,t2)</code>
      *
      * @param t1 a Time
      * @param t2 a Time
@@ -362,8 +308,6 @@ public class Time
     }
     /** 
      * getGapMinute - Get the number of minute between two Time
-     * 
-     *     <code>int i = FlexiTime.getGapMinute(t1,t2)</code>
      *
      * @param t1 a Time
      * @param t2 a Time
@@ -381,8 +325,6 @@ public class Time
     }
     /** 
      * getGapHour - Get the number of hour between two Time
-     * 
-     *     <code>int i = FlexiTime.getGapHour(t1,t2)</code>
      *
      * @param t1 a Time
      * @param t2 a Time
@@ -400,8 +342,6 @@ public class Time
     }
     /** 
      * getGapWeek - Get the number of week between two Time
-     * 
-     *     <code>int i = FlexiTime.getGapWeek(t1,t2)</code>
      *
      * @param t1 a Time
      * @param t2 a Time
@@ -437,7 +377,6 @@ public class Time
     /** 
      * countNbHour_HM - gets the number of hour (in float) between 2 Time<br>
      * It doesn't take care of year, month, day
-     * <code>Time.countNbHour_HM(t1,t2)</code>
      *
      * @param begin the begin time
      * @param end the end time
@@ -450,7 +389,6 @@ public class Time
     /** 
      * countNbMinute_HM - gets the number of minute between 2 Time<br>
      * It doesn't take care of year, month, day
-     * <code>Time.countNbMinute_HM(t1,t2)</code>
      *
      * @param begin the begin time
      * @param end the end time

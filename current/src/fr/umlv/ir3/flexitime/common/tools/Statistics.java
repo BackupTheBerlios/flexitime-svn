@@ -1,6 +1,6 @@
 /*
  * Created on 11 janv. 2005
- * by Administrateur
+ * by VF
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.common.tools;
@@ -21,15 +21,11 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Statistics - gets the statistics of a teacher or a group 
  * 
- * @version Verion ou révision SVN
+ * @version 0.1
  * 
- * @author FlexiTeam - Administrateur
+ * @author FlexiTeam - VF
  */
 public class Statistics
 {
@@ -57,9 +53,7 @@ public class Statistics
     // Méthodes    //
     //-------------//
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * getCourseName -
      *
      * @return Returns the courses
      */
@@ -70,9 +64,7 @@ public class Statistics
         this.courseName = courseName;
     }
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * getGroups - gets the list of the group
      *
      * @return Returns the groups
      */
@@ -83,12 +75,9 @@ public class Statistics
         groups.add(group);
     }
     /** 
-     * getStatTeacher - gets the Statistiques of a teacher<br>
+     * getDone - Says if the statistics is done or not yet
      *
-     * <code>Statistiques.getStatTeacher(t)</code>
-     *
-     * @param t the teacher
-     * @return Returns the stats of the teacher
+     * @return the state of statistics
      */
     public boolean getDone(){
         return done;
@@ -96,12 +85,23 @@ public class Statistics
     private void setDone(boolean bool){
         done = bool;
     }
+    /** 
+     * getNbHour - the number of hours
+     *
+     * @return the number of hours
+     */
     public int getNbHours(){
         return nbHours;
     }
     private void setNbHours(int nb){
         this.nbHours = nb;
     }
+    /** 
+     * getStatTeacher - gets the Statistiques of a teacher<br>
+     *
+     * @param t the teacher
+     * @return Returns the stats of the teacher
+     */
     public static List getStatTeacher(ITeacher t){
         ArrayList<Statistics> list = new ArrayList<Statistics>();
         Iterator it = t.getLstBusy().iterator();
@@ -112,8 +112,6 @@ public class Statistics
     }
     /** 
      * getStatGroup - gets the Statistiques of a group<br>
-     *
-     * <code>Statistiques.getStatGroup(g)</code>
      *
      * @param g the group
      * @return Returns the stats of the group
@@ -146,9 +144,8 @@ public class Statistics
     // Un exemple
     //****************
     /** 
-     * DOCME Description
+     * Description
      * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
      *
      * @param args 
      */
