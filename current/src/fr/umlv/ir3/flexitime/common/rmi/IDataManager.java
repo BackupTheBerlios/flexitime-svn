@@ -23,6 +23,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 
 /**
  * Interface for all Data managers extends Remote to be called remotely
@@ -79,7 +80,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException
      */
-    public boolean saveOrUpdateBuilding(IBuilding building) throws RemoteException;
+    public IBuilding saveOrUpdateBuilding(IBuilding building) throws RemoteException;
 
     /**
      * get all datas managed by this manager
@@ -95,8 +96,9 @@ public interface IDataManager extends Remote
      * @param building
      * @return true if OK
      * @throws RemoteException
+     * @throws FlexiException 
      */
-    public boolean deleteBuilding(IBuilding building) throws RemoteException;
+    public boolean deleteBuilding(IBuilding building) throws RemoteException, FlexiException;
 
     /**
      * Adds a Data created by a client Have to save Data and fire the add
@@ -105,7 +107,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException
      */
-    public boolean saveOrUpdateClass(IClass _class) throws RemoteException;
+    public IClass saveOrUpdateClass(IClass _class) throws RemoteException;
 
     /**
      * get all datas managed by this manager
@@ -122,8 +124,9 @@ public interface IDataManager extends Remote
      * @param _class
      * @return true if OK
      * @throws RemoteException
+     * @throws FlexiException 
      */
-    public boolean deleteClass(IClass _class) throws RemoteException;
+    public boolean deleteClass(IClass _class) throws RemoteException, FlexiException;
 
     /**
      * Adds a Data created by a client Have to save Data and fire the add
@@ -132,7 +135,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException
      */
-    public boolean saveOrUpdateCourse(ICourse course) throws RemoteException;
+    public ICourse saveOrUpdateCourse(ICourse course) throws RemoteException;
 
     /**
      * get all datas managed by this manager
@@ -149,8 +152,9 @@ public interface IDataManager extends Remote
      * @param course
      * @return true if OK
      * @throws RemoteException
+     * @throws FlexiException 
      */
-    public boolean deleteCourse(ICourse course) throws RemoteException;
+    public boolean deleteCourse(ICourse course) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -159,7 +163,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean saveOrUpdateDevice(IDevice device) throws RemoteException;
+    public IDevice saveOrUpdateDevice(IDevice device) throws RemoteException;
     
     /**
      *  
@@ -175,8 +179,9 @@ public interface IDataManager extends Remote
      * @param device 
      * @return true if OK
      * @throws RemoteException 
+     * @throws FlexiException 
      */
-    public boolean deleteDevice(IDevice device) throws RemoteException;
+    public boolean deleteDevice(IDevice device) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -185,7 +190,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean saveOrUpdateFloor(IFloor floor) throws RemoteException;
+    public IFloor saveOrUpdateFloor(IFloor floor) throws RemoteException;
     
     /**
      *  
@@ -202,8 +207,9 @@ public interface IDataManager extends Remote
      * @param floor 
      * @return true if OK
      * @throws RemoteException 
+     * @throws FlexiException 
      */
-    public boolean deleteFloor(IFloor floor) throws RemoteException;
+    public boolean deleteFloor(IFloor floor) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -212,7 +218,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean saveOrUpdateGroup(IGroup group) throws RemoteException;
+    public IGroup saveOrUpdateGroup(IGroup group) throws RemoteException;
     
     /**
      *  
@@ -229,8 +235,9 @@ public interface IDataManager extends Remote
      * @param group 
      * @return true if OK
      * @throws RemoteException 
+     * @throws FlexiException 
      */
-    public boolean deleteGroup(IGroup group) throws RemoteException;
+    public boolean deleteGroup(IGroup group) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -239,7 +246,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean saveOrUpdateLesson(ILesson lesson) throws RemoteException;
+    public ILesson saveOrUpdateLesson(ILesson lesson) throws RemoteException;
     
     /**
      *  
@@ -266,7 +273,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean saveOrUpdateRoom(IRoom room) throws RemoteException;
+    public IRoom saveOrUpdateRoom(IRoom room) throws RemoteException;
     
     /**
      *  
@@ -283,8 +290,9 @@ public interface IDataManager extends Remote
      * @param room 
      * @return true if OK
      * @throws RemoteException 
+     * @throws FlexiException 
      */
-    public boolean deleteRoom(IRoom room) throws RemoteException;
+    public boolean deleteRoom(IRoom room) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -293,7 +301,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean saveOrUpdateSubject(ISubject subject) throws RemoteException;
+    public ISubject saveOrUpdateSubject(ISubject subject) throws RemoteException;
     
     /**
      *  
@@ -310,8 +318,9 @@ public interface IDataManager extends Remote
      * @param subject 
      * @return true if OK
      * @throws RemoteException 
+     * @throws FlexiException 
      */
-    public boolean deleteSubject(ISubject subject) throws RemoteException;
+    public boolean deleteSubject(ISubject subject) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -320,16 +329,16 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean saveOrUpdateSubjectsGroup(ISubjectsGroup subjectsGroup) throws RemoteException;
+    public ISubjectsGroup saveOrUpdateSubjectsGroup(ISubjectsGroup subjectsGroup) throws RemoteException;
     
     /**
      *  
      * get all datas managed by this manager
-     * @param _class 
+     * @param ts 
      * @return all datas
      * @throws RemoteException 
      */
-    public List<ISubjectsGroup> getSubjectsGroup(IClass _class) throws RemoteException; 
+    public List<ISubjectsGroup> getSubjectsGroup(ITeachingStructure ts) throws RemoteException; 
     /**
      *  
      * removes a data
@@ -337,8 +346,9 @@ public interface IDataManager extends Remote
      * @param subjectsGroup 
      * @return true if OK
      * @throws RemoteException 
+     * @throws FlexiException 
      */
-    public boolean deleteSubjectsGroup(ISubjectsGroup subjectsGroup) throws RemoteException;
+    public boolean deleteSubjectsGroup(ISubjectsGroup subjectsGroup) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -347,7 +357,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean saveOrUpdateTeacher(ITeacher teacher) throws RemoteException;
+    public ITeacher saveOrUpdateTeacher(ITeacher teacher) throws RemoteException;
     
     /**
      *  
@@ -364,7 +374,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean deleteTeacher(ITeacher teacher) throws RemoteException;
+    public boolean deleteTeacher(ITeacher teacher) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -373,7 +383,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean saveOrUpdateTeachingStructure(ITeachingStructure teachingStructure) throws RemoteException;
+    public ITeachingStructure saveOrUpdateTeachingStructure(ITeachingStructure teachingStructure) throws RemoteException;
     
     /**
      *  
@@ -390,8 +400,9 @@ public interface IDataManager extends Remote
      * @param teachingStructure 
      * @return true if OK
      * @throws RemoteException 
+     * @throws FlexiException 
      */
-    public boolean deleteTeachingStructure(ITeachingStructure teachingStructure) throws RemoteException;
+    public boolean deleteTeachingStructure(ITeachingStructure teachingStructure) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -400,7 +411,7 @@ public interface IDataManager extends Remote
      * @return true if OK
      * @throws RemoteException 
      */
-    public boolean saveOrUpdateTrack(ITrack track) throws RemoteException;
+    public ITrack saveOrUpdateTrack(ITrack track) throws RemoteException;
     
     /**
      *  
@@ -416,6 +427,7 @@ public interface IDataManager extends Remote
      * @param track 
      * @return true if OK
      * @throws RemoteException 
+     * @throws FlexiException 
      */
-    public boolean deleteTrack(ITrack track) throws RemoteException;
+    public boolean deleteTrack(ITrack track) throws RemoteException, FlexiException;
 }

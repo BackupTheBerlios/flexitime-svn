@@ -1,6 +1,7 @@
 
 package fr.umlv.ir3.flexitime.common.event;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.EventObject;
 
@@ -10,13 +11,14 @@ import java.util.EventObject;
  * @author Remi Forax
  * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener
  */
-public class DataEvent extends EventObject
+public class DataEvent implements Serializable
 {
 
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3979274642101712951L;
+    private Object source;
 
     /**
      * Event delivered whenever the state of an item's property change.
@@ -74,7 +76,7 @@ public class DataEvent extends EventObject
     public DataEvent(Object item, String propertyName, int eventType,
             Object[] subObjects, int[] subIndicies)
     {
-        super(item);
+        source = item;
         this.propertyName = propertyName;
         this.eventType = eventType;
         this.subObjects = subObjects;
@@ -126,6 +128,21 @@ public class DataEvent extends EventObject
     public int[] getSubIndicies()
     {
         return subIndicies;
+    }
+    
+    /**
+     *  
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return 
+     * 
+     * @see (si nécessaire)
+     */
+    public Object getSource()
+    {
+        return source;
     }
 
     /**

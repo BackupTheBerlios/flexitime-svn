@@ -9,10 +9,12 @@ package fr.umlv.ir3.flexitime.server.io.storage;
 
 import java.util.List;
 
+import net.sf.hibernate.Hibernate;
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
 
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 
 
@@ -64,20 +66,21 @@ public class TeachingStructureStorage
     /**
      *  
      * Method to get all the teaching structures
+     * @param parent 
      * @return List of ITeachingStructure
      * @throws HibernateException 
      * 
      */
-    public static List get() throws HibernateException
+    public static ITeachingStructure get(IClass parent) throws HibernateException
     {
         Session s = null;
         Transaction tx = null;
-        List l = null;
+        List<ITeachingStructure> l = null;
         try
         {
             s = HibernateUtil.currentSession();
             tx = s.beginTransaction();
-            l = s.find("FROM TeachingStructureImpl");
+            l = s.find("FROM TeachingStructureImpl as t WHERE t.parentClass = ? ", parent.getIdData(), Hibernate.LONG);
             tx.commit();
         }
         catch (HibernateException e)
@@ -91,7 +94,7 @@ public class TeachingStructureStorage
             HibernateUtil.closeSession();
         }
 
-        return l;
+        return l.iterator().next();
     }
     
     /**

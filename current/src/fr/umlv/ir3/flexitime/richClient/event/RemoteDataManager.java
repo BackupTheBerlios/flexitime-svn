@@ -5,8 +5,12 @@
  */
 package fr.umlv.ir3.flexitime.richClient.event;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
 import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
-import fr.umlv.ir3.flexitime.server.core.DataManagerImpl;
 
 
 /**
@@ -22,7 +26,7 @@ import fr.umlv.ir3.flexitime.server.core.DataManagerImpl;
  */
 public class RemoteDataManager
 {
-    private static IDataManager manager = new DataManagerImpl();
+    private static IDataManager manager;
 
     /**
      *  
@@ -33,6 +37,27 @@ public class RemoteDataManager
      */
     public static IDataManager getManager()
     {
+        if(manager == null)
+        {
+            try
+            {
+                Registry r = LocateRegistry.getRegistry("localhost");
+                try
+                {
+                    manager = (IDataManager) r.lookup("manager");
+                }
+                catch (NotBoundException e1)
+                {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+            catch (RemoteException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
         return manager;
     }
 }
