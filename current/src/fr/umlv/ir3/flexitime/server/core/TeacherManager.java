@@ -10,11 +10,11 @@ package fr.umlv.ir3.flexitime.server.core;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import net.sf.hibernate.HibernateException;
+
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
-import fr.umlv.ir3.flexitime.server.io.storage.SubjectsGroupStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.TeacherStorage;
 
 /**
@@ -25,7 +25,6 @@ import fr.umlv.ir3.flexitime.server.io.storage.TeacherStorage;
  */
 public class TeacherManager extends AbstractManager
 {
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -33,15 +32,15 @@ public class TeacherManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#save(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void save(IData data) throws RemoteException
+    public void save(IData data) throws RemoteException, HibernateException
     {
         if(data instanceof ITeacher) TeacherStorage.save((ITeacher) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_ADDED);
-        t.start();
+        notifyListener(data,DataEvent.TYPE_ADDED);
     }
 
     /** 
@@ -51,33 +50,15 @@ public class TeacherManager extends AbstractManager
      *
      * @return
      * @throws RemoteException 
+     * @throws HibernateException
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#get()
      * @author   FlexiTeam - Administrateur
      */
-    public List get() throws RemoteException
+    public List get() throws RemoteException, HibernateException
     {
         return TeacherStorage.get();
     }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param data
-     * @return
-     * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#lock(fr.umlv.ir3.flexitime.common.data.IData)
-     * @author   FlexiTeam - Administrateur
-     */
-    public boolean lock(IData data) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -85,18 +66,16 @@ public class TeacherManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
+     * @throws HibernateException
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#delete(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void delete(IData data) throws RemoteException
+    public void delete(IData data) throws RemoteException, HibernateException
     {
-        //TODO if not lock
         if(data instanceof ITeacher) TeacherStorage.delete((ITeacher) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_REMOVED);
-        t.start();
+        notifyListener(data,DataEvent.TYPE_REMOVED);
     }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -104,34 +83,15 @@ public class TeacherManager extends AbstractManager
      *
      * @param data
      * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#unlock(fr.umlv.ir3.flexitime.common.data.IData)
-     * @author   FlexiTeam - Administrateur
-     */
-    public void unlock(IData data) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        
-    }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param data
-     * @throws RemoteException 
+     * @throws HibernateException
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#update(fr.umlv.ir3.flexitime.common.data.IData)
      * @author   FlexiTeam - Administrateur
      */
-    public void update(IData data) throws RemoteException
+    public void update(IData data) throws RemoteException, HibernateException
     {
-        //TODO lock
         if(data instanceof ITeacher) TeacherStorage.update((ITeacher) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_CHANGED);
-        t.start();
-        //TODO unlock
+        notifyListener(data,DataEvent.TYPE_CHANGED);
     }
 
 }

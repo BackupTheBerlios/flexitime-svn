@@ -9,6 +9,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import net.sf.hibernate.HibernateException;
+
 import fr.umlv.ir3.flexitime.common.data.IData;
 
 
@@ -29,9 +31,10 @@ public interface IDataManager extends Remote
      * 
      * @param d Data to be added
      * @throws RemoteException if not reachable
+     * @throws HibernateException
      * 
      */
-    public void save(IData d) throws RemoteException;
+    public void save(IData d) throws RemoteException, HibernateException;
     
     /**
      *  
@@ -40,9 +43,10 @@ public interface IDataManager extends Remote
      * @return all datas
      * 
      * @throws RemoteException if not reachable 
+     * @throws HibernateException
      * 
      */
-    public List get() throws RemoteException; 
+    public List get() throws RemoteException, HibernateException; 
     
     /**
      * locks a data 
@@ -52,9 +56,10 @@ public interface IDataManager extends Remote
      * @return true if data can be locked, flase otherwise
      * 
      * @throws RemoteException if not reachable
+     * @throws InterruptedException
      * 
      */
-    public boolean lock(IData d) throws RemoteException;
+   // public boolean lock(IData d) throws RemoteException, InterruptedException;
     
     /**
      *  
@@ -63,9 +68,10 @@ public interface IDataManager extends Remote
      * 
      * @param d Data to remove
      * @throws RemoteException if not reachable 
+     * @throws HibernateException
      * 
      */
-    public void delete(IData d) throws RemoteException;
+    public void delete(IData d) throws RemoteException, HibernateException;
     
     /**
      *  
@@ -75,7 +81,7 @@ public interface IDataManager extends Remote
      * @throws RemoteException if not reachable 
      * 
      */
-    public void unlock(IData d) throws RemoteException;
+    //public void unlock(IData d) throws RemoteException;
     
     /**
      *  
@@ -84,9 +90,10 @@ public interface IDataManager extends Remote
      *
      * @param d Data to be updated
      * @throws RemoteException if not reachable
+     * @throws HibernateException
      * 
      */
-    public void update(IData d) throws RemoteException;
+    public void update(IData d) throws RemoteException, HibernateException;
     
 }
 

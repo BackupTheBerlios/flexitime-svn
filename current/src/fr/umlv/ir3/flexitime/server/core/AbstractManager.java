@@ -9,11 +9,12 @@ package fr.umlv.ir3.flexitime.server.core;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
-import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
 
@@ -29,7 +30,8 @@ public abstract class AbstractManager implements IDataManager
     /**
      * list of IDataListener
      */
-    private static List listenerList = new ArrayList();
+    private List listenerList = new ArrayList();
+    private final Lock lock = new ReentrantLock();
 
     /**
      *  
@@ -49,27 +51,10 @@ public abstract class AbstractManager implements IDataManager
      * @param d Data on which event has occured
      * @param property type of the event 
      */
-    protected static void notifyListener(IData d, int property)
+    protected void notifyListener(IData data, int property)
     {
-        ArrayList toRemove = new ArrayList();
-        for (Iterator iter = listenerList.iterator() ; iter.hasNext() ;)
-        {
-            IDataListener element = (IDataListener) iter.next();
-            try
-            {
-                element.dataChanged(new DataEvent(d, property));
-            }
-            catch (RemoteException e)
-            {
-                //Listener not reachable
-                //Mark it to be removed
-                toRemove.add(element);
-            }
-        }
-        
-        if(!toRemove.isEmpty()){
-            listenerList.removeAll(toRemove);
-        }
+        ThreadManager t = new ThreadManager(listenerList,data,property);
+        t.start();
     }
     
     /**
@@ -84,6 +69,34 @@ public abstract class AbstractManager implements IDataManager
     {
         // FIXME Vérifier les références pour la suppression
         listenerList.remove(l);
+    }
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return
+     * @throws InterruptedException
+     * @throws InterruptedException
+     * 
+     * @author   FlexiTeam - Administrateur
+     */
+    public boolean lock() throws InterruptedException
+    {
+        if(lock.tryLock(5,TimeUnit.SECONDS)) return true;
+        return false;
+    }
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * 
+     * @author   FlexiTeam - Administrateur
+     */
+    public void unlock()
+    {
+        lock.unlock();       
     }
     
 }

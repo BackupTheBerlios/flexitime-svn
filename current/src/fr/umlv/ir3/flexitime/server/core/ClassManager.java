@@ -16,7 +16,7 @@ import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.server.io.storage.ClassStorage;
 
 /**
- * ClassManagerImpl - DOCME Description explication supplémentaire si nécessaire
+ * ClassManager - DOCME Description explication supplémentaire si nécessaire
  * in english please... Que fait cette classe, qu'est-ce qu'elle représente, ...
  * 
  * @version Verion ou révision SVN
@@ -24,7 +24,6 @@ import fr.umlv.ir3.flexitime.server.io.storage.ClassStorage;
  */
 public class ClassManager extends AbstractManager
 {
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -39,8 +38,7 @@ public class ClassManager extends AbstractManager
     public void save(IData data) throws RemoteException
     {
         if(data instanceof IClass) ClassStorage.save((IClass) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_ADDED);
-        t.start();   
+        notifyListener(data,DataEvent.TYPE_ADDED);  
     }
 
     /** 
@@ -58,25 +56,6 @@ public class ClassManager extends AbstractManager
     {
         return ClassStorage.get();
     }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param data
-     * @return
-     * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#lock(fr.umlv.ir3.flexitime.common.data.IData)
-     * @author   FlexiTeam - Administrateur
-     */
-    public boolean lock(IData data) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -90,29 +69,9 @@ public class ClassManager extends AbstractManager
      */
     public void delete(IData data) throws RemoteException
     {
-        //TODO if not lock
         if(data instanceof IData) ClassStorage.delete((IClass) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_REMOVED);
-        t.start();
+        notifyListener(data,DataEvent.TYPE_REMOVED);
     }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param data
-     * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#unlock(fr.umlv.ir3.flexitime.common.data.IData)
-     * @author   FlexiTeam - Administrateur
-     */
-    public void unlock(IData data) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        
-    }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -126,11 +85,8 @@ public class ClassManager extends AbstractManager
      */
     public void update(IData data) throws RemoteException
     {
-        // TODO lock
         if(data instanceof IData) ClassStorage.update((IClass) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_CHANGED);
-        t.start();
-        //TODO unlock
+        notifyListener(data,DataEvent.TYPE_CHANGED);
     }
 
 }

@@ -6,24 +6,13 @@
 package fr.umlv.ir3.flexitime.server.core;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
-import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
-import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
-import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
-import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 
 
 /**
@@ -34,33 +23,55 @@ import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
  * représente, ...
  * 
  * @version Verion ou révision SVN
- * @see (si nécessaire)
  * 
  * @author FlexiTeam - Administrateur
  */
 public class ThreadManager extends Thread
 {
-    IData data;
-    int property;
-    ThreadManager(IData data, int property) {
+    private List listenerList;
+    private IData data;
+    private int property;
+    /**
+     * DOCME
+     * @param list
+     * @param data
+     * @param property
+     */
+    public ThreadManager(List list, IData data, int property) {
+        this.listenerList = list;
         this.data = data;
         this.property = property;
     }
-
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     *  
+     * 
+     * @see java.lang.Thread#run()
+     * @author   FlexiTeam - Administrateur
+     */
     public void run() {
-        if(data instanceof IBuilding) BuildingManager.notifyListener(data,property);
-        if(data instanceof IClass) ClassManager.notifyListener(data,property);
-        if(data instanceof ICourse) CourseManager.notifyListener(data,property);
-        if(data instanceof IDevice) DeviceManager.notifyListener(data,property);
-        if(data instanceof IFloor) FloorManager.notifyListener(data,property);
-        if(data instanceof IGroup) GroupManager.notifyListener(data,property);
-        if(data instanceof ILesson) LessonManager.notifyListener(data,property);
-        if(data instanceof IRoom) RoomManager.notifyListener(data,property);
-        if(data instanceof ISubject) SubjectManager.notifyListener(data,property);
-        if(data instanceof ISubjectsGroup) SubjectsGroupManager.notifyListener(data,property);
-        if(data instanceof ITeacher) TeacherManager.notifyListener(data,property);
-        if(data instanceof ITeachingStructure) TeachingStructureManager.notifyListener(data,property);
-        if(data instanceof ITrack) TrackManager.notifyListener(data,property);
+        ArrayList toRemove = new ArrayList();
+        for (Iterator iter = listenerList.iterator() ; iter.hasNext() ;)
+        {
+            IDataListener element = (IDataListener) iter.next();
+            try
+            {
+                element.dataChanged(new DataEvent(data, property));
+            }
+            catch (RemoteException e)
+            {
+                //Listener not reachable
+                //Mark it to be removed
+                toRemove.add(element);
+            }
+        }
+        
+        if(!toRemove.isEmpty()){
+            listenerList.removeAll(toRemove);
+        }
     }
 }
 

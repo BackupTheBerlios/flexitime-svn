@@ -10,11 +10,8 @@ package fr.umlv.ir3.flexitime.server.core;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import javax.sound.midi.Track;
-
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.server.io.storage.TrackStorage;
 
@@ -26,7 +23,6 @@ import fr.umlv.ir3.flexitime.server.io.storage.TrackStorage;
  */
 public class TrackManager extends AbstractManager
 {
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -41,8 +37,7 @@ public class TrackManager extends AbstractManager
     public void save(IData data) throws RemoteException
     {
         if(data instanceof ITrack) TrackStorage.save((ITrack) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_ADDED);
-        t.start();
+        notifyListener(data,DataEvent.TYPE_ADDED);
     }
 
     /** 
@@ -60,25 +55,6 @@ public class TrackManager extends AbstractManager
     {
         return TrackStorage.get();
     }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param data
-     * @return
-     * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#lock(fr.umlv.ir3.flexitime.common.data.IData)
-     * @author   FlexiTeam - Administrateur
-     */
-    public boolean lock(IData data) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -92,29 +68,9 @@ public class TrackManager extends AbstractManager
      */
     public void delete(IData data) throws RemoteException
     {
-        //TODO if not lock 
-        if(data instanceof ITrack) TrackStorage.delete((ITrack) data); 
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_REMOVED);
-        t.start();
+         if(data instanceof ITrack) TrackStorage.delete((ITrack) data); 
+        notifyListener(data,DataEvent.TYPE_REMOVED);
     }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param data
-     * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#unlock(fr.umlv.ir3.flexitime.common.data.IData)
-     * @author   FlexiTeam - Administrateur
-     */
-    public void unlock(IData data) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        
-    }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -128,11 +84,8 @@ public class TrackManager extends AbstractManager
      */
     public void update(IData data) throws RemoteException
     {
-        //TODO lock
         if(data instanceof ITrack) TrackStorage.update((ITrack) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_CHANGED);
-        t.start();
-        //TODO unlock
+        notifyListener(data,DataEvent.TYPE_CHANGED);
     }
     
 }

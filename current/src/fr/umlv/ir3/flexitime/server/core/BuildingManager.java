@@ -23,7 +23,6 @@ import fr.umlv.ir3.flexitime.server.io.storage.BuildingStorage;
  */
 public class BuildingManager extends AbstractManager
 {
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -38,10 +37,8 @@ public class BuildingManager extends AbstractManager
     public void save(IData data) throws RemoteException
     {
         if(data instanceof IBuilding) BuildingStorage.save((IBuilding) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_ADDED);
-        t.start();
+        notifyListener(data,DataEvent.TYPE_ADDED);
     }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -57,25 +54,6 @@ public class BuildingManager extends AbstractManager
     {
         return BuildingStorage.get();
     }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param data
-     * @return
-     * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#lock(fr.umlv.ir3.flexitime.common.data.IData)
-     * @author   FlexiTeam - Administrateur
-     */
-    public boolean lock(IData data) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -89,29 +67,9 @@ public class BuildingManager extends AbstractManager
      */
     public void delete(IData data) throws RemoteException
     {
-        // TODO if not lock
         if(data instanceof IBuilding) BuildingStorage.delete((IBuilding) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_REMOVED);
-        t.start();
+        notifyListener(data, DataEvent.TYPE_REMOVED);
     }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param data
-     * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#unlock(fr.umlv.ir3.flexitime.common.data.IData)
-     * @author   FlexiTeam - Administrateur
-     */
-    public void unlock(IData data) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        
-    }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -125,11 +83,8 @@ public class BuildingManager extends AbstractManager
      */
     public void update(IData data) throws RemoteException
     {
-        // TODO lock
         if(data instanceof IBuilding) BuildingStorage.update((IBuilding) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_CHANGED);
-        t.start();
-        //TODO unlock
+        notifyListener(data,DataEvent.TYPE_CHANGED);
     }
 
 }

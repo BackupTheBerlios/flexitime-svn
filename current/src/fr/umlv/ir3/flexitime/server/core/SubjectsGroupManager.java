@@ -11,10 +11,8 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
-import fr.umlv.ir3.flexitime.server.io.storage.SubjectStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.SubjectsGroupStorage;
 
 /**
@@ -27,7 +25,6 @@ import fr.umlv.ir3.flexitime.server.io.storage.SubjectsGroupStorage;
  */
 public class SubjectsGroupManager extends AbstractManager
 {
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -42,8 +39,7 @@ public class SubjectsGroupManager extends AbstractManager
     public void save(IData data) throws RemoteException
     {
         if(data instanceof ISubjectsGroup) SubjectsGroupStorage.save((ISubjectsGroup) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_ADDED);
-        t.start();
+        notifyListener(data,DataEvent.TYPE_ADDED);
     }
 
     /** 
@@ -61,25 +57,6 @@ public class SubjectsGroupManager extends AbstractManager
     {
         return SubjectsGroupStorage.get();
     }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param data
-     * @return
-     * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#lock(fr.umlv.ir3.flexitime.common.data.IData)
-     * @author   FlexiTeam - Administrateur
-     */
-    public boolean lock(IData data) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -93,29 +70,9 @@ public class SubjectsGroupManager extends AbstractManager
      */
     public void delete(IData data) throws RemoteException
     {
-        // TODO if not lock
         if(data instanceof ISubjectsGroup) SubjectsGroupStorage.delete((ISubjectsGroup) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_REMOVED);
-        t.start();
+        notifyListener(data,DataEvent.TYPE_REMOVED);
     }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param data
-     * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#unlock(fr.umlv.ir3.flexitime.common.data.IData)
-     * @author   FlexiTeam - Administrateur
-     */
-    public void unlock(IData data) throws RemoteException
-    {
-        // TODO Auto-generated method stub
-        
-    }
-
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -129,11 +86,8 @@ public class SubjectsGroupManager extends AbstractManager
      */
     public void update(IData data) throws RemoteException
     {
-        //TODO lock
         if(data instanceof ISubjectsGroup) SubjectsGroupStorage.update((ISubjectsGroup) data);
-        ThreadManager t = new ThreadManager(data,DataEvent.TYPE_CHANGED);
-        t.start();
-        //TODO unlock
+        notifyListener(data,DataEvent.TYPE_CHANGED);
     }
 
 }
