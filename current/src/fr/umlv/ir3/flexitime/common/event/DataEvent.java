@@ -18,7 +18,35 @@ import fr.umlv.ir3.flexitime.common.data.IData;
  */
 public class DataEvent extends EventObject implements Serializable
 {
+    //============//
+    // Propriétés //
+    //============//
+    
+    /**
+     * Indicates that the data has been added added
+     */
+    public final static int TYPE_ADDED=1;
+    
+    /**
+     * indicates that the data has changed
+     */
+    
+    public final static int TYPE_CHANGED=2;
+    /**
+     * Indicates that the data has been removed
+     */
+    public final static int TYPE_REMOVED=3;
 
+    //========//
+    // Champs //
+    //========//
+    
+    private final int iEventType;
+    
+    //===============//
+    // Constructeurs //
+    //===============//
+    
     /**
      * 
      * Event delivered when the state of a IData has changed
@@ -29,19 +57,13 @@ public class DataEvent extends EventObject implements Serializable
     public DataEvent(IData d, int eType)
     {
         super(d);
-        eventType = eType;
+        iEventType = eType;
         
     }
     
-    /**
-     * Return eventType
-     * @return Returns the eventType.
-     */
-    public int getEventType()
-    {
-        return eventType;
-    }
-    
+    //==========//
+    // Méthodes //
+    //==========//
     /**
      *  Getter for IData contained in this event
      * 
@@ -53,21 +75,14 @@ public class DataEvent extends EventObject implements Serializable
         return (IData)getSource();
     }
     
-    private final int eventType;
-    
     /**
-     * indicates that the data has changed
+     * Return eventType
+     * @return Returns the eventType.
      */
-    public final static int TYPE_CHANGED=1;
+    public int getEventType()
+    {
+        return iEventType;
+    }
     
-    /**
-     * Indicates that the data has been added added
-     */
-    public final static int TYPE_ADDED=2;
-    
-    /**
-     * Indicates that the data has been removed
-     */
-    public final static int TYPE_REMOVED=3;
     
 }
