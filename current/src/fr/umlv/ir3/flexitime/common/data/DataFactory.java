@@ -136,6 +136,21 @@ public class DataFactory
      * 
      * @param g
      * @param c
+     * @param t
+     * @param gr
+     * @return a new lesson
+     */
+    public static ILesson createLesson(Gap g, ICourse c, ITeacher t,
+            IGroup gr)
+    {
+        return new LessonImpl(g, c, t, gr);
+    }
+    
+    /**
+     * DOCME
+     * 
+     * @param g
+     * @param c
      * @param l
      * @param t
      * @param gr
