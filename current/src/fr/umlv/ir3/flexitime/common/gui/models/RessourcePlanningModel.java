@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.DataFactorySansRmi;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
@@ -423,22 +424,39 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 	 */
 	public void addElement(int weekNumber, int dayNumber, int gapNumber, int length, BusyBloc busyBloc)
 	{
-        BusyBloc newBusyBloc = new BusyBloc(busyBloc); 
+        //System.out.println("nb Busy : " + this.ressource.getSetBusy().size());
+        //BusyBloc newBusyBloc = new BusyBloc(busyBloc);
+        Gap gap = getGap(weekNumber, dayNumber, gapNumber,length);
+        System.out.println("Ajout du " + gap.getStartDate().getStrDay() + " au " + gap.getEndDate().getStrDate());
+        ILesson l=null;
+        try
+        {
+            l = DataFactory.createLesson(gap, ((ILesson)busyBloc.getBusy()).getCourse(),  new ArrayList(((ILesson)busyBloc.getBusy()).getSetGroup()) , length*gapTime );
+        }
+        catch (FlexiException e)
+        {
+            System.err.println("Exception in addElement()");
+            e.printStackTrace();
+        }
+        BusyBloc newBusyBloc = new BusyBloc(l , length);
         newBusyBloc.setNbGap(length);
-        //TODO newBusyBloc.getBusy().setGap( getGap(weekNumber, dayNumber, gapNumber,length) );
-
+        
+        //newBusyBloc.getBusy().setGap( gap );
 		//Ici il faudra ajouter le cours au groupe et le faire valider par le serveur
 		
 	    //pas de verif avant de placer le cours pour l'instant, mais le controle a deja été fait dans le controleur normalement
 	    DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
 	    bloc.representationList[gapNumber] = newBusyBloc;
-        this.ressource.addBusy(newBusyBloc.getBusy());
+        System.out.println("id du lesson : " + newBusyBloc.getBusy().getIdBusy());
+        //this.ressource.addBusy(newBusyBloc.getBusy());
+        //System.out.println("nb Busy : " + this.ressource.getSetBusy().size());
         
 	    if(newBusyBloc.getNbGap() > 1 )
 	    {
 	        for (int i = gapNumber+1 ; i < gapNumber+newBusyBloc.getNbGap() ; i++)
 	            bloc.representationList[i] = null;
 	    }
+        
 		fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+newBusyBloc.getNbGap()-1 );
 	}
     
@@ -450,14 +468,14 @@ public class RessourcePlanningModel extends AbstractPlanningModel
             if (courseAdapter.getTeacher() == null)
 
                 lesson = DataFactorySansRmi.createLesson(
-                        new Gap(),
+                        getGap(weekNumber, dayNumber, gapNumber,length),
                         courseAdapter.getCourse(), 
                         new ArrayList(), 
                         length
                         );
             else
                 lesson = DataFactorySansRmi.createLesson(
-                        new Gap(),
+                        getGap(weekNumber, dayNumber, gapNumber,length),
                         courseAdapter.getCourse(), 
                         new ArrayList(), 
                         length,
@@ -522,35 +540,73 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 
     private Gap getGap(int weekNumber, int dayNumber, int gapNumber, int length)
     {
-        Time begin = getStartTime(gapNumber);
-        Time end = getEndTime(gapNumber+length-1);
-        return new Gap(begin.getCal() , end.getCal() );
+        Time beginHour = getStartTime(gapNumber);
+        System.out.println("ajout de " + (length-1));
+        Time endHour = getEndTime(gapNumber+length-1);
+        //System.out.println("2");
+        Calendar cal = (Calendar)this.edtWeekGap.getStartDate().getCal().clone();
+        cal.add(Calendar.WEEK_OF_YEAR, weekNumber);
+        cal.add(Calendar.DAY_OF_WEEK, dayNumber);
+        Time date = new Time(cal);
+        return new Gap(date.getYear(), 
+                date.getIMonth(),
+                date.getIDay(),
+                beginHour.getHour(),
+                beginHour.getMinute(),
+                date.getYear(),
+                date.getIMonth(),
+                date.getIDay(),
+                endHour.getHour(),
+                endHour.getMinute()
+                );
     }
 
     private Time getEndTime(int gapNumber)
     {
-        // TODO Auto-generated method stub
-        return null;
+        int[] tab = getBlocNumber(gapNumber);
+        Time t = new Time(this.blocList[tab[0]].getStartDate().getCal());
+        int localGap = tab[1];
+        t.addMinute((localGap+1)*gapTime);
+        //System.out.println("ajout de " + (localGap+1) + "*" + gapTime + "=" + ((localGap+1)*gapTime));
+        //System.out.println(t.getStrTime());
+        return t;
     }
 
     private Time getStartTime(int gapNumber)
     {
-        //this.blocList
-        return null;
+        int[] tab = getBlocNumber(gapNumber);
+        Time t = new Time(this.blocList[tab[0]].getStartDate().getCal());
+        int localGap = tab[1];
+        t.addMinute(localGap*gapTime);
+        //System.out.println(t.getStrTime());
+        return t;
     }
     
     private int[] getBlocNumber(int gapNumber)
     {
         int[] res = new int[2];
         int i = 0;
-        int sum = this.getBlocSize(i);
+        int sum = this.getBlocSize(0);
         while(i < blocList.length && gapNumber >= sum)
         {
             i++;
             sum += this.getBlocSize(i);
         }
         if(i == blocList.length)
-            return null;
+        {
+            System.err.println("pb in getBlocNumber()");
+        }
+        else
+        {
+            //on stock le numero du bloc
+            res[0] = i;
+            System.out.println("getBlocNumber() : bloc numero " + i);
+            sum -= this.getBlocSize(i);
+            int localGapNumber = gapNumber - sum;
+            res[1] = localGapNumber;
+            System.out.println("getBlocNumber() : gap local " + localGapNumber);
+            return res;
+        }
          //TODO finir
         return null;
     }

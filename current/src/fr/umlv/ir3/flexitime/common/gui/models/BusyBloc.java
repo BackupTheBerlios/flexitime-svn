@@ -10,6 +10,7 @@ package fr.umlv.ir3.flexitime.common.gui.models;
 
 
 
+import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.DataFactorySansRmi;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
@@ -70,7 +71,7 @@ public class BusyBloc
             //TODO verifier si on doit valuer le nbGap suivant le course ou le lesson
             try
             {
-                this.busy = DataFactorySansRmi.createLesson(lesson);
+                this.busy = DataFactory.createLesson(lesson);
                 //this.busy = lesson;
             }
             catch (FlexiException e)
