@@ -10,6 +10,11 @@ package fr.umlv.ir3.flexitime.richClient.gui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 
@@ -32,14 +37,13 @@ import com.jgoodies.plaf.HeaderStyle;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.Plastic3DLookAndFeel;
 
-import fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExploitationAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExportAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.GestionAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.HistoryAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LargerTimeTableAction;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LoginAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LogoutAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.NextWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreferencesAction;
@@ -47,6 +51,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PrintAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerTimeTableAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.StatsAction;
+import fr.umlv.ir3.flexitime.richClient.gui.views.IPServerView;
 
 /**
  * Client This class build an graphic interface for the user.
@@ -203,10 +208,7 @@ public class Client
     }
 
     
-    
-    
-    
-    
+     
     /**
      *  
      * DOCME Description
@@ -302,10 +304,6 @@ public class Client
         JMenu menuFichier = new JMenu("Fichier");
         menuBar.add(menuFichier);
 
-        Action log = LoginAction.getInstance();
-        menuFichier.add(log);
-        menuFichier.add(new JSeparator());
-
         Action pref = PreferencesAction.getInstance();
         menuFichier.add(pref);
 
@@ -327,6 +325,9 @@ public class Client
         Action export = ExportAction.getInstance();
         menuFichier.add(export);
         menuFichier.add(new JSeparator());
+        
+        Action log = LogoutAction.getInstance();
+        menuFichier.add(log);
         
         Action quit = new AbstractAction("Quitter") {
 
@@ -480,8 +481,73 @@ public class Client
         //1/ check si existance fichier conf en local
         //2/ si oui try contact @server
             //si ok, continuer traitement
-            //si ko, ouvrir vue demande @server
+            //si ko, 3/
         //3/ si non ouvrir vue demande @server puis retour en 2/
+        
+        
+        int res = 1;
+        File f = new File("Prefs.xml");
+        //si le fichier Prefs.xml existe deja on utilise l'ip du server inclue
+        if(f.canRead()) 
+        {
+            //System.out.println("fichier présent");
+            BufferedReader br = null;
+            String ligne;
+
+            try {
+                br = new BufferedReader(new FileReader(f));
+            }
+            catch(FileNotFoundException exc) {
+                //TODO lancer exception : illisible, puis aller en 3/
+                System.out.println("Erreur d'ouverture");
+            }
+            try {
+                ligne = br.readLine();
+				res = testIPServer(ligne);
+                br.close();
+            }
+            catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            while(res!=0) {
+                String line = IPServerView.printView();
+                res = testIPServer(line);
+            }
+
+        }
+        //sinon on demande l'ip du server
+        else
+        {
+            //System.out.println("fichier NON présent");
+            while(res!=0)
+            {
+                String line = IPServerView.printView();
+                res = testIPServer(line);
+            }
+        }
+        
+        System.out.println("Le serveur est up");
+        
+        //TODO recup fichier de conf du server, créer méthode on it....
+ 
+        return 0;
+    }
+    
+    
+    
+    /**
+     *  
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param ip
+     * @return an int representing if the server is up or down.
+     */
+    private static int testIPServer(String ip)
+    {
+        //TODO appel méthode "hello" du server
         return 0;
     }
     
