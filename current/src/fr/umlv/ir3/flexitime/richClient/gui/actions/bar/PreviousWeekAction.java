@@ -35,11 +35,7 @@ public class PreviousWeekAction extends AbstractAction
     public static PreviousWeekAction getInstance(ExploitationView view)
     {
         if(action==null)
-        {
-            System.out.println("PreviousWeekAction");
             action = new PreviousWeekAction(view);
-        }
-            
         
         return action;
     }

@@ -1,6 +1,6 @@
 /*
- * Created on 16 janv. 2005
- * by Prâsad
+ * Created on 28 janv. 2005
+ * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.actions.bar;
@@ -25,22 +25,22 @@ import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class MailAction extends AbstractAction
+public class MailPreFormatedClassAction extends AbstractAction
 {
-    private static MailAction action;
-    private static Icon icon = Client.getIcon(MailAction.class, "../../pictures/_mail.png");
+    private static MailPreFormatedClassAction action;
+    private static Icon icon = Client.getIcon(MailPreFormatedClassAction.class, "../../pictures/_mail.png");
     
-    public static MailAction getInstance()
+    public static MailPreFormatedClassAction getInstance()
     {
         if(action==null)
-            action = new MailAction();
+            action = new MailPreFormatedClassAction();
         
         return action;
     }
 
-    protected MailAction()
+    protected MailPreFormatedClassAction()
     {
-        super("Envoyer un mail", icon);
+        super("à une promotion", icon);
     }
     
     /** 
@@ -54,9 +54,12 @@ public class MailAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent e)
     {
+        //afficher une JDialog contenant la liste des promotions classées
+        //la secrétaire choisie une promo
+        //créer l'EdT de la promo et le stocker temporairement
+        //construire une mailView avec le champ From, To, Subject et PJ rempli
+        //envoyer le mail kan la secrétaire appuie sur OK
         MailView mail = new MailView();
         mail.printView();
     }
-
 }
-

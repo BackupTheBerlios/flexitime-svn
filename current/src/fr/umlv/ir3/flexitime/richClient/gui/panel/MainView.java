@@ -12,6 +12,8 @@ import java.io.IOException;
 
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 
 /**
  * MainView - DOCME Description explication supplémentaire si nécessaire in
@@ -32,6 +34,14 @@ public class MainView
     {
         JEditorPane editorPanel = new JEditorPane();
         editorPanel.setEditable(false);
+        editorPanel.addHyperlinkListener(new HyperlinkListener() {
+            
+            public void hyperlinkUpdate(HyperlinkEvent arg0)
+            {
+                System.out.println("ouvir naviguateur..");
+            }
+            
+        });
         java.net.URL helpURL = MainView.class.getResource("accueil.html");
         if (helpURL != null) {
             try {

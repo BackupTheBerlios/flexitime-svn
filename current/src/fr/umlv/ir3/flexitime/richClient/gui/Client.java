@@ -11,9 +11,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
@@ -24,11 +22,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.Calendar;
+import java.util.Enumeration;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -56,21 +56,25 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExploitationAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExportAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.GestionAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.HistoryAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LargerGapAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LargerTimeTableAction;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LogoutAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailPreFormatedClassAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailPreFormatedTeacherAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.NextIntervalAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.NextWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreferencesAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousIntervalAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PrintAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerGapAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerTimeTableAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.StatsAction;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
-import fr.umlv.ir3.flexitime.richClient.gui.views.IPServerView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
-import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
+import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
 
 /**
  * Client This class build an graphic interface for the user.
@@ -87,12 +91,24 @@ public class Client
     private static LoginView loginView;
     private static JPanel mainPanel;
     private static JLayeredPane centerPanel;
+    private static ExploitationView exploitView;
     private static JPanel exploitPanel;
+    private static ManagementView mngmtView;
     private static JPanel mngmtPanel;
+    private static MainView accueilView;
     private static JScrollPane accueilPanel;
     private JPanel jp_status;
     private JLabel status;
     private static String user;
+    private static ButtonGroup butGpExploit;
+    private static JButton butLargerGap;
+    private static JButton butSmallerGap;
+    private static JButton butPrevInterval;
+    private static JButton butBack;
+    private static JButton butSmallerTimeTable;
+    private static JButton butLargerTimeTable;
+    private static JButton butNext;
+    private static JButton butNextInterval;
     private static FlexiLanguage language;
     static
     {
@@ -108,7 +124,7 @@ public class Client
      */
     public Client()
     {
-        frame = new JFrame(language.getText("appliTitle"));
+        frame = new JFrame(language.getText("appliTitle")); //$NON-NLS-1$
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         ImageIcon icon = new ImageIcon(getClass().getResource("pictures/FlexiTime_icone32.png"));
@@ -123,23 +139,17 @@ public class Client
         
         
         //construction des 3 panels principaux
-        MainView accueilView = new MainView();
-        ExploitationView exploitView = new ExploitationView();
-        ManagementView mngmtView = null;
+        accueilView = new MainView();
+        exploitView = new ExploitationView();
 		try {
 			mngmtView = new ManagementView();
 		} catch (RemoteException e) {
-            //TODO
+            //TODO pop up
             System.out.println("mngmtView inouvrable");
 		}
         accueilPanel = accueilView.getPanel();
-        //accueilPanel.setPreferredSize(frame.getSize());
-        //accueilPanel.revalidate();
         exploitPanel = (JPanel)exploitView.getPanel();
-        //exploitPanel.setPreferredSize(frame.getSize());
-        //exploitPanel.revalidate();
         mngmtPanel   = mngmtView.getPanel(); 
-        //mngmtPanel.setPreferredSize(new Dimension(1000,1000));
     }
     
 
@@ -168,7 +178,6 @@ public class Client
             public Dimension preferredLayoutSize(Container parent) {
                 int w = 0, h = 0;
                 int n = parent.getComponentCount();
-                System.out.println("preferred");
                 for (int i = 0; i < n; i++) {
                     Component c = parent.getComponent(i);
                     System.out.println(c + "\n\t" + c.getPreferredSize());
@@ -176,29 +185,24 @@ public class Client
                     h = Math.max(h, c.getPreferredSize().height);
                 }
                 System.out.println(w + ", " + h);
-                //return parent.getBounds().getSize();
                 return new Dimension(w, h);
             }
 
             public Dimension minimumLayoutSize(Container parent) {
                 int w = 0, h = 0;
                 int n = parent.getComponentCount();
-                System.out.println("minimum");
                 for (int i = 0; i < n; i++) {
                     Component c = parent.getComponent(i);
                     w = Math.max(w, c.getPreferredSize().width);
                     h = Math.max(h, c.getPreferredSize().height);
                 }
                 return parent.getMaximumSize();
-                //return new Dimension(w, h);
             }
 
             public void layoutContainer(Container parent) {
                 int n = parent.getComponentCount();
                 for (int i = 0; i < n; i++) {
                     Component c = parent.getComponent(i);
-                    //System.out.println(c);
-                    //c.setBounds(parent.getBounds());
                     c.setBounds(0, 0, parent.getWidth(), parent.getHeight());
                 }
             }
@@ -206,6 +210,9 @@ public class Client
         centerPanel.add(accueilPanel, JLayeredPane.PALETTE_LAYER);
         centerPanel.add(exploitPanel, JLayeredPane.PALETTE_LAYER);
         centerPanel.add(mngmtPanel, JLayeredPane.PALETTE_LAYER);
+        //TODO if(user.getPrefs().getDefaultTrack() != null)
+        //{ setExploitMode() Mettre une filière en paramètre ???????
+        //}else
         setAccueilMode();
         frame.setVisible(true);
         //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -266,18 +273,47 @@ public class Client
         toolBar.add(createButton(StatsAction.getInstance()));
         
         toolBar.addSeparator();
+
+        butGpExploit = new ButtonGroup();
+        //gap + petit
+        butSmallerGap = createButton(SmallerGapAction.getInstance(exploitView));
+        butGpExploit.add(butSmallerGap);
+        toolBar.add(butSmallerGap);
         
-        //plage + large  !!!modif constructeur by Binou, ExploitationView needed !!!
-        //toolBar.add(createButton((LargerTimeTableAction.getInstance())));
+        //gap + grand
+        butLargerGap = createButton(LargerGapAction.getInstance(exploitView));
+        butGpExploit.add(butLargerGap);
+        toolBar.add(butLargerGap);
         
-        //plage + petite
-        //toolBar.add(createButton((SmallerTimeTableAction.getInstance())));
+        //full back
+        butPrevInterval = createButton(PreviousIntervalAction.getInstance(exploitView));
+        butGpExploit.add(butPrevInterval);
+        toolBar.add(butPrevInterval);
         
         //Back
-        //toolBar.add(createButton(PreviousWeekAction.getInstance()));
+        butBack = createButton(PreviousWeekAction.getInstance(exploitView));
+        butGpExploit.add(butBack);
+        toolBar.add(butBack);
+        
+        //plage + petite
+        butSmallerTimeTable = createButton((SmallerTimeTableAction.getInstance(exploitView)));
+        butGpExploit.add(butSmallerTimeTable);
+        toolBar.add(butSmallerTimeTable);
+        
+        //plage + large
+        butLargerTimeTable = createButton((LargerTimeTableAction.getInstance(exploitView)));
+        butGpExploit.add(butLargerTimeTable);
+        toolBar.add(butLargerTimeTable);
         
         //Forward
-        //toolBar.add(createButton(NextWeekAction.getInstance()));
+        butNext = createButton(NextWeekAction.getInstance(exploitView));
+        butGpExploit.add(butNext);
+        toolBar.add(butNext);
+        
+        //full forward
+        butNextInterval = createButton(NextIntervalAction.getInstance(exploitView));
+        butGpExploit.add(butNextInterval);
+        toolBar.add(butNextInterval);
         
         
         toolBar.add(Box.createHorizontalGlue());
@@ -479,10 +515,6 @@ public class Client
                     //TODO Est-ce propre de quitter de cette facon ?
                     System.exit(0);                
                 }
-                else
-                {
-                    //System.out.println("NO quit");   
-                }
             }
         };
         menuFichier.add(quit);
@@ -494,19 +526,19 @@ public class Client
         JMenu menuMail = new JMenu("Mail");
         menuBar.add(menuMail);
         
-        Action sendView = MailAction.getInstance();
-        menuMail.add(sendView);
+        Action sendMail = MailAction.getInstance();
+        menuMail.add(sendMail);
 
-        Action sendFormatedMail = new AbstractAction("Envoyer Mail pré formaté") {
-
-            public void actionPerformed(ActionEvent e)
-            {
-                // TODO Auto-generated method stub
-                //ouvrir vue mail
-            }
-
-        };
-        menuMail.add(sendFormatedMail);
+        JMenu formatedMail = new JMenu("Envoyer Mail pré formaté...");
+        menuMail.add(formatedMail);
+        
+        Action sendPreFormatedClassMail = MailPreFormatedClassAction.getInstance();
+        formatedMail.add(sendPreFormatedClassMail);
+                
+        Action sendPreFormatedTeacherMail = MailPreFormatedTeacherAction.getInstance();
+        formatedMail.add(sendPreFormatedTeacherMail);
+        
+        
 
         
         ///////////////
@@ -556,8 +588,7 @@ public class Client
 
             public void actionPerformed(ActionEvent e)
             {
-                // TODO Auto-generated method stub
-                //ouvre la fenetre a propos
+                setAccueilMode();
             }
 
         };
@@ -750,6 +781,32 @@ public class Client
         return login;
     }
     
+    /**
+     *  
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     */
+    private static void enableButGpExploit()
+    {
+        for (Enumeration e = butGpExploit.getElements() ; e.hasMoreElements() ;) {
+            ((JButton)e.nextElement()).setEnabled(true);
+        }
+    }
+    
+    /**
+     *  
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     */
+    private static void disableButGpExploit()
+    {
+        for (Enumeration e = butGpExploit.getElements() ; e.hasMoreElements() ;) {
+            ((JButton)e.nextElement()).setEnabled(false);
+        }
+    }
+    
     
     /** 
      * DOCME Description
@@ -759,6 +816,7 @@ public class Client
      */
     public static void setExploitMode()
     {
+        enableButGpExploit();
         centerPanel.moveToFront(exploitPanel);
         centerPanel.validate();
         centerPanel.repaint();
@@ -773,6 +831,7 @@ public class Client
      */
     public static void setMngmtMode()
     {
+        disableButGpExploit();
         centerPanel.moveToFront(mngmtPanel);
         centerPanel.validate();
         centerPanel.repaint();
@@ -786,6 +845,7 @@ public class Client
      */
     public static void setAccueilMode()
     {
+        disableButGpExploit();
         centerPanel.moveToFront(accueilPanel);
         centerPanel.validate();
         centerPanel.repaint();
@@ -832,7 +892,6 @@ public class Client
             //TODO garder celui-ci ?? en trouver un + bleu...
             //lister LF d'un windows et les checker....
             UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
-            //System.out.println(UIManager.getSystemLookAndFeelClassName());
         }
         catch (Exception e)
         {}

@@ -1,6 +1,6 @@
 /*
- * Created on 16 janv. 2005
- * by Prâsad
+ * Created on 28 janv. 2005
+ * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.actions.bar;
@@ -25,22 +25,22 @@ import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class MailAction extends AbstractAction
+public class MailPreFormatedTeacherAction extends AbstractAction
 {
-    private static MailAction action;
-    private static Icon icon = Client.getIcon(MailAction.class, "../../pictures/_mail.png");
+    private static MailPreFormatedTeacherAction action;
+    private static Icon icon = Client.getIcon(MailPreFormatedTeacherAction.class, "../../pictures/_mail.png");
     
-    public static MailAction getInstance()
+    public static MailPreFormatedTeacherAction getInstance()
     {
         if(action==null)
-            action = new MailAction();
+            action = new MailPreFormatedTeacherAction();
         
         return action;
     }
 
-    protected MailAction()
+    protected MailPreFormatedTeacherAction()
     {
-        super("Envoyer un mail", icon);
+        super("à un professeur", icon);
     }
     
     /** 
@@ -54,9 +54,12 @@ public class MailAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent e)
     {
+        //afficher une JDialog contenant la liste des professeurs classée par ordre alpha
+        //la secrétaire choisie un prof
+        //créer l'EdT du prof et le stocker temporairement
+        //construire une mailView avec le champ From, To, Subject et PJ rempli
+        //envoyer le mail kan la secrétaire appuie sur OK
         MailView mail = new MailView();
         mail.printView();
     }
-
 }
-

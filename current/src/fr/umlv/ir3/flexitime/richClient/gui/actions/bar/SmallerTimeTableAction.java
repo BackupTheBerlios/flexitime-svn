@@ -35,11 +35,7 @@ public class SmallerTimeTableAction extends AbstractAction
     public static SmallerTimeTableAction getInstance(ExploitationView view)
     {
         if(action==null)
-        {
-            System.out.println("SmallerTimeTableAction");
-            action = new SmallerTimeTableAction(view);
-        }
-            
+            action = new SmallerTimeTableAction(view);            
         
         return action;
     }
@@ -47,7 +43,6 @@ public class SmallerTimeTableAction extends AbstractAction
     protected SmallerTimeTableAction(ExploitationView view)
     {
         super("Retrecir la plage", icon);
-        System.out.println(icon);
         this.view = view;
     }
     /** 
@@ -61,7 +56,7 @@ public class SmallerTimeTableAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent arg0)
     {
-        view.increase();
+        view.decrease();
     }
 
 }

@@ -1,6 +1,6 @@
 /*
- * Created on 16 janv. 2005
- * by Prâsad
+ * Created on 28 janv. 2005
+ * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.actions.bar;
@@ -11,7 +11,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
-import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 
 
 /**
@@ -25,38 +25,41 @@ import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class MailAction extends AbstractAction
+public class SmallerGapAction extends AbstractAction
 {
-    private static MailAction action;
-    private static Icon icon = Client.getIcon(MailAction.class, "../../pictures/_mail.png");
+    private static SmallerGapAction action;
+    private static Icon icon = Client.getIcon(SmallerGapAction.class, "../../pictures/_gapSmall2.png");
     
-    public static MailAction getInstance()
+    ExploitationView view;
+    
+    public static SmallerGapAction getInstance(ExploitationView view)
     {
         if(action==null)
-            action = new MailAction();
-        
+            action = new SmallerGapAction(view);
+
         return action;
     }
 
-    protected MailAction()
+    protected SmallerGapAction(ExploitationView view)
     {
-        super("Envoyer un mail", icon);
+        super("Retrecir la précision d'un emploi du temps", icon);
+        this.view = view;
     }
-    
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
      *
-     * @param e 
+     * @param arg0 
      * 
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent arg0)
     {
-        MailView mail = new MailView();
-        mail.printView();
+        view.lessGapTime();
     }
 
 }
+
+
 
