@@ -169,7 +169,7 @@ public class DeviceTreeNode implements FlexiTreeNode
 	 */
 	public TreeNode add() {
 		//Non utilisée
-		System.out.println("- Add de group");
+		System.out.println("- Add de device");
 		return null;
 	}
 	

@@ -207,6 +207,7 @@ public class TypeRoomTreeNode implements FlexiTreeNode
     
     public TreeNode add(IRoom room)
     {
+        System.out.println("Add room");
         lstRoom.add( room);
         RoomTreeNode child = new RoomTreeNode(this,room,model);
         if(children.size()==0)

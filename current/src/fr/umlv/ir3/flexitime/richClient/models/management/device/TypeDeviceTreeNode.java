@@ -192,21 +192,15 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
     {
             IDevice device= DataFactory.createDevice("Nouveau Matériel");
             device.setType(type);
-            return(add(device));
+            return null;
     }
     
 	public TreeNode add(IDevice device)
     {
+        System.out.println("Add device");
         lstDevice.add( device);
         DeviceTreeNode child = new DeviceTreeNode(this,device,model);
-        if(children.size()==0)
-        {
-            processChildren();
-        }
-        else
-        {
-            children.add(child);
-        }
+        children.add(child);
         model.nodesWereInserted(this,new int[]{children.size()-1});
         return child;
     }
@@ -222,21 +216,24 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
 	public void remove(TreeNode childNode) throws RemoteException, FlexiException {
-		lstDevice.remove(((DeviceTreeNode)childNode).getDevice());
-        ((RootDeviceTreeNode)this.getParent()).getList().remove(((DeviceTreeNode)childNode).getDevice());
-		int index = children.indexOf(childNode);
+       // lstDevice.remove(((DeviceTreeNode)childNode).getDevice());
+        System.out.println("delete type");
+        ((RootDeviceTreeNode)this.getParent()).remove(((DeviceTreeNode)childNode).getDevice());
+		/*int index = children.indexOf(childNode);
 		children.remove(childNode);	
-		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});*/
 		
 	}
     
     public void remove(IDevice device) {
         DeviceTreeNode childNode = searchChild(device);
-        lstDevice.remove(device);
-        int index = children.indexOf(childNode);
-        children.remove(childNode); 
-        model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
-        
+        if(childNode !=null)
+        {
+            lstDevice.remove(device);
+            int index = children.indexOf(childNode);
+            children.remove(childNode); 
+            model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        }
     }
     
     public DeviceTreeNode searchChild(IDevice device)

@@ -75,7 +75,8 @@ public class RootTrackTreeNode extends RootTreeNode{
 	{
 		//synchronized(this.cat)
 		//{
-		ITrack track = DataFactory.createTrack("Nouvelle Filière");
+		System.out.println("Add track");
+        ITrack track = DataFactory.createTrack("Nouvelle Filière");
 		lst.add(track);
 		TrackTreeNode child = new TrackTreeNode(this,track,model);
 	/*	if(children.size()==0)

@@ -1,10 +1,13 @@
 package fr.umlv.ir3.flexitime.richClient.gui.panel;
 import java.awt.BorderLayout;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 
 
 /*
@@ -27,9 +30,19 @@ public class ManagementView
 	 * @throws RemoteException 
 	 * 
 	 */
-	public ManagementView(List lstTrack,List lstDevice,List lstBuilding,List lstTeacher) throws RemoteException 
+	public ManagementView() throws RemoteException 
 	{
-		panel = new JPanel(new BorderLayout());
+		/*List lstTrack = RemoteDataManager.getManager().getTracks();
+        List lstDevice= RemoteDataManager.getManager().getDevices();
+        List lstBuilding = RemoteDataManager.getManager().getBuildings() ;
+        List lstTeacher =RemoteDataManager.getManager().getTeachers();*/
+        
+        List lstTrack = new ArrayList();
+        List lstDevice= new ArrayList();
+        List lstBuilding = new ArrayList();
+        List lstTeacher =new ArrayList();
+        
+        panel = new JPanel(new BorderLayout());
         OutlookBarManagement fb1 = new OutlookBarManagement(panel,lstTrack,lstDevice,lstBuilding,lstTeacher);
 		//NameView trackView = new NameView((IData)lstTrack.get(0));
 		JPanel panel1 = new JPanel(new BorderLayout());

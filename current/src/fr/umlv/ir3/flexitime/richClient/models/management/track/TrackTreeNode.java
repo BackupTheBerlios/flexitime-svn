@@ -181,7 +181,8 @@ public class TrackTreeNode implements FlexiTreeNode
 	public TreeNode add() throws FlexiException 
 	{
 
-			IClass iClass = DataFactory.createClass("Nouvelle Promotion",track);
+		System.out.println("Add promotion");	
+        IClass iClass = DataFactory.createClass("Nouvelle Promotion",track);
 			iClass.setTeachingStructure(DataFactory.createTeachingStructure("structure",iClass));
             ClassTreeNode child = new ClassTreeNode(this,iClass,model);
 			if(children.size()==0)

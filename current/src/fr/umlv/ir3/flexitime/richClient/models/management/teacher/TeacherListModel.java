@@ -81,7 +81,7 @@ public class TeacherListModel extends AbstractListModel {
 	 */
 	public void add() throws FlexiException
 	{	
-		
+		System.out.println("Add teacher");
 		lstTeacher.add(DataFactory.createTeacher("Nouveau Professeur",""));
 		this.fireIntervalAdded(this,lstTeacher.size()-1,lstTeacher.size());
 	}
@@ -168,7 +168,7 @@ public class TeacherListModel extends AbstractListModel {
                 }
                 case DataEvent.TYPE_PROPERTY_REMOVED:
                 {
-                     remove(teacher);
+                    remove(teacher);
                     break;
                 }
             }

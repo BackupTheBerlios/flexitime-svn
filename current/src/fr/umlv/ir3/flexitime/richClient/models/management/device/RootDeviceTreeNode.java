@@ -130,12 +130,15 @@ public class RootDeviceTreeNode extends RootTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(javax.swing.tree.TreeNode)
 	 */
-	public void remove(TreeNode childNode) throws RemoteException, FlexiException {
-		RemoteDataManager.getManager().deleteDevice(((DeviceTreeNode)childNode).getDevice());
-        lst.remove(((DeviceTreeNode)childNode).getDevice());
+	public void remove(IDevice device) throws RemoteException, FlexiException {
+		System.out.println("delete device");
+        RemoteDataManager.getManager().deleteDevice(device);
 
 		
 	}
+    public void remove(TreeNode device) throws RemoteException, FlexiException {
+       
+    }
 
     /* (non-Javadoc)
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)

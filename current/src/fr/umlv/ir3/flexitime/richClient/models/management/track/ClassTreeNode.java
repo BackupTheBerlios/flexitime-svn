@@ -197,7 +197,8 @@ public class ClassTreeNode implements FlexiTreeNode
 	 */
 	public TreeNode add() throws FlexiException {
 	
-				IGroup groupe = DataFactory.createGroup("Nouveau Groupe",0,iClass);
+                System.out.println("Add group");
+                IGroup groupe = DataFactory.createGroup("Nouveau Groupe",0,iClass);
 				GroupTreeNode child = new GroupTreeNode(this,groupe,model);
 				if(children.size()==0)
 				{

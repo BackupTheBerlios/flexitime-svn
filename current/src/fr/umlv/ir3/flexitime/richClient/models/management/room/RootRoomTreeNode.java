@@ -39,7 +39,7 @@ public class RootRoomTreeNode extends RootTreeNode
 	public RootRoomTreeNode(TreeNode parent,List lstBuilding) throws RemoteException
 	{
 		super(parent,lstBuilding);
-         RemoteDataManager.getManager().addDataListener(IDevice.class,this);
+         RemoteDataManager.getManager().addDataListener(IBuilding.class,this);
 	}
 	
 	/**
@@ -89,6 +89,7 @@ public class RootRoomTreeNode extends RootTreeNode
     {
        try
        {
+           System.out.println("Add BuildingNode");
            BuildingTreeNode child = new BuildingTreeNode(this,building,model);
            lst.add(building);
            children.add(child);
