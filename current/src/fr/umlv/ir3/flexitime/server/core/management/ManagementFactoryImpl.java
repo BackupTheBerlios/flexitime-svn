@@ -9,6 +9,10 @@ package fr.umlv.ir3.flexitime.server.core.management;
 
 import java.util.Date;
 
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.general.*;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.IResource;
@@ -16,19 +20,17 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.ressources.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
-import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.general.*;
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.tools.Time;
+import fr.umlv.ir3.flexitime.server.core.management.*;
 
 /**
- * ManagementFactory - Creates all the ressources needed
+ * ManagementFactoryImpl - Implementation of the abstract class
+ * ManagementFactory
  * 
  * @version 0.1
  * @author FlexiTeam - Valère FOREL
  */
-public abstract class ManagementFactory
+public class ManagementFactoryImpl extends ManagementFactory
 {
 
     /**
@@ -40,7 +42,11 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract ITeacher createTeacher(String name);
+    public ITeacher createTeacher(String name)
+    {
+        return null;
+
+    }
 
     /**
      * createRoom - creates a room
@@ -52,7 +58,10 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract IRoom createRoom(String name, IFloor floor);
+    public IRoom createRoom(String name, IFloor floor)
+    {
+        return null;
+    }
 
     /**
      * createDevice - creates a device
@@ -63,7 +72,10 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract IDevice createDevice(String name);
+    public IDevice createDevice(String name)
+    {
+        return null;
+    }
 
     /**
      * createGroup - creates a group
@@ -75,7 +87,10 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract IGroup createGroup(String name, IClass _class);
+    public IGroup createGroup(String name, IClass _class)
+    {
+        return null;
+    }
 
     /**
      * createTrack - creates a Track
@@ -86,7 +101,10 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract ITrack createTrack(String name);
+    public ITrack createTrack(String name)
+    {
+        return null;
+    }
 
     /**
      * createClass - creates a Class
@@ -97,7 +115,10 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract IClass createClass(String name);
+    public IClass createClass(String name)
+    {
+        return null;
+    }
 
     /**
      * createSubjectsGroup - create a group of subjects
@@ -109,24 +130,29 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract ISubjectsGroup createSubjectsGroup(String name, IClass _class);
+    public ISubjectsGroup createSubjectsGroup(String name, IClass _class)
+    {
+        return null;
+    }
 
     /**
      * createSubject - creates a subject
-     * <code>Subject m = myFactory.createSubject("name", aSubjectsGroup)</code>
+     * <code>Subject s = myFactory.createSubject("name", aSubjectsGroup)</code>
      * 
      * @param name name of the subject
-     * @param subjectsGroup groups of subjects which the subject depends
-     * @return a SubjectsGroup
+     * @param subjectsGroup group of subjects which the subject depends
+     * @return a Subject
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract ISubject createSubject(String name,
-            ISubjectsGroup subjectsGroup);
+    public ISubject createSubject(String name, ISubjectsGroup subjectsGroup)
+    {
+        return null;
+    }
 
     /**
      * createCourse - create a course
-     * <code>Course c = myFactory.createCourse("name", aSubject)</code>
+     * <code>Cours c = myFactory.createCourse("name", aSubject)</code>
      * 
      * @param name name of the course
      * @param subject subject which the course depends
@@ -134,7 +160,10 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract ICourse createCourse(String name, ISubject subject);
+    public ICourse createCourse(String name, ISubject subject)
+    {
+        return null;
+    }
 
     /**
      * createBuilding - creates a building
@@ -145,7 +174,10 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract IBuilding createBuilding(String name);
+    public IBuilding createBuilding(String name)
+    {
+        return null;
+    }
 
     /**
      * createFloor - creates a floor
@@ -157,49 +189,50 @@ public abstract class ManagementFactory
      * @author FlexiTeam - Valère FOREL
      * @date 13 déc. 2004
      */
-    public abstract IFloor createFloor(String name, IBuilding building);
-
-    /**
-     * createLesson - creates a lesson
-     * <code>Lesson l = myManagementFactory.createLesson(date,time,resource)</code>
-     * 
-     * @param date date of the lesson
-     * @param time time of the lesson
-     * @param resource resource which is plannified
-     * @return a Lesson
-     * @author FlexiTeam - Valère FOREL
-     * @date 15 déc. 2004
-     */
-    public abstract ILesson createLesson(Date date, Time time, IResource resource);
-
-    /**
-     * createBusy - creates a unavaibility
-     * <code>Busy b = myManagementFactory.createBusy(date,time,resource)</code>
-     * 
-     * @param date date of the unavaibility
-     * @param time time of the unavaibility
-     * @param resource resource which is plannified
-     * @return a Busy
-     * @author FlexiTeam - Administrateur
-     * @date 15 déc. 2004
-     */
-    public abstract IBusy createBusy(Date date, Time time, IResource resource);
-
-    /**
-     * getFactory - get the ManagementFactory
-     * <code>ManagementFactory mf = ManagementFactory.getFactory()</code>
-     * 
-     * @return a ManagementFactory
-     * @author FlexiTeam - Valère FOREL
-     * @date 13 déc. 2004
-     */
-    public static ManagementFactory getFactory()
+    public IFloor createFloor(String name, IBuilding building)
     {
         return null;
     }
 
     /**
-     * The ManagementFactory
+     * createLesson - DOCME Description Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     * 
+     * @param date
+     * @param time
+     * @param resource
+     * @return
+     * @see fr.umlv.ir3.flexitime.server.core.management.ManagementFactory#createLesson(java.util.Date,
+     *      fr.umlv.ir3.flexitime.common.tools.Time,
+     *      fr.umlv.ir3.flexitime.common.data.ressources.Resource)
+     * @author FlexiTeam - Administrateur
+     * @date 15 déc. 2004
      */
-    public static ManagementFactory factory;
+    public ILesson createLesson(Date date, Time time, IResource resource)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * createBusy - DOCME Description Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     * 
+     * @param date
+     * @param time
+     * @param resource
+     * @return
+     * @see fr.umlv.ir3.flexitime.server.core.management.ManagementFactory#createBusy(java.util.Date,
+     *      fr.umlv.ir3.flexitime.common.tools.Time,
+     *      fr.umlv.ir3.flexitime.common.data.ressources.Resource)
+     * @author FlexiTeam - Administrateur
+     * @date 15 déc. 2004
+     */
+    public IBusy createBusy(Date date, Time time, IResource resource)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+ 
 }
