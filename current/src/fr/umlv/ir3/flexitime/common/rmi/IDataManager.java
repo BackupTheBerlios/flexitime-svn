@@ -11,11 +11,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
@@ -446,38 +442,25 @@ public interface IDataManager extends Remote
      * @throws FlexiException 
      */
     public boolean deleteTrack(ITrack track) throws RemoteException, FlexiException;
-
+    
+    
     /**
-     * @param d
+     * @param b
      * @param parent
-     * @return IdeviceBusy
+     * @return IBusy
      * @throws RemoteException 
+     * 
      */
-    public IDeviceBusy saveOrUpdateDeviceBusy(IDeviceBusy d, IDevice parent) throws RemoteException;
-
+    public IBusy saveOrUpdateResourceBusy(IBusy b, IResource parent) throws RemoteException;
     /**
-     * @param group
+     * @param b
      * @param parent
-     * @return IGroupBusy
+     * @return true if OK
      * @throws RemoteException 
+     * @throws FlexiException 
+     * 
      */
-    public IGroupBusy saveOrUpdateGroupBusy(IGroupBusy group, IGroup parent) throws RemoteException;
-
-    /**
-     * @param r
-     * @param parent
-     * @return IRoomBusy
-     * @throws RemoteException 
-     */
-    public IRoomBusy saveOrUpdateRoomBusy(IRoomBusy r, IRoom parent) throws RemoteException;
-
-    /**
-     * @param t
-     * @param parent
-     * @return ITeacherBusy
-     * @throws RemoteException 
-     */
-    public ITeacherBusy saveOrUpdateTeacherBusy(ITeacherBusy t, ITeacher parent) throws RemoteException;
+    public boolean deleteResourceBusy(IBusy b, IResource parent) throws RemoteException, FlexiException;
     
     /**
      * 

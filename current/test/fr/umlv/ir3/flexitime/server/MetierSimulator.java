@@ -261,22 +261,21 @@ public class MetierSimulator
         //RemoteDataManager.getManager().deleteLesson(lesson9);
 
         
-        for(IResource r : lesson1.getAllResources())
-        {
-            System.out.println(r.getName()+" " +r);
-            for(IBusy b : r.getSetBusy())
-                System.out.println("\t" + b);
-        }
-        System.out.println("Groupe 2");
-        for(IBusy b : ir3_grp2.getSetBusy())
-            System.out.println("\t" + b);
+//        for(IResource r : lesson1.getAllResources())
+//        {
+//            System.out.println(r.getName()+" " +r);
+//            for(IBusy b : r.getSetBusy())
+//                System.out.println("\t" + b);
+//        }
+//        System.out.println("Groupe 2");
+//        for(IBusy b : ir3_grp2.getSetBusy())
+//            System.out.println("\t" + b);
         
 
         //System.exit(0);
         
-        //lesson1.addResource(ir1_grp1);
-        //RemoteDataManager.getManager().saveOrUpdateLesson(lesson1, lesson1.getAllResources());
-        RemoteDataManager.getManager().deleteLesson(lesson1);
+        lesson1.addResource(ir1_grp1);
+//        RemoteDataManager.getManager().saveOrUpdateLesson(lesson1, lesson1.getAllResources());
 //        RemoteDataManager.getManager().deleteLesson(lesson1);
         lesson2.addResource(salle2017);
         lesson3.addResource(salle2017);

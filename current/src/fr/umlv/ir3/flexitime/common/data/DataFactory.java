@@ -51,16 +51,16 @@ public class DataFactory
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent) throws FlexiException
     {
         IDeviceBusy d = new DeviceBusyImpl(g);
-        parent.addBusy(d);
+        
         try
         {
-            d = RemoteDataManager.getManager().saveOrUpdateDeviceBusy(d, parent);
+            d = (IDeviceBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(d);
         return d;
     }
     
@@ -79,16 +79,15 @@ public class DataFactory
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent, String comment) throws FlexiException
     {
         IDeviceBusy d = new DeviceBusyImpl(g, comment);
-        parent.addBusy(d);
         try
         {
-            d = RemoteDataManager.getManager().saveOrUpdateDeviceBusy(d, parent);
+            d = (IDeviceBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(d);
         return d;
     }
 
@@ -107,16 +106,16 @@ public class DataFactory
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent, int reason) throws FlexiException
     {
         IDeviceBusy d = new DeviceBusyImpl(g, reason);
-        parent.addBusy(d);
+
         try
         {
-            d = RemoteDataManager.getManager().saveOrUpdateDeviceBusy(d, parent);
+            d = (IDeviceBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(d);
         return d;
     }
     
@@ -137,16 +136,15 @@ public class DataFactory
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent, int reason, String comment) throws FlexiException
     {
         IDeviceBusy d = new DeviceBusyImpl(g, reason, comment);
-        parent.addBusy(d);
         try
         {
-            d = RemoteDataManager.getManager().saveOrUpdateDeviceBusy(d, parent);
+            d = (IDeviceBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(d);
         return d;
     }
 
@@ -162,15 +160,15 @@ public class DataFactory
     public static IDeviceBusy createDeviceBusy(IDeviceBusy busy, IDevice parent) throws FlexiException
     {
         IDeviceBusy d = new DeviceBusyImpl(busy);
-        parent.addBusy(d);
         try
         {
-            d = RemoteDataManager.getManager().saveOrUpdateDeviceBusy(d, parent);
+            d = (IDeviceBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addBusy(d);
         return d;
     }
 
@@ -185,16 +183,15 @@ public class DataFactory
     public static IGroupBusy createGroupBusy(Gap g, IGroup parent) throws FlexiException
     {
         IGroupBusy group = new GroupBusyImpl(g);
-        parent.addBusy(group);
         try
         {
-            group = RemoteDataManager.getManager().saveOrUpdateGroupBusy(group, parent);
+            group = (IGroupBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(group);
         return group;
     }
     
@@ -211,16 +208,16 @@ public class DataFactory
     public static IGroupBusy createGroupBusy(Gap g, IGroup parent, String comment) throws FlexiException
     {
         IGroupBusy group = new GroupBusyImpl(g, comment);
-        parent.addBusy(group);
+        
         try
         {
-            group = RemoteDataManager.getManager().saveOrUpdateGroupBusy(group, parent);
+            group = (IGroupBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(group);
         return group;
     }
 
@@ -236,15 +233,15 @@ public class DataFactory
     public static IGroupBusy createGroupBusy(Gap g, IGroup parent, int reason) throws FlexiException
     {
         IGroupBusy group = new GroupBusyImpl(g, reason);
-        parent.addBusy(group);
         try
         {
-            group = RemoteDataManager.getManager().saveOrUpdateGroupBusy(group, parent);
+            group = (IGroupBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addBusy(group);
         return group;
     }
     
@@ -262,15 +259,16 @@ public class DataFactory
     public static IGroupBusy createGroupBusy(Gap g, IGroup parent, int reason, String comment) throws FlexiException
     {
         IGroupBusy group = new GroupBusyImpl(g, reason, comment);
-        parent.addBusy(group);
+        
         try
         {
-            group = RemoteDataManager.getManager().saveOrUpdateGroupBusy(group, parent);
+            group = (IGroupBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addBusy(group);
         return group;
     }
     
@@ -286,15 +284,15 @@ public class DataFactory
     public static IGroupBusy createGroupBusy(IGroupBusy busy, IGroup parent) throws FlexiException
     {
         IGroupBusy group = new GroupBusyImpl(busy);
-        parent.addBusy(group);
         try
         {
-            group = RemoteDataManager.getManager().saveOrUpdateGroupBusy(group, parent);
+            group = (IGroupBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addBusy(group);
         return group;
     }    
 
@@ -421,7 +419,7 @@ public class DataFactory
         for(IResource elem : l)
         {
             lesson.addResource(elem);
-            System.out.println(elem.getClass() +" " + elem.getSetBusy());
+            //System.out.println(elem.getClass() +" " + elem.getSetBusy());
         }
         
         return lesson;
@@ -469,7 +467,7 @@ public class DataFactory
         for(IResource elem : lr)
         {
             lesson.addResource(elem);
-            System.out.println(elem.getSetBusy());
+            //System.out.println(elem.getSetBusy());
         }
         
         return lesson;
@@ -540,16 +538,16 @@ public class DataFactory
     public static IRoomBusy createRoomBusy(Gap g, IRoom parent) throws FlexiException
     {
         IRoomBusy r = new RoomBusyImpl(g);
-        parent.addBusy(r);
+
         try
         {
-            r = RemoteDataManager.getManager().saveOrUpdateRoomBusy(r, parent);
+            r = (IRoomBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(r);
         return r;
     }
     
@@ -567,16 +565,15 @@ public class DataFactory
     public static IRoomBusy createRoomBusy(Gap g, IRoom parent, String comment) throws FlexiException
     {
         IRoomBusy r = new RoomBusyImpl(g, comment);
-        parent.addBusy(r);
         try
         {
-            r = RemoteDataManager.getManager().saveOrUpdateRoomBusy(r, parent);
+            r = (IRoomBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(r);
         return r;
     }
 
@@ -594,15 +591,15 @@ public class DataFactory
     public static IRoomBusy createRoomBusy(Gap g, IRoom parent, int reason) throws FlexiException
     {
         IRoomBusy r = new RoomBusyImpl(g, reason);
-        parent.addBusy(r);
         try
         {
-            r = RemoteDataManager.getManager().saveOrUpdateRoomBusy(r, parent);
+            r = (IRoomBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addBusy(r);
         return r;
     }
     
@@ -622,15 +619,15 @@ public class DataFactory
     public static IRoomBusy createRoomBusy(Gap g, IRoom parent, int reason, String comment) throws FlexiException
     {
         IRoomBusy r = new RoomBusyImpl(g, reason, comment);
-        parent.addBusy(r);
         try
         {
-            r = RemoteDataManager.getManager().saveOrUpdateRoomBusy(r, parent);
+            r = (IRoomBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addBusy(r);
         return r;
     }
 
@@ -646,15 +643,15 @@ public class DataFactory
     public static IRoomBusy createRoomBusy(IRoomBusy busy, IRoom parent) throws FlexiException
     {
         IRoomBusy r = new RoomBusyImpl(busy);
-        parent.addBusy(r);
         try
         {
-            r = RemoteDataManager.getManager().saveOrUpdateRoomBusy(r, parent);
+            r = (IRoomBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addBusy(r);
         return r;
     }
     
@@ -670,16 +667,15 @@ public class DataFactory
     public static ITeacherBusy createTeacherBusy(Gap g, ITeacher parent) throws FlexiException
     {
         ITeacherBusy t = new TeacherBusyImpl(g);
-        parent.addBusy(t);
         try
         {
-            t = RemoteDataManager.getManager().saveOrUpdateTeacherBusy(t, parent);
+            t = (ITeacherBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(t);
         return t;
     }
     
@@ -697,15 +693,16 @@ public class DataFactory
     public static ITeacherBusy createTeacherBusy(Gap g, ITeacher parent, String comment) throws FlexiException
     {
         ITeacherBusy t = new TeacherBusyImpl(g, comment);
-        parent.addBusy(t);
+        
         try
         {
-            t = RemoteDataManager.getManager().saveOrUpdateTeacherBusy(t, parent);
+            t = (ITeacherBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addBusy(t);
         
         return t;
     }
@@ -724,16 +721,15 @@ public class DataFactory
     public static ITeacherBusy createTeacherBusy(Gap g, ITeacher parent, int reason) throws FlexiException
     {
         ITeacherBusy t = new TeacherBusyImpl(g, reason);
-        parent.addBusy(t);
         try
         {
-            t = RemoteDataManager.getManager().saveOrUpdateTeacherBusy(t, parent);
+            t = (ITeacherBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(t);
         return t;
     }
     
@@ -753,16 +749,15 @@ public class DataFactory
     public static ITeacherBusy createTeacherBusy(Gap g, ITeacher parent, int reason, String comment) throws FlexiException
     {
         ITeacherBusy t = new TeacherBusyImpl(g, reason, comment);
-        parent.addBusy(t);
         try
         {
-            t = RemoteDataManager.getManager().saveOrUpdateTeacherBusy(t, parent);
+            t = (ITeacherBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
-        
+        parent.addBusy(t);        
         return t;
     }
     
@@ -778,15 +773,15 @@ public class DataFactory
     public static ITeacherBusy createTeacherBusy(ITeacherBusy busy, ITeacher parent) throws FlexiException
     {
         ITeacherBusy t = new TeacherBusyImpl(busy);
-        parent.addBusy(t);
         try
         {
-            t = RemoteDataManager.getManager().saveOrUpdateTeacherBusy(t, parent);
+            t = (ITeacherBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
+        parent.addBusy(t);
         return t;
     }
 

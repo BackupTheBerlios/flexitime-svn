@@ -38,6 +38,7 @@ import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.server.io.storage.BuildingStorage;
+import fr.umlv.ir3.flexitime.server.io.storage.BusyStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.ClassStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.CourseStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.DeviceStorage;
@@ -756,6 +757,24 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         {
             // TODO Auto-generated catch block
             e1.printStackTrace();
+        }
+        
+        i = 0;
+        for (IResource elem : lresource)
+        {
+            Class c = null;
+            if(elem instanceof IDevice)
+                c = IDevice.class;
+            else if(elem instanceof IGroup)
+                c = IGroup.class;
+            else if(elem instanceof IRoom)
+                c = IRoom.class;
+            else if(elem instanceof ITeacher)
+                c = ITeacher.class;
+            
+            manager.fireDataChanged(c, new DataEvent(elem,
+                  "setBusy", type[i], new Object[] { lesson }));
+            ++i;
         }
 
         // Mise à jour des ressources associées
@@ -1685,44 +1704,39 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         return null;
     }
 
-    /**
-     * DOCME Description Quel service est rendu par cette méthode
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
-     * @param track
-     * @return
-     * @throws RemoteException
-     * @throws FlexiException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteDeviceBusy(fr.umlv.ir3.flexitime.common.data.general.ITrack)
-     */
-    public boolean deleteDeviceBusy(ITrack track) throws RemoteException,
-            FlexiException
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param busy
+     *
+     * @param b
      * @param parent
      * @return
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateGroupBusy(fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy,
-     *      fr.umlv.ir3.flexitime.common.data.resources.IGroup)
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateResourceBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy, fr.umlv.ir3.flexitime.common.data.resources.IResource)
      */
-    public IGroupBusy saveOrUpdateGroupBusy(IGroupBusy busy, IGroup parent)
+    public IBusy saveOrUpdateResourceBusy(IBusy b, IResource parent)
             throws RemoteException
     {
-        int type = busy.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+        int type = b.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
                 : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
+        Class c = null;
+        
+        if(parent instanceof IDevice)
+            c = IDevice.class;
+        else if(parent instanceof IGroup)
+            c = IGroup.class;
+        else if(parent instanceof IRoom)
+            c = IRoom.class;
+        else if(parent instanceof ITeacher)
+            c = ITeacher.class;
+        
         try
         {
-            GroupStorage.save(parent);
-            
+            //TeacherStorage.save(parent);
+            BusyStorage.save(b);
         }
         catch (HibernateException e)
         {
@@ -1731,81 +1745,56 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             return null;
         }
 
-        manager.fireDataChanged(IGroup.class, new DataEvent(parent,
-                "setBusy", type, new Object[] { busy })); //$NON-NLS-1$
+        manager.fireDataChanged(c, new DataEvent(parent,
+                "setBusy", type, new Object[] { b })); //$NON-NLS-1$
 
-        return busy;
-
+        return b;
     }
-
-    /**
-     * DOCME Description Quel service est rendu par cette méthode
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
-     * @param busy
+     *
+     * @param b
      * @param parent
      * @return
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateRoomBusy(fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy,
-     *      fr.umlv.ir3.flexitime.common.data.resources.IRoom)
-     */
-    public IRoomBusy saveOrUpdateRoomBusy(IRoomBusy busy, IRoom parent)
-            throws RemoteException
-    {
-        int type = busy.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
-
-        try
-        {
-            RoomStorage.save(parent);
-        }
-        catch (HibernateException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-
-        manager.fireDataChanged(IRoom.class, new DataEvent(parent,
-                "setBusy", type, new Object[] { busy })); //$NON-NLS-1$
-
-        return busy;
-
-    }
-
-    /**
-     * DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * @throws RemoteException 
+     * @throws FlexiException 
      * 
-     * @param busy
-     * @param parent
-     * @return
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateTeacherBusy(fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy,
-     *      fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteTeacherBusy(fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy, fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
      */
-    public ITeacherBusy saveOrUpdateTeacherBusy(ITeacherBusy busy,
-            ITeacher parent) throws RemoteException
+    public boolean deleteResourceBusy(IBusy b, IResource parent) throws RemoteException, FlexiException
     {
-        int type = busy.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
-                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
-
+        Class c = null;
+        
+        if(parent instanceof IDevice)
+            c = IDevice.class;
+        else if(parent instanceof IGroup)
+            c = IGroup.class;
+        else if(parent instanceof IRoom)
+            c = IRoom.class;
+        else if(parent instanceof ITeacher)
+            c = ITeacher.class;
+        
         try
         {
-            TeacherStorage.save(parent);
+            BusyStorage.delete(b);
         }
         catch (HibernateException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
+            throw new FlexiException(FlexiLanguage.getInstance().getText(
+                    "classDeletion"), e); //$NON-NLS-1$
         }
 
-        manager.fireDataChanged(ITeacher.class, new DataEvent(parent,
-                "setBusy", type, new Object[] { busy })); //$NON-NLS-1$
+        manager
+                .fireDataChanged(
+                        c,
+                        new DataEvent(
+                                parent,
+                                "setBusy", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { b })); //$NON-NLS-1$
 
-        return busy;
-
+        return true;
     }
 
 }
