@@ -9,7 +9,7 @@ package fr.umlv.ir3.flexitime.common.data.general.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.impl.*;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 
 import junit.framework.TestCase;
@@ -31,13 +31,13 @@ public class TestClassImpl extends TestCase {
     String strName = "toto";
     List lstGroup  = new ArrayList();
     ITeachingStructure struct;
-    ClassImpl pclass = new ClassImpl(strName,lstGroup,struct);
+    ClassImpl pclass = new ClassImpl(strName);
 
     public void testGetNbGroup()
     {
-        GroupImpl group1 = new GroupImpl("titi",new ArrayList(),10);
+        GroupImpl group1 = new GroupImpl("titi",new ArrayList(),10,new ClassImpl());
         pclass.addGroup(group1);
-        pclass.addGroup( new GroupImpl("tutu",new ArrayList(),20));
+        pclass.addGroup( new GroupImpl("tutu",new ArrayList(),20,new ClassImpl()));
         
         if(pclass.getNbGroup() != 2)
             fail("Erreur NbGroup");
@@ -50,9 +50,9 @@ public class TestClassImpl extends TestCase {
     
     public void testGetNbPerson()
     {
-        GroupImpl group1 = new GroupImpl("titi",new ArrayList(),10);
+        GroupImpl group1 = new GroupImpl("titi",new ArrayList(),10,new ClassImpl());
         pclass.addGroup(group1);
-        pclass.addGroup( new GroupImpl("tutu",new ArrayList(),20));
+        pclass.addGroup( new GroupImpl("tutu",new ArrayList(),20,new ClassImpl()));
         
         if(pclass.getNbPerson() != 30)
             fail("Erreur NbGroup");
@@ -65,9 +65,9 @@ public class TestClassImpl extends TestCase {
     
     public void testLstGroup()
     {
-        GroupImpl group1 = new GroupImpl("titi",new ArrayList(),10);
+        GroupImpl group1 = new GroupImpl("titi",new ArrayList(),10,new ClassImpl());
         pclass.addGroup(group1);
-        pclass.addGroup( new GroupImpl("tutu",new ArrayList(),20));
+        pclass.addGroup( new GroupImpl("tutu",new ArrayList(),20,new ClassImpl()));
         
         if( ((GroupImpl)(pclass.getLstGroups().get(0))).getName().compareTo("titi") != 0 )
             fail("erreur Lecture des Group");

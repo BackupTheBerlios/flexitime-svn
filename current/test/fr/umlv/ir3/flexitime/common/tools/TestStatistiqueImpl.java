@@ -4,7 +4,7 @@
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.data.general.impl;
+package fr.umlv.ir3.flexitime.common.tools;
 
 import junit.framework.TestCase;
 

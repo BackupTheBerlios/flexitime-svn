@@ -22,7 +22,7 @@ import junit.framework.TestCase;
  * 
  * @author FlexiTeam - Famille
  */
-public class TestFlexiTime extends TestCase
+public class TestTime extends TestCase
 {
    
     
@@ -39,34 +39,34 @@ public class TestFlexiTime extends TestCase
     public void testGetStrDate()
     {
         //Creation des time avec : le 06/12/2004 qui est un lundi
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
         if(time.getStrDate().compareTo("Lundi 6 Décembre 2004") != 0 ) fail();
     }
 
     public void testGetDate()
     {
 //      Creation des time avec : le 06/12/2004 qui est un lundi 
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
         if(time.getDate().compareTo("06/12/2004") != 0 ) fail();
     }
     public void testGetHour()
     {
 //      Creation des time avec : le 06/12/2004 à12h00
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
         if(time.getHour()!= 12 ) fail();
     }
     
     public void testGetMinute()
     {
 //      Creation des time avec : le 06/12/2004 à12h00
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
         if(time.getMinute()!= 00 ) fail();
     }
     
     public void testAddDay()
     {
 //      Creation des time avec : le 06/12/2004 
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
         time.addDay(7);//si on ajoute 7 jours on obtient le lundi 13 decembre 2004
         if(time.getDate().compareTo("13/12/2004") != 0 ) fail();
     }
@@ -74,7 +74,7 @@ public class TestFlexiTime extends TestCase
     public void testAddWeek()
     {
 //      Creation des time avec : le 06/12/2004 
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
         time.addWeek(1);//si on ajoute 1semaine on obtient le lundi 13 decembre 2004
         if(time.getDate().compareTo("13/12/2004") != 0 ) fail();
     }
@@ -82,7 +82,7 @@ public class TestFlexiTime extends TestCase
     public void testAddMonth()
     {
 //      Creation des time avec : le 06/12/2004
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
         time.addMonth(3);
         if(time.getDate().compareTo("06/03/2005") != 0 ) fail();
     }
@@ -90,7 +90,7 @@ public class TestFlexiTime extends TestCase
     public void testAddYear()
     {
 //      Creation des time avec : le 06/12/2004 
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
         time.addYear(2);
         if(time.getDate().compareTo("06/12/2006") != 0 ) fail();
     }
@@ -98,7 +98,7 @@ public class TestFlexiTime extends TestCase
     public void testAddHour()
     {
 //      Creation des time avec : le 06/12/2004 
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
         time.addHour(2);
         if(time.getHour() != 14 ) fail();
     }
@@ -106,7 +106,7 @@ public class TestFlexiTime extends TestCase
     public void testAddMinute()
     {
 //      Creation des time avec : le 06/12/2004 
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
         time.addMinute(7);
         if(time.getMinute() != 7 ) fail();
     }
@@ -114,58 +114,58 @@ public class TestFlexiTime extends TestCase
     public void testCompare()
     {
 //      Creation des time avec : 
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
-        if(FlexiTime.compare(time,time)!=0)fail();
+        Time time = new Time(2004, 12, 6, 12, 00);
+        if(Time.compare(time,time)!=0)fail();
     }
     
     
     public void testGetGapWeek()
     {
 //      Creation des time avec : 
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
-        FlexiTime time2 = new FlexiTime(2004, 12, 15, 12, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
+        Time time2 = new Time(2004, 12, 15, 12, 00);
         
         //1. Avec les deux meme
-        if(FlexiTime.getGapWeek(time,time) != 0)fail();
+        if(Time.getGapWeek(time,time) != 0)fail();
         
         //2. Avec deux différents ordre croissant
-        if(FlexiTime.getGapWeek(time,time2) != 1)fail();
+        if(Time.getGapWeek(time,time2) != 1)fail();
         
         //3. Avec deux différents ordre décroissant
-        if(FlexiTime.getGapWeek(time2,time) != 1)fail();
+        if(Time.getGapWeek(time2,time) != 1)fail();
     }
     
     public void testGetGapHour()
     {
 //      Creation des time avec : 
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
-        FlexiTime time2 = new FlexiTime(2004, 12, 6, 16, 00);
+        Time time = new Time(2004, 12, 6, 12, 00);
+        Time time2 = new Time(2004, 12, 6, 16, 00);
         
         //1. Avec les deux meme
-        if(FlexiTime.getGapHour(time,time) != 0)fail();
+        if(Time.getGapHour(time,time) != 0)fail();
         
         //2. Avec deux différents ordre croissant
-        if(FlexiTime.getGapHour(time,time2) != 4)fail();
+        if(Time.getGapHour(time,time2) != 4)fail();
         
         //3. Avec deux différents ordre décroissant
-        if(FlexiTime.getGapHour(time2,time) != 4)fail();
+        if(Time.getGapHour(time2,time) != 4)fail();
     }
     
     
     public void testGetGapMinute()
     {
 //      Creation des time avec : 
-        FlexiTime time = new FlexiTime(2004, 12, 6, 12, 00);
-        FlexiTime time2 = new FlexiTime(2004, 12, 6, 12, 10);
+        Time time = new Time(2004, 12, 6, 12, 00);
+        Time time2 = new Time(2004, 12, 6, 12, 10);
         
         //1. Avec les deux meme
-        if(FlexiTime.getGapMinute(time,time) != 0)fail();
+        if(Time.getGapMinute(time,time) != 0)fail();
         
         //2. Avec deux différents ordre croissant
-        if(FlexiTime.getGapMinute(time,time2) != 10)fail();
+        if(Time.getGapMinute(time,time2) != 10)fail();
         
         //3. Avec deux différents ordre décroissant
-        if(FlexiTime.getGapMinute(time2,time) != 10)fail();
+        if(Time.getGapMinute(time2,time) != 10)fail();
     }
 }
 

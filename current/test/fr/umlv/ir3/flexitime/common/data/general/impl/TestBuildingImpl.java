@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.ressources.impl.*;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
 import junit.framework.TestCase;
 
 
@@ -35,9 +35,9 @@ public class TestBuildingImpl extends TestCase {
 
     public void testGetNbFloor()
     {
-        FloorImpl floor1 = new FloorImpl("titi",new ArrayList());
+        FloorImpl floor1 = new FloorImpl("titi");
         building.addFloor(floor1);
-        building.addFloor( new FloorImpl("tutu",new ArrayList()));
+        building.addFloor( new FloorImpl("tutu"));
         
         if(building.getNbFloor() != 2)
             fail("Erreur NbFloor");
@@ -51,9 +51,9 @@ public class TestBuildingImpl extends TestCase {
     
     public void testLstFloor()
     {
-        FloorImpl floor1 = new FloorImpl("titi",new ArrayList());
+        FloorImpl floor1 = new FloorImpl("titi");
         building.addFloor(floor1);
-        building.addFloor( new FloorImpl("tutu",new ArrayList()));
+        building.addFloor( new FloorImpl("tutu"));
         
         if( ((FloorImpl)(building.getLstFloor().get(0))).getName().compareTo("titi") != 0 )
             fail("erreur Lecture des Floor");
