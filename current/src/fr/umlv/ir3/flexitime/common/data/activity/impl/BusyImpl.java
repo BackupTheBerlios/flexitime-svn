@@ -9,6 +9,7 @@ package fr.umlv.ir3.flexitime.common.data.activity.impl;
 import java.util.*;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.tools.*;
+import fr.umlv.ir3.flexitime.common.tools.lang.FlexiLanguage;
 
 /**
  * DOCME Description
@@ -24,6 +25,12 @@ public abstract class BusyImpl implements IBusy
     private Date   daStart;
     private Date   daEnd;
     protected Long idBusy;
+    private static FlexiLanguage language;
+    
+    static
+    {
+        language = FlexiLanguage.getInstance();
+    }
 
     // =============//
     // Constructeurs//
@@ -175,7 +182,7 @@ public abstract class BusyImpl implements IBusy
     public int compareTo(Object o)
     {
         if (! ( o instanceof IBusy ))
-            throw new ClassCastException("The parameter must be an IBusy instance to be compare.");
+            throw new ClassCastException(language.getText("errBusy01")); //$NON-NLS-1$
     
         IBusy bus = (IBusy)o;
         
