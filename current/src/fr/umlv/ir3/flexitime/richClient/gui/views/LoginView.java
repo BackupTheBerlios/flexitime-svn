@@ -28,6 +28,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
+import fr.umlv.ir3.flexitime.richClient.gui.Client;
 
 
 /**
@@ -68,7 +69,7 @@ public class LoginView
         CellConstraints cc = new CellConstraints();
 
         //creation des components
-        ImageIcon icon = new ImageIcon(getClass().getResource("../pictures/FlexiTime_icone32.png"));//$NON-NLS-1$
+        ImageIcon icon = new ImageIcon(Client.class.getResource("pictures/FlexiTime_icone32.png"));//$NON-NLS-1$
         JLabel labIcon = new JLabel(icon);
         final JTextField tfLogin = new JTextField();
         tfLogin.setText("<votre nom>");//$NON-NLS-1$
