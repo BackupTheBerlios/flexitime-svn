@@ -8,7 +8,11 @@ package fr.umlv.ir3.flexitime.common.data.general.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.collections.SetUtils;
+
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
@@ -34,6 +38,7 @@ public class TrackImpl extends DataImpl implements ITrack
     // ===========//
     private List<IClass>      lstClass;
     private List<TimeBloc>    lstTimeBloc;
+    private Set<IUser> setUser;
 
     // ==================//
     // Constructeurs //
@@ -149,5 +154,24 @@ public class TrackImpl extends DataImpl implements ITrack
     public boolean removeClass(IClass pClass)
     {
         return lstClass.remove(pClass);
+    }
+    
+    
+    /** 
+     * @see fr.umlv.ir3.flexitime.common.data.general.ITrack#getSetUser()
+     */
+    public Set<IUser> getSetUser()
+    {
+        return setUser;
+    }
+    
+    /**
+     * 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.general.ITrack#setSetUser(java.util.Set)
+     */
+    public void setSetUser(Set<IUser> setUser)
+    {
+        this.setUser = setUser;
     }
 }

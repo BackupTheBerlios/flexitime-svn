@@ -257,7 +257,7 @@ public class MetierSimulator
         lesson8 = DataFactory.createLesson(new Gap(2005,1,21,8,30,2005,1,21,10,30), corba_td, groups_td, roussel);
         lesson9 = DataFactory.createLesson(new Gap(2005,1,28,8,30,2005,1,28,10,30), corba_td, groups_td, roussel);
         
-        //RemoteDataManager.getManager().deleteLesson(lesson9);
+        //LocalDataManager.getManager().deleteLesson(lesson9);
 
         
 //        for(IResource r : lesson1.getAllResources())
@@ -274,8 +274,8 @@ public class MetierSimulator
         //System.exit(0);
         
         lesson1.addResource(ir1_grp1);
-//        RemoteDataManager.getManager().saveOrUpdateLesson(lesson1, lesson1.getAllResources());
-//        RemoteDataManager.getManager().deleteLesson(lesson1);
+//        LocalDataManager.getManager().saveOrUpdateLesson(lesson1, lesson1.getAllResources());
+//        LocalDataManager.getManager().deleteLesson(lesson1);
         lesson2.addResource(salle2017);
         lesson3.addResource(salle2017);
         lesson4.addResource(salle2027);

@@ -23,7 +23,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
@@ -76,7 +76,7 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
 			this.parent = parent;
 			this.subject = subject;
 			children = new ArrayList();
-            RemoteDataManager.getManager().addDataListener(ISubject.class,this);
+            LocalDataManager.getManager().addDataListener(ISubject.class,this);
 		}
 		
 		/**
@@ -223,7 +223,7 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
 		
         public void remove(ICourse course) throws RemoteException, FlexiException
         {
-            RemoteDataManager.getManager().deleteCourse(course);   
+            LocalDataManager.getManager().deleteCourse(course);   
         }
 		/* (non-Javadoc)
 		 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
@@ -231,7 +231,7 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
 		public void setValue(Object newValue) throws RemoteException 
         {
 			subject.setName((String)newValue);
-            RemoteDataManager.getManager().saveOrUpdateSubject(subject,subject.getParentSubjectsGroup());
+            LocalDataManager.getManager().saveOrUpdateSubject(subject,subject.getParentSubjectsGroup());
 
 			
 		}

@@ -19,7 +19,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 
@@ -66,12 +66,12 @@ public class TestStorage
 //        
 //        b.setComment("Toto");
 //        
-//        RemoteDataManager.getManager().saveOrUpdateResourceBusy(b, t);
+//        LocalDataManager.getManager().saveOrUpdateResourceBusy(b, t);
 //        
 //        for(IBusy bb: t.getSetBusy())
 //            System.out.println(bb.getComment());
 //        
-//        RemoteDataManager.getManager().deleteResourceBusy(b, t);
+//        LocalDataManager.getManager().deleteResourceBusy(b, t);
 //        
 //        for(IBusy bb: t.getSetBusy())
 //            System.out.println(bb.getComment());
@@ -85,12 +85,12 @@ public class TestStorage
 //        
 //        bd.setReason(1);
 //        
-//        RemoteDataManager.getManager().saveOrUpdateResourceBusy(bd, d);
+//        LocalDataManager.getManager().saveOrUpdateResourceBusy(bd, d);
 //        
 //        for(IBusy bb: d.getSetBusy())
 //            System.out.println(bb.getComment());
 //        
-//        RemoteDataManager.getManager().deleteResourceBusy(bd, d);
+//        LocalDataManager.getManager().deleteResourceBusy(bd, d);
 //        
 //        for(IBusy bb: t.getSetBusy())
 //            System.out.println(bb.getComment());
@@ -102,7 +102,7 @@ public class TestStorage
 //        {
 //            System.out.println(g.getName());
 //        }
-//        IBuilding b = RemoteDataManager.getManager().getBuildings().iterator().next();
+//        IBuilding b = LocalDataManager.getManager().getBuildings().iterator().next();
 //        System.out.println(b);
 //        for(IFloor f : b.getLstFloor())
 //            System.out.println(f.getName());

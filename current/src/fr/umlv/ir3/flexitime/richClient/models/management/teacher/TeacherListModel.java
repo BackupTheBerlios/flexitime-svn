@@ -17,7 +17,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;
 
 
@@ -42,7 +42,7 @@ public class TeacherListModel extends AbstractListModel {
 	 */ 
 	public TeacherListModel(List lstTeacher) throws RemoteException
 	{
-		RemoteDataManager.getManager().addDataListener(ITeacher.class,new TeacherListener());
+		LocalDataManager.getManager().addDataListener(ITeacher.class,new TeacherListener());
         this.lstTeacher = lstTeacher;
 	}
 	
@@ -108,7 +108,7 @@ public class TeacherListModel extends AbstractListModel {
 	 */
 	public void remove(int index) throws RemoteException, FlexiException
 	{
-			RemoteDataManager.getManager().deleteTeacher((ITeacher)lstTeacher.get(index));
+			LocalDataManager.getManager().deleteTeacher((ITeacher)lstTeacher.get(index));
             //this.fireIntervalRemoved(this,lstTeacher.size()-1,lstTeacher.size());
 	}
 	

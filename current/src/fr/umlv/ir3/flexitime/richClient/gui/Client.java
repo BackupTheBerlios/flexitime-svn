@@ -53,7 +53,7 @@ import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.Plastic3DLookAndFeel;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.common.rmi.admin.IUserListener;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Time;
@@ -100,7 +100,7 @@ public class Client
     private static JButton butNext;
     private static JButton butNextInterval;
     private static JLabel labTrackAct;
-    private static IUser iUser;
+    public static IUser iUser;
     private static FlexiLanguage language;
     static
     {
@@ -149,7 +149,7 @@ public class Client
                 if(res == JOptionPane.YES_OPTION)
                 {
                     try {
-                        RemoteDataManager.getUserManager().disconnect(iUser);
+                        LocalDataManager.getUserManager().disconnect(iUser);
                     }
                     catch (RemoteException e1) {
                         // TODO Auto-generated catch block
@@ -422,7 +422,7 @@ public class Client
                     setAccueilMode();
                     try
                     {
-                        RemoteDataManager.getUserManager().disconnect(iUser);
+                        LocalDataManager.getUserManager().disconnect(iUser);
                     }
                     catch (RemoteException e1)
                     {
@@ -456,7 +456,7 @@ public class Client
                 {
                     /* Demande trop de temps ;-)
                     try {
-                        RemoteDataManager.getUserManager().disconnect(iUser);
+                        LocalDataManager.getUserManager().disconnect(iUser);
                     }
                     catch (RemoteException e1) {
                         // TODO Auto-generated catch block
@@ -678,8 +678,8 @@ public class Client
      */
     private static int testIPServer(String ip)
     {
-        RemoteDataManager.setIpServer(ip);
-        if(RemoteDataManager.getManager()==null)
+        LocalDataManager.setIpServer(ip);
+        if(LocalDataManager.getManager()==null)
             return -1;
         return 0;
     }
@@ -709,13 +709,13 @@ public class Client
             pass = loginView.getPass();
             
             try {
-                if(RemoteDataManager.getUserManager().ConnectToRich(login, pass))
+                if(LocalDataManager.getUserManager().ConnectToRich(login, pass))
                 {
                     System.out.println("login="+login+", pass="+pass + " => OK");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
                     test = true;
                     try {
-                        iUser = RemoteDataManager.getUserManager().get(login);
-                        RemoteDataManager.getUserManager().addUserListener(iUser, new userListener());
+                        iUser = LocalDataManager.getUserManager().get(login);
+                        LocalDataManager.getUserManager().addUserListener(iUser, new userListener());
                     } catch (RemoteException e) {
                         JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
                         //e.printStackTrace();
@@ -733,8 +733,8 @@ public class Client
                 System.out.println("Test fictif : login="+login+", pass="+pass + " => OK");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
                 test = true;
                 try {
-					iUser = RemoteDataManager.getUserManager().get(login);
-                    RemoteDataManager.getUserManager().addUserListener(iUser, new userListener());
+					iUser = LocalDataManager.getUserManager().get(login);
+                    LocalDataManager.getUserManager().addUserListener(iUser, new userListener());
                 } catch (RemoteException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

@@ -13,7 +13,7 @@ import net.sf.hibernate.HibernateException;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 
 
 /**
@@ -32,14 +32,14 @@ public class TestUserStorage
 
     public static void main(String[] args) throws HibernateException, RemoteException, FlexiException
     {
-        if(RemoteDataManager.getManager() == null)
+        if(LocalDataManager.getManager() == null)
         {
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Entrez l'adresse du serveur");
             String ip;
             try {
                 ip = in.readLine();
-                RemoteDataManager.setIpServer(ip);
+                LocalDataManager.setIpServer(ip);
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);
@@ -62,17 +62,17 @@ public class TestUserStorage
 //            System.out.println(r.getFloor());
 //        }
 //        
-//        IGroup g = RemoteDataManager.getManager().getGroup();
+//        IGroup g = LocalDataManager.getManager().getGroup();
 //        
 //        System.out.println(g.getName());
         
-        //RemoteDataManager.getUserManager().save(u);
+        //LocalDataManager.getUserManager().save(u);
         
-        //IUser u2 = RemoteDataManager.getUserManager().get("prasad");
+        //IUser u2 = LocalDataManager.getUserManager().get("prasad");
         
         //System.out.println(u2.getName());
         
-        //RemoteDataManager.getUserManager().removeUser(u2);
+        //LocalDataManager.getUserManager().removeUser(u2);
         //UserStorage.delete(u2);
         
     }

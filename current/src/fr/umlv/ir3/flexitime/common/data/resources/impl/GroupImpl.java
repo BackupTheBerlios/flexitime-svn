@@ -6,19 +6,19 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
+import java.rmi.RemoteException;
 import java.util.SortedSet;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 
 /**
- * Defines a group.<br>
- * 
+ * Defines a group. <br>
  * 
  * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup
- * 
  * @author FlexiTeam - Jérôme GUERS
  */
 public class GroupImpl extends ResourceImpl implements IGroup
@@ -33,6 +33,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
     // ======== //
     private int               nbPerson;
     private IClass            parentClass;
+    private Long              idClass;
 
     // ============= //
     // Constructeurs //
@@ -48,10 +49,8 @@ public class GroupImpl extends ResourceImpl implements IGroup
     /**
      * Constructs a group with just a name in parameter.
      * 
-     * @param name
-     *            a string.
-     * @param nbPerson
-     *            number of person in this group
+     * @param name a string.
+     * @param nbPerson number of person in this group
      */
     public GroupImpl(String name, int nbPerson)
     {
@@ -62,11 +61,9 @@ public class GroupImpl extends ResourceImpl implements IGroup
     /**
      * Constructs a group with a name and a parent class in parameter.
      * 
-     * @param name
-     *            a string
+     * @param name a string
      * @param nbPerson
-     * @param parentClass
-     *            the parent class of this group
+     * @param parentClass the parent class of this group
      */
     public GroupImpl(String name, int nbPerson, IClass parentClass)
     {
@@ -77,14 +74,10 @@ public class GroupImpl extends ResourceImpl implements IGroup
     /**
      * Constructs a group.
      * 
-     * @param name
-     *            a string.
-     * @param busies
-     *            a list of unavailibilities.
-     * @param nbPerson
-     *            the number of students in this group.
-     * @param parentClass
-     *            the parent class of this group.
+     * @param name a string.
+     * @param busies a list of unavailibilities.
+     * @param nbPerson the number of students in this group.
+     * @param parentClass the parent class of this group.
      */
     public GroupImpl(String name, int nbPerson, IClass parentClass,
             SortedSet<IBusy> busies)
@@ -102,7 +95,6 @@ public class GroupImpl extends ResourceImpl implements IGroup
      * <code>Int i = group.getNbPerson()</code>
      * 
      * @return the number of students in this group.
-     * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#getNbPerson()
      */
     public int getNbPerson()
@@ -128,11 +120,22 @@ public class GroupImpl extends ResourceImpl implements IGroup
      * <code>ClassImpl c = group.getParentClass()</code>
      * 
      * @return the parent class of this group.
-     * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup#getParentClass()
      */
     public IClass getParentClass()
     {
+        if (parentClass == null)
+        {
+            try
+            {
+                parentClass = LocalDataManager.getManager().getClassFromId(idClass);
+            }
+            catch (RemoteException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
         return parentClass;
     }
 
@@ -147,5 +150,15 @@ public class GroupImpl extends ResourceImpl implements IGroup
     public void setParentClass(IClass parentClass)
     {
         this.parentClass = parentClass;
+    }
+    
+    protected Long getIdClass()
+    {
+        return idClass;
+    }
+    
+    protected void setIdClass(Long newId)
+    {
+        idClass = newId;
     }
 }

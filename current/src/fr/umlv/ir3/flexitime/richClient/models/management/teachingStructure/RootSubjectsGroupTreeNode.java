@@ -21,7 +21,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassTreeNode;
 
@@ -43,7 +43,7 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
 	{
 		super(parent,teachingStructure.getLstSubjectsGroup());
 		this.teachingStructure = teachingStructure;
-        RemoteDataManager.getManager().addDataListener(ITeachingStructure.class,this);
+        LocalDataManager.getManager().addDataListener(ITeachingStructure.class,this);
 	}
 	
 	/**
@@ -110,7 +110,7 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
      * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
      */
     public void remove(TreeNode childNode) throws RemoteException, FlexiException {
-        RemoteDataManager.getManager().deleteSubjectsGroup(((SubjectsGroupTreeNode)childNode).getSubjectsGroup());  
+        LocalDataManager.getManager().deleteSubjectsGroup(((SubjectsGroupTreeNode)childNode).getSubjectsGroup());  
         
     }
     

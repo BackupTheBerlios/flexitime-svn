@@ -20,7 +20,7 @@ import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.BuildingTreeNode;
 
@@ -37,7 +37,7 @@ public class RootTrackTreeNode extends RootTreeNode{
 	public RootTrackTreeNode(TreeNode parent,List lstTrack) throws RemoteException
 	{
 		super(parent,lstTrack);
-        RemoteDataManager.getManager().addDataListener(ITrack.class,this);
+        LocalDataManager.getManager().addDataListener(ITrack.class,this);
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class RootTrackTreeNode extends RootTreeNode{
 	public RootTrackTreeNode(TreeNode parent,List lstTrack,DefaultTreeModel model) throws RemoteException
 	{
 		super(parent,lstTrack,model);
-        RemoteDataManager.getManager().addDataListener(ITrack.class,this);
+        LocalDataManager.getManager().addDataListener(ITrack.class,this);
 	}
 	
 	
@@ -126,7 +126,7 @@ public class RootTrackTreeNode extends RootTreeNode{
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(javax.swing.tree.TreeNode)
 	 */
 	public void remove(TreeNode childNode) throws RemoteException, FlexiException {
-		RemoteDataManager.getManager().deleteTrack(((TrackTreeNode)childNode).getTrack());
+		LocalDataManager.getManager().deleteTrack(((TrackTreeNode)childNode).getTrack());
 		
 	}
     

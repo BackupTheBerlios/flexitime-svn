@@ -409,8 +409,8 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
                 {
                     try
                     {
-                        System.out.println("UserManager: polling "
-                                + s.getValue().getUser().getName());
+//                        System.out.println("UserManager: polling "
+//                                + s.getValue().getUser().getName());
                         s.getValue().getUser();
                     }
                     catch (RemoteException e)

@@ -16,7 +16,7 @@ import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 
@@ -162,7 +162,7 @@ public class RoomTreeNode implements FlexiTreeNode
 	public void setValue(Object newValue) throws RemoteException 
     {
 		room.setName((String)newValue);
-        RemoteDataManager.getManager().saveOrUpdateRoom(room,room.getFloor());
+        LocalDataManager.getManager().saveOrUpdateRoom(room,room.getFloor());
 		
 	}
 

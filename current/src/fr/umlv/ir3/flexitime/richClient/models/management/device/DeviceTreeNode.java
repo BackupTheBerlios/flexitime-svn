@@ -15,7 +15,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 
@@ -157,7 +157,7 @@ public class DeviceTreeNode implements FlexiTreeNode
 	 */
 	public void setValue(Object newValue) throws RemoteException {
 		device.setName((String)newValue);
-        RemoteDataManager.getManager().saveOrUpdateDevice(device);
+        LocalDataManager.getManager().saveOrUpdateDevice(device);
 		
 	}
 

@@ -14,7 +14,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.CourseView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.GroupView;
 
@@ -31,7 +31,7 @@ public class CourseViewModel extends DataListenerImpl
     public CourseViewModel(ICourse course) throws RemoteException
     {
         this.course=course;
-        RemoteDataManager.getManager().addDataListener(ISubject.class,this);
+        LocalDataManager.getManager().addDataListener(ISubject.class,this);
     }
     
     public void setValue(Object[] values) throws RemoteException
@@ -42,7 +42,7 @@ public class CourseViewModel extends DataListenerImpl
             course.setNbHours((Integer.parseInt((String)values[1])));
             course.setDefaultLength((Integer.parseInt((String)values[2])));
             course.setColor((Color)values[3]);
-            RemoteDataManager.getManager().saveOrUpdateCourse(course,course.getParentSubject());
+            LocalDataManager.getManager().saveOrUpdateCourse(course,course.getParentSubject());
         }
         
     }

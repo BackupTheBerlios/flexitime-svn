@@ -12,7 +12,7 @@ import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.BuildingView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.FloorView;
 
@@ -29,13 +29,13 @@ public class FloorViewModel extends DataListenerImpl
        public FloorViewModel(IFloor floor) throws RemoteException
        {
            this.floor=floor;
-           RemoteDataManager.getManager().addDataListener(IBuilding.class,this);
+           LocalDataManager.getManager().addDataListener(IBuilding.class,this);
        }
        
        public void setValue(String value) throws RemoteException
        {
            floor.setName(value);
-           RemoteDataManager.getManager().saveOrUpdateFloor(floor,floor.getParentBuilding());
+           LocalDataManager.getManager().saveOrUpdateFloor(floor,floor.getParentBuilding());
        }
 
        /* (non-Javadoc)

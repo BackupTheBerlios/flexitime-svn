@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.ClassView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TrackView;
 
@@ -30,13 +30,13 @@ public class ClassViewModel extends DataListenerImpl
     public ClassViewModel(IClass iClass) throws RemoteException
     {
         this.iClass=iClass;
-        RemoteDataManager.getManager().addDataListener(ITrack.class,this);
+        LocalDataManager.getManager().addDataListener(ITrack.class,this);
     }
     
     public void setValue(String value) throws RemoteException
     {
         iClass.setName(value);
-        RemoteDataManager.getManager().saveOrUpdateClass(iClass,iClass.getParentTrack());
+        LocalDataManager.getManager().saveOrUpdateClass(iClass,iClass.getParentTrack());
     }
 
     /* (non-Javadoc)

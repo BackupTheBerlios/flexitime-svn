@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TrackView;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.BuildingTreeNode;
 
@@ -30,13 +30,13 @@ public class TrackViewModel extends DataListenerImpl
     public TrackViewModel(ITrack track) throws RemoteException
     {
         this.track=track;
-        RemoteDataManager.getManager().addDataListener(ITrack.class,this);
+        LocalDataManager.getManager().addDataListener(ITrack.class,this);
     }
     
     public void setValue(String value) throws RemoteException
     {
         track.setName(value);
-        RemoteDataManager.getManager().saveOrUpdateTrack(track);
+        LocalDataManager.getManager().saveOrUpdateTrack(track);
     }
 
     /* (non-Javadoc)

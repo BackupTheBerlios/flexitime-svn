@@ -19,7 +19,7 @@ import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;
 
@@ -36,7 +36,7 @@ public class RootRoomTreeNode extends RootTreeNode
 	public RootRoomTreeNode(TreeNode parent,List lstBuilding) throws RemoteException
 	{
 		super(parent,lstBuilding);
-         RemoteDataManager.getManager().addDataListener(IBuilding.class,this);
+         LocalDataManager.getManager().addDataListener(IBuilding.class,this);
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class RootRoomTreeNode extends RootTreeNode
 	public RootRoomTreeNode(TreeNode parent,List lstBuilding,DefaultTreeModel model) throws RemoteException
 	{
 		super(parent,lstBuilding,model);
-        RemoteDataManager.getManager().addDataListener(IBuilding.class,this);
+        LocalDataManager.getManager().addDataListener(IBuilding.class,this);
 	}
 	
 	
@@ -104,7 +104,7 @@ public class RootRoomTreeNode extends RootTreeNode
     }
 
 	public void remove(TreeNode childNode) throws RemoteException, FlexiException {
-         RemoteDataManager.getManager().deleteBuilding(((BuildingTreeNode)childNode).getBuilding());
+         LocalDataManager.getManager().deleteBuilding(((BuildingTreeNode)childNode).getBuilding());
         
     }
     /* (non-Javadoc)

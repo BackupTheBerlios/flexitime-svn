@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.GroupView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.RoomsView;
 
@@ -30,7 +30,7 @@ public class GroupViewModel extends DataListenerImpl
     public GroupViewModel(IGroup group) throws RemoteException
     {
         this.group=group;
-        RemoteDataManager.getManager().addDataListener(IClass.class,this);
+        LocalDataManager.getManager().addDataListener(IClass.class,this);
     }
     
     public void setValue(String[] values) throws RemoteException
@@ -39,7 +39,7 @@ public class GroupViewModel extends DataListenerImpl
         {
             group.setName(values[0]);
             group.setNbPerson(Integer.valueOf(values[1]).intValue());
-            RemoteDataManager.getManager().saveOrUpdateGroup(group,group.getParentClass());
+            LocalDataManager.getManager().saveOrUpdateGroup(group,group.getParentClass());
         }
         
     }

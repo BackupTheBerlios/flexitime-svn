@@ -12,6 +12,7 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
@@ -421,10 +422,11 @@ public interface IDataManager extends Remote
     /**
      *  
      * get all datas managed by this manager
+     * @param user 
      * @return all datas
      * @throws RemoteException 
      */
-    public List<ITrack> getTracks() throws RemoteException; 
+    public List<ITrack> getTracks(IUser user) throws RemoteException; 
     /**
      *  
      * removes a data
@@ -461,7 +463,7 @@ public interface IDataManager extends Remote
      * @return List of busies
      * @throws RemoteException
      */
-    public List<IBusy> getBusies(IResource parent) throws RemoteException;
+    public List<IBusy> getBusies(Long idResource, Class c) throws RemoteException;
     
     
     //POUR LES TEST//
@@ -471,4 +473,8 @@ public interface IDataManager extends Remote
      * 
      */
     public IGroup getGroup() throws RemoteException;
+    
+    public IClass getClassFromId(Long idClass) throws RemoteException;
+    
+    public List<IRoom> getRooms() throws RemoteException;
 }

@@ -21,7 +21,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.common.tools.*;
 
 /**
@@ -54,7 +54,7 @@ public class DataFactory
         
         try
         {
-            d = (IDeviceBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
+            d = (IDeviceBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
         }
         catch (RemoteException e)
         {
@@ -81,7 +81,7 @@ public class DataFactory
         IDeviceBusy d = new DeviceBusyImpl(g, comment);
         try
         {
-            d = (IDeviceBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
+            d = (IDeviceBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
         }
         catch (RemoteException e)
         {
@@ -109,7 +109,7 @@ public class DataFactory
 
         try
         {
-            d = (IDeviceBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
+            d = (IDeviceBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
         }
         catch (RemoteException e)
         {
@@ -138,7 +138,7 @@ public class DataFactory
         IDeviceBusy d = new DeviceBusyImpl(g, reason, comment);
         try
         {
-            d = (IDeviceBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
+            d = (IDeviceBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
         }
         catch (RemoteException e)
         {
@@ -162,7 +162,7 @@ public class DataFactory
         IDeviceBusy d = new DeviceBusyImpl(busy);
         try
         {
-            d = (IDeviceBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
+            d = (IDeviceBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
         }
         catch (RemoteException e)
         {
@@ -185,7 +185,7 @@ public class DataFactory
         IGroupBusy group = new GroupBusyImpl(g);
         try
         {
-            group = (IGroupBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
+            group = (IGroupBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
         }
         catch (RemoteException e)
         {
@@ -211,7 +211,7 @@ public class DataFactory
         
         try
         {
-            group = (IGroupBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
+            group = (IGroupBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
         }
         catch (RemoteException e)
         {
@@ -235,7 +235,7 @@ public class DataFactory
         IGroupBusy group = new GroupBusyImpl(g, reason);
         try
         {
-            group = (IGroupBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
+            group = (IGroupBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
         }
         catch (RemoteException e)
         {
@@ -262,7 +262,7 @@ public class DataFactory
         
         try
         {
-            group = (IGroupBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
+            group = (IGroupBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
         }
         catch (RemoteException e)
         {
@@ -286,7 +286,7 @@ public class DataFactory
         IGroupBusy group = new GroupBusyImpl(busy);
         try
         {
-            group = (IGroupBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
+            group = (IGroupBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
         }
         catch (RemoteException e)
         {
@@ -318,7 +318,7 @@ public class DataFactory
         
         try
         {
-            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson, l);
+            lesson = LocalDataManager.getManager().saveOrUpdateLesson(lesson, l);
         }
         catch (RemoteException e)
         {
@@ -361,7 +361,7 @@ public class DataFactory
         
         try
         {
-            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson, lr);
+            lesson = LocalDataManager.getManager().saveOrUpdateLesson(lesson, lr);
         }
         catch (RemoteException e)
         {
@@ -404,7 +404,7 @@ public class DataFactory
         
         try
         {
-            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson, l);
+            lesson = LocalDataManager.getManager().saveOrUpdateLesson(lesson, l);
         }
         catch (RemoteException e)
         {
@@ -452,7 +452,7 @@ public class DataFactory
         
         try
         {
-            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson, lr);
+            lesson = LocalDataManager.getManager().saveOrUpdateLesson(lesson, lr);
         }
         catch (RemoteException e)
         {
@@ -505,7 +505,7 @@ public class DataFactory
         
         try
         {
-            les = RemoteDataManager.getManager().saveOrUpdateLesson(les, l);
+            les = LocalDataManager.getManager().saveOrUpdateLesson(les, l);
         }
         catch (RemoteException e)
         {
@@ -541,7 +541,7 @@ public class DataFactory
 
         try
         {
-            r = (IRoomBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
+            r = (IRoomBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
         }
         catch (RemoteException e)
         {
@@ -567,7 +567,7 @@ public class DataFactory
         IRoomBusy r = new RoomBusyImpl(g, comment);
         try
         {
-            r = (IRoomBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
+            r = (IRoomBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
         }
         catch (RemoteException e)
         {
@@ -593,7 +593,7 @@ public class DataFactory
         IRoomBusy r = new RoomBusyImpl(g, reason);
         try
         {
-            r = (IRoomBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
+            r = (IRoomBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
         }
         catch (RemoteException e)
         {
@@ -621,7 +621,7 @@ public class DataFactory
         IRoomBusy r = new RoomBusyImpl(g, reason, comment);
         try
         {
-            r = (IRoomBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
+            r = (IRoomBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
         }
         catch (RemoteException e)
         {
@@ -645,7 +645,7 @@ public class DataFactory
         IRoomBusy r = new RoomBusyImpl(busy);
         try
         {
-            r = (IRoomBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
+            r = (IRoomBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
         }
         catch (RemoteException e)
         {
@@ -669,7 +669,7 @@ public class DataFactory
         ITeacherBusy t = new TeacherBusyImpl(g);
         try
         {
-            t = (ITeacherBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
+            t = (ITeacherBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
         }
         catch (RemoteException e)
         {
@@ -696,7 +696,7 @@ public class DataFactory
         
         try
         {
-            t = (ITeacherBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
+            t = (ITeacherBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
         }
         catch (RemoteException e)
         {
@@ -723,7 +723,7 @@ public class DataFactory
         ITeacherBusy t = new TeacherBusyImpl(g, reason);
         try
         {
-            t = (ITeacherBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
+            t = (ITeacherBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
         }
         catch (RemoteException e)
         {
@@ -751,7 +751,7 @@ public class DataFactory
         ITeacherBusy t = new TeacherBusyImpl(g, reason, comment);
         try
         {
-            t = (ITeacherBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
+            t = (ITeacherBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
         }
         catch (RemoteException e)
         {
@@ -775,7 +775,7 @@ public class DataFactory
         ITeacherBusy t = new TeacherBusyImpl(busy);
         try
         {
-            t = (ITeacherBusy)RemoteDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
+            t = (ITeacherBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
         }
         catch (RemoteException e)
         {
@@ -802,7 +802,7 @@ public class DataFactory
         
         try
         {
-            b = RemoteDataManager.getManager().saveOrUpdateBuilding(b);
+            b = LocalDataManager.getManager().saveOrUpdateBuilding(b);
         }
         catch (RemoteException e)
         {
@@ -829,7 +829,7 @@ public class DataFactory
         
         try
         {
-            class1 = RemoteDataManager.getManager().saveOrUpdateClass(class1, parent);
+            class1 = LocalDataManager.getManager().saveOrUpdateClass(class1, parent);
         }
         catch (RemoteException e)
         {
@@ -855,7 +855,7 @@ public class DataFactory
         
         try
         {
-            floor = RemoteDataManager.getManager().saveOrUpdateFloor(floor, parent);
+            floor = LocalDataManager.getManager().saveOrUpdateFloor(floor, parent);
         }
         catch (RemoteException e)
         {
@@ -878,7 +878,7 @@ public class DataFactory
         ITrack temp = new TrackImpl(name);
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateTrack(temp);
+            temp = LocalDataManager.getManager().saveOrUpdateTrack(temp);
         }
         catch (RemoteException e)
         {
@@ -903,7 +903,7 @@ public class DataFactory
         IDevice d = new DeviceImpl(name);
         try
         {
-            d = RemoteDataManager.getManager().saveOrUpdateDevice(d);
+            d = LocalDataManager.getManager().saveOrUpdateDevice(d);
         }
         catch (RemoteException e)
         {
@@ -928,7 +928,7 @@ public class DataFactory
         IDevice d = new DeviceImpl(name, type);
         try
         {
-            d = RemoteDataManager.getManager().saveOrUpdateDevice(d);
+            d = LocalDataManager.getManager().saveOrUpdateDevice(d);
         }
         catch (RemoteException e)
         {
@@ -953,7 +953,7 @@ public class DataFactory
         
         try
         {
-            group = RemoteDataManager.getManager().saveOrUpdateGroup(group, parent);
+            group = LocalDataManager.getManager().saveOrUpdateGroup(group, parent);
         }
         catch (RemoteException e)
         {
@@ -984,7 +984,7 @@ public class DataFactory
         
         try
         {
-            room = RemoteDataManager.getManager().saveOrUpdateRoom(room, floor);
+            room = LocalDataManager.getManager().saveOrUpdateRoom(room, floor);
         }
         catch (RemoteException e)
         {
@@ -1007,7 +1007,7 @@ public class DataFactory
         ITeacher t = new TeacherImpl(name, firstName);
         try
         {
-            t = RemoteDataManager.getManager().saveOrUpdateTeacher(t);
+            t = LocalDataManager.getManager().saveOrUpdateTeacher(t);
         }
         catch (RemoteException e)
         {
@@ -1031,7 +1031,7 @@ public class DataFactory
         ITeacher t = new TeacherImpl(name, firstName, mail);
         try
         {
-            t = RemoteDataManager.getManager().saveOrUpdateTeacher(t);
+            t = LocalDataManager.getManager().saveOrUpdateTeacher(t);
         }
         catch (RemoteException e)
         {
@@ -1061,7 +1061,7 @@ public class DataFactory
         
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateCourse(temp, parent);
+            temp = LocalDataManager.getManager().saveOrUpdateCourse(temp, parent);
         }
         catch (RemoteException e)
         {
@@ -1097,7 +1097,7 @@ public class DataFactory
                 nbHours, color);
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateCourse(temp, parent);
+            temp = LocalDataManager.getManager().saveOrUpdateCourse(temp, parent);
         }
         catch (RemoteException e)
         {
@@ -1136,7 +1136,7 @@ public class DataFactory
                 nbHours, color, listTeachers);
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateCourse(temp, parent);
+            temp = LocalDataManager.getManager().saveOrUpdateCourse(temp, parent);
         }
         catch (RemoteException e)
         {
@@ -1163,7 +1163,7 @@ public class DataFactory
         
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateSubject(temp, parent);
+            temp = LocalDataManager.getManager().saveOrUpdateSubject(temp, parent);
         }
         catch (RemoteException e)
         {
@@ -1191,7 +1191,7 @@ public class DataFactory
         
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateSubjectsGroup(temp, parent);
+            temp = LocalDataManager.getManager().saveOrUpdateSubjectsGroup(temp, parent);
         }
         catch (RemoteException e)
         {
@@ -1218,7 +1218,7 @@ public class DataFactory
         
         try
         {
-            temp = RemoteDataManager.getManager().saveOrUpdateTeachingStructure(temp, parent);
+            temp = LocalDataManager.getManager().saveOrUpdateTeachingStructure(temp, parent);
         }
         catch (RemoteException e)
         {
@@ -1274,7 +1274,7 @@ public class DataFactory
         IUser user = new UserImpl(name);
         try
         {
-            user = RemoteDataManager.getUserManager().save(user);
+            user = LocalDataManager.getUserManager().save(user);
         }
         catch (RemoteException e)
         {
@@ -1296,7 +1296,7 @@ public class DataFactory
         IUser user = new UserImpl(name, rigths);
         try
         {
-            user = RemoteDataManager.getUserManager().save(user);
+            user = LocalDataManager.getUserManager().save(user);
         }
         catch (RemoteException e)
         {
@@ -1318,7 +1318,7 @@ public class DataFactory
         IUser user = new UserImpl(name, pass);
         try
         {
-            user = RemoteDataManager.getUserManager().save(user);
+            user = LocalDataManager.getUserManager().save(user);
         }
         catch (RemoteException e)
         {
@@ -1341,7 +1341,7 @@ public class DataFactory
         IUser user = new UserImpl(name, pass, rigths);
         try
         {
-            user = RemoteDataManager.getUserManager().save(user);
+            user = LocalDataManager.getUserManager().save(user);
         }
         catch (RemoteException e)
         {
@@ -1363,7 +1363,7 @@ public class DataFactory
         IUser user = new UserImpl(name, pref);
         try
         {
-            user = RemoteDataManager.getUserManager().save(user);
+            user = LocalDataManager.getUserManager().save(user);
         }
         catch (RemoteException e)
         {
@@ -1386,7 +1386,7 @@ public class DataFactory
         IUser user = new UserImpl(name, rigths, pref);
         try
         {
-            user = RemoteDataManager.getUserManager().save(user);
+            user = LocalDataManager.getUserManager().save(user);
         }
         catch (RemoteException e)
         {
@@ -1409,7 +1409,7 @@ public class DataFactory
         IUser user = new UserImpl(name, pass, pref);
         try
         {
-            user = RemoteDataManager.getUserManager().save(user);
+            user = LocalDataManager.getUserManager().save(user);
         }
         catch (RemoteException e)
         {
@@ -1433,7 +1433,7 @@ public class DataFactory
         IUser user = new UserImpl(name, pass, rigths, pref);
         try
         {
-            user = RemoteDataManager.getUserManager().save(user);
+            user = LocalDataManager.getUserManager().save(user);
         }
         catch (RemoteException e)
         {

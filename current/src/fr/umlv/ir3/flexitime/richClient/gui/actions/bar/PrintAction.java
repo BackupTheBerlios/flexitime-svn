@@ -13,9 +13,9 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
+import fr.umlv.ir3.flexitime.common.tools.PrintUtilities;
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
-import fr.umlv.ir3.flexitime.server.io.PrintUtilities;
 
 
 /**

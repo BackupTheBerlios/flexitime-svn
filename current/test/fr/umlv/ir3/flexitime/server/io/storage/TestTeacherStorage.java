@@ -12,7 +12,7 @@ import net.sf.hibernate.HibernateException;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import junit.framework.TestCase;
 
 
@@ -35,7 +35,7 @@ public class TestTeacherStorage extends TestCase
         try
         {
             teacher = DataFactory.createTeacher("REVUZ", "Banane","revuz@boulet.fr");
-            allTeacher = RemoteDataManager.getManager().getTeachers();
+            allTeacher = LocalDataManager.getManager().getTeachers();
         }catch (Exception e1){
             fail("TeacherStorage:testStorage()");
         }

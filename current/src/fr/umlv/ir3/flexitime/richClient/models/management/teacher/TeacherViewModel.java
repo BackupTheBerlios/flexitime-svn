@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.RoomsView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TeacherView;
 
@@ -30,7 +30,7 @@ public class TeacherViewModel extends DataListenerImpl
     public TeacherViewModel(ITeacher teacher) throws RemoteException
     {
         this.teacher=teacher;
-        RemoteDataManager.getManager().addDataListener(ITeacher.class,this);
+        LocalDataManager.getManager().addDataListener(ITeacher.class,this);
     }
     
     public void setValue(String[] values) throws RemoteException
@@ -40,7 +40,7 @@ public class TeacherViewModel extends DataListenerImpl
             teacher.setName(values[0]);
             teacher.setFirstName(values[1]);
             teacher.setEmail(values[2]);
-            RemoteDataManager.getManager().saveOrUpdateTeacher(teacher);
+            LocalDataManager.getManager().saveOrUpdateTeacher(teacher);
         }
         
     }

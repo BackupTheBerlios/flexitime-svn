@@ -44,7 +44,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.UsersListModel;
 
@@ -97,7 +97,7 @@ public class UsersManagementView
         List<IUser> listOfUsers = null;
         try
         {
-            listOfUsers = RemoteDataManager.getUserManager().getAllUsers();
+            listOfUsers = LocalDataManager.getUserManager().getAllUsers();
         }
         catch (RemoteException e)
         {
@@ -177,7 +177,7 @@ public class UsersManagementView
             {
                 try
                 {
-                    RemoteDataManager.getUserManager().removeUser(userSelected);
+                    LocalDataManager.getUserManager().removeUser(userSelected);
                     userModel.removeUser(userSelected);
                 }
                 catch (RemoteException e)
@@ -317,7 +317,7 @@ public class UsersManagementView
                         userSelected.setPrivilege(cbPermissions.getSelectedIndex());
                         try
                         {
-                            RemoteDataManager.getUserManager().save(userSelected);
+                            LocalDataManager.getUserManager().save(userSelected);
                         }
                         catch (RemoteException e)
                         {

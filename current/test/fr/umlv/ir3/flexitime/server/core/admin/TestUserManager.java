@@ -5,7 +5,7 @@
  */
 package fr.umlv.ir3.flexitime.server.core.admin;
 
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import junit.framework.TestCase;
 
 
@@ -24,7 +24,7 @@ public class TestUserManager extends TestCase
 {
     public void testConnectToLight(){
         try{         
-            if(RemoteDataManager.getUserManager().ConnectToLight("jojo","pipo")) fail("UserManager:testConnectLight()");
+            if(LocalDataManager.getUserManager().ConnectToLight("jojo","pipo")) fail("UserManager:testConnectLight()");
             
         }catch(Exception e){
             fail("UserManager:testConnectLight()");
@@ -33,7 +33,7 @@ public class TestUserManager extends TestCase
     
     public void testConnectToRich(){
         try{         
-            if(RemoteDataManager.getUserManager().ConnectToRich("jojo","pipo")) fail("UserManager:testConnectLight()");
+            if(LocalDataManager.getUserManager().ConnectToRich("jojo","pipo")) fail("UserManager:testConnectLight()");
             
         }catch(Exception e){
             fail("UserManager:testConnectLight()");
@@ -42,7 +42,7 @@ public class TestUserManager extends TestCase
     
     public void testGet(){
         try{
-            if(RemoteDataManager.getUserManager().get("popo")!=null) fail("UserManager:get()");
+            if(LocalDataManager.getUserManager().get("popo")!=null) fail("UserManager:get()");
         }catch(Exception e){}
     }
 }

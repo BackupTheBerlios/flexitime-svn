@@ -26,6 +26,18 @@ public class HibernateUtil
 
     private static final ThreadLocal session = new ThreadLocal();
 
+    static{
+        Configuration cfg = null;
+        try {
+            cfg = new Configuration().configure();
+
+            sessionFactory = cfg.buildSessionFactory();
+        } catch (HibernateException e) {
+//            throw new FlexiException(FlexiLanguage.getInstance().getText(
+//            "errHiber1")
+//            + e.getMessage(), e);
+        }
+    }
     /**
      * Set the URI of the database, the database name and the user and password
      * to connect to the database from the configuration

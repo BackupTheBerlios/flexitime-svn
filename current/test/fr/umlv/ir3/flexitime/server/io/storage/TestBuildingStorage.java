@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import junit.framework.TestCase;
 
 
@@ -36,7 +36,7 @@ public class TestBuildingStorage extends TestCase
         try
         {
             building = DataFactory.createBuilding("BuildingDeValre");
-            allBuilding = RemoteDataManager.getManager().getBuildings();
+            allBuilding = LocalDataManager.getManager().getBuildings();
         }catch (Exception e1){
             fail("BuildingStorage:testStorage()");
         }

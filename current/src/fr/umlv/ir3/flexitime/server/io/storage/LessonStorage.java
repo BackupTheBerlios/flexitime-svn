@@ -7,6 +7,10 @@ package fr.umlv.ir3.flexitime.server.io.storage;
 
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import net.sf.hibernate.HibernateException;
@@ -60,6 +64,61 @@ public class LessonStorage
             }
         }
     }
+    
+    public static void save(ILesson lesson, Long[] idR) throws HibernateException
+    {
+        Session s = null;
+        Transaction tx = null;
+        try
+        {
+            s = HibernateUtil.currentSession();
+            tx = s.beginTransaction();
+            s.saveOrUpdate(lesson);
+            tx.commit();
+            
+            
+            
+            
+            
+            try
+            {
+                Class.forName("org.postgresql.Driver");
+
+                Connection connect = DriverManager.getConnection(
+                        "jdbc:postgresql://gontime.ath.cx:5432/flexitime", "flexitime",
+                        "flexitim");
+                Statement state = connect.createStatement();
+                String queries[] = new String[idR.length];
+                for(int i=0; i < idR.length; i++)
+                    queries[i] = "INSERT INTO resourcebusyset (idresource, idbusy) VALUES ("+ idR[i] + "," + lesson.getIdBusy()+")";
+                for(int i=0; i < idR.length; i++)
+                    state.execute(queries[i]);
+                
+                connect.close();
+            }
+            catch (SQLException e1)
+            {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            catch (ClassNotFoundException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        catch (HibernateException e)
+        {
+            e.printStackTrace();
+            if (tx != null) tx.rollback();
+            throw e;
+        }
+        finally
+        {
+            HibernateUtil.closeSession();
+        }
+    }
+    
     
     /**
      *  

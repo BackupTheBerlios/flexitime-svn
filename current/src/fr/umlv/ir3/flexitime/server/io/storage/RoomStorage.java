@@ -162,5 +162,32 @@ public class RoomStorage
         }
     }
     
+    public static List<IRoom> get() throws HibernateException
+    {
+        Session s = null;
+        Transaction tx = null;
+        List<IRoom> l = null;
+        try
+        {
+            s = HibernateUtil.currentSession();
+            tx = s.beginTransaction();
+            l = s.find("FROM FloorImpl");
+            
+            tx.commit();
+        }
+        catch (HibernateException e)
+        {
+            e.printStackTrace();
+            if (tx != null) tx.rollback();
+            throw e;
+        }
+        finally
+        {
+            HibernateUtil.closeSession();
+        }
+
+        return l;
+    }
+    
 }
 

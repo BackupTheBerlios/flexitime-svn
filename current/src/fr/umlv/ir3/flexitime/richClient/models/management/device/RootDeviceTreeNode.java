@@ -17,7 +17,7 @@ import javax.swing.tree.TreeNode;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 
@@ -47,7 +47,7 @@ public class RootDeviceTreeNode extends RootTreeNode
     public RootDeviceTreeNode(TreeNode parent,List lstDevice) throws RemoteException
 	{
 		super(parent,lstDevice);
-        RemoteDataManager.getManager().addDataListener(IDevice.class,this);
+        LocalDataManager.getManager().addDataListener(IDevice.class,this);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class RootDeviceTreeNode extends RootTreeNode
 	public RootDeviceTreeNode(TreeNode parent,List lstDevice,DefaultTreeModel model) throws RemoteException
 	{
 		super(parent,lstDevice,model);
-      RemoteDataManager.getManager().addDataListener(IDevice.class,this);
+      LocalDataManager.getManager().addDataListener(IDevice.class,this);
     }
 	
 	
@@ -119,7 +119,7 @@ public class RootDeviceTreeNode extends RootTreeNode
 	 */
 	public void remove(IDevice device) throws RemoteException, FlexiException 
     {
-        RemoteDataManager.getManager().deleteDevice(device);
+        LocalDataManager.getManager().deleteDevice(device);
 
 		
 	}

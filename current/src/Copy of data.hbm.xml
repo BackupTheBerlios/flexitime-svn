@@ -79,6 +79,7 @@
 				<key column="idRoom"/>
 				<property name="capacity"/>
 				<property name="type"/>
+				<many-to-one name="floor" column="idFloor" class="fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl"/>
 			</joined-subclass>
 
 			<!-- Device -->      
@@ -91,6 +92,8 @@
 			<joined-subclass name="fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl" table="groupt" dynamic-update="true">
 				<key column="idGroup"/>
 				<property name="nbPerson"/>
+				
+				<many-to-one name="parentClass" column="idClass" class="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl"/>
 			</joined-subclass>
 
 			<!-- Teacher -->      
@@ -161,6 +164,14 @@
 			<many-to-one name="parentClass" class="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl" column="idClass"/>
 			
 		</joined-subclass>
+		
+		<!--User-->
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl" table="tb_user" dynamic-update="true">
+			<key column="idUser"/>
+			<property name="password" />
+			<property name="privilege" />
+		</joined-subclass>
+				
 
 	</class>
 
@@ -189,21 +200,21 @@
 		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl" table="lesson" dynamic-update="true">
 				<key column="idBusy"/>
 				<many-to-one name="course" class="fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl" column="idCourse"/>
-				<set name="setDevice" cascade="none" table="lessondevicelist">
-					<key column="idLesson" />
-					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl" column="idDevice"/>
+				<set name="setDevice" cascade="none" table="resourcebusyset">
+					<key column="idBusy" />
+					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl" column="idResource"/>
 				</set>
-				<set name="setGroup" cascade="none" table="lessongrouplist">
-					<key column="idLesson" />
-					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl" column="idGroup"/>
+				<set name="setGroup" cascade="none" table="resourcebusyset">
+					<key column="idBusy" />
+					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl" column="idResource"/>
 				</set>
-				<set name="setRoom" cascade="none" table="lessonroomlist">
-					<key column="idLesson" />
-					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl" column="idRoom"/>
+				<set name="setRoom" cascade="none" table="resourcebusyset">
+					<key column="idBusy" />
+					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl" column="idResource"/>
 				</set>
-				<set name="setTeacher" cascade="none" table="lessonteacherlist">
-					<key column="idLesson" />
-					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl" column="idTeacher"/>
+				<set name="setTeacher" cascade="none" table="resourcebusyset">
+					<key column="idBusy" />
+					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl" column="idResource"/>
 				</set>
 		</joined-subclass>
 		
@@ -218,6 +229,22 @@
 				<key column="idBusy"/>
 				<property name="reason"/>
 		</joined-subclass>
+		
+	</class>
+	
+	<!--Preferences-->
+	<class name="fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl" table="preferences" dynamic-update="true">
+    	<id name="idPref" column="idPref" unsaved-value="null">
+			<generator class="native"/>
+		</id>
+		
+		<property name="cDayHeader" access="field"/>
+		<property name="cGapHeader" access="field"/>
+		<property name="cWeekHeader" access="field"/>
+		<property name="heightGap" access="field"/>
+		<property name="lengthGap" access="field"/>
+		<property name="widthGap" access="field"/>
+		<many-to-one name="defaultTrack" class="fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl" column="idTrack" />
 		
 	</class>
 

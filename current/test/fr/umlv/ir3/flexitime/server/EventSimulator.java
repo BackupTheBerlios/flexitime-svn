@@ -20,7 +20,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 
 
 /**
@@ -392,21 +392,21 @@ public class EventSimulator
     
     public static void main(String[] args) throws RemoteException
     {
-        RemoteDataManager.getManager().addDataListener(IBuilding.class, new BuildingListener());
-        RemoteDataManager.getManager().addDataListener(IFloor.class, new FloorListener());
-        RemoteDataManager.getManager().addDataListener(IRoom.class, new RoomListener());
+        LocalDataManager.getManager().addDataListener(IBuilding.class, new BuildingListener());
+        LocalDataManager.getManager().addDataListener(IFloor.class, new FloorListener());
+        LocalDataManager.getManager().addDataListener(IRoom.class, new RoomListener());
         
-        RemoteDataManager.getManager().addDataListener(IDevice.class, new DeviceListener());
-        RemoteDataManager.getManager().addDataListener(ITeacher.class, new TeacherListener());
+        LocalDataManager.getManager().addDataListener(IDevice.class, new DeviceListener());
+        LocalDataManager.getManager().addDataListener(ITeacher.class, new TeacherListener());
         
-        RemoteDataManager.getManager().addDataListener(ITrack.class, new TrackListener());
-        RemoteDataManager.getManager().addDataListener(IClass.class, new ClassListener());
-        RemoteDataManager.getManager().addDataListener(IGroup.class, new GroupListener());
+        LocalDataManager.getManager().addDataListener(ITrack.class, new TrackListener());
+        LocalDataManager.getManager().addDataListener(IClass.class, new ClassListener());
+        LocalDataManager.getManager().addDataListener(IGroup.class, new GroupListener());
         
-        RemoteDataManager.getManager().addDataListener(ISubjectsGroup.class, new SubjectsGroupListener());
-        RemoteDataManager.getManager().addDataListener(ISubject.class, new SubjectListener());
-        RemoteDataManager.getManager().addDataListener(ICourse.class, new CourseListener());
-        RemoteDataManager.getManager().addDataListener(ISubjectsGroup.class, new TeachingStructureListener());
+        LocalDataManager.getManager().addDataListener(ISubjectsGroup.class, new SubjectsGroupListener());
+        LocalDataManager.getManager().addDataListener(ISubject.class, new SubjectListener());
+        LocalDataManager.getManager().addDataListener(ICourse.class, new CourseListener());
+        LocalDataManager.getManager().addDataListener(ISubjectsGroup.class, new TeachingStructureListener());
         
     }
 }

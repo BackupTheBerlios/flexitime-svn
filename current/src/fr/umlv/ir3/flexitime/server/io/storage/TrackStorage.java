@@ -10,11 +10,12 @@ package fr.umlv.ir3.flexitime.server.io.storage;
 import java.util.List;
 
 import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Query;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
-
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
-import fr.umlv.ir3.flexitime.server.io.storage.HibernateUtil;
 
 
 /**
@@ -157,6 +158,41 @@ public class TrackStorage
         {
             HibernateUtil.closeSession();
         }
+    }
+    
+    public static List<ITrack> getTracks(IUser user) throws HibernateException
+    {
+        Session s = null;
+        Transaction tx = null;
+        List<ITrack> l = null;
+        try
+        {
+            s = HibernateUtil.currentSession();
+            tx = s.beginTransaction();
+            Query q = s.createQuery("select t from TrackImpl t inner join t.setUser u where u.idData = "+user.getIdData());
+            l = q.list();
+            tx.commit();
+        }
+        catch (HibernateException e)
+        {
+            e.printStackTrace();
+            if (tx != null) tx.rollback();
+            throw e;
+        }
+        finally
+        {
+            HibernateUtil.closeSession();
+        }
+
+        return l;
+    }
+    
+    public static void main(String[] args) throws HibernateException
+    {
+        IUser u = new UserImpl("toto");
+        u.setIdData(new Long(72));
+        for(ITrack t : getTracks(u))
+            System.out.println(t.getName());
     }
 }
 

@@ -10,11 +10,12 @@ import java.util.List;
 
 import net.sf.hibernate.Hibernate;
 import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Query;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
-
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
 
 /**
  * Class that has the responsibility to persist IClass in database
@@ -164,4 +165,39 @@ public class ClassStorage
             HibernateUtil.closeSession();
         }
     }
+    
+    public static IClass getClassFromId(Long idClass) throws HibernateException
+    {
+        IClass c = null;
+        Session s = null;
+        Transaction tx = null;
+        try
+        {
+            s = HibernateUtil.currentSession();
+            tx = s.beginTransaction();
+            c = (IClass)s.load(ClassImpl.class, idClass);
+            tx.commit();
+            
+            System.out.println(c);
+        }
+        catch (HibernateException e)
+        {
+            e.printStackTrace();
+            if (tx != null) tx.rollback();
+            throw e;
+        }
+        finally
+        {
+            HibernateUtil.closeSession();
+        }
+        
+        return c;
+    }
+    
+    public static void main(String[] args) throws HibernateException
+    {
+        getClassFromId(new Long(25));
+    }
+    
 }
+

@@ -23,7 +23,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
@@ -72,7 +72,7 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
 		this.building = building;
 		children = new ArrayList();
 		this.listener = new ArrayList();
-        RemoteDataManager.getManager().addDataListener(IBuilding.class,this);
+        LocalDataManager.getManager().addDataListener(IBuilding.class,this);
 	}
 	
 	/**
@@ -216,7 +216,7 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
 	 */
 	public void remove(TreeNode childNode) throws RemoteException, FlexiException 
 	{
-		RemoteDataManager.getManager().deleteFloor(((FloorTreeNode)childNode).getFloor());	
+		LocalDataManager.getManager().deleteFloor(((FloorTreeNode)childNode).getFloor());	
 		
 	}
     
@@ -236,7 +236,7 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
     public void setValue(Object newValue) throws RemoteException 
     {
         building.setName((String)newValue);
-        RemoteDataManager.getManager().saveOrUpdateBuilding(building);
+        LocalDataManager.getManager().saveOrUpdateBuilding(building);
     }
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setModel(fr.umlv.ir3.flexitime.richClient.models.ResourceModel)

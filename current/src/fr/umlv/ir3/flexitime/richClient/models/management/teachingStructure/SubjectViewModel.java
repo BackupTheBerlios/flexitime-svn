@@ -12,7 +12,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.SubjectView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.SubjectsGroupView;
 
@@ -29,13 +29,13 @@ public class SubjectViewModel extends DataListenerImpl
        public SubjectViewModel(ISubject subject) throws RemoteException
        {
            this.subject=subject;
-           RemoteDataManager.getManager().addDataListener(ISubjectsGroup.class,this);
+           LocalDataManager.getManager().addDataListener(ISubjectsGroup.class,this);
        }
        
        public void setValue(String value) throws RemoteException
        {
            subject.setName(value);
-           RemoteDataManager.getManager().saveOrUpdateSubject(subject,subject.getParentSubjectsGroup());
+           LocalDataManager.getManager().saveOrUpdateSubject(subject,subject.getParentSubjectsGroup());
        }
 
        /* (non-Javadoc)

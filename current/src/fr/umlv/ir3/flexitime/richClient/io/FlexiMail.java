@@ -15,7 +15,7 @@ import javax.mail.internet.*;
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 import fr.umlv.ir3.flexitime.common.event.ConfigEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.common.rmi.admin.AbstractConfigurationListener;
 
 /**
@@ -72,7 +72,7 @@ public class FlexiMail
         try
         {
             // System.setProperty("mail.smtp.host", config.getUriSMTPserver());
-            System.setProperty("mail.smtp.host", RemoteDataManager
+            System.setProperty("mail.smtp.host", LocalDataManager
                     .getConfigurationManager().get().getUriSMTPserver());
         }
         catch (RemoteException e)
@@ -94,9 +94,9 @@ public class FlexiMail
         try
         {
             // System.setProperty("mail.smtp.host", config.getUriSMTPserver());
-            System.err.println(RemoteDataManager.getConfigurationManager()
+            System.err.println(LocalDataManager.getConfigurationManager()
                     .get().getUriSMTPserver());
-            System.setProperty("mail.smtp.host", RemoteDataManager
+            System.setProperty("mail.smtp.host", LocalDataManager
                     .getConfigurationManager().get().getUriSMTPserver());
         }
         catch (RemoteException e)
@@ -113,7 +113,7 @@ public class FlexiMail
         
         try
         {
-            RemoteDataManager.getConfigurationManager().addConfigurationListener(new FlexiMail.CfgListener());
+            LocalDataManager.getConfigurationManager().addConfigurationListener(new FlexiMail.CfgListener());
         }
         catch (RemoteException e1)
         {

@@ -23,7 +23,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.common.tools.*;
 
 /**

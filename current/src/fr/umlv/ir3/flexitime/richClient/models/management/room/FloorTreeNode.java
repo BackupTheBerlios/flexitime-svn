@@ -23,7 +23,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
@@ -72,7 +72,7 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 		this.parent = parent;
 		this.floor = floor;
 		children = new ArrayList();
-        RemoteDataManager.getManager().addDataListener(IFloor.class,this);
+        LocalDataManager.getManager().addDataListener(IFloor.class,this);
 	}
 	
 	/**
@@ -221,7 +221,7 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 	}
     public void remove(IRoom room) throws RemoteException, FlexiException 
     {
-        RemoteDataManager.getManager().deleteRoom(room);
+        LocalDataManager.getManager().deleteRoom(room);
         
     }
 
@@ -231,7 +231,7 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 	public void setValue(Object newValue) throws RemoteException 
     {
 			floor.setName((String)newValue);
-			RemoteDataManager.getManager().saveOrUpdateFloor(floor,floor.getParentBuilding());
+			LocalDataManager.getManager().saveOrUpdateFloor(floor,floor.getParentBuilding());
 	}
 
 	/* (non-Javadoc)

@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.DevicesView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TrackView;
 
@@ -31,14 +31,14 @@ public class DevicesViewModel extends DataListenerImpl
         public DevicesViewModel(IDevice device) throws RemoteException
         {
             this.device=device;
-            RemoteDataManager.getManager().addDataListener(IDevice.class,this);
+            LocalDataManager.getManager().addDataListener(IDevice.class,this);
             listener = new ArrayList();
         }
         
         public void setValue(String value) throws RemoteException
         {
             device.setName(value);
-            RemoteDataManager.getManager().saveOrUpdateDevice(device);
+            LocalDataManager.getManager().saveOrUpdateDevice(device);
         }
         public void setDevice(IDevice device) throws RemoteException
         {

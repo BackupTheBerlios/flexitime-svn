@@ -7,8 +7,10 @@
 package fr.umlv.ir3.flexitime.common.data.general;
 
 import java.util.List;
+import java.util.Set;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
 
 /**
@@ -66,4 +68,21 @@ public interface ITrack extends IData
      * @author FlexiTeam - Guillaume GUERRIN
      */
     boolean removeClass(IClass pClass);
+    
+    /**
+     *  
+     * Retrieves IUsers associated with this Track
+     * @return a Set of IUser
+     * 
+
+     */
+    public Set<IUser> getSetUser();
+
+    /**
+     * Setter for IUsers associated with this Track 
+     * 
+     * @param setUser a Set of IUser
+     * 
+     */
+    public void setSetUser(Set<IUser> setUser);
 }

@@ -19,7 +19,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;
 
 
@@ -42,7 +42,7 @@ public class CourseTeacherListModel extends AbstractListModel {
 	 */ 
 	public CourseTeacherListModel(List lstTeacher,ICourse course) throws RemoteException
 	{
-		//RemoteDataManager.getManager().addDataListener(ISubject.class,new TeacherListener());
+		//LocalDataManager.getManager().addDataListener(ISubject.class,new TeacherListener());
         this.lstTeacher = lstTeacher;
         this.courseL=course;
 	}
@@ -109,7 +109,7 @@ public class CourseTeacherListModel extends AbstractListModel {
         {
             System.out.println("Ajout d'un prof:");
             lstTeacher.add(teacher);
-	        RemoteDataManager.getManager().saveOrUpdateCourse(this.courseL,this.courseL.getParentSubject());
+	        LocalDataManager.getManager().saveOrUpdateCourse(this.courseL,this.courseL.getParentSubject());
         }
     }
     
@@ -139,7 +139,7 @@ public class CourseTeacherListModel extends AbstractListModel {
     {
         System.out.println("suppression d'un prof:");
         lstTeacher.remove(teacher); 
-        RemoteDataManager.getManager().saveOrUpdateCourse(courseL,courseL.getParentSubject());
+        LocalDataManager.getManager().saveOrUpdateCourse(courseL,courseL.getParentSubject());
     }
     
 	public void change(List lstTeacher)

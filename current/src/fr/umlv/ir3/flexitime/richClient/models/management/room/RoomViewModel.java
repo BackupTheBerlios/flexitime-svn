@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
-import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.ClassView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.RoomsView;
 
@@ -30,7 +30,7 @@ public class RoomViewModel extends DataListenerImpl
     public RoomViewModel(IRoom room) throws RemoteException
     {
         this.room=room;
-        RemoteDataManager.getManager().addDataListener(IFloor.class,this);
+        LocalDataManager.getManager().addDataListener(IFloor.class,this);
     }
     
     public void setValue(String[] values) throws RemoteException
@@ -39,7 +39,7 @@ public class RoomViewModel extends DataListenerImpl
         {
             room.setName(values[0]);
             room.setCapacity(Integer.valueOf(values[1]).intValue());
-            RemoteDataManager.getManager().saveOrUpdateRoom(room,room.getFloor());
+            LocalDataManager.getManager().saveOrUpdateRoom(room,room.getFloor());
         }
         
     }

@@ -46,6 +46,11 @@
 				<index column="posClass" />      	
 				<one-to-many class="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl" />
 			</list>
+			
+			<set name="setUser" table="trackuserset">
+				<key column="idTrack" />
+				<many-to-many class="fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl" column="idUser"/>
+			</set>
 		</joined-subclass>
 
 		<!-- Class -->
@@ -69,17 +74,17 @@
 				<many-to-many class="fr.umlv.ir3.flexitime.common.data.activity.impl.BusyImpl" column="idBusy"/>
 			</list>-->
 			
-			<set name="setBusy" cascade="none" table="resourcebusyset" >
+			<!--<set name="setBusy" cascade="none" table="resourcebusyset" >
 				<key column="idResource" />
 				<many-to-many class="fr.umlv.ir3.flexitime.common.data.activity.impl.BusyImpl" column="idBusy"/>
-			</set>
+			</set>-->
 
 			<!-- Room -->      
 			<joined-subclass name="fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl" table="room" dynamic-update="true">
 				<key column="idRoom"/>
 				<property name="capacity"/>
 				<property name="type"/>
-				<many-to-one name="floor" column="idFloor" class="fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl"/>
+				<!--<many-to-one name="floor" column="idFloor" class="fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl"/>-->
 			</joined-subclass>
 
 			<!-- Device -->      
@@ -93,7 +98,8 @@
 				<key column="idGroup"/>
 				<property name="nbPerson"/>
 				
-				<many-to-one name="parentClass" column="idClass" class="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl"/>
+				<!--<many-to-one name="parentClass" column="idClass" class="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl"/>-->
+				<property name="idClass" />
 			</joined-subclass>
 
 			<!-- Teacher -->      

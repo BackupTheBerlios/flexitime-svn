@@ -13,9 +13,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Session;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
@@ -25,6 +27,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.ResourceImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
@@ -41,6 +44,7 @@ import fr.umlv.ir3.flexitime.server.io.storage.CourseStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.DeviceStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.FloorStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.GroupStorage;
+import fr.umlv.ir3.flexitime.server.io.storage.HibernateUtil;
 import fr.umlv.ir3.flexitime.server.io.storage.LessonStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.RoomStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.SubjectStorage;
@@ -169,7 +173,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      */
     public List<IBuilding> getBuildings() throws RemoteException
     {
-        List<IBuilding> l;
+        List<IBuilding> l = DataStorage.get(IBuilding.class);
+        if(l != null)
+            return l;
         try
         {
             l = BuildingStorage.get();
@@ -180,6 +186,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             e.printStackTrace();
             l = new ArrayList<IBuilding>();
         }
+        DataStorage.addBuildings(l);
         return l;
     }
 
@@ -433,7 +440,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      */
     public List<IDevice> getDevices() throws RemoteException
     {
-        List<IDevice> l;
+        List<IDevice> l = DataStorage.get(IDevice.class);
+        if(l!=null)
+            return l;
         try
         {
             l = DeviceStorage.get();
@@ -444,6 +453,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             e.printStackTrace();
             l = new ArrayList<IDevice>();
         }
+        DataStorage.addDevices(l);
         return l;
     }
 
@@ -662,7 +672,62 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         return true;
     }
 
+    public Long saveLesson(ILesson lesson, Long[] idR) throws RemoteException
+    {
+        try
+        {
+            LessonStorage.save(lesson, idR);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        
+        for(int i=0; i < idR.length; i++)
+        {
+            IResource r;
+            if((r = (IResource)DataStorage.get(idR[i])) == null)
+            {
+                
+                try
+                {
+                    Session s =HibernateUtil.currentSession();
+                    r = (IResource)s.load(ResourceImpl.class, idR[i]);
+                    DataStorage.putIfAbsent(idR[i], r);
+                }
+                catch (HibernateException e1)
+                {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                finally
+                {
+                    try
+                    {
+                        HibernateUtil.closeSession();
+                    }
+                    catch (HibernateException e2)
+                    {
+                        // TODO Auto-generated catch block
+                        e2.printStackTrace();
+                    }
+                }
+            }
+            manager
+            .fireDataChanged(
+                    IClass.class,
+                    new DataEvent(
+                            r,
+                            "setBusy", DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED, new Object[] { lesson })); //$NON-NLS-1$
+        }
+        
+        return lesson.getIdBusy();
+        
+    }
      
+    
     /**
      * @param lesson 
      * @param lresource 
@@ -1315,7 +1380,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      */
     public List<ITeacher> getTeachers() throws RemoteException
     {
-        List<ITeacher> l;
+        List<ITeacher> l = DataStorage.get(ITeacher.class);
+        if(l != null)
+            return l;
         try
         {
             l = TeacherStorage.get();
@@ -1326,6 +1393,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             e.printStackTrace();
             l = new ArrayList<ITeacher>();
         }
+        DataStorage.addTeachers(l);
         return l;
     }
 
@@ -1490,7 +1558,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      */
     public List<ITrack> getTracks() throws RemoteException
     {
-        List<ITrack> l;
+        List<ITrack> l = DataStorage.get(ITrack.class);
+        if(l != null)
+            return l;
         try
         {
             l = TrackStorage.get();
@@ -1501,6 +1571,50 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             e.printStackTrace();
             l = new ArrayList<ITrack>();
         }
+        DataStorage.addTracks(l);
+        return l;
+    }
+    
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param user
+     * @return
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getTracks(fr.umlv.ir3.flexitime.common.data.admin.IUser)
+     */
+    public List<ITrack> getTracks(IUser user) throws RemoteException
+    {
+        List<ITrack> l = DataStorage.get(ITrack.class);
+        if(l != null)
+        {
+            List<ITrack> toSend = new ArrayList<ITrack>();
+            for(ITrack t : l)
+            {
+                if(t.getSetUser().contains(user))
+                    toSend.add(t);
+                    
+            }
+            if(toSend.size() != 0)
+                return toSend;
+        }
+        
+        
+        try
+        {
+            l = TrackStorage.getTracks(user);
+        }
+        catch (HibernateException e)
+        {
+
+            e.printStackTrace();
+            l = new ArrayList<ITrack>();
+        }
+        DataStorage.addTracks(l);
         return l;
     }
 
@@ -1564,12 +1678,37 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getBusies(fr.umlv.ir3.flexitime.common.data.resources.IResource)
      */
-    public List<IBusy> getBusies(IResource parent) throws RemoteException
+    public List<IBusy> getBusies(Long idResource, Class resourceClass) throws RemoteException
     {
-        // TODO Auto-generated method stub
-        return null;
+        List l = null;
+        try
+        {
+            if(resourceClass.equals(IGroup.class))
+                l = BusyStorage.getGroupBusy(idResource);
+            if(resourceClass.equals(IDevice.class))
+                l = BusyStorage.getDeviceBusy(idResource);
+            if(resourceClass.equals(IRoom.class))
+                l = BusyStorage.getRoomBusy(idResource);
+            if(resourceClass.equals(ITeacher.class))
+                l = BusyStorage.getTeacherBusy(idResource);
+            for(Iterator it = l.iterator(); it.hasNext(); )
+            {
+                System.out.println(it.next().getClass());
+            }
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return l;
     }
 
+    public static void main(String[] args) throws RemoteException
+    {
+        DataManagerImpl d = new DataManagerImpl();
+        d.getBusies(new Long(37), IGroup.class);
+    }
     /** 
      * @param b
      * @param parent
@@ -1675,5 +1814,55 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             e.printStackTrace();
             return null;
         }
+    }
+    
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param idChildGroup
+     * @return
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getParentClass(java.lang.Long)
+     */
+    public IClass getClassFromId(Long idClass) throws RemoteException
+    {
+        IClass c = (IClass) DataStorage.get(idClass);
+        if(c != null)
+            return c;
+        try
+        {
+            return ClassStorage.getClassFromId(idClass);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public List<IRoom> getRooms() throws RemoteException
+    {
+        List<IRoom> l = DataStorage.get(IRoom.class);
+        if(l != null)
+        {
+            return l;
+        }
+        
+        try
+        {
+            l = RoomStorage.get();
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        DataStorage.addRooms(l);
+        return l;
     }
 }
