@@ -22,7 +22,7 @@ import junit.framework.TestCase;
  * 
  * @author FlexiTeam - Famille
  */
-public class TestTime extends TestCase
+public class TestFlexiTime extends TestCase
 {
    
     
