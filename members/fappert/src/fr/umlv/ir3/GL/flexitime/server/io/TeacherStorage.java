@@ -25,7 +25,7 @@ public class TeacherStorage
 	public TeacherStorage()
 	{
 		list.add(new Teacher("Marcelus","Wallas","marcellus@pulp.com"));
-		list.add(new Teacher("Echo","Request","adrien@ping.fr"));
+		list.add(new Teacher("Rachel","Green","adrien@ping.fr"));
 		list.add(new Teacher("Sydney","Bristow","alias@serieTV.com"));
 		list.add(new Teacher("Jack","Bauer","24@hours.com"));
 	}
