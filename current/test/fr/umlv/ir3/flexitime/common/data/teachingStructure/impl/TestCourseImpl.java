@@ -44,17 +44,6 @@ public class TestCourseImpl extends TestCase
     private int               defaultLength;
     private ISubject          parentSubject;
 
-    // ============= //
-    // Constructeurs //
-    // ============= //
-    /**
-     * Default constructor for a course.
-     */
-    protected TestCourseImpl()
-    {
-        lstTeacher = new ArrayList<ITeacher>();
-    }
-
     
 
     // ===========//

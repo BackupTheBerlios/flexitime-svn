@@ -34,14 +34,7 @@ public class TestGroupBusyImpl extends TestCase
     // ===========//
     private int               reason;
 
-    // =============//
-    // Constructeurs//
-    // =============//
-    /**
-     * Default constructor for a group's unavailibility.
-     */
-    protected TestGroupBusyImpl()
-    {}
+
 
     // ===========//
     // Méthodes //
@@ -56,6 +49,9 @@ public class TestGroupBusyImpl extends TestCase
      */
     public void testGetReason()
     {
+        GroupBusyImpl bus = new GroupBusyImpl(new Gap(2004,12,01,12,01,2004,12,02,12,02));
+        bus.setReason(2);
+        if(bus.getReason()!=2)fail("Mauvaise reason");
     }
 
     /**
@@ -68,5 +64,8 @@ public class TestGroupBusyImpl extends TestCase
      */
     public void testSetReason()
     {
+        GroupBusyImpl bus = new GroupBusyImpl(new Gap(2004,12,01,12,01,2004,12,02,12,02));
+        bus.setReason(2);
+        if(bus.getReason()!=2)fail("Mauvaise reason");
     }
 }

@@ -9,6 +9,7 @@ import java.util.*;
 
 import fr.umlv.ir3.flexitime.common.data.activity.*;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
 import fr.umlv.ir3.flexitime.server.MetierSimulator;
 import junit.framework.TestCase;
 
@@ -29,7 +30,7 @@ public class TestCompareBusies extends TestCase
      */
     public void testCompare()
     {
-        IGroup group = MetierSimulator.getGroup2IR3();
+        IGroup group = new GroupImpl("groupe",10);
         
         Set<IBusy> set = group.getSetBusy();
         for (Iterator iter = set.iterator() ; iter.hasNext() ;)

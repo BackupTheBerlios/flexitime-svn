@@ -36,15 +36,6 @@ public class TestDeviceBusyImpl extends TestCase
     // ===========//
     private int               reason;
 
-    // =============//
-    // Constructeurs//
-    // =============//
-    /**
-     * Default constructor for a device's unavailibility.
-     */
-    protected TestDeviceBusyImpl()
-    {}
-
     
     // ===========//
     // Méthodes //
@@ -60,6 +51,9 @@ public class TestDeviceBusyImpl extends TestCase
      */
     public void testGetReason()
     {
+        DeviceBusyImpl bus = new DeviceBusyImpl(new Gap(2004,12,01,12,01,2004,12,02,12,02));
+        bus.setReason(2);
+        if(bus.getReason()!=2)fail("Mauvaise reason");
     }
 
     /**
@@ -72,5 +66,8 @@ public class TestDeviceBusyImpl extends TestCase
      */
     public void testSetReason()
     {
+        DeviceBusyImpl bus = new DeviceBusyImpl(new Gap(2004,12,01,12,01,2004,12,02,12,02));
+        bus.setReason(2);
+        if(bus.getReason()!=2)fail("Mauvaise reason");
     }
 }

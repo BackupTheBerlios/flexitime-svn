@@ -38,18 +38,7 @@ public class TestTeachingStructureImpl extends TestCase
     private List<ISubjectsGroup> lstSubjectsGroup;
     private IClass               parentClass;
 
-    // =============//
-    // Constructeurs//
-    // =============//
-    /**
-     * Default constructor for a teaching structure.
-     */
-    protected TestTeachingStructureImpl()
-    {
-        lstSubjectsGroup = new ArrayList<ISubjectsGroup>();
-    }
-
-    
+  
 
     // ======== //
     // Méthodes //

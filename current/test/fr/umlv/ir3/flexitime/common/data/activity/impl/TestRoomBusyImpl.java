@@ -36,15 +36,6 @@ public class TestRoomBusyImpl extends TestCase
     // ===========//
     private int               reason;
 
-    // =============//
-    // Constructeurs//
-    // =============//
-    /**
-     * Default constructor for a room's unavailibility.
-     */
-    protected TestRoomBusyImpl()
-    {}
-
     
     // ===========//
     // Méthodes //
@@ -59,6 +50,9 @@ public class TestRoomBusyImpl extends TestCase
      */
     public void testGetReason()
     {
+        RoomBusyImpl bus = new RoomBusyImpl(new Gap(2004,12,01,12,01,2004,12,02,12,02));
+        bus.setReason(2);
+        if(bus.getReason()!=2)fail("Mauvaise reason");
     }
 
     /**
@@ -71,5 +65,8 @@ public class TestRoomBusyImpl extends TestCase
      */
     public void testSetReason(int iReason)
     {
+        RoomBusyImpl bus = new RoomBusyImpl(new Gap(2004,12,01,12,01,2004,12,02,12,02));
+        bus.setReason(2);
+        if(bus.getReason()!=2)fail("Mauvaise reason");
     }
 }

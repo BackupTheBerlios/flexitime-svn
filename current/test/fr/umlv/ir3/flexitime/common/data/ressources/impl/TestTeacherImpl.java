@@ -12,6 +12,8 @@ import junit.framework.TestCase;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
 
 /**
  * Defines a teacher.
@@ -35,15 +37,6 @@ public class TestTeacherImpl extends TestCase
     private String            firstName;
     private String            email;
 
-    // ============= //
-    // Constructeurs //
-    // ============= //
-    /**
-     * Default constructor for a teacher.
-     */
-    protected TestTeacherImpl()
-    {
-    }
 
 
     // ===========//
@@ -59,6 +52,8 @@ public class TestTeacherImpl extends TestCase
      */
     public void testGetFirstName()
     {
+          TeacherImpl teach = new TeacherImpl("toto","toto");
+          if(teach.getFirstName().compareTo("toto")!=0 )fail("error type");
     }
 
     /**
@@ -72,30 +67,8 @@ public class TestTeacherImpl extends TestCase
      */
     public void testSetFirstName()
     {
-    }
-
-    /**
-     * Returns the email adress of the teacher.
-     * <code>String e = teacher.getEmail()</code>
-     * 
-     * @return the email adress of the teacher.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.resources.ITeacher#getEmail()
-     */
-    public void testGetEmail()
-    {
-    }
-
-    /**
-     * Sets the email adress of the teacher.
-     * <code>teacher.setEmail(email)</code>
-     * 
-     * @param email
-     *            the email adress of the teacher.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.resources.ITeacher#setEmail(java.lang.String)
-     */
-    public void testSetEmail()
-    {
+        TeacherImpl teach = new TeacherImpl("toto","toto");
+        teach.setFirstName("titi");
+        if(teach.getFirstName().compareTo("titi")!=0 )fail("error prenom");
     }
 }

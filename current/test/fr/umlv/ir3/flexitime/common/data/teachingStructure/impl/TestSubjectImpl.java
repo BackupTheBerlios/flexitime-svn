@@ -37,16 +37,6 @@ public class TestSubjectImpl extends TestCase
     private List<ICourse>     lstCourse;
     private ISubjectsGroup    parentSubjectsGroup;
 
-    // =============//
-    // Constructeurs//
-    // =============//
-    /**
-     * Default constructor for a subject.
-     */
-    protected TestSubjectImpl()
-    {
-        lstCourse = new ArrayList<ICourse>();
-    }
 
     
     // ======== //

@@ -39,16 +39,6 @@ public class TestRoomImpl extends TestCase
     private int               capacity;
     private IFloor            floor;
 
-    // ============= //
-    // Constructeurs //
-    // ============= //
-    /**
-     * Default constructor for a room.
-     */
-    protected TestRoomImpl()
-    {
-    }
-
     
     // ===========//
     // Méthodes //

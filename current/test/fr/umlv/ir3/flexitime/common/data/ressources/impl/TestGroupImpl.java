@@ -36,15 +36,6 @@ public class TestGroupImpl extends TestCase
     private int               nbPerson;
     private IClass            parentClass;
 
-    // ============= //
-    // Constructeurs //
-    // ============= //
-    /**
-     * Default constructor for a group.
-     */
-    protected TestGroupImpl()
-    {
-    }
 
     
     // ===========//

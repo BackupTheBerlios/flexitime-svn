@@ -34,11 +34,6 @@ public class TestUserImpl extends TestCase
     
     private int privilege;
 
-    // =============//
-    // Constructeurs//
-    // =============//
-    protected TestUserImpl()
-    {}
 
     
     // ======== //
@@ -53,6 +48,8 @@ public class TestUserImpl extends TestCase
      */
     public void testGetPassword()
     {
+        UserImpl user = new UserImpl("name","toto");
+        if(!user.getPassword().equals("toto"))fail("error password");
     }
 
     /**
@@ -64,54 +61,10 @@ public class TestUserImpl extends TestCase
      */
     public void testSetPassword()
     {
+        UserImpl user = new UserImpl("name");
+        user.setPassword("toto");
+        if(!user.getPassword().equals("toto"))fail("error password");
     }
 
-    /**
-     * DOCME
-     * 
-     * @return user preferences
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#getPreferences()
-     */
-    public void testGetPreferences()
-    {
-    }
-
-    /**
-     * DOCME
-     * 
-     * @param preferences
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#setPreferences(fr.umlv.ir3.flexitime.common.data.admin.IPreferences)
-     */
-    public void testSetPreferences()
-    {
-    }
-    
-    /**
-     * @return Returns the ldap.
-     */
-    public void testIsLdap()
-    {
-    }
-    
-    
-    /** 
-     * @return privilege fot this user 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#getPrivilege()
-     */
-    public void testGetPrivilege()
-    {
-    }
-    
-    
-    /** 
-     * @param newPrivilege 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#setPrivilege(int)
-     */
-    public void testSetPrivilege()
-    {
-    }
+   
 }

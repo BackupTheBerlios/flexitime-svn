@@ -33,18 +33,7 @@ public class TestTeacherBusyImpl extends TestCase
     // ===========//
     // Champs //
     // ===========//
-    private int               reason;
-
-    // =============//
-    // Constructeurs//
-    // =============//
-    /**
-     * Default constructor for a teacher's unavailibility.
-     */
-    protected TestTeacherBusyImpl()
-    {}
-
-    
+    private int               reason; 
 
     // ======== //
     // Méthodes //
@@ -59,6 +48,9 @@ public class TestTeacherBusyImpl extends TestCase
      */
     public void testGetReason()
     {
+        TeacherBusyImpl bus = new TeacherBusyImpl(new Gap(2004,12,01,12,01,2004,12,02,12,02));
+        bus.setReason(2);
+        if(bus.getReason()!=2)fail("Mauvaise reason");
     }
 
     /**
@@ -71,6 +63,9 @@ public class TestTeacherBusyImpl extends TestCase
      */
     public void testSetReason()
     {
+        TeacherBusyImpl bus = new TeacherBusyImpl(new Gap(2004,12,01,12,01,2004,12,02,12,02));
+        bus.setReason(2);
+        if(bus.getReason()!=2)fail("Mauvaise reason");
     }
 
 }

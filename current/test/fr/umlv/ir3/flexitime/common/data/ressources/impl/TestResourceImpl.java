@@ -32,17 +32,6 @@ public abstract class TestResourceImpl extends TestCase
 	//===========//
     private SortedSet<IBusy> setBusy;
     
-    
-	//=============//
-	//Constructeurs//
-    //=============//
-	/**
-	 * Default constructor for a resource. 
-	 */
-	protected TestResourceImpl()
-	{
-        setBusy = new TreeSet<IBusy>();
-    }
 	
 	
     

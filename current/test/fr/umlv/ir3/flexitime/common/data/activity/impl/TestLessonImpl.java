@@ -11,8 +11,15 @@ import java.util.*;
 import junit.framework.TestCase;
 
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
+import fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.*;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectsGroupImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructureImpl;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 /**
@@ -34,27 +41,20 @@ public class TestLessonImpl extends TestCase
     // ===========//
     // Champs //
     // ===========//
-    private Set<IDevice>     setDevice;
-    private Set<IRoom>       setRoom;
-    private Set<ITeacher>    setTeacher;
-    private Set<IGroup>      setGroup;
+    private Set<IDevice>     setDevice = new HashSet();
+    private Set<IRoom>       setRoom= new HashSet();
+    private Set<ITeacher>    setTeacher= new HashSet();
+    private Set<IGroup>      setGroup= new HashSet();
     private ICourse           course;
     private int               length;
-
-    // =============//
-    // Constructeurs//
-    // =============//
-    /**
-     * Constructs an unavailibility for a course with just a name in parameter.
-     * 
-     */
-    protected TestLessonImpl()
-    {
-        setDevice = new HashSet<IDevice>();
-        setRoom = new HashSet<IRoom>();
-        setTeacher = new HashSet<ITeacher>();
-        setGroup = new HashSet<IGroup>();
-    }
+    TrackImpl track = new TrackImpl("track");
+    ClassImpl iClass = new ClassImpl("class",track);
+    TeachingStructureImpl structure = new TeachingStructureImpl("struc",iClass);
+     SubjectsGroupImpl subGroup = new SubjectsGroupImpl("subgroup",structure);
+     SubjectImpl sub = new SubjectImpl("sub",subGroup);
+     CourseImpl cour = new CourseImpl("cour",sub,1);
+     LessonImpl lesson = new LessonImpl();
+  
     
     
 
@@ -73,6 +73,11 @@ public class TestLessonImpl extends TestCase
      */
     public void testAddResource()
     {
+
+        lesson.addResource(new TeacherImpl("name","firstname"));
+        if(lesson.getAllResources().size()!=1)fail("erreur de nombre");
+        lesson.addResource(new TeacherImpl("name2","firstname2"));
+        if(lesson.getAllResources().size()!=2)fail("erreur de nombre");
     }
 
     /**
@@ -86,20 +91,22 @@ public class TestLessonImpl extends TestCase
      */
     public void testRemoveResource()
     {
+        TeacherImpl teacher=new TeacherImpl("name","firstname");
+        lesson.addResource(teacher);
+        lesson.addResource(new TeacherImpl("name2","firstname2"));
+        lesson.removeResource(teacher);
+        if(lesson.getAllResources().size()!=1)fail("erreur de nombre");
     }
 
-    /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getSetTeacher()
-     */
-    public void testGetSetTeacher()
-    {
-    }
+   
 
     /**
      * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getSetDevice()
      */
     public void testGetSetDevice()
     {
+        lesson.setSetDevice(setDevice);
+        if(!lesson.getSetDevice().equals(setDevice))fail("erreur de set");
     }
 
     /**
@@ -107,6 +114,8 @@ public class TestLessonImpl extends TestCase
      */
     public void testGetSetRoom()
     {
+        lesson.setSetRoom(setRoom);
+        if(!lesson.getSetRoom().equals(setRoom))fail("erreur de set");
     }
 
     /**
@@ -114,6 +123,8 @@ public class TestLessonImpl extends TestCase
      */
     public void testGetSetGroup()
     {
+        lesson.setSetGroup(setGroup);
+        if(!lesson.getSetGroup().equals(setGroup))fail("erreur de set");
     }
 
     /**
@@ -121,73 +132,19 @@ public class TestLessonImpl extends TestCase
      */
     public void testGetCourse()
     {
+        cour.setIdData(new Long(0));
+        lesson.setCourse(cour);
+        if(!lesson.getCourse().equals(cour))fail("erreur de cour");
     }
 
-    /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setSetTeacher(Set)
-     */
-    public void testSetSetTeacher()
-    {
 
-    }
 
-    /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setSetDevice(Set)
-     */
-    public void testSetSetDevice()
-    {
 
-    }
 
-    /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setSetRoom(Set)
-     */
-    public void testSetSetRoom()
-    {
-    }
 
-    /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setSetGroup(Set)
-     */
-    public void testSetSetGroup()
-    {
-    }
 
-    /**
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setCourse(ICourse)
-     */
-    public void testSetCourse()
-    {
-    }
 
-    /**
-     * Return length
-     * 
-     * @return Returns the length.
-     */
-    public void testGetLength()
-    {
-    }
 
-    /**
-     * Set length
-     * 
-     * @param length
-     *            The length to set.
-     */
-    public void testSetLength()
-    {
-    }
-    
-    
-    /** 
-     * Get all the reources in a List
-     * @return List of Iresource
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#getAllResources()
-     */
-    public void testGetAllResources()
-    {
 
-    }
+ 
 }

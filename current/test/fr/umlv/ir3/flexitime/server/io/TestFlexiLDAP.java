@@ -38,8 +38,8 @@ public class TestFlexiLDAP extends TestCase
         FlexiLDAP ldap = new FlexiLDAP();
         if(ldap.createConnection(name,passwd) != true)fail("CreateConnexion");
         ArrayList list = new ArrayList();
-        if((list=ldap.getAttribute("uid",FlexiLDAP.TYPE_USER,"jguers"))==null)fail("Recuperation Attributs");
-        if( ((String)list.get(0)).compareTo("jguers")!= 0 )fail("Lecture Attributs");
+        if((list=ldap.getAttribute("uid",FlexiLDAP.TYPE_USER,"fappert"))==null)fail("Recuperation Attributs");
+        if( ((String)list.get(0)).compareTo("Fabien ")!= 0 )fail("Lecture Attributs");
         // if((list=ldap.getAttribute("cn",FlexiLDAP.TYPE_USER,"fappert"))==null)fail("Recuperation Attributs");
        // if( ((String)list.get(0)).compareTo("Fabien ")!= 0 )fail("Lecture Attributs");
     }

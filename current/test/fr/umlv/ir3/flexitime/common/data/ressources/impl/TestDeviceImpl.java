@@ -12,6 +12,7 @@ import junit.framework.TestCase;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl;
 
 /**
  * Defines a device.<br>
@@ -34,15 +35,6 @@ public class TestDeviceImpl extends TestCase
     // ===========//
     private int               type;
 
-    // =============//
-    // Constructeurs//
-    // =============//
-    /**
-     * Default constructor for a device.
-     */
-    protected TestDeviceImpl()
-    {
-    }
 
     
 
@@ -58,6 +50,8 @@ public class TestDeviceImpl extends TestCase
      */
     public void testGetType()
     {
+        DeviceImpl device = new DeviceImpl("toto",2);
+        if(device.getType()!=2)fail("error type");
     }
 
     /**
@@ -70,5 +64,8 @@ public class TestDeviceImpl extends TestCase
      */
     public void testSetType()
     {
+         DeviceImpl device = new DeviceImpl("toto");
+         device.setType(2);
+         if(device.getType()!=2)fail("error type");
     }
 }

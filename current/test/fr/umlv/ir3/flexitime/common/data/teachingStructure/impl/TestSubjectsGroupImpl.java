@@ -37,17 +37,6 @@ public class TestSubjectsGroupImpl extends TestCase
     private List<ISubject>     lstSubject;
     private ITeachingStructure parentTeachStruct;
 
-    // =============//
-    // Constructeurs//
-    // =============//
-    /**
-     * Default constructor for a subjects' group.
-     */
-    protected TestSubjectsGroupImpl()
-    {
-        lstSubject = new ArrayList<ISubject>();
-    }
-
     // ======== //
     // Méthodes //
     // ======== //
