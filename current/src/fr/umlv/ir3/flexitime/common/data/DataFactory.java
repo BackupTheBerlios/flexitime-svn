@@ -8,23 +8,48 @@ package fr.umlv.ir3.flexitime.common.data;
 
 import java.awt.Color;
 import java.rmi.RemoteException;
+import java.util.LinkedList;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.activity.*;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.*;
-import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
-import fr.umlv.ir3.flexitime.common.data.admin.IUser;
-import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
-import fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl;
-import fr.umlv.ir3.flexitime.common.data.general.*;
-import fr.umlv.ir3.flexitime.common.data.general.impl.*;
-import fr.umlv.ir3.flexitime.common.data.resources.*;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
+import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.DeviceBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.GroupBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.RoomBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.TeacherBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
+import fr.umlv.ir3.flexitime.common.data.general.IFloor;
+import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.data.general.impl.BuildingImpl;
+import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
+import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
+import fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.IResource;
+import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectsGroupImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructureImpl;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
-import fr.umlv.ir3.flexitime.common.tools.*;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
+import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 /**
  * Create all datas from specific parameters. This class contains only statics
@@ -199,15 +224,25 @@ public class DataFactory
     public static ILesson createLesson(Gap g, ICourse c, List<IGroup> groups) throws FlexiException
     {
         ILesson lesson = new LessonImpl(g, c, groups);
+        List<IResource> l = new LinkedList<IResource>();
+        
+        for(IResource elem : groups)
+            l.add(elem);
+        
         try
         {
-            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson);
+            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson, l);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }       
-        return lesson; 
+        }
+        
+        for(IResource elem : l)
+            lesson.addResource(elem);
+        
+        return lesson;
+         
     }
 
     /**
@@ -227,14 +262,23 @@ public class DataFactory
     public static ILesson createLesson(Gap g, ICourse c, List<IGroup> groups, int l) throws FlexiException
     {
         ILesson lesson = new LessonImpl(g, c, groups, l);
+        List<IResource> lr = new LinkedList<IResource>();
+        
+        for(IResource elem : groups)
+            lr.add(elem);
+        
         try
         {
-            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson);
+            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson, lr);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }    
+        }
+        
+        for(IResource elem : lr)
+            lesson.addResource(elem);
+        
         return lesson;
     }
 
@@ -255,14 +299,27 @@ public class DataFactory
     public static ILesson createLesson(Gap g, ICourse c, List<IGroup> groups, ITeacher t) throws FlexiException
     {
         ILesson lesson = new LessonImpl(g, c, groups, t);
+        List<IResource> l = new LinkedList<IResource>();
+        
+        for(IResource elem : groups)
+            l.add(elem);
+        l.add(t);
+        
         try
         {
-            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson);
+            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson, l);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }    
+        }
+        
+        for(IResource elem : l)
+        {
+            lesson.addResource(elem);
+            System.out.println(elem.getClass() +" " + elem.getSetBusy());
+        }
+        
         return lesson;
     }
     
@@ -285,14 +342,27 @@ public class DataFactory
     public static ILesson createLesson(Gap g, ICourse c, List<IGroup> groups, int l , ITeacher t) throws FlexiException
     {
         ILesson lesson = new LessonImpl(g, c, groups, l, t);
+        List<IResource> lr = new LinkedList<IResource>();
+        
+        for(IResource elem : groups)
+            lr.add(elem);
+        lr.add(t);
+        
         try
         {
-            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson);
+            lesson = RemoteDataManager.getManager().saveOrUpdateLesson(lesson, lr);
         }
         catch (RemoteException e)
         {
             throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }    
+        }
+        
+        for(IResource elem : lr)
+        {
+            lesson.addResource(elem);
+            System.out.println(elem.getSetBusy());
+        }
+        
         return lesson;
     }
     
@@ -309,7 +379,7 @@ public class DataFactory
         ILesson les = new LessonImpl(lesson); 
         try
         {
-            les = RemoteDataManager.getManager().saveOrUpdateLesson(les);
+            les = RemoteDataManager.getManager().saveOrUpdateLesson(les, null);
         }
         catch (RemoteException e)
         {
@@ -893,95 +963,5 @@ public class DataFactory
         }
         parent.setTeachingStructure(temp);
         return temp;
-    }
-
-    // ===== //
-    // Admin //
-    // ===== //
-    /** 
-     * Create a new default user preferences
-     *
-     * @return default user preferences
-     */
-    public static IPreferences createPreferences()
-    {
-        IPreferences pref = new PreferencesImpl();
-        // TODO sauvegarde hibernate
-        return pref;
-    }
-    
-    /** 
-     * Create a new user preferences
-     * @param height in pixel of gap
-     * @param width in pixel of gap
-     * @param length in minute of gap
-     * @param week color used for the week header
-     * @param day color used for the day
-     * @param gap color used for the gap
-     *
-     * @return user preferences
-     */
-    public static IPreferences createPreferences(int height, int width, int length, Color week, Color day,
-            Color gap)
-    {
-        IPreferences pref = new PreferencesImpl(height, width, length, week, day, gap);
-        // TODO sauvegarde hibernate
-        return pref;
-    }
-
-    /**
-     * Create a new <em>ldap</em> user with default preferences 
-     *
-     * @param name
-     * @return a new user 
-     */
-    public static IUser createUser(String name)
-    {
-        IUser user = new UserImpl(name);
-        // TODO sauvegarde hibernate
-        return user; 
-    }
-    
-    /**
-     * Create a new <em>non-ldap</em> user with default preferences 
-     *
-     * @param name
-     * @param pass
-     * @return a new user 
-     */
-    public static IUser createUser(String name, String pass)
-    {
-        IUser user = new UserImpl(name, pass);
-        // TODO sauvegarde hibernate
-        return user; 
-    }
-    
-    /**
-     * Create a new <em>LDAP</em> user  
-     *
-     * @param name
-     * @param pref User preferences
-     * @return a new user 
-     */
-    public static IUser createUser(String name, IPreferences pref)
-    {
-        IUser user = new UserImpl(name, pref);
-        // TODO sauvegarde hibernate
-        return user; 
-    }
-    
-    /**
-     * Create a new <em>non-LDAP</em> user 
-     *
-     * @param name
-     * @param pass
-     * @param pref User preferences
-     * @return a new user 
-     */
-    public static IUser createUser(String name, String pass, IPreferences pref)
-    {
-        IUser user = new UserImpl(name, pass, pref);
-        // TODO sauvegarde hibernate
-        return user; 
     }
 }
