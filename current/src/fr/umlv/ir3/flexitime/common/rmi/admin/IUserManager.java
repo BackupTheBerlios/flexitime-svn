@@ -44,17 +44,16 @@ public interface IUserManager extends Remote
     public IUser get(String name) throws RemoteException;
     /**
      * DOCME
-     * @param name 
-     * @param password 
+     * @param user 
      * @throws RemoteException 
      */
-    public void save(String name, String password) throws RemoteException;
+    public void save(IUser user) throws RemoteException;
     /**
      * DOCME
-     * @param name 
+     * @param user 
      * @throws RemoteException 
      */
-    public void removeUser(String name) throws RemoteException;
+    public void removeUser(IUser user) throws RemoteException;
     /**
      * DOCME
      * @param name 

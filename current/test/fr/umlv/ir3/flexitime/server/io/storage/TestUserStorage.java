@@ -5,11 +5,14 @@
  */
 package fr.umlv.ir3.flexitime.server.io.storage;
 
+import java.rmi.RemoteException;
+
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.server.io.storage.admin.UserStorage;
 
 
@@ -27,16 +30,18 @@ import fr.umlv.ir3.flexitime.server.io.storage.admin.UserStorage;
 public class TestUserStorage
 {
 
-    public static void main(String[] args) throws HibernateException
+    public static void main(String[] args) throws HibernateException, RemoteException
     {
-//        IUser u = DataFactory.createUser("prasad", "prasad");
-//        
-//        UserStorage.save(u);
+        IUser u = DataFactory.createUser("prasad", "prasad");
         
-        IUser u2 = UserStorage.get("prasad");
+        RemoteDataManager.getUserManager().save(u);
+        
+        IUser u2 = RemoteDataManager.getUserManager().get("prasad");
         
         System.out.println(u2.getName());
-        UserStorage.delete(u2);
+        
+        //RemoteDataManager.getUserManager().removeUser(u2);
+        //UserStorage.delete(u2);
         
     }
 }

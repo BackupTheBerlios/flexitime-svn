@@ -13,12 +13,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
+import net.sf.hibernate.HibernateException;
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
-import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
-import fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl;
 import fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager;
 import fr.umlv.ir3.flexitime.server.io.FlexiLDAP;
+import fr.umlv.ir3.flexitime.server.io.storage.admin.UserStorage;
 
 /**
  * UserManagerImpl - DOCME Description explication supplémentaire si nécessaire
@@ -29,6 +28,10 @@ import fr.umlv.ir3.flexitime.server.io.FlexiLDAP;
  */
 public class UserManager extends UnicastRemoteObject implements IUserManager
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3689353204265400632L;
     FlexiLDAP ldap;
     List ConnectedUser;
     
@@ -83,19 +86,24 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
         
         if(ldap.createConnection(name,passwd)) return true;
         //      Si on ne l'a pas trouvé dans le LDAP on regarde si c'est un utilisateur local à l'appli    
-        /* il faut retrouver tous les utilisateurs de l'appli dans la base.
-             Ensuite il faut parcourir la liste, voir si l'on trouve l'utilisateur et vérifier son password
-             Si on le trouve on renvoit true sinon false.*/
-        //FIXME List lstUser = UserStorage.get();
-        //FIXME it = lstUser.iterator();
-        //FIXME while(it.hasNext()){
-        //FIXME    IUser user = (IUser)it.next();
-        //FIXME    if(name.compareTo(user.getName())) {
-        //FIXME        if(passwd.compareTo(user.getPassword()))
-        //FIXME            return true;
-        //FIXME    }
-        //FIXME }
-        //Sinon si il n'est ni dans le ldap ni dans la base alors false
+        IUser user = null;
+        try
+        {
+            user = UserStorage.get(name);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        if(user==null)
+            return false;
+        
+        if(passwd.compareTo(user.getPassword())==0)
+            return true;
+
+//      Sinon si il n'est ni dans le ldap ni dans la base alors false
         return false;
     }
     /**
@@ -109,32 +117,36 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
      */
     public IUser get(String name) throws RemoteException
     {
-        //TODO ligne de dessous à retirer
-        IUser user = new UserImpl(name);    
+            
         //On recupere le user dans la base
-        //FIXME User user = UserStorage.get(name);
+        IUser user = null;
+        try
+        {
+            user = UserStorage.get(name);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
-        //s'il existe, on le retourne
         return user;
-        //sinon on retourne null
     }
     
     /**
      * addUser 
      * allows to add a user in the BDD
+     * @param user
      *
-     * @param name
-     * @param password 
-     * 
      * @see fr.umlv.ir3.flexitime.common.data.admin
      * @author   FlexiTeam - Famille
      */
-    public void save(String name, String password) throws RemoteException
+    public void save(IUser user) throws RemoteException
     {
         //Un user de ldap ou non?
         //On verifie si il est dans le ldap
-        List list = ldap.getAttribute("uid",FlexiLDAP.TYPE_USER,name);
-        if( ((String)list.get(0)).compareTo(name)!= 0 )
+        List list = ldap.getAttribute("uid",FlexiLDAP.TYPE_USER,user.getName());
+        if( list != null && ((String)list.get(0)).compareTo(user.getName())!= 0 )
         {
             //Si l'utilisateur est dans le ldap
             //On lui cree un user avec une preference mais sans mot de passe
@@ -146,9 +158,16 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
         {
             //Si 'utilisteur n'est pas dans le ldap
             //On cree un user avec les preferences et le mot de passe local a l'appli
-            //IUser user = new UserImpl(name,password,new PreferencesImpl(),false);
-            //Puis on l'ajoute a la base de données
-            //UserStorage.add(user);
+            try
+            {
+                //Puis on l'ajoute a la base de données
+                UserStorage.save(user);
+            }
+            catch (HibernateException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         
     }
@@ -157,17 +176,23 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
      * removeUser 
      * allows to remove a user in the BDD
      *
-     * @param name
+     * @param user
      * 
      * @see fr.umlv.ir3.flexitime.common.data.admin
      * @author   FlexiTeam - Famille
      */
-    public void removeUser(String name) throws RemoteException
+    public void removeUser(IUser user) throws RemoteException
     {
-            //On cree un user
-            IUser user = new UserImpl(name);
-            //Puis le retire de la base de données
-            //UserStorage.delete(user);
+            try
+            {
+                //Puis le retire de la base de données
+                UserStorage.delete(user);
+            }
+            catch (HibernateException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
     }
     
     /**
