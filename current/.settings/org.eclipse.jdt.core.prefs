@@ -1,4 +1,4 @@
-#Wed Jan 19 20:50:23 CET 2005
+#Thu Jan 20 00:52:39 CET 2005
 org.eclipse.jdt.core.formatter.insert_space_before_comma_in_for_inits=do not insert
 org.eclipse.jdt.core.formatter.brace_position_for_block=next_line
 org.eclipse.jdt.core.formatter.insert_space_after_at_in_annotation_type_declaration=do not insert
@@ -27,7 +27,7 @@ org.eclipse.jdt.core.formatter.insert_space_before_opening_angle_bracket_in_type
 org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_enum_constant=do not insert
 org.eclipse.jdt.core.compiler.problem.fieldHiding=ignore
 org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_while=do not insert
-org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral=ignore
+org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral=warning
 org.eclipse.jdt.core.formatter.insert_space_after_unary_operator=do not insert
 org.eclipse.jdt.core.formatter.blank_lines_after_imports=1
 org.eclipse.jdt.core.compiler.problem.missingJavadocCommentsVisibility=public
