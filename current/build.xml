@@ -119,9 +119,12 @@
 	</target>
 
 	<target name="jar-client" depends="compile">
-		<jar jarfile="${build.dir}/${build.name}-client.jar" compress="true" basedir="${build.dest}" includes="**" excludes="fr/umlv/ir3/flexitime/server/**">
+		<jar jarfile="${build.dir}/${build.name}-client.jar" compress="true" basedir="${build.dest}" >
 			<fileset dir="${build.dest}">
-				<include name="fr/umlv/ir3/flexitime/richClient/pictures/*.png" />
+				<include name="fr/umlv/ir3/flexitime/common/**; fr/umlv/ir3/flexitime/richClient/**"/>
+			</fileset>
+			<fileset dir="${src.dir}">
+				<include name="fr/umlv/ir3/flexitime/richClient/pictures/*.png"/>
 			</fileset>
 			<manifest>
 				<attribute name="Main-Class" value="fr.umlv.ir3.flexitime.richClient.gui.Client" />
@@ -134,6 +137,15 @@
 		<jar jarfile="${build.dir}/${build.name}-src.jar" compress="true" basedir="${src.dir}">
 			<fileset dir="${src.dir}">
 				<include name="fr/umlv/ir3/flexitime/**; ../build.xml; str_fr.properties; hibernate.cfg.xml; data.hbm.xml" />
+				<exclude name="**/.svn" />
+			</fileset>
+		</jar>
+	</target>
+	
+	<target name="jar-test">
+		<jar jarfile="${build.dir}/${build.name}-test.jar" compress="true" basedir="${src.tests.dir}">
+			<fileset dir="${src.tests.dir}">
+				<include name="fr/umlv/ir3/flexitime/**" />
 				<exclude name="**/.svn" />
 			</fileset>
 		</jar>
