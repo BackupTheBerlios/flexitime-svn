@@ -8,6 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.teachingStructure.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 
@@ -20,12 +21,11 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class TeachingStructureImpl implements ITeachingStructure
+public class TeachingStructureImpl extends DataImpl implements ITeachingStructure
 {
     //===========//
 	//  Champs	 //
 	//===========//
-    private String strName;
     private List listOfSubjectsGroups;
     
     
@@ -45,7 +45,7 @@ public class TeachingStructureImpl implements ITeachingStructure
 	 */
 	public TeachingStructureImpl(String name)
 	{
-		this.strName = name;
+		super(name);
 	}
 	
     /**
@@ -56,7 +56,7 @@ public class TeachingStructureImpl implements ITeachingStructure
      */
     public TeachingStructureImpl(String name, List listSubjectsGroup)
     {
-        this.strName = name;
+        super(name);
         this.listOfSubjectsGroups = new ArrayList(listSubjectsGroup);
     }
 
@@ -119,34 +119,5 @@ public class TeachingStructureImpl implements ITeachingStructure
     {
         listOfSubjectsGroups.remove(subjectsGroup);
     }
-
-    /** 
-     * Returns the name of the teaching structure.
-     * <code>String n = struct.getName()</code>
-     *
-     * @return the name of the teaching structure.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public String getName()
-    {
-        return strName;
-    }
-
-    /** 
-     * Sets the name of the teaching structure.
-     * <code>struct.setName(name)</code>
-     *
-     * @param name the name of the teaching structure.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void setName(String name)
-    {
-        this.strName = name;
-    }
-
 }
 

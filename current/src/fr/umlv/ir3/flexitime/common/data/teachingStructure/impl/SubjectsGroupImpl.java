@@ -8,8 +8,10 @@ package fr.umlv.ir3.flexitime.common.data.teachingStructure.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 
 
 /**
@@ -20,14 +22,13 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class SubjectsGroupImpl implements ISubjectsGroup
+public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
 {
     //===========//
 	//  Champs	 //
 	//===========//
-    private String strName;
     private List listOfSubjects;
-    private TeachingStructureImpl parentTeachStruct;
+    private ITeachingStructure parentTeachStruct;
     
     
 	//=============//
@@ -46,7 +47,7 @@ public class SubjectsGroupImpl implements ISubjectsGroup
 	 */
 	public SubjectsGroupImpl(String name)
 	{
-		this.strName = name;
+		super(name);
 	}
 	
 	/**
@@ -57,7 +58,7 @@ public class SubjectsGroupImpl implements ISubjectsGroup
 	 */
 	public SubjectsGroupImpl(String name, TeachingStructureImpl struct)
 	{
-		this.strName = name;
+		super(name);
 		this.parentTeachStruct = struct;
 	}
 	
@@ -70,7 +71,7 @@ public class SubjectsGroupImpl implements ISubjectsGroup
      */
     public SubjectsGroupImpl(String name, List listSubjects, TeachingStructureImpl teachStruct)
     {
-        this.strName = name;
+        super(name);
         this.listOfSubjects = new ArrayList(listSubjects);
         this.parentTeachStruct = teachStruct;
     }
@@ -137,9 +138,9 @@ public class SubjectsGroupImpl implements ISubjectsGroup
 	 *
 	 * @return the teaching structure to which the subjects' group belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ISubjectsGroup#getTeachStruct()
+	 * @see fr.umlv.ir3.flexitime.common.data.ISubjectsGroup#getParentTeachStruct()
 	 */
-	public TeachingStructureImpl getTeachStruct()
+	public ITeachingStructure getParentTeachStruct()
 	{
 		return parentTeachStruct;
 	}
@@ -150,38 +151,12 @@ public class SubjectsGroupImpl implements ISubjectsGroup
 	 *
 	 * @param struct the teaching structure to which the subjects' group belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ISubjectsGroup#setTeachStruct(fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructureImpl)
+	 * @see fr.umlv.ir3.flexitime.common.data.ISubjectsGroup#setParentTeachStruct(ITeachingStructure)
 	 */
-	public void setTeachStruct(TeachingStructureImpl struct)
+	public void setParentTeachStruct(ITeachingStructure struct)
 	{
 		this.parentTeachStruct = struct;		
 	}
 
-    /** 
-     * Returns the name of the subjects' group.
-     * <code>String n = group.getName()</code>
-     *
-     * @return the name of the subjects' group.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     */
-    public String getName()
-    {
-        return strName;
-    }
-
-    /** 
-     * Sets the name of the subjects' group.
-     * <code>group.setName(name)</code>
-     *
-     * @param name the name of the subjects' group. 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     */
-    public void setName(String name)
-    {
-        this.strName = name;
-    }
-    
 }
 

@@ -9,8 +9,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 
 
 /**
@@ -23,18 +25,17 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class CourseImpl implements ICourse
+public class CourseImpl extends DataImpl implements ICourse
 {
     //===========//
 	//  Champs	 //
 	//===========//
-    private String strName;
     private int iType;
     private int iNbHours;
     private Color color;
     private List listOfTeachers;
     private int iDefaultLength;
-    private SubjectImpl parentSubject;
+    private ISubject parentSubject;
     
     
 	//=============//
@@ -53,7 +54,7 @@ public class CourseImpl implements ICourse
 	 */
 	public CourseImpl(String name)
 	{
-		this.strName = name;
+		super(name);
 	}
 	
 	/**
@@ -64,7 +65,7 @@ public class CourseImpl implements ICourse
 	 */
 	public CourseImpl(String name, SubjectImpl subject)
 	{
-		this.strName = name;
+		super(name);
 		this.parentSubject = subject;
 	}
 	
@@ -81,7 +82,7 @@ public class CourseImpl implements ICourse
      */
     public CourseImpl(String name, int type, int nbHours, Color color, List listTeachers, int defaultLength, SubjectImpl subject)
     {
-        this.strName = name;
+        super(name);
         this.iType = type;
         this.iNbHours = nbHours;
         this.color = color;
@@ -271,7 +272,7 @@ public class CourseImpl implements ICourse
 	 * 
 	 * @see fr.umlv.ir3.flexitime.common.data.ICourse#getParentSubject()
 	 */
-	public SubjectImpl getParentSubject()
+	public ISubject getParentSubject()
 	{
 		return parentSubject;
 	}
@@ -285,38 +286,10 @@ public class CourseImpl implements ICourse
 	 * 
 	 * @see fr.umlv.ir3.flexitime.common.data.ICourse#setPArentSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl)
 	 */
-	public void setParentSubject(SubjectImpl subject)
+	public void setParentSubject(ISubject subject)
 	{
 		this.parentSubject = subject;
 	}
-
-    /** 
-     * Returns the name of this course.
-     * <code>String s = course.getName()</code>
-     *
-     * @return the name of this course.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public String getName()
-    {
-        return strName;
-    }
-
-    /** 
-     * Sets the name of this course.
-     * <code>course.setName(name)</code>
-     *
-     * @param name a string.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void setName(String name)
-    {
-        this.strName = name;
-    }
     
 }
 

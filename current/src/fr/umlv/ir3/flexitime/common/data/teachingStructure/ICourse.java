@@ -11,7 +11,6 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl;
 
 /**
  * Represents a course which belong to a subject
@@ -125,7 +124,7 @@ public interface ICourse extends IData
 	 * @return the subject to which the course belongs.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-	SubjectImpl getParentSubject();
+	ISubject getParentSubject();
 
 	/**
 	 * Sets the subject to which the course belongs.
@@ -133,6 +132,6 @@ public interface ICourse extends IData
 	 * @param subject the subject to which the course belongs.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-	void setParentSubject(SubjectImpl subject);
+	void setParentSubject(ISubject subject);
 
 }

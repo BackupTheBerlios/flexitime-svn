@@ -8,8 +8,10 @@ package fr.umlv.ir3.flexitime.common.data.teachingStructure.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 
 
 /**
@@ -20,14 +22,13 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class SubjectImpl implements ISubject
+public class SubjectImpl extends DataImpl implements ISubject
 {
     //===========//
 	//  Champs	 //
 	//===========//
-    private String strName;
     private List listOfCourses;
-    private SubjectsGroupImpl parentSubjectsGroup;
+    private ISubjectsGroup parentSubjectsGroup;
     
     
 	//=============//
@@ -46,7 +47,7 @@ public class SubjectImpl implements ISubject
 	 */
 	public SubjectImpl(String name)
 	{
-		this.strName = name;
+		super(name);
 	}
 	
 	/**
@@ -57,7 +58,7 @@ public class SubjectImpl implements ISubject
 	 */
 	public SubjectImpl(String name, SubjectsGroupImpl subjectsGroup)
 	{
-		this.strName = name;
+		super(name);
 		this.parentSubjectsGroup = subjectsGroup;
 	}
 	
@@ -70,7 +71,7 @@ public class SubjectImpl implements ISubject
      */
     public SubjectImpl(String name, List listCourses, SubjectsGroupImpl subjectsGroup)
     {
-        this.strName = name;
+        super(name);
         this.listOfCourses = new ArrayList(listCourses);
         this.parentSubjectsGroup = subjectsGroup;
     }
@@ -143,7 +144,7 @@ public class SubjectImpl implements ISubject
 	 * 
 	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#getParentSubjectsGroup()
 	 */
-	public SubjectsGroupImpl getParentSubjectsGroup()
+	public ISubjectsGroup getParentSubjectsGroup()
 	{
 		return parentSubjectsGroup;
 	}
@@ -155,40 +156,11 @@ public class SubjectImpl implements ISubject
 	 *
 	 * @param subjectsGroup the subjects' group to which the subject belongs.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#setParentSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectsGroupImpl)
+	 * @see fr.umlv.ir3.flexitime.common.data.ISubject#setParentSubjectsGroup(ISubjectsGroup)
 	 */
-	public void setParentSubjectsGroup(SubjectsGroupImpl subjectsGroup)
+	public void setParentSubjectsGroup(ISubjectsGroup subjectsGroup)
 	{
 		this.parentSubjectsGroup = subjectsGroup;
 	}
-
-    /** 
-     * Returns the name of this subject.
-     * <code>String s = subject.getName()</code>
-     *
-     * @return the name of this subject.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public String getName()
-    {
-        return strName;
-    }
-
-    /** 
-     * Sets the name of this subject.
-     * <code>subject.setName(name)</code>
-     *
-     * @param name a string.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void setName(String name)
-    {
-        this.strName = name;
-    }
-
 }
 
