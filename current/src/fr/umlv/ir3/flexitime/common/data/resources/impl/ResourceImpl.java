@@ -15,7 +15,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 /**
  * Defines an implementation of a ressource, it is extended by all the resource classes.
  * 
- * @version 245
+ * @version 248
  * @see fr.umlv.ir3.flexitime.common.data.resources.IResource
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -74,7 +74,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#getSetBusy()
      */
-    public SortedSet<IBusy> getSetBusy()
+    public Set<IBusy> getSetBusy()
     {
         return setBusy;
     }
@@ -87,9 +87,9 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * 
      * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#setSetBusy(java.util.SortedSet)
      */
-    public void setSetBusy(SortedSet<IBusy> busies)
+    public void setSetBusy(Set<IBusy> busies)
     {
-        this.setBusy = busies;
+        this.setBusy = new TreeSet<IBusy>(busies);
     }
 
     /** 

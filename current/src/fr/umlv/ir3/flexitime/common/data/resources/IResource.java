@@ -6,7 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources;
 
-import java.util.SortedSet;
+import java.util.Set;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
@@ -25,14 +25,14 @@ public interface IResource extends IData
      * 
      * @return the list of unavailabilities of the resource.
      */
-    SortedSet<IBusy> getSetBusy();
+    Set<IBusy> getSetBusy();
 
     /**
      * Changes the list of unavailabilities of the resouce.
      * 
      * @param setBusy the new unavailabilities.
      */
-    void setSetBusy(SortedSet<IBusy> setBusy);
+    void setSetBusy(Set<IBusy> setBusy);
 
     /**
      * Add a unavailabilities in a Resource .
