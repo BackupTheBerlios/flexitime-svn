@@ -196,7 +196,6 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
     
 	public void add(IDevice device)
     {
-        System.out.println("Add device");
         lstDevice.add( device);
         DeviceTreeNode child = new DeviceTreeNode(this,device,model);
         children.add(child);
@@ -208,7 +207,6 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	 */
 	public void remove(TreeNode childNode) throws RemoteException, FlexiException {
        // lstDevice.remove(((DeviceTreeNode)childNode).getDevice());
-        System.out.println("delete type");
         ((RootDeviceTreeNode)this.getParent()).remove(((DeviceTreeNode)childNode).getDevice());
 		/*int index = children.indexOf(childNode);
 		children.remove(childNode);	

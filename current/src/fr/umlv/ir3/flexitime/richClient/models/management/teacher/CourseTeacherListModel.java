@@ -9,6 +9,8 @@ import javax.swing.AbstractListModel;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
@@ -21,12 +23,13 @@ import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeN
  * The class PeopleListModel is the model for the people list
  * @author AIME Séverine and GUERRIN Guillaume
  */
-public class TeacherListModel extends AbstractListModel {
+public class CourseTeacherListModel extends AbstractListModel {
 
 	/**
 	 * The teacher list
 	 */
 	private List lstTeacher;
+    private ICourse courseL;
 	
 	/**
 	 * The contructor by intialising
@@ -35,20 +38,38 @@ public class TeacherListModel extends AbstractListModel {
 	 * @param people the people
 	 * @throws RemoteException 
 	 */ 
-	public TeacherListModel(List lstTeacher) throws RemoteException
+	public CourseTeacherListModel(List lstTeacher,ICourse course) throws RemoteException
 	{
-		RemoteDataManager.getManager().addDataListener(ITeacher.class,new TeacherListener());
+		//RemoteDataManager.getManager().addDataListener(ISubject.class,new TeacherListener());
         this.lstTeacher = lstTeacher;
+        this.courseL=course;
 	}
 	
 	/**
-	 * To get the size of the people list
-	 * @return the size of the people list
+	 * To get the size of the teacher list
+	 * @return the size of the teacher list
 	 */
 	public int getSize()
 	{
 		return lstTeacher.size();
 	}
+    
+    /**
+     * To get the teacher list
+     * @return the teacher list
+     */
+    public List getLstTeacher()
+    {
+        return lstTeacher;
+    }
+    
+    public void setLstTeacher(List lstTeacher)
+    {
+        System.out.println("Modification de la liste des profs:");
+        this.lstTeacher=lstTeacher;
+        this.fireContentsChanged(this,0,lstTeacher.size());
+        
+    }
 
 	/**
 	 * To get the party specified by its index
@@ -78,18 +99,23 @@ public class TeacherListModel extends AbstractListModel {
 	 * To add a people to the people list
 	 * @param str the name of the new people
 	 * @throws FlexiException 
+	 * @throws RemoteException 
 	 */
-	public void add() throws FlexiException
+	public void add(ITeacher teacher) throws FlexiException, RemoteException
 	{	
-		System.out.println("Add teacher");
-		DataFactory.createTeacher("Nouveau Professeur","");
-	}
+	    if(!lstTeacher.contains(teacher))
+        {
+            System.out.println("Ajout d'un prof:");
+            lstTeacher.add(teacher);
+	        RemoteDataManager.getManager().saveOrUpdateCourse(this.courseL,this.courseL.getParentSubject());
+        }
+    }
     
-    public void add(ITeacher teacher)
+   /* public void add(ITeacher teacher)
     {
         lstTeacher.add(teacher);
         this.fireIntervalAdded(this,lstTeacher.size()-1,lstTeacher.size());
-    }
+    }*/
 
 	/**
 	 * To delete a party
@@ -99,32 +125,25 @@ public class TeacherListModel extends AbstractListModel {
 	 */
 	public void remove(int index) throws RemoteException, FlexiException
 	{
-			RemoteDataManager.getManager().deleteTeacher((ITeacher)lstTeacher.get(index));
-            //this.fireIntervalRemoved(this,lstTeacher.size()-1,lstTeacher.size());
+		
 	}
 	
     /**
      * To delete a party
      * @param index the party to be deleted
+     * @throws RemoteException 
      */
-    public void remove(ITeacher teacher)
+    public void remove(ITeacher teacher) throws RemoteException
     {
-            lstTeacher.remove(teacher);
-            this.fireIntervalRemoved(this,lstTeacher.size()-1,lstTeacher.size());
+        System.out.println("suppression d'un prof:");
+        lstTeacher.remove(teacher); 
+        RemoteDataManager.getManager().saveOrUpdateCourse(courseL,courseL.getParentSubject());
     }
     
-	public void change(List values,int index)
+	public void change(List lstTeacher)
 	{
-		if(values.size() >=3)
-		{
-			ITeacher teacher = (ITeacher)getPartyAt(index);
-			teacher.setName((String)values.get(0));
-			teacher.setFirstName((String)values.get(1));
-			teacher.setEmail((String)values.get(2));
-			fireContentsChanged(this,index,index);
+        setLstTeacher(lstTeacher);
 			
-		}
-		
 	}
     
     public class TeacherListener extends DataListenerImpl
@@ -148,32 +167,28 @@ public class TeacherListModel extends AbstractListModel {
          */
         public void dataChanged(DataEvent event) throws RemoteException
         {
-            ITeacher teacher = (ITeacher)event.getSource();
+            ISubject subject = (ISubject)event.getSource();
             int type = event.getEventType();
-            switch(type)
+            if(event.getPropertyName().equals("lstTeacher"))
             {
-                case DataEvent.TYPE_PROPERTY_ADDED:
+                switch(type)
                 {
-                    add(teacher);
-                    break;
-                }
-                case DataEvent.TYPE_PROPERTY_CHANGED :
-                {
-                    int ind = lstTeacher.indexOf(teacher);
-                    List list = new ArrayList();
-                    list.add(teacher.getName());
-                    list.add( teacher.getFirstName());
-                    list.add( teacher.getEmail());
-                    change(list,ind);
-                    break;
-                }
-                case DataEvent.TYPE_PROPERTY_REMOVED:
-                {
-                    remove(teacher);
-                    break;
+                    case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
+                    {
+                        for(int i=0;i<event.getSubObjects().length;i++)
+                        {
+                            System.out.println("Modification de la liste des profs:");
+                            if(((ICourse)event.getSubObjects()[i]).equals(courseL))
+                            {
+                                System.out.println("Modification de la liste des profs:");
+                                setLstTeacher(((ICourse)event.getSubObjects()[i]).getLstTeacher());
+                                System.out.println(((ICourse)event.getSubObjects()[i]).getLstTeacher());
+                            }
+                         }       
+                        break;
+                    }
                 }
             }
-            
         }
         
     }

@@ -61,7 +61,7 @@ public class ManagementView
         
         JPanel panel2 = new JPanel(new BorderLayout());
         panel2.add(fb1.getPanel(), BorderLayout.CENTER);
-        //panel2.setBorder(BorderFactory.createTitledBorder("Visualisation"));
+        panel2.setBorder(BorderFactory.createTitledBorder("Visualisation"));
         //panel2.setMinimumSize(new Dimension(180,90));
         //panel2.setMaximumSize(new Dimension(200,200));
        /* fb1.getPanel().setMinimumSize(new Dimension(110,90));

@@ -198,7 +198,6 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
     {
         try
         {
-            System.out.println("Add floor");
             FloorTreeNode child = new FloorTreeNode(this,floor,model);
             children.add(child);
             model.nodesWereInserted(this,new int[]{children.size()-1});

@@ -25,6 +25,7 @@ import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
@@ -61,7 +62,10 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 	 */
 	private List children;
 	 
-	
+    /**
+     * The langage file
+     */
+	 private static FlexiLanguage language = FlexiLanguage.getInstance();
 	//==================//
     //   Constructeurs  //
     //==================// 
@@ -172,7 +176,7 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 		for(int i=0;i<IRoom.class.getFields().length;i++)
 		{
 			String name = new String();
-			name += IRoom.class.getFields()[i].getName() ;
+			name += language.getText("roomType"+i);
 			List lstRoom;
 			if(map.get(new Integer(i))!= null )lstRoom = (List)map.get(i);
 			else lstRoom = new ArrayList();
@@ -217,7 +221,6 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 	}
     public void remove(IRoom room) throws RemoteException, FlexiException 
     {
-        System.out.println("delete room");
         RemoteDataManager.getManager().deleteRoom(room);
         
     }

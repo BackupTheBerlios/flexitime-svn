@@ -102,7 +102,6 @@ public class RootDeviceTreeNode extends RootTreeNode
 		for(int i=1;i<=IDevice.class.getFields().length;i++)
 		{
 			String name = language.getText("deviceType"+i) ;
-			System.out.println("on demande: "+"deviceType"+i);
             List lstDevice;
 			if(map.get(new Integer(i))!= null )lstDevice = (List)map.get(i);
 			else lstDevice = new ArrayList();
@@ -120,7 +119,6 @@ public class RootDeviceTreeNode extends RootTreeNode
 	 */
 	public void remove(IDevice device) throws RemoteException, FlexiException 
     {
-		System.out.println("delete device");
         RemoteDataManager.getManager().deleteDevice(device);
 
 		
