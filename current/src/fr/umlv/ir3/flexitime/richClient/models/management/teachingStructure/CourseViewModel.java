@@ -6,6 +6,7 @@
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure;
 
+import java.awt.Color;
 import java.rmi.RemoteException;
 
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
@@ -36,12 +37,14 @@ public class CourseViewModel extends DataListenerImpl
         RemoteDataManager.getManager().addDataListener(ISubject.class,this);
     }
     
-    public void setValue(String[] values) throws RemoteException
+    public void setValue(Object[] values) throws RemoteException
     {
         if(values.length>0)
         {
-            course.setName(values[0]);
-            //course.setNbPerson(Integer.valueOf(values[1]).intValue());
+            course.setName((String)values[0]);
+            course.setNbHours((Integer.parseInt((String)values[1])));
+            course.setDefaultLength((Integer.parseInt((String)values[2])));
+            course.setColor((Color)values[3]);
             RemoteDataManager.getManager().saveOrUpdateCourse(course,course.getParentSubject());
         }
         

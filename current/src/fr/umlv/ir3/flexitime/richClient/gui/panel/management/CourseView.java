@@ -106,7 +106,7 @@ public class CourseView
         popMenu = new JPopupMenu();
         popMenu2 = new JPopupMenu();
         coul = new JColorChooser(Color.BLUE);
-       // if(model.getCourse().getColor()!=null)coul.setColor(model.getCourse().getColor());
+        if(model.getCourse().getColor()!=null)coul.setColor(model.getCourse().getColor());
         coul.setPreviewPanel(new JPanel());
         //coul.setMaximumSize(new Dimension(410,100));
         coul.getSelectionModel().addChangeListener(new ChangeListener(){
@@ -115,7 +115,11 @@ public class CourseView
             {
                 Color newColor = coul.getColor();
                 buttonCoul.setBackground(newColor);
-                
+                if(!errorLabel.isVisible())
+                {
+                    okButton.setEnabled(true);
+                    cancelButton.setEnabled(true);
+                }
             }
             
         });
@@ -144,7 +148,7 @@ public class CourseView
         buttonCoul= new JButton (language.getText("btColor"));
         buttonTeacher = new JButton(language.getText("btTeacher"));
         removeTeacher = new JButton(language.getText("remTeacher"));
-        //if(model.getCourse().getColor()!=null)buttonCoul.setBackground(model.getCourse().getColor());
+        if(model.getCourse().getColor()!=null)buttonCoul.setBackground(model.getCourse().getColor());
 		name = new JTextField(model.getCourse().getName());
 		nbHourTotal = new JTextField(""+model.getCourse().getNbHours());
         time = new JTextField(""+model.getCourse().getNbHours());
@@ -156,8 +160,9 @@ public class CourseView
                 try{
                     Integer number = Integer.valueOf(nbHourTotal.getText()).intValue();   
                     Integer number2 = Integer.valueOf(time.getText()).intValue();
-                okButton.setEnabled(true);
+                    okButton.setEnabled(true);
 					cancelButton.setEnabled(true);
+                    errorLabel.setVisible(false);
                 }
                 catch(NumberFormatException e){
                     if(nbHourTotal.getText().length()>9)errorLabel.setText("Valeur excessive");
@@ -189,8 +194,16 @@ public class CourseView
 
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				//String[] values = new String[];
-			    //model.setValue();
+				Object[] values = new Object[4];
+                values[0]=name.getText();
+                values[1]=nbHourTotal.getText();
+                values[2]=time.getText();
+                values[3]=coul.getColor();
+			    try {
+					model.setValue(values);
+				} catch (RemoteException e) {
+					JOptionPane.showMessageDialog(null,e.getMessage(),"Modification impossible",JOptionPane.ERROR_MESSAGE);
+				}
 				okButton.setEnabled(false);
 				cancelButton.setEnabled(false);
 			}	
@@ -201,9 +214,14 @@ public class CourseView
 
 			public void actionPerformed(ActionEvent arg0) {
 				name.setText(model.getCourse().getName());
-				//nbPerson.setText(""+((GroupTreeNode)tree.getSelectionPath().getLastPathComponent()).getGroup().getNbPerson());
+                if(model.getCourse().getColor()!=null)coul.setColor(model.getCourse().getColor());
+                else coul.setColor(Color.BLUE);
+                nbHourTotal.setText("" + model.getCourse().getNbHours());
+                time.setText("" + model.getCourse().getDefaultLength());
+                //nbPerson.setText(""+((GroupTreeNode)tree.getSelectionPath().getLastPathComponent()).getGroup().getNbPerson());
 				okButton.setEnabled(false);
 				cancelButton.setEnabled(false);
+                errorLabel.setVisible(false);
 			}
 		
 		});
@@ -301,6 +319,9 @@ public class CourseView
         buttonCoul.setBackground(model.getCourse().getColor());
         time.setText("" + model.getCourse().getDefaultLength());
         courseTeacherListModel.change(model.getCourse().getLstTeacher());
+        okButton.setEnabled(false);
+        cancelButton.setEnabled(false);
+        errorLabel.setVisible(false);
     }
 
     private void createListTeacherPanel()
@@ -330,7 +351,7 @@ public class CourseView
             }
             
         });
-        FormLayout layout = new FormLayout("2px,100dlu,3px,25dlu,2px","2px,pref,pref,10px");
+        FormLayout layout = new FormLayout("2px,100dlu,3px,30dlu,2px","2px,pref,pref,10px");
         listTeacherPanel.setLayout(layout);
         CellConstraints cc = new CellConstraints();
         listTeacherPanel.add(listTeacherScroll,cc.xy(2,2));

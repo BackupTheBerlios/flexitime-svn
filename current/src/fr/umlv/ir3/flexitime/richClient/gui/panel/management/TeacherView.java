@@ -215,5 +215,7 @@ public class TeacherView
         name.setText(model.getTeacher().getName());
         firstName.setText(model.getTeacher().getFirstName());
         email.setText(model.getTeacher().getEmail());
+        okButton.setEnabled(false);
+        cancelButton.setEnabled(false);
     }
 }
