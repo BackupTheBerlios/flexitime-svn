@@ -85,5 +85,5 @@ public abstract class AbstractManager implements IDataManager
         // FIXME Vérifier les références pour la suppression
         listenerList.remove(l);
     }
-
+    
 }

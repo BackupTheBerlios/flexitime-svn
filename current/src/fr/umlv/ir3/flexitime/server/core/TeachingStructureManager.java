@@ -9,10 +9,9 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
-import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
-import fr.umlv.ir3.flexitime.server.io.storage.LessonStorage;
-import fr.umlv.ir3.flexitime.server.io.storage.TrackStorage;
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.server.io.storage.TeacherStorage;
 
 
 /**
@@ -27,7 +26,7 @@ import fr.umlv.ir3.flexitime.server.io.storage.TrackStorage;
  * 
  * @author FlexiTeam - Administrateur
  */
-public class LessonManager extends AbstractManager
+public class TeachingStructureManager extends AbstractManager
 {
 
     /** 
@@ -43,7 +42,7 @@ public class LessonManager extends AbstractManager
      */
     public void save(IData data) throws RemoteException
     {
-        if(data instanceof ILesson) LessonStorage.save((ILesson) data);
+        if(data instanceof ITeachingStructure) TeachingStructureStorage.save((ITeachingStructure) data);
     }
 
     /** 
@@ -59,7 +58,7 @@ public class LessonManager extends AbstractManager
      */
     public List get() throws RemoteException
     {
-        return LessonStorage.get();
+        return TeachingStructureStorage.get();
     }
 
     /** 
@@ -93,7 +92,7 @@ public class LessonManager extends AbstractManager
      */
     public void delete(IData data) throws RemoteException
     {
-        if(data instanceof ILesson) LessonStorage.delete((ILesson) data);
+        if(data instanceof ITeachingStructure) TeachingStructureStorage.delete((ITeachingStructure) data);
     }
 
     /** 
@@ -126,7 +125,7 @@ public class LessonManager extends AbstractManager
      */
     public void update(IData data) throws RemoteException
     {
-        if(data instanceof ILesson) LessonStorage.update((ILesson) data);
+        if(data instanceof ITeachingStructure) TeachingStructureStorage.update((ITeachingStructure) data);
     }
 
 }
