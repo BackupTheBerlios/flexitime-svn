@@ -70,4 +70,20 @@ public interface IBusy extends Serializable
      * 
      */
     public Gap getGap();
+    
+    /**
+     * Getter for id of the Busy
+     *
+     * @return id of the busy
+     * 
+     */
+    public Long getIdBusy();
+    
+    /**
+     *  
+     * Setter of id
+     * @param idBusy id to set 
+     * 
+     */
+    public void setIdBusy(Long idBusy);
 }
