@@ -12,13 +12,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
 import fr.umlv.ir3.flexitime.server.MetierSimulator;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.LessonBloc;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.BusyBloc;
 
 
 
@@ -39,7 +38,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
     }
     
     //Données dépendantes des préférences
-    private final String[] dayList = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"};
+    private final String[] tmpDayEnum = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"};
     private final int      nbDays  = 5;
     //TODO faire un JSlider pour assurer la cohérence
     private final int      gapTime = 60;
@@ -53,9 +52,12 @@ public class DefaultPlanningModel extends AbstractPlanningModel
     //private int            blocNbGapsList;
 
     
-    //Données métiers à placer
-    private List           busyList;
-    private List           busyListImage;
+    //Données métiers à placer ordonnée dans une liste de semaine, contenante une liste de jour, avec la liste de tous les Busy dans l'ordre
+    private List<List[]>           busyList;
+    //Image des Busy encapsulé par des LessonBloc et structuré de la meme maniere => list de semaine avec une liste de jour et une liste de LessonBloc
+    private List<DayBloc[]>         busyListImage;
+    
+    //TODO idée => fusionner les 2 listes pour gain de place
     
     
 
@@ -93,10 +95,11 @@ public class DefaultPlanningModel extends AbstractPlanningModel
         // -> Busy toutes comprises dans le créneau concerné ici
         // -> Busy valides (pas de chevauchement etc ...)
         // -> Busy dans l'ordre chronologique
-        this.busyList = new ArrayList(nbWeeks);
-        this.busyListImage = new ArrayList(nbWeeks);
+        this.busyList = new ArrayList<List[]>(nbWeeks);
+        this.busyListImage = new ArrayList<DayBloc[]>(nbWeeks);
         
         this.initialyseDatas(MetierSimulator.getLessonsList());
+        //this.initialyseDatas(null);
         this.initialyseImage();
         
         System.out.println("nbWeeks=" + nbWeeks);
@@ -200,7 +203,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
      */
     public Object getDayHeaderAt(int dayNumber)
     {
-        return (dayList[dayNumber]);
+        return (tmpDayEnum[dayNumber]);
     }
 
     /**
@@ -232,7 +235,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
      */
     public Object getDateHeaderAt(int weekNumber, int dayNumber)
     {
-        //TODO valeure réelle a retourner
+        //TODO bug sur la date
         Calendar res = (Calendar)this.edtWeekGap.getStartDate().getCal().clone();
         res.add(Calendar.DAY_OF_MONTH,weekNumber*7+dayNumber);
         
@@ -276,7 +279,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
         DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
         int count = 0;
         int i = gapNumber;
-        while(i < bloc.representationList.length && !(bloc.representationList[i] == null || bloc.representationList[i] instanceof LessonBloc)  )
+        while(i < bloc.representationList.length && !(bloc.representationList[i] == null || bloc.representationList[i] instanceof BusyBloc)  )
         {
             count++;
             i++;
@@ -299,7 +302,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
     {
         DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
         Object o = bloc.getElementAt(gapNumber);
-        return (o == null || o instanceof LessonBloc);
+        return (o == null || o instanceof BusyBloc);
     }
     
     
@@ -313,7 +316,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
      * @param gapNumber the value of the gap (0 is the first)
 	 * @param lesson
 	 */
-	public void addElement(int weekNumber, int dayNumber, int gapNumber, LessonBloc lesson)
+	public void addElement(int weekNumber, int dayNumber, int gapNumber, BusyBloc lesson)
 	{
 		//Ici il faudra ajouter le cours au groupe et le faire valider par le serveur
 		
@@ -367,27 +370,43 @@ public class DefaultPlanningModel extends AbstractPlanningModel
     }
     
     
+    /*
+     * Prend un liste de des Busy ordonnées et la reconstruis dans la structure Liste de semaine\liste de jour\liste de busy
+     *
+     */
     private void initialyseDatas(List datas)
     {
-        Iterator iter = datas.iterator();
+        Iterator iter;
+        if(datas != null)
+            iter = datas.iterator();
+        else
+            iter = (new ArrayList()).iterator();
+        
+        //Cas ou il n'y a aucun Busy, on charge une DayList ki sera vide (aucun Busy)
         if(!iter.hasNext())
         {
             for(int i=0; i < this.nbWeeks;i++)
                 this.busyList.add(new List[this.nbDays]);
             return;
         }
+        
+        
         IBusy curBusy = (IBusy)iter.next();
+        //Pour chauqe semaine on va créer une dayList et y mettre la liste des Busy de chaque jour
         for(int week=0; week < this.nbWeeks;week++)
         {
-            List[] dayList = new List[this.nbDays];
+            List<IBusy>[] dayList = new ArrayList[this.nbDays];
+            //Ajout dans l'ordre ici add(week,dayList) implicite
             this.busyList.add(dayList);
+            
             int dayNumber;
             boolean stop = false;
+            //On parcours les Busy tant qu'ils correspondent à la semaine que l'on rempli
             while(!stop && isInWeek(curBusy,week))
             {
                 dayNumber = curBusy.getGap().getStartDate().getIDayOfWeek();
                 if(dayList[dayNumber] == null)
-                    dayList[dayNumber] = new ArrayList();
+                    dayList[dayNumber] = new ArrayList<IBusy>(1);
                 dayList[dayNumber].add(curBusy);
                 if(iter.hasNext())
                     curBusy = (IBusy)iter.next();
@@ -411,9 +430,9 @@ public class DefaultPlanningModel extends AbstractPlanningModel
         DayBloc[] tab = null;
         for (int i = 0 ; i < nbWeeks ; i++)
         {
-            tab = new DayBloc[dayList.length];
+            tab = new DayBloc[tmpDayEnum.length];
             busyListImage.add(i, tab);
-            for (int j = 0 ; j < dayList.length ; j++)
+            for (int j = 0 ; j < tmpDayEnum.length ; j++)
             {
                 tab[j] = new DayBloc();
                 tab[j].init(getBusyList(i,j));
@@ -432,21 +451,26 @@ public class DefaultPlanningModel extends AbstractPlanningModel
     private class DayBloc
     {
 
+        /**
+         * Represent a the contents data in a day
+         */
         public Object[] representationList;
 
+        /**
+         * Constructs a dayBloc
+         */
         public DayBloc()
         {
             this.representationList = new Object[nbGaps];
             for (int i = 0 ; i < representationList.length ; i++)
-                representationList[i]  = new Object();
+                representationList[i]  = new Integer(0);
         }
         
-        public void init(List list)
+        private void init(List list)
         {
             if(list == null || list.size() == 0)
                 return;
-            else
-                placeBusy(list);
+            placeBusy(list);
         }
         
         
@@ -464,8 +488,6 @@ public class DefaultPlanningModel extends AbstractPlanningModel
             for (Iterator iter = list.iterator() ; iter.hasNext() ;)
             {
                 IBusy busy = (IBusy) iter.next();
-                if(  !(busy instanceof ILesson) )
-                    return;
                 
                 //***************************************************************
                 //  On cherche le premier bloc ki contient la date de debut du Busy
@@ -498,29 +520,33 @@ public class DefaultPlanningModel extends AbstractPlanningModel
                     curBloc++;
                 }
                 
-                
-                
                 int lastGap;
-                int nbMinutes = Time.countNbMinute_HM( blocList[curBloc].getStartDate() , busy.getGap().getEndDate());
-                //Cas ou l'heure de fin dépasse le dernier creneau ... on affecte alors la derniere case
+//              Cas ou l'heure de fin dépasse le dernier creneau ... on affecte alors la derniere case
                 if(curBloc == blocList.length)
-                    lastGap = getBlocSize(curBloc-1)-1+precSizeBloc;
-                //cas ou la date de fin se trouve entre 2 blocs ! on lui donne donc la taille des blocs précédents 
-                if(nbMinutes <= 0)
-                    lastGap = precSizeBloc-1;
+                    lastGap = precSizeBloc -1;
                 else
                 {
-                    lastGap = nbMinutes/gapTime + precSizeBloc;
-                    //cas ou l'heure de fin est l'heure d'un creneau ... on enleve 1 pour ne pas empieter sur le creneau d'apres
-                    if(nbMinutes%gapTime == 0)
-                        lastGap--;
+                
+                
+                    int nbMinutes = Time.countNbMinute_HM( blocList[curBloc].getStartDate() , busy.getGap().getEndDate());
+                    
+                    //cas ou la date de fin se trouve entre 2 blocs ! on lui donne donc la taille des blocs précédents 
+                    if(nbMinutes <= 0)
+                        lastGap = precSizeBloc-1;
+                    else
+                    {
+                        lastGap = nbMinutes/gapTime + precSizeBloc;
+                        //cas ou l'heure de fin est l'heure d'un creneau ... on enleve 1 pour ne pas empieter sur le creneau d'apres
+                        if(nbMinutes%gapTime == 0)
+                            lastGap--;
+                    }
                 }
                     
                 //System.out.println("Bloc pour la fin : " + curBloc);
                 //System.out.println("Cours du gap " + firstGap + " au " + lastGap);
                 
                 //on place le LessonBloc sur le premier créneau
-                this.representationList[firstGap] = new LessonBloc((ILesson)busy,lastGap-firstGap+1);
+                this.representationList[firstGap] = new BusyBloc(busy,lastGap-firstGap+1);
                 //On affecte tous les creneaux internes à null
                 for(int i = firstGap+1; i <= lastGap; i++)
                     representationList[i]= null;
@@ -528,6 +554,13 @@ public class DefaultPlanningModel extends AbstractPlanningModel
             }
         }
 
+        /** 
+         * Return an element At the specified indice
+         *
+         * @param gapNumber
+         * @return the element
+         * 
+         */
         public Object getElementAt(int gapNumber)
         {
             return this.representationList[gapNumber];

@@ -11,8 +11,8 @@ package fr.umlv.ir3.flexitime.richClient.gui.renderers;
 import javax.swing.JComponent;
 
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.FlexiPlanning;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JLesson;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.LessonBloc;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JBusy;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.BusyBloc;
 
 
 
@@ -44,15 +44,15 @@ public class EDTCellRenderer
         this.comp = null;
         if(elementAt != null)
         {
-            if(elementAt instanceof LessonBloc)
+            if(elementAt instanceof BusyBloc)
             {
                 //nous sommes bien dans le cas d'un Busy à placer
-                comp = new JLesson( (LessonBloc)elementAt ); 
+                comp = new JBusy( (BusyBloc)elementAt ); 
             }   
             else
             {
                 //cas d'un créneau vide à placer
-                comp = new JLesson();
+                comp = new JBusy();
                 /*JLabel label = new JLabel();
                 label.setText("");
                 label.setBackground(Color.WHITE);

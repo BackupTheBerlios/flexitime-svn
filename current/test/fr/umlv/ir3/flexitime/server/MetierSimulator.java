@@ -81,6 +81,8 @@ public class MetierSimulator
         res.add(DataFactory.createLesson(new Gap(2005,1,27,10,00,2005,1,19,12,00) , new CourseImpl("MSI", 1,50,Color.GREEN,2), 120));
         res.add(DataFactory.createLesson(new Gap(2005,1,27,14,30,2005,1,19,17,30) , new CourseImpl("Corba", 1,50,Color.YELLOW,2), 180));
         res.add(DataFactory.createLesson(new Gap(2005,1,28,10,45,2005,1,19,12,45) , new CourseImpl("J2EE", 1,50,Color.MAGENTA,2), 120));
+        
+        res.add(DataFactory.createLesson(new Gap(2005,1,31,1,0,2005,1,19,18,05) , new CourseImpl("J2EE", 1,50,Color.CYAN,2), 120));
 
         
         return res;
