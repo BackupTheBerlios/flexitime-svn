@@ -10,7 +10,11 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
@@ -430,4 +434,32 @@ public interface IDataManager extends Remote
      * @throws FlexiException 
      */
     public boolean deleteTrack(ITrack track) throws RemoteException, FlexiException;
+
+    /**
+     * @param d
+     * @param parent
+     * @return
+     */
+    public IDeviceBusy saveOrUpdateDeviceBusy(IDeviceBusy d, IDevice parent) throws RemoteException;
+
+    /**
+     * @param group
+     * @param parent
+     * @return
+     */
+    public IGroupBusy saveOrUpdateGroupBusy(IGroupBusy group, IGroup parent) throws RemoteException;
+
+    /**
+     * @param r
+     * @param parent
+     * @return
+     */
+    public IRoomBusy saveOrUpdateRoomBusy(IRoomBusy r, IRoom parent) throws RemoteException;
+
+    /**
+     * @param t
+     * @param parent
+     * @return
+     */
+    public ITeacherBusy saveOrUpdateTeacherBusy(ITeacherBusy t, ITeacher parent) throws RemoteException;
 }
