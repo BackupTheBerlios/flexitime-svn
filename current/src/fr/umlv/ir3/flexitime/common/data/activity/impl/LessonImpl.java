@@ -43,6 +43,7 @@ public class LessonImpl extends BusyImpl implements ILesson
     public LessonImpl(String strName, Date daStart, Date daEnd)
     {
         super(strName,daStart,daEnd);
+        listOfResources = new ArrayList();
     }
     
     

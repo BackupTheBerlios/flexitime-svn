@@ -1,4 +1,4 @@
-/*
+ /*
  * Created on 6 janv. 2005
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
