@@ -667,7 +667,7 @@ public class Client
             pass = loginView.getPass();
             
             //TODO JG, verifier user / login sur server (bdd flexitime)
-            /*try {
+            try {
                 if(RemoteDataManager.getUserManager().ConnectToRich(login, pass))
                 {
                     System.out.println("login="+login+", pass="+pass + " => OK");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
@@ -686,10 +686,10 @@ public class Client
                 }
             } catch (RemoteException e) {
                 JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
-            }*/
+            }
             
             //test fictif...
-            if(login.compareTo(pass) == 0)
+            /*if(login.compareTo(pass) == 0)
             {
                 System.out.println("Test fictif : login="+login+", pass="+pass + " => OK");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
                 test = true;
@@ -704,7 +704,7 @@ public class Client
             else
             {
                 System.out.println("Test fictif : login="+login+", pass="+pass + " => KO");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-            }
+            }*/
         }
         
         return login;
