@@ -87,7 +87,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         super();
 
         this.ressource = _ressource;
-        this.edtWeekGap = initialGap;
+        this.edtWeekGap = new Gap((Calendar)initialGap.getEndDate().getCal().clone(), (Calendar)initialGap.getStartDate().getCal().clone());
+        System.out.println("RessourcePlanningModel() : " + this.edtWeekGap.getStartDate().getStrDate());
+        //System.out.println("RessourcePlanningModel() : " + this.edtWeekGap.getStartDate().getIMonth());
         
         this.blocList = new TimeBloc[4];
         this.blocList[0] = new TimeBloc(8,30,10,30);
@@ -129,7 +131,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     private void initDataList()
     {
         this.ressourceSet = ressource.getSetBusy();
-        System.out.println("Nb busy : " + ressourceSet.size());
+        //System.out.println("Nb busy : " + ressourceSet.size());
         this.initialyseDatas(subSet(this.ressourceSet,this.edtWeekGap));
         //this.initialyseDatas(MetierSimulator.getLessonsList());
         //this.initialyseDatas(null);
@@ -541,13 +543,16 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     private Gap getGap(int weekNumber, int dayNumber, int gapNumber, int length)
     {
         Time beginHour = getStartTime(gapNumber);
-        System.out.println("ajout de " + (length-1));
+        //System.out.println("ajout de " + (length-1));
         Time endHour = getEndTime(gapNumber+length-1);
         //System.out.println("2");
         Calendar cal = (Calendar)this.edtWeekGap.getStartDate().getCal().clone();
+        System.out.println("getGap() : cal du edt : " + cal.get(Calendar.MONTH) + ")");
         cal.add(Calendar.WEEK_OF_YEAR, weekNumber);
         cal.add(Calendar.DAY_OF_WEEK, dayNumber);
         Time date = new Time(cal);
+        System.out.println("getGap() : Mois du getGap() : " + date.getIMonth());
+        System.out.println("getGap() : (avec le cal : " + cal.get(Calendar.MONTH) + ")");
         return new Gap(date.getYear(), 
                 date.getIMonth(),
                 date.getIDay(),
@@ -600,11 +605,11 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         {
             //on stock le numero du bloc
             res[0] = i;
-            System.out.println("getBlocNumber() : bloc numero " + i);
+            //System.out.println("getBlocNumber() : bloc numero " + i);
             sum -= this.getBlocSize(i);
             int localGapNumber = gapNumber - sum;
             res[1] = localGapNumber;
-            System.out.println("getBlocNumber() : gap local " + localGapNumber);
+            //System.out.println("getBlocNumber() : gap local " + localGapNumber);
             return res;
         }
          //TODO finir
@@ -633,8 +638,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.edtWeekGap.getStartDate().addWeek(-this.nbWeeks);
         this.edtWeekGap.getEndDate().addWeek(-this.nbWeeks);
 
-        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
         
         this.initDataList();
     }
@@ -649,8 +654,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.edtWeekGap.getStartDate().addWeek(-1);
         this.edtWeekGap.getEndDate().addWeek(-1);
         
-        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
 
         this.initDataList();
         
@@ -666,8 +671,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.edtWeekGap.getEndDate().addWeek(-1);
         this.nbWeeks -= 1;
         
-        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
 
         this.busyList.remove(this.busyList.size()-1);
         this.busyListImage.remove(this.busyListImage.size()-1);
@@ -682,8 +687,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.edtWeekGap.getEndDate().addWeek(1);
         this.nbWeeks += 1;
         
-        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
         
         this.initDataList();
     }
@@ -698,8 +703,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.edtWeekGap.getStartDate().addWeek(1);
         this.edtWeekGap.getEndDate().addWeek(1);
         
-        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
         
         this.initDataList();
         
@@ -717,8 +722,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.initWorkingData();
         this.initDataList();
         
-        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
     }
     
     /** 
@@ -732,8 +737,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.initWorkingData();
         this.initDataList();
         
-        System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        System.out.println(this.edtWeekGap.getEndDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
     }
 
 
