@@ -12,9 +12,10 @@ import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 
 
 /**
@@ -34,8 +35,8 @@ public class TestUserStorage
     public static void main(String[] args) throws HibernateException, RemoteException, FlexiException
     {
 //        IUser u = DataFactory.createUser("a", "a");
-//        DataFactory.createUser("b", "b");
-//        DataFactory.createUser("c", "c");
+//        DataFactory.createUser("q", "q");
+//        DataFactory.createUser("w", "w");
 //        DataFactory.createUser("d", "d");
 //        DataFactory.createUser("fappert", "popopopo");
 //        DataFactory.createUser("valre", "popopopo");
@@ -49,6 +50,10 @@ public class TestUserStorage
         {
             System.out.println(r.getFloor());
         }
+        
+        IGroup g = RemoteDataManager.getManager().getGroup();
+        
+        System.out.println(g.getName());
         
         //RemoteDataManager.getUserManager().save(u);
         

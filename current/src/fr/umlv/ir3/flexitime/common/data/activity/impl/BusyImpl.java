@@ -6,6 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.activity.impl;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,8 +26,8 @@ public abstract class BusyImpl implements IBusy
     // ===========//
     // Champs //
     // ===========//
-    private Date                 daStart;
-    private Date                 daEnd;
+    private Timestamp                 daStart;
+    private Timestamp                 daEnd;
     protected Long               idBusy;
     private String               comment;
     private static FlexiLanguage language;
@@ -53,7 +54,7 @@ public abstract class BusyImpl implements IBusy
      * @param daEnd
      *            the end date of the unavailibility.
      */
-    private BusyImpl(Date daStart, Date daEnd)
+    private BusyImpl(Timestamp daStart, Timestamp daEnd)
     {
         this.daStart = daStart;
         this.daEnd = daEnd;
@@ -68,8 +69,8 @@ public abstract class BusyImpl implements IBusy
      */
     BusyImpl(Gap g)
     {
-        this(g.getStartDate().getCal().getTime(), g.getEndDate().getCal()
-                .getTime());
+        this(new Timestamp(g.getStartDate().getCal().getTimeInMillis()), new Timestamp(g.getEndDate().getCal()
+                .getTimeInMillis()));
     }
 
     /**
@@ -84,8 +85,7 @@ public abstract class BusyImpl implements IBusy
      */
     BusyImpl(Gap g, String comment)
     {
-        this(g.getStartDate().getCal().getTime(), g.getEndDate().getCal()
-                .getTime());
+        this(g);
         this.comment = comment;
     }
 
@@ -100,7 +100,7 @@ public abstract class BusyImpl implements IBusy
      * 
      * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#getStartDate()
      */
-    public Date getStartDate()
+    public Timestamp getStartDate()
     {
         return daStart;
     }
@@ -115,7 +115,7 @@ public abstract class BusyImpl implements IBusy
      * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#setStartDate(java.util.Date)
      * @author FlexiTeam - Adrien BOUVET
      */
-    public void setStartDate(Date daStart)
+    public void setStartDate(Timestamp daStart)
     {
         this.daStart = daStart;
     }
@@ -128,7 +128,7 @@ public abstract class BusyImpl implements IBusy
      * 
      * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#getEndDate()
      */
-    public Date getEndDate()
+    public Timestamp getEndDate()
     {
         return daEnd;
     }
@@ -141,7 +141,7 @@ public abstract class BusyImpl implements IBusy
      * 
      * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#setEndDate(java.util.Date)
      */
-    public void setEndDate(Date daEnd)
+    public void setEndDate(Timestamp daEnd)
     {
         this.daEnd = daEnd;
     }
@@ -156,9 +156,9 @@ public abstract class BusyImpl implements IBusy
     public Gap getGap()
     {
         Calendar calStart = Calendar.getInstance();
-        calStart.setTime(this.daStart);
+        calStart.setTimeInMillis(this.daStart.getTime());
         Calendar calEnd = Calendar.getInstance();
-        calEnd.setTime(this.daEnd);
+        calEnd.setTimeInMillis(this.daEnd.getTime());
 
         return new Gap(calStart, calEnd);
     }
@@ -171,8 +171,8 @@ public abstract class BusyImpl implements IBusy
      */
     public void setGap(Gap newGap)
     {
-        this.setStartDate(newGap.getStartDate().getCal().getTime());
-        this.setEndDate(newGap.getEndDate().getCal().getTime());
+        this.setStartDate(new Timestamp(newGap.getStartDate().getCal().getTimeInMillis()));
+        this.setEndDate(new Timestamp(newGap.getEndDate().getCal().getTimeInMillis()));
     }
 
     /**
@@ -239,7 +239,7 @@ public abstract class BusyImpl implements IBusy
 
         IBusy bus = (IBusy) o;
 
-        return this.daStart.compareTo(bus.getStartDate());
+        return ((Date)this.daStart).compareTo(((Date)bus.getStartDate()));
     }
 
     /**
