@@ -59,7 +59,7 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
     
     public boolean ConnectToLight(String name, String passwd) throws RemoteException
     {
-        if(checkUser(name,passwd))return true;
+        if(ldap.createConnection(name,passwd)) return true;
         return false;     
     }
     
@@ -78,10 +78,6 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
     {
         //TODO (Gestion des exeptions si on ne peut pas joindre soit le LDAP soit la base de données)
         //      On verifie que le User ne soit pas déja connecté
-        Iterator it = ConnectedUser.iterator();
-        while(it.hasNext()){
-            if(name.equals((String)it.next())) return false;
-        }
         
         //      On vérifie d'abord si l'utilisateur se trouve dans le LDAP
         if(ldap.createConnection(name,passwd)) return true;
@@ -206,5 +202,6 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
         }
         
     }
+
 
 }
