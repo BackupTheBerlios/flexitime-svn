@@ -18,6 +18,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import fr.umlv.ir3.flexitime.server.DataSimulator;
 
 
@@ -30,7 +31,6 @@ import fr.umlv.ir3.flexitime.server.DataSimulator;
  * please... Que fait cette classe, qu'est-ce qu'elle représente, ...
  * 
  * @version Verion ou révision SVN
- * @see (si nécessaire)
  * @author FlexiTeam - binou
  */
 public class TestManagementView

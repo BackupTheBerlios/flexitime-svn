@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
+import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JRessourcePlanning;
 
 
@@ -55,7 +56,7 @@ public class EDTCellHeaderRenderer
      * 
      * @see EDTCellRenderer
      */
-    public JComponent getEDTCellHeaderRendererComponent(JRessourcePlanning edt, Object object, int headerType)
+    public JComponent getEDTCellHeaderRendererComponent(JComponent edt, Object object, int headerType)
     {
         
         switch(headerType)
@@ -95,14 +96,15 @@ public class EDTCellHeaderRenderer
                 if(object instanceof Calendar)
                 {
                     Calendar calendar = (Calendar)object;
+                    Time t = new Time(calendar);
                     this.label = new JLabel();
                     this.label.setPreferredSize(new Dimension(JRessourcePlanning.WEEK_WIDTH,JRessourcePlanning.DAY_HEIGTH));
                     this.label.setBackground(Color.decode("#4169e1"));
                     this.label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                     this.label.setText(
-                            calendar.get(Calendar.DAY_OF_MONTH) + "-" + 
-                            calendar.get(Calendar.MONTH+1) + "-" +
-                            calendar.get(Calendar.YEAR) + "-"
+                            t.getIDay() + " " + 
+                            t.getStrMonth() + " " +
+                            t.getYear()
                             );
                 }
                 break;

@@ -39,7 +39,7 @@ public class EDTCellRenderer
      * 
      * @see EDTCellRenderer
      */
-    public JComponent getEDTCellRendererComponent(JRessourcePlanning flexiEDT, Object elementAt, int week, int day, int gap)
+    public JComponent getEDTCellRendererComponent(JComponent flexiEDT, Object elementAt, int week, int day, int gap)
     {
         this.comp = null;
         if(elementAt != null)

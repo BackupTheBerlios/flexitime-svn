@@ -95,7 +95,7 @@ public class Time
      */
     public int getIMonth()
     {
-        return cal.get(Calendar.MONTH) + 1;
+        return cal.get(Calendar.MONTH);
     }
 
     /**
@@ -105,7 +105,7 @@ public class Time
      */
     public String getStrMonth()
     {
-        return language.getMonth(cal.get(Calendar.MONTH) + 1);
+        return language.getMonth(cal.get(Calendar.MONTH));
     }
 
     /**

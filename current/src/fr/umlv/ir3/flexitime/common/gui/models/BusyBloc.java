@@ -68,7 +68,7 @@ public class BusyBloc
             lesson = (ILesson)busyBloc.getBusy();
             //TODO !!!! ATTENTION COPY DE LA REF DU Lesson ICI !!!! A CHANGER
             //TODO verifier si on doit valuer le nbGap suivant le course ou le lesson
-            this.busy = DataFactory.createLesson(new Gap(), lesson.getCourse(), lesson.getLength());    //new Busy(lesson.getBusy());
+            this.busy = DataFactory.createLesson(new Gap(), lesson.getCourse(), lesson.getLstGroup(), lesson.getLength());    //new Busy(lesson.getBusy());
             this.nbGap = busyBloc.getNbGap();
         }
     }
