@@ -8,14 +8,14 @@ package fr.umlv.ir3.flexitime.richClient.gui.views;
 
 
 /**
- * This class draws a frame where the user can authenticate.
+ * This class draws a frame where the user can specify some options before printing.
  * 
  * @version 0.1
  * 
  * @author FlexiTeam - BOUVET Adrien
  */
-public class LoginView {
+public class PrintView {
     
-    void printView() {}
+    void printview() {}
 
 }

@@ -8,14 +8,13 @@ package fr.umlv.ir3.flexitime.richClient.gui.views;
 
 
 /**
- * This class draws a frame where the user can authenticate.
+ * This class draws a frame where the super user can manage soft's users.
  * 
  * @version 0.1
  * 
  * @author FlexiTeam - BOUVET Adrien
  */
-public class LoginView {
-    
-    void printView() {}
+public class UsersManagementView {
 
+    void printView() {}
 }

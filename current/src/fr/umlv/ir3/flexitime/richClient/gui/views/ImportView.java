@@ -8,14 +8,13 @@ package fr.umlv.ir3.flexitime.richClient.gui.views;
 
 
 /**
- * This class draws a frame where the user can authenticate.
+ * This class draws a frame where the user can specify some options before importing the data.
  * 
  * @version 0.1
  * 
  * @author FlexiTeam - BOUVET Adrien
  */
-public class LoginView {
-    
-    void printView() {}
+public class ImportView {
 
+    void printView() {}
 }
