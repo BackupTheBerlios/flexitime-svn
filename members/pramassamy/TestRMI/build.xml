@@ -7,14 +7,14 @@
     &buildfile;
 	
 	<target name="jars" depends="build">
-		<jar destfile="server.jar" basedir=".">
+		<jar destfile="server.jar" basedir="bin">
 			<manifest>
 				<attribute name="Main-Class" value="bin/list.ServerList" />
 			</manifest>
 		</jar>
 		<jar destfile="client.jar" basedir="bin">
 			<manifest>
-				<attribute name="Main-Class" value="list.ClientList" />
+				<attribute name="Main-Class" value="twowayRMI.Client" />
 			</manifest>
 		</jar>
 	</target>
