@@ -55,7 +55,6 @@ public class TeacherActions
 	{
 		Action action = new AbstractAction()
 		{
-
 			/**
 			 * Comment for <code>serialVersionUID</code>
 			 */

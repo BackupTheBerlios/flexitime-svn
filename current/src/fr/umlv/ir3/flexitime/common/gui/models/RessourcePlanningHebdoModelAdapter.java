@@ -25,9 +25,22 @@ public class RessourcePlanningHebdoModelAdapter
 {
     private RessourcePlanningModel model;
     
+    public RessourcePlanningModel getModel()
+    {
+        return model;
+    }
     public RessourcePlanningHebdoModelAdapter(IResource ressource, Gap initialGap)
     {
         this.model = new RessourcePlanningModel(ressource,initialGap);
+    }
+
+    /**
+     * DOCME
+     * @param model2
+     */
+    public RessourcePlanningHebdoModelAdapter(RessourcePlanningModel model2)
+    {
+        this.model = model2;
     }
 
     /** 
@@ -146,6 +159,20 @@ public class RessourcePlanningHebdoModelAdapter
     public int getDayGapSize()
     {
         return model.getDayGapSize();
+    }
+
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return 
+     * 
+     */
+    public Gap getCurrentGap()
+    {
+        // TODO Auto-generated method stub
+        return model.getCurrentGap();
     }
 
 }

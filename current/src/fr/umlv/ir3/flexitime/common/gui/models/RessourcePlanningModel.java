@@ -200,6 +200,17 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     {
         return this.countNbGap(blocList[blocNumber].countNbMinutes());
     }
+    
+    /** 
+     * return the current Gap that use le model
+     *
+     * @return the gap
+     * 
+     */
+    public Gap getCurrentGap()
+    {
+        return edtWeekGap;
+    }
 
 
 

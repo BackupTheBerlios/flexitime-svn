@@ -11,6 +11,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 
 
 /**
@@ -29,17 +30,20 @@ public class LargerTimeTableAction extends AbstractAction
     private static LargerTimeTableAction action;
     private static Icon icon = Client.getIcon(LargerTimeTableAction.class, "../../pictures/_zoom+.png");
     
-    public static LargerTimeTableAction getInstance()
+    ExploitationView exploit;
+    
+    public static LargerTimeTableAction getInstance(ExploitationView exploit)
     {
         if(action==null)
-            action = new LargerTimeTableAction();
+            action = new LargerTimeTableAction(exploit);
         
         return action;
     }
 
-    protected LargerTimeTableAction()
+    protected LargerTimeTableAction(ExploitationView exploit)
     {
         super("Agrandir la plage", icon);
+        this.exploit = exploit;
     }
     /** 
      * DOCME Description
@@ -52,8 +56,7 @@ public class LargerTimeTableAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent arg0)
     {
-        // TODO Auto-generated method stub
-        
+        exploit.increaseView();
     }
 
 }

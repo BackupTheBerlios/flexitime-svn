@@ -11,6 +11,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 
 
 /**
@@ -29,17 +30,20 @@ public class NextWeekAction extends AbstractAction
     private static NextWeekAction action;
     private static Icon icon = Client.getIcon(NextWeekAction.class, "../../pictures/_forward.png");
     
-    public static NextWeekAction getInstance()
+    ExploitationView view;
+    
+    public static NextWeekAction getInstance(ExploitationView view)
     {
         if(action==null)
-            action = new NextWeekAction();
+            action = new NextWeekAction(view);
         
         return action;
     }
 
-    protected NextWeekAction()
+    protected NextWeekAction(ExploitationView view)
     {
         super("Avancer d'une semaine", icon);
+        this.view = view;
     }
     /** 
      * DOCME Description
@@ -52,8 +56,7 @@ public class NextWeekAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent e)
     {
-    // TODO Auto-generated method stub
-
+        view.stepOver();
     }
 
 }

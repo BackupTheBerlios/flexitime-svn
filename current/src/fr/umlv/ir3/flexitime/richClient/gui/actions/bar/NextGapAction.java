@@ -1,6 +1,6 @@
 /*
- * Created on 20 janv. 2005
- * by Adrien BOUVET
+ * Created on 16 janv. 2005
+ * by Prâsad
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.actions.bar;
@@ -21,33 +21,28 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
  * Que fait cette classe, qu'est-ce qu'elle 
  * représente, ...
  * 
- * @version 0.1
+ * @version Verion ou révision SVN
+ * @see (si nécessaire)
  * 
- * @author FlexiTeam - Adrien BOUVET
  */
-public class SmallerTimeTableAction extends AbstractAction
+public class NextGapAction extends AbstractAction
 {
-    private static SmallerTimeTableAction action;
-    private static Icon icon = Client.getIcon(SmallerTimeTableAction.class, "../../pictures/_zoom-.png");
+    private static NextGapAction action;
+    private static Icon icon = Client.getIcon(NextGapAction.class, "../../pictures/_forward.png");
     
     ExploitationView view;
     
-    public static SmallerTimeTableAction getInstance(ExploitationView view)
+    public static NextGapAction getInstance(ExploitationView view)
     {
         if(action==null)
-        {
-            System.out.println("SmallerTimeTableAction");
-            action = new SmallerTimeTableAction(view);
-        }
-            
+            action = new NextGapAction(view);
         
         return action;
     }
 
-    protected SmallerTimeTableAction(ExploitationView view)
+    protected NextGapAction(ExploitationView view)
     {
-        super("Retrecir la plage", icon);
-        System.out.println(icon);
+        super("Créneau suivant", icon);
         this.view = view;
     }
     /** 
@@ -55,13 +50,13 @@ public class SmallerTimeTableAction extends AbstractAction
      * Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
      *
-     * @param arg0 
+     * @param e 
      * 
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
-    public void actionPerformed(ActionEvent arg0)
+    public void actionPerformed(ActionEvent e)
     {
-        view.increase();
+        view.fullStepOver();
     }
 
 }

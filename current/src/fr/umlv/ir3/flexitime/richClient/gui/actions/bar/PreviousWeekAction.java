@@ -11,6 +11,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 
 
 /**
@@ -29,17 +30,24 @@ public class PreviousWeekAction extends AbstractAction
     private static PreviousWeekAction action;
     private static Icon icon = Client.getIcon(PreviousWeekAction.class, "../../pictures/_back.png");
     
-    public static PreviousWeekAction getInstance()
+    ExploitationView view;
+    
+    public static PreviousWeekAction getInstance(ExploitationView view)
     {
         if(action==null)
-            action = new PreviousWeekAction();
+        {
+            System.out.println("PreviousWeekAction");
+            action = new PreviousWeekAction(view);
+        }
+            
         
         return action;
     }
 
-    protected PreviousWeekAction()
+    protected PreviousWeekAction(ExploitationView view)
     {
         super("Reculer d'une semaine", icon);
+        this.view = view;
     }
     /** 
      * DOCME Description
@@ -52,8 +60,7 @@ public class PreviousWeekAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent e)
     {
-    // TODO Auto-generated method stub
-
+        view.stepBack();
     }
 
 }
