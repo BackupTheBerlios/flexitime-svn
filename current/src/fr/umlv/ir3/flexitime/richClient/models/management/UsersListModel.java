@@ -96,8 +96,8 @@ public class UsersListModel extends AbstractListModel
      */
     public void addUser(IUser user)
     {
-        int index = listOfUsers.indexOf(user);
         listOfUsers.add(user);
+        int index = listOfUsers.indexOf(user);
         fireIntervalAdded(this, index, index);
     }
 }
