@@ -43,11 +43,12 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
      * Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
      * @throws FlexiException 
+     * @throws RemoteException 
      * 
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager#init()
      */
-    public void init() throws FlexiException
+    public void init() throws FlexiException, RemoteException
     {
         String fileName = System.getProperty(
                 "fr.umlv.ir3.flexitime.configfile", "flexiConfig.xml");
@@ -95,7 +96,7 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
         super();
     }
     
-    private void upDateConfig() throws FlexiException
+    private void upDateConfig() throws FlexiException, RemoteException
     {
         HibernateUtil.setConfiguration(currentConfig);
         FlexiMail.setConfiguration(currentConfig);

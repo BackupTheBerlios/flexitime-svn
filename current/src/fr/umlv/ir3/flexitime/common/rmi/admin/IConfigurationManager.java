@@ -47,7 +47,8 @@ public interface IConfigurationManager extends Remote
     /** 
      * DOCME
      * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public void init() throws FlexiException;
+    public void init() throws FlexiException, RemoteException;
 }
 
