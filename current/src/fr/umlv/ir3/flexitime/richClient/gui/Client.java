@@ -90,6 +90,7 @@ public class Client
     private static JButton butLargerTimeTable;
     private static JButton butNext;
     private static JButton butNextInterval;
+    private static JLabel labTrackAct;
     private static FlexiLanguage language;
     static
     {
@@ -307,15 +308,15 @@ public class Client
         JLabel labDateAct = new JLabel() ;
         Font v = new Font("Arial", Font.BOLD, 12); //$NON-NLS-1$
         labDateAct.setFont(v);
-        String dateActuelle = language.formatLongDate(new Time()) + " | "; //$NON-NLS-1$
+        String dateActuelle = language.formatLongDate(new Time()) + "   "; //$NON-NLS-1$
         labDateAct.setText(dateActuelle);
         toolBar.add(labDateAct);
         
         
         //filière actuelle
-        JLabel labTrackAct = new JLabel();
+        labTrackAct = new JLabel();
         labTrackAct.setFont(v);
-        String filiereActuelle = language.getText("track") + " : "; //$NON-NLS-1$ //$NON-NLS-2$
+        String filiereActuelle = " |    " + language.getText("track") + " : "; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         /*TODO ajouter la filiere a l'affichage 
         if( (String s = UserImpl.getTrack()) != null)
         {
@@ -707,6 +708,7 @@ public class Client
     public static void setExploitMode()
     {
         PrintAction.getInstance().setEnabled(true);
+        labTrackAct.setVisible(true);
         enableButGpExploit();
         centerPanel.moveToFront(exploitPanel);
         centerPanel.validate();
@@ -723,6 +725,7 @@ public class Client
     public static void setMngmtMode()
     {
         PrintAction.getInstance().setEnabled(false);
+        labTrackAct.setVisible(false);
         disableButGpExploit();
         centerPanel.moveToFront(mngmtPanel);
         centerPanel.validate();
@@ -738,6 +741,7 @@ public class Client
     public static void setAccueilMode()
     {
         PrintAction.getInstance().setEnabled(false);
+        labTrackAct.setVisible(false);
         disableButGpExploit();
         centerPanel.moveToFront(accueilPanel);
         centerPanel.validate();
