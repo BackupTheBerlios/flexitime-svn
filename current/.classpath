@@ -39,6 +39,6 @@
 	<classpathentry kind="lib" path="lib/looks-1.2.2.jar"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>
 	<classpathentry kind="lib" path="lib/mail.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate/jta.jar"/>
+	<classpathentry kind="lib" path="lib/jta.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
