@@ -43,6 +43,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
@@ -62,7 +63,6 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.UsersManagementView;
-import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
 
 /**
  * Client This class build an graphic interface for the user.
@@ -82,7 +82,7 @@ public class Client
     private static ExploitationView exploitView;
     private static JPanel exploitPanel;
     private static ManagementView mngmtView;
-    private static JPanel mngmtPanel;
+    private static JSplitPane mngmtPanel;
     private static MainView accueilView;
     private static JScrollPane accueilPanel;
     private JPanel jp_status;
@@ -137,7 +137,7 @@ public class Client
         }
         accueilPanel = accueilView.getPanel();
         exploitPanel = (JPanel)exploitView.getPanel();
-        mngmtPanel   = mngmtView.getPanel(); 
+        mngmtPanel   = mngmtView.getJSP(); 
         
         //initialisation des barres
         initMenuBar();
