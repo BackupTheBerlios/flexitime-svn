@@ -32,7 +32,7 @@ public class MetierSimulator
     /** 
      * @return dsfsd
      */
-    public static List getDatas()
+    public static List getLessonsList()
     {
         List<ILesson> res = new ArrayList<ILesson>(3);
         res.add(BusyFactory.createLesson(new Gap(2005,1,3,8,30,2005,1,3,10,30) , new CourseImpl("Corba", 1,50,Color.YELLOW,2) , 120 )   );
