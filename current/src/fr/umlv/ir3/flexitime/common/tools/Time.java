@@ -70,6 +70,8 @@ public class Time
      * getIMonth - get the month
      * 
      *     <code>int m = time.getIMonth()</code>
+     * January = 1
+     * December = 12
      *
      * @return Returns the month
      */
@@ -107,6 +109,20 @@ public class Time
         return cal.get(Calendar.DAY_OF_MONTH);
     }
     /** 
+     * getIDay - get the day in week
+     * 
+     *     <code>int d = time.getIDayOfWeek()</code>
+     * Monday = 0
+     * Sunday = 6
+     *
+     * @return Returns the day in the week
+     */
+    public int getIDayOfWeek() {
+        int d =  cal.get(Calendar.DAY_OF_WEEK);
+        if(d==Calendar.SUNDAY) return 6;
+        return d-2;
+    } 
+    /** 
      * getStrDay - get the day in String
      * 
      *     <code>String d = time.getStrDay()</code>
@@ -114,7 +130,9 @@ public class Time
      * @return Returns the day in String
      */
     public String getStrDay(){
-        return getDay(cal.get(Calendar.DAY_OF_WEEK)-1);
+        int d =  cal.get(Calendar.DAY_OF_WEEK);
+        if(d==Calendar.SUNDAY) return getDay(6);
+        return getDay(d-2);
     }
     /** 
      * getHour - get the hour in 24H
@@ -482,13 +500,13 @@ public class Time
     private String getDay(int d){
         String str = null;
         switch(d){
-            case 1: str = "Lundi";break;
-            case 2: str = "Mardi";break;
-            case 3: str = "Mercredi";break;
-            case 4: str = "Jeudi";break;
-            case 5: str = "Vendredi";break;
-            case 6: str = "Samedi";break;
-            case 7: str = "Dimanche";break;
+            case 0: str = "Lundi";break;
+            case 1: str = "Mardi";break;
+            case 2: str = "Mercredi";break;
+            case 3: str = "Jeudi";break;
+            case 4: str = "Vendredi";break;
+            case 5: str = "Samedi";break;
+            case 6: str = "Dimanche";break;
         }
         return str;
     }

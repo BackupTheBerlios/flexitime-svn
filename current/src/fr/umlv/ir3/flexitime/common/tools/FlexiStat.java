@@ -77,7 +77,7 @@ public class FlexiStat
         Iterator itl = l.iterator();
         while(itl.hasNext()){
             IData res = (IData)itl.next();
-            if(res.getClass().getSimpleName().equals("CourseImpl")){
+            if(res instanceof ICourse){
                 int nbHeure = 0;
                 if(table.containsKey(res.getName())){
                     Integer integ = (Integer) table.get(res.getName());

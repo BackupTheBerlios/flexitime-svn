@@ -7,6 +7,7 @@
 package fr.umlv.ir3.flexitime.common.tools;
 
 import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -103,5 +104,20 @@ public class Gap {
 	 */
 	public void setStartDate(Time startDate) {
 		this.startDate = startDate;
+	}
+	/** 
+	 * getGap - Gets a Gap with 2 Date
+	 * 
+	 * <code>FlexiGap.getGap(start,end)</code>
+	 *
+	 * @param start the start Date
+	 * @param end the end Date
+	 * @return Returns the gap
+	 */
+	public static Gap getGap(Date start, Date end){
+	    Gap g = new Gap();
+	    g.getStartDate().getCal().setTime(start);
+	    g.getEndDate().getCal().setTime(end);
+	    return g;
 	}
 }
