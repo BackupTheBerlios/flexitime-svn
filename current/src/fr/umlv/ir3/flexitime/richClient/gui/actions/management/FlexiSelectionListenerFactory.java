@@ -16,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -117,9 +118,9 @@ public class FlexiSelectionListenerFactory
 							panel1.add(new JScrollPane(teachingStructureView.getPanel()), BorderLayout.CENTER);
 							panel1.setBorder(BorderFactory.createTitledBorder("Structure d'enseignement"));
 						}
-						panelParent.remove(0);
-                        //((JSplitPane)panelParent).setRightComponent(panel1);
-                        panelParent.add(panel1, BorderLayout.CENTER,0);
+						//panelParent.remove(0);
+                        ((JSplitPane)panelParent).setRightComponent(panel1);
+                        //panelParent.add(panel1, BorderLayout.CENTER,0);
 						panelParent.validate() ;
 						panelParent.repaint();
 					}
@@ -168,9 +169,9 @@ public class FlexiSelectionListenerFactory
 							panel1.setBorder(BorderFactory.createTitledBorder("Matériel"));
 							
 						}
-						panelParent.remove(0);
-                        //((JSplitPane)panelParent).setRightComponent(panel1);                      
-						panelParent.add(panel1, BorderLayout.CENTER,0);
+						//panelParent.remove(0);
+                        ((JSplitPane)panelParent).setRightComponent(panel1);                      
+						//panelParent.add(panel1, BorderLayout.CENTER,0);
                         panelParent.validate() ;
 						panelParent.repaint();
 					}
@@ -234,9 +235,9 @@ public class FlexiSelectionListenerFactory
 							panel1.setBorder(BorderFactory.createTitledBorder("Salle"));
 							
 						}
-						panelParent.remove(0);
-						panelParent.add(panel1, BorderLayout.CENTER,0);
-						//((JSplitPane)panelParent).setRightComponent(panel1);              
+						//panelParent.remove(0);
+						//panelParent.add(panel1, BorderLayout.CENTER,0);
+						((JSplitPane)panelParent).setRightComponent(panel1);              
                         panelParent.validate() ;
 						panelParent.repaint();
 					}
@@ -271,9 +272,9 @@ public class FlexiSelectionListenerFactory
     		        panel1.add(new JScrollPane(teacherView.getPanel()), BorderLayout.CENTER);
     		        panel1.setBorder(BorderFactory.createTitledBorder("Professeur"));
     		        panel1.setVisible( true);
-    		        panelParent.remove(0);
-                    panelParent.add(panel1, BorderLayout.CENTER,0);
-                    //((JSplitPane)panelParent).setRightComponent(panel1);
+    		        //panelParent.remove(0);
+                    //panelParent.add(panel1, BorderLayout.CENTER,0);
+                    ((JSplitPane)panelParent).setRightComponent(panel1);
                     panelParent.validate() ;
     		        panelParent.repaint();
                  }
@@ -332,11 +333,11 @@ public class FlexiSelectionListenerFactory
     							panel1.setBorder(BorderFactory.createTitledBorder("Cours"));
     							
     						}
-                            panel1.setMaximumSize(new Dimension(10,10));
-                            panelParent.remove(0);
+                            //panel1.setMaximumSize(new Dimension(10,10));
+                            //panelParent.remove(0);
     						//panelParent.add(panel1,JSplitPane.RIGHT,0);
-                            panelParent.add(panel1, BorderLayout.CENTER,0);
-    						//((JSplitPane)panelParent).setRightComponent(panel1);
+                            //panelParent.add(panel1, BorderLayout.CENTER,0);
+    						((JSplitPane)panelParent).setRightComponent(panel1);
                             panelParent.validate() ;
     						panelParent.repaint();
     					}

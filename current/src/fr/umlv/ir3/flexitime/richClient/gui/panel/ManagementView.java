@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 
@@ -26,6 +27,7 @@ import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 public class ManagementView 
 {
 	JPanel panel;
+    JSplitPane jSP;
 	/**
 	 * @throws RemoteException 
 	 * 
@@ -43,6 +45,8 @@ public class ManagementView
         List lstTeacher =new ArrayList();
         
         panel = new JPanel(new BorderLayout());
+        jSP = new JSplitPane();
+        
         OutlookBarManagement fb1 = new OutlookBarManagement(panel,lstTrack,lstDevice,lstBuilding,lstTeacher);
 		//NameView trackView = new NameView((IData)lstTrack.get(0));
 		JPanel panel1 = new JPanel(new BorderLayout());
@@ -53,13 +57,19 @@ public class ManagementView
         panel2.add(fb1.getPanel(), BorderLayout.CENTER);
         panel2.setBorder(BorderFactory.createTitledBorder("Visualisation"));
         
-        panel.add(panel1, BorderLayout.CENTER,0);
-	    panel.add(panel2, BorderLayout.WEST,1);
+        /*panel.add(panel1, BorderLayout.CENTER,0);
+	    panel.add(panel2, BorderLayout.WEST,1);*/
+        jSP.add(panel1, JSplitPane.RIGHT,0);
+        jSP.add(panel2,  JSplitPane.LEFT,1);
 	}
 	
 	public JPanel getPanel()
 	{
 		return panel;
 	}
+    public JSplitPane getJSP()
+    {
+        return jSP;
+    }
 
 }

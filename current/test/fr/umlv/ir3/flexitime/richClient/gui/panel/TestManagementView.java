@@ -58,8 +58,8 @@ public class TestManagementView
         ManagementView managementView = new ManagementView();
         //ManagementView managementView = new ManagementView(null,null,null);
         //ManagementView managementView = new ManagementView(new ArrayList(),new ArrayList(),new ArrayList());
-        container.add(new JScrollPane(createPanelForComponent(managementView.getPanel(),null)), BorderLayout.CENTER);
-        
+       // container.add(new JScrollPane(createPanelForComponent(managementView.getPanel(),null)), BorderLayout.CENTER);
+        container.add(new JScrollPane(createPanelForComponent(managementView.getJSP(),null)), BorderLayout.CENTER);
     }
     
     public JPanel createPanelForComponent(JComponent comp, String title)

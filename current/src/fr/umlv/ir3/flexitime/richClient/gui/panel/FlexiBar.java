@@ -55,7 +55,7 @@ public class FlexiBar extends JPanel
 		panel = new JPanel();
 		layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 		panel.setLayout(layout);
-		panel.setPreferredSize(new Dimension(110,400));
+		//panel.setPreferredSize(new Dimension(110,400));
         add(panel);
 		
 		listComponent = new ArrayList<JComponent>();
@@ -79,13 +79,13 @@ public class FlexiBar extends JPanel
 
 			}
 		});
-		button.setMinimumSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
-		button.setMaximumSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
-		button.setPreferredSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
+		//button.setMinimumSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
+		//button.setMaximumSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
+		//button.setPreferredSize(new Dimension(this.B_WIDTH,this.B_HEIGHT));
 		button.setAlignmentX(LEFT_ALIGNMENT);
         JScrollPane pane = new JScrollPane(comp);
-        pane.setMinimumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
-        pane.setMaximumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
+       // pane.setMinimumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
+       // pane.setMaximumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
         
         
 		//comp.setMinimumSize(new Dimension(this.P_WIDTH,this.P_HEIGHT));
