@@ -162,6 +162,18 @@ public abstract class BusyImpl implements IBusy
 
         return new Gap(calStart, calEnd);
     }
+    
+    /** 
+     * Set a new gap to the busy
+     *
+     * @param newGap to set
+     * 
+     */
+    public void setGap(Gap newGap)
+    {
+        this.setStartDate(newGap.getStartDate().getCal().getTime());
+        this.setEndDate(newGap.getEndDate().getCal().getTime());
+    }
 
     /**
      * Getter for id of the Busy

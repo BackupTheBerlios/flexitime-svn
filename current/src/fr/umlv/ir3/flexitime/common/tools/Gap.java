@@ -59,9 +59,21 @@ public class Gap {
 	 */
 	public Gap(Calendar startDate, Calendar endDate) {
 
-		this.startDate = new Time(startDate);
-		this.endDate = new Time(endDate);
+		this.startDate = new Time((Calendar)startDate.clone());
+		this.endDate = new Time((Calendar)endDate.clone());
 	}
+    
+    /**
+     * Constructor - Take the two calendar
+     * @param gap 
+
+     */
+    public Gap(Gap gap) {
+
+        this((Calendar)gap.getStartDate().getCal().clone(), (Calendar)gap.getEndDate().getCal().clone());
+    }
+    
+    
     //=============//
     //  Méthodes   //
     //=============//

@@ -65,6 +65,14 @@ public interface IBusy extends Serializable, Comparable
      * 
      */
     public Gap getGap();
+    
+    /**
+     * Set Gap for this Busy
+     * 
+     * @param newGap 
+     * 
+     */
+    public void setGap(Gap newGap);
 
     /**
      * Getter for id of the Busy
