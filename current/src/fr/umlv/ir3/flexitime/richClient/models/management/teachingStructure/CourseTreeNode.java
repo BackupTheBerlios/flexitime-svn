@@ -75,7 +75,6 @@ public class CourseTreeNode implements FlexiTreeNode
 		{
 			this(parent,course);
 			this.model=model;
-			
 		}
 		
 		

@@ -39,7 +39,7 @@ public class PlanningHebdoCellRenderer
      * 
      * @see PlanningTrimCellRenderer
      */
-    public JComponent getCellRendererComponent(JComponent flexiEDT, Object elementAt, int week, int day, int gap)
+    public JComponent getCellRendererComponent(JComponent flexiEDT, Object elementAt, int day, int gap)
     {
         this.comp = null;
         if(elementAt != null)

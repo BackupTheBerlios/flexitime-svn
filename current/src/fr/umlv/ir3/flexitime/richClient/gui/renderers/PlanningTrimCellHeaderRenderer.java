@@ -52,11 +52,12 @@ public class PlanningTrimCellHeaderRenderer
      * @param edt the planning we're painting
      * @param object The object returned by edt.getModel().getElementAt(...)
      * @param headerType hte type of header we will have to paint
+     * @param day 
      * @return A component whose paint() method will render the specified value
      * 
      * @see PlanningTrimCellRenderer
      */
-    public JComponent getEDTCellHeaderRendererComponent(JComponent edt, Object object, int headerType)
+    public JComponent getEDTCellHeaderRendererComponent(JRessourcePlanning edt, Object object, int headerType, int length)
     {
         
         switch(headerType)
@@ -86,7 +87,7 @@ public class PlanningTrimCellHeaderRenderer
                 {
                     String text = (String)object;
                     this.label = new JLabel();
-                    this.label.setPreferredSize(new Dimension(JRessourcePlanning.DAY_COLUMN_WIDTH,JRessourcePlanning.GAP_HEIGTH));
+                    this.label.setPreferredSize(new Dimension(JRessourcePlanning.DAY_COLUMN_WIDTH,JRessourcePlanning.GAP_HEIGTH*length ));
                     this.label.setBackground(Color.decode("#4682b4"));
                     this.label.setText(text);
                     this.label.setBorder(BorderFactory.createLineBorder(Color.BLACK));

@@ -14,7 +14,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
@@ -82,7 +81,6 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         super();
 
         this.ressource = _ressource;
-        this.ressourceSet = ressource.getSetBusy();
         this.edtWeekGap = initialGap;
         
         this.blocList = new TimeBloc[4];
@@ -123,6 +121,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     
     private void initDataList()
     {
+        this.ressourceSet = ressource.getSetBusy();
+        System.out.println("Nb busy : " + ressourceSet.size());
         this.initialyseDatas(subSet(this.ressourceSet,this.edtWeekGap));
         //this.initialyseDatas(MetierSimulator.getLessonsList());
         //this.initialyseDatas(null);
@@ -412,21 +412,28 @@ public class RessourcePlanningModel extends AbstractPlanningModel
      * @param weekNumber the value of the week (0 is the first)
      * @param dayNumber the value of the day (0 is the first)
      * @param gapNumber the value of the gap (0 is the first)
-	 * @param lesson
+	 * @param length 
+	 * @param busyBloc
 	 */
-	public void addElement(int weekNumber, int dayNumber, int gapNumber, BusyBloc lesson)
+	public void addElement(int weekNumber, int dayNumber, int gapNumber, int length, BusyBloc busyBloc)
 	{
+        BusyBloc newBusyBloc = new BusyBloc(busyBloc); 
+        newBusyBloc.setNbGap(length);
+        //newBusyBloc.getBusy().setGap( getGap(weekNumber, dayNumber, gapNumber,length) );
+
 		//Ici il faudra ajouter le cours au groupe et le faire valider par le serveur
 		
 	    //pas de verif avant de placer le cours pour l'instant, mais le controle a deja été fait dans le controleur normalement
 	    DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
-	    bloc.representationList[gapNumber] = lesson;
-	    if(lesson.getNbGap() > 1 )
+	    bloc.representationList[gapNumber] = newBusyBloc;
+        this.ressource.addBusy(newBusyBloc.getBusy());
+        
+	    if(newBusyBloc.getNbGap() > 1 )
 	    {
-	        for (int i = gapNumber+1 ; i < gapNumber+lesson.getNbGap() ; i++)
+	        for (int i = gapNumber+1 ; i < gapNumber+newBusyBloc.getNbGap() ; i++)
 	            bloc.representationList[i] = null;
 	    }
-		fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+lesson.getNbGap()-1 );
+		fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+newBusyBloc.getNbGap()-1 );
 	}
     
     /** 
@@ -445,11 +452,76 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         //TODO communication au serveur
 
         BusyBloc busyBloc = (BusyBloc)this.getDayBloc(weekNumber, dayNumber).getElementAt(gapNumber);
-        
-        fireContentsChanged(weekNumber,dayNumber,gapNumber,gapNumber+busyBloc.getNbGap());
+        //System.out.println(weekNumber + "," + dayNumber + "," + gapNumber);
+        fireContentsChanged(weekNumber,dayNumber,gapNumber,gapNumber+busyBloc.getNbGap()-1);
     }
     
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param weekNumber
+     * @param dayNumber
+     * @param gapNumber 
+     * 
+     */
+    public void removeLesson(int weekNumber, int dayNumber, int gapNumber)
+    {
+        //TODO communication au serveur
+
+        //pas de verif avant de placer le cours pour l'instant, mais le controle a deja été fait dans le controleur normalement
+        DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
+        BusyBloc busyBloc = (BusyBloc)bloc.representationList[gapNumber];
+        this.ressource.removeBusy(busyBloc.getBusy());
+        
+
+        for (int i = gapNumber ; i < gapNumber+busyBloc.getNbGap() ; i++)
+            bloc.representationList[i] = new Integer(0);
+
+        fireIntervalRemoved(weekNumber,dayNumber,gapNumber,gapNumber+busyBloc.getNbGap()-1);
+    }
     
+
+    private Gap getGap(int weekNumber, int dayNumber, int gapNumber, int length)
+    {
+        Time begin = getStartTime(gapNumber);
+        Time end = getEndTime(gapNumber+length-1);
+        return new Gap(begin.getCal() , end.getCal() );
+    }
+
+    private Time getEndTime(int i)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    private Time getStartTime(int gapNumber)
+    {
+        //this.blocList
+        return null;
+    }
+    
+    private int getBlocNumber(int gapNumber)
+    {
+        int i = 0;
+        int sum = countNbGap(blocList[i].countNbMinutes());
+        while(i < blocList.length && gapNumber > sum)
+            ;
+        return 1;
+    }
+
+
+    
+    
+    
+    
+    
+    
+    
+    //**************************************************
+    //    Naviguation
+    //**************************************************
     
     
     /** 

@@ -127,6 +127,11 @@ public class MetierSimulatorSansRmi
     private static ILesson lesson9;
 
 
+    static
+    {
+        System.out.println("generate()");
+        generate();
+    }
 
     public static void generate()
     {
@@ -234,7 +239,7 @@ public class MetierSimulatorSansRmi
         lesson6 = DataFactorySansRmi.createLesson(new Gap(2005,1,11,8,30,2005,1,11,10,30), corba_td, groups_td, roussel);
         lesson7 = DataFactorySansRmi.createLesson(new Gap(2005,1,19,8,30,2005,1,19,10,30), corba_td, groups_td, roussel);
         lesson8 = DataFactorySansRmi.createLesson(new Gap(2005,1,21,8,30,2005,1,21,10,30), corba_td, groups_td, roussel);
-        lesson9 = DataFactorySansRmi.createLesson(new Gap(2005,1,28,8,30,2005,1,28,10,30), corba_td, groups_td, roussel);
+        lesson9 = DataFactorySansRmi.createLesson(new Gap(2005,1,10,11,45,2005,1,10,14,45), corba_td, groups_td, roussel);
         
         lesson1.addResource(salle2017);
         lesson2.addResource(salle2017);
@@ -242,12 +247,16 @@ public class MetierSimulatorSansRmi
         lesson4.addResource(salle2027);
         lesson5.addResource(salle2027);
         
-        /*ir3_grp2.addBusy(lesson1);
+        ir3_grp2.addBusy(lesson1);
         ir3_grp2.addBusy(lesson2);
         ir3_grp2.addBusy(lesson3);
         ir3_grp2.addBusy(lesson4);
         ir3_grp2.addBusy(lesson5);
-        
+        ir3_grp2.addBusy(lesson6);
+        ir3_grp2.addBusy(lesson7);
+        ir3_grp2.addBusy(lesson8);
+        ir3_grp2.addBusy(lesson9);
+        /*
         roussel.addBusy(lesson1);
         midonnet.addBusy(lesson2);
         revuz.addBusy(lesson3);
@@ -286,44 +295,46 @@ public class MetierSimulatorSansRmi
     
     public static IGroup getGroup2IR3()
     {
-        generate();
+        //generate();
         //System.out.println("Nb busy for ir3_grp2 = " +  ir3_grp2.getSetBusy().size());
         return ir3_grp2;
     }
     
     public static List getTeacherListe()
     {
-        generate();
+        //generate();
         return teacherLst;
     }
     
     public static ITeacher getRoussel()
     {
-        generate();
+        //generate();
         return roussel;
     }
     
     public static List createTeacherList()
     {
         List lstTeacher = new ArrayList();
-        
-        try
-        {
-            midonnet = DataFactorySansRmi.createTeacher("Midonnet","jeCpasSonPrenom","midonnet@univ-mlv.fr");
+       
+        lstTeacher.add(midonnet);
+        lstTeacher.add(revuz);
+        lstTeacher.add(roussel);
 
-            lstTeacher.add(midonnet);
-            revuz = DataFactorySansRmi.createTeacher("Revuz","Dominiqueuniquenique","revuz@univ-mlv.fr");
-            lstTeacher.add(revuz);
-            roussel = DataFactorySansRmi.createTeacher("Roussel","Gilles","groussel@univ-mlv.fr");
-            lstTeacher.add(roussel);
-        }
-        catch (FlexiException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
         return lstTeacher;
+    }
+
+
+    public static List getRoomListe()
+    {
+        List lstRoom = new ArrayList();
+        
+        lstRoom.add(salle2017);
+        lstRoom.add(salle2027);
+        lstRoom.add(salle2031);
+        lstRoom.add(salle3012);
+        lstRoom.add(salleAuditorium);
+
+         return lstRoom;
     }
 
     

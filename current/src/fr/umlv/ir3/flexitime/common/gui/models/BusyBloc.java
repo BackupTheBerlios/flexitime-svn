@@ -75,7 +75,6 @@ public class BusyBloc
             }
             catch (FlexiException e)
             {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             this.nbGap = busyBloc.getNbGap();
