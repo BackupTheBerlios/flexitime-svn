@@ -789,7 +789,7 @@ public class DataFactorySansRmi
             int type, int defaultLength, int nbHours, Color color,
             List<ITeacher> listTeachers) throws FlexiException
     {
-        ICourse temp = new CourseImpl(name, parent, defaultLength, type,
+        ICourse temp = new CourseImpl(name, parent, type, defaultLength, 
                 nbHours, color, listTeachers);
         parent.addCourse(temp);
 //        try
