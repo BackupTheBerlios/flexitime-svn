@@ -9,7 +9,8 @@ package fr.umlv.ir3.flexitime.common.data.admin.impl;
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 
 /**
- * DOCME
+ * Defines the configuration of the server<br>
+ * Implements the interface IConfig
  * 
  * @version 240
  * 

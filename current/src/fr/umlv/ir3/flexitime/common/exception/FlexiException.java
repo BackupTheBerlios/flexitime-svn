@@ -7,14 +7,9 @@ package fr.umlv.ir3.flexitime.common.exception;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Catch the Exceptions of the application 
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version Prasad
  * 
  */
 public class FlexiException extends Exception

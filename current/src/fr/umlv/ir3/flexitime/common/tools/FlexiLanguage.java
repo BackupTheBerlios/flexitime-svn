@@ -18,7 +18,8 @@ import java.util.ResourceBundle;
 
 
 /**
- * Class for the language
+ * Class for the language<br>
+ * Used for the the Externalize string
  * 
  * @version 210
  * 

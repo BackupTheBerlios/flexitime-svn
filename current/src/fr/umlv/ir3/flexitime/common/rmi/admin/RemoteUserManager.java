@@ -14,7 +14,7 @@ import java.rmi.registry.Registry;
 
 /**
  * Singleton used for communication with the server
- * 
+ * @deprecated
  */
 public class RemoteUserManager
 {

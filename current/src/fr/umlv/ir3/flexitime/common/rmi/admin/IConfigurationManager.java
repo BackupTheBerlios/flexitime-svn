@@ -12,7 +12,7 @@ import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 
 
 /**
- * DOCME
+ * Represents the configuration of the server application 
  * 
  * @version 320
  * 

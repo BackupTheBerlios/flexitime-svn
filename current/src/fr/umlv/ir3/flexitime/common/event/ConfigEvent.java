@@ -13,6 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 /**
  * Event delivered when confguration has changed
  * 
+ * @author Prasad
  */
 public class ConfigEvent implements Serializable
 {

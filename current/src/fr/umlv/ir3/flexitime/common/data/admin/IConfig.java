@@ -8,7 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.admin;
 import java.io.Serializable;
 
 /**
- * Represents the interface of a Configuration
+ * Represents the interface of a Configuration of the server
  * 
  * @version 240
  * 

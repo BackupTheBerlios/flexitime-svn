@@ -13,7 +13,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.*;
 
 
 /**
- * Statistics - gets the statistics of a teacher or a group 
+ * Gets the statistics of a teacher or a group 
  * 
  * @version 240
  * 

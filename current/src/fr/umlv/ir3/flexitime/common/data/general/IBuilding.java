@@ -12,7 +12,8 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 
 /**
  * Represents a building with all parameters that it can
- * have
+ * have<br>
+ * Contains a IFloor
  * 
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN

@@ -12,7 +12,7 @@ import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 
 
 /**
- * DOCME
+ * Represents the UserManager of the server
  * 
  * @version 320
  * 

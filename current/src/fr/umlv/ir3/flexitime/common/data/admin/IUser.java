@@ -9,7 +9,7 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 
 
 /**
- * Represents the interface of a User
+ * Represents the interface of a User in the BDD
  * 
  * @version 240
  * 

@@ -12,7 +12,8 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 
 /**
- * Represents a floor with all parameters that it can have
+ * Represents a floor with all parameters that it can have<br>
+ * contains a list of IRoom
  * 
  * @version 0.2
  * @author FlexiTeam - Guillaume GUERRIN

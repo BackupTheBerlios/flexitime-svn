@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 
 /**
- * IDataListener -  Interface that all dustant listeners have to implement
+ * Interface that all distant listeners have to implement
  * Extends Remote in order to be called remotely.
  * 
  * @version 1.0

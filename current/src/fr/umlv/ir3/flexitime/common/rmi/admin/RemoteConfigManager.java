@@ -9,8 +9,8 @@ import java.rmi.*;
 import java.rmi.registry.*;
 
 /**
-* Singleton used for communication with the server
-* 
+* Singleton used for communication with the server<br>
+* @deprecated
 */
 public class RemoteConfigManager
 {

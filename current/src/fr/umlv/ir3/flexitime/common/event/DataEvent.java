@@ -1,14 +1,17 @@
-
+/*
+ * Created on 30 janv. 2005
+ * by Prâsad
+ * Copyright: GPL - UMLV(FR) - 2004/2005
+ */
 package fr.umlv.ir3.flexitime.common.event;
 
 import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * Event sended to PropertyListener.
+ * Event sended to DataListener.
  * 
- * @author Remi Forax
- * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener
+ * @author Prasad
  */
 public class DataEvent implements Serializable
 {

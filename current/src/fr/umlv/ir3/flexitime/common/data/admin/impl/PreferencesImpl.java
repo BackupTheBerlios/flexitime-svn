@@ -12,7 +12,8 @@ import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 
 /**
- * Defines all the preferences that can set a user.
+ * Defines all the preferences that can set a user.<br>
+ * Implements the interface IPreferences
  * 
  * @version 240
  * 

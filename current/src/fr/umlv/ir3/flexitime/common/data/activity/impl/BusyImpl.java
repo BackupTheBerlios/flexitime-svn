@@ -112,7 +112,6 @@ public abstract class BusyImpl implements IBusy
      * @param daStart
      *            a date.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#setStartDate(java.util.Date)
      * @author FlexiTeam - Adrien BOUVET
      */
     public void setStartDate(Timestamp daStart)
@@ -139,7 +138,6 @@ public abstract class BusyImpl implements IBusy
      * @param daEnd
      *            a date.
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#setEndDate(java.util.Date)
      */
     public void setEndDate(Timestamp daEnd)
     {

@@ -11,7 +11,7 @@ import java.util.Date;
 
 
 /**
- * Gap - Description Tool for gap<br>
+ * Description Tool for gap<br>
  * This Class allows the users to work with Gap of two Time
  * 
  * @version 0.1

@@ -15,7 +15,8 @@ import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 
 
 /**
- * Defines an implementation of a ressource, it is extended by all the resource classes.
+ * Defines an implementation of a ressource,<br>
+ * it is extended by all the resource classes.
  * 
  * @version 248
  * @see fr.umlv.ir3.flexitime.common.data.resources.IResource

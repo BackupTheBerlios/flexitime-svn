@@ -11,7 +11,8 @@ import fr.umlv.ir3.flexitime.common.data.admin.*;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
 /**
- * DOCME
+ * Defines un user in the BDD<br>
+ * Implements the interface IUser
  * 
  * @version 260
  * 

@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 
 /**
- * Users - Implements the interface Users
+ * Base Interface for all User Listener
  * 
  * @version 0.1
  * @author FlexiTeam - Valère FOREL

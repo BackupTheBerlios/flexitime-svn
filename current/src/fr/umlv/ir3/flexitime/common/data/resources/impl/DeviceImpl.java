@@ -12,7 +12,8 @@ import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 
 /**
- * Defines a device.
+ * Defines a device.<br>
+ * Implements the interface IDevice
  * 
  * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.resources.IDevice

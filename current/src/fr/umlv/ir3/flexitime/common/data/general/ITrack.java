@@ -12,7 +12,8 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
 
 /**
- * Regroupe differents classes
+ * Representes the Track of the univeristy<br>
+ * Contains a list of IClass
  * 
  * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN

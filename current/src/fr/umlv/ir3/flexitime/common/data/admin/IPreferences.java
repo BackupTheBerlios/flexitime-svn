@@ -11,7 +11,7 @@ import java.io.Serializable;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 
 /**
- * Represents the interface of a Preference
+ * Represents the interface of a Preference of a user
  * 
  * @version 240
  * 

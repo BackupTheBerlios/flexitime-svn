@@ -13,7 +13,8 @@ import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 
 /**
- * Defines a group.
+ * Defines a group.<br>
+ * 
  * 
  * @version 245
  * @see fr.umlv.ir3.flexitime.common.data.resources.IGroup
