@@ -15,8 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import fr.umlv.ir3.GL.test.edt.gui.TestOutlookBar;
+import fr.umlv.ir3.GL.test.edt.model.EDTModel;
 
 
 
@@ -44,8 +46,9 @@ public class EDTDemo
         JButton b4 = new JButton("b4");
         container.add(createPanelForComponent(b4,"StatusBar"), BorderLayout.SOUTH);
         
-        FlexiEDT fe = new FlexiEDT();
-        container.add(createPanelForComponent(fe,"EDT"), BorderLayout.CENTER);
+        FlexiEDT fe = new FlexiEDT(new EDTModel());
+        container.add(new JScrollPane(createPanelForComponent(fe,"EDT")), BorderLayout.CENTER);
+        
     }
     
     public JPanel createPanelForComponent(JComponent comp, String title)
@@ -72,7 +75,7 @@ public class EDTDemo
         JFrame frame = new JFrame("CoordinatesDemo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setBounds(0,0,800,800);
-        frame.setPreferredSize(new Dimension(900,650));
+        frame.setPreferredSize(new Dimension(800,600));
         //Set up the content pane.
         EDTDemo controller = new EDTDemo();
         controller.buildUI(frame.getContentPane());
