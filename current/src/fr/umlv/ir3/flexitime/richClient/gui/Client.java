@@ -59,7 +59,6 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
-import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
 
 /**
  * Client This class build an graphic interface for the user.
@@ -84,7 +83,6 @@ public class Client
     private static JScrollPane accueilPanel;
     private JPanel jp_status;
     private JLabel status;
-    private static String user;
     private static ButtonGroup butGpExploit;
     private static JButton butLargerGap;
     private static JButton butSmallerGap;
@@ -395,16 +393,25 @@ public class Client
             if(res == JOptionPane.YES_OPTION)
             {
                 setAccueilMode();
-                user = null;
+                try
+                {
+                    RemoteDataManager.getUserManager().disconnect(iUser);
+                }
+                catch (RemoteException e1)
+                {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                iUser = null;
                 //TODO loginView.reset();
-                if( (user = checkLogin()) == null)
+                if( checkLogin())
                 {
                     JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
                     System.exit(1);
                 }
                 
                 //TODO JG, charger pref user notamment filière par défaut(si pas ds pref->afficher view)
-                System.out.println("apres logout : charger "+ user + " prefs"); //$NON-NLS-1$ //$NON-NLS-2$
+                System.out.println("apres logout : charger "+ iUser.getName() + " prefs"); //$NON-NLS-1$ //$NON-NLS-2$
             }
             else
             {}
@@ -535,9 +542,8 @@ public class Client
      */
     public void setStatus(String etat)
     {
-        JLabel lab = new JLabel(etat);
-        this.status = lab;
-        jp_status.validate();
+        this.status.setText(etat);
+        //jp_status.validate();
     }
 
     /**
@@ -653,7 +659,7 @@ public class Client
      * @return the name of the user logged in.
      * 
      */
-    private static String checkLogin()
+    private static boolean checkLogin()
     {
         String login = null;
         String pass;
@@ -678,12 +684,10 @@ public class Client
                     } catch (RemoteException e) {
                         // TODO Auto-generated catch block
                          e.printStackTrace();
-                    }                
+                    }    
+                    return true;
                 }
-                else
-                {
-                    System.out.println("login="+login+", pass="+pass + " => KO");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-                }
+                JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             } catch (RemoteException e) {
                 JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             }
@@ -707,7 +711,7 @@ public class Client
             }*/
         }
         
-        return login;
+        return false;
     }
     
     /**
@@ -856,14 +860,14 @@ public class Client
         
         //gestion login
         loginView = new LoginView(frame);
-        if( (user = checkLogin()) == null)
+        if( checkLogin() )
         {
             JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             System.exit(1);
         }
         
         //TODO JG, charger pref user notamment filière par défaut(si pas ds pref->afficher view)
-        System.out.println("charge "+ user + " prefs"); //$NON-NLS-1$ //$NON-NLS-2$
+        System.out.println("charge "+ iUser.getName() + " prefs"); //$NON-NLS-1$ //$NON-NLS-2$
         //PreferencesImpl prefs = new PreferencesImpl();
         
         Client c = new Client();
