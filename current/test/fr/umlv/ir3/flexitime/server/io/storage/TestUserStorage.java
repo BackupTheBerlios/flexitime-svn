@@ -5,15 +5,13 @@
  */
 package fr.umlv.ir3.flexitime.server.io.storage;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.rmi.RemoteException;
-import java.util.List;
-
 import net.sf.hibernate.HibernateException;
-import net.sf.hibernate.Session;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 
@@ -34,14 +32,27 @@ public class TestUserStorage
 
     public static void main(String[] args) throws HibernateException, RemoteException, FlexiException
     {
-        IUser u = DataFactory.createUser("a", "a");
+        if(RemoteDataManager.getManager() == null)
+        {
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Entrez l'adresse du serveur");
+            String ip;
+            try {
+                ip = in.readLine();
+                RemoteDataManager.setIpServer(ip);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+        }
+        DataFactory.createUser("a", "a");
         DataFactory.createUser("q", "q");
         DataFactory.createUser("w", "w");
         DataFactory.createUser("d", "d");
         DataFactory.createUser("fappert", "popopopo");
         DataFactory.createUser("valre", "popopopo");
         DataFactory.createUser("flexitime", "flexitim");
-        
+            
 //        Session s = HibernateUtil.currentSession();
 //        List<IRoom> lr = s.find("FROM RoomImpl");
 //        

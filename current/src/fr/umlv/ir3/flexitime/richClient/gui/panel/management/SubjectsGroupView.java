@@ -21,6 +21,7 @@ import javax.swing.event.DocumentListener;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.FloorViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectsGroupViewModel;
 

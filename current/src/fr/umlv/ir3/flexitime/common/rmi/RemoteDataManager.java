@@ -6,8 +6,6 @@
 
 package fr.umlv.ir3.flexitime.common.rmi;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -24,7 +22,7 @@ public class RemoteDataManager
 
     private static IDataManager          manager;
     private static IUserManager          userManager;
-    private static String                ipServer = "192.168.0.2";
+    private static String                ipServer;
     private static IConfigurationManager cfgManager;
     private static Registry              r;
 
