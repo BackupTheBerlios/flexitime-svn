@@ -6,7 +6,11 @@
  */
 package fr.umlv.ir3.GL.flexitime.common.rmi;
 
-import fr.umlv.ir3.GL.flexitime.common.event.MetierEvent;
+import fr.umlv.ir3.GL.flexitime.common.event.DataEvent;
+
+
+
+
 
 /**
  * @author binou
@@ -16,5 +20,5 @@ import fr.umlv.ir3.GL.flexitime.common.event.MetierEvent;
  */
 public interface ITeacherListener 
 {
-	public void teacherChanged(MetierEvent event);
+	public void teacherChanged(DataEvent event);
 }

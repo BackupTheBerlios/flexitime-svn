@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.umlv.ir3.GL.flexitime.common.event.MetierEvent;
+import fr.umlv.ir3.GL.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.GL.flexitime.common.ressource.Teacher;
 import fr.umlv.ir3.GL.flexitime.common.rmi.IDataManager;
 import fr.umlv.ir3.GL.flexitime.common.rmi.ITeacherListener;
@@ -46,7 +46,7 @@ public abstract class AbstractDataManager extends UnicastRemoteObject implements
 		for (Iterator iter = listenerList.iterator(); iter.hasNext();)
 		{
 			ITeacherListener element = (ITeacherListener) iter.next();
-			element.teacherChanged(new MetierEvent(t, property));
+			element.teacherChanged(new DataEvent(t, property));
 		}
 	}
 	

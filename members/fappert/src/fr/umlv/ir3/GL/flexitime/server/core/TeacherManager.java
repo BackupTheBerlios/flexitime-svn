@@ -9,7 +9,8 @@ package fr.umlv.ir3.GL.flexitime.server.core;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import fr.umlv.ir3.GL.flexitime.common.event.MetierEvent;
+
+import fr.umlv.ir3.GL.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.GL.flexitime.common.ressource.Teacher;
 import fr.umlv.ir3.GL.flexitime.server.io.TeacherStorage;
 
@@ -40,7 +41,7 @@ public class TeacherManager extends AbstractDataManager
 	 */
 	public Teacher create(String text1, String text2, String text3) throws RemoteException {
 		Teacher t = io.createTeacher(text1,text2,text3);
-		notifyListener(t,MetierEvent.ADDED);
+		notifyListener(t,DataEvent.ADDED);
 		return t;
 	}
 
@@ -57,7 +58,7 @@ public class TeacherManager extends AbstractDataManager
 	 */
 	public void delete(Teacher t) throws RemoteException {
 		io.deleteTeacher(t);
-		notifyListener(t,MetierEvent.REMOVED);
+		notifyListener(t,DataEvent.REMOVED);
 	}
 
 	/* (non-Javadoc)
