@@ -95,7 +95,7 @@ public class Time implements Comparable
      */
     public int getIMonth()
     {
-        return cal.get(Calendar.MONTH);
+        return cal.get(Calendar.MONTH)+1;
     }
 
     /**
