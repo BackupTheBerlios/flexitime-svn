@@ -92,8 +92,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 
         this.ressource = _ressource;
         this.edtWeekGap = new Gap((Calendar)initialGap.getStartDate().getCal().clone(), (Calendar)initialGap.getEndDate().getCal().clone());
-        System.out.println("RessourcePlanningModel() : " + this.edtWeekGap.getStartDate().getStrDate());
-        System.out.println("RessourcePlanningModel() : " + this.edtWeekGap.getStartDate().getIMonth());
+        //System.out.println("RessourcePlanningModel() : " + this.edtWeekGap.getStartDate().getStrDate());
+        //System.out.println("RessourcePlanningModel() : " + this.edtWeekGap.getStartDate().getIMonth());
         
         this.blocList = new TimeBloc[4];
         this.blocList[0] = new TimeBloc(8,30,10,30);

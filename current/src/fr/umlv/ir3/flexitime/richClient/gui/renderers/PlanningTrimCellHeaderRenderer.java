@@ -7,7 +7,10 @@ package fr.umlv.ir3.flexitime.richClient.gui.renderers;
 
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Calendar;
 
 import javax.swing.BorderFactory;
@@ -16,6 +19,7 @@ import javax.swing.JLabel;
 
 import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JRessourcePlanning;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.RessourcePlanning;
 
 
 
@@ -43,6 +47,7 @@ public class PlanningTrimCellHeaderRenderer
      */
     public static final int DATE_HEADER = 3;
     private JLabel label = null;
+    private JRessourcePlanning edt;
 
     
     /** 
@@ -57,19 +62,24 @@ public class PlanningTrimCellHeaderRenderer
      * 
      * @see PlanningTrimCellRenderer
      */
-    public JComponent getEDTCellHeaderRendererComponent(JRessourcePlanning edt, Object object, int headerType, int length)
+    public JComponent getEDTCellHeaderRendererComponent(JRessourcePlanning edt, Object object, int headerType, int weekNumber, int length)
     {
+        this.edt = edt;
         
         switch(headerType)
         {
             case PlanningTrimCellHeaderRenderer.WEEK_HEADER :
                 if(object instanceof Integer)
                 {
+                    //System.out.println(this.weekNumber);
                     Integer i = (Integer)object;
+                    
                     this.label = new JLabel();
+                    this.label.setCursor(new Cursor(Cursor.HAND_CURSOR));
                     this.label.setPreferredSize(new Dimension(JRessourcePlanning.WEEK_WIDTH,JRessourcePlanning.DAY_HEIGTH));
                     this.label.setBackground(Color.decode("#483d8b"));
                     this.label.setText("sem. " + i.intValue());
+                    this.label.addMouseListener(new HeaderMouseListener(weekNumber));
                 }
                 break;
             case PlanningTrimCellHeaderRenderer.DAY_HEADER :
@@ -114,6 +124,61 @@ public class PlanningTrimCellHeaderRenderer
         this.label.setOpaque(true);
         //this.label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         return label;
+    }
+    
+    private class HeaderMouseListener implements MouseListener
+    {
+        
+        private final int weekNumber;
+
+        /**
+         * DOCME
+         * @param weekNumber
+         */
+        public HeaderMouseListener(int weekNumber)
+        {
+            this.weekNumber = weekNumber;
+        }
+        /** 
+         * @param e 
+         * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+         * @author   FlexiTeam - binou
+         */
+        public void mouseClicked(MouseEvent e)
+        {
+            //TODO mega cracra ! à changer
+            RessourcePlanning rp = PlanningTrimCellHeaderRenderer.this.edt.getParentManager();
+            rp.switchToHebdo(weekNumber);
+        }
+
+        /** 
+         * @param e 
+         * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+         * @author   FlexiTeam - binou
+         */
+        public void mousePressed(MouseEvent e){}
+
+        /** 
+         * @param e 
+         * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+         * @author   FlexiTeam - binou
+         */
+        public void mouseReleased(MouseEvent e){}
+
+        /** 
+         * @param e 
+         * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+         * @author   FlexiTeam - binou
+         */
+        public void mouseEntered(MouseEvent e){}
+
+        /** 
+         * @param e 
+         * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+         * @author   FlexiTeam - binou
+         */
+        public void mouseExited(MouseEvent e){}
+        
     }
 
 }
