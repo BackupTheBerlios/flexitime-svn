@@ -476,22 +476,24 @@ public class Time implements Comparable
         long number = t1.getCal().getTimeInMillis();
         c.setTimeInMillis(number);
         Calendar c2 = t2.getCal();
-        
+        if(c.get(Calendar.WEEK_OF_YEAR)==c2.get(Calendar.WEEK_OF_YEAR) && c.get(Calendar.YEAR)==c2.get(Calendar.YEAR))
+            return 0;
         int tmp = 0;
-        
-        while(c.get(Calendar.WEEK_OF_YEAR)!=c2.get(Calendar.WEEK_OF_YEAR)
-                && c.get(Calendar.YEAR)!=c2.get(Calendar.YEAR)){
-            tmp++;
-            c.add(Calendar.WEEK_OF_YEAR,1);
+        boolean bool= false;
+        while(bool==false){
+            do{
+                tmp++;
+                c.add(Calendar.WEEK_OF_YEAR,1);
+            }while(c.get(Calendar.WEEK_OF_YEAR)!=c2.get(Calendar.WEEK_OF_YEAR));
+            if(c.get(Calendar.YEAR)==c2.get(Calendar.YEAR))bool=true;
         }
         return tmp;
     }
     
     /*public static void main(String[] args){
-        Time t= new Time(2005,1,6,0,0);
-        Time t2 = new Time(2005,2,3,0,0);
+        Time t= new Time(2004,1,6,0,0);
+        Time t2 = new Time(2005,1,6,0,0);
         System.out.println(Time.getGapWeek(t,t2));
-        System.out.println(t.getYear());
     }*/
 
     /**
