@@ -227,5 +227,21 @@
 		</joined-subclass>
 		
 	</class>
+	
+	<!--Preferences-->
+	<class name="fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl" table="preferences" dynamic-update="true">
+    	<id name="idPref" column="idPref" unsaved-value="null">
+			<generator class="native"/>
+		</id>
+		
+		<property name="cDayHeader" access="field"/>
+		<property name="cGapHeader" access="field"/>
+		<property name="cWeekHeader" access="field"/>
+		<property name="heightGap" access="field"/>
+		<property name="lengthGap" access="field"/>
+		<property name="widthGap" access="field"/>
+		<many-to-one name="defaultTrack" class="fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl" column="idTrack" />
+		
+	</class>
 
 </hibernate-mapping>

@@ -99,7 +99,7 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
     private void upDateConfig() throws FlexiException, RemoteException
     {
         HibernateUtil.setConfiguration(currentConfig);
-        FlexiMail.setConfiguration(currentConfig);
+        //FlexiMail.setConfiguration(currentConfig);
         FlexiLDAP.setConfiguration(currentConfig);
     }
 

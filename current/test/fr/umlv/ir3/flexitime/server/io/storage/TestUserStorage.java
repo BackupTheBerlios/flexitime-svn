@@ -12,6 +12,7 @@ import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.server.io.storage.admin.UserStorage;
 
@@ -30,7 +31,7 @@ import fr.umlv.ir3.flexitime.server.io.storage.admin.UserStorage;
 public class TestUserStorage
 {
 
-    public static void main(String[] args) throws HibernateException, RemoteException
+    public static void main(String[] args) throws HibernateException, RemoteException, FlexiException
     {
         IUser u = DataFactory.createUser("flexitime", "flexitim");
         
@@ -45,7 +46,7 @@ public class TestUserStorage
         
     }
     
-    public static void createUser(String name, String pass)
+    public static void createUser(String name, String pass) throws FlexiException
     {
         IUser u = DataFactory.createUser(name, pass);
     }

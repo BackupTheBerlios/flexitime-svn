@@ -6,17 +6,20 @@
 
 package fr.umlv.ir3.flexitime.richClient.io;
 
+import java.rmi.RemoteException;
+
 import javax.activation.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 
 /**
  * DOCME
  * 
  * @version 320
- * 
  * @author FlexiTeam - Jérôme GUERS
  */
 public class FlexiMail
@@ -31,7 +34,48 @@ public class FlexiMail
      */
     public static void setConfiguration(IConfig config)
     {
-        System.setProperty("mail.smtp.host", config.getUriSMTPserver());
+        try
+        {
+            // System.setProperty("mail.smtp.host", config.getUriSMTPserver());
+            System.err.println(RemoteDataManager.getConfigurationManager()
+                    .get().getUriSMTPserver());
+            System.setProperty("mail.smtp.host", RemoteDataManager
+                    .getConfigurationManager().get().getUriSMTPserver());
+        }
+        catch (RemoteException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (FlexiException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        session = Session.getDefaultInstance(System.getProperties());
+
+    }
+
+    static
+    {
+        try
+        {
+            // System.setProperty("mail.smtp.host", config.getUriSMTPserver());
+            System.err.println(RemoteDataManager.getConfigurationManager()
+                    .get().getUriSMTPserver());
+            System.setProperty("mail.smtp.host", RemoteDataManager
+                    .getConfigurationManager().get().getUriSMTPserver());
+        }
+        catch (RemoteException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (FlexiException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         session = Session.getDefaultInstance(System.getProperties());
     }
 
@@ -53,27 +97,27 @@ public class FlexiMail
         try
         {
             msg = createHeaderMessage(from, to, subject);
-            
+
             // On cree le corps du message
             MimeBodyPart message_body = new MimeBodyPart();
             message_body.setContent(body, "text/plain");
-            
+
             // On cree un message en partie multiple
             Multipart multipart_message = new MimeMultipart();
 
             // On ajoute enfin les deux partie: le corps et le fichier
             multipart_message.addBodyPart(message_body);
             // On attache le fichier desiré avec JAF
-            if(files != null)
+            if (files != null)
             {
                 MimeBodyPart[] files_attachments = createAttachFile(files);
                 for (int i = 0 ; i < files_attachments.length ; i++)
                     multipart_message.addBodyPart(files_attachments[i]);
             }
-           
+
             // enfin on ajoute cette multi partie au message
             msg.setContent(multipart_message);
-            
+
             // On envoie le message
             Transport.send(msg);
         }
@@ -94,12 +138,12 @@ public class FlexiMail
      * 
      * @param subject
      * @param from
-     * @param to 
+     * @param to
      * @throws MessagingException
      * @throws AddressException
      */
-    private static Message createHeaderMessage(String from, String[] to, String subject)
-            throws AddressException, MessagingException
+    private static Message createHeaderMessage(String from, String[] to,
+            String subject) throws AddressException, MessagingException
     {
         // Creation du message qui va contenir les informations du mail
         Message msg = new MimeMessage(session);
@@ -110,27 +154,27 @@ public class FlexiMail
         // On positionne les destinataires
         for (int i = 0 ; i < to.length ; i++)
         {
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to[i],
-                    false));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(
+                    to[i], false));
         }
-        
+
         // On positionne le sujet du mail
         msg.setSubject(subject);
-        
+
         return msg;
     }
 
     /**
      * Creation du fichier joint
-     * @param files 
      * 
+     * @param files
      * @throws MessagingException
-     * 
      */
-    private static MimeBodyPart[] createAttachFile(String[] files) throws MessagingException
+    private static MimeBodyPart[] createAttachFile(String[] files)
+            throws MessagingException
     {
         MimeBodyPart[] files_attachments = new MimeBodyPart[files.length];
-        
+
         for (int i = 0 ; i < files.length ; i++)
         {
             DataSource file_data_source = new FileDataSource(files[i]);

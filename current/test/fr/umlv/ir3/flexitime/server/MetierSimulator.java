@@ -588,7 +588,11 @@ public class MetierSimulator
         lstBuilding.add(buildingDes);
         return lstBuilding;
     }*/
+
+    public static void main(String[] args)
+    {
     
+    }
 
 }
 

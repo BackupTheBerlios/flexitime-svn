@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager;
 import fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager;
 import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
 
@@ -24,6 +25,7 @@ public class RemoteDataManager
     private static IDataManager manager;
     private static IUserManager userManager;
     private static String ipServer;
+    private static IConfigurationManager cfgManager;
 
     /**
      * Sets the adress of Server 
@@ -91,6 +93,32 @@ public class RemoteDataManager
             }
         }
         return userManager;
+    }
+    
+    public static IConfigurationManager getConfigurationManager()
+    {
+        if(cfgManager == null)
+        {
+            try
+            {
+                Registry r = LocateRegistry.getRegistry(ipServer);
+                try
+                {
+                    cfgManager = (IConfigurationManager) r.lookup("ConfigManager");
+                }
+                catch (NotBoundException e1)
+                {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+            catch (RemoteException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return cfgManager;
     }
 }
 

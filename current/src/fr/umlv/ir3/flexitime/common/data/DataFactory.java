@@ -1267,11 +1267,19 @@ public class DataFactory
      *
      * @param name
      * @return a new user 
+     * @throws FlexiException 
      */
-    public static IUser createUser(String name)
+    public static IUser createUser(String name) throws FlexiException
     {
         IUser user = new UserImpl(name);
-        // TODO sauvegarde hibernate
+        try
+        {
+            user = RemoteDataManager.getUserManager().save(user);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
         return user; 
     }
     
@@ -1281,18 +1289,18 @@ public class DataFactory
      * @param name
      * @param pass
      * @return a new user 
+     * @throws FlexiException 
      */
-    public static IUser createUser(String name, String pass)
+    public static IUser createUser(String name, String pass) throws FlexiException
     {
         IUser user = new UserImpl(name, pass);
         try
         {
-            RemoteDataManager.getUserManager().save(user);
+            user = RemoteDataManager.getUserManager().save(user);
         }
         catch (RemoteException e)
         {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
         }
         return user; 
     }
@@ -1303,11 +1311,19 @@ public class DataFactory
      * @param name
      * @param pref User preferences
      * @return a new user 
+     * @throws FlexiException 
      */
-    public static IUser createUser(String name, IPreferences pref)
+    public static IUser createUser(String name, IPreferences pref) throws FlexiException
     {
         IUser user = new UserImpl(name, pref);
-        // TODO sauvegarde hibernate
+        try
+        {
+            user = RemoteDataManager.getUserManager().save(user);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
         return user; 
     }
     
@@ -1318,11 +1334,19 @@ public class DataFactory
      * @param pass
      * @param pref User preferences
      * @return a new user 
+     * @throws FlexiException 
      */
-    public static IUser createUser(String name, String pass, IPreferences pref)
+    public static IUser createUser(String name, String pass, IPreferences pref) throws FlexiException
     {
         IUser user = new UserImpl(name, pass, pref);
-        // TODO sauvegarde hibernate
+        try
+        {
+            user = RemoteDataManager.getUserManager().save(user);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
         return user; 
     }
 }
