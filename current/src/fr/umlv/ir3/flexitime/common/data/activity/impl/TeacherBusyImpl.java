@@ -26,31 +26,38 @@ import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class TeacherBusyImpl implements ITeacherBusy
+public class TeacherBusyImpl extends BusyImpl implements ITeacherBusy
 {
+    //===========//
+	//  Champs	 //
+	//===========//
     private int reason;
-    private Date startDate;
-    private Date endDate;
-    private String name;
     
        
+    //=============//
+	//Constructeurs//
+    //=============//
     /**
      * Constructs an unavailibility for a teacher. 
      * 
      * @param iReason an Integer representing the reason of the unavailibility.
-     * @param sName a string.
-     * @param startD the start date of the unavailibility.
-     * @param endD the end date of the unavailibility.
+     * @param strName a string.
+     * @param daStart the start date of the unavailibility.
+     * @param daEnd the end date of the unavailibility.
      * 
      */
-    public TeacherBusyImpl(int iReason, String sName, Date startD, Date endD)
+    public TeacherBusyImpl(int iReason, String strName, Date daStart, Date daEnd)
     {
-        reason = iReason;
-        startDate = startD;
-        endDate = endD;
-        name = sName;        
+        super(strName,daStart,daEnd);
+        reason = iReason;           
     }
     
+    
+    
+    
+    //===========//
+    // Méthodes  //
+	//===========//
     /** 
      * Returns the reason of the unavailibility.
      * <code>int reason = getReason()</code>
@@ -79,88 +86,4 @@ public class TeacherBusyImpl implements ITeacherBusy
         reason = iReason;
     }
 
-    /** 
-     * Returns the start date of the unavailibility.
-     * <code>Date date = getStartDate()</code>
-     *
-     * @return the start date of the unavailibility.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#getStartDate()
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public Date getStartDate()
-    {
-        return startDate;
-    }
-
-    /** 
-     * Sets the start date of the unavailibility.
-     * <code>setStartDate(daBusy)</code>
-     *
-     * @param daBusy a date.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#setStartDate(java.util.Date)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void setStartDate(Date daBusy)
-    {
-        startDate = daBusy;
-    }
-
-    /** 
-     * Returns the end date of the unavailibility.
-     * <code>Date date = getEndDate()</code>
-     *
-     * @return the end date of the unavailibility.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#getEndDate()
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public Date getEndDate()
-    {
-        return endDate;
-    }
-
-    /** 
-     * Sets the end date of the unavailibility.
-     * <code>setEndDate(daBusy)</code>
-     *
-     * @param daBusy a date.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#setEndDate(java.util.Date)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void setEndDate(Date daBusy)
-    {
-        endDate = daBusy;
-    }
-
-    /** 
-     * Returns the name of the TeacherBusy.
-     * <code>String name = getName()</code>
-     *
-     * @return the name of the TeacherBusy.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /** 
-     * Sets the name of the TeacherBusy.
-     * <code>setName(name)</code>
-     *
-     * @param name a string.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
 }
-

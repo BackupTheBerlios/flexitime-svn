@@ -22,29 +22,35 @@ import fr.umlv.ir3.flexitime.common.data.ressources.IResource;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class LessonImpl implements ILesson
+public class LessonImpl extends BusyImpl implements ILesson
 {
-
+    //===========//
+	//  Champs	 //
+	//===========//
     private List listOfResources; 
-    private Date startDate;
-    private Date endDate;
-    private String name;
     
+    //=============//
+	//Constructeurs//
+    //=============//
     /**
      * Constructs an unavailibility for a course. 
      * 
-     * @param sName a string.
-     * @param startD the start date of the unavailibility.
-     * @param endD the end date of the unavailibility.
+     * @param strName a string.
+     * @param daStart the start date of the unavailibility.
+     * @param daEnd the end date of the unavailibility.
      * 
      */
-    public LessonImpl(String sName, Date startD, Date endD)
+    public LessonImpl(String strName, Date daStart, Date daEnd)
     {
-        startDate = startD;
-        endDate = endD;
-        name = sName;        
+        super(strName,daStart,daEnd);
     }
     
+    
+    
+    
+    //===========//
+    // Méthodes  //
+	//===========//
     /** 
      * Returns the list of resources contained by the lesson.
      * <code>List list = getLstResource()</code>
@@ -97,83 +103,6 @@ public class LessonImpl implements ILesson
         listOfResources.remove(resource);
     }
 
-    /** 
-     * Returns the start date of the lesson.
-     * <code>Date date = getStartDate()</code>
-     *
-     * @return the start date of the lesson.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#getStartDate()
-     */
-    public Date getStartDate()
-    {
-        return startDate;
-    }
-
-    /** 
-     * Sets the start date of the lesson.
-     * <code>setStartDate(daBusy)</code>
-     *
-     * @param daBusy a date.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#setStartDate(java.util.Date)
-     */
-    public void setStartDate(Date daBusy)
-    {
-        startDate = daBusy;
-    }
-
-    /** 
-     * Returns the end date of the lesson.
-     * <code>Date date = getEndDate()</code>
-     *
-     * @return the end date of the lesson.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#getEndDate()
-     */
-    public Date getEndDate()
-    {
-        return endDate;
-    }
-
-    /** 
-     * Sets the end date of the lesson.
-     * <code>setEndDate(daBusy)</code>
-     *
-     * @param daBusy a date.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.activity.IBusy#setEndDate(java.util.Date)
-     */
-    public void setEndDate(Date daBusy)
-    {
-        endDate = daBusy;
-    }
-
-    /** 
-     * Returns the name of the lesson.
-     * <code>String name = getName()</code>
-     *
-     * @return the name of the lesson.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /** 
-     * Sets the name of the lesson.
-     * <code>setName(name)</code>
-     *
-     * @param name a string.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
+    
 }
 
