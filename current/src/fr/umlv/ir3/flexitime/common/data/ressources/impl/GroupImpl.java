@@ -7,162 +7,72 @@ package fr.umlv.ir3.flexitime.common.data.ressources.impl;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.ressources.IGroup;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Defines a group.
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 0.1
+ * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup
+ * @see fr.umlv.ir3.flexitime.common.data.ressources.impl.ResourceImpl
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class GroupImpl implements IGroup
+public class GroupImpl extends ResourceImpl implements IGroup
 {
-
+    //===========//
+	//  Champs	 //
+	//===========//
+    private int iNbPerson; 
+    
+    
+	//=============//
+	//Constructeurs//
+    //=============//
     /**
-     * DOCME
+     * Constructs a group.
+     * 
+     * @param name a string.
+     * @param listBusy a list of unavailibilities.
+     * @param nbPerson the number of students in this group.
      * 
      */
-    public GroupImpl()
+    public GroupImpl(String name, List listBusy, int nbPerson)
     {
-        super();
-        // TODO Auto-generated constructor stub
+        super(name, listBusy);
+        this.iNbPerson = nbPerson;
     }
 
+    
+    //===========//
+    // Méthodes  //
+	//===========//
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Returns the number of students in this group.
+     * <code>Int i = group.getNbPerson()</code>
      *
-     * @return 
+     * @return the number of students in this group.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#getNbPerson()
      * @author   FlexiTeam - Adrien BOUVET
      */
     public int getNbPerson()
     {
-        // TODO Auto-generated method stub
-        return 0;
+        return iNbPerson;
     }
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Sets the number of students in this group.
+     * <code>group.setNbPerson(nbPerson)<code>
      *
-     * @param nbPerson 
+     * @param nbPerson the number of students in this group.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#setNbPerson(int)
      * @author   FlexiTeam - Adrien BOUVET
      */
     public void setNbPerson(int nbPerson)
     {
-    // TODO Auto-generated method stub
-
+        this.iNbPerson = nbPerson;
     }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @return 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IResource#getLstBusy()
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public List getLstBusy()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param lstBusy 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IResource#setLstBusy(java.util.List)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void setLstBusy(List lstBusy)
-    {
-    // TODO Auto-generated method stub
-
-    }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param busy 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IResource#addBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void addBusy(IBusy busy)
-    {
-    // TODO Auto-generated method stub
-
-    }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param busy 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.ressources.IResource#removeBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void removeBusy(IBusy busy)
-    {
-    // TODO Auto-generated method stub
-
-    }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @return 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public String getName()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param name 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void setName(String name)
-    {
-    // TODO Auto-generated method stub
-
-    }
-
 }
-
