@@ -60,7 +60,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     //La ressoruce
     private IResource ressource;
     //Totues les indispo de la Ressource
-    private SortedSet ressourceSet;
+    private Set<IBusy> ressourceSet;
     //Données métiers à placer ordonnée dans une liste de semaine, contenante une liste de jour, avec la liste de tous les Busy dans l'ordre
     private List<List[]>           busyList;
     //Image des Busy encapsulé par des LessonBloc et structuré de la meme maniere => list de semaine avec une liste de jour et une liste de LessonBloc
@@ -137,7 +137,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     }
 
 
-    private Set subSet(SortedSet<IBusy> from, Gap gap)
+    private Set subSet(Set<IBusy> from, Gap gap)
     {
         boolean stop = false;
         TreeSet<IBusy> set = new TreeSet<IBusy>();
