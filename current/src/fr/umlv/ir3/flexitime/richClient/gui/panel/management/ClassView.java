@@ -156,6 +156,8 @@ public class ClassView
         name.setText(model.getIClass().getName());
         nbPerson.setText("" + model.getIClass().getNbPerson());
         nbGroup.setText(""+model.getIClass().getNbGroup());
+        okButton.setEnabled(false);
+        cancelButton.setEnabled(false);
     }
 
 

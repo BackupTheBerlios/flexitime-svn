@@ -217,5 +217,6 @@ public class TeacherView
         email.setText(model.getTeacher().getEmail());
         okButton.setEnabled(false);
         cancelButton.setEnabled(false);
+        errorLabel.setVisible(false);
     }
 }

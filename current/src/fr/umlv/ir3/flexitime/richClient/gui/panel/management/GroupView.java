@@ -164,5 +164,8 @@ public class GroupView
      {
          name.setText(model.getGroup().getName());
          nbPerson.setText("" + model.getGroup().getNbPerson());
+         okButton.setEnabled(false);
+         cancelButton.setEnabled(false);
+         errorLabel.setVisible(false);
      }
 }

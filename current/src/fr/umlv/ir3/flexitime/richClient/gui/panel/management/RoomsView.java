@@ -167,6 +167,9 @@ public class RoomsView
     {
         name.setText(model.getRoom().getName());
         capacity.setText("" + model.getRoom().getCapacity());
+        okButton.setEnabled(false);
+        cancelButton.setEnabled(false);
+        errorLabel.setVisible(false);
     }
 
 }

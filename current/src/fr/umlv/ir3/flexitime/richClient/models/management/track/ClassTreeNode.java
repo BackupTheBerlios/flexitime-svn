@@ -218,6 +218,7 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
     
     public void add(IGroup group)
     {
+            System.out.println("Graphique:ajout groupe");
             GroupTreeNode child = new GroupTreeNode(this,group,model);
             children.add(child);
             model.nodesWereInserted(this,new int[]{children.size()-1});
