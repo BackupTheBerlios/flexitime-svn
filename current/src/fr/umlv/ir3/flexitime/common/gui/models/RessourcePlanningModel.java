@@ -57,6 +57,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     private int            nbGaps = 0;
     //private int            blocNbGapsList;
 
+    //La ressoruce
+    private IResource ressource;
     //Totues les indispo de la Ressource
     private SortedSet ressourceSet;
     //Données métiers à placer ordonnée dans une liste de semaine, contenante une liste de jour, avec la liste de tous les Busy dans l'ordre
@@ -74,17 +76,23 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     /**
      * Constructs a Model according to the specified Ressource
      * and the initial Gap to handle
+     * @param _ressource 
+     * @param initialGap 
      *  
-     * @param ressource the ressource concerned by the planning
-     * @param gap th initial gap handle to create the model
+     * @param _ressource the ressource concerned by the planning
+     * @param initialGap th initial gap handle to create the model
      */
-    public RessourcePlanningModel(IResource ressource, Gap initialGap)
+    public RessourcePlanningModel(IResource _ressource, Gap initialGap)
     {
         super();
 
+        this.ressource = _ressource;
         this.ressourceSet = ressource.getSetBusy();
         this.edtWeekGap = initialGap;
         this.nbWeeks = Time.getGapWeek(edtWeekGap.getStartDate(),edtWeekGap.getEndDate()) + 1 ;
+        
+        System.out.println("Debut : " + this.edtWeekGap.getStartDate().getStrDate());
+        System.out.println("Fin : " + this.edtWeekGap.getEndDate().getStrDate());
         
         /*this.blocList = new Gap[4];
         this.blocList[0] = new Gap(1901,1,1,8,30,1901,1,1,10,30);
@@ -129,11 +137,37 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     }
 
 
-    private Set subSet(SortedSet from, Gap gap)
+    private Set subSet(SortedSet<IBusy> from, Gap gap)
     {
-        Gap start = new Gap(gap.getStartDate().getCal(), gap.getStartDate().getCal());
-        Gap end = new Gap(gap.getEndDate().getCal(), gap.getEndDate().getCal());
-        return (TreeSet)from.subSet(DataFactory.createLesson(start,null, new ArrayList(),0) , DataFactory.createLesson(end,null,new ArrayList(),0));
+        boolean stop = false;
+        TreeSet<IBusy> set = new TreeSet<IBusy>();
+        if(from == null)
+            return set;
+        Iterator iter = from.iterator();
+        if(!iter.hasNext())
+            return set;
+        IBusy busy = (IBusy) iter.next();
+        while(!stop &&  Time.compare(busy.getGap().getStartDate() , gap.getEndDate()) == -1)
+        {
+            //System.out.println("************************");
+            //System.out.println(busy.getGap().getStartDate().getStrDate());
+            //System.out.println(busy.getGap().getEndDate().getStrDate());
+            
+            if(Time.compare(busy.getGap().getStartDate() , gap.getStartDate()) == 1)
+                set.add(busy);
+
+            if(iter.hasNext())
+                busy = (IBusy) iter.next();
+            else
+                stop = true;
+        }
+        
+        return set;
+        
+        //TODO changer
+        //Gap start = new Gap(gap.getStartDate().getCal(), gap.getStartDate().getCal());
+        //Gap end = new Gap(gap.getEndDate().getCal(), gap.getEndDate().getCal());
+        //return (TreeSet)from.subSet(DataFactory.createLesson(start,null, new ArrayList(),0) , DataFactory.createLesson(end,null,new ArrayList(),0));
     }
 
 
@@ -372,6 +406,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 	        for (int i = gapNumber+1 ; i < gapNumber+lesson.getNbGap() ; i++)
 	            bloc.representationList[i] = null;
 	    }
+        
+        
 	    
 	    
 		fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+lesson.getNbGap()-1 );
@@ -383,12 +419,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
      */
     public void increase()
     {
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
         this.edtWeekGap.getEndDate().addWeek(1);
         this.nbWeeks += 1;
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
-        
-//      TODO optimiser en ne faisant ke l'ajout
         
         this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
         this.initialyseImage();
@@ -401,15 +433,11 @@ public class RessourcePlanningModel extends AbstractPlanningModel
      */
     public void decrease()
     {
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
         this.edtWeekGap.getEndDate().addWeek(-1);
         this.nbWeeks -= 1;
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
-        
-        
+
         this.busyList.remove(this.busyList.size()-1);
         this.busyListImage.remove(this.busyListImage.size()-1);
-        
     }
 
 
@@ -419,20 +447,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
      */
     public void stepOver()
     {
-        //Décalage de la première semaine
-        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
         this.edtWeekGap.getStartDate().addWeek(1);
-        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        
-        //this.busyList.remove(0);
-        //this.busyListImage.remove(0);
-        
-        //Ajout d'une semaine
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
         this.edtWeekGap.getEndDate().addWeek(1);
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
-
-//      TODO optimiser en ne faisant ke l'ajout
         
         this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
         this.initialyseImage();
@@ -446,22 +462,13 @@ public class RessourcePlanningModel extends AbstractPlanningModel
      */
     public void stepBack()
     {
-
-        
-        //Ajout d'une semaine
-        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
+//      TODO optimiser en ne faisant ke l'ajout
         this.edtWeekGap.getStartDate().addWeek(-1);
-        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        
-        //TODO optimiser en ne faisant ke l'ajout
-        
-        //Suppression de la derniere semaine
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
         this.edtWeekGap.getEndDate().addWeek(-1);
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
-        //this.busyList.remove(this.busyList.size()-1);
-        //this.busyListImage.remove(this.busyListImage.size()-1);
         
+        System.out.println("Debut : " + this.edtWeekGap.getStartDate().getStrDate());
+        System.out.println("Fin : " + this.edtWeekGap.getEndDate().getStrDate());
+
         this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
         this.initialyseImage();
         
@@ -474,16 +481,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
      */
     public void fullStepOver()
     {
-        //Décalage de la première semaine
-        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
         this.edtWeekGap.getStartDate().addWeek(this.nbWeeks);
-        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        
-        //Ajout d'une semaine
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
         this.edtWeekGap.getEndDate().addWeek(this.nbWeeks);
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
-        
+
         this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
         this.initialyseImage();
     }
@@ -495,26 +495,13 @@ public class RessourcePlanningModel extends AbstractPlanningModel
      */
     public void fullStepBack()
     {
-        //Décalage de la première semaine
-        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
         this.edtWeekGap.getStartDate().addWeek(-this.nbWeeks);
-        //System.out.println(this.edtWeekGap.getStartDate().getStrDate());
-        
-        //Ajout d'une semaine
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
         this.edtWeekGap.getEndDate().addWeek(-this.nbWeeks);
-        //System.out.println(this.edtWeekGap.getEndDate().getStrDate());
-        
+
         this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
         this.initialyseImage();
     }
     
-    /*public void changeGap(Gap newGap)
-    {
-        this.edtWeekGap = new Gap(newGap.getStartDate().getCal(), newGap.getEndDate().getCal());
-        this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
-        this.initialyseImage();
-    }*/
 
 
 
@@ -587,13 +574,14 @@ public class RessourcePlanningModel extends AbstractPlanningModel
             
             int dayNumber;
             boolean stop = false;
+            //System.out.println(isInWeek(curBusy,week));
             //On parcours les Busy tant qu'ils correspondent à la semaine que l'on rempli
             while(!stop && isInWeek(curBusy,week))
             {
                 dayNumber = curBusy.getGap().getStartDate().getIDayOfWeek();
                 if(dayList[dayNumber] == null)
                     dayList[dayNumber] = new ArrayList<IBusy>(1);
-                //System.out.println("ajout de " + curBusy);
+                System.out.println("ajout de " + curBusy.getGap().getStartDate().getStrDate());
                 dayList[dayNumber].add(curBusy);
                 if(iter.hasNext())
                     curBusy = (IBusy)iter.next();
@@ -610,7 +598,16 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     
     private boolean isInWeek(IBusy curBusy, int week)
     {
-        return 0 == (this.edtWeekGap.getStartDate().getWeek()+week - curBusy.getGap().getStartDate().getWeek());
+        //System.out.println("-------------------------");
+        //System.out.println("test de " + curBusy.getGap().getStartDate().getStrDate() + " => " + curBusy.getGap().getEndDate().getStrDate());
+        //System.out.println("sur week " + week);
+        //System.out.println(this.edtWeekGap.getStartDate().getWeek());
+        Time t = new Time((Calendar)this.edtWeekGap.getStartDate().getCal().clone());
+        t.addWeek(week);
+        //System.out.println("Apres ajout : " + t.getWeek());
+        //System.out.println(curBusy.getGap().getStartDate().getWeek());
+        
+        return t.getWeek() == curBusy.getGap().getStartDate().getWeek();
     }
 
 

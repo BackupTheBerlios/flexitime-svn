@@ -119,6 +119,8 @@ public class Client
         
         return button;
     }
+    
+    
     /**
      * initToolBar - DOCME Code This method creates the client's tool bar.
      * <code>exemple d'appel de la methode</code>

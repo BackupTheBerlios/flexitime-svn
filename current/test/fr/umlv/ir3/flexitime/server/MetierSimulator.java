@@ -45,6 +45,9 @@ public class MetierSimulator
     private static ITeacher midonnet;
     private static ITeacher revuz;
     private static ITeacher roussel;
+    
+    private static List teacherLst;
+    
     private static IBuilding copernic;
     private static IBuilding lavoisier;
     private static IFloor premier;
@@ -126,9 +129,16 @@ public class MetierSimulator
 
     public static void generate()
     {
+        
         midonnet = DataFactory.createTeacher("Midonnet","jeCpasSonPrenom","midonnet@univ-mlv.fr");
         revuz = DataFactory.createTeacher("Revuz","Dominiqueuniquenique","revuz@univ-mlv.fr");
         roussel = DataFactory.createTeacher("Roussel","Gilles","groussel@univ-mlv.fr");
+        
+        teacherLst = new ArrayList(3);
+        teacherLst.add(midonnet);
+        teacherLst.add(revuz);
+        teacherLst.add(roussel);
+        
         copernic = DataFactory.createBuilding("Copernic");
         lavoisier = DataFactory.createBuilding("Lavoisier");
         premier = DataFactory.createFloor("1er etage", copernic);
@@ -267,6 +277,18 @@ public class MetierSimulator
         generate();
         //System.out.println("Nb busy for ir3_grp2 = " +  ir3_grp2.getSetBusy().size());
         return ir3_grp2;
+    }
+    
+    public static List getTeacherListe()
+    {
+        generate();
+        return teacherLst;
+    }
+    
+    public static ITeacher getRoussel()
+    {
+        generate();
+        return roussel;
     }
     
     
