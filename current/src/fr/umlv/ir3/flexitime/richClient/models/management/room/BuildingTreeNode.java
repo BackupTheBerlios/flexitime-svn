@@ -253,38 +253,41 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
     public void dataChanged(DataEvent event) throws RemoteException
     {
          IBuilding building = (IBuilding)event.getSource();
-         int type = event.getEventType();
-         switch(type)
+         if(this.building.equals(building))
          {
-             case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+             int type = event.getEventType();
+             switch(type)
              {
-                 Object[] tabFloor = (Object[])event.getSubObjects();
-                 for(int i=0;i<tabFloor.length;i++)
+                 case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
                  {
-                    add((IFloor)tabFloor[i]);
+                     Object[] tabFloor = (Object[])event.getSubObjects();
+                     for(int i=0;i<tabFloor.length;i++)
+                     {
+                        add((IFloor)tabFloor[i]);
+                     }
+                     break;
                  }
-                 break;
-             }
-             case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
-             {
-                Object[] tabFloor = (Object[])event.getSubObjects();
-                for(int i=0;i<tabFloor.length;i++)
-                {
-                    FloorTreeNode ftn = searchChild((IFloor)tabFloor[i]);
-                    ftn.setFloor((IFloor)tabFloor[i]);
-                }
-                break; 
-             }
-             case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
-             {
-                Object[] tabFloor = (Object[])event.getSubObjects();
-                 for(int i=0;i<tabFloor.length;i++)
+                 case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
                  {
-                     remove((IFloor)tabFloor[i]);
+                    Object[] tabFloor = (Object[])event.getSubObjects();
+                    for(int i=0;i<tabFloor.length;i++)
+                    {
+                        FloorTreeNode ftn = searchChild((IFloor)tabFloor[i]);
+                        ftn.setFloor((IFloor)tabFloor[i]);
+                    }
+                    break; 
                  }
-                 break;   
+                 case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+                 {
+                    Object[] tabFloor = (Object[])event.getSubObjects();
+                     for(int i=0;i<tabFloor.length;i++)
+                     {
+                         remove((IFloor)tabFloor[i]);
+                     }
+                     break;   
+                 }
+       
              }
-   
          }
         
     }

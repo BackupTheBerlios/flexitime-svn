@@ -74,7 +74,8 @@ public class ResourceTreeModel extends DefaultTreeModel {
 		
         //System.out.println("path:"+ path+"  value:"+newValue );
 		FlexiTreeNode node = (FlexiTreeNode)path.getLastPathComponent();
-		try {
+		try 
+        {
 			node.setValue(newValue);
 		} catch (RemoteException e) {
             JOptionPane.showMessageDialog(null,e.getMessage(),"Modififcation impossible",JOptionPane.ERROR_MESSAGE);

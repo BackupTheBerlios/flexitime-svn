@@ -352,7 +352,7 @@ public class FlexiMouseListenerFactory
 				menuItem.setText(name[i]);
 			popMenu.add(menuItem);
 		}	
-		popMenu.setVisible(true);
+		//popMenu.setVisible(true);
 		return popMenu;
 	
 	}

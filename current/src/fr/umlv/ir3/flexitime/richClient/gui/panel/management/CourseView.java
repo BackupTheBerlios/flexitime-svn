@@ -36,7 +36,7 @@ import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class CourseView implements FlexiTreeNodeListener
+public class CourseView
 {
 
 	JPanel panel;
@@ -60,7 +60,6 @@ public class CourseView implements FlexiTreeNodeListener
 	{
 		this.model=(ResourceTreeModel)model;
 		this.tree=tree;
-		((FlexiTreeNode)this.tree.getSelectionPath().getLastPathComponent()).addFlexiTreeNodeListener(this);
 		create();
 	}
 	
@@ -174,15 +173,5 @@ public class CourseView implements FlexiTreeNodeListener
 		return panel;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.gui.actions.FlexiTreeNodeListener#nodeChanged(java.lang.Object)
-	 */
-	public void nodeChanged(Object obj) {
-		name.setText( (String)obj);
-		okButton.setEnabled( false);
-		cancelButton.setEnabled( false);
-		
-	}
 
 }

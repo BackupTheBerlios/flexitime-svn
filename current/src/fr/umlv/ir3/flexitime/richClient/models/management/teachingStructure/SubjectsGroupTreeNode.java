@@ -188,11 +188,16 @@ public class SubjectsGroupTreeNode extends DataListenerImpl implements FlexiTree
         DataFactory.createSubject("Nouvelle Matière",subjectsGroup);
 	}
 	
+    public void subjectAdded(ISubject subject)
+    {
+         subjectsGroup.addSubject(subject);
+        add(subject);
+    }
+    
     public void add(ISubject subject)
     {
         try
         {    
-            subjectsGroup.addSubject(subject);
             SubjectTreeNode child = new SubjectTreeNode(this,subject,model);
             children.add(child);
             model.nodesWereInserted(this,new int[]{children.size()-1});
@@ -216,10 +221,14 @@ public class SubjectsGroupTreeNode extends DataListenerImpl implements FlexiTree
     public void remove(ISubject subject) 
     {
         SubjectTreeNode childNode = searchChild(subject);
-        subjectsGroup.removeSubject(((SubjectTreeNode)childNode).getSubject());
-        int index = children.indexOf(childNode);
-		children.remove(childNode);	
-		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        if(childNode != null)
+        {
+            subjectsGroup.removeSubject(((SubjectTreeNode)childNode).getSubject());
+            int index = children.indexOf(childNode);
+            children.remove(childNode); 
+            model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        }
+        
 		
     }
 
@@ -247,38 +256,44 @@ public class SubjectsGroupTreeNode extends DataListenerImpl implements FlexiTree
     public void dataChanged(DataEvent event) throws RemoteException
     {
         ISubjectsGroup subjectsGroup = (ISubjectsGroup)event.getSource();
-        int type = event.getEventType();
-        switch(type)
+        if(this.subjectsGroup.equals(subjectsGroup))
         {
-            case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+            int type = event.getEventType();
+            switch(type)
             {
-                Object[] tabSubject = event.getSubObjects();
-                for(int i=0;i<tabSubject.length;i++)
+                case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
                 {
-                   add((ISubject)tabSubject[i]);
+                    Object[] tabSubject = event.getSubObjects();
+                    for(int i=0;i<tabSubject.length;i++)
+                    {
+                        subjectAdded((ISubject)tabSubject[i]);
+                    }
+                    break;
                 }
-                break;
-            }
-            case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
-            {
-                Object[] tabSubject = event.getSubObjects();
-               for(int i=0;i<tabSubject.length;i++)
-               {
-                   SubjectTreeNode stn = searchChild((ISubject)tabSubject[i]);
-                   stn.setSubject((ISubject)tabSubject[i]);
-               }
-               break; 
-            }
-            case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
-            {
-                Object[] tabSubject = event.getSubObjects();
-                for(int i=0;i<tabSubject.length;i++)
+                case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
                 {
-                    remove((ISubject)tabSubject[i]);
+                    Object[] tabSubject = event.getSubObjects();
+                   for(int i=0;i<tabSubject.length;i++)
+                   {
+                       SubjectTreeNode stn = searchChild((ISubject)tabSubject[i]);
+                       if(stn != null)
+                       {
+                           stn.setSubject((ISubject)tabSubject[i]);
+                       }
+                   }
+                   break; 
                 }
-                break;   
-            }
-        } 
+                case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+                {
+                    Object[] tabSubject = event.getSubObjects();
+                    for(int i=0;i<tabSubject.length;i++)
+                    {
+                        remove((ISubject)tabSubject[i]);
+                    }
+                    break;   
+                }
+            } 
+        }
     }
     
     public SubjectTreeNode searchChild(ISubject subject)

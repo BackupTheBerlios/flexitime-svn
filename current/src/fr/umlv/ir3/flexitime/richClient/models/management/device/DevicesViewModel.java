@@ -7,6 +7,8 @@
 package fr.umlv.ir3.flexitime.richClient.models.management.device;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
@@ -27,11 +29,13 @@ public class DevicesViewModel extends DataListenerImpl
 {
      IDevice device ;
      DevicesView view;
+     List listener;
         
         public DevicesViewModel(IDevice device) throws RemoteException
         {
             this.device=device;
             RemoteDataManager.getManager().addDataListener(IDevice.class,this);
+            listener = new ArrayList();
         }
         
         public void setValue(String value) throws RemoteException

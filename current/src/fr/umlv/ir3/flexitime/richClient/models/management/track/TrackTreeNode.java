@@ -189,17 +189,26 @@ public class TrackTreeNode extends DataListenerImpl implements  FlexiTreeNode
 	{
             System.out.println("Add promotion");	
             IClass iClass=DataFactory.createClass("Nouvelle Promotion",track);
-            DataFactory.createTeachingStructure("structure",iClass);
 	}
+    
+    public void classAdded(IClass iClass)
+    {
+        track.addClass(iClass);
+        add(iClass);
+    }
     
     public void add(IClass iClass)
     {
         try
         {    
-            track.addClass(iClass);
+            if(iClass.getTeachingStructure() == null)DataFactory.createTeachingStructure("structure",iClass);
             ClassTreeNode child = new ClassTreeNode(this,iClass,model);
             children.add(child);
             model.nodesWereInserted(this,new int[]{children.size()-1});
+        }
+        catch(FlexiException e)
+        {
+            JOptionPane.showMessageDialog(null,e.getMessage(),"Ajout impossible",JOptionPane.ERROR_MESSAGE); 
         }
         catch(RemoteException e)
         {
@@ -218,10 +227,14 @@ public class TrackTreeNode extends DataListenerImpl implements  FlexiTreeNode
     public void remove(IClass iClass) 
     {
         ClassTreeNode childNode = searchChild(iClass);
-        track.removeClass(((ClassTreeNode)childNode).getIClass());
-        int index = children.indexOf(childNode);
-        children.remove(childNode); 
-        model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        if(childNode != null)
+        {
+            track.removeClass(((ClassTreeNode)childNode).getIClass());
+            int index = children.indexOf(childNode);
+            children.remove(childNode); 
+            model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        }
+        
         
     }
 
@@ -250,36 +263,41 @@ public class TrackTreeNode extends DataListenerImpl implements  FlexiTreeNode
     public void dataChanged(DataEvent event) throws RemoteException
     {
         ITrack track = (ITrack)event.getSource();
-        int type = event.getEventType();
-        switch(type)
-        {
-            case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+        if(this.track.equals(track))
+        {  
+            int type = event.getEventType();
+            switch(type)
             {
-                Object[] tabClass = event.getSubObjects();
-                for(int i=0;i<tabClass.length;i++)
+                case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
                 {
-                   add((IClass)tabClass[i]);
+                    Object[] tabClass = event.getSubObjects();
+                    for(int i=0;i<tabClass.length;i++)
+                    {
+                        classAdded((IClass)tabClass[i]);
+                    }
+                    break;
                 }
-                break;
-            }
-            case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
-            {
-                Object[] tabClass = event.getSubObjects();
-               for(int i=0;i<tabClass.length;i++)
-               {
-                   ClassTreeNode ctn = searchChild((IClass)tabClass[i]);
-                   ctn.setIClass((IClass)tabClass[i]);
-               }
-               break; 
-            }
-            case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
-            {
-                Object[] tabClass = event.getSubObjects();
-                for(int i=0;i<tabClass.length;i++)
+                case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
                 {
-                    remove((IClass)tabClass[i]);
+                    Object[] tabClass = event.getSubObjects();
+                   for(int i=0;i<tabClass.length;i++)
+                   {
+                       ClassTreeNode ctn = searchChild((IClass)tabClass[i]);
+                       if( ctn != null){
+                           ctn.setIClass((IClass)tabClass[i]);
+                       }
+                   }
+                   break; 
                 }
-                break;   
+                case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+                {
+                    Object[] tabClass = event.getSubObjects();
+                    for(int i=0;i<tabClass.length;i++)
+                    {
+                        remove((IClass)tabClass[i]);
+                    }
+                    break;   
+                }
             }
         }
     }

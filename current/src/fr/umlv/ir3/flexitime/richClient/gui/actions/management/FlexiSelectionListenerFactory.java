@@ -47,6 +47,7 @@ import fr.umlv.ir3.flexitime.richClient.models.management.room.FloorViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.TypeRoomTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.CourseTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectTreeNode;
@@ -116,7 +117,7 @@ public class FlexiSelectionListenerFactory
 						{
 							TeachingStructureView teachingStructureView = new TeachingStructureView(tmpTree.getModel(),tmpTree);
 							panel1.add(new JScrollPane(teachingStructureView.getPanel()), BorderLayout.CENTER);
-							panel1.setBorder(BorderFactory.createTitledBorder("Structure d'enseignement"));
+                            panel1.setBorder(BorderFactory.createTitledBorder("Structure d'enseignement"));
 						}
 						//panelParent.remove(0);
                         ((JSplitPane)panelParent).setRightComponent(panel1);
@@ -266,7 +267,7 @@ public class FlexiSelectionListenerFactory
 				 try 
 				 {  
                     JList list  = (JList)arg0.getSource();	
-    				TeacherViewModel model = new TeacherViewModel((ITeacher)list.getModel().getElementAt(list.getSelectedIndex()));
+    				TeacherViewModel model = new TeacherViewModel((ITeacher)((TeacherListModel)list.getModel()).getPartyAt(list.getSelectedIndex()));
     				TeacherView teacherView = new TeacherView(model);
     				JPanel panel1 = new JPanel(new BorderLayout());
     		        panel1.add(new JScrollPane(teacherView.getPanel()), BorderLayout.CENTER);

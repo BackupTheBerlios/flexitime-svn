@@ -77,17 +77,34 @@ public class RootTrackTreeNode extends RootTreeNode{
         return children;
 	}
 
-	public void add() throws FlexiException 
+	/**
+     *Allows to create a new track in the dataBase 
+	 */
+    public void add() throws FlexiException 
 	{
 		System.out.println("Add track");
 		DataFactory.createTrack("Nouvelle Filière");
 	}
     
+    /**
+     * Allows to add the track in the local list 
+     * and calls the graphic addition
+     * @param track
+     */
+    public void trackAdded(ITrack track)
+    {
+        lst.add(track);
+        add(track);
+    }
+    
+    /**
+     * Allows to do a graphics addition or a track 
+     * @param track
+     */
     public void add(ITrack track)
     {
         try
         {
-            lst.add(track);
             TrackTreeNode child = new TrackTreeNode(this,track,model);
             {
                 children.add(child);
@@ -117,12 +134,15 @@ public class RootTrackTreeNode extends RootTreeNode{
 	}
     
     public void remove(ITrack track) {
-        TrackTreeNode childNode;
-        lst.remove(track);
-        int index = children.indexOf(childNode = searchChild(track));
-        children.remove(childNode); 
-        model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        TrackTreeNode childNode = searchChild(track);
         
+        if(childNode!=null)
+        {
+            lst.remove(track);
+            int index = children.indexOf(childNode);
+            children.remove(childNode); 
+            model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        }
     }
 
     /* (non-Javadoc)
@@ -136,13 +156,16 @@ public class RootTrackTreeNode extends RootTreeNode{
         {
             case DataEvent.TYPE_PROPERTY_ADDED:
             {
-                add(track);
+                trackAdded(track);
                 break;
             }
             case DataEvent.TYPE_PROPERTY_CHANGED :
             {
                 TrackTreeNode ttn = searchChild(track);
-                ttn.setTrack(track);
+                if(ttn!=null)
+                {
+                    ttn.setTrack(track);
+                }
                 break;
             }
             case DataEvent.TYPE_PROPERTY_REMOVED:

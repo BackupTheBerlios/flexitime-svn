@@ -223,11 +223,13 @@ public class TypeCourseTreeNode implements FlexiTreeNode
     
     public void remove(ICourse course) {
         CourseTreeNode childNode = searchChild(course);
-        lstCourse.remove(((CourseTreeNode)childNode).getCourse());
-        int index = children.indexOf(childNode);
-        children.remove(childNode);   
-        model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
-        
+        if(childNode != null)
+        {
+            lstCourse.remove(((CourseTreeNode)childNode).getCourse());
+            int index = children.indexOf(childNode);
+            children.remove(childNode);   
+            model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        }
     }
 
 	/* (non-Javadoc)

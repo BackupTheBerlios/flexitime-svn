@@ -245,46 +245,55 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
     public void dataChanged(DataEvent event) throws RemoteException
     {
         IFloor floor = (IFloor)event.getSource();
-        int type = event.getEventType();
-        switch(type)
+        if(this.floor.equals(floor))
         {
-            case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+            int type = event.getEventType();
+            switch(type)
             {
-                Object[] tabRoom = (Object[])event.getSubObjects();
-                for(int i=0;i<tabRoom.length;i++)
+                case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
                 {
-                    floor.addRoom((IRoom)tabRoom[i]);
-                    TypeRoomTreeNode trtn = searchChild(((IRoom)tabRoom[i]).getType());
-                    trtn.add((IRoom)tabRoom[i]);
-                }
-                break;
-            }
-            case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
-            {
-                Object[] tabRoom = (Object[])event.getSubObjects();
-               for(int i=0;i<tabRoom.length;i++)
-               {
-                   TypeRoomTreeNode tdtn = searchChild(((IRoom)tabRoom[i]).getType());
-                   tdtn.changedRoom((IRoom)tabRoom[i]);
+                    Object[] tabRoom = (Object[])event.getSubObjects();
+                    for(int i=0;i<tabRoom.length;i++)
+                    {
+                        floor.addRoom((IRoom)tabRoom[i]);
+                        TypeRoomTreeNode trtn = searchChild(((IRoom)tabRoom[i]).getType());
+                        if(trtn != null)
+                        {
+                            trtn.add((IRoom)tabRoom[i]);
+                        }
+                    }
                     break;
-               }
-               break; 
-            }
-            case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
-            {
-                Object[] tabRoom = (Object[])event.getSubObjects();
-                for(int i=0;i<tabRoom.length;i++)
-                {
-                    floor.removeRoom((IRoom)tabRoom[i]);
-                    TypeRoomTreeNode trtn = searchChild(((IRoom)tabRoom[i]).getType());
-                    trtn.remove((IRoom)tabRoom[i]);
                 }
-                break;   
+                case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
+                {
+                    Object[] tabRoom = (Object[])event.getSubObjects();
+                   for(int i=0;i<tabRoom.length;i++)
+                   {
+                       TypeRoomTreeNode tdtn = searchChild(((IRoom)tabRoom[i]).getType());
+                       if(tdtn!=null)
+                       {
+                           tdtn.changedRoom((IRoom)tabRoom[i]);
+                       }
+                   }
+                   break; 
+                }
+                case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+                {
+                    Object[] tabRoom = (Object[])event.getSubObjects();
+                    for(int i=0;i<tabRoom.length;i++)
+                    {
+                        TypeRoomTreeNode trtn = searchChild(((IRoom)tabRoom[i]).getType());
+                        if(trtn != null)
+                        {
+                            floor.removeRoom((IRoom)tabRoom[i]);
+                            trtn.remove((IRoom)tabRoom[i]);
+                        }
+                    }
+                    break;   
+                }
+      
             }
-  
-        }
-       
-        
+        }  
     }
     public TypeRoomTreeNode searchChild(int type)
     {

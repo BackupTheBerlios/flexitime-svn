@@ -65,11 +65,7 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
 	/**
 	 * The teaching Structure
 	 */
-	private FlexiTreeNode teachingStructure;
-	/**
-	 * List of Listener
-	*/
-	List listener; 
+	private FlexiTreeNode teachingStructure; 
 	 
 	
 	//==================//
@@ -81,8 +77,7 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
 		this.parent = parent;
 		this.iClass = iClass;
 		children = new ArrayList();
-		this.listener = new ArrayList();
-        RemoteDataManager.getManager().addDataListener(ITrack.class,this);
+        RemoteDataManager.getManager().addDataListener(IClass.class,this);
 	}
 	
 	/**
@@ -191,8 +186,9 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
 		{
 			add((IGroup)iClass.getLstGroups().get(i));
 		}
-		teachingStructure = new TeachingStructureTreeNode(this,iClass.getTeachingStructure(),model);
-		return children;
+		List list = new ArrayList(children);
+        list.add(teachingStructure = new TeachingStructureTreeNode(this,iClass.getTeachingStructure(),model));
+		return list;
 	}
 	
 	/**
@@ -213,8 +209,14 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
         System.out.println("Add group");
         IGroup groupe = DataFactory.createGroup("Nouveau Groupe",0,iClass);
 	}
+   
+    public void groupAdded(IGroup group)
+    {
+        iClass.addGroup(group);
+        add(group);
+    }
     
-     public void add(IGroup group)
+    public void add(IGroup group)
     {
             GroupTreeNode child = new GroupTreeNode(this,group,model);
             children.add(child);
@@ -232,19 +234,22 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
     public void remove(IGroup group) 
     {
             GroupTreeNode childNode = searchChild(group);  
-            iClass.removeGroup(group);
-            int index = children.indexOf(childNode);
-            children.remove(childNode); 
-            model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
-        
+            if(childNode !=null)
+            {
+                iClass.removeGroup(group);
+                int index = children.indexOf(childNode);
+                children.remove(childNode); 
+                model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+            }
     }
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
 	 */
-	public void setValue(Object newValue) {
+	public void setValue(Object newValue) throws RemoteException {
 		iClass.setName((String)newValue);
-		model.nodeChanged(this);
+		RemoteDataManager.getManager().saveOrUpdateClass(this.iClass,this.iClass.getParentTrack());    
+
 		
 	}
 
@@ -262,38 +267,44 @@ public class ClassTreeNode extends DataListenerImpl implements FlexiTreeNode
     public void dataChanged(DataEvent event) throws RemoteException
     {
         IClass iClass = (IClass)event.getSource();
-        int type = event.getEventType();
-        switch(type)
+        if(this.iClass.equals(iClass))
         {
-            case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+            int type = event.getEventType();
+            switch(type)
             {
-                Object[] tabGroup = event.getSubObjects();
-                for(int i=0;i<tabGroup.length;i++)
+                case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
                 {
-                   add((IGroup)tabGroup[i]);
+                    Object[] tabGroup = event.getSubObjects();
+                    for(int i=0;i<tabGroup.length;i++)
+                    {
+                        groupAdded((IGroup)tabGroup[i]);
+                    }
+                    break;
                 }
-                break;
-            }
-            case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
-            {
-                Object[] tabGroup = event.getSubObjects();
-               for(int i=0;i<tabGroup.length;i++)
-               {
-                GroupTreeNode ctn = searchChild((IGroup)tabGroup[i]);
-                   ctn.setGroup((IGroup)tabGroup[i]);
-               }
-               break; 
-            }
-            case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
-            {
-                Object[] tabGroup = event.getSubObjects();
-                for(int i=0;i<tabGroup.length;i++)
+                case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
                 {
-                    remove((IGroup)tabGroup[i]);
+                    Object[] tabGroup = event.getSubObjects();
+                   for(int i=0;i<tabGroup.length;i++)
+                   {
+                       GroupTreeNode ctn = searchChild((IGroup)tabGroup[i]);
+                       if(ctn!=null)
+                       {   
+                           ctn.setGroup((IGroup)tabGroup[i]);
+                       }
+                   }
+                   break; 
                 }
-                break;   
+                case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+                {
+                    Object[] tabGroup = event.getSubObjects();
+                    for(int i=0;i<tabGroup.length;i++)
+                    {
+                        remove((IGroup)tabGroup[i]);
+                    }
+                    break;   
+                }
+      
             }
-  
         }
     }
     

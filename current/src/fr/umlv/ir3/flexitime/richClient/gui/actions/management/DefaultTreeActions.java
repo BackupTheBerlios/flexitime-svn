@@ -16,6 +16,7 @@ import javax.swing.JTree;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 
@@ -27,7 +28,8 @@ import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
  */
 public class DefaultTreeActions 
 {
-	public static Action add(final TreeModel model,final TreeNode treeNode)
+	private static FlexiLanguage language = FlexiLanguage.getInstance();
+    public static Action add(final TreeModel model,final TreeNode treeNode)
 	{
 		Action action = new AbstractAction()
 		{
@@ -44,7 +46,7 @@ public class DefaultTreeActions
 						((ResourceTreeModel)model).add(treeNode);
 					} 
                     catch (FlexiException e) {
-                        JOptionPane.showMessageDialog(null,e.getMessage(),"Ajout impossible",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,e.getMessage(),language.getText("erreurAdd"),JOptionPane.ERROR_MESSAGE);
 					}
 					
 				

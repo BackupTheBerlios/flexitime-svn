@@ -60,11 +60,6 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
 		 * The list of the sub categories
 		 */
 		private List children;
-		
-		/**
-		 * The teaching Structure
-		 */
-		private FlexiTreeNode teachingStructure;
 		 
 		
 		//==================//
@@ -102,17 +97,6 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
 		 */
 		public FlexiTreeNode getChildAt(int childIndex) 
 		{
-			if(children.size()>0)
-			{
-				if(childIndex>=children.size())
-				{
-					return teachingStructure;
-				}
-				else
-				{
-					return (FlexiTreeNode)children.get( childIndex);
-				}
-			}
 			return (FlexiTreeNode)processChildren().get(childIndex);
 		}
 
@@ -258,43 +242,46 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
         public void dataChanged(DataEvent event) throws RemoteException
         {
             ISubject subject= (ISubject)event.getSource();
-            int type = event.getEventType();
-            switch(type)
+            if(this.subject.equals(subject))
             {
-                case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+                int type = event.getEventType();
+                switch(type)
                 {
-                    Object[] tabCourse= event.getSubObjects();
-                    for(int i=0;i<tabCourse.length;i++)
+                    case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
                     {
-                        subject.addCourse((ICourse)tabCourse[i]);
-                        TypeCourseTreeNode tctn = searchChild(((ICourse)tabCourse[i]).getType());
-                        tctn.add((ICourse)tabCourse[i]);
-                    }
-                    break;
-                }
-                case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
-                {
-                    Object[] tabCourse= event.getSubObjects();
-                   for(int i=0;i<tabCourse.length;i++)
-                   {
-                       TypeCourseTreeNode tctn = searchChild(((ICourse)tabCourse[i]).getType());
-                       tctn.changedCourse((ICourse)tabCourse[i]);
+                        Object[] tabCourse= event.getSubObjects();
+                        for(int i=0;i<tabCourse.length;i++)
+                        {
+                            subject.addCourse((ICourse)tabCourse[i]);
+                            TypeCourseTreeNode tctn = searchChild(((ICourse)tabCourse[i]).getType());
+                            tctn.add((ICourse)tabCourse[i]);
+                        }
                         break;
-                   }
-                   break; 
-                }
-                case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
-                {
-                    Object[] tabCourse= event.getSubObjects();
-                    for(int i=0;i<tabCourse.length;i++)
-                    {
-                        subject.removeCourse((ICourse)tabCourse[i]);
-                        TypeCourseTreeNode tctn = searchChild(((ICourse)tabCourse[i]).getType());
-                        tctn.remove((ICourse)tabCourse[i]);
                     }
-                    break;   
-                }
-            }   
+                    case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
+                    {
+                        Object[] tabCourse= event.getSubObjects();
+                       for(int i=0;i<tabCourse.length;i++)
+                       {
+                           TypeCourseTreeNode tctn = searchChild(((ICourse)tabCourse[i]).getType());
+                           tctn.changedCourse((ICourse)tabCourse[i]);
+                            break;
+                       }
+                       break; 
+                    }
+                    case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+                    {
+                        Object[] tabCourse= event.getSubObjects();
+                        for(int i=0;i<tabCourse.length;i++)
+                        {
+                            subject.removeCourse((ICourse)tabCourse[i]);
+                            TypeCourseTreeNode tctn = searchChild(((ICourse)tabCourse[i]).getType());
+                            tctn.remove((ICourse)tabCourse[i]);
+                        }
+                        break;   
+                    }
+                }  
+            }
         }
         
         public TypeCourseTreeNode searchChild(int type)

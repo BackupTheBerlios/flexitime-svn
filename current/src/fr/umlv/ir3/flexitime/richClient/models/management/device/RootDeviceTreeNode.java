@@ -19,6 +19,7 @@ import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 
 /**
@@ -29,7 +30,15 @@ import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
  */
 public class RootDeviceTreeNode extends RootTreeNode
 {
-//	==================//
+    /**
+     *le langage
+     */
+    private static FlexiLanguage language;
+    static
+    {
+        language = FlexiLanguage.getInstance();
+    }
+    //	==================//
     //   Constructeurs  //
     //==================// 
 	
@@ -90,12 +99,12 @@ public class RootDeviceTreeNode extends RootTreeNode
 			}
 		}
 		Iterator TypeDeviceIte = map.keySet().iterator();	
-		for(int i=0;i<IDevice.class.getFields().length;i++)
+		for(int i=1;i<=IDevice.class.getFields().length;i++)
 		{
-			String name = new String();
-			name += IDevice.class.getFields()[i].getName() ;
-			List lstDevice;
-			if(map.get(new Integer(i))!= null )lstDevice = (List)map.get(i);
+			String name = language.getText("deviceType"+i) ;
+			System.out.println("on demande: "+"deviceType"+i);
+            List lstDevice;
+			if(map.get(new Integer(i))!= null )lstDevice = (List)map.get(i-1);
 			else lstDevice = new ArrayList();
 			list.add(new TypeDeviceTreeNode(this,name,i,lstDevice,model));
 		}

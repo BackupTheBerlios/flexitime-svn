@@ -14,6 +14,7 @@ import java.rmi.RemoteException;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
@@ -39,8 +40,9 @@ public class TeachingStructureView implements FlexiTreeNodeListener
 {
 	JTree tree;
 	TreeModel model;
-	JPanel mainPanel;
-	JPanel treePanel;
+	//JPanel mainPanel;
+	JSplitPane mainPanel;
+    JPanel treePanel;
 	JPanel viewPanel;
 	ITeachingStructure teachingStructure;
 	
@@ -55,8 +57,10 @@ public class TeachingStructureView implements FlexiTreeNodeListener
 	private void create()
 	{
 		//Initialisation des panels
-		mainPanel = new JPanel(new BorderLayout());
+		//mainPanel = new JPanel(new BorderLayout());
+        mainPanel = new JSplitPane();
 		treePanel = new JPanel(new BorderLayout());
+        
 		viewPanel = new JPanel(new BorderLayout());
 		teachingStructure = ((TeachingStructureTreeNode)tree.getSelectionPath().getLastPathComponent()).getTeachingStructure();
 		//Construction du treePanel
@@ -71,6 +75,7 @@ public class TeachingStructureView implements FlexiTreeNodeListener
         subjectsGroupTree.addTreeSelectionListener(FlexiSelectionListenerFactory.createSubjectsGroupTreeSelectionListener(this.mainPanel));
         JScrollPane scrollBloc = new JScrollPane(subjectsGroupTree);
         scrollBloc.setPreferredSize(new Dimension(200,100));
+        scrollBloc.setMinimumSize(new Dimension(200,100));
         scrollBloc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         treePanel.add(scrollBloc);
         
@@ -80,8 +85,10 @@ public class TeachingStructureView implements FlexiTreeNodeListener
        // viewPanel.setBorder(BorderFactory.createTitledBorder("Cours"));
         
         //Ajout des panel dans le panel principal
-        mainPanel.add(viewPanel,BorderLayout.CENTER,0 );
-        mainPanel.add(treePanel,BorderLayout.WEST,1);
+        //mainPanel.add(viewPanel,BorderLayout.CENTER,0 );
+       //mainPanel.add(treePanel,BorderLayout.WEST,1);
+        mainPanel.add(viewPanel,JSplitPane.RIGHT,0 );
+        mainPanel.add(treePanel,JSplitPane.LEFT,1);
         }
         catch(RemoteException e)
         {
@@ -89,10 +96,14 @@ public class TeachingStructureView implements FlexiTreeNodeListener
         }
 	}
 	
-	public JPanel getPanel()
+	/*public JPanel getPanel()
 	{
 		return mainPanel;
-	}
+	}*/
+    public JSplitPane getPanel()
+    {
+        return mainPanel;
+    }
 	
     public JTree createJTree(RootTreeNode rootTree)
     {

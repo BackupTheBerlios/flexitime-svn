@@ -220,10 +220,13 @@ public class TypeRoomTreeNode implements FlexiTreeNode
     
     public void remove(IRoom room) {
         RoomTreeNode childNode = searchChild(room);
-        lstRoom.remove(room);
-        int index = children.indexOf(childNode);
-        children.remove(childNode); 
-        model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        if(childNode != null)
+        {
+            lstRoom.remove(room);
+            int index = children.indexOf(childNode);
+            children.remove(childNode); 
+            model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        }
         
     }
     
@@ -252,7 +255,10 @@ public class TypeRoomTreeNode implements FlexiTreeNode
     public void changedRoom(IRoom room)
     {
         RoomTreeNode childNode= searchChild(room);
-        childNode.setRoom(room);
+        if(childNode != null)
+        {
+            childNode.setRoom(room);
+        }
     }
 
 

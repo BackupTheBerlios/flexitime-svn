@@ -89,11 +89,16 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
 		ISubjectsGroup subGroup = DataFactory.createSubjectsGroup("Nouveau Bloc",teachingStructure);
 	}
     
+    public void subjectsGroupAdded(ISubjectsGroup subGroup)
+    {
+        lst.add(subGroup);
+        add(subGroup);
+    }
+    
     public void add(ISubjectsGroup subGroup)
     {
         try
         {    
-            lst.add(subGroup);
             SubjectsGroupTreeNode child = new SubjectsGroupTreeNode(this,subGroup,model);
             children.add(child);
             model.nodesWereInserted(this,new int[]{children.size()-1});
@@ -132,36 +137,39 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
     public void dataChanged(DataEvent event) throws RemoteException
     {
         ITeachingStructure teaching = (ITeachingStructure)event.getSource();
-        int type = event.getEventType();
-        switch(type)
+        if(this.teachingStructure.equals(teaching))
         {
-            case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+            int type = event.getEventType();
+            switch(type)
             {
-                Object[] tabSubjectsGroup = event.getSubObjects();
-                for(int i=0;i<tabSubjectsGroup.length;i++)
+                case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
                 {
-                   add((ISubjectsGroup)tabSubjectsGroup[i]);
+                    Object[] tabSubjectsGroup = event.getSubObjects();
+                    for(int i=0;i<tabSubjectsGroup.length;i++)
+                    {
+                        subjectsGroupAdded((ISubjectsGroup)tabSubjectsGroup[i]);
+                    }
+                    break;
                 }
-                break;
-            }
-            case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
-            {
-                Object[] tabSubjectsGroup = event.getSubObjects();
-               for(int i=0;i<tabSubjectsGroup.length;i++)
-               {
-                   SubjectsGroupTreeNode sgtn = searchChild((ISubjectsGroup)tabSubjectsGroup[i]);
-                   sgtn.setSubjectsGroup((ISubjectsGroup)tabSubjectsGroup[i]);
-               }
-               break; 
-            }
-            case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
-            {
-                Object[] tabSubjectsGroup = event.getSubObjects();
-                for(int i=0;i<tabSubjectsGroup.length;i++)
+                case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
                 {
-                    remove((ISubjectsGroup)tabSubjectsGroup[i]);
+                    Object[] tabSubjectsGroup = event.getSubObjects();
+                   for(int i=0;i<tabSubjectsGroup.length;i++)
+                   {
+                       SubjectsGroupTreeNode sgtn = searchChild((ISubjectsGroup)tabSubjectsGroup[i]);
+                       sgtn.setSubjectsGroup((ISubjectsGroup)tabSubjectsGroup[i]);
+                   }
+                   break; 
                 }
-                break;   
+                case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+                {
+                    Object[] tabSubjectsGroup = event.getSubObjects();
+                    for(int i=0;i<tabSubjectsGroup.length;i++)
+                    {
+                        remove((ISubjectsGroup)tabSubjectsGroup[i]);
+                    }
+                    break;   
+                }
             }
         }
     }

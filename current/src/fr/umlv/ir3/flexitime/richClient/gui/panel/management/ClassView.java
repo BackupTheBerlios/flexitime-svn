@@ -105,7 +105,7 @@ public class ClassView
 			{
 				try 
                 {
-					model.setValue(name.getName());
+					model.setValue(name.getText());
                     okButton.setEnabled(false);
                     cancelButton.setEnabled(false);
 				} 

@@ -83,13 +83,17 @@ public class RootRoomTreeNode extends RootTreeNode
 		DataFactory.createBuilding("Nouveau Batiment");
 	}
 	
+    public void buildingAdded(IBuilding building)
+    {
+        lst.add(building);
+        add(building);
+    }
     public void add(IBuilding building)
     {
        try
        {
            System.out.println("Add BuildingNode");
            BuildingTreeNode child = new BuildingTreeNode(this,building,model);
-           lst.add(building);
            children.add(child);
            model.nodesWereInserted(this,new int[]{children.size()-1});
        }
@@ -107,12 +111,14 @@ public class RootRoomTreeNode extends RootTreeNode
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(javax.swing.tree.TreeNode)
 	 */
 	public void remove(IBuilding building) {
-		BuildingTreeNode childNode;
-        lst.remove(building);
-		int index = children.indexOf(childNode = searchChild(building));
-		children.remove(index);	
-		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
-		
+		BuildingTreeNode childNode=searchChild(building);
+        if(childNode != null)
+        {
+            lst.remove(building);
+            int index = children.indexOf(childNode);
+            children.remove(index);	
+            model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        }
 	}
 
     /* (non-Javadoc)
@@ -126,13 +132,15 @@ public class RootRoomTreeNode extends RootTreeNode
         {
             case DataEvent.TYPE_PROPERTY_ADDED:
             {
-                add(building);
+                buildingAdded(building);
                 break;
             }
             case DataEvent.TYPE_PROPERTY_CHANGED :
             {
                 BuildingTreeNode btn = searchChild(building);
-                btn.setBuilding(building);
+                if(btn != null){
+                    btn.setBuilding(building);
+                }
                 break;
             }
             case DataEvent.TYPE_PROPERTY_REMOVED:
