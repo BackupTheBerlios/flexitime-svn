@@ -57,13 +57,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
         
         this.edtWeekGap = new Gap(2005,1,3,0,0,2005,3,1,0,0);
         
-        //System.out.println(edtWeekGap.getEndDate().getCal().get(Calendar.WEEK_OF_YEAR));
-        //System.out.println(edtWeekGap.getStartDate().getCal().get(Calendar.WEEK_OF_YEAR));
-        
         this.nbWeeks = Time.getGapWeek(edtWeekGap.getStartDate(),edtWeekGap.getEndDate()) + 1 ;
-        //System.out.println("nbWeeks=" + nbWeeks);
-        //this.nbWeeks = edtWeekGap.getEndDate().getCal().get(Calendar.WEEK_OF_YEAR)
-        //- edtWeekGap.getStartDate().getCal().get(Calendar.WEEK_OF_YEAR) + 1;
         
         this.blocList = new Gap[4];
         this.blocList[0] = new Gap(1901,1,1,8,30,1901,1,1,10,30);

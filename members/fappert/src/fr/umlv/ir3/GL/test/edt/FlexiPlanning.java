@@ -62,6 +62,8 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
 	private static BufferedImage buffImage = null; //buff image
 	private static Point cursorPoint = new Point();
 	
+	private JLesson currentSelected = null;
+	
 	
     private DefaultPlanningModel model;
     private EDTCellRenderer cellRenderer;
@@ -105,7 +107,17 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
         return model;
     }
 
-
+    
+    public JLesson getCurrentSelected()
+    {
+        return currentSelected;
+    }
+    public void setCurrentSelected(JLesson currentSelected)
+    {
+        if(this.currentSelected != null)
+            this.currentSelected.setSelected(false);
+        this.currentSelected = currentSelected;
+    }
 
     /** 
      * Initialyse the time table
@@ -198,8 +210,6 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
      */
     private void addWeekHeader(int x, int y, int weekNumber)
     {
-        //System.out.println("Ajout d'un header semaine en ["+x+","+y+"]");
-        
         JComponent comp = cellHeaderRenderer.getEDTCellHeaderRendererComponent(this,model.getWeekHeaderAt(weekNumber),EDTCellHeaderRenderer.WEEK_HEADER);
         
         GridBagConstraints c = new GridBagConstraints();
@@ -223,8 +233,6 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
      */
     private void addDateHeader(int x, int y, int weekNumber, int dayNumber)
     {
-        //System.out.println("Ajout d'un header jour/semaine en ["+x+","+y+"]");
-        
         JComponent comp = cellHeaderRenderer.getEDTCellHeaderRendererComponent(this,model.getDateHeaderAt(weekNumber,dayNumber),EDTCellHeaderRenderer.DATE_HEADER);
 
         GridBagConstraints c = new GridBagConstraints();
@@ -249,7 +257,6 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
      */
     private void addGapHeader(int x, int y, int blocNumber, int length)
     {
-        //System.out.println("Ajout d'un header horaire en ["+x+","+y+"]");
         JComponent comp = cellHeaderRenderer.getEDTCellHeaderRendererComponent(this,model.getGapHeaderAt(blocNumber),EDTCellHeaderRenderer.GAP_HEADER);
         
         GridBagConstraints c = new GridBagConstraints();
@@ -275,7 +282,6 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
      */
     private void addDayHeader(int x, int y, int dayNumber)
     {
-       //System.out.println("Ajout d'un header jour en ["+x+","+y+"]");
        JComponent comp = cellHeaderRenderer.getEDTCellHeaderRendererComponent(this,model.getDayHeaderAt(dayNumber),EDTCellHeaderRenderer.DAY_HEADER);
        
        GridBagConstraints c = new GridBagConstraints();
@@ -389,12 +395,12 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
      */
     private int weekToX(int week)
     {
-        return DAY_COLUMN_WIDTH+week*WEEK_WIDTH+2;
+        return DAY_COLUMN_WIDTH+week*WEEK_WIDTH+2  + gbl.getLayoutOrigin().x;
     }
     
     private int gapToY(int day, int gap)
     {
-        return DAY_HEIGTH + (model.getDayGapSize()*day*GAP_HEIGTH + DAY_HEIGTH*(day+1)) + GAP_HEIGTH*gap + 2;
+        return DAY_HEIGTH + (model.getDayGapSize()*day*GAP_HEIGTH + DAY_HEIGTH*(day+1)) + GAP_HEIGTH*gap + 2 + + gbl.getLayoutOrigin().y;
     }
     
     
@@ -491,7 +497,7 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
 			
 			//System.out.println(p_abs);
 			//System.out.println(p_rel);
-			System.out.println("[" + xToWeek(p_rel.x) + "," + yToDay(p_rel.y) + "," + yToGapInTheDay(p_rel.y) + "]" );
+			//System.out.println("[" + xToWeek(p_rel.x) + "," + yToDay(p_rel.y) + "," + yToGapInTheDay(p_rel.y) + "]" );
 			
 			//on test si c bien une case de cours et si c bien un cours ... sinon pas de drag !
 			if (comp != null && comp instanceof JLesson && comp != FlexiPlanning.this && isALessonGap(p_rel)   &&  model.isALesson(xToWeek(p_rel.x),yToDay(p_rel.y),yToGapInTheDay(p_rel.y)) )
@@ -530,7 +536,7 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
 		private int length;
 		
 		public void dragEnter(DropTargetDragEvent dtde) {
-		    System.out.println("dragEnter() at " + System.currentTimeMillis());
+		    //System.out.println("dragEnter() at " + System.currentTimeMillis());
 		    /*Point pt = dtde.getLocation();
 			paintImmediately(rect2D.getBounds());
 			rect2D.setRect((int) (pt.getX()-cursorPoint.getX()),(int) (pt.getY()-cursorPoint.getY()),buffImage.getWidth(),buffImage.getHeight());
@@ -540,7 +546,7 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
 		}
 		
 		public void dragExit(DropTargetEvent dte) {
-		    System.out.println("dragExit() at " + System.currentTimeMillis());
+		    //System.out.println("dragExit() at " + System.currentTimeMillis());
 		    //redessine la partie du buffImage pour qu'il disparaisse vu kon sort d'une zone de drop
 			//paintImmediately(rect2D.getBounds());
 			//System.out.println("[TODO] Effacer le drop potentiel en ["+ dragPoint.x + ","+ dragPoint.y +"] (at " + System.currentTimeMillis() + ")");
@@ -618,7 +624,7 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
 		}
 
         public void dropActionChanged(DropTargetDragEvent dtde) {
-		    System.out.println("dropActionChanged()");
+		    //System.out.println("dropActionChanged()");
 			
 		    /*Point pt = dtde.getLocation();
 			paintImmediately(rect2D.getBounds());
@@ -652,7 +658,7 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
 					    //System.out.println(location);
 					    Point target = gbl.location(location.x,location.y);
 
-					    System.out.println("Ajout en [" + target.x + "," + target.y + "]" + "week " + xToWeek(target.x) + " day " + yToDay(target.y) + "gap " + yToGapInTheDay(target.y));
+					    //System.out.println("Ajout en [" + target.x + "," + target.y + "]" + "week " + xToWeek(target.x) + " day " + yToDay(target.y) + "gap " + yToGapInTheDay(target.y));
 					    getModel().addElement(xToWeek(target.x) , yToDay(target.y) , yToGapInTheDay(target.y) , lesson );
 
 						dtde.dropComplete(true);
@@ -677,12 +683,6 @@ public class FlexiPlanning extends JPanel implements PlanningDataListener
 	}
 
 
-
-	
-
-    
-    
-    
 
 }
 

@@ -6,7 +6,6 @@
 package fr.umlv.ir3.GL.test.edt;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -95,7 +94,7 @@ public class JLesson extends JLabel
     public boolean isSelected()
     { return isSelected;}
     
-    private void setSelected(boolean value)
+    public void setSelected(boolean value)
     {
         this.isSelected=value;
         if(value)
@@ -104,8 +103,10 @@ public class JLesson extends JLabel
         }
         else
         {
-            //System.out.println("BLACK at" + System.currentTimeMillis());
-            this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            if(lesson == null)
+                this.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+            else
+                this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
     }
     
@@ -163,6 +164,8 @@ public class JLesson extends JLabel
 	
 	final class MouseEventForwarder extends MouseInputAdapter {
 		public void mousePressed(MouseEvent e) {
+	    	
+	    	//forward
 			Container parent = getParent();
 			if (parent != null) {
 				Point newPoint = SwingUtilities.convertPoint(JLesson.this, e.getPoint(), parent);
@@ -196,27 +199,14 @@ public class JLesson extends JLabel
 	    {
 	    	//System.out.println("mouseClicked() over " + getText());
 	    	setSelected(!isSelected());
+	    	((FlexiPlanning)JLesson.this.getParent()).setCurrentSelected(JLesson.this);
 	    }
 		
 		
 	}
 
 
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @return 
-     * 
-     * @see (si nécessaire)
-     * @author   FlexiTeam - binou
-     */
-    public Component getClone()
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
+
 
 
 
