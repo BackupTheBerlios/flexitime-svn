@@ -31,8 +31,9 @@ import fr.umlv.ir3.GL.test.edt.renderer.EDTCellRenderer;
 public class FlexiEDT extends JPanel
 {
 	public static final int WEEK_WIDTH = 75;
+	public static final int DAY_COLUMN_WIDTH = 75;
 	public static final int DAY_HEIGTH = 25;
-	public static final int GAP_HEIGTH = 10;
+	public static final int GAP_HEIGTH = 4;
 	
 	private JGap gap;
 	
@@ -51,18 +52,27 @@ public class FlexiEDT extends JPanel
         this.cellHeaderRenderer = new EDTCellHeaderRenderer();
         
         this.init();
-        //this.initGapOnEDT_Debug();
-        
     }
 
    
-
+    /** 
+     * Returns the model of the FlexiEDT
+     *
+     * @return the model used by the component
+     * 
+     * @see EDTModel
+     * @author   FlexiTeam - binou
+     */
+    public EDTModel getModel()
+    {
+        return model;
+    }
 
 
 
     /** 
-     * DOCME Description
-     * Initialyse the Planning
+     * Initialyse the time table
+     * Is only used at the creation
      * 
      * @author   FlexiTeam - binou
      */
@@ -75,24 +85,23 @@ public class FlexiEDT extends JPanel
     
 
     /** 
-     * DOCME Description
-     * Generate the week Header of the planning containing the number of each week
+     * Generate the week Header of the time table containing the number of each week
      * 
      * @author   FlexiTeam - binou
      */
     private void createWeekLign()
     {
-        for (int i = 1 ; i <= model.getNbWeeks() ; i++)
-            addWeekHeader(i,0,i);
+        for (int i = 0 ; i < model.getNbWeeks() ; i++)
+            addWeekHeader(i+1,0,i);  //+1 =+dayColumn
     } 
     
     /** 
-     * DOCME Description
      * Generate the first Column of the planning
      * containing : <br>
      * - the name of each day
      * - all gap's header
      * - each date of each days on each weeks
+     * Is only used at the creation
      * 
      * @author   FlexiTeam - binou
      */
@@ -101,80 +110,48 @@ public class FlexiEDT extends JPanel
         int tempY;
         for (int i = 0 ; i < model.getNbDays()  ; i++)
         {
-            tempY = i*(model.getNbGaps()+1)+1;
+            tempY = i*(model.getNbGaps()+1)+1; //dernier +1 = +weekLign
             addDayHeader(0,tempY,i);
-            for (int j = 1 ; j <= model.getNbWeeks() ; j++)
-                addDateHeader(j,tempY,j,i);
-            for (int j = 1 ; j <= model.getNbGaps() ; j++)
-                addGapHeader(0,tempY+j,j);
+            for (int j = 0 ; j < model.getNbWeeks() ; j++)
+                addDateHeader(j+1,tempY,j,i);
+            int length;
+            int cur = tempY+1;
+            for (int j = 0 ; j < model.getNbBloc() ; j++)
+            {
+                length = model.getBlocSize(j);
+                addGapHeader(0,cur,j,length);
+                cur += length;
+            }
         }
     }
     
     /** 
-     * DOCME Description
      * Generate the data in the planning :
      * - each Lessons
      * - each empty space (no lessons)
+     * Is only used at the creation
      * 
      * @author   FlexiTeam - binou
      */
     private void fillLesson()
     {
         int tempY;
-        for (int k = 1 ; k <= model.getNbWeeks() ; k++)
+        for (int k = 0 ; k < model.getNbWeeks() ; k++)
         {
             for (int i = 0 ; i < model.getNbDays() ; i++)
             {
                 tempY = i * (model.getNbGaps() + 1) + 1;
-                for (int j = 1 ; j <= model.getNbGaps() ; j++)
+                for (int j = 0 ; j < model.getNbGaps() ; j++)
                     //addEmptyLesson(k, tempY + j);
-                    addGap(k, tempY+j, k,i+1,j);
+                    addGap(k+1, (tempY+1)+j, k,i,j);
             }
-        }
+        } 
     }
     
-    
-
-
-
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param weekNumber
-     * @param dayNumber
-     * @param gapNumber 
-     * 
-     * @see (si nécessaire)
-     * @author   FlexiTeam - binou
-     */
-    private void addGap(int x, int y, int weekNumber, int dayNumber, int gapNumber)
-    {
-        JComponent comp = cellRenderer.getEDTCellRendererComponent(this,model.getElementAt(weekNumber,dayNumber,gapNumber));
-        int fusion = cellRenderer.getEDTCellRendererConstraint();
-        /*if(comp != null)
-        {
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = x;
-            c.gridy = y;
-            c.gridheight = fusion;
-            c.fill = GridBagConstraints.VERTICAL;
-            add(comp, c);
-            System.out.println("add en ["+x+","+y+","+fusion+"]=>"+comp);
-        }
-        else
-            System.out.println("null");*/
-    }
-
-
-
-
-
-
     /** 
      * DOCME Description
      * Add to the layout a week header at the specified coordinate
+     * Is only used at the creation
      * 
      * @param x the x coordinate
      * @param y the y coordinate
@@ -198,6 +175,7 @@ public class FlexiEDT extends JPanel
     /** 
      * DOCME Description
      * Add to the layout a date header at the specified coordinate
+     * Is only used at the creation
      * 
      * @param x the x coordinate
      * @param y the y coordinate
@@ -223,21 +201,25 @@ public class FlexiEDT extends JPanel
     /** 
      * DOCME Description
      * Add to the layout a gap header at the specified coordinate
+     * Is only used at the creation
      * 
      * @param x the x coordinate
      * @param y the y coordinate
+     * @param length
      * @param gapNumber the gap number of the header to add
      * 
      * @author   FlexiTeam - binou
      */
-    private void addGapHeader(int x, int y, int gapNumber)
+    private void addGapHeader(int x, int y, int blocNumber, int length)
     {
         //System.out.println("Ajout d'un header horaire en ["+x+","+y+"]");
-        JComponent comp = cellHeaderRenderer.getEDTCellHeaderRendererComponent(this,model.getGapHeaderAt(gapNumber),EDTCellHeaderRenderer.GAP_HEADER);
+        JComponent comp = cellHeaderRenderer.getEDTCellHeaderRendererComponent(this,model.getGapHeaderAt(blocNumber),EDTCellHeaderRenderer.GAP_HEADER);
         
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = x;
         c.gridy = y;
+        c.gridheight = length;
+        c.fill = GridBagConstraints.VERTICAL;
         add(comp, c);
     }
 
@@ -245,6 +227,7 @@ public class FlexiEDT extends JPanel
     /** 
      * DOCME Description
      * Add to the layout a day header at the specified coordinate
+     * Is only used at the creation
      * 
      * @param x the x coordinate
      * @param y the y coordinate
@@ -265,93 +248,43 @@ public class FlexiEDT extends JPanel
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //********************************************
-    // 					DEBUG
-    //********************************************
-    
-    private void addEmptyLesson(int x, int y)
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param weekNumber
+     * @param dayNumber
+     * @param gapNumber 
+     * 
+     * @see (si nécessaire)
+     * @author   FlexiTeam - binou
+     */
+    private void addGap(int x, int y, int weekNumber, int dayNumber, int gapNumber)
     {
-        System.out.println("Ajout d'une seance vide en ["+x+","+y+"]");
-        gap = new JGap("",Color.WHITE,WEEK_WIDTH,GAP_HEIGTH);
-        addGap(gap,x,y);
-    }
 
-    private void addGap(JGap gap2,int x, int y)
-    {
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = x;
-        c.gridy = y;
-        add(gap2, c);
+        JComponent comp = cellRenderer.getEDTCellRendererComponent(this,model.getElementAt(weekNumber,dayNumber,gapNumber), weekNumber, dayNumber,gapNumber);
+        int fusion = cellRenderer.getEDTCellRendererConstraint();
+        if(comp != null)
+        {
+            GridBagConstraints c = new GridBagConstraints();
+            c.gridx = x;
+            c.gridy = y;
+            c.gridheight = fusion;
+            c.fill = GridBagConstraints.VERTICAL;
+            add(comp, c);
+        }
+        
+        /*if(weekNumber == 0)
+        {
+            Object o = (model.getElementAt(weekNumber,dayNumber,gapNumber));
+            if(o != null)
+                System.out.println("["+ dayNumber + "," + gapNumber + ","+x+","+y+","+fusion+" ]=> " + o.getClass());
+            else
+                System.out.println("["+ dayNumber + "," + gapNumber + ","+x+","+y+","+fusion+" ]=> null");
+        }*/
     }
     
-    private void addMultiGap(JGap gap2,int x, int y, int length)
-    {
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = x;
-        c.gridy = y;
-        c.gridheight = length;
-        c.fill = GridBagConstraints.VERTICAL;
-        add(gap2, c);
-    }
-    
-    private void initGapOnEDT_Debug()
-    {
-        JGap.setDefaultGapSize(FlexiEDT.WEEK_WIDTH, FlexiEDT.GAP_HEIGTH);
-        
-        JButton button;
-        JGap emptyGap;
-        
 
-        
-        gap = new JGap("Corba",Color.RED,WEEK_WIDTH,GAP_HEIGTH);
-        addMultiGap(gap,2,24,2);
-        gap = new JGap("J2EE",Color.GREEN,WEEK_WIDTH,GAP_HEIGTH);
-        addMultiGap(gap,4,22,2);
-        gap = new JGap("SNA",Color.PINK,WEEK_WIDTH,GAP_HEIGTH);
-        addMultiGap(gap,2,22,1);
-        gap = new JGap("ProjetGL",Color.YELLOW,WEEK_WIDTH,GAP_HEIGTH);
-        addMultiGap(gap,1,24,2);
-        
-        gap = new JGap("",Color.WHITE,WEEK_WIDTH,GAP_HEIGTH);
-        addGap(gap,1,22);
-        gap = new JGap("",Color.WHITE,WEEK_WIDTH,GAP_HEIGTH);
-        addGap(gap,1,23);
-        gap = new JGap("",Color.WHITE,WEEK_WIDTH,GAP_HEIGTH);
-        addGap(gap,2,23);
-        for (int i = 0 ; i < 4 ; i++)
-        {
-            gap = new JGap("",Color.WHITE,WEEK_WIDTH,GAP_HEIGTH);
-            addGap(gap,3,22+i);
-            
-        }
-        for (int i = 0 ; i < 4 ; i++)
-        {
-            gap = new JGap("",Color.WHITE,WEEK_WIDTH,GAP_HEIGTH);
-            addGap(gap,5,22+i);
-            
-        }
-        gap = new JGap("",Color.WHITE,WEEK_WIDTH,GAP_HEIGTH);
-        addGap(gap,4,24);
-        gap = new JGap("",Color.WHITE,WEEK_WIDTH,GAP_HEIGTH);
-        addGap(gap,4,25);
-    }
-    public EDTModel getModel()
-    {
-        return model;
-    }
 }
 

@@ -7,13 +7,19 @@ package fr.umlv.ir3.GL.test.edt.renderer;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
+import fr.umlv.ir3.GL.test.edt.Busy;
 import fr.umlv.ir3.GL.test.edt.FlexiEDT;
 import fr.umlv.ir3.GL.test.edt.model.EDTModel;
+import fr.umlv.ir3.GL.test.edt.tool.FlexiColor;
 
 
 /**
@@ -54,8 +60,9 @@ public class EDTCellRenderer
      * @see (si nécessaire)
      * @author   FlexiTeam - binou
      */
-    public JComponent getEDTCellRendererComponent(FlexiEDT flexiEDT, Object elementAt)
+    public JComponent getEDTCellRendererComponent(FlexiEDT flexiEDT, Object elementAt, int week, int day, int gap)
     {
+        this.contrainte = 1;
         this.label = new JLabel();
         if(elementAt == null)
         {
@@ -64,24 +71,69 @@ public class EDTCellRenderer
         }
         else
         {
-            EDTModel.LessonBloc objet = (EDTModel.LessonBloc)elementAt;
-            this.contrainte = objet.getGapSize();
-            if(objet.getBusy() == null)
+            if(elementAt instanceof EDTModel.LessonBloc)
             {
-                //cas d'un créneau vide (sans cours)
-                this.label.setText("    free");
-                this.label.setBackground(Color.WHITE);
-            }
+                EDTModel.LessonBloc lessonBloc = (EDTModel.LessonBloc)elementAt;
+                Busy busy = lessonBloc.getBusy();
+//              nous sommes bien dans le cas d'un Busy à placer
+                this.contrainte = lessonBloc.getNbGap();
+                this.label.setBackground(busy.getColor());
+                this.label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                label.setFont(new Font("Serif", Font.PLAIN, 9));
+                this.label.setText("<html>" + busy.getReason() + " " + busy.getGap().getStartDate().getTime()+ "/" + busy.getGap().getEndDate().getTime()+ "</html>");
+                this.label.addMouseListener(new MouseListener(){
+                public void mousePressed(MouseEvent e)
+                {
+                System.out.println("Oula vla un click ! sur => " + label.getText());
+
+                }
+
+                public void mouseClicked(MouseEvent e)
+                {
+                    // TODO Auto-generated method stub
+                    
+                }
+
+                public void mouseReleased(MouseEvent e)
+                {
+                    // TODO Auto-generated method stub
+                    
+                }
+
+                public void mouseEntered(MouseEvent e)
+                {
+                    // TODO Auto-generated method stub
+                    
+                }
+
+                public void mouseExited(MouseEvent e)
+                {
+                    // TODO Auto-generated method stub
+                    
+                }
+                });
+                
+            }   
             else
             {
-                //nous sommes bien dans le cas d'un Busy à placer
-                this.label.setBackground(objet.getBusy().getColor());
-                this.label.setText(objet.getBusy().getReason());
+                //cas d'un créneau vide (sans cours)
+                this.label.setText("");
+                this.label.setBackground(Color.WHITE);
+                this.label.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+                /*if(week%2 == 0 && gap%2 == 0)
+                    this.label.setBackground(FlexiColor.getColor(FlexiColor.lightblue));
+                else
+                {
+                    if(week%2 == 1 && gap%2 == 1)
+                        this.label.setBackground(FlexiColor.getColor(FlexiColor.lightblue));
+                    else
+                        this.label.setBackground(FlexiColor.getColor(FlexiColor.lightsteelblue));
+                }*/
             }
         }
         
         this.label.setPreferredSize(new Dimension(FlexiEDT.WEEK_WIDTH,FlexiEDT.GAP_HEIGTH*contrainte));
-        this.label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        
         this.label.setOpaque(true);
         return this.label;
     }

@@ -6,7 +6,6 @@
 package fr.umlv.ir3.GL.test.edt;
 
 import java.awt.Color;
-import java.util.Calendar;
 
 
 
@@ -24,15 +23,23 @@ import java.util.Calendar;
  */
 public class Busy
 {
-    private Calendar debut;
-    private Calendar fin;
+    private Gap gap;
     
     private String reason;
     
+    private Color color;
     
 
 
     
+    public Gap getGap()
+    {
+        return gap;
+    }
+    public void setGap(Gap gap)
+    {
+        this.gap = gap;
+    }
     public String getReason()
     {
         return reason;
@@ -43,11 +50,10 @@ public class Busy
     }
     public Busy(int startYear, int startMonth, int startDate, int startHour, int startMinute, int endYear, int endMonth, int endDate, int endHour, int endMinute, Color color, String reason)
     {
-        this.debut = Calendar.getInstance();
-        this.debut.set(startYear,startMonth,startDate,startHour,startMinute);
-        this.fin = Calendar.getInstance();
-        this.fin.set(endYear,endMonth,endDate,endHour,endMinute);
+        this.color = color;
         this.reason = reason;
+        this.gap = new Gap(startYear,startMonth,startDate,startHour,startMinute,endYear,endMonth,endDate,endHour,endMinute);
+        
     }
 
     public Color getColor()
@@ -58,23 +64,7 @@ public class Busy
     {
         this.color = color;
     }
-    private Color color;
+    
  
-    public Calendar getDebut()
-    {
-        return debut;
-    }
-    public void setDebut(Calendar debut)
-    {
-        this.debut = debut;
-    }
-    public Calendar getFin()
-    {
-        return fin;
-    }
-    public void setFin(Calendar fin)
-    {
-        this.fin = fin;
-    }
 }
 
