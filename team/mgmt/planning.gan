@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="FlexiTime" company="FlexiTime" webLink="http://flexitime.free.fr" view-date="1/8/2004" view-zoom="6" version="1.10.1">
+<project name="FlexiTime" company="FlexiTime" webLink="http://flexitime.free.fr" view-date="1/10/2004" view-zoom="3" version="1.10.1">
 <!-- -->    <description>
         Gestion des emplois du Temps
         Projet de Génie Logiciel &#47; Informatique Réseaux 3° année
@@ -144,7 +144,7 @@
             </task>
             <task id="109" name="Création compte SVN" color="#ffcccc" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="25/9/2004" duration="1" complete="100" fixed-start="false" priority="1" expand="false">
                 <notes>
-                    Recherc
+                    Recherche d'un hébergeur SVN : 2h
                 </notes>
             </task>
             <task id="30" name="Description des outils de gestions" color="#ffcccc" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="22/10/2004" duration="15" complete="100" fixed-start="false" priority="1" expand="false">
@@ -154,7 +154,7 @@
                 </notes>
             </task>
         </task>
-        <task id="29" name="Cahier des Charges Fonctionnelles" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="5/10/2004" duration="32" complete="100" fixed-start="true" priority="1" expand="true">
+        <task id="29" name="Cahier des Charges Fonctionnelles" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="5/10/2004" duration="33" complete="99" fixed-start="true" priority="1" expand="true">
             <task id="420" name="Formation à la réalisation des UC" color="#006666" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="5/10/2004" duration="1" complete="100" fixed-start="false" priority="1" expand="true">
                 <notes>
                     2h de réunion entre chefs de projet pour échanger les connaissances de chaque groupe
@@ -167,40 +167,77 @@
                 <depend id="511" type="2"/>
             </task>
             <task id="511" name="Réalisation des diagrammes UC" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true">
-                <task id="512" name="UC Visu infos des enseignants &#38; stats" color="#006666" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true"/>
-                <task id="513" name="UC Gestion du groupe" color="#006666" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true"/>
-                <task id="514" name="UC Gestion Salles&#38;Matériels" color="#006666" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true"/>
-                <task id="515" name="UC Séances &#38; Indispo Enseignants" color="#006666" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true"/>
+                <task id="512" name="UC Visu infos des enseignants &#38; stats" color="#006666" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        6h
+                    </notes>
+                </task>
+                <task id="513" name="UC Gestion du groupe" color="#006666" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        2h
+                    </notes>
+                </task>
+                <task id="514" name="UC Gestion Salles&#38;Matériels" color="#006666" shape="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        1h30
+                    </notes>
+                </task>
+                <task id="515" name="UC Séances &#38; Indispo Enseignants" color="#006666" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        2h30
+                    </notes>
+                </task>
                 <task id="516" name="UC Visu d'un EDT &#38; Export" color="#006666" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true">
                     <notes>
                         3h
                     </notes>
                 </task>
-                <task id="517" name="UC Gestion de l'appli" color="#006666" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true"/>
+                <task id="517" name="UC Gestion de l'appli" color="#006666" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="7/10/2004" duration="11" complete="100" fixed-start="false" priority="1" expand="true">
+                    <notes>
+                        2h30
+                    </notes>
+                </task>
             </task>
             <task id="518" name="Mise au point avec consultant UML" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="true" start="18/10/2004" duration="1" complete="100" fixed-start="false" priority="1" expand="true">
+                <notes>
+                    2 heures de TD Génie Logiciel
+                </notes>
                 <depend id="267" type="2"/>
             </task>
-            <task id="267" name="Structuration en paquetages" color="#006666" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="19/10/2004" duration="9" complete="100" fixed-start="false" priority="1" expand="false"/>
+            <task id="267" name="Structuration en paquetages" color="#006666" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="19/10/2004" duration="9" complete="100" fixed-start="false" priority="1" expand="false">
+                <notes>
+                    6h
+                </notes>
+            </task>
             <task id="268" name="Réalisation de la documentation des UC" color="#006666" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="19/10/2004" duration="9" complete="100" fixed-start="false" priority="1" expand="false">
                 <notes>
                     VF : 4h30
+                    PR : 3h
+                </notes>
+                <depend id="645" type="2"/>
+            </task>
+            <task id="645" name="Première relecture et mise en commun" color="#006666" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="28/10/2004" duration="1" complete="0" fixed-start="false" priority="1" expand="true">
+                <notes>
+                    4h de réunion pour mise en accord des définitions réalisées
                 </notes>
                 <depend id="269" type="2"/>
             </task>
-            <task id="269" name="Réalisation des FQM par UC" color="#006666" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="28/10/2004" duration="9" complete="100" fixed-start="false" priority="1" expand="false">
+            <task id="269" name="Réalisation des FQM par UC" color="#006666" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="29/10/2004" duration="9" complete="100" fixed-start="false" priority="1" expand="false">
                 <notes>
                     VF : 4h
+                    PR : 2h
                 </notes>
             </task>
-            <task id="270" name="Diagramme des paquetages" color="#006666" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="28/10/2004" duration="6" complete="100" fixed-start="false" priority="1" expand="false">
-                <depend id="271" type="2"/>
+            <task id="270" name="Diagramme des paquetages" color="#006666" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="29/10/2004" duration="6" complete="100" fixed-start="false" priority="1" expand="false">
+                <notes>
+                    6h
+                </notes>
             </task>
         </task>
         <task id="191" name="Spécification de l'IG" color="#006600" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="9/11/2004" duration="9" complete="0" fixed-start="true" priority="1" expand="true">
             <task id="285" name="Zoning de l'interface" color="#006600" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="9/11/2004" duration="3" complete="0" fixed-start="false" priority="1" expand="true">
                 <notes>
-                    Travail perso puis2 réunions pour la définition des zones
+                    Travail perso puis 2 réunions pour la définition des zones
                 </notes>
                 <depend id="525" type="2"/>
                 <depend id="526" type="2"/>
@@ -278,24 +315,24 @@
         <allocation task-id="187" resource-id="3" load="50"/>
         <allocation task-id="190" resource-id="4" load="100"/>
         <allocation task-id="9" resource-id="0" load="100"/>
+        <allocation task-id="10" resource-id="7" load="100"/>
         <allocation task-id="10" resource-id="4" load="100"/>
+        <allocation task-id="10" resource-id="6" load="100"/>
         <allocation task-id="10" resource-id="5" load="100"/>
         <allocation task-id="10" resource-id="3" load="100"/>
-        <allocation task-id="10" resource-id="7" load="100"/>
-        <allocation task-id="10" resource-id="6" load="100"/>
         <allocation task-id="10" resource-id="0" load="100"/>
         <allocation task-id="106" resource-id="4" load="10"/>
         <allocation task-id="107" resource-id="4" load="10"/>
         <allocation task-id="108" resource-id="4" load="40"/>
         <allocation task-id="109" resource-id="0" load="10"/>
-        <allocation task-id="30" resource-id="4" load="100"/>
+        <allocation task-id="30" resource-id="4" load="50"/>
         <allocation task-id="30" resource-id="0" load="30"/>
         <allocation task-id="420" resource-id="0" load="80"/>
+        <allocation task-id="421" resource-id="7" load="100"/>
         <allocation task-id="421" resource-id="4" load="100"/>
+        <allocation task-id="421" resource-id="6" load="100"/>
         <allocation task-id="421" resource-id="5" load="100"/>
         <allocation task-id="421" resource-id="3" load="100"/>
-        <allocation task-id="421" resource-id="7" load="100"/>
-        <allocation task-id="421" resource-id="6" load="100"/>
         <allocation task-id="421" resource-id="0" load="80"/>
         <allocation task-id="512" resource-id="3" load="100"/>
         <allocation task-id="513" resource-id="4" load="100"/>
@@ -303,17 +340,23 @@
         <allocation task-id="515" resource-id="0" load="80"/>
         <allocation task-id="516" resource-id="5" load="100"/>
         <allocation task-id="517" resource-id="7" load="100"/>
-        <allocation task-id="518" resource-id="4" load="100"/>
-        <allocation task-id="518" resource-id="5" load="100"/>
         <allocation task-id="518" resource-id="7" load="100"/>
-        <allocation task-id="518" resource-id="3" load="100"/>
+        <allocation task-id="518" resource-id="4" load="100"/>
         <allocation task-id="518" resource-id="6" load="100"/>
+        <allocation task-id="518" resource-id="5" load="100"/>
+        <allocation task-id="518" resource-id="3" load="100"/>
         <allocation task-id="518" resource-id="0" load="80"/>
         <allocation task-id="267" resource-id="3" load="100"/>
-        <allocation task-id="268" resource-id="5" load="100"/>
         <allocation task-id="268" resource-id="7" load="100"/>
-        <allocation task-id="269" resource-id="5" load="100"/>
+        <allocation task-id="268" resource-id="5" load="100"/>
+        <allocation task-id="645" resource-id="7" load="100"/>
+        <allocation task-id="645" resource-id="4" load="50"/>
+        <allocation task-id="645" resource-id="6" load="50"/>
+        <allocation task-id="645" resource-id="5" load="100"/>
+        <allocation task-id="645" resource-id="3" load="100"/>
+        <allocation task-id="645" resource-id="0" load="50"/>
         <allocation task-id="269" resource-id="7" load="100"/>
+        <allocation task-id="269" resource-id="5" load="100"/>
         <allocation task-id="269" resource-id="3" load="50"/>
         <allocation task-id="270" resource-id="3" load="50"/>
         <allocation task-id="285" resource-id="7" load="100"/>
@@ -323,7 +366,9 @@
         <allocation task-id="526" resource-id="7" load="100"/>
         <allocation task-id="527" resource-id="3" load="100"/>
         <allocation task-id="284" resource-id="4" load="100"/>
-        <allocation task-id="279" resource-id="6" load="100"/>
+        <allocation task-id="521" resource-id="6" load="100"/>
+        <allocation task-id="522" resource-id="6" load="100"/>
+        <allocation task-id="523" resource-id="6" load="50"/>
         <allocation task-id="528" resource-id="5" load="100"/>
         <allocation task-id="530" resource-id="5" load="100"/>
         <allocation task-id="532" resource-id="5" load="100"/>
