@@ -8,53 +8,21 @@ package fr.umlv.ir3.flexitime.common.data;
 
 import java.awt.Color;
 import java.rmi.RemoteException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.DeviceBusyImpl;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.GroupBusyImpl;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.RoomBusyImpl;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.TeacherBusyImpl;
-import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
-import fr.umlv.ir3.flexitime.common.data.admin.IUser;
-import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
-import fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl;
-import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
-import fr.umlv.ir3.flexitime.common.data.general.impl.BuildingImpl;
-import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
-import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
-import fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl;
-import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.resources.IResource;
-import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
-import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectsGroupImpl;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructureImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.*;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.*;
+import fr.umlv.ir3.flexitime.common.data.admin.*;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.*;
+import fr.umlv.ir3.flexitime.common.data.general.*;
+import fr.umlv.ir3.flexitime.common.data.general.impl.*;
+import fr.umlv.ir3.flexitime.common.data.resources.*;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
-import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
-import fr.umlv.ir3.flexitime.common.tools.Gap;
+import fr.umlv.ir3.flexitime.common.tools.*;
 
 /**
  * Create all datas from specific parameters. This class contains only statics
@@ -78,10 +46,39 @@ public class DataFactory
      * @param parent
      *              IDevice this Busy belongs to 
      * @return a new unavaibility for a device
+     * @throws FlexiException 
      */
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent) throws FlexiException
     {
         IDeviceBusy d = new DeviceBusyImpl(g);
+        parent.addBusy(d);
+        try
+        {
+            d = RemoteDataManager.getManager().saveOrUpdateDeviceBusy(d, parent);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        
+        return d;
+    }
+    
+    /**
+     * Create an unavaibility for a device during a Gap without reason
+     * 
+     * @param g
+     *            the gap of the unavaibility
+     * @param parent
+     *              IDevice this Busy belongs to
+     * @param comment
+     *            description of the unaivaibility
+     * @return a new unavaibility for a device
+     * @throws FlexiException 
+     */
+    public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent, String comment) throws FlexiException
+    {
+        IDeviceBusy d = new DeviceBusyImpl(g, comment);
         parent.addBusy(d);
         try
         {
@@ -105,10 +102,41 @@ public class DataFactory
      * @param reason
      *            the reason if the unavaibility
      * @return a new unavaibility for a device
+     * @throws FlexiException 
      */
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent, int reason) throws FlexiException
     {
         IDeviceBusy d = new DeviceBusyImpl(g, reason);
+        parent.addBusy(d);
+        try
+        {
+            d = RemoteDataManager.getManager().saveOrUpdateDeviceBusy(d, parent);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        
+        return d;
+    }
+    
+    /**
+     * Create an unavaibility for a device during a Gap for the specified reason
+     * 
+     * @param g
+     *            the gap of the unavaibility
+     * @param parent 
+     *            IDevice this Busy belongs to
+     * @param reason
+     *            the reason if the unavaibility
+     * @param comment
+     *            description of the unaivaibility
+     * @return a new unavaibility for a device
+     * @throws FlexiException 
+     */
+    public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent, int reason, String comment) throws FlexiException
+    {
+        IDeviceBusy d = new DeviceBusyImpl(g, reason, comment);
         parent.addBusy(d);
         try
         {
@@ -127,6 +155,7 @@ public class DataFactory
      * 
      * @param busy
      *            the unavaibility to copy
+     * @param parent 
      * @return a new unavaibility for a device
      * @throws FlexiException 
      */
@@ -149,6 +178,7 @@ public class DataFactory
      * Constructs an unavailibility for a group between a gap without reason.
      * 
      * @param g gap of the unavaibulity
+     * @param parent 
      * @return a new unavaibility for a group
      * @throws FlexiException 
      */
@@ -167,11 +197,38 @@ public class DataFactory
         
         return group;
     }
+    
+    /**
+     * Constructs an unavailibility for a group between a gap without reason.
+     * 
+     * @param g gap of the unavaibulity
+     * @param comment
+     *            description of the unaivaibility
+     * @param parent 
+     * @return a new unavaibility for a group
+     * @throws FlexiException 
+     */
+    public static IGroupBusy createGroupBusy(Gap g, IGroup parent, String comment) throws FlexiException
+    {
+        IGroupBusy group = new GroupBusyImpl(g, comment);
+        parent.addBusy(group);
+        try
+        {
+            group = RemoteDataManager.getManager().saveOrUpdateGroupBusy(group, parent);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        
+        return group;
+    }
 
     /**
      * Constructs an unavailibility for a group between a gap for the reason specified.
      * 
      * @param g gap of the unavaibulity
+     * @param parent 
      * @param reason reason of the unavaibility
      * @return a new unavaibility for a group
      * @throws FlexiException 
@@ -192,10 +249,37 @@ public class DataFactory
     }
     
     /**
+     * Constructs an unavailibility for a group between a gap for the reason specified.
+     * 
+     * @param g gap of the unavaibulity
+     * @param parent 
+     * @param reason reason of the unavaibility
+     * @param comment
+     *            description of the unaivaibility
+     * @return a new unavaibility for a group
+     * @throws FlexiException 
+     */
+    public static IGroupBusy createGroupBusy(Gap g, IGroup parent, int reason, String comment) throws FlexiException
+    {
+        IGroupBusy group = new GroupBusyImpl(g, reason, comment);
+        parent.addBusy(group);
+        try
+        {
+            group = RemoteDataManager.getManager().saveOrUpdateGroupBusy(group, parent);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        return group;
+    }
+    
+    /**
      * Copy a group busy to create a new group busy.
      * 
      * @param busy
      *            the unavaibility to copy
+     * @param parent 
      * @return a new unavaibility for a group
      * @throws FlexiException 
      */
@@ -324,7 +408,7 @@ public class DataFactory
             lesson.addResource(elem);
             System.out.println(elem.getClass() +" " + elem.getSetBusy());
         }
-        System.out.println(lesson.getIdBusy());
+        
         return lesson;
     }
     
@@ -382,7 +466,7 @@ public class DataFactory
     public static ILesson createLesson(ILesson lesson) throws FlexiException
     {
         ILesson les = new LessonImpl(lesson);
-        List<IResource> l = new LinkedList();
+        List<IResource> l = new LinkedList<IResource>();
         
         for(Iterator<IDevice> it = les.getLstDevice().iterator(); it.hasNext(); )
         {
@@ -417,6 +501,7 @@ public class DataFactory
      * 
      * @param g
      *            the gap between the unavailibility.
+     * @param parent 
      * @return a new unavaibility for a room
      * @throws FlexiException 
      */
@@ -435,19 +520,86 @@ public class DataFactory
         
         return r;
     }
+    
+    /**
+     * Constructs an unavailibility for a room without reason.
+     * 
+     * @param g
+     *            the gap between the unavailibility.
+     * @param parent 
+     * @param comment
+     *            description of the unaivaibility
+     * @return a new unavaibility for a room
+     * @throws FlexiException 
+     */
+    public static IRoomBusy createRoomBusy(Gap g, IRoom parent, String comment) throws FlexiException
+    {
+        IRoomBusy r = new RoomBusyImpl(g, comment);
+        parent.addBusy(r);
+        try
+        {
+            r = RemoteDataManager.getManager().saveOrUpdateRoomBusy(r, parent);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        
+        return r;
+    }
 
     /**
      * Constructs an unavailibility for a room for the reason specified.
      * 
      * @param g
      *            the gap between the unavailibility.
+     * @param parent 
      * @param reason
      *            an Integer representing the reason of the unavailibility.
      * @return a new unavaibility for a room
+     * @throws FlexiException 
      */
-    public static IRoomBusy createRoomBusy(Gap g, int reason)
+    public static IRoomBusy createRoomBusy(Gap g, IRoom parent, int reason) throws FlexiException
     {
-        return new RoomBusyImpl(g, reason);
+        IRoomBusy r = new RoomBusyImpl(g, reason);
+        parent.addBusy(r);
+        try
+        {
+            r = RemoteDataManager.getManager().saveOrUpdateRoomBusy(r, parent);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        return r;
+    }
+    
+    /**
+     * Constructs an unavailibility for a room for the reason specified.
+     * 
+     * @param g
+     *            the gap between the unavailibility
+     * @param parent 
+     * @param reason
+     *            an Integer representing the reason of the unavailibility
+     * @param comment
+     *            description of the unaivaibility
+     * @return a new unavaibility for a room
+     * @throws FlexiException 
+     */
+    public static IRoomBusy createRoomBusy(Gap g, IRoom parent, int reason, String comment) throws FlexiException
+    {
+        IRoomBusy r = new RoomBusyImpl(g, reason, comment);
+        parent.addBusy(r);
+        try
+        {
+            r = RemoteDataManager.getManager().saveOrUpdateRoomBusy(r, parent);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        return r;
     }
 
     /**
@@ -455,6 +607,7 @@ public class DataFactory
      * 
      * @param busy
      *            the unavaibility to copy
+     * @param parent 
      * @return a new unavaibility for a device
      * @throws FlexiException 
      */
@@ -478,6 +631,7 @@ public class DataFactory
      * 
      * @param g
      *            the gap between the unavailibility.
+     * @param parent 
      * @return a new unavaibility for a teacher
      * @throws FlexiException 
      */
@@ -496,12 +650,40 @@ public class DataFactory
         
         return t;
     }
+    
+    /**
+     * Constructs an unavailibility for a teacher without reason.
+     * 
+     * @param g
+     *            the gap between the unavailibility.
+     * @param parent 
+     * @param comment
+     *            description of the unaivaibility 
+     * @return a new unavaibility for a teacher
+     * @throws FlexiException 
+     */
+    public static ITeacherBusy createTeacherBusy(Gap g, ITeacher parent, String comment) throws FlexiException
+    {
+        ITeacherBusy t = new TeacherBusyImpl(g, comment);
+        parent.addBusy(t);
+        try
+        {
+            t = RemoteDataManager.getManager().saveOrUpdateTeacherBusy(t, parent);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        
+        return t;
+    }
 
     /**
      * Constructs an unavailibility for a teacher for the reason specified.
      * 
      * @param g
      *            the gap between the unavailibility.
+     * @param parent 
      * @param reason
      *            an Integer representing the reason of the unavailibility.
      * @return a new unavaibility for a teacher
@@ -524,10 +706,40 @@ public class DataFactory
     }
     
     /**
+     * Constructs an unavailibility for a teacher for the reason specified.
+     * 
+     * @param g
+     *            the gap between the unavailibility.
+     * @param parent 
+     * @param reason
+     *            an Integer representing the reason of the unavailibility.
+     * @param comment
+     *            description of the unaivaibility
+     * @return a new unavaibility for a teacher
+     * @throws FlexiException 
+     */
+    public static ITeacherBusy createTeacherBusy(Gap g, ITeacher parent, int reason, String comment) throws FlexiException
+    {
+        ITeacherBusy t = new TeacherBusyImpl(g, reason, comment);
+        parent.addBusy(t);
+        try
+        {
+            t = RemoteDataManager.getManager().saveOrUpdateTeacherBusy(t, parent);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        
+        return t;
+    }
+    
+    /**
      * Copy a teacher busy to create a new teacher busy.
      * 
      * @param busy
      *            the unavaibility to copy
+     * @param parent 
      * @return a new unavaibility for a device
      * @throws FlexiException 
      */

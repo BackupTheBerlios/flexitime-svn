@@ -13,11 +13,8 @@ import fr.umlv.ir3.flexitime.common.tools.Gap;
  * Defines an unavailability for a teacher. Containes a reason for the
  * unavailibility, a start and an end date and a name.
  * 
- * REASON_WORK      = 1;
- * REASON_HOLLYDAYS = 2;
- * REASON_SICK      = 3;
- * REASON_STAGE     = 4;
- * REASON_PERSO     = 5;
+ * REASON_WORK = 1; REASON_HOLLYDAYS = 2; REASON_SICK = 3; REASON_STAGE = 4;
+ * REASON_PERSO = 5;
  * 
  * 
  * @version 240
@@ -58,6 +55,20 @@ public class TeacherBusyImpl extends BusyImpl implements ITeacherBusy
     }
     
     /**
+     * Constructs an unavailibility for a teacher without reason.
+     * 
+     * @param g
+     *            the gap between the unavailibility.
+     * @param comment
+     *            description of the unaivaibility
+     * 
+     */
+    public TeacherBusyImpl(Gap g, String comment)
+    {
+        super(g, comment);
+    }
+
+    /**
      * Constructs an unavailibility for a teacher for the reason specified.
      * 
      * @param g
@@ -70,7 +81,23 @@ public class TeacherBusyImpl extends BusyImpl implements ITeacherBusy
         this(g);
         reason = iReason;
     }
-    
+
+    /**
+     * Constructs an unavailibility for a teacher for the reason specified.
+     * 
+     * @param g
+     *            the gap between the unavailibility.
+     * @param iReason
+     *            an Integer representing the reason of the unavailibility.
+     * @param comment
+     *            description of the unaivaibility
+     */
+    public TeacherBusyImpl(Gap g, int iReason, String comment)
+    {
+        this(g, comment);
+        reason = iReason;
+    }
+
     /**
      * Copy a teacher busy to create a new teacher busy.
      * 
@@ -79,7 +106,7 @@ public class TeacherBusyImpl extends BusyImpl implements ITeacherBusy
      */
     public TeacherBusyImpl(ITeacherBusy busy)
     {
-        this(busy.getGap(), busy.getReason());
+        this(busy.getGap(), busy.getReason(), busy.getComment());
     }
 
     // ======== //

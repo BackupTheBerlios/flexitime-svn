@@ -54,6 +54,19 @@ public class DeviceBusyImpl extends BusyImpl implements IDeviceBusy
     {
         super(g);
     }
+    
+    /**
+     * Constructs an unavailibility for a device between a gap without reason.
+     * 
+     * @param g
+     *            gap of the unavaibulity
+     * @param comment
+     *            description of the unaivaibility
+     */
+    public DeviceBusyImpl(Gap g, String comment)
+    {
+        super(g, comment);
+    }
 
     /**
      * Constructs an unavailibility for a device between a gap for the reason
@@ -67,6 +80,23 @@ public class DeviceBusyImpl extends BusyImpl implements IDeviceBusy
     public DeviceBusyImpl(Gap g, int iReason)
     {
         this(g);
+        reason = iReason;
+    }
+    
+    /**
+     * Constructs an unavailibility for a device between a gap for the reason
+     * specified.
+     * 
+     * @param g
+     *            gap of the unavaibulity
+     * @param iReason
+     *            reason of the unavaibility
+     * @param comment
+     *            description of the unaivaibility
+     */
+    public DeviceBusyImpl(Gap g, int iReason, String comment)
+    {
+        this(g, comment);
         reason = iReason;
     }
     

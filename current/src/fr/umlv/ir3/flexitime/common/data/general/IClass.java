@@ -103,4 +103,16 @@ public interface IClass extends IData
 	 * @param track the parent track of this class.
 	 */
 	public void setParentTrack(ITrack track);
+    
+    /**
+     * Return nbSubGroup
+     * @return Returns the nbSubGroup.
+     */
+    public int getNbSubGroup();
+    
+    /**
+     * Set nbSubGroup
+     * @param nbSubGroup The nbSubGroup to set.
+     */
+    public void setNbSubGroup(int nbSubGroup);
 }

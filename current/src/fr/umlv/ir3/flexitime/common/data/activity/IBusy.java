@@ -83,6 +83,18 @@ public interface IBusy extends Serializable, Comparable
     public void setIdBusy(Long idBusy);
     
     /**
+     * Return comment
+     * @return Returns the comment.
+     */
+    public String getComment();
+    
+    /**
+     * Set comment
+     * @param comment The comment to set.
+     */
+    public void setComment(String comment);
+    
+    /**
      * Compare two Busy.
      * Only the start of the unavaibilities are compared.
      * 

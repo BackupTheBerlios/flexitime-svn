@@ -25,11 +25,12 @@ public abstract class BusyImpl implements IBusy
     // ===========//
     // Champs //
     // ===========//
-    private Date   daStart;
-    private Date   daEnd;
-    protected Long idBusy;
+    private Date                 daStart;
+    private Date                 daEnd;
+    protected Long               idBusy;
+    private String               comment;
     private static FlexiLanguage language;
-    
+
     static
     {
         language = FlexiLanguage.getInstance();
@@ -69,6 +70,23 @@ public abstract class BusyImpl implements IBusy
     {
         this(g.getStartDate().getCal().getTime(), g.getEndDate().getCal()
                 .getTime());
+    }
+
+    /**
+     * Construct an unavaibility for a device for a specified gap with a
+     * comment.
+     * 
+     * @param g
+     *            the gap between the start date and the end date of the
+     *            unavaibility
+     * @param comment
+     *            the reason of the unavaibility
+     */
+    BusyImpl(Gap g, String comment)
+    {
+        this(g.getStartDate().getCal().getTime(), g.getEndDate().getCal()
+                .getTime());
+        this.comment = comment;
     }
 
     // ======== //
@@ -168,8 +186,28 @@ public abstract class BusyImpl implements IBusy
     }
 
     /**
-     * Compare two Busy.
-     * Only the start of the unavaibilities are compared.
+     * Return comment
+     * 
+     * @return Returns the comment.
+     */
+    public String getComment()
+    {
+        return comment;
+    }
+
+    /**
+     * Set comment
+     * 
+     * @param comment
+     *            The comment to set.
+     */
+    public void setComment(String comment)
+    {
+        this.comment = comment;
+    }
+
+    /**
+     * Compare two Busy. Only the start of the unavaibilities are compared.
      * 
      * @param o
      *            the second busy to compare
@@ -186,12 +224,12 @@ public abstract class BusyImpl implements IBusy
     {
         if (! ( o instanceof IBusy ))
             throw new ClassCastException(language.getText("errBusy01")); //$NON-NLS-1$
-    
-        IBusy bus = (IBusy)o;
-        
+
+        IBusy bus = (IBusy) o;
+
         return this.daStart.compareTo(bus.getStartDate());
     }
-    
+
     /**
      * Test the equality of two busies.
      * <ul>
@@ -215,7 +253,7 @@ public abstract class BusyImpl implements IBusy
         if (! ( this.getClass().equals(obj.getClass()) )) return false;
         if ( ( ( (IBusy) obj ).getIdBusy() == null ) || ( idBusy == null ))
             return false;
-        return ( idBusy.equals(( (IBusy) obj ).getIdBusy() ));
+        return ( idBusy.equals( ( (IBusy) obj ).getIdBusy()) );
     }
 
     /**

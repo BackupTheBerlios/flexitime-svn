@@ -54,6 +54,19 @@ public class RoomBusyImpl extends BusyImpl implements IRoomBusy
     {
         super(g);
     }
+    
+    /**
+     * Constructs an unavailibility for a room without reason.
+     * 
+     * @param g
+     *            the gap between the unavailibility
+     * @param comment
+     *            description of the unaivaibility
+     */
+    public RoomBusyImpl(Gap g, String comment)
+    {
+        super(g, comment);
+    }
 
     /**
      * Constructs an unavailibility for a room for the reason specified.
@@ -66,6 +79,22 @@ public class RoomBusyImpl extends BusyImpl implements IRoomBusy
     public RoomBusyImpl(Gap g, int iReason)
     {
         this(g);
+        reason = iReason;
+    }
+    
+    /**
+     * Constructs an unavailibility for a room for the reason specified.
+     * 
+     * @param g
+     *            the gap between the unavailibility
+     * @param iReason
+     *            an Integer representing the reason of the unavailibility
+     * @param comment
+     *            description of the unaivaibility
+     */
+    public RoomBusyImpl(Gap g, int iReason, String comment)
+    {
+        this(g, comment);
         reason = iReason;
     }
     

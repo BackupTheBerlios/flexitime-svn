@@ -9,6 +9,7 @@ package fr.umlv.ir3.flexitime.common.data.general;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
+import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
 
 /**
  * Regroupe differents classes
@@ -19,6 +20,18 @@ import fr.umlv.ir3.flexitime.common.data.IData;
 public interface ITrack extends IData
 {
 
+    /**
+     * Return lstTimeBloc
+     * @return Returns the lstTimeBloc.
+     */
+    public List<TimeBloc> getLstTimeBloc();
+    
+    /**
+     * Set lstTimeBloc
+     * @param lstTimeBloc The lstTimeBloc to set.
+     */
+    public void setLstTimeBloc(List<TimeBloc> lstTimeBloc);
+    
     /**
      * Returns the list of class.
      * 

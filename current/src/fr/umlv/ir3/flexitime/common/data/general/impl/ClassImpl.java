@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.data.general.*;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
@@ -40,6 +39,7 @@ public class ClassImpl extends DataImpl implements IClass
     private List<IGroup>       lstGroups;
     private ITeachingStructure teachingStructure;
     private ITrack             parentTrack;
+    private int                nbSubGroup;
 
     // ==================//
     // Constructeurs //
@@ -65,6 +65,7 @@ public class ClassImpl extends DataImpl implements IClass
         super(name);
         this.parentTrack = track;
         lstGroups = new ArrayList<IGroup>();
+        nbSubGroup = 1;
     }
 
     /**
@@ -78,19 +79,21 @@ public class ClassImpl extends DataImpl implements IClass
      *            the teaching structure of this class.
      * @param track
      *            the parent track.
+     * @param nbSubGroup 
      */
-    public ClassImpl(String sName, ITrack track, List<IGroup> listOfGroups,
+    public ClassImpl(String sName, ITrack track, int nbSubGroup, List<IGroup> listOfGroups,
             ITeachingStructure struct)
     {
         super(sName);
+        this.nbSubGroup = nbSubGroup;
         this.lstGroups = listOfGroups;
         this.teachingStructure = struct;
         this.parentTrack = track;
     }
 
-    // =============//
+    // ======== //
     // Méthodes //
-    // =============//
+    // ======== //
     /**
      * Calculates the number of persons and groups in this class.
      * <code>class.calculNbPersonAndNbGroup()</code>
@@ -244,5 +247,23 @@ public class ClassImpl extends DataImpl implements IClass
     public void setParentTrack(ITrack track)
     {
         this.parentTrack = track;
+    }
+    
+    /**
+     * Return nbSubGroup
+     * @return Returns the nbSubGroup.
+     */
+    public int getNbSubGroup()
+    {
+        return nbSubGroup;
+    }
+    
+    /**
+     * Set nbSubGroup
+     * @param nbSubGroup The nbSubGroup to set.
+     */
+    public void setNbSubGroup(int nbSubGroup)
+    {
+        this.nbSubGroup = nbSubGroup;
     }
 }

@@ -12,11 +12,12 @@ import java.util.List;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
+import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
 
 /**
  * Defines a track which contains classes.
  * 
- * @version 245
+ * @version 290
  * @see fr.umlv.ir3.flexitime.common.data.general.ITrack
  * 
  * @author FlexiTeam - Jérôme GUERS
@@ -32,6 +33,7 @@ public class TrackImpl extends DataImpl implements ITrack
     // Champs //
     // ===========//
     private List<IClass>      lstClass;
+    private List<TimeBloc>    lstTimeBloc;
 
     // ==================//
     // Constructeurs //
@@ -71,9 +73,28 @@ public class TrackImpl extends DataImpl implements ITrack
         this.lstClass = listClasses;
     }
 
-    // =============//
+    // ======== //
     // Méthodes //
-    // =============//
+    // ======== //
+    
+    /**
+     * Return lstTimeBloc
+     * @return Returns the lstTimeBloc.
+     */
+    public List<TimeBloc> getLstTimeBloc()
+    {
+        return lstTimeBloc;
+    }
+    
+    /**
+     * Set lstTimeBloc
+     * @param lstTimeBloc The lstTimeBloc to set.
+     */
+    public void setLstTimeBloc(List<TimeBloc> lstTimeBloc)
+    {
+        this.lstTimeBloc = lstTimeBloc;
+    }
+    
     /**
      * Returns the list of classes in this track.
      * <code>List list = getLstClass()</code>
