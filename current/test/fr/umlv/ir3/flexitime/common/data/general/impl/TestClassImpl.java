@@ -37,6 +37,7 @@ public class TestClassImpl extends TestCase {
     public void testGetNbGroup()
     {
         GroupImpl group1 = new GroupImpl("titi",10);
+        group1.setIdData(new Long(1));
         pclass.addGroup(group1);
         pclass.addGroup( new GroupImpl("tutu",20));
         
@@ -45,7 +46,7 @@ public class TestClassImpl extends TestCase {
        
         pclass.removeGroup(group1);
         if(pclass.getNbGroup() != 1)
-            fail("Erreur NbFloor");
+            fail("Erreur suppression groupe");
           
     }
     
@@ -56,6 +57,7 @@ public class TestClassImpl extends TestCase {
     public void testGetNbPerson()
     {
         GroupImpl group1 = new GroupImpl("titi",10);
+        group1.setIdData(new Long(1));
         pclass.addGroup(group1);
         pclass.addGroup( new GroupImpl("tutu",20));
         
@@ -64,7 +66,7 @@ public class TestClassImpl extends TestCase {
        
         pclass.removeGroup(group1);
         if(pclass.getNbPerson() != 20)
-            fail("Erreur NbFloor");
+            fail("Erreur suppression groupe");
           
     }
     
@@ -75,6 +77,7 @@ public class TestClassImpl extends TestCase {
     public void testLstGroup()
     {
         GroupImpl group1 = new GroupImpl("titi",10);
+        group1.setIdData(new Long(1));
         pclass.addGroup(group1);
         pclass.addGroup( new GroupImpl("tutu",20));
         

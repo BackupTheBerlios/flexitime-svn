@@ -34,6 +34,7 @@ public class TestBuildingImpl extends TestCase {
     public void testGetNbFloor()
     {
         FloorImpl floor1 = new FloorImpl("titi", building);
+        floor1.setIdData(new Long(1));
         building.addFloor(floor1);
         building.addFloor( new FloorImpl("tutu", building));
         
@@ -54,6 +55,7 @@ public class TestBuildingImpl extends TestCase {
     public void testLstFloor()
     {
         FloorImpl floor1 = new FloorImpl("titi", building);
+        floor1.setIdData(new Long(1));
         building.addFloor(floor1);
         building.addFloor( new FloorImpl("tutu", building));
         
@@ -65,5 +67,4 @@ public class TestBuildingImpl extends TestCase {
             fail("erreur Lecture des Floor 2 ");
         
     }
-    
 }

@@ -30,6 +30,7 @@ public class TestTrackImpl extends TestCase
     public void testLstClass()
     {
         IClass class1 = new ClassImpl("ir1", track);
+        class1.setIdData(new Long(1));
         track.addClass(class1);
         track.addClass(new ClassImpl("ir2", track));
 
