@@ -81,47 +81,86 @@ public class FlexiSelectionListenerFactory
 	 */
 	public static TreeSelectionListener createTrackTreeSelectionListener(final JComponent panelParent,final ListModel teacherList)
 	{
-		TreeSelectionListener selectionListener = new TreeSelectionListener()
+       
+        TreeSelectionListener selectionListener = new TreeSelectionListener()
 		{
-			public void valueChanged(TreeSelectionEvent arg0) 
+             
+             TrackViewModel modelTrack = null;
+             TrackView trackView =null;
+             ClassViewModel modelClass = null;
+             ClassView classView =null;
+             GroupViewModel modelGroup =null; 
+             GroupView groupView=null;
+             TeachingStructureView teachingStructureView=null;
+            public void valueChanged(TreeSelectionEvent arg0) 
 			{
-				 try 
+                
+                try 
                  {
+                    JPanel panel1 = new JPanel(new BorderLayout());
                     JTree tmpTree = (JTree)arg0.getSource();
 					if(tmpTree.getSelectionPath()!= null)
 					{
 						TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
-						JPanel panel1 = new JPanel(new BorderLayout());
+
 						if(tmpTreeNode instanceof TrackTreeNode)
 						{										   
-				            TrackViewModel model = new TrackViewModel(((TrackTreeNode)tmpTreeNode).getTrack());
-				            TrackView trackView = new TrackView(model);
-				            panel1.add(new JScrollPane(trackView.getPanel()), BorderLayout.CENTER);
-				            panel1.setBorder(BorderFactory.createTitledBorder(language.getText("track")));
-                               	
+				            if(modelTrack==null)
+                            {
+				                modelTrack = new TrackViewModel(((TrackTreeNode)tmpTreeNode).getTrack());
+				                trackView = new TrackView(modelTrack);
+                            }
+                            else
+                            {
+                                modelTrack.setTrack(((TrackTreeNode)tmpTreeNode).getTrack());
+                            }
+                            panel1.add(new JScrollPane(trackView.getPanel()), BorderLayout.CENTER);
+                            panel1.setBorder(BorderFactory.createTitledBorder(language.getText("track")));
 						}
 						else if(tmpTreeNode instanceof ClassTreeNode)
 						{                     
-                            ClassViewModel model = new ClassViewModel(((ClassTreeNode)tmpTreeNode).getIClass());
-                            ClassView classView = new ClassView(model);
-							panel1.add(new JScrollPane(classView.getPanel()), BorderLayout.CENTER);
-							panel1.setBorder(BorderFactory.createTitledBorder(language.getText("class")));
-							
+                            if(modelClass == null)
+                            {
+                                modelClass = new ClassViewModel(((ClassTreeNode)tmpTreeNode).getIClass());
+                                classView = new ClassView(modelClass);
+    							
+                            }
+                            else
+                            {
+                                modelClass.setIClass(((ClassTreeNode)tmpTreeNode).getIClass());
+                            }
+                            panel1.add(new JScrollPane(classView.getPanel()), BorderLayout.CENTER);
+                            panel1.setBorder(BorderFactory.createTitledBorder(language.getText("class")));
 						}
 						else if(tmpTreeNode instanceof GroupTreeNode)
 						{
-							GroupViewModel model = new GroupViewModel(((GroupTreeNode)tmpTreeNode).getGroup());
-                            GroupView groupView = new GroupView(model);
-							panel1.add(new JScrollPane(groupView.getPanel()), BorderLayout.CENTER);
-							panel1.setBorder(BorderFactory.createTitledBorder(language.getText("group")));
-							
+							if(modelGroup ==null)
+                            {
+                                modelGroup = new GroupViewModel(((GroupTreeNode)tmpTreeNode).getGroup());
+                                groupView = new GroupView(modelGroup);
+    							
+                            }
+                            else
+                            {
+                                modelGroup.setGroup(((GroupTreeNode)tmpTreeNode).getGroup());
+                            }
+                            panel1.add(new JScrollPane(groupView.getPanel()), BorderLayout.CENTER);
+                            panel1.setBorder(BorderFactory.createTitledBorder(language.getText("group")));
 						}
 						else if(tmpTreeNode instanceof TeachingStructureTreeNode)
 						{
-							TeachingStructureView teachingStructureView = new TeachingStructureView(tmpTree.getModel(),tmpTree,teacherList);
-							panel1.add(new JScrollPane(teachingStructureView.getPanel()), BorderLayout.CENTER);
+							if(teachingStructureView==null) 
+                            {
+                                teachingStructureView = new TeachingStructureView(tmpTree.getModel(),tmpTree,teacherList);
+                                
+                            }
+                            else
+                            {
+                                teachingStructureView.setTeachingStructure(((TeachingStructureTreeNode)tmpTreeNode).getTeachingStructure());
+                            }
+                            panel1.add(new JScrollPane(teachingStructureView.getPanel()), BorderLayout.CENTER);
                             panel1.setBorder(BorderFactory.createTitledBorder(language.getText("teachingStructure")));
-						}
+                        }
 						//panelParent.remove(0);
                         ((JSplitPane)panelParent).setRightComponent(panel1);
                         //panelParent.add(panel1, BorderLayout.CENTER,0);
@@ -148,7 +187,10 @@ public class FlexiSelectionListenerFactory
 	{
 		TreeSelectionListener selectionListener = new TreeSelectionListener()
 		{
-			public void valueChanged(TreeSelectionEvent arg0) 
+            DevicesViewModel model=null;
+            DevicesView deviceView=null;
+            JPanel panel1 = new JPanel(new BorderLayout());
+            public void valueChanged(TreeSelectionEvent arg0) 
 			{
 				 try 
                  {	
@@ -156,7 +198,7 @@ public class FlexiSelectionListenerFactory
 					if(tmpTree.getSelectionPath()!= null)
 					{
 						TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
-						JPanel panel1 = new JPanel(new BorderLayout());
+						//JPanel panel1 = new JPanel(new BorderLayout());
 						if(tmpTreeNode instanceof TypeDeviceTreeNode)
 						{
 							//Pas de vue
@@ -167,11 +209,17 @@ public class FlexiSelectionListenerFactory
 						}
 						else if(tmpTreeNode instanceof DeviceTreeNode)
 						{
-							DevicesViewModel model = new DevicesViewModel(((DeviceTreeNode)tmpTreeNode).getDevice());
-                            DevicesView deviceView = new DevicesView(model);
-							panel1.add(new JScrollPane(deviceView.getPanel()), BorderLayout.CENTER);
-							panel1.setBorder(BorderFactory.createTitledBorder(language.getText("device")));
-							
+							if(model == null)
+                            {   
+							     model = new DevicesViewModel(((DeviceTreeNode)tmpTreeNode).getDevice());
+							     deviceView = new DevicesView(model);
+                                 panel1.add(new JScrollPane(deviceView.getPanel()), BorderLayout.CENTER);
+                                 panel1.setBorder(BorderFactory.createTitledBorder(language.getText("device")));
+                            }
+                            else
+                            {
+                                model.setDevice(((DeviceTreeNode)tmpTreeNode).getDevice());
+                            }			
 						}
 						//panelParent.remove(0);
                         ((JSplitPane)panelParent).setRightComponent(panel1);                      

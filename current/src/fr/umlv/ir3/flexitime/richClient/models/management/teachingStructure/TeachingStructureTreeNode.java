@@ -127,6 +127,7 @@ public class TeachingStructureTreeNode implements FlexiTreeNode
 	{
 		return teachingStructure;
 	}
+   
 	/**
 	 * Creates dynamiquely the list of the children when the user click on the "plus"
 	 * @return the list of sub categories

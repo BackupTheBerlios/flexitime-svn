@@ -66,6 +66,14 @@ public class TrackViewModel extends DataListenerImpl
     public ITrack getTrack()
     {
         return track;
+       
+    }
+    
+    public void setTrack(ITrack track)
+    {
+        this.track=track;
+        view.setValue(track.getName());
+        
     }
 
     /**

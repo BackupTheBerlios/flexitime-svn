@@ -71,6 +71,12 @@ public class ClassViewModel extends DataListenerImpl
     {
         return iClass;
     }
+    
+    public void setIClass(IClass iClass)
+    {
+        this.iClass=iClass;
+        view.fireChanged();
+    }
 
     /**
      * @param view The view to set.

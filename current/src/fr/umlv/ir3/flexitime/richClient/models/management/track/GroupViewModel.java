@@ -76,6 +76,12 @@ public class GroupViewModel extends DataListenerImpl
     {
         return group;
     }
+    
+    public void setGroup(IGroup group)
+    {
+     this.group=group;   
+     view.fireChanged();
+    }
 
     /**
      * @param view The view to set.

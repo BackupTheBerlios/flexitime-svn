@@ -244,7 +244,7 @@ public class TypeDeviceTreeNode implements FlexiTreeNode
 	 */
 	public void setValue(Object device) {
 		DeviceTreeNode childNode = searchChild((IDevice)device);
-        childNode.setDevice(((IDevice)device));
+        if(childNode!=null)childNode.setDevice(((IDevice)device));
 	}
 
 

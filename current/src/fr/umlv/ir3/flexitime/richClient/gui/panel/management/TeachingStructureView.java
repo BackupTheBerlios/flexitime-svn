@@ -45,7 +45,7 @@ public class TeachingStructureView implements FlexiTreeNodeListener
 	JSplitPane mainPanel;
     JPanel treePanel;
 	JPanel viewPanel;
-	ITeachingStructure teachingStructure;
+	ITeachingStructure teachingStructure=null;
     ListModel teacherList;
     private static FlexiLanguage language = FlexiLanguage.getInstance();
     
@@ -66,7 +66,7 @@ public class TeachingStructureView implements FlexiTreeNodeListener
 		treePanel = new JPanel(new BorderLayout());
         
 		viewPanel = new JPanel(new BorderLayout());
-		teachingStructure = ((TeachingStructureTreeNode)tree.getSelectionPath().getLastPathComponent()).getTeachingStructure();
+		if(teachingStructure ==null)teachingStructure = ((TeachingStructureTreeNode)tree.getSelectionPath().getLastPathComponent()).getTeachingStructure();
 		//Construction du treePanel
 		treePanel.setBorder(BorderFactory.createTitledBorder("Liste des Blocs"));
 		
@@ -131,6 +131,12 @@ public class TeachingStructureView implements FlexiTreeNodeListener
 			public void editingStopped(ChangeEvent e) {}
 		});
         return tmpTree;
+    }
+    
+    public void setTeachingStructure(ITeachingStructure teaching)
+    {
+        this.teachingStructure = teaching;
+        create();
     }
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.gui.actions.FlexiTreeNodeListener#nodeChanged(java.lang.Object)

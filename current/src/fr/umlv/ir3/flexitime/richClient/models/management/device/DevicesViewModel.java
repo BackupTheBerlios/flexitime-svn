@@ -40,6 +40,11 @@ public class DevicesViewModel extends DataListenerImpl
             device.setName(value);
             RemoteDataManager.getManager().saveOrUpdateDevice(device);
         }
+        public void setDevice(IDevice device) throws RemoteException
+        {
+            this.device=device;
+            view.setValue(device.getName());
+        }
 
         /* (non-Javadoc)
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
