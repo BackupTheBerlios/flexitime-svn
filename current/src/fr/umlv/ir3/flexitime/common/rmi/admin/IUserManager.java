@@ -30,6 +30,7 @@ public interface IUserManager extends Remote
     public void save(String name, String password) throws RemoteException;
     public void removeUser(String name) throws RemoteException;
     public void changeLocalPasswd(String name,String newPassword) throws RemoteException;
+    public String getLongName(String login)throws RemoteException;
 }
 
 

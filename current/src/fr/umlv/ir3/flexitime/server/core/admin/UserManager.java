@@ -80,6 +80,7 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
         //      On verifie que le User ne soit pas déja connecté
         
         //      On vérifie d'abord si l'utilisateur se trouve dans le LDAP
+        
         if(ldap.createConnection(name,passwd)) return true;
         //      Si on ne l'a pas trouvé dans le LDAP on regarde si c'est un utilisateur local à l'appli    
         /* il faut retrouver tous les utilisateurs de l'appli dans la base.
@@ -203,5 +204,15 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
         
     }
 
+    public String getLongName(String login)throws RemoteException
+    {
+        //TODO gecos par le bon identifiant
+        ArrayList list = ldap.getAttribute("gecos",FlexiLDAP.TYPE_USER,login);
+        if(list==null) return "";
+        Iterator it = list.iterator();
+        if(it.hasNext()) return (String)it.next();
+        return "";
+        
+    }
 
 }
