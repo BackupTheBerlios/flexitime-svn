@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="FlexiTime" company="FlexiTime" webLink="http://flexitime.free.fr" view-date="1/11/2004" view-zoom="3" version="1.10.2">
-    <!-- -->    <description>
+<!-- -->    <description>
         Gestion des emplois du Temps
         Projet de Génie Logiciel &#47; Informatique Réseaux 3° année
         Ingénieurs 2000 - Université de Marne-La-Vallée
@@ -287,13 +287,7 @@
             </task>
             <task id="1044" name="Redéfinition de la charte graphique" color="#006600" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="24/11/2004" duration="2" complete="90" fixed-start="false" priority="1" expand="true">
                 <notes>
-                    AB - 28&#47;11&#47;04 : 45 min refonte plan
-                    AB - 29&#47;11&#47;04 : 45 min partie logo
-                    AB - 30&#47;11&#47;04 : 1H partie style + boutons
-                    AB - 01&#47;12&#47;04 : 2H partie icones + couleur
-                    
-                    Reste : intro + relecture
-                    
+                    AB - 28&#47;11&#47;04e&#34;&#62;
                 </notes>
             </task>
             <task id="1045" name="Nouvelle relecture" color="#006600" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="26/11/2004" duration="3" complete="0" fixed-start="false" priority="1" expand="true">
@@ -342,8 +336,7 @@
                 </task>
                 <task id="528" name="Test des différentes SGBDR" color="#003300" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="false" start="19/11/2004" duration="6" complete="100" fixed-start="false" priority="1" expand="true">
                     <notes>
-                        * Qualification des différentes SGBDR &#38; choix justifié (Prévu 6h)
-                           xed e&#34;&#62;
+                        * Qualification des différenteing=&#34;f
                     </notes>
                 </task>
                 <task id="782" name="Choix de la bibliothèque d'IG" color="#003300" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="19/11/2004" duration="8" complete="100" fixed-start="false" priority="1" expand="true">
@@ -371,12 +364,7 @@
                 </task>
                 <task id="786" name="Test JUnit" color="#003300" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="19/11/2004" duration="5" complete="95" fixed-start="false" priority="1" expand="true">
                     <notes>
-                        * Documentation d'utilisation de JUnit (Prévu 6h)
-                        Samedi 20-11: recherche sur Junit 1h30
-                        Lundi 22-11: tests classes 30min
-                        Mardi 23-11: creation doc 30min
-                        Mercredi 24-11: tests classes 30min
-                         2004&#34; name=&#34;Red
+                        *  différenteing=&#34;f
                     </notes>
                 </task>
                 <task id="785" name="Gestion du Drag&#38;Drop" color="#003300" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="22/11/2004" duration="5" complete="75" fixed-start="false" priority="1" expand="true">
@@ -425,17 +413,18 @@
                         - Qualification d'Hibernate (Prévu 4h) :
                         26&#47;10&#47;04 : 30 min
                         
-                        Lecture doc + Tests
+                         hèques deing=&#34;f
                     </notes>
                 </task>
             </task>
-            <task id="282" name="Description de l'architecture logicielle" color="#003300" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="29/11/2004" duration="24" complete="0" fixed-start="false" priority="1" expand="true">
-                <task id="1047" name="Répartition du travail -&#62; Architecture" color="#003300" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="29/11/2004" duration="2" complete="10" fixed-start="false" priority="1" expand="true">
+            <task id="282" name="Description de l'architecture logicielle" color="#003300" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="29/11/2004" duration="24" complete="1" fixed-start="false" priority="1" expand="true">
+                <task id="1047" name="Répartition du travail -&#62; Architecture" color="#003300" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="29/11/2004" duration="2" complete="20" fixed-start="false" priority="1" expand="true">
                     <notes>
                         * VF : Découpage de l'application en paquetage (Prévu 4h)
                         * JG : Validation + répartition des tâches (Prévu 2h)
                         
                         Réflexion VF 29&#47;11 30min
+                        VF Création de la doc 30&#47;11 2h 
                     </notes>
                 </task>
                 <task id="1321" name="Definition du MCD" color="#003300" shape="1,1,0,0,0,1,1,0,0,0,1,1,1,0,0,1" meeting="false" start="6/12/2004" duration="2" complete="0" fixed-start="false" priority="1" expand="true"/>
@@ -472,16 +461,16 @@
         <allocation task-id="15" resource-id="5" load="80.0"/>
         <allocation task-id="19" resource-id="5" load="80.0"/>
         <allocation task-id="18" resource-id="7" load="100.0"/>
-        <allocation task-id="187" resource-id="3" load="50.0"/>
         <allocation task-id="187" resource-id="5" load="20.0"/>
+        <allocation task-id="187" resource-id="3" load="50.0"/>
         <allocation task-id="190" resource-id="4" load="100.0"/>
         <allocation task-id="9" resource-id="0" load="100.0"/>
+        <allocation task-id="10" resource-id="5" load="100.0"/>
+        <allocation task-id="10" resource-id="0" load="100.0"/>
         <allocation task-id="10" resource-id="6" load="100.0"/>
         <allocation task-id="10" resource-id="3" load="100.0"/>
-        <allocation task-id="10" resource-id="0" load="100.0"/>
-        <allocation task-id="10" resource-id="5" load="100.0"/>
-        <allocation task-id="10" resource-id="4" load="100.0"/>
         <allocation task-id="10" resource-id="7" load="100.0"/>
+        <allocation task-id="10" resource-id="4" load="100.0"/>
         <allocation task-id="106" resource-id="4" load="10.0"/>
         <allocation task-id="107" resource-id="4" load="10.0"/>
         <allocation task-id="108" resource-id="4" load="40.0"/>
@@ -489,39 +478,39 @@
         <allocation task-id="30" resource-id="0" load="30.0"/>
         <allocation task-id="30" resource-id="4" load="50.0"/>
         <allocation task-id="420" resource-id="0" load="80.0"/>
+        <allocation task-id="421" resource-id="5" load="100.0"/>
+        <allocation task-id="421" resource-id="0" load="80.0"/>
         <allocation task-id="421" resource-id="6" load="100.0"/>
         <allocation task-id="421" resource-id="3" load="100.0"/>
-        <allocation task-id="421" resource-id="0" load="80.0"/>
-        <allocation task-id="421" resource-id="5" load="100.0"/>
-        <allocation task-id="421" resource-id="4" load="100.0"/>
         <allocation task-id="421" resource-id="7" load="100.0"/>
+        <allocation task-id="421" resource-id="4" load="100.0"/>
         <allocation task-id="512" resource-id="3" load="100.0"/>
         <allocation task-id="513" resource-id="4" load="100.0"/>
         <allocation task-id="514" resource-id="6" load="100.0"/>
         <allocation task-id="515" resource-id="0" load="80.0"/>
         <allocation task-id="516" resource-id="5" load="100.0"/>
         <allocation task-id="517" resource-id="7" load="100.0"/>
+        <allocation task-id="518" resource-id="5" load="100.0"/>
+        <allocation task-id="518" resource-id="0" load="80.0"/>
         <allocation task-id="518" resource-id="6" load="100.0"/>
         <allocation task-id="518" resource-id="3" load="100.0"/>
-        <allocation task-id="518" resource-id="0" load="80.0"/>
-        <allocation task-id="518" resource-id="5" load="100.0"/>
-        <allocation task-id="518" resource-id="4" load="100.0"/>
         <allocation task-id="518" resource-id="7" load="100.0"/>
+        <allocation task-id="518" resource-id="4" load="100.0"/>
         <allocation task-id="267" resource-id="3" load="100.0"/>
         <allocation task-id="268" resource-id="5" load="100.0"/>
         <allocation task-id="268" resource-id="7" load="100.0"/>
+        <allocation task-id="645" resource-id="5" load="100.0"/>
+        <allocation task-id="645" resource-id="0" load="50.0"/>
         <allocation task-id="645" resource-id="6" load="50.0"/>
         <allocation task-id="645" resource-id="3" load="100.0"/>
-        <allocation task-id="645" resource-id="0" load="50.0"/>
-        <allocation task-id="645" resource-id="5" load="100.0"/>
-        <allocation task-id="645" resource-id="4" load="50.0"/>
         <allocation task-id="645" resource-id="7" load="100.0"/>
-        <allocation task-id="269" resource-id="3" load="50.0"/>
+        <allocation task-id="645" resource-id="4" load="50.0"/>
         <allocation task-id="269" resource-id="5" load="100.0"/>
+        <allocation task-id="269" resource-id="3" load="50.0"/>
         <allocation task-id="269" resource-id="7" load="100.0"/>
         <allocation task-id="270" resource-id="3" load="50.0"/>
-        <allocation task-id="285" resource-id="3" load="100.0"/>
         <allocation task-id="285" resource-id="0" load="80.0"/>
+        <allocation task-id="285" resource-id="3" load="100.0"/>
         <allocation task-id="285" resource-id="7" load="100.0"/>
         <allocation task-id="525" resource-id="7" load="100.0"/>
         <allocation task-id="526" resource-id="0" load="80.0"/>
@@ -551,20 +540,20 @@
         <allocation task-id="530" resource-id="5" load="100.0"/>
         <allocation task-id="531" resource-id="6" load="100.0"/>
         <allocation task-id="781" resource-id="7" load="50.0"/>
-        <allocation task-id="1047" resource-id="0" load="30.0"/>
         <allocation task-id="1047" resource-id="5" load="100.0"/>
+        <allocation task-id="1047" resource-id="0" load="30.0"/>
         <allocation task-id="1321" resource-id="3" load="100.0"/>
-        <allocation task-id="1051" resource-id="3" load="100.0"/>
         <allocation task-id="1051" resource-id="5" load="100.0"/>
+        <allocation task-id="1051" resource-id="3" load="100.0"/>
     </allocations>
 
 
-    <roles roleset-name="Default"/>
-    <roles>
-        <role id="11" name="Secrétaire + Responsable Client"/>
-        <role id="12" name="Site Web + Responsable Qualité"/>
-        <role id="13" name="Responsable Développement &amp; test"/>
-        <role id="14" name="Responsable technique"/>
-        <role id="15" name="Responsable Interface Graphique"/>
-    </roles>
+<roles roleset-name="Default"/>
+<roles>
+<role id="11" name="Secrétaire + Responsable Client"/>
+<role id="12" name="Site Web + Responsable Qualité"/>
+<role id="13" name="Responsable Développement &amp; test"/>
+<role id="14" name="Responsable technique"/>
+<role id="15" name="Responsable Interface Graphique"/>
+</roles>
 </project>
