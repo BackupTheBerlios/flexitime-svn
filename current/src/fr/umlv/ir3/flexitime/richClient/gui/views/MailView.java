@@ -21,6 +21,7 @@ import com.jgoodies.forms.debug.FormDebugPanel;
 import com.jgoodies.forms.layout.*;
 
 import fr.umlv.ir3.flexitime.common.tools.*;
+import fr.umlv.ir3.flexitime.richClient.gui.Client;
 import fr.umlv.ir3.flexitime.richClient.io.FlexiMail;
 
 /**
@@ -270,7 +271,7 @@ public class MailView
         
         mailFrame.add(builder.getPanel());
         mailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        ImageIcon icon = new ImageIcon(getClass().getResource("../pictures/FlexiTime_icone32.png"));
+        ImageIcon icon = new ImageIcon(Client.class.getResource("pictures/FlexiTime_icone32.png"));
         mailFrame.setIconImage(icon.getImage());
         mailFrame.setSize(330, 350);
         //mailFrame.setResizable(false);

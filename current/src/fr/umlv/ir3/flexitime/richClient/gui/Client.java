@@ -378,7 +378,6 @@ public class Client
 
         //Print
         Action print = PrintAction.getInstance();
-        PrintAction.setExploitView(exploitView);
         menuFichier.add(print);
         
         menuFichier.add(new JSeparator());
@@ -578,7 +577,7 @@ public class Client
      */
     public static void setStatus(String etat)
     {
-        System.out.println("je suis dtc: " + etat);
+        //System.out.println("je suis dtc: " + etat);
         status.setText(etat);
         status.repaint();
     }
@@ -786,7 +785,7 @@ public class Client
      */
     public static void setExploitMode()
     {
-        setStatus("DTC !!!!!!!!!");
+        //setStatus("DTC !!!!!!!!!");
         jp_status.revalidate();
         jp_status.repaint();        
         PrintAction.getInstance().setEnabled(true);
@@ -809,6 +808,8 @@ public class Client
             LargerTimeTableAction.setView(exploitView);
             NextWeekAction.setView(exploitView);
             NextIntervalAction.setView(exploitView);
+            
+            PrintAction.setExploitView(exploitView);
             
             //fpm.stop();
         }
