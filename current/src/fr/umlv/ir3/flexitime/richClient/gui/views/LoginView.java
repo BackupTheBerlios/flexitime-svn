@@ -33,6 +33,7 @@ import com.jgoodies.forms.layout.FormLayout;
 public class LoginView
 {
     private JFrame loginFrame;
+    private PanelBuilder builder;
     private String login = "";
     private char[] pass;
 
@@ -48,14 +49,14 @@ public class LoginView
                 "3dlu, p, p, p, 9dlu, p, 3dlu, p, 9dlu, p");      // 9 rows
         
         
-        PanelBuilder builder = new PanelBuilder(layout);
+        builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
         
         //Obtain a reusable constraints object to place components in the grid.
         CellConstraints cc = new CellConstraints();
 
         //creation des components
-        ImageIcon icon = new ImageIcon(getClass().getResource("FlexiTime_icone32.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("../pictures/FlexiTime_icone32.png"));
         JLabel labIcon = new JLabel(icon);
         final JTextField tfLogin = new JTextField();
         tfLogin.setText("<votre nom>");
@@ -174,6 +175,6 @@ public class LoginView
     public void setRepack()
     {
         //TODO Ne marche pas ...
-        loginFrame.pack();
+        loginFrame.getRootPane().revalidate();
     }
 }

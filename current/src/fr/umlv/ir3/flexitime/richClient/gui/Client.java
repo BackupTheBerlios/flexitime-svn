@@ -97,7 +97,7 @@ public class Client
         frame.setSize(800, 600);
         panel = new JPanel(new BorderLayout());
         frame.setContentPane(panel);
-        ImageIcon icon = new ImageIcon(getClass().getResource("FlexiTime_icone32.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("pictures/FlexiTime_icone32.png"));
         frame.setIconImage(icon.getImage());
     }
     
@@ -354,7 +354,7 @@ public class Client
             int res = JOptionPane.showConfirmDialog(null,"Souhaitez-vous réellement vous délogger?","Se désauthentifier",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
             if(res == JOptionPane.YES_OPTION)
             {
-                //TODO fermer panel exploit et/ou mngmt
+                //TODO fermer panel exploit et/ou mngmt & Afficher Accueil.html
                 user = null;
                 loginView.setLogin("");
                 loginView.setRepack(); //TODO ne marche pas ....
@@ -636,7 +636,7 @@ public class Client
             while( (login=loginView.getLogin()) == "" ) {}
             pass = loginView.getPass();
             
-            //TODO verifier user / login sur server (bdd flexitime)
+            //TODO JG, verifier user / login sur server (bdd flexitime)
             //test fictif...
             String password = new String(pass);
             System.out.println("login="+login+", pass="+password);

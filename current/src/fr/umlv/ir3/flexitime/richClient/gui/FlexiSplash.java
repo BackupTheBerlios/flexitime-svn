@@ -36,7 +36,7 @@ public class FlexiSplash extends JFrame
         
         
         //TODO icone deconne....
-        ImageIcon splashImage = new ImageIcon(getClass().getResource("FlexiSplash.png"));
+        ImageIcon splashImage = new ImageIcon(getClass().getResource("pictures/FlexiSplash.png"));
         JLabel lab = new JLabel(splashImage);
         
         getContentPane().add(lab, BorderLayout.CENTER);
