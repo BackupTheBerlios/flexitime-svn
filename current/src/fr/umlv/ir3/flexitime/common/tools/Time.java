@@ -481,7 +481,7 @@ public class Time implements Comparable
             return 0;
         long nb3 = c2.getTimeInMillis()-c.getTimeInMillis();
 
-        if((nb3/100)<(60*60*60*24*7)) return 0;
+        if((nb3/1000)<(60*60*24*7)) return 0;
         int tmp = 0;
         boolean bool= false;
         while(bool==false){
@@ -495,8 +495,8 @@ public class Time implements Comparable
     }
     
    /*public static void main(String[] args){
-        Time t= new Time(2004,12,27,0,0);
-        Time t2 = new Time(2050,1,2,0,0);
+        Time t= new Time(2005,1,6,0,0);
+        Time t2 = new Time(2005,2,3,0,0);
         System.out.println(Time.getGapWeek(t,t2));
     }*/
 
