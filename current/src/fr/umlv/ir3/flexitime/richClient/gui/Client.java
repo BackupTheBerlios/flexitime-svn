@@ -21,7 +21,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
-import java.util.Calendar;
 import java.util.Enumeration;
 
 import javax.swing.AbstractAction;
@@ -49,7 +48,6 @@ import com.jgoodies.plaf.HeaderStyle;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.Plastic3DLookAndFeel;
 
-import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Time;
@@ -110,7 +108,7 @@ public class Client
         frame = new JFrame(language.getText("appliTitle")); //$NON-NLS-1$
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
-        ImageIcon icon = new ImageIcon(getClass().getResource("pictures/FlexiTime_icone32.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource(language.getText("flexIcone32"))); //$NON-NLS-1$
         frame.setIconImage(icon.getImage());
         
         //gestion conteneurs
@@ -127,8 +125,8 @@ public class Client
 		try {
 			mngmtView = new ManagementView();
 		} catch (RemoteException e) {
-            //TODO pop up
-            System.out.println("mngmtView inouvrable");
+            JOptionPane.showMessageDialog(null, language.getText("errMngmt1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+            setAccueilMode();
 		}
         accueilPanel = accueilView.getPanel();
         exploitPanel = (JPanel)exploitView.getPanel();
@@ -163,11 +161,11 @@ public class Client
                 int n = parent.getComponentCount();
                 for (int i = 0; i < n; i++) {
                     Component c = parent.getComponent(i);
-                    System.out.println(c + "\n\t" + c.getPreferredSize());
+                    System.out.println(c + "\n\t" + c.getPreferredSize()); //$NON-NLS-1$
                     w = Math.max(w, c.getPreferredSize().width);
                     h = Math.max(h, c.getPreferredSize().height);
                 }
-                System.out.println(w + ", " + h);
+                System.out.println(w + ", " + h); //$NON-NLS-1$
                 return new Dimension(w, h);
             }
 
@@ -193,7 +191,7 @@ public class Client
         centerPanel.add(accueilPanel, JLayeredPane.PALETTE_LAYER);
         centerPanel.add(exploitPanel, JLayeredPane.PALETTE_LAYER);
         centerPanel.add(mngmtPanel, JLayeredPane.PALETTE_LAYER);
-        //TODO if(user.getPrefs().getDefaultTrack() != null)
+        //TODO if(user!=null && user.getPrefs().getDefaultTrack() != null)
         //{ setExploitMode() Mettre une filière en paramètre ???????
         //}else
         setAccueilMode();
@@ -304,9 +302,9 @@ public class Client
         
         //date actuelle
         JLabel labDateAct = new JLabel() ;
-        Font v = new Font("Arial", Font.BOLD, 12);
+        Font v = new Font("Arial", Font.BOLD, 12); //$NON-NLS-1$
         labDateAct.setFont(v);
-        String dateActuelle = language.formatLongDate(new Time()) + " | ";
+        String dateActuelle = language.formatLongDate(new Time()) + " | "; //$NON-NLS-1$
         labDateAct.setText(dateActuelle);
         toolBar.add(labDateAct);
         
@@ -314,13 +312,14 @@ public class Client
         //filière actuelle
         JLabel labTrackAct = new JLabel();
         labTrackAct.setFont(v);
-        String filiereActuelle = language.getText("track") + " : ";
-        /*TODO if( (String s = UserImpl.getTrack()) != null)
+        String filiereActuelle = language.getText("track") + " : "; //$NON-NLS-1$ //$NON-NLS-2$
+        /*TODO ajouter la filiere a l'affichage 
+        if( (String s = UserImpl.getTrack()) != null)
         {
             filiereActuelle += s;
         }
         else*/
-            filiereActuelle += "aucune  ";
+            filiereActuelle += "aucune  "; //$NON-NLS-1$
         labTrackAct.setText(filiereActuelle);
         toolBar.add(labTrackAct);
     }
@@ -343,7 +342,7 @@ public class Client
         // File //
         //////////
         // Fichier
-        JMenu menuFichier = new JMenu("Fichier");
+        JMenu menuFichier = new JMenu(language.getText("file")); //$NON-NLS-1$
         menuBar.add(menuFichier);
 
         //Preferences
@@ -357,12 +356,12 @@ public class Client
         menuFichier.add(new JSeparator());
         
         //Import
-        Action impor = new AbstractAction("Importer") {
+        Action impor = new AbstractAction(language.getText("import")) {
 
             public void actionPerformed(ActionEvent e)
             {
             // TODO Auto-generated method stub
-
+                System.out.println("Faire fonction Importer...."); //$NON-NLS-1$
             }
 
         };
@@ -375,10 +374,10 @@ public class Client
         menuFichier.add(new JSeparator());
         
         //Logout
-        Action logout = new AbstractAction("Logout") {
+        Action logout = new AbstractAction(language.getText("logout")) {
         public void actionPerformed(ActionEvent e)
         {
-            int res = JOptionPane.showConfirmDialog(null,"Souhaitez-vous réellement vous délogger?","Se désauthentifier",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+            int res = JOptionPane.showConfirmDialog(null,language.getText("msg6"),language.getText("logout"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             if(res == JOptionPane.YES_OPTION)
             {
                 setAccueilMode();
@@ -386,12 +385,12 @@ public class Client
                 //TODO loginView.reset();
                 if( (user = checkLogin()) == null)
                 {
-                    System.out.println("problème lors de l'authentification");
+                    JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
                     System.exit(1);
                 }
                 
                 //TODO JG, charger pref user notamment filière par défaut(si pas ds pref->afficher view)
-                System.out.println("apres logout : charge "+ user + " prefs");
+                System.out.println("apres logout : charger "+ user + " prefs"); //$NON-NLS-1$ //$NON-NLS-2$
             }
             else
             {}
@@ -400,15 +399,13 @@ public class Client
         menuFichier.add(logout);
         
         //Quitter
-        Action quit = new AbstractAction("Quitter") {
+        Action quit = new AbstractAction(language.getText("quit")) { //$NON-NLS-1$
 
             public void actionPerformed(ActionEvent e)
             {
-                int res = JOptionPane.showConfirmDialog(null,"Souhaitez-vous quitter FlexiTime?","Quitter l'application",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+                int res = JOptionPane.showConfirmDialog(null,language.getText("msg7"),language.getText("exit"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);  //$NON-NLS-1$//$NON-NLS-2$
                 if(res == JOptionPane.YES_OPTION)
                 {
-                    //System.out.println("YES quit");
-                    //TODO Est-ce propre de quitter de cette facon ?
                     System.exit(0);                
                 }
             }
@@ -419,13 +416,13 @@ public class Client
         //////////
         // Mail //
         //////////
-        JMenu menuMail = new JMenu("Mail");
+        JMenu menuMail = new JMenu(language.getText("mail")); //$NON-NLS-1$
         menuBar.add(menuMail);
         
         Action sendMail = MailAction.getInstance();
         menuMail.add(sendMail);
 
-        JMenu formatedMail = new JMenu("Envoyer Mail pré formaté...");
+        JMenu formatedMail = new JMenu(language.getText("preFormatedMail")); //$NON-NLS-1$
         menuMail.add(formatedMail);
         
         Action sendPreFormatedClassMail = MailPreFormatedClassAction.getInstance();
@@ -440,10 +437,10 @@ public class Client
         ///////////////
         // Affichage //
         ///////////////
-        JMenu menuAffichage = new JMenu("Affichage");
+        JMenu menuAffichage = new JMenu(language.getText("view")); //$NON-NLS-1$
         menuBar.add(menuAffichage);
         
-        JMenu mode = new JMenu("Mode");
+        JMenu mode = new JMenu(language.getText("mode")); //$NON-NLS-1$
         menuAffichage.add(mode);
         
         Action gestion = GestionAction.getInstance();
@@ -465,23 +462,23 @@ public class Client
         ///////////////////
 
         // Aide en ligne //
-        JMenu menuAide = new JMenu("Aide");
+        JMenu menuAide = new JMenu(language.getText("help")); //$NON-NLS-1$
         menuBar.add(menuAide);
         
-        Action aideenligne = new AbstractAction("Aide en ligne...") {
+        Action aideenligne = new AbstractAction(language.getText("helpOnline")) { //$NON-NLS-1$
 
             public void actionPerformed(ActionEvent e)
             {
                 // TODO Auto-generated method stub
                 //ouvre la fenetre aide en ligne
-                System.out.println("ouvrir fenetre Aide en ligne...");
+                System.out.println("ouvrir fenetre Aide en ligne..."); //$NON-NLS-1$
             }
 
         };
         menuAide.add(aideenligne);
         
         // a propos //
-        Action apropos = new AbstractAction("A propos...") {
+        Action apropos = new AbstractAction(language.getText("about")) {//$NON-NLS-1$
 
             public void actionPerformed(ActionEvent e)
             {
@@ -506,7 +503,7 @@ public class Client
     {
         jp_status = new JPanel();
         jp_status.setLayout(new BorderLayout());
-        status = new JLabel("Prêt");
+        status = new JLabel(language.getText("ready")); //$NON-NLS-1$
         jp_status.add(status, BorderLayout.CENTER);
         jp_status.setBorder(new BevelBorder(BevelBorder.LOWERED));
         
@@ -561,11 +558,11 @@ public class Client
         //3/ si non ouvrir vue demande @server puis retour en 2/
         
         int res = 1;
-        File f = new File("Conf.xml");
+        File f = new File("Conf.xml"); //$NON-NLS-1$
         //si le fichier Conf.xml existe deja on utilise l'ip du server inclue
         if(f.canRead()) 
         {
-            System.out.println("fichier conf présent");
+            //System.out.println("fichier conf présent"); //$NON-NLS-1$
             BufferedReader br = null;
             String ligne;
 
@@ -573,7 +570,6 @@ public class Client
                 br = new BufferedReader(new FileReader(f));
             }
             catch(FileNotFoundException exc) {
-                System.out.println("Fichier conf illisible");
                 enterIPServer();
                 return 0;
             }
@@ -589,11 +585,11 @@ public class Client
         //sinon on demande l'ip du server
         else
         {
-            System.out.println("fichier conf NON présent");
+            //System.out.println("fichier conf NON présent"); //$NON-NLS-1$
             enterIPServer();
         }
         
-        System.out.println("Le serveur est up");
+        System.out.println("Le serveur est up"); //$NON-NLS-1$
         return 0;
     }
     
@@ -607,10 +603,10 @@ public class Client
     private static void enterIPServer()
     {
         int res = 1;
-        String serverIP = " ";
+        String serverIP = " "; //$NON-NLS-1$
         while(res!=0)
         {
-            serverIP = JOptionPane.showInputDialog("Le serveur ne répond pas ou est mal configuré !\nEntrez l'adresse IP du serveur");
+            serverIP = JOptionPane.showInputDialog(language.getText("errConf")); //$NON-NLS-1$
             res = testIPServer(serverIP);
         }
     }
@@ -660,12 +656,12 @@ public class Client
             //test fictif...
             if(login.compareTo(pass) == 0)
             {
-                System.out.println("Test fictif : login="+login+", pass="+pass + " => OK");
+                System.out.println("Test fictif : login="+login+", pass="+pass + " => OK");  //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$
                 test = true;
             }
             else
             {
-                System.out.println("Test fictif : login="+login+", pass="+pass + " => KO");
+                System.out.println("Test fictif : login="+login+", pass="+pass + " => KO");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
             }
         }
         
@@ -771,7 +767,7 @@ public class Client
         // gestion contact du serveur
         if( initConf() != 0 )
         {
-            System.out.println("serveur injoignable");
+            JOptionPane.showMessageDialog(null, language.getText("errConf2"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             System.exit(1);
         }
         
@@ -779,13 +775,13 @@ public class Client
         loginView = new LoginView(frame);
         if( (user = checkLogin()) == null)
         {
-            System.out.println("problème lors de l'authentification");
+            JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             System.exit(1);
         }
         
         //TODO JG, charger pref user notamment filière par défaut(si pas ds pref->afficher view)
-        System.out.println("charge "+ user + " prefs");
-        PreferencesImpl prefs = new PreferencesImpl();
+        System.out.println("charge "+ user + " prefs"); //$NON-NLS-1$ //$NON-NLS-2$
+        //PreferencesImpl prefs = new PreferencesImpl();
         
         Client c = new Client();
         
