@@ -6,6 +6,7 @@
 package fr.umlv.ir3.flexitime.common.rmi.admin;
 
 import java.rmi.*;
+import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 
@@ -95,6 +96,8 @@ public interface IUserManager extends Remote
      * 
      */
     public void removeUserListener(IUser u) throws RemoteException;
+    
+    public List<IUser> getAllUsers() throws RemoteException;
 }
 
 

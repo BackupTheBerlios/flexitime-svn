@@ -154,7 +154,6 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
      * 
      * @param name
      * @return
-     * @author FlexiTeam - Famille
      */
     public IUser get(String name) throws RemoteException
     {
@@ -183,24 +182,24 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
      */
     public IUser save(IUser user) throws RemoteException
     {
-        // Un user de ldap ou non?
-        // On verifie si il est dans le ldap
-        List list = ldap.getAttribute("uid", FlexiLDAP.TYPE_USER, user
-                .getName());
-        if (list != null
-                && ( (String) list.get(0) ).compareTo(user.getName()) != 0)
-        {
-            // Si l'utilisateur est dans le ldap
-            // On lui cree un user avec une preference mais sans mot de passe
-            // IUser user = new UserImpl(name,new PreferencesImpl(),true);
-            // Puis on l'ajoute a la base de données
-            // UserStorage.add(user);
-        }
-        else
-        {
-            // Si 'utilisteur n'est pas dans le ldap
-            // On cree un user avec les preferences et le mot de passe local a
-            // l'appli
+//        // Un user de ldap ou non?
+//        // On verifie si il est dans le ldap
+//        List list = ldap.getAttribute("uid", FlexiLDAP.TYPE_USER, user
+//                .getName());
+//        if (list != null
+//                && ( (String) list.get(0) ).compareTo(user.getName()) != 0)
+//        {
+//            // Si l'utilisateur est dans le ldap
+//            // On lui cree un user avec une preference mais sans mot de passe
+//            // IUser user = new UserImpl(name,new PreferencesImpl(),true);
+//            // Puis on l'ajoute a la base de données
+//            // UserStorage.add(user);
+//        }
+//        else
+//        {
+//            // Si 'utilisteur n'est pas dans le ldap
+//            // On cree un user avec les preferences et le mot de passe local a
+//            // l'appli
             try
             {
                 // Puis on l'ajoute a la base de données
@@ -211,7 +210,7 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        }
+//        }
 
         return user;
     }
@@ -296,6 +295,26 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
             removeUserListener(user);
         }
 
+    }
+    
+    
+    /** 
+     * @return List of all users
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager#getAllUsers()
+     */
+    public List<IUser> getAllUsers() throws RemoteException
+    {
+        try
+        {
+            return UserStorage.getAllUsers();
+        }
+        catch (HibernateException e)
+        {
+            return new ArrayList<IUser>();
+        }
+        
     }
 
     /**
