@@ -15,7 +15,8 @@ import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 import fr.umlv.ir3.flexitime.common.tools.Time;
-import fr.umlv.ir3.flexitime.richClient.gui.MetierSimulator;
+import fr.umlv.ir3.flexitime.common.tools.lang.FlexiLanguage;
+import fr.umlv.ir3.flexitime.server.MetierSimulator;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.LessonBloc;
 
 
@@ -30,6 +31,12 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.LessonBloc;
  */
 public class DefaultPlanningModel extends AbstractPlanningModel
 {
+    private static FlexiLanguage language;
+    static
+    {
+        language = FlexiLanguage.getInstance();
+    }
+    
     //Données dépendantes des préférences
     private final String[] dayList = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"};
     private final int      nbDays  = 5;
@@ -48,6 +55,8 @@ public class DefaultPlanningModel extends AbstractPlanningModel
     //Données métiers à placer
     private List           busyList;
     private List           busyListImage;
+    
+    
 
 
     //TODO gérer la fusion horizontalement !! ca serait top
@@ -81,7 +90,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
         this.busyList = new ArrayList(nbWeeks);
         this.busyListImage = new ArrayList(nbWeeks);
         
-        this.initialyseDatas(MetierSimulator.getDatas());
+        this.initialyseDatas(MetierSimulator.getLessonsList());
         this.initialyseImage();
         
         System.out.println("nbWeeks=" + nbWeeks);
@@ -201,7 +210,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
      */
     public Object getGapHeaderAt(int blocNumber)
     {
-        return blocList[blocNumber].getStartDate().getTime() + "-" + blocList[blocNumber].getEndDate().getTime();
+        return language.formatShortTime(blocList[blocNumber].getStartDate()) + "-" + language.formatShortTime(blocList[blocNumber].getEndDate());
     }
 
 
