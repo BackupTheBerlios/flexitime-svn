@@ -21,6 +21,10 @@ public class LessonBloc
     Busy busy;
     int nbGap;
 
+    public void setNbGap(int nbGap)
+    {
+        this.nbGap = nbGap;
+    }
     public Busy getBusy()
     {
         return busy;
@@ -41,7 +45,7 @@ public class LessonBloc
      */
     public LessonBloc(LessonBloc lesson)
     {
-        //this.busy = new Busy(lesson.getBusy());
+        this.busy = new Busy(lesson.getBusy());
         this.nbGap = lesson.getNbGap();
     }
 

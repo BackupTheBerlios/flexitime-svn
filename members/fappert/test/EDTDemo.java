@@ -17,8 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import fr.umlv.ir3.GL.test.edt.FlexiEDT;
-import fr.umlv.ir3.GL.test.edt.model.EDTModel;
+import fr.umlv.ir3.GL.test.edt.FlexiPlanning;
+import fr.umlv.ir3.GL.test.edt.model.DefaultPlanningModel;
 
 import temp.TestOutlookBar;
 
@@ -48,7 +48,7 @@ public class EDTDemo
         JButton b4 = new JButton("b4");
         container.add(createPanelForComponent(b4,"StatusBar"), BorderLayout.SOUTH);
         
-        FlexiEDT fe = new FlexiEDT(new EDTModel());
+        FlexiPlanning fe = new FlexiPlanning(new DefaultPlanningModel());
         container.add(new JScrollPane(createPanelForComponent(fe,"EDT")), BorderLayout.CENTER);
         
     }

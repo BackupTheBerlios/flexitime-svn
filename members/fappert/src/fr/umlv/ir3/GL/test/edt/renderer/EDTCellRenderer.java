@@ -6,14 +6,11 @@
 package fr.umlv.ir3.GL.test.edt.renderer;
 
 
-import java.awt.Color;
-import java.awt.Dimension;
 
-import javax.swing.BorderFactory;
+
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 
-import fr.umlv.ir3.GL.test.edt.FlexiEDT;
+import fr.umlv.ir3.GL.test.edt.FlexiPlanning;
 import fr.umlv.ir3.GL.test.edt.JLesson;
 import fr.umlv.ir3.GL.test.edt.LessonBloc;
 
@@ -53,7 +50,7 @@ public class EDTCellRenderer
      * @see (si nécessaire)
      * @author   FlexiTeam - binou
      */
-    public JComponent getEDTCellRendererComponent(FlexiEDT flexiEDT, Object elementAt, int week, int day, int gap)
+    public JComponent getEDTCellRendererComponent(FlexiPlanning flexiEDT, Object elementAt, int week, int day, int gap)
     {
         this.comp = null;
         if(elementAt != null)
@@ -66,7 +63,7 @@ public class EDTCellRenderer
             else
             {
                 //cas d'un créneau vide à placer
-                comp = new JLesson(null);
+                comp = new JLesson();
                 /*JLabel label = new JLabel();
                 label.setText("");
                 label.setBackground(Color.WHITE);

@@ -12,10 +12,7 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceDragEvent;
-import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
-import java.awt.dnd.DragSourceListener;
+
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
@@ -27,7 +24,11 @@ import java.io.IOException;
 import javax.swing.*;
 
 
-import fr.umlv.ir3.GL.test.edt.model.EDTModel;
+
+import fr.umlv.ir3.GL.test.edt.controller.ComponentDragSourceListener;
+import fr.umlv.ir3.GL.test.edt.event.PlanningDataEvent;
+import fr.umlv.ir3.GL.test.edt.event.PlanningDataListener;
+import fr.umlv.ir3.GL.test.edt.model.DefaultPlanningModel;
 import fr.umlv.ir3.GL.test.edt.renderer.EDTCellHeaderRenderer;
 import fr.umlv.ir3.GL.test.edt.renderer.EDTCellRenderer;
 
@@ -41,17 +42,17 @@ import fr.umlv.ir3.GL.test.edt.renderer.EDTCellRenderer;
  * of the planning.
  * 
  * @version 0.1
- * @see model.EDTModel
+ * @see model.DefaultPlanningModel
  * @see renderer.EDTCellRenderer
  * @see renderer.EDTCellHeaderRenderer
  * 
  * @author FlexiTeam - binou
  */
-public class FlexiEDT extends JPanel
+public class FlexiPlanning extends JPanel implements PlanningDataListener
 {
 	public static final int WEEK_WIDTH = 75;
 	public static final int DAY_COLUMN_WIDTH = 75;
-	public static final int DAY_HEIGTH = 25;
+	public static final int DAY_HEIGTH = 18;
 	public static final int GAP_HEIGTH = 15;
 	
 	private GridBagLayout gbl;
@@ -62,11 +63,11 @@ public class FlexiEDT extends JPanel
 	private static Point cursorPoint = new Point();
 	
 	
-    private EDTModel model;
+    private DefaultPlanningModel model;
     private EDTCellRenderer cellRenderer;
     private EDTCellHeaderRenderer cellHeaderRenderer;
 
-    public FlexiEDT(EDTModel model)
+    public FlexiPlanning(DefaultPlanningModel model)
     {
         super();
         
@@ -84,9 +85,10 @@ public class FlexiEDT extends JPanel
         this.cellRenderer = new EDTCellRenderer();
         this.cellHeaderRenderer = new EDTCellHeaderRenderer();
         
+        this.model.addPlanningDataListener(this);
+        
         this.init();
-        
-        
+
     }
 
    
@@ -95,10 +97,10 @@ public class FlexiEDT extends JPanel
      *
      * @return the model used by the component
      * 
-     * @see EDTModel
+     * @see DefaultPlanningModel
      * @author   FlexiTeam - binou
      */
-    public EDTModel getModel()
+    public DefaultPlanningModel getModel()
     {
         return model;
     }
@@ -314,86 +316,165 @@ public class FlexiEDT extends JPanel
     }
     
     
-	/** 
-     * Change the style of a gap in (x,y) and the followings, 
-     * when there's a drag over them
+    private void addGap(int weekNumber, int daynumber, int lowerGap)
+    {
+        //System.out.println(weekNumber+1 + "/" + (daynumber*(model.getDayGapSize()+1)+lowerGap+1));
+        addGap(weekNumber+1, 1+daynumber*(model.getDayGapSize()+1)+lowerGap+1      , weekNumber, daynumber, lowerGap);
+    }
+    
+    
+
+    
+    
+    
+    /** 
+     * convert an indice of column into the week number
      *
-     * @param lesson
-	 * @param j
-	 * @param i
-     * @return 
+     * @param columnNumber the column number
+     * @return the week number
      * 
-     * @see (si nécessaire)
      * @author   FlexiTeam - binou
      */
-    private boolean setDragOverStyle(JLesson lesson, int i, int j)
+    private int xToWeek(int columnNumber)
     {
-        // TODO Auto-generated method stub
-        return true;
+        return columnNumber-1;
     }
     
-    
-    
-    private int xToWeek(int x)
+    /** 
+     * convert an indice of lign into the day number
+     *
+     * @param lignNumber the lign number
+     * @return the day number
+     * 
+     * @author   FlexiTeam - binou
+     */
+    private int yToDay(int lignNumber)
     {
-        return x-1;
+        return (lignNumber-2)/(model.getDayGapSize()+1);
     }
     
-    private int yToDay(int y)
+    /** 
+     * convert an indice of lign into the gap number in its day
+     *
+     * @param lignNumber the lign number
+     * @return the gap number in its day
+     * 
+     * @author   FlexiTeam - binou
+     */
+    private int yToGapInTheDay(int lignNumber)
     {
-        return (y-2)/(model.getDayGapSize()+1);
+        return lignNumber - (yToDay(lignNumber)*(model.getDayGapSize()+1)+1) - 1;
     }
     
-    private int yToGapInTheDay(int y)
-    {
-        return y - (yToDay(y)*(model.getDayGapSize()+1)+1) - 1;
-    }
-    
+    /** 
+     * return true if the specified datagrid cordinate is a lesson gap
+     *
+     * @param p the datagrid point
+     * @return true if its a lesson gap
+     * 
+     * @author   FlexiTeam - binou
+     */
     private boolean isALessonGap(Point p)
     {
         return !(p.x<=0 || p.y<=1 || (p.y-1)%(model.getDayGapSize()+1) == 0 );
     }
     
     
+    /** 
+     * convert a week number into a pixel number +2
+     * 
+     * bug ... not a good way, depend of the size
+     *
+     * @author   FlexiTeam - binou
+     */
+    private int weekToX(int week)
+    {
+        return DAY_COLUMN_WIDTH+week*WEEK_WIDTH+2;
+    }
+    
+    private int gapToY(int day, int gap)
+    {
+        return DAY_HEIGTH + (model.getDayGapSize()*day*GAP_HEIGTH + DAY_HEIGTH*(day+1)) + GAP_HEIGTH*gap + 2;
+    }
     
     
     
     
-	final class ComponentDragSourceListener implements DragSourceListener {
-		public void dragDropEnd(DragSourceDropEvent dsde) {
-		}
-		public void dragEnter(DragSourceDragEvent dsde)  {
-			int action = dsde.getDropAction();
-			if (action == DnDConstants.ACTION_MOVE) {
-				dsde.getDragSourceContext().setCursor(DragSource.DefaultMoveDrop);
-			} 
-			else {
-				dsde.getDragSourceContext().setCursor(DragSource.DefaultMoveNoDrop);
-			}
-		}
-		public void dragOver(DragSourceDragEvent dsde) {
-			int action = dsde.getDropAction();
-			if (action == DnDConstants.ACTION_MOVE) {
-				dsde.getDragSourceContext().setCursor(DragSource.DefaultMoveDrop);
-			} 
-			else {
-				dsde.getDragSourceContext().setCursor(DragSource.DefaultMoveNoDrop);
-			}
-		}
-		public void dropActionChanged(DragSourceDragEvent dsde)  {
-			int action = dsde.getDropAction();
-			if (action == DnDConstants.ACTION_MOVE) {
-				dsde.getDragSourceContext().setCursor(DragSource.DefaultMoveDrop);
-			} 
-			else {
-				dsde.getDragSourceContext().setCursor(DragSource.DefaultMoveNoDrop);
-			}
-		}
-		public void dragExit(DragSourceEvent dse) {
-		   dse.getDragSourceContext().setCursor(DragSource.DefaultMoveNoDrop);
-		}	
-	}
-		
+    private Component getComponentAt(int week, int day, int gap)
+    {
+        return getComponentAt(    weekToX(week)    ,     gapToY(day, gap)         );
+    }
+    
+    
+    
+    
+	/** 
+     * Change the style of a gap in (x,y) and the followings, 
+     * when there's a drag over them
+     *
+     * @param j
+	 * @param i
+     * @return 
+     * 
+     * @see (si nécessaire)
+     * @author   FlexiTeam - binou
+     */
+    private void setDragOverStyle(int x, int y, boolean value)
+    {
+        Component comp = getComponentAt(xToWeek(x) , yToDay(y) , yToGapInTheDay(y));
+        if(comp instanceof JLesson)
+        {
+            JLesson jlesson = (JLesson)comp;
+            jlesson.setDragOver(value);
+            //Rectangle rect2Dselect = new Rectangle(jlesson.getBounds());
+            //paintImmediately(rect2Dselect.getBounds());
+        }
+    }
+    
+    
+    
+
+    public void intervalAdded(PlanningDataEvent e)
+    {
+        System.out.println(e.getLowerGap() + " => " + e.getUpperGap());
+        for (int i = e.getLowerGap() ; i <= e.getUpperGap()  ; i++)
+            remove(   getComponentAt( e.getWeekNumber() , e.getDaynumber(), i)   );
+        
+        for (int i = e.getLowerGap() ; i <= e.getUpperGap()  ; i++)
+            addGap(e.getWeekNumber(), e.getDaynumber(), i);
+            
+        //System.out.println(model.getDayGapSize() + "*" +e.getDaynumber()+ "*" + GAP_HEIGTH + "+" +DAY_HEIGTH+ "*" +(e.getDaynumber()+1)+"+"+ GAP_HEIGTH + "*" + e.getLowerGap() + "+ 2" );
+        //System.out.println(x + " - " + y);
+        
+        
+        
+        
+        System.out.println("intervalAdded()");
+        System.out.println(e);
+    }
+
+
+
+
+
+    public void intervalRemoved(PlanningDataEvent e)
+    {
+        System.out.println("intervalRemoved()");
+        System.out.println(e);
+    }
+
+
+
+    public void contentsChanged(PlanningDataEvent e)
+    {
+        System.out.println("contentsChanged()");
+        System.out.println(e);
+    }
+    
+    
+    
+
+	
 	final class ComponentDragGestureListener implements DragGestureListener {
 		ComponentDragSourceListener tdsl;
 		public ComponentDragGestureListener(ComponentDragSourceListener tdsl) {
@@ -410,12 +491,13 @@ public class FlexiEDT extends JPanel
 			
 			//System.out.println(p_abs);
 			//System.out.println(p_rel);
-			//System.out.println("[" + xToWeek(p_rel.x) + "," + yToDay(p_rel.y) + "," + yToGapInTheDay(p_rel.y) + "]" );
+			System.out.println("[" + xToWeek(p_rel.x) + "," + yToDay(p_rel.y) + "," + yToGapInTheDay(p_rel.y) + "]" );
 			
 			//on test si c bien une case de cours et si c bien un cours ... sinon pas de drag !
-			if (comp != null && comp instanceof JLesson && comp != FlexiEDT.this && isALessonGap(p_rel)   &&  model.isALesson(xToWeek(p_rel.x),yToDay(p_rel.y),yToGapInTheDay(p_rel.y)) )
+			if (comp != null && comp instanceof JLesson && comp != FlexiPlanning.this && isALessonGap(p_rel)   &&  model.isALesson(xToWeek(p_rel.x),yToDay(p_rel.y),yToGapInTheDay(p_rel.y)) )
 			{
-				cursorPoint.setLocation(SwingUtilities.convertPoint(FlexiEDT.this, dge.getDragOrigin(), comp));
+			    //Generation de l'image
+				cursorPoint.setLocation(SwingUtilities.convertPoint(FlexiPlanning.this, dge.getDragOrigin(), comp));
 				buffImage = new BufferedImage(comp.getWidth(), comp.getHeight(), java.awt.image.BufferedImage.TYPE_INT_ARGB_PRE);//buffered image reference passing the comp's ht and width
 				Graphics2D graphics = buffImage.createGraphics();//creating the graphics for buffered image
 				graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));	//Sets the Composite for the Graphics2D context
@@ -423,15 +505,13 @@ public class FlexiEDT extends JPanel
 				if (opacity) {
 					((JComponent)comp).setOpaque(false);				
 				}
-				comp.paint(graphics); //painting the graphics to label
+				comp.paint(graphics);
 				if (opacity) {
 					((JComponent)comp).setOpaque(true);					
 				}
 				graphics.dispose();
-				//remove(comp);
-				//créer une copie sans les dates (car impossible de savoir les dates à ce moment précis mais on connait le reste
-				//dragSource.startDrag(dge, DragSource.DefaultMoveDrop , buffImage, cursorPoint, new TransferableComponent(new JLesson((JLesson)comp)), tdsl);	
-				dragSource.startDrag(dge, DragSource.DefaultMoveDrop , buffImage, cursorPoint, new TransferableComponent(comp), tdsl);
+					
+				dragSource.startDrag(dge, DragSource.DefaultMoveDrop , buffImage, cursorPoint, new TransferableLessonBloc( new LessonBloc(((JLesson)comp).getLesson()) ), tdsl);
 				revalidate();
 				repaint();
 			}
@@ -439,24 +519,41 @@ public class FlexiEDT extends JPanel
 	}
 	
 	
-
 	final class ComponentDropTargetListener implements DropTargetListener {
 		private Rectangle rect2D = new Rectangle();
+		private Rectangle rect2Dselect = new Rectangle();
+		
 		Insets insets;
+		
+		//garde en mémoire le drag point potentiel actuel ainsi ke la longueur de l'ajout potentiel
+		private Point dragPoint = new Point();
+		private int length;
+		
 		public void dragEnter(DropTargetDragEvent dtde) {
-		    //System.out.println("dragEnter()");
+		    System.out.println("dragEnter() at " + System.currentTimeMillis());
 		    /*Point pt = dtde.getLocation();
 			paintImmediately(rect2D.getBounds());
 			rect2D.setRect((int) (pt.getX()-cursorPoint.getX()),(int) (pt.getY()-cursorPoint.getY()),buffImage.getWidth(),buffImage.getHeight());
 			((Graphics2D) getGraphics()).drawImage(buffImage,(int) (pt.getX()-cursorPoint.getX()),(int) (pt.getY()-cursorPoint.getY()),FlexiEDT.this);
 			dtde.acceptDrag(dtde.getDropAction());*/
+		    dragPoint.setLocation(-1,-1);
 		}
+		
 		public void dragExit(DropTargetEvent dte) {
-		    //System.out.println("dragExit()");
+		    System.out.println("dragExit() at " + System.currentTimeMillis());
 		    //redessine la partie du buffImage pour qu'il disparaisse vu kon sort d'une zone de drop
-			paintImmediately(rect2D.getBounds());
+			//paintImmediately(rect2D.getBounds());
+			//System.out.println("[TODO] Effacer le drop potentiel en ["+ dragPoint.x + ","+ dragPoint.y +"] (at " + System.currentTimeMillis() + ")");
+            for (int i = dragPoint.y ; i < dragPoint.y+length ; i++)
+            {
+                //System.out.println("setDragOverStyle(" + dragPoint.x + "," + i +", false)");
+		        setDragOverStyle(dragPoint.x, i, false);
+            }
+			dragPoint.setLocation(-1,-1);
 		}
+		
 		public void dragOver(DropTargetDragEvent dtde) {
+		    //System.out.println("dragOver() at " + System.currentTimeMillis());
 		    Point p_abs = dtde.getLocation();
 		    Point p_rel = gbl.location(p_abs.x,p_abs.y);
 		    
@@ -470,23 +567,46 @@ public class FlexiEDT extends JPanel
 		    {
 			    paintImmediately(rect2D.getBounds());
 				rect2D.setRect((int) (p_abs.getX()-cursorPoint.getX()),(int) (p_abs.getY()-cursorPoint.getY()),buffImage.getWidth(),buffImage.getHeight());
-				((Graphics2D) getGraphics()).drawImage(buffImage,(int) (p_abs.getX()-cursorPoint.getX()),(int) (p_abs.getY()-cursorPoint.getY()),FlexiEDT.this);
+				
+				((Graphics2D) getGraphics()).drawImage(buffImage,(int) (p_abs.getX()-cursorPoint.getX()),(int) (p_abs.getY()-cursorPoint.getY()),FlexiPlanning.this);
 				dtde.acceptDrag(dtde.getDropAction());
-			    
-			    //Ici on peut savoir sur kel objet potentiel on veut placer le cours !!
-			    // Il faut donc provoquer l'affichage des zones ici
-				//System.out.println("Ajout potentiel en : " + gbl.location(pt.x,pt.y).x + "," + gbl.location(pt.x,pt.y).y );
 	
 				Transferable transferable = dtde.getTransferable();
-				if (transferable.isDataFlavorSupported(TransferableComponent.COMPONENT_FLAVOR))
+				if (transferable.isDataFlavorSupported(TransferableLessonBloc.LESSON_FLAVOR))
 				{
 					try
 	                {
-	                    Component comp = (Component) transferable.getTransferData(TransferableComponent.COMPONENT_FLAVOR);
-	                    if(comp instanceof JLesson)
+					    //on test kon a bien changer de sélection
+	                    if(dragPoint.x != p_rel.x || dragPoint.y != p_rel.y)
 	                    {
-	                        JLesson lesson = (JLesson)comp;
-	                        boolean dragOver = setDragOverStyle(lesson, p_rel.x, p_rel.y);
+	                        //Lecture du lesson bloc à dragguer
+						    LessonBloc lesson = (LessonBloc)transferable.getTransferData(TransferableLessonBloc.LESSON_FLAVOR);
+						    
+	                        //On déselectionne le dragOverStyle précédent
+	                        if(dragPoint.x != -1 && dragPoint.y != -1)
+	                        {
+	                            //System.out.println("[TODO] Effacer le drop potentiel en ["+ dragPoint.x + ","+ dragPoint.y +"] (at " + System.currentTimeMillis() + ")");
+	                            for (int i = dragPoint.y ; i < dragPoint.y+length ; i++)
+							        setDragOverStyle(dragPoint.x, i, false);
+	                        }
+	                        
+	                        //on mémorise pour la suite le nous point de drag potentiel et sa longueur
+	                        dragPoint.setLocation(p_rel.x,p_rel.y);
+	                        
+						    //on regarde combien de créneau nous est disponible
+						    int nbEmptyGap = model.getNbEmptyGapAt(xToWeek(p_rel.x) , yToDay(p_rel.y) , yToGapInTheDay(p_rel.y));
+	                        if(nbEmptyGap <= 0)
+	                            System.out.println("Oula gros pb :s");
+	                        
+						    if(lesson.getNbGap() > nbEmptyGap)
+						        length = nbEmptyGap;    
+						    else
+						        length = lesson.getNbGap();
+						    
+	                        //on sélectionne la zone du drag potentiel
+						    for (int i = p_rel.y ; i < p_rel.y+length ; i++)
+						        setDragOverStyle(p_rel.x, i, true);
+
 	                    }
 	                }
 	                catch (UnsupportedFlavorException e)
@@ -496,7 +616,6 @@ public class FlexiEDT extends JPanel
 				}
 		    }
 		}
-
 
         public void dropActionChanged(DropTargetDragEvent dtde) {
 		    System.out.println("dropActionChanged()");
@@ -510,18 +629,19 @@ public class FlexiEDT extends JPanel
 
 		public void drop(DropTargetDropEvent dtde) {
 			try {
-			    System.out.println("ATTENTION drop !!!!");
+			    //System.out.println("ATTENTION drop !!!!");
 				paintImmediately(rect2D.getBounds());
 				int action = dtde.getDropAction();
 				Transferable transferable = dtde.getTransferable();
-				if (transferable.isDataFlavorSupported(TransferableComponent.COMPONENT_FLAVOR))
+				if (transferable.isDataFlavorSupported(TransferableLessonBloc.LESSON_FLAVOR))
 				{
-				    System.out.println("DataFlavor OK");
-				    // On recupere le composant a droper
-					Component comp = (Component) transferable.getTransferData(TransferableComponent.COMPONENT_FLAVOR);
+				    //System.out.println("DataFlavor OK");
+				    // On recupere le lesson a droper
+				    LessonBloc lesson = (LessonBloc)transferable.getTransferData(TransferableLessonBloc.LESSON_FLAVOR);
+				    lesson.setNbGap(length);
 					Point location = dtde.getLocation();
-					if (comp == null) {
-					    System.out.println("rien a dropper :(");
+					if (lesson == null) {
+					    System.out.println("rien a dropper !!!");
 						dtde.rejectDrop();
 						dtde.dropComplete(false);
 						revalidate();
@@ -529,10 +649,12 @@ public class FlexiEDT extends JPanel
 						return;						
 					}
 					else {
+					    //System.out.println(location);
 					    Point target = gbl.location(location.x,location.y);
-					    System.out.println("Ajout en " + target.x + "," + target.y);
-						//add(comp, 0);
-						//comp.setLocation((int)(location.getX()-cursorPoint.getX()),(int)(location.getY()-cursorPoint.getY()));
+
+					    System.out.println("Ajout en [" + target.x + "," + target.y + "]" + "week " + xToWeek(target.x) + " day " + yToDay(target.y) + "gap " + yToGapInTheDay(target.y));
+					    getModel().addElement(xToWeek(target.x) , yToDay(target.y) , yToGapInTheDay(target.y) , lesson );
+
 						dtde.dropComplete(true);
 						revalidate();
 						repaint();
@@ -553,6 +675,9 @@ public class FlexiEDT extends JPanel
 			}	
 		}
 	}
+
+
+
 	
 
     

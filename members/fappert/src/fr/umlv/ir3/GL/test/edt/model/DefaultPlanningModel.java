@@ -24,7 +24,7 @@ import temp.*;
  * @see (si nécessaire)
  * @author FlexiTeam - binou
  */
-public class EDTModel
+public class DefaultPlanningModel extends AbstractPlanningModel
 {
     //Données dépendantes des préférences
     private final String[] dayList = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"};
@@ -51,14 +51,14 @@ public class EDTModel
     /**
      * DOCME
      */
-    public EDTModel()
+    public DefaultPlanningModel()
     {
         super();
         
         this.edtWeekGap = new Gap(2005,1,3,0,0,2005,3,1,0,0);
         
-        System.out.println(edtWeekGap.getEndDate().getCal().get(Calendar.WEEK_OF_YEAR));
-        System.out.println(edtWeekGap.getStartDate().getCal().get(Calendar.WEEK_OF_YEAR));
+        //System.out.println(edtWeekGap.getEndDate().getCal().get(Calendar.WEEK_OF_YEAR));
+        //System.out.println(edtWeekGap.getStartDate().getCal().get(Calendar.WEEK_OF_YEAR));
         
         this.nbWeeks = Time.getGapWeek(edtWeekGap.getStartDate(),edtWeekGap.getEndDate()) + 1 ;
         //System.out.println("nbWeeks=" + nbWeeks);
@@ -241,17 +241,38 @@ public class EDTModel
      */
     public Object getElementAt(int weekNumber, int dayNumber, int gapNumber)
     {
-        return ((DayBloc[])this.busyListImage.get(weekNumber))[dayNumber].getElementAt(gapNumber);
+        return this.getDayBloc(weekNumber, dayNumber).getElementAt(gapNumber);
     }
     
 
     
-/*    public boolean isEmpty(int weekNumber, int dayNumber, int gapNumber,
-            int length)
+    
+    
+    /** 
+     * Returns the number of empty gap available after the specified gap
+     *
+     * @param weekNumber the value of the week (0 is the first)
+     * @param dayNumber the value of the day (0 is the first)
+     * @param gapNumber the value of the gap (0 is the first)
+     * @return 
+     * 
+     * @see (si nécessaire)
+     * @author   FlexiTeam - binou
+     */
+    public int getNbEmptyGapAt(int weekNumber, int dayNumber, int gapNumber)
     {
-        DayBloc dayBloc = ((DayBloc[]) this.busyListImage.get(weekNumber))[dayNumber];
-        return weekNumber != 0;
-    }*/
+        
+        DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
+        int count = 0;
+        int i = gapNumber;
+        while(i < bloc.representationList.length && !(bloc.representationList[i] == null || bloc.representationList[i] instanceof LessonBloc)  )
+        {
+            count++;
+            i++;
+        }
+        return count;
+    }
+    
     
     /** 
      * Allow to know if there is a lesson a the specified week, day and gap
@@ -266,17 +287,58 @@ public class EDTModel
      */
     public boolean isALesson(int weekNumber, int dayNumber, int gapNumber)
     {
-        DayBloc bloc = ((DayBloc[])this.busyListImage.get(weekNumber))[dayNumber];
+        DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
         Object o = bloc.getElementAt(gapNumber);
         return (o == null || o instanceof LessonBloc);
     }
     
     
+    
+    
+    
+    
+	/**
+	 * @param i
+	 * @param j
+	 * @param k
+	 * @param lesson
+	 */
+	public void addElement(int weekNumber, int dayNumber, int gapNumber, LessonBloc lesson)
+	{
+		//Ici il faudra ajouter le cours au groupe et le faire valider par le serveur
+		
+	    //pas de verif avant de placer le cours pour l'instant
+	    DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
+	    bloc.representationList[gapNumber] = lesson;
+	    if(lesson.getNbGap() > 1 )
+	    {
+	        for (int i = gapNumber+1 ; i < gapNumber+lesson.getNbGap() ; i++)
+	            bloc.representationList[i] = null;
+	    }
+	    
+	    
+		fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+lesson.getNbGap()-1 );
+	}
+    
+    
+    
+    
+    
+    
+
+
+
+
 
     //***************************************************
     // usefull methods
     //***************************************************
-    
+
+
+	private DayBloc getDayBloc(int weekNumber, int dayNumber)
+	{
+	    return ((DayBloc[])this.busyListImage.get(weekNumber))[dayNumber];
+	}
 
 	private int countNbGap(Time begin, Time end)
 	{
@@ -355,7 +417,7 @@ public class EDTModel
     private class DayBloc
     {
 
-        private Object[] representationList;
+        public Object[] representationList;
 
         public DayBloc()
         {
@@ -407,7 +469,7 @@ public class EDTModel
                     firstGap = precSizeBloc;
                     
 
-                System.out.println("Bloc pour le debut : " + curBloc);
+                //System.out.println("Bloc pour le debut : " + curBloc);
                 
                 
                 
@@ -437,14 +499,15 @@ public class EDTModel
                         lastGap--;
                 }
                     
-                System.out.println("Bloc pour la fin : " + curBloc);
-                System.out.println("Cours du gap " + firstGap + " au " + lastGap);
+                //System.out.println("Bloc pour la fin : " + curBloc);
+                //System.out.println("Cours du gap " + firstGap + " au " + lastGap);
                 
+                //on place le LessonBloc sur le premier créneau
+                this.representationList[firstGap] = new LessonBloc(busy,lastGap-firstGap+1);
                 //On affecte tous les creneaux internes à null
                 for(int i = firstGap+1; i <= lastGap; i++)
                     representationList[i]= null;
-                //puis on place le Busy sur le premier créneau
-                this.representationList[firstGap] = new LessonBloc(busy,lastGap-firstGap+1);
+                
             }
         }
 
@@ -453,11 +516,6 @@ public class EDTModel
             return this.representationList[gapNumber];
         }
     }
-
-
-
-    
-   
 
 }
 

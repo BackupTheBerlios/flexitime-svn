@@ -56,6 +56,17 @@ public class Busy
         
     }
 
+    /**
+     * DOCME
+     * @param busy
+     */
+    public Busy(Busy busy)
+    {
+        this.color = busy.color;
+        this.reason = busy.reason;
+        this.gap = new Gap();
+    }
+    
     public Color getColor()
     {
         return color;

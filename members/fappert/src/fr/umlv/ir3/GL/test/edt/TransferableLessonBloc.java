@@ -1,23 +1,22 @@
 package fr.umlv.ir3.GL.test.edt;
 
 import java.awt.datatransfer.*;
-import java.awt.*;
 import java.util.*;
 
-public class TransferableComponent implements Transferable {
-	public static final DataFlavor COMPONENT_FLAVOR = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType, "JLesson");
-	private Component component;
-	private DataFlavor[] flavors = { COMPONENT_FLAVOR };
+public class TransferableLessonBloc implements Transferable {
+	public static final DataFlavor LESSON_FLAVOR = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType, "LessonBloc");
+	private LessonBloc lessonBloc;
+	private DataFlavor[] flavors = { LESSON_FLAVOR };
 	
 	/**
 	* Constructs a transferrable component object for the specified component.
 	*/
-	public TransferableComponent(Component comp) {
-		this.component = comp;
+	public TransferableLessonBloc(LessonBloc lesson) {
+		this.lessonBloc = lesson;
 	}  
 	public synchronized Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
-		if (flavor == COMPONENT_FLAVOR) {
-			return component;
+		if (flavor == LESSON_FLAVOR) {
+			return lessonBloc;
 		}
 		else {
 			throw new UnsupportedFlavorException(flavor);	
