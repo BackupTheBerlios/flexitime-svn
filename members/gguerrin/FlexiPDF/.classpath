@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path=""/>
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+    <classpathentry kind="lib" path="C:/Documents and Settings/Famille/Mes documents/ingé2k/GL/ganttproject-1.10.2/lib/optional/fop-font-metrics.jar"/>
+    <classpathentry kind="lib" path="C:/Documents and Settings/Famille/Mes documents/ingé2k/GL/ganttproject-1.10.2/lib/optional/fop.jar"/>
+    <classpathentry kind="lib" path="C:/Documents and Settings/Famille/Mes documents/ingé2k/GL/ganttproject-1.10.2/lib/optional/avalon.jar"/>
+    <classpathentry kind="lib" path="C:/Documents and Settings/Famille/Mes documents/ingé2k/GL/itext-paulo-142.jar"/>
+    <classpathentry kind="output" path=""/>
+</classpath>
