@@ -3,7 +3,7 @@
  * by binou
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.GL.test.edt;
+package temp;
 
 import java.awt.Color;
 

@@ -14,7 +14,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import fr.umlv.ir3.GL.test.edt.FlexiEDT;
-import fr.umlv.ir3.GL.test.edt.tool.FlexiColor;
+import temp.FlexiColor;
 
 
 /**

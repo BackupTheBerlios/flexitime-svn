@@ -11,10 +11,8 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.umlv.ir3.GL.test.edt.Busy;
-import fr.umlv.ir3.GL.test.edt.Gap;
-import fr.umlv.ir3.GL.test.edt.MetierSimulator;
-import fr.umlv.ir3.GL.test.edt.tool.Time;
+import temp.*;
+
 
 /**
  * DOCME Description explication supplémentaire si nécessaire in english
@@ -26,9 +24,6 @@ import fr.umlv.ir3.GL.test.edt.tool.Time;
  */
 public class EDTModel
 {
-
-
-
     //Données dépendantes des préférences
     private final String[] dayList = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"};
     private final int      nbDays  = 5;
@@ -58,15 +53,15 @@ public class EDTModel
     {
         super();
         
-        this.edtWeekGap = new Gap(2005,0,3,0,0,2005,2,1,0,0);
+        this.edtWeekGap = new temp.Gap(2005,0,3,0,0,2005,2,1,0,0);
         this.nbWeeks = edtWeekGap.getEndDate().getCal().get(Calendar.WEEK_OF_YEAR)
         - edtWeekGap.getStartDate().getCal().get(Calendar.WEEK_OF_YEAR) + 1;
         
-        this.blocList = new Gap[4];
-        this.blocList[0] = new Gap(1901,1,1,8,30,1901,1,1,10,30);
-        this.blocList[1] = new Gap(1901,1,1,10,45,1901,1,1,12,45);
-        this.blocList[2] = new Gap(1901,1,1,13,45,1901,1,1,15,45);
-        this.blocList[3] = new Gap(1901,1,1,16,0,1901,1,1,18,0);
+        this.blocList = new temp.Gap[4];
+        this.blocList[0] = new temp.Gap(1901,1,1,8,30,1901,1,1,10,30);
+        this.blocList[1] = new temp.Gap(1901,1,1,10,45,1901,1,1,12,45);
+        this.blocList[2] = new temp.Gap(1901,1,1,13,45,1901,1,1,15,45);
+        this.blocList[3] = new temp.Gap(1901,1,1,16,0,1901,1,1,18,0);
 
 
         for (int i = 0; i < blocList.length; i++)
@@ -239,9 +234,14 @@ public class EDTModel
     }
     
 
+    
+    private boolean isDropable(Object lesson)
+    {
+        return false;
+    }
 
     //***************************************************
-    // useful method
+    // usefull methods
     //***************************************************
     
 
@@ -249,6 +249,7 @@ public class EDTModel
 	{
 		return Time.countNbMinute_HM(begin,end)/gapTime;
 	}
+	
 	
     private List getBusyList(int weekNumber, int dayNumber)
     {
@@ -295,7 +296,6 @@ public class EDTModel
     }
 
 
-    
     private void initialyseImage()
     {
         DayBloc[] tab = null;
@@ -312,8 +312,13 @@ public class EDTModel
     }
     
     
-
-
+    /**
+     * Represent the composition of a day, with busy, empty gap and  
+     * 
+     * @version 1.5
+     * 
+     * @author FlexiTeam - binou
+     */
     private class DayBloc
     {
 

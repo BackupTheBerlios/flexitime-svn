@@ -35,7 +35,6 @@ public class FlexiEDT extends JPanel
 	public static final int DAY_HEIGTH = 25;
 	public static final int GAP_HEIGTH = 4;
 	
-	private JGap gap;
 	
 	
     private EDTModel model;

@@ -16,10 +16,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import fr.umlv.ir3.GL.test.edt.Busy;
+import temp.Busy;
 import fr.umlv.ir3.GL.test.edt.FlexiEDT;
 import fr.umlv.ir3.GL.test.edt.model.EDTModel;
-import fr.umlv.ir3.GL.test.edt.tool.FlexiColor;
 
 
 /**
@@ -81,37 +80,6 @@ public class EDTCellRenderer
                 this.label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 label.setFont(new Font("Serif", Font.PLAIN, 9));
                 this.label.setText("<html>" + busy.getReason() + " " + busy.getGap().getStartDate().getTime()+ "/" + busy.getGap().getEndDate().getTime()+ "</html>");
-                this.label.addMouseListener(new MouseListener(){
-                public void mousePressed(MouseEvent e)
-                {
-                System.out.println("Oula vla un click ! sur => " + label.getText());
-
-                }
-
-                public void mouseClicked(MouseEvent e)
-                {
-                    // TODO Auto-generated method stub
-                    
-                }
-
-                public void mouseReleased(MouseEvent e)
-                {
-                    // TODO Auto-generated method stub
-                    
-                }
-
-                public void mouseEntered(MouseEvent e)
-                {
-                    // TODO Auto-generated method stub
-                    
-                }
-
-                public void mouseExited(MouseEvent e)
-                {
-                    // TODO Auto-generated method stub
-                    
-                }
-                });
                 
             }   
             else

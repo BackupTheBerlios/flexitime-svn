@@ -4,7 +4,7 @@
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 
-package fr.umlv.ir3.GL.test.edt;
+
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -17,8 +17,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import fr.umlv.ir3.GL.test.edt.gui.TestOutlookBar;
+import fr.umlv.ir3.GL.test.edt.FlexiEDT;
 import fr.umlv.ir3.GL.test.edt.model.EDTModel;
+
+import temp.TestOutlookBar;
 
 
 
