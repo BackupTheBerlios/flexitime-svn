@@ -1284,6 +1284,28 @@ public class DataFactory
     }
     
     /**
+     * Create a new <em>ldap</em> user with default preferences 
+     *
+     * @param name
+     * @param rigths User privileges
+     * @return a new user 
+     * @throws FlexiException 
+     */
+    public static IUser createUser(String name, int rigths) throws FlexiException
+    {
+        IUser user = new UserImpl(name, rigths);
+        try
+        {
+            user = RemoteDataManager.getUserManager().save(user);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        return user; 
+    }
+    
+    /**
      * Create a new <em>non-ldap</em> user with default preferences 
      *
      * @param name
@@ -1294,6 +1316,29 @@ public class DataFactory
     public static IUser createUser(String name, String pass) throws FlexiException
     {
         IUser user = new UserImpl(name, pass);
+        try
+        {
+            user = RemoteDataManager.getUserManager().save(user);
+        }
+        catch (RemoteException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
+        }
+        return user; 
+    }
+    
+    /**
+     * Create a new <em>LDAP</em> user  
+     *
+     * @param name
+     * @param pass 
+     * @param rigths User privileges
+     * @return a new user 
+     * @throws FlexiException 
+     */
+    public static IUser createUser(String name, String pass, int rigths) throws FlexiException
+    {
+        IUser user = new UserImpl(name, pass, rigths);
         try
         {
             user = RemoteDataManager.getUserManager().save(user);

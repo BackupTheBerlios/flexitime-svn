@@ -48,6 +48,18 @@ public class UserImpl extends DataImpl implements IUser
     {
         this(name, null, DataFactory.createPreferences());
     }
+    
+    /**
+     * 
+     * DOCME
+     * 
+     * @param name
+     * @param rigths 
+     */
+    public UserImpl(String name, int rigths)
+    {
+        this(name, null, rigths, DataFactory.createPreferences());
+    }
 
     /**
      * 
@@ -59,6 +71,19 @@ public class UserImpl extends DataImpl implements IUser
     public UserImpl(String name, String pass)
     {
         this(name, pass, DataFactory.createPreferences());
+    }
+    
+    /**
+     * 
+     * DOCME
+     * 
+     * @param name
+     * @param pass
+     * @param rigths 
+     */
+    public UserImpl(String name, String pass, int rigths)
+    {
+        this(name, pass, rigths, DataFactory.createPreferences());
     }
     
     /**
