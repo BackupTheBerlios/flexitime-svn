@@ -47,7 +47,7 @@ public interface IUserManager extends Remote
      * @param user 
      * @throws RemoteException 
      */
-    public void save(IUser user) throws RemoteException;
+    public IUser save(IUser user) throws RemoteException;
     /**
      * DOCME
      * @param user 

@@ -307,6 +307,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
 
         try
         {
+            //TeachingStructureStorage.delete(_class.getTeachingStructure());
             ClassStorage.delete(_class);
         }
         catch (HibernateException e)

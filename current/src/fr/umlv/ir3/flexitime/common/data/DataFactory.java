@@ -1285,7 +1285,15 @@ public class DataFactory
     public static IUser createUser(String name, String pass)
     {
         IUser user = new UserImpl(name, pass);
-        // TODO sauvegarde hibernate
+        try
+        {
+            RemoteDataManager.getUserManager().save(user);
+        }
+        catch (RemoteException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return user; 
     }
     

@@ -141,7 +141,7 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
      * @see fr.umlv.ir3.flexitime.common.data.admin
      * @author   FlexiTeam - Famille
      */
-    public void save(IUser user) throws RemoteException
+    public IUser save(IUser user) throws RemoteException
     {
         //Un user de ldap ou non?
         //On verifie si il est dans le ldap
@@ -170,6 +170,7 @@ public class UserManager extends UnicastRemoteObject implements IUserManager
             }
         }
         
+        return user;
     }
     
     /**

@@ -32,17 +32,22 @@ public class TestUserStorage
 
     public static void main(String[] args) throws HibernateException, RemoteException
     {
-        IUser u = DataFactory.createUser("prasad", "prasad");
+        IUser u = DataFactory.createUser("flexitime", "flexitim");
         
-        RemoteDataManager.getUserManager().save(u);
+        //RemoteDataManager.getUserManager().save(u);
         
-        IUser u2 = RemoteDataManager.getUserManager().get("prasad");
+        //IUser u2 = RemoteDataManager.getUserManager().get("prasad");
         
-        System.out.println(u2.getName());
+        //System.out.println(u2.getName());
         
         //RemoteDataManager.getUserManager().removeUser(u2);
         //UserStorage.delete(u2);
         
+    }
+    
+    public static void createUser(String name, String pass)
+    {
+        IUser u = DataFactory.createUser(name, pass);
     }
 }
 
