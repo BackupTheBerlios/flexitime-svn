@@ -49,7 +49,8 @@ import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.UsersListModel;
 
 /**
- * This class draws a frame where the super user can manage soft's users.
+ * draws a frame where an administrator can manage the soft's users.
+ * It is used to set password for users and their permissions.
  * 
  * @version 0.2
  * @author FlexiTeam - BOUVET Adrien
@@ -472,6 +473,7 @@ public class UsersManagementView
             checkLDAP.setSelected(true);
             labPass.setEnabled(false);
             tfPass.setEnabled(false);
+            tfPass.setText("");
         }
         cbPermissions.setSelectedIndex(user.getPrivilege());
     }
