@@ -33,7 +33,7 @@
 		<!-- Track -->    
 		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl" table="track">
 			<key column="idTrack"/>
-			<list name="lstClass" cascade="all" lazy="true">
+			<list name="lstClass" cascade="all">
 				<key column="idTrack" />
 				<index column="posClass" />      	
 				<one-to-many class="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl" />
@@ -44,7 +44,7 @@
 		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl" table="class">
 			<key column="idClass"/>
 			<many-to-one name="parentTrack" column="idTrack" class="fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl"/>
-			<list name="lstGroups" cascade="all" lazy="true">
+			<list name="lstGroups" cascade="all">
 				<key column="idClass" />
 				<index column="posGroup" />
 				<one-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl" />
