@@ -472,13 +472,22 @@ public class Time implements Comparable
      */
     public static int getGapWeek(Time t1, Time t2)
     {
-        Calendar c = Calendar.getInstance();
-        long number = t1.getCal().getTimeInMillis();
-        c.setTimeInMillis(number);
-        Calendar c2 = t2.getCal();
+        Calendar c;
+        Calendar c2;
+        if(t1.compareTo(t2)==1){
+            c = Calendar.getInstance();
+            long number = t2.getCal().getTimeInMillis();
+            c.setTimeInMillis(number);
+            c2 = t1.getCal();
+        }else{
+            c = Calendar.getInstance();
+            long number = t1.getCal().getTimeInMillis();
+            c.setTimeInMillis(number);
+            c2 = t2.getCal();
+        }
         
-        if(c.get(Calendar.WEEK_OF_YEAR)==c2.get(Calendar.WEEK_OF_YEAR) && c.get(Calendar.YEAR)==c2.get(Calendar.YEAR))
-            return 0;
+        //if(c.get(Calendar.WEEK_OF_YEAR)==c2.get(Calendar.WEEK_OF_YEAR) && c.get(Calendar.YEAR)==c2.get(Calendar.YEAR))
+        //    return 0;
         long nb3 = c2.getTimeInMillis()-c.getTimeInMillis();
 
         if((nb3/1000)<(60*60*24*7)) return 0;
@@ -495,9 +504,19 @@ public class Time implements Comparable
     }
     
    /*public static void main(String[] args){
-        Time t= new Time(2005,1,6,0,0);
-        Time t2 = new Time(2005,2,3,0,0);
+        Time t= new Time(2004, 12, 6, 12, 00);
+        Time t2 = new Time(2004, 12, 15, 12, 00);
+        System.out.println(Time.getGapWeek(t,t));
         System.out.println(Time.getGapWeek(t,t2));
+        System.out.println(Time.getGapWeek(t2,t));
+        t= new Time(2004, 12, 31, 12, 00);
+        t2 = new Time(2005, 1, 1, 12, 00);
+        System.out.println(Time.getGapWeek(t,t2));
+        System.out.println(Time.getGapWeek(t2,t));
+        t= new Time(2004, 12, 31, 12, 00);
+        t2 = new Time(2005, 12, 31, 12, 00);
+        System.out.println(Time.getGapWeek(t,t2));
+        System.out.println(Time.getGapWeek(t2,t));
     }*/
 
     /**
