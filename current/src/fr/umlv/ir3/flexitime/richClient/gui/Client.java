@@ -9,6 +9,7 @@ package fr.umlv.ir3.flexitime.richClient.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,6 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JToolBar;
@@ -51,7 +53,10 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PrintAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerTimeTableAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.StatsAction;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.IPServerView;
+import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
+import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
 
 /**
  * Client This class build an graphic interface for the user.
@@ -68,6 +73,7 @@ public class Client
     private JPanel panel;
     private JPanel jp_status;
     private JLabel status;
+    private static String user;
     private static FlexiLanguage language;
     static
     {
@@ -88,7 +94,10 @@ public class Client
         frame.setSize(800, 600);
         panel = new JPanel(new BorderLayout());
         frame.setContentPane(panel);
+        ImageIcon icon = new ImageIcon(getClass().getResource("FlexiTime_icone32.png"));
+        frame.setIconImage(icon.getImage());
     }
+    
 
     
     // ======== //
@@ -105,8 +114,10 @@ public class Client
         initMenuBar();
         initToolBar();
         initStateBar();
+        MainView mainPanel = new MainView();
+        frame.add(mainPanel.getPanel());
         frame.setVisible(true);
-        //TODO frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         return 0;
     }
 
@@ -119,8 +130,6 @@ public class Client
         
         return button;
     }
-    
-    
     /**
      * initToolBar - DOCME Code This method creates the client's tool bar.
      * <code>exemple d'appel de la methode</code>
@@ -157,7 +166,7 @@ public class Client
         
         toolBar.addSeparator();
         
-        //plage + large
+        //plage + large  !!!modif constructeur by Binou, ExploitationView needed !!!
         toolBar.add(createButton((LargerTimeTableAction.getInstance())));
         
         //plage + petite
@@ -328,15 +337,24 @@ public class Client
         menuFichier.add(export);
         menuFichier.add(new JSeparator());
         
-        Action log = LogoutAction.getInstance();
-        menuFichier.add(log);
+        Action logout = LogoutAction.getInstance();
+        menuFichier.add(logout);
         
         Action quit = new AbstractAction("Quitter") {
 
             public void actionPerformed(ActionEvent e)
             {
-            // TODO Auto-generated method stub
-
+                int res = JOptionPane.showConfirmDialog(null,"Souhaitez-vous quitter FlexiTime?","Quitter l'application",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+                if(res == JOptionPane.YES_OPTION)
+                {
+                    //System.out.println("YES quit");
+                    //TODO Est-ce propre de quitter de cette facon ?
+                    System.exit(0);                
+                }
+                else
+                {
+                    //System.out.println("NO quit");   
+                }
             }
 
         };
@@ -395,7 +413,7 @@ public class Client
         JMenu menuAide = new JMenu("Aide");
         menuBar.add(menuAide);
         
-        Action aideenligne = new AbstractAction("Aide...") {
+        Action aideenligne = new AbstractAction("Aide en ligne...") {
 
             public void actionPerformed(ActionEvent e)
             {
@@ -421,6 +439,7 @@ public class Client
         frame.setJMenuBar(menuBar);
     }
 
+    
     /**
      * initStateBar - DOCME Code This method creates the client's state bar.
      * <code>exemple d'appel de la methode</code>
@@ -486,13 +505,12 @@ public class Client
             //si ko, 3/
         //3/ si non ouvrir vue demande @server puis retour en 2/
         
-        
         int res = 1;
-        File f = new File("Prefs.xml");
-        //si le fichier Prefs.xml existe deja on utilise l'ip du server inclue
+        File f = new File("Conf.xml");
+        //si le fichier Conf.xml existe deja on utilise l'ip du server inclue
         if(f.canRead()) 
         {
-            //System.out.println("fichier présent");
+            System.out.println("fichier conf présent");
             BufferedReader br = null;
             String ligne;
 
@@ -500,43 +518,47 @@ public class Client
                 br = new BufferedReader(new FileReader(f));
             }
             catch(FileNotFoundException exc) {
-                //TODO lancer exception : illisible, puis aller en 3/
-                System.out.println("Erreur d'ouverture");
+                System.out.println("Fichier conf illisible");
+                enterIPServer();
+                return 0;
             }
             try {
                 ligne = br.readLine();
 				res = testIPServer(ligne);
                 br.close();
             }
-            catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            while(res!=0) {
-                String line = IPServerView.printView();
-                res = testIPServer(line);
-            }
-
+            catch (IOException e) {}
+            if(res != 0) enterIPServer();
         }
+        
         //sinon on demande l'ip du server
         else
         {
-            //System.out.println("fichier NON présent");
-            while(res!=0)
-            {
-                String line = IPServerView.printView();
-                res = testIPServer(line);
-            }
+            System.out.println("fichier conf NON présent");
+            enterIPServer();
         }
         
         System.out.println("Le serveur est up");
-        
-        //TODO recup fichier de conf du server, créer méthode on it....
- 
         return 0;
     }
     
-    
+    /**
+     *  
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     * 
+     */
+    private static void enterIPServer()
+    {
+        int res = 1;
+        String serverIP = " ";
+        while(res!=0)
+        {
+            serverIP = JOptionPane.showInputDialog("Le serveur ne répond pas ou est mal configuré !\nEntrez l'adresse IP du serveur");
+            res = testIPServer(serverIP);
+        }
+    }
     
     /**
      *  
@@ -549,9 +571,54 @@ public class Client
      */
     private static int testIPServer(String ip)
     {
-        //TODO appel méthode "hello" du server
+        System.out.println("test connect " + ip);
+        //TODO recup registar du server => voir avec Prasad
         return 0;
     }
+    
+    
+    /**
+     *  
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param loginFrame
+     * @return the name of the user logged in.
+     * 
+     */
+    private static String checkLogin(LoginView loginView)
+    {
+        String login = "";
+        char[] pass;
+        while(login.compareTo("") == 0)
+        {
+            loginView.getFrame().setVisible(true);
+            
+            //tant que l'utilisateur n'a pas rentré de login
+            while( (login=loginView.getLogin()) == "" ) {}
+            pass = loginView.getPass();
+            
+            //TODO verifier user / login sur server (bdd flexitime)
+            //test fictif...
+            String password = new String(pass);
+            System.out.println("login="+login+", pass="+password);
+            if(login.compareTo(password) == 0)
+            {
+                System.out.println("ok");
+                loginView.getFrame().dispose();
+            }
+            else
+            {
+                login = "";
+                loginView.setLogin("");
+                //message erreur avec Continuer ou Arreter ?
+                System.out.println("ko");
+            }
+        }
+        return login;
+    }
+    
     
   
     // ==== //
@@ -562,24 +629,46 @@ public class Client
      * the run() method on it. <code>exemple d'appel de la methode</code>
      * 
      * @param args
-     * @author FlexiTeam - Adrien Bouvet
-     * @date 14 déc. 2004
      */
     public static void main(String[] args)
     {
+        // Splash image
+        FlexiSplash splash = new FlexiSplash();
+        splash.setVisible(true);
         
-        initConf();
+        // gestion contact du serveur
+        if( initConf() != 0 )
+        {
+            System.out.println("serveur injoignable");
+            System.exit(1);
+        }
         
+        //gestion login
+        LoginView login = new LoginView();
+        if( (user = checkLogin(login)) == null)
+        {
+            System.out.println("problème lors de l'authentification");
+            System.exit(1);
+        }
+        
+        //charger pref user notamment filière par défaut(si pas ds pref, -> view)
+        System.out.println("charge "+ user + " prefs");
+        
+        // gestion fenetre principale
         try
         {
             //definition d'un look&feel
-            //TODO garder celui-ci ??
+            //TODO garder celui-ci ?? en trouver un + bleu...
+            //lister LF d'un windows et les checker....
             UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
         }
         catch (Exception e)
         {}
-
+        
         Client c = new Client();
+        
+        
+        splash.close();
         c.run();
     }
 

@@ -17,8 +17,7 @@ import javax.swing.AbstractAction;
  * Que fait cette classe, qu'est-ce qu'elle 
  * représente, ...
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 0.1
  * 
  */
 public class LogoutAction extends AbstractAction
@@ -48,8 +47,9 @@ public class LogoutAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent e)
     {
-    // TODO Auto-generated method stub
-
+        //pop up: confirm delog
+        //clore session user
+        //pop up demande login
     }
 
 }
