@@ -129,7 +129,7 @@ public class ClassImpl implements IClass
      */
     public void setTeachingStructure(ITeachingStructure struct)
     {
-        teachStruct = new TeachingStructureImpl(struct);
+        teachStruct = new TeachingStructureImpl(struct.getName(), struct.getLstSubjectsGroup());
     }
 
     /** 
