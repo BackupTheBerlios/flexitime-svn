@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+
+<hibernate-mapping>
+	<class name="fr.umlv.ir3.flexitime.common.data.impl.Data" table="data" polymorphism="implicit">
+    	<id name="id" column="ID" unsaved-value="null">
+			<generator class="native"/>
+		</id>
+		<property name="name" />
+
+		<!-- Building -->
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.general.impl.BuildingImpl" table="Building">
+			<key column="id"/>
+			<list name="lstFloor" cascade="all">
+				<key column="idBuilding" />
+				<index column="posFloor" />
+				<one-to-many class="fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl" />
+			</list>
+		</joined-subclass>
+
+		<!-- Floor -->    
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl" table="Floor">
+			<key column="id"/>
+			<list name="lstRoom" cascade="all">
+				<key column="idFloor" />
+				<index column="posRoom" />      	
+				<one-to-many class="fr.umlv.ir3.flexitime.common.data.ressources.impl.RoomImpl" />
+			</list>
+		</joined-subclass>
+
+		<!-- Track -->    
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl" table="Track">
+			<key column="id"/>
+			<list name="lstClass" cascade="all">
+				<key column="idTrack" />
+				<index column="posClass" />      	
+				<one-to-many class="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl" />
+			</list>
+		</joined-subclass>
+
+		<!-- Class -->
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl" table="Class">
+			<key column="id"/>
+			<list name="lstGroups" cascade="all">
+				<key column="idClass" />
+				<index column="posGroup" />
+				<one-to-many class="fr.umlv.ir3.flexitime.common.data.ressources.impl.GroupImpl" />
+			</list>
+			<property name="nbGroup" />
+			<property name="nbPerson" />
+			<property name="teachingStructure" type="fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructureImpl"/>
+		</joined-subclass>
+
+		<!-- Ressource -->    
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.ressources.impl.ResourceImpl" table="Ressource">
+			<key column="id"/>
+			<list name="lstBusy" cascade="all">
+				<key column="id" />
+				<index column="posBusy" />
+				<one-to-many class="fr.umlv.ir3.flexitime.common.data.ressources.impl.BusyImpl" />
+			</list>
+
+			<!-- Room -->      
+			<joined-subclass name="fr.umlv.ir3.flexitime.common.data.ressources.impl.RoomImpl" table="Room">
+				<key column="id"/>
+				<property name="capacity"/>
+				<property name="type"/>
+			</joined-subclass>
+
+			<!-- Device -->      
+			<joined-subclass name="fr.umlv.ir3.flexitime.common.data.ressources.impl.DeviceImpl" table="Device">
+				<key column="id"/>
+				<property name="type"/>
+			</joined-subclass>
+
+			<!-- Group -->      
+			<joined-subclass name="fr.umlv.ir3.flexitime.common.data.ressources.impl.GroupImpl" table="Group">
+				<key column="id"/>
+				<property name="nbPerson"/>
+			</joined-subclass>
+
+			<!-- Teacher -->      
+			<joined-subclass name="fr.umlv.ir3.flexitime.common.data.ressources.impl.TeacherImpl" table="Teacher">
+				<key column="id"/>
+				<property name="email"/>
+				<property name="firstName"/>
+			</joined-subclass>
+
+		</joined-subclass>
+
+	</class>
+
+	<!-- BUSY -->
+	<class name="fr.umlv.ir3.flexitime.common.data.activity.impl.BusyImpl" table="Busy">
+		<id name="idBusy" column="idBusy" unsaved-value="null">
+			<generator class="native"/>
+		</id>
+
+		<property name="endDate" type="date" />
+		<property name="startDate" type="date" />
+
+		<!-- DeviceBusy -->
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.activity.impl.DeviceBusyImpl" table="DeviceBusy">
+				<key column="idBusy"/>
+				<property name="reason"/>
+		</joined-subclass>
+		
+		<!-- GroupBusy -->
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.activity.impl.GroupBusyImpl" table="GroupBusy">
+				<key column="idBusy"/>
+				<property name="reason"/>
+		</joined-subclass>
+		
+		<!-- Lesson -->
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl" table="Lesson">
+				<key column="idBusy"/>
+				<list name="lstResource" cascade="all" table="LessonRessourceList">
+					<key column="idLesson" />
+					<index column="posRes" />
+					<many-to-many class="fr.umlv.ir3.flexitime.common.data.ressources.impl.ResourceImpl" column="idRes"/>
+				</list>
+		</joined-subclass>
+		
+		<!-- RoomBusy -->
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.activity.impl.RoomBusyImpl" table="RoomBusy">
+				<key column="idBusy"/>
+				<property name="reason"/>
+		</joined-subclass>
+		
+		<!-- TeacherBusy -->
+		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.activity.impl.TeacherBusyImpl" table="TeacherBusy">
+				<key column="idBusy"/>
+				<property name="reason"/>
+		</joined-subclass>
+		
+	</class>
+
+</hibernate-mapping>
