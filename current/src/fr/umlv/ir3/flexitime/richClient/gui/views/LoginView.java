@@ -193,18 +193,6 @@ public class LoginView
         return login;        
     }
     
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param log 
-     * 
-     */
-    public void setLogin(String log)
-    {
-        this.login=log;        
-    }
     
     /** 
      * DOCME Description
@@ -218,15 +206,9 @@ public class LoginView
         return new String(pass);        
     }
     
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     */
-    public void setRepack()
+    public void reset()
     {
-        //TODO Ne marche pas ...
-        loginFrame.getRootPane().revalidate();
+        this.login="";
     }
+    
 }

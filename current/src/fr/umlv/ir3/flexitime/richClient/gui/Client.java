@@ -52,6 +52,7 @@ import com.jgoodies.plaf.plastic.Plastic3DLookAndFeel;
 import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
+import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.*;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
@@ -305,19 +306,10 @@ public class Client
         JLabel labDateAct = new JLabel() ;
         Font v = new Font("Arial", Font.BOLD, 12);
         labDateAct.setFont(v);
-        int jSemaine, jMois, mois, annee ;
-        Calendar now = Calendar.getInstance() ;
-        String dateActuelle ="";
-        jSemaine = now.get(Calendar.DAY_OF_WEEK);
-        jMois = now.get(Calendar.DAY_OF_MONTH);
-        mois = now.get(Calendar.MONTH);
-        annee = now.get(Calendar.YEAR);
-        dateActuelle += jourSemaine(jSemaine);
-        dateActuelle += ", "+ Integer.toString(jMois) + " " ;
-        dateActuelle += moisDeLannee(mois);
-        dateActuelle += " "+ Integer.toString(annee) + " | ";
+        String dateActuelle = language.formatLongDate(new Time()) + " | ";
         labDateAct.setText(dateActuelle);
         toolBar.add(labDateAct);
+        
         
         //filière actuelle
         JLabel labTrackAct = new JLabel();
@@ -333,83 +325,6 @@ public class Client
         toolBar.add(labTrackAct);
     }
 
-    
-     
-    /**
-     *  
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param j an integer representing the actual day.
-     * @return the french translation for the actual day.
-     * 
-     */
-    private String jourSemaine(int j)
-    {
-        switch(j)
-        {
-            case 1 :
-                return "Dimanche" ;
-            case 2 :
-                return "Lundi" ;
-            case 3 :
-                return "Mardi" ;
-            case 4 :
-                return "Mercredi" ;
-            case 5 :
-                return "Jeudi" ;
-            case 6 :
-                return "Vendredi" ;
-            case 7 :
-                return "Samedi" ;
-        }
-        return "inconnu";
-    }
-    
-    /**
-     *  
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param j an integer representing the actual month.
-     * @return the french translation for the actual month.
-     * 
-     */
-    private String moisDeLannee(int j)
-    {
-        switch(j)
-            {
-            case 0 :
-                return "Janvier" ;
-            case 1 :
-                return "Février" ;
-            case 2 :
-                return "Mars" ;
-            case 3 :
-                return "Avril" ;
-            case 4 :
-                return "Mai" ;
-            case 5 :
-                return "Juin" ;
-            case 6 :
-                return "Juillet" ;
-            case 7 :
-                return "Août" ;
-            case 8 :
-                return "Septembre" ;
-            case 9 :
-                return "Octobre" ;
-            case 10 :
-                return "Novembre" ;
-            case 11 :
-                return "Décembre" ;
-            }
-        return "inconnu";
-    }   
-    
-    
     
     
     /**
@@ -466,10 +381,9 @@ public class Client
             int res = JOptionPane.showConfirmDialog(null,"Souhaitez-vous réellement vous délogger?","Se désauthentifier",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
             if(res == JOptionPane.YES_OPTION)
             {
-                //TODO fermer panel exploit et/ou mngmt & Afficher Accueil.html
+                setAccueilMode();
                 user = null;
-                loginView.setLogin("");
-                loginView.setRepack(); //TODO ne marche pas ....
+                //TODO loginView.reset();
                 if( (user = checkLogin()) == null)
                 {
                     System.out.println("problème lors de l'authentification");
@@ -560,6 +474,7 @@ public class Client
             {
                 // TODO Auto-generated method stub
                 //ouvre la fenetre aide en ligne
+                System.out.println("ouvrir fenetre Aide en ligne...");
             }
 
         };
@@ -743,61 +658,18 @@ public class Client
             
             //TODO JG, verifier user / login sur server (bdd flexitime)
             //test fictif...
-            System.out.println("login="+login+", pass="+pass);
             if(login.compareTo(pass) == 0)
             {
-                System.out.println("ok");
+                System.out.println("Test fictif : login="+login+", pass="+pass + " => OK");
                 test = true;
             }
             else
             {
-                System.out.println("ko");
+                System.out.println("Test fictif : login="+login+", pass="+pass + " => KO");
             }
         }
-
         
         return login;
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /*String login = "";
-        char[] pass;
-        while(login.compareTo("") == 0)
-        {
-            loginView.getFrame().setVisible(true);
-            
-            //System.out.println("new login="+loginView.getLogin());
-            
-
-            //tant que l'utilisateur n'a pas rentré de login
-            while( (login=loginView.getLogin()) == "" ) {}
-            pass = loginView.getPass();
-            
-            //TODO JG, verifier user / login sur server (bdd flexitime)
-            //test fictif...
-            String password = new String(pass);
-            System.out.println("login="+login+", pass="+password);
-            if(login.compareTo(password) == 0)
-            {
-                System.out.println("ok");
-                loginView.getFrame().dispose();
-            }
-            else
-            {
-                login = "";
-                loginView.setLogin("");
-                //message erreur avec Continuer ou Arreter ?
-                System.out.println("ko");
-            }
-        }
-        return login;*/
     }
     
     /**
