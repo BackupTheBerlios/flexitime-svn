@@ -719,7 +719,6 @@ public class Client
             login = loginView.getLogin();
             pass = loginView.getPass();
             
-            //TODO JG, verifier user / login sur server (bdd flexitime)
             try {
                 if(RemoteDataManager.getUserManager().ConnectToRich(login, pass))
                 {
@@ -729,13 +728,11 @@ public class Client
                         iUser = RemoteDataManager.getUserManager().get(login);
                         RemoteDataManager.getUserManager().addUserListener(iUser, new userListener());
                     } catch (RemoteException e) {
-                        // TODO Auto-generated catch block
-                         e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
                     }    
                     return true;
                 }
-                
-                JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+                JOptionPane.showMessageDialog(null, language.getText("errLogin2"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             } catch (RemoteException e) {
                 JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
             }
