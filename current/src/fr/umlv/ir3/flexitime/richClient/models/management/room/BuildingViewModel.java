@@ -72,7 +72,12 @@ public class BuildingViewModel extends DataListenerImpl
             {
                 return building;
             }
-
+            
+            public void setBuilding(IBuilding building)
+            {
+             this.building = building;   
+             view.setValue(building.getName());
+            }
             /**
              * @param view The view to set.
              */

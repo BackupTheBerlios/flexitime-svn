@@ -86,6 +86,13 @@ public class CourseViewModel extends DataListenerImpl
     {
         return course;
     }
+    
+    public  void setCourse(ICourse subject)
+    {
+        this.course= course;
+        view.fireChanged();
+    }
+
 
     /**
      * @param view The view to set.

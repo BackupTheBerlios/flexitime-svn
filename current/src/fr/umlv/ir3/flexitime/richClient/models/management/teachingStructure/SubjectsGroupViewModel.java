@@ -77,6 +77,12 @@ public class SubjectsGroupViewModel extends DataListenerImpl
        {
            return subGroup;
        }
+       
+       public  void setSubjectsGroup(ISubjectsGroup subjectsGroup)
+       {
+           this.subGroup= subjectsGroup;
+           view.setValue(subGroup.getName());
+       }
 
        /**
         * @param view The view to set.

@@ -78,6 +78,12 @@ public class TeacherViewModel extends DataListenerImpl
     {
         return teacher;
     }
+    
+    public void setTeacher(ITeacher teacher)
+    {
+        this.teacher=teacher;
+        view.fireChanged();
+    }
 
     /**
      * @param view The view to set.

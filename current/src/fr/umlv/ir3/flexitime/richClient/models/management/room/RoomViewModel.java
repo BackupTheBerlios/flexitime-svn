@@ -7,6 +7,8 @@ package fr.umlv.ir3.flexitime.richClient.models.management.room;
 
 import java.rmi.RemoteException;
 
+import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
@@ -81,6 +83,12 @@ public class RoomViewModel extends DataListenerImpl
     public IRoom getRoom()
     {
         return room;
+    }
+    
+    public void setRoom(IRoom room)
+    {
+     this.room = room;   
+     view.fireChanged();
     }
 
     /**

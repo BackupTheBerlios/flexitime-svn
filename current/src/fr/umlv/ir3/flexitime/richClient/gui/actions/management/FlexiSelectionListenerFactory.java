@@ -247,7 +247,13 @@ public class FlexiSelectionListenerFactory
 	{
 		TreeSelectionListener selectionListener = new TreeSelectionListener()
 		{
-			public void valueChanged(TreeSelectionEvent arg0) 
+			BuildingViewModel modelBuilding =null;
+            BuildingView buildingView = null;
+            FloorViewModel modelFloor = null;
+            FloorView floorView =null;
+            RoomViewModel modelRoom =null;
+            RoomsView roomView=null;
+            public void valueChanged(TreeSelectionEvent arg0) 
 			{
                 try 
                 {   	
@@ -258,16 +264,29 @@ public class FlexiSelectionListenerFactory
 						JPanel panel1 = new JPanel(new BorderLayout());
 						if(tmpTreeNode instanceof BuildingTreeNode)
 						{                           
-                            BuildingViewModel model =null;
-                            model = new BuildingViewModel(((BuildingTreeNode)tmpTreeNode).getBuilding());
-                            BuildingView buildingView = new BuildingView(model);
+                            if(modelBuilding==null)
+                            {
+                                modelBuilding = new BuildingViewModel(((BuildingTreeNode)tmpTreeNode).getBuilding());
+                                buildingView = new BuildingView(modelBuilding);
+                            }
+                            else
+                            {
+                                modelBuilding.setBuilding(((BuildingTreeNode)tmpTreeNode).getBuilding());
+                            }
                             panel1.add(new JScrollPane(buildingView.getPanel()), BorderLayout.CENTER);
                             panel1.setBorder(BorderFactory.createTitledBorder(language.getText("building")));
 						}
 						else if(tmpTreeNode instanceof FloorTreeNode)
 						{
-                            FloorViewModel model = new FloorViewModel(((FloorTreeNode)tmpTreeNode).getFloor());
-                            FloorView floorView = new FloorView(model);
+                            if(modelFloor==null)
+                            {
+                                modelFloor = new FloorViewModel(((FloorTreeNode)tmpTreeNode).getFloor());
+                                floorView = new FloorView(modelFloor);
+                            }
+                            else
+                            {
+                                modelFloor.setFloor(((FloorTreeNode)tmpTreeNode).getFloor());
+                            }
 							panel1.add(new JScrollPane(floorView.getPanel()), BorderLayout.CENTER);
 							panel1.setBorder(BorderFactory.createTitledBorder(language.getText("floor")));
 							
@@ -279,8 +298,15 @@ public class FlexiSelectionListenerFactory
 						}
 						else if(tmpTreeNode instanceof RoomTreeNode)
 						{
-							RoomViewModel model = new RoomViewModel(((RoomTreeNode)tmpTreeNode).getRoom());
-                            RoomsView roomView = new RoomsView(model);
+							if(modelRoom==null)
+                            {
+							    modelRoom = new RoomViewModel(((RoomTreeNode)tmpTreeNode).getRoom());
+							    roomView = new RoomsView(modelRoom);
+                            }
+                            else
+                            {
+                                modelRoom.setRoom(((RoomTreeNode)tmpTreeNode).getRoom());
+                            }
 							panel1.add(new JScrollPane(roomView.getPanel()), BorderLayout.CENTER);
 							panel1.setBorder(BorderFactory.createTitledBorder(language.getText("room")));
 							
@@ -311,13 +337,24 @@ public class FlexiSelectionListenerFactory
 	{
 		ListSelectionListener selectionListener = new ListSelectionListener()
 		{
-			public void valueChanged(ListSelectionEvent arg0) 
+			TeacherViewModel modelTeacher =null;
+            TeacherView teacherView=null;
+            public void valueChanged(ListSelectionEvent arg0) 
 			{
 				 try 
 				 {  
                     JList list  = (JList)arg0.getSource();	
-    				TeacherViewModel model = new TeacherViewModel((ITeacher)((TeacherListModel)list.getModel()).getPartyAt(list.getSelectedIndex()));
-    				TeacherView teacherView = new TeacherView(model);
+    				if(modelTeacher==null)
+                    {
+                         modelTeacher = new TeacherViewModel((ITeacher)((TeacherListModel)list.getModel()).getPartyAt(list.getSelectedIndex()));
+                         teacherView = new TeacherView(modelTeacher);
+                    }
+                    else
+                    {
+                        modelTeacher.setTeacher((ITeacher)((TeacherListModel)list.getModel()).getPartyAt(list.getSelectedIndex()));
+                    }
+                        
+                   
     				JPanel panel1 = new JPanel(new BorderLayout());
     		        panel1.add(new JScrollPane(teacherView.getPanel()), BorderLayout.CENTER);
     		        panel1.setBorder(BorderFactory.createTitledBorder(language.getText("teacher")));
@@ -346,7 +383,13 @@ public class FlexiSelectionListenerFactory
 	{
 		TreeSelectionListener selectionListener = new TreeSelectionListener()
 		{
-			public void valueChanged(TreeSelectionEvent arg0) 
+			SubjectsGroupViewModel modelSubjectsGroup =null;
+            SubjectsGroupView subjectsGroupView =null;
+            SubjectViewModel modelSubject=null;
+            SubjectView subjectView =null;
+            CourseViewModel modelCourse =null;
+            CourseView courseView =null;
+            public void valueChanged(TreeSelectionEvent arg0) 
 			{
                 try 
                 {
@@ -357,17 +400,31 @@ public class FlexiSelectionListenerFactory
     						JPanel panel1 = new JPanel(new BorderLayout());
     						if(tmpTreeNode instanceof SubjectsGroupTreeNode)
     						{
-                                SubjectsGroupViewModel model = new SubjectsGroupViewModel(((SubjectsGroupTreeNode)tmpTreeNode).getSubjectsGroup());
-                                SubjectsGroupView subjectsGroupView = new SubjectsGroupView(model);
-    							panel1.add(new JScrollPane(subjectsGroupView.getPanel()), BorderLayout.CENTER);
+                                if(modelSubjectsGroup==null)                                    
+                                {
+                                    modelSubjectsGroup = new SubjectsGroupViewModel(((SubjectsGroupTreeNode)tmpTreeNode).getSubjectsGroup());
+                                    subjectsGroupView = new SubjectsGroupView(modelSubjectsGroup);
+                                }
+                                else
+                                {
+                                    modelSubjectsGroup.setSubjectsGroup(((SubjectsGroupTreeNode)tmpTreeNode).getSubjectsGroup());  
+                                }
+                                panel1.add(new JScrollPane(subjectsGroupView.getPanel()), BorderLayout.CENTER);
     							panel1.setBorder(BorderFactory.createTitledBorder(language.getText("subjectsGroup")));
     							
     						}
     						else if(tmpTreeNode instanceof SubjectTreeNode)
     						{
-    							SubjectViewModel model = new SubjectViewModel(((SubjectTreeNode)tmpTreeNode).getSubject());
-                                SubjectView subjectView = new SubjectView(model);
-    							panel1.add(new JScrollPane(subjectView.getPanel()), BorderLayout.CENTER);
+    							if(modelSubject==null)
+                                {
+    							    modelSubject = new SubjectViewModel(((SubjectTreeNode)tmpTreeNode).getSubject());
+    							    subjectView = new SubjectView(modelSubject);
+                                }
+                                else
+                                {
+                                    modelSubject.setSubject(((SubjectTreeNode)tmpTreeNode).getSubject());
+                                }
+                                panel1.add(new JScrollPane(subjectView.getPanel()), BorderLayout.CENTER);
     							panel1.setBorder(BorderFactory.createTitledBorder(language.getText("subject")));
     							
     						}
@@ -378,9 +435,16 @@ public class FlexiSelectionListenerFactory
     						}
     						else if(tmpTreeNode instanceof CourseTreeNode)
     						{
-    							CourseViewModel model = new CourseViewModel(((CourseTreeNode)tmpTreeNode).getCourse());
-                                CourseView courseView = new CourseView(model,teacherList);
-    							panel1.add(new JScrollPane(courseView.getPanel()), BorderLayout.CENTER);
+    							if(modelCourse==null)
+                                {
+    							    modelCourse = new CourseViewModel(((CourseTreeNode)tmpTreeNode).getCourse());
+    							    courseView = new CourseView(modelCourse,teacherList);
+                                }
+                                else
+                                {
+                                    modelCourse.setCourse(((CourseTreeNode)tmpTreeNode).getCourse());
+                                }
+                                panel1.add(new JScrollPane(courseView.getPanel()), BorderLayout.CENTER);
     							panel1.setBorder(BorderFactory.createTitledBorder(language.getText("course")));
     							
     						}

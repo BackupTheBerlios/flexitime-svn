@@ -77,6 +77,12 @@ public class FloorViewModel extends DataListenerImpl
        {
            return floor;
        }
+       
+       public void setFloor(IFloor floor)
+       {
+        this.floor = floor;   
+        view.setValue(floor.getName());
+       }
 
        /**
         * @param view The view to set.

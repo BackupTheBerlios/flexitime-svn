@@ -78,6 +78,12 @@ public class SubjectViewModel extends DataListenerImpl
            return subject;
        }
 
+       public  void setSubject(ISubject subject)
+       {
+           this.subject= subject;
+           view.setValue(subject.getName());
+       }
+
        /**
         * @param view The view to set.
         */
