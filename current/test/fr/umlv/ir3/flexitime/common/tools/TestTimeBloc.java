@@ -27,28 +27,31 @@ public class TestTimeBloc extends TestCase
     {
         TimeBloc bloc = new TimeBloc(8,30,10,30);
         Time t = new Time(1901,1,1,9,30);
-        if( bloc.isInclude(t) != true  ) fail();
+        if( bloc.include(t) != true  ) fail();
         t = new Time(1901,1,1,10,30);
-        if( bloc.isInclude(t) != false  ) fail();
+        if( bloc.include(t) != false  ) fail();
         t = new Time(1901,1,1,11,30);
-        if( bloc.isInclude(t) != false  ) fail();
+        if( bloc.include(t) != false  ) fail();
         t = new Time(1901,1,1,15,45);
-        if( bloc.isInclude(t) != false  ) fail();
+        if( bloc.include(t) != false  ) fail();
     }
     
-    public void testCountNbMinutesBefore()
+    public void testCountNbMinutesWithStart()
     {
         TimeBloc bloc = new TimeBloc(8,30,10,30);
-        Time t = new Time(1901,1,1,8,45);
-        System.out.println(bloc.countNbMinutesBefore(t));
-        if( bloc.countNbMinutesBefore(t) != 120  ) fail();
+        Time t = new Time(1901,1,1,9,45);
+        if( bloc.countNbMinutesWithStart(t) != 75  ) fail("Time after start");
+        t = new Time(1901,1,1,7,45);
+        if( bloc.countNbMinutesWithStart(t) != 45  ) fail("Time before start");
     }
     
-    public void testCountNbMinutesAfter()
+    public void testCountNbMinutesWithEnd()
     {
         TimeBloc bloc = new TimeBloc(8,30,10,30);
-        Time t = new Time(1901,1,1,9,30);
-        if( bloc.countNbMinutesAfter(t) != 60  ) fail();
+        Time t = new Time(1901,1,1,9,15);
+        if( bloc.countNbMinutesWithEnd(t) != 75  ) fail("Time before end");
+        t = new Time(1901,1,1,11,15);
+        if( bloc.countNbMinutesWithEnd(t) != 45  ) fail("Time after end");
     }
 
 }
