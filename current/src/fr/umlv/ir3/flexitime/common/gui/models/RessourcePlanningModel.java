@@ -13,10 +13,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.DataFactorySansRmi;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
@@ -87,9 +89,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         super();
 
         this.ressource = _ressource;
-        this.edtWeekGap = new Gap((Calendar)initialGap.getEndDate().getCal().clone(), (Calendar)initialGap.getStartDate().getCal().clone());
+        this.edtWeekGap = new Gap((Calendar)initialGap.getStartDate().getCal().clone(), (Calendar)initialGap.getEndDate().getCal().clone());
         System.out.println("RessourcePlanningModel() : " + this.edtWeekGap.getStartDate().getStrDate());
-        //System.out.println("RessourcePlanningModel() : " + this.edtWeekGap.getStartDate().getIMonth());
+        System.out.println("RessourcePlanningModel() : " + this.edtWeekGap.getStartDate().getIMonth());
         
         this.blocList = new TimeBloc[4];
         this.blocList[0] = new TimeBloc(8,30,10,30);
@@ -123,9 +125,9 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         for (int i = 0; i < blocList.length; i++)
             this.nbGaps += countNbGap(blocList[i].countNbMinutes());
         
-        //System.out.println("nbWeeks=" + nbWeeks); //$NON-NLS-1$
-        //System.out.println("nbBlocs=" + this.blocList.length); //$NON-NLS-1$
-        //System.out.println("nbGap=" + this.nbGaps); //$NON-NLS-1$
+        System.out.println("nbWeeks=" + nbWeeks); //$NON-NLS-1$
+        System.out.println("nbBlocs=" + this.blocList.length); //$NON-NLS-1$
+        System.out.println("nbGap=" + this.nbGaps); //$NON-NLS-1$
     }
     
     private void initDataList()
@@ -272,6 +274,11 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     public int getGapUnit()
     {
         return gapUnit;
+    }
+    
+    public int getGapTime()
+    {
+        return gapUnit*gapMultiplicateur;
     }
     
     
@@ -424,7 +431,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 	 * @param length 
 	 * @param busyBloc
 	 */
-	public void addElement(int weekNumber, int dayNumber, int gapNumber, int length, BusyBloc busyBloc)
+	public void addLesson(int weekNumber, int dayNumber, int gapNumber, int length, BusyBloc busyBloc)
 	{
         //System.out.println("nb Busy : " + this.ressource.getSetBusy().size());
         //BusyBloc newBusyBloc = new BusyBloc(busyBloc);
@@ -441,7 +448,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
             e.printStackTrace();
         }
         BusyBloc newBusyBloc = new BusyBloc(l , length);
-        newBusyBloc.setNbGap(length);
+        //newBusyBloc.setNbGap(length);
         
         //newBusyBloc.getBusy().setGap( gap );
 		//Ici il faudra ajouter le cours au groupe et le faire valider par le serveur
@@ -462,24 +469,32 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 		fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+newBusyBloc.getNbGap()-1 );
 	}
     
-    public void addElement(int weekNumber, int dayNumber, int gapNumber, int length, ICourse course, ITeacher teacher)
+    public void addLesson(int weekNumber, int dayNumber, int gapNumber, int length, ICourse course, ITeacher teacher)
     {
+        ILesson lesson = null;
+        
+        if(! (ressource instanceof IGroup) )
+            System.err.println("MPF !!!! c pas un group ! commment faire un addLesson() ??");
         try
         {
-            ILesson lesson;
+            List grpLst = new ArrayList(2);
+            if(course.getType() == ICourse.TD)
+                grpLst.add(ressource);
+            else if(course.getType() == ICourse.CM)
+                grpLst = new ArrayList(((IGroup)ressource).getParentClass().getLstGroups());
             if (teacher == null)
 
                 lesson = DataFactorySansRmi.createLesson(
                         getGap(weekNumber, dayNumber, gapNumber,length),
                         course, 
-                        new ArrayList(), 
+                        grpLst, 
                         length
                         );
             else
                 lesson = DataFactorySansRmi.createLesson(
                         getGap(weekNumber, dayNumber, gapNumber,length),
                         course, 
-                        new ArrayList(), 
+                        grpLst, 
                         length,
                         teacher
                         );
@@ -489,8 +504,21 @@ public class RessourcePlanningModel extends AbstractPlanningModel
             e.printStackTrace();
         }
         
-        //BusyBloc busyBloc = new BusyBloc();
+        BusyBloc newBusyBloc = new BusyBloc(lesson, length);
         
+        DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
+        bloc.representationList[gapNumber] = newBusyBloc;
+        System.out.println("id du lesson : " + newBusyBloc.getBusy().getIdBusy());
+        //this.ressource.addBusy(newBusyBloc.getBusy());
+        //System.out.println("nb Busy : " + this.ressource.getSetBusy().size());
+        
+        if(newBusyBloc.getNbGap() > 1 )
+        {
+            for (int i = gapNumber+1 ; i < gapNumber+newBusyBloc.getNbGap() ; i++)
+                bloc.representationList[i] = null;
+        }
+        
+        fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+newBusyBloc.getNbGap()-1 );
     }
     
     /** 
@@ -547,22 +575,22 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         Time endHour = getEndTime(gapNumber+length-1);
         //System.out.println("2");
         Calendar cal = (Calendar)this.edtWeekGap.getStartDate().getCal().clone();
-        System.out.println("getGap() : cal du edt : " + cal.get(Calendar.MONTH) + ")");
+        //System.out.println("getGap() : cal du edt : " + cal.get(Calendar.MONTH) + ")");
         cal.add(Calendar.WEEK_OF_YEAR, weekNumber);
         cal.add(Calendar.DAY_OF_WEEK, dayNumber);
         Time date = new Time(cal);
-        System.out.println("getGap() : Mois du getGap() : " + date.getIMonth());
-        System.out.println("getGap() : (avec le cal : " + cal.get(Calendar.MONTH) + ")");
+        //System.out.println("getGap() : Mois du getGap() : " + date.getIMonth());
+        //System.out.println("getGap() : (avec le cal : " + cal.get(Calendar.MONTH) + ")");
         return new Gap(date.getYear(), 
-                date.getIMonth(),
-                date.getIDay(),
-                beginHour.getHour(),
-                beginHour.getMinute(),
-                date.getYear(),
-                date.getIMonth(),
-                date.getIDay(),
-                endHour.getHour(),
-                endHour.getMinute()
+                date.getIMonth(), 
+                date.getIDay(), 
+                beginHour.getHour(), 
+                beginHour.getMinute(), 
+                date.getYear(), 
+                date.getIMonth(), 
+                date.getIDay(), 
+                endHour.getHour(), 
+                endHour.getMinute() 
                 );
     }
 
