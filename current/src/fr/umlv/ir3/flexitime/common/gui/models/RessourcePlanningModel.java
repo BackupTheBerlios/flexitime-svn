@@ -13,12 +13,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import fr.umlv.ir3.flexitime.common.data.DataFactorySansRmi;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.resources.IResource;
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
+import fr.umlv.ir3.flexitime.richClient.models.exploitation.course.CourseAdapter;
 
 
 /**
@@ -420,7 +425,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 	{
         BusyBloc newBusyBloc = new BusyBloc(busyBloc); 
         newBusyBloc.setNbGap(length);
-        //newBusyBloc.getBusy().setGap( getGap(weekNumber, dayNumber, gapNumber,length) );
+        //TODO newBusyBloc.getBusy().setGap( getGap(weekNumber, dayNumber, gapNumber,length) );
 
 		//Ici il faudra ajouter le cours au groupe et le faire valider par le serveur
 		
@@ -436,6 +441,37 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 	    }
 		fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+newBusyBloc.getNbGap()-1 );
 	}
+    
+    public void addElement(int weekNumber, int dayNumber, int gapNumber, int length, CourseAdapter courseAdapter)
+    {
+        try
+        {
+            ILesson lesson;
+            if (courseAdapter.getTeacher() == null)
+
+                lesson = DataFactorySansRmi.createLesson(
+                        new Gap(),
+                        courseAdapter.getCourse(), 
+                        new ArrayList(), 
+                        length
+                        );
+            else
+                lesson = DataFactorySansRmi.createLesson(
+                        new Gap(),
+                        courseAdapter.getCourse(), 
+                        new ArrayList(), 
+                        length,
+                        courseAdapter.getTeacher()
+                        );
+        }
+        catch (FlexiException e)
+        {
+            e.printStackTrace();
+        }
+        
+        //BusyBloc busyBloc = new BusyBloc();
+        
+    }
     
     /** 
      * DOCME Description
@@ -491,7 +527,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         return new Gap(begin.getCal() , end.getCal() );
     }
 
-    private Time getEndTime(int i)
+    private Time getEndTime(int gapNumber)
     {
         // TODO Auto-generated method stub
         return null;
@@ -503,13 +539,20 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         return null;
     }
     
-    private int getBlocNumber(int gapNumber)
+    private int[] getBlocNumber(int gapNumber)
     {
+        int[] res = new int[2];
         int i = 0;
-        int sum = countNbGap(blocList[i].countNbMinutes());
-        while(i < blocList.length && gapNumber > sum)
-            ;
-        return 1;
+        int sum = this.getBlocSize(i);
+        while(i < blocList.length && gapNumber >= sum)
+        {
+            i++;
+            sum += this.getBlocSize(i);
+        }
+        if(i == blocList.length)
+            return null;
+         //TODO finir
+        return null;
     }
 
 
