@@ -1,20 +1,64 @@
 /*
  * Created on 26 déc. 2004
- * by Famille
+ * by GG
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 
 package fr.umlv.ir3.flexitime.common.tools;
 
+import java.awt.Color;
+
 /**
- * FlexiColor - DOCME Description Belong a big number of color
+ * FlexiColor - Description Belong a big number of color
  * 
  * @version Version 0.1
- * @author FlexiTeam - Famille
+ * @author FlexiTeam - VF
  */
 public class FlexiColor
 {
+    /** 
+     * getColor - get a color with a String "#xxyyzz"
+     * 
+     *     <code>Color c = FlexiColor.get(FlexiColor.black);</code>
+     *
+     * @param c the color in "#xxyyzz" format
+     * @return Returns the color
+     * 
+     * @author   FlexiTeam - VF
+     * @date     6 janv. 2005
+     */
+    public static Color getColor(String c){
+        return Color.decode(c);
+    }
+    /** 
+     * brighter - get a brighter color than the color in args
+     * 
+     *     <code>Color newc = FlexiColor.brighter(c);</code>
+     *
+     * @param c the color you want to bright
+     * @return Returns the color brightered
+     * 
+     * @author   FlexiTeam - VF
+     * @date     6 janv. 2005
+     */
+    public static Color brighter(Color c){
+        return c.brighter();
+    }
+    /** 
+     * darker - get a darker color than the color in args
+     * 
+     *     <code>Color newc = FlexiColor.darker(c);</code>
+     *
+     * @param c the color you want to dark
+     * @return Returns the color darkered
+     * 
+     * @author   FlexiTeam - VF
+     * @date     6 janv. 2005
+     */
+    public static Color darker(Color c){
+        return c.darker();
+    }
     public final static String black = "#000000";
     public final static String navy  = "#000080";
     public final static String darkblue = "#00008b";
