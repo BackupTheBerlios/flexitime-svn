@@ -179,8 +179,8 @@
 			<generator class="native"/>
 		</id>
 
-		<property name="endDate" type="timestamp" />
-		<property name="startDate" type="timestamp" />
+		<property name="endDate" type="java.util.Date" />
+		<property name="startDate" type="java.util.Date" />
 
 		<!-- DeviceBusy -->
 		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.activity.impl.DeviceBusyImpl" table="devicebusy" dynamic-update="true">
