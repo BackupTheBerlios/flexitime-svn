@@ -137,4 +137,27 @@ public class GroupImpl extends ResourceImpl implements IGroup
 	{
 		this.parentClass = parentClass;
 	}
+    
+     /**
+     * Test the equality of two groups. Add a test to the equality of two
+     * datas by comparing the parent Class
+     * 
+     * @param obj
+     *            other group to compare with
+     * @return <code>true</code> if this object is the same as the obj
+     *         argument; <code>false</code> otherwise.
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     * @see fr.umlv.ir3.flexitime.common.data.impl.DataImpl#equals(java.lang.Object)
+     */
+    public boolean equals(Object obj)
+    {
+        if (idData == null)
+        {
+            if (super.equals(obj))
+                return parentClass.equals( ( (IGroup) obj ).getParentClass());
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

@@ -159,10 +159,10 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      */
     public boolean equals(Object obj)
     {
-        if (idData == 0)
+        if (idData == null)
         {
             if (super.equals(obj))
-                return firstName.equals( ( (TeacherImpl) obj ).getFirstName());
+                return firstName.equals( ( (ITeacher) obj ).getFirstName());
             return false;
         }
         return super.equals(obj);

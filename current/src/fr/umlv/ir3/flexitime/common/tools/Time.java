@@ -525,10 +525,6 @@ public class Time
      */
     public static int countNbMinute_HM(Time begin, Time end)
     {
-        //System.out.println("Comparaison de " + begin.getStrTime() + "et" + end.getStrTime());
-        //System.out.println("= " + ( ( end.getHour() - begin.getHour() ) * 60 + ( end.getMinute() - begin
-        //        .getMinute() ) ) );
-        
         return ( ( end.getHour() - begin.getHour() ) * 60 + ( end.getMinute() - begin
                 .getMinute() ) );
     }

@@ -147,12 +147,14 @@ public class TimeBloc
      * 
      * @return Number of minute
      */
-    public int countNbMinutesBefore(Time t)
+    public int countNbMinutesWithStart(Time t)
     {
         if (this.include(t))
-            return ( t.getHour() - this.startHour ) * 60
-                    + ( t.getMinute() - this.startMin );
-        return -1;
+            return ( t.getHour() - startHour ) * 60
+                    + ( t.getMinute() - startMin );
+        return ( startHour - t.getHour() ) * 60
+                + ( startMin - t.getMinute() );
+
     }
 
     /**
@@ -163,12 +165,13 @@ public class TimeBloc
      * 
      * @return Number of minute
      */
-    public int countNbMinutesAfter(Time t)
+    public int countNbMinutesWithEnd(Time t)
     {
         if (this.include(t))
-            return ( this.endHour - t.getHour() ) * 60
-                    + ( this.endMin - t.getMinute() );
-        return -1;
+            return ( endHour - t.getHour() ) * 60
+                    + ( endMin - t.getMinute() );
+        return ( t.getHour() - endHour ) * 60
+                + ( t.getMinute() - endMin );
     }
 
     /**
@@ -193,14 +196,20 @@ public class TimeBloc
         return false;
     }
 
+    /**
+     * DOCME
+     * 
+     * @return start time
+     */
     public Time getStartDate()
     {
         return new Time(1900, 1, 1, this.startHour, this.startMin);
     }
 
     /**
-     * @return sdq
+     * DOCME
      * 
+     * @return end time
      */
     public Time getEndDate()
     {

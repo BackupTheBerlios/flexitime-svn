@@ -124,4 +124,27 @@ public class DeviceImpl extends ResourceImpl implements IDevice
     {
         this.type = type;
     }
+    
+    /**
+     * Test the equality of two devices. Add a test to the equality of two
+     * datas by comparing the type
+     * 
+     * @param obj
+     *            other device to compare with
+     * @return <code>true</code> if this object is the same as the obj
+     *         argument; <code>false</code> otherwise.
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     * @see fr.umlv.ir3.flexitime.common.data.impl.DataImpl#equals(java.lang.Object)
+     */
+    public boolean equals(Object obj)
+    {
+        if (idData == null)
+        {
+            if (super.equals(obj))
+                return (type == ((IDevice)obj).getType());
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

@@ -79,6 +79,7 @@ public abstract class DataImpl implements IData
     /**
      * Test the equality of two datas.
      * <ul>
+     * <li>The two objects must be instance of the same Class (not interface)</li>
      * <li>If one data has an ID, the other must have one, else there are not
      * equals.</li>
      * <li>If any data has an ID, they must have the same name to be equals.
