@@ -1,84 +1,110 @@
 /*
  * Created on 28 nov. 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * by Prâsad
+ * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-
-/**
- * @author Prâsad
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
-
 
 package fr.umlv.ir3.flexitime.server.io.storage;
+
+import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import net.sf.hibernate.*;
 import net.sf.hibernate.cfg.*;
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * DOCME
  * 
- * @version Verion ou révision SVN
+ * @version 300
  * 
  * @author FlexiTeam - Prâsad
  */
-public class HibernateUtil {
+public class HibernateUtil
+{
 
-	private static final SessionFactory sessionFactory;
+    private static SessionFactory    sessionFactory;
 
-	static {
-		try {
-			// Crée la SessionFactory
-			Configuration cfg = new Configuration();
-			//.addFile("video.hbm.xml");
-			
-		//cfg.setProperty("hibernate.show_sql", "true");
-		
-		sessionFactory = cfg.configure().buildSessionFactory();
-			//sessionFactory = new Configuration().configure().buildSessionFactory();
-		} catch (HibernateException ex) {
-			throw new RuntimeException("Problème de configuration : "
-					+ ex.getMessage(), ex);
-		}
-	}
+    static
+    {
+        try
+        {
+            // Crée la SessionFactory
+            Configuration cfg = new Configuration();
+            // cfg.setProperty("hibernate.show_sql", "true");
 
-	private static final ThreadLocal session = new ThreadLocal();
+            sessionFactory = cfg.configure().buildSessionFactory();
+        }
+        catch (HibernateException ex)
+        {
+            throw new RuntimeException(FlexiLanguage.getInstance().getText(
+                    "errHiber1")
+                    + ex.getMessage(), ex);
+        }
+    }
 
-	/**
-	 *  
-	 * Get current Hibernate Session
-	 * @return Hibernate Session
-	 * @throws HibernateException 
-	 * 
-	 */
-	public static Session currentSession() throws HibernateException {
-		Session s = (Session) session.get();
-		// Ouvre une nouvelle Session, si ce Thread n'en a aucune
-		if (s == null) {
-			s = sessionFactory.openSession();
-			session.set(s);
-		}
-		return s;
-	}
+    private static final ThreadLocal session = new ThreadLocal();
 
-	/**
-	 *  
-	 * Closes current Session.
-	 * To always do after manipulating data with Hibernate
-	 *
-	 * @throws HibernateException 
-	 * 
-	 */
-	public static void closeSession() throws HibernateException {
-		Session s = (Session) session.get();
-		session.set(null);
-		if (s != null)
-			s.close();
-	}
+    /**
+     * Set the URI of the database, the database name and the user and password
+     * to connect to the database from the configuration
+     * 
+     * @param config
+     *            database configuration to set
+     * @throws FlexiException
+     */
+    public static void setConfiguration(IConfig config) throws FlexiException
+    {
+        Configuration cfg = new Configuration();
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(config.getUriServerData() + "/");
+        buffer.append(config.getNameBase());
+        cfg.setProperty("hibernate.connection.url", buffer.toString());
+        cfg.setProperty("hibernate.connection.username", config.getUserBDD());
+        cfg.setProperty("hibernate.connection.password", config.getPassBDD());
+        try
+        {
+            sessionFactory = cfg.configure().buildSessionFactory();
+        }
+        catch (HibernateException e)
+        {
+            throw new FlexiException(FlexiLanguage.getInstance().getText(
+                    "errHiber1")
+                    + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 
+     * Get current Hibernate Session
+     * 
+     * @return Hibernate Session
+     * @throws HibernateException
+     * 
+     */
+    public static Session currentSession() throws HibernateException
+    {
+        Session s = (Session) session.get();
+        // Ouvre une nouvelle Session, si ce Thread n'en a aucune
+        if (s == null)
+        {
+            s = sessionFactory.openSession();
+            session.set(s);
+        }
+        return s;
+    }
+
+    /**
+     * 
+     * Closes current Session. To always do after manipulating data with
+     * Hibernate
+     * 
+     * @throws HibernateException
+     * 
+     */
+    public static void closeSession() throws HibernateException
+    {
+        Session s = (Session) session.get();
+        session.set(null);
+        if (s != null) s.close();
+    }
 }

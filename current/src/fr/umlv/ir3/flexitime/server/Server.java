@@ -33,7 +33,12 @@ public class Server
     {
         try {
             LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-            
+        } catch (RemoteException e1) {
+            System.err.println(FlexiLanguage.getInstance().getText("errRMI1"));
+            System.exit(1);
+        }
+        
+        try {
             IConfigurationManager cm = new ConfigurationManager();
             IDataManager dm = new DataManagerImpl();
             IUserManager um = new UserManager(cm.get());
@@ -43,19 +48,22 @@ public class Server
             Naming.rebind("usermanager",um);
 
             System.out.println("Server running...");
-        } catch (RemoteException e1) {
-            System.err.println(FlexiLanguage.getInstance().getText("errRMI1"));
-            System.exit(1);
+        }
+        catch (RemoteException e)
+        {
+            System.err.println(FlexiLanguage.getInstance().getText("errRMI2"));
+            e.printStackTrace();
+            System.exit(2);
         }
         catch (MalformedURLException e)
         {
-            System.err.println(FlexiLanguage.getInstance().getText("errRMI1"));
-            System.exit(2);
+            System.err.println(FlexiLanguage.getInstance().getText("errServer1"));
+            System.exit(3);
         }
         catch (FlexiException e)
         {
             System.err.println(e.getMessage());
-            System.exit(3);
+            System.exit(4);
         }
     }
 }

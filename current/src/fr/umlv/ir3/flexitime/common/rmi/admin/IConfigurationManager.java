@@ -5,12 +5,7 @@
  */
 package fr.umlv.ir3.flexitime.common.rmi.admin;
 
-import java.io.IOException;
-import java.rmi.Remote;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
+import java.rmi.*;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
@@ -34,16 +29,18 @@ public interface IConfigurationManager extends Remote
      * considered.
      * 
      * @return current configuration
+     * @throws RemoteException 
      * @throws FlexiException 
      */
-    public IConfig get() throws FlexiException;
+    public IConfig get() throws RemoteException, FlexiException;
     
     /**
      * DOCME
      * 
      * @param config 
      * @return if the configuration was well saved
+     * @throws RemoteException 
      */
-    public boolean save(IConfig config);
+    public boolean save(IConfig config) throws RemoteException;
 }
 

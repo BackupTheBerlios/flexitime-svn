@@ -9,6 +9,8 @@ package fr.umlv.ir3.flexitime.server.core.admin;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import javax.xml.parsers.*;
 
@@ -25,10 +27,22 @@ import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
  * @version 250
  * @author FlexiTeam - Jérôme GUERS
  */
-public class ConfigurationManager implements IConfigurationManager
+public class ConfigurationManager extends UnicastRemoteObject implements IConfigurationManager
 {
-
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3256442499634378288L;
     private static IConfig currentConfig;
+    
+    /**
+     * DOCME
+     * @throws RemoteException
+     */
+    public ConfigurationManager() throws RemoteException
+    {
+        super();
+    }
 
     /**
      * Load the configuration if it is the first time the configuration is
@@ -43,7 +57,7 @@ public class ConfigurationManager implements IConfigurationManager
      * 
      * @see fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager#get()
      */
-    public IConfig get() throws FlexiException
+    public IConfig get() throws RemoteException, FlexiException
     {
         if (currentConfig == null)
         {
@@ -91,7 +105,7 @@ public class ConfigurationManager implements IConfigurationManager
      * @return if the configuration was well saved
      * @see fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager#save(fr.umlv.ir3.flexitime.common.data.admin.IConfig)
      */
-    public boolean save(IConfig config)
+    public boolean save(IConfig config) throws RemoteException
     {
         boolean error = false;
 
