@@ -38,6 +38,7 @@ public class SubjectsGroupView
     JButton okButton;
     JButton cancelButton;
     JTextField name;
+    private static FlexiLanguage language = FlexiLanguage.getInstance();
     
     public SubjectsGroupView(SubjectsGroupViewModel model)
     {

@@ -21,6 +21,7 @@ import javax.swing.event.DocumentListener;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectsGroupViewModel;
 
@@ -38,6 +39,7 @@ public class SubjectView
     JButton okButton;
     JButton cancelButton;
     JTextField name;
+    private static FlexiLanguage language = FlexiLanguage.getInstance();
     
     public SubjectView(SubjectViewModel model)
     {

@@ -10,18 +10,21 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
+import javax.swing.ListModel;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeSelectionModel;
 
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiMouseListenerFactory;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiSelectionListenerFactory;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
@@ -45,11 +48,14 @@ public class TeachingStructureView implements FlexiTreeNodeListener
     JPanel treePanel;
 	JPanel viewPanel;
 	ITeachingStructure teachingStructure;
-	
-	public TeachingStructureView(TreeModel model,JTree tree)
+    ListModel teacherList;
+    private static FlexiLanguage language = FlexiLanguage.getInstance();
+    
+	public TeachingStructureView(TreeModel model,JTree tree,ListModel teacherList)
 	{
 		this.model=(ResourceTreeModel)model;
 		this.tree=tree;
+        this.teacherList=teacherList;
 		//((FlexiTreeNode)this.tree.getSelectionPath().getLastPathComponent()).addFlexiTreeNodeListener(this);
 		create();
 	}
@@ -72,7 +78,7 @@ public class TeachingStructureView implements FlexiTreeNodeListener
         RootTreeNode rootSubjectsGroupTree = new RootSubjectsGroupTreeNode(null,teachingStructure);
         JTree subjectsGroupTree = createJTree(rootSubjectsGroupTree);
         subjectsGroupTree.addMouseListener(FlexiMouseListenerFactory.createSubjectsGroupMouseLister(mainPanel));
-        subjectsGroupTree.addTreeSelectionListener(FlexiSelectionListenerFactory.createSubjectsGroupTreeSelectionListener(this.mainPanel));
+        subjectsGroupTree.addTreeSelectionListener(FlexiSelectionListenerFactory.createSubjectsGroupTreeSelectionListener(this.mainPanel,teacherList));
         JScrollPane scrollBloc = new JScrollPane(subjectsGroupTree);
         scrollBloc.setPreferredSize(new Dimension(200,100));
         scrollBloc.setMinimumSize(new Dimension(200,100));

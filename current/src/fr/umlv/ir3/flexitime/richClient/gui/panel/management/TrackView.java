@@ -25,6 +25,7 @@ import javax.swing.tree.TreeModel;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
@@ -45,6 +46,8 @@ public class TrackView
 	JButton okButton;
 	JButton cancelButton;
 	JTextField name;
+    private static FlexiLanguage language = FlexiLanguage.getInstance();
+    
 	public TrackView(TrackViewModel model)
 	{
 		this.model=model;

@@ -46,7 +46,7 @@ public class DefaultTreeActions
 						((ResourceTreeModel)model).add(treeNode);
 					} 
                     catch (FlexiException e) {
-                        JOptionPane.showMessageDialog(null,e.getMessage(),language.getText("erreurAdd"),JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,e.getMessage(),language.getText("errorAdd"),JOptionPane.ERROR_MESSAGE);
 					}
 					
 				
@@ -73,11 +73,11 @@ public class DefaultTreeActions
                     ((ResourceTreeModel)model).remove(treeNode);
                 }catch (FlexiException e) 
                 {
-                    JOptionPane.showMessageDialog(null,e.getMessage(),"Suppression impossible",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,e.getMessage(),language.getText("errorDel"),JOptionPane.ERROR_MESSAGE);
                 }
                 catch(RemoteException re)
                 {
-                    JOptionPane.showMessageDialog(null,re.getMessage(),"Probleme Distant",JOptionPane.ERROR_MESSAGE);  
+                    JOptionPane.showMessageDialog(null,re.getMessage(),language.getText("errorCom"),JOptionPane.ERROR_MESSAGE);  
                 }
                 
 			}

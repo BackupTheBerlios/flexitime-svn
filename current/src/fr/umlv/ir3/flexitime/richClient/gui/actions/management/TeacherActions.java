@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListModel;
 
 /**
@@ -26,7 +27,8 @@ import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListMod
  */
 public class TeacherActions 
 {
-	public static Action addTeacher(final ListModel model, final JList list)
+	private static FlexiLanguage language = FlexiLanguage.getInstance();
+    public static Action addTeacher(final ListModel model, final JList list)
 	{
 		
 		Action action = new AbstractAction()
@@ -44,7 +46,7 @@ public class TeacherActions
 					((TeacherListModel)model).add();
 				} catch (FlexiException e)
                 {
-					JOptionPane.showMessageDialog(null,e.getMessage(),"Ajout impossible",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,e.getMessage(),language.getText("errorDisplay"),JOptionPane.ERROR_MESSAGE);
 				}
 				 list.setSelectedIndex(((TeacherListModel)model).getSize()-1);//list.getVisibleRowCount());
 			}
@@ -67,9 +69,9 @@ public class TeacherActions
 					try {
 						((TeacherListModel)model).remove(list.getSelectedIndex());
 					} catch (RemoteException e) {
-						JOptionPane.showMessageDialog(null,e.getMessage(),"Suppression impossible",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null,e.getMessage(),language.getText("errorDel"),JOptionPane.ERROR_MESSAGE);
 					} catch (FlexiException e) {
-						JOptionPane.showMessageDialog(null,e.getMessage(),"Suppression impossible",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null,e.getMessage(),language.getText("errorDel"),JOptionPane.ERROR_MESSAGE);
 					}
 					list.setSelectedIndex(0);
 			}

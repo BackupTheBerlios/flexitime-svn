@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.ListModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
@@ -32,6 +33,7 @@ import javax.swing.tree.TreeModel;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
@@ -59,17 +61,19 @@ public class CourseView
     JColorChooser coul;
     JButton buttonCoul;
     JButton buttonTeacher;
-    //JList prof;
-    //JList globalTeacherList;
-    JTextField prof;
-    JTextField globalTeacherList;
+    JList prof;
+    JList globalTeacherList;
+    //JTextField globalTeacherList;
     JPopupMenu popMenu;
+    JPopupMenu popMenu2;
 	JLabel errorLabel;
-	
+    ListModel teacherList;
+    private static FlexiLanguage language = FlexiLanguage.getInstance();
     
-    public CourseView(CourseViewModel model)
+    public CourseView(CourseViewModel model,ListModel teacherList)
 	{
 	    this.model =model;
+        this.teacherList = teacherList;
 		create();
 	}
 	
@@ -88,6 +92,7 @@ public class CourseView
 		nbHourTotal = new JTextField();
         time = new JTextField();
         popMenu = new JPopupMenu();
+        popMenu2 = new JPopupMenu();
         coul = new JColorChooser(Color.BLUE);
        // if(model.getCourse().getColor()!=null)coul.setColor(model.getCourse().getColor());
         coul.setPreviewPanel(new JPanel());
@@ -102,29 +107,27 @@ public class CourseView
             }
             
         });
-   //     try {
-            //prof = new JList();//new TeacherListModel(model.getCourse().getLstTeacher()));
-            prof = new JTextField();
-            prof.setMinimumSize(new Dimension(50,50));
-            prof.setMaximumSize(new Dimension(50,50));
-            //globalTeacherList = new JList();//new TeacherListModel(model.getCourse().getLstTeacher()));
-            globalTeacherList = new JTextField();
+        try {
+            prof = new JList(new TeacherListModel(model.getCourse().getLstTeacher()));
+            prof.setMinimumSize(new Dimension(100,100));
+            prof.setMaximumSize(new Dimension(250,250));
+            globalTeacherList = new JList(teacherList);
             globalTeacherList.setMinimumSize(new Dimension(50,50));
             globalTeacherList.setMaximumSize(new Dimension(50,50));
  
-            //       } catch (RemoteException e1) {
+            } catch (RemoteException e1) {
 			// TODO Auto-generated catch block
-	//		e1.printStackTrace();
-	//	}
+			e1.printStackTrace();
+		}
         errorLabel = new JLabel();
 		errorLabel.setForeground(Color.RED);
 		errorLabel.setVisible(false);
-		okButton = new JButton("Appliquer");
+		okButton = new JButton(language.getText("apply"));
 		okButton.setEnabled(false);
-		cancelButton=new JButton("Annuler");
+		cancelButton=new JButton(language.getText("cancel"));
 		cancelButton.setEnabled( false);
-        buttonCoul= new JButton (">");
-        buttonTeacher = new JButton("...");
+        buttonCoul= new JButton (language.getText("btColor"));
+        buttonTeacher = new JButton(language.getText("btTeacher"));
         //if(model.getCourse().getColor()!=null)buttonCoul.setBackground(model.getCourse().getColor());
 		name = new JTextField(model.getCourse().getName());
 		nbHourTotal = new JTextField(""+model.getCourse().getNbHours());
@@ -191,15 +194,15 @@ public class CourseView
 		
         //Bouton de couleur
         buttonCoul.addActionListener(new ActionListener()
-                {
+        {
 
-                    public void actionPerformed(ActionEvent arg0)
-                    {
-                       popMenu.add(coul);
-                       popMenu.show((Component)arg0.getSource(),buttonCoul.getX(),buttonCoul.getY());
-                        //JMenuItem menuItem;
+            public void actionPerformed(ActionEvent arg0)
+            {
+                popMenu.add(coul);
+                popMenu.show(buttonCoul,buttonTeacher.getWidth(),buttonTeacher.getHeight());
+                //JMenuItem menuItem;
                         
-                    }
+            }
             
         });
 		
@@ -209,9 +212,8 @@ public class CourseView
 
                     public void actionPerformed(ActionEvent arg0)
                     {
-                        popMenu.remove(coul);
-                        popMenu.add(globalTeacherList);
-                        popMenu.show((Component)arg0.getSource(),buttonTeacher.getX(),buttonTeacher.getY());
+                        popMenu2.add(globalTeacherList);
+                        popMenu2.show(buttonTeacher,buttonTeacher.getWidth(),buttonTeacher.getHeight());
                         
                     }
             
@@ -222,22 +224,22 @@ public class CourseView
         //////////////////////////////////////////
         // CREATION DU FORMULAIRE
         //////////////////////////////////////////
-        FormLayout layout = new FormLayout("50px, pref, 10px, 50dlu,50px,50dlu,70px,pref","70px, pref, 20px, pref,20px,pref,20px,pref,20px,pref,40px,pref");
+        FormLayout layout = new FormLayout("50px, pref, 10px, 50dlu,50px,50dlu,70px,pref","10px, pref, 20px, pref,20px,pref,20px,pref,20px,pref,40px,pref");
 		//Collone 							 1		2	  3		4	  5	   6	7	 8	 9    10     1      2    3      4    5    6    7    8    9     10
 		//layout.setRowGroups(new int[][]{{1, 3, 5}});
 		panel.setLayout(layout);
 		CellConstraints cc = new CellConstraints();
-		panel.add(new JLabel("Nom:"), cc.xy (2, 2));
+		panel.add(new JLabel(language.getText("formName")+":"), cc.xy (2, 2));
 		panel.add(name, cc.xyw(4, 2, 2));
-		panel.add(new JLabel("Nombre d'heures totales:"), cc.xyw (4, 4, 3));
+		panel.add(new JLabel(language.getText(language.getText("defaultCourseLength"))), cc.xyw (4, 4, 3));
 		panel.add(nbHourTotal, cc.xy (6, 4));
-		panel.add(new JLabel("Durée de la séance"), cc.xyw (4, 6, 3));
+		panel.add(new JLabel(language.getText("courseTime")+":"), cc.xyw (4, 6, 3));
 		panel.add(time, cc.xy (6, 6));
-		panel.add(new JLabel("Couleur:"),cc.xy (4, 8));
+		panel.add(new JLabel(language.getText("color")+":"),cc.xy (4, 8));
         panel.add(buttonCoul,cc.xy(6, 8));
-        panel.add(new JLabel("Professeur:"),cc.xy (4, 10));
+        panel.add(new JLabel(language.getText("teacher"+":")),cc.xy (4, 10));
         panel.add(prof,cc.xy(6, 10));
-        panel.add(buttonTeacher,cc.xy(8,10));
+        panel.add(buttonTeacher,cc.xy(7,10));
         panel.add(okButton, cc.xy (4, 12));
 		panel.add(cancelButton,cc.xy (6, 12));
 		

@@ -21,6 +21,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.DeviceTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;
@@ -45,7 +46,8 @@ import fr.umlv.ir3.flexitime.richClient.models.management.track.TrackTreeNode;
  */
 public class FlexiMouseListenerFactory 
 {
-	/**
+	private static FlexiLanguage language = FlexiLanguage.getInstance();
+    /**
 	 * Creates a Mouse Listener for a tree of Track
 	 * @param panelParent
 	 * @return
@@ -67,17 +69,17 @@ public class FlexiMouseListenerFactory
 							
 							if(tmpTreeNode instanceof TrackTreeNode)
 							{
-								name = new String[]{"Ajouter une Filière","Ajouter une Promotion","Supprimer"};
+								name = new String[]{language.getText("addTrack"),language.getText("addClass"),language.getText("delResource")};
 								action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode.getParent()) ,DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode) ,DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
 							}
 							else if(tmpTreeNode instanceof ClassTreeNode)
 							{
-								name = new String[]{"Ajouter un Groupe","Supprimer"};
+								name = new String[]{language.getText("addGroup"),language.getText("delResource")};
 								action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode) ,DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
 							}
 							else if(tmpTreeNode instanceof GroupTreeNode)
 							{
-								name = new String[]{"Supprimer"};
+								name = new String[]{language.getText("delResource")};
 								action = new Action[]{DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
 							}
 							else if(tmpTreeNode instanceof TeachingStructureTreeNode)
@@ -87,7 +89,7 @@ public class FlexiMouseListenerFactory
 						}
 						else
 						{
-							name = new String[]{"Ajouter une Filière"};
+							name = new String[]{language.getText("addTrack")};
 							action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),(RootTreeNode)tmpTree.getModel().getRoot())};
 							
 						}
@@ -131,13 +133,13 @@ public class FlexiMouseListenerFactory
 							TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
 							if(tmpTreeNode instanceof TypeDeviceTreeNode)
 							{
-								name = new String[]{"Ajouter un Matériel"};
+								name = new String[]{language.getText("addDevice")};
 								action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode) };
 								
 							}
 							else if(tmpTreeNode instanceof DeviceTreeNode)
 							{
-								name = new String[]{"Supprimer"};
+								name = new String[]{language.getText("Supprimer")};
 								action = new Action[]{DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
 							}
 							popMenu = createPopupMenu(name,action);
@@ -180,22 +182,22 @@ public class FlexiMouseListenerFactory
 							TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
 							if(tmpTreeNode instanceof BuildingTreeNode)
 							{
-								name = new String[]{"Ajouter un Batiment","Ajouter un Etage","Supprimer"};
+								name = new String[]{language.getText("addBuilding"),language.getText("addFloor"),language.getText("delResource")};
 								action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode.getParent()) ,DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode) ,DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
 							}
 							else if(tmpTreeNode instanceof FloorTreeNode)
 							{
-								name = new String[]{"Supprimer"};
+								name = new String[]{language.getText("delResource")};
 								action = new Action[]{DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
 							}
 							else if(tmpTreeNode instanceof TypeRoomTreeNode)
 							{
-								name = new String[]{"Ajouter une salle"};
+								name = new String[]{language.getText("addRoom")};
 								action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode)};
 							}
 							else if(tmpTreeNode instanceof RoomTreeNode)
 							{
-								name = new String[]{"Supprimer"};
+								name = new String[]{language.getText("delResource")};
 								action = new Action[]{DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
 								//tmpTree.addSelectionRow(6) ;
 								//System.out.println(tmpTree.getLeadSelectionRow());
@@ -206,7 +208,7 @@ public class FlexiMouseListenerFactory
 						}
 						else
 						{
-							name = new String[]{"Ajouter un Batiment"};
+							name = new String[]{language.getText("addBuilding")};
 							action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),(RootTreeNode)tmpTree.getModel().getRoot())};	
 						}
 						popMenu = createPopupMenu(name,action);
@@ -246,13 +248,13 @@ public class FlexiMouseListenerFactory
 						Action[] action=null;
 						if(tmpList.getSelectedIndex() >= 0)
 						{
-								name = new String[]{"Ajouter un Professeur","Supprimer"};
+								name = new String[]{language.getText("addTeacher"),language.getText("delResource")};
 								action = new Action[]{TeacherActions.addTeacher(tmpList.getModel(),tmpList),TeacherActions.removeTeacher(tmpList.getModel(),tmpList)};
 						}
 						else
 						{
 
-							name = new String[]{"Ajouter un Professeur"};
+							name = new String[]{language.getText("addTeacher")};
 							action = new Action[]{TeacherActions.addTeacher(tmpList.getModel(),tmpList)};
 						}
 						popMenu = createPopupMenu(name,action);
@@ -293,22 +295,22 @@ public class FlexiMouseListenerFactory
 						TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
 						if(tmpTreeNode instanceof SubjectsGroupTreeNode)
 						{
-							name = new String[]{"Ajouter un Bloc","Ajouter une Matière","Supprimer"};
+							name = new String[]{language.getText("addSubjectsGroup"),language.getText("addSubject"),language.getText("delResource")};
 							action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode.getParent()) ,DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode) ,DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
 						}
 						else if(tmpTreeNode instanceof SubjectTreeNode)
 						{
-							name = new String[]{"Supprimer"};
+							name = new String[]{language.getText("delResource")};
 							action = new Action[]{DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
 						}
 						else if(tmpTreeNode instanceof TypeCourseTreeNode)
 						{
-							name = new String[]{"Ajouter un Cours"};
+							name = new String[]{language.getText("addCourse")};
 							action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),tmpTreeNode)};
 						}
 						else if(tmpTreeNode instanceof CourseTreeNode)
 						{
-							name = new String[]{"Supprimer"};
+							name = new String[]{language.getText("delResource")};
 							action = new Action[]{DefaultTreeActions.remove(tmpTree.getModel(),tmpTreeNode)};
 							//tmpTree.addSelectionRow(6) ;
 							//System.out.println(tmpTree.getLeadSelectionRow());
@@ -319,7 +321,7 @@ public class FlexiMouseListenerFactory
 					}
 					else
 					{
-						name = new String[]{"Ajouter un Bloc"};
+						name = new String[]{language.getText("addSubjectsGroup")};
 						action = new Action[]{DefaultTreeActions.add(tmpTree.getModel(),(RootTreeNode)tmpTree.getModel().getRoot())};	
 					}
 					popMenu = createPopupMenu(name,action);

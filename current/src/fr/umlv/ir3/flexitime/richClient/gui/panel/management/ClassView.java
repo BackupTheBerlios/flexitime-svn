@@ -23,6 +23,7 @@ import javax.swing.tree.TreeModel;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
@@ -49,6 +50,7 @@ public class ClassView
 	//JTextField nbPerson;
 	//JTextField nbGroup;
 	JLabel errorLabel;
+    private static FlexiLanguage language = FlexiLanguage.getInstance();
 	public ClassView(ClassViewModel model)
 	{
 		this.model=model;
@@ -71,9 +73,9 @@ public class ClassView
 		/*errorLabel = new JLabel();
 		errorLabel.setForeground(Color.RED);
 		errorLabel.setVisible(false);*/
-		okButton = new JButton("Appliquer");
+		okButton = new JButton(language.getText("apply"));
 		okButton.setEnabled(false);
-		cancelButton=new JButton("Annuler");
+		cancelButton=new JButton(language.getText("cancel"));
 		cancelButton.setEnabled( false);
 		name = new JTextField(model.getIClass().getName());
 		nbPerson = new JLabel(""+model.getIClass().getNbPerson());
@@ -130,11 +132,11 @@ public class ClassView
 		//layout.setRowGroups(new int[][]{{1, 3, 5}});
 		panel.setLayout(layout);
 		CellConstraints cc = new CellConstraints();
-		panel.add(new JLabel("Nom:"), cc.xy (2, 2));
+		panel.add(new JLabel(language.getText("formName")+":"), cc.xy (2, 2));
 		panel.add(name, cc.xyw(4, 2, 2));
-		panel.add(new JLabel("Nombre de Groupes:"), cc.xyw (4, 4,3));
+		panel.add(new JLabel(language.getText("nbGroup")+":"), cc.xyw (4, 4,3));
 		panel.add(nbGroup, cc.xy (6, 4));
-		panel.add(new JLabel("Nombre de Personnes:"), cc.xyw (4, 6,3));
+		panel.add(new JLabel(language.getText("nbPerson")+":"), cc.xyw (4, 6,3));
 		panel.add(nbPerson, cc.xy (6, 6));
 		panel.add(okButton, cc.xy (8, 8));
 		panel.add(cancelButton,cc.xy (10, 8));

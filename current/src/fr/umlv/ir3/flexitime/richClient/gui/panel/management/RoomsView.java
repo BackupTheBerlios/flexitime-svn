@@ -27,11 +27,13 @@ import javax.swing.tree.TreeModel;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomViewModel;
+
 
 /**
  * RoomsView - DOCME Description explication supplémentaire si nécessaire in
@@ -50,7 +52,8 @@ public class RoomsView
 	JTextField name;
 	JTextField capacity;
 	JLabel errorLabel;
-	
+	private static FlexiLanguage language = FlexiLanguage.getInstance();
+    
     public RoomsView(RoomViewModel model)
 	{
 		this.model=model;

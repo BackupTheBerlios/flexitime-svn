@@ -22,6 +22,7 @@ import javax.swing.event.DocumentListener;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.DevicesViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.TrackViewModel;
 
@@ -40,6 +41,7 @@ public class DevicesView
     JButton okButton;
     JButton cancelButton;
     JTextField name;
+    private static FlexiLanguage language = FlexiLanguage.getInstance();
     
     public DevicesView(DevicesViewModel model)
     {
@@ -60,8 +62,8 @@ public class DevicesView
     private void create()
     {
         panel = new JPanel();
-        okButton = new JButton("Appliquer");
-        cancelButton=new JButton("Annuler");
+        okButton = new JButton(language.getText("apply"));
+        cancelButton=new JButton(language.getText("cancel"));
         okButton.setEnabled(false);
         cancelButton.setEnabled(false);
         name = new JTextField(model.getDevice().getName());
@@ -95,7 +97,7 @@ public class DevicesView
                         cancelButton.setEnabled(false);
                     } catch (RemoteException e) 
                     {
-                        JOptionPane.showMessageDialog(null,e.getMessage(),"Modification impossible",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,e.getMessage(),language.getText("errorChange"),JOptionPane.ERROR_MESSAGE);
                     }
                    
             }   
@@ -115,7 +117,7 @@ public class DevicesView
         //layout.setRowGroups(new int[][]{{1, 3, 5}});
         panel.setLayout(layout);
         CellConstraints cc = new CellConstraints();
-        panel.add(new JLabel("Nom:"), cc.xy (2, 2));
+        panel.add(new JLabel(language.getText("formName")), cc.xy (2, 2));
         panel.add(name, cc.xyw(4, 2, 2));
         panel.add(okButton, cc.xy (6, 4));
         panel.add(cancelButton,cc.xy (8, 4));

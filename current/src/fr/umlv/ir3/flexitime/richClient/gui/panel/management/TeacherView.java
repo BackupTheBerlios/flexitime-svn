@@ -29,6 +29,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListModel;
@@ -52,7 +53,8 @@ public class TeacherView
 	JTextField firstName;
 	JTextField email;
 	JLabel errorLabel;
-	
+	private static FlexiLanguage language = FlexiLanguage.getInstance();
+    
     public TeacherView(TeacherViewModel model)
 	{
 		this.model= model;

@@ -58,6 +58,7 @@ public class OutlookBarManagement
 	//static JFrame frame;
 	JPanel panelOutlookBar;
 	JComponent panelParent;
+    TeacherListModel listModel;
     //JPanel panelParent;
     //JList list;
 
@@ -69,7 +70,7 @@ public class OutlookBarManagement
         panelOutlookBar = new JPanel(new BorderLayout());
         //panelOutlookBar.setPreferredSize();
         //Create a list model and a list for the Teachers.
-        TeacherListModel listModel = new TeacherListModel(listTeacher);
+        listModel = new TeacherListModel(listTeacher);
         JList list = new JList(listModel);
         list.addMouseListener(FlexiMouseListenerFactory.createTeacherMouseLister());
         list.addListSelectionListener(FlexiSelectionListenerFactory.createTeacherListSelectionListener(this.panelParent));
@@ -83,7 +84,7 @@ public class OutlookBarManagement
 		rootTrackTree = new RootTrackTreeNode(null,listTrack);
         JTree treeTrack = createJTree(rootTrackTree);
         treeTrack.addMouseListener(FlexiMouseListenerFactory.createTrackMouseLister());
-        treeTrack.addTreeSelectionListener(FlexiSelectionListenerFactory.createTrackTreeSelectionListener(this.panelParent));
+        treeTrack.addTreeSelectionListener(FlexiSelectionListenerFactory.createTrackTreeSelectionListener(this.panelParent,listModel));
         JScrollPane scrollTrack = new JScrollPane(treeTrack);
         //scrollTrack.setPreferredSize(new Dimension(300,100));
         scrollTrack.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
