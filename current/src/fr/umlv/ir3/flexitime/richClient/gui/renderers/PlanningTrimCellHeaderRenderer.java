@@ -24,7 +24,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JRessourcePlannin
  * 
  * @author FlexiTeam - binou
  */
-public class EDTCellHeaderRenderer
+public class PlanningTrimCellHeaderRenderer
 {
     /**
      * Comment for <code>WEEK_HEADER</code>
@@ -54,14 +54,14 @@ public class EDTCellHeaderRenderer
      * @param headerType hte type of header we will have to paint
      * @return A component whose paint() method will render the specified value
      * 
-     * @see EDTCellRenderer
+     * @see PlanningTrimCellRenderer
      */
     public JComponent getEDTCellHeaderRendererComponent(JComponent edt, Object object, int headerType)
     {
         
         switch(headerType)
         {
-            case EDTCellHeaderRenderer.WEEK_HEADER :
+            case PlanningTrimCellHeaderRenderer.WEEK_HEADER :
                 if(object instanceof Integer)
                 {
                     Integer i = (Integer)object;
@@ -71,7 +71,7 @@ public class EDTCellHeaderRenderer
                     this.label.setText("sem. " + i.intValue());
                 }
                 break;
-            case EDTCellHeaderRenderer.DAY_HEADER :
+            case PlanningTrimCellHeaderRenderer.DAY_HEADER :
                 if(object instanceof String)
                 {
                     String text = (String)object;
@@ -81,7 +81,7 @@ public class EDTCellHeaderRenderer
                     this.label.setText(text);
                 }
                 break;
-            case EDTCellHeaderRenderer.GAP_HEADER :
+            case PlanningTrimCellHeaderRenderer.GAP_HEADER :
                 if(object instanceof String)
                 {
                     String text = (String)object;
@@ -92,7 +92,7 @@ public class EDTCellHeaderRenderer
                     this.label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 }
                 break;
-            case EDTCellHeaderRenderer.DATE_HEADER :
+            case PlanningTrimCellHeaderRenderer.DATE_HEADER :
                 if(object instanceof Calendar)
                 {
                     Calendar calendar = (Calendar)object;

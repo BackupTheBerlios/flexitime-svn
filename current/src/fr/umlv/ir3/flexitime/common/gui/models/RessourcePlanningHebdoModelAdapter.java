@@ -50,7 +50,6 @@ public class RessourcePlanningHebdoModelAdapter
      *
      * @param hebdo 
      * 
-     * @see (si nécessaire)
      */
     public void addPlanningDataListener(JRessourcePlanningHebdo hebdo)
     {
@@ -64,7 +63,6 @@ public class RessourcePlanningHebdoModelAdapter
      *
      * @return 
      * 
-     * @see (si nécessaire)
      */
     public int getNbDays()
     {
@@ -78,7 +76,6 @@ public class RessourcePlanningHebdoModelAdapter
      *
      * @return 
      * 
-     * @see (si nécessaire)
      */
     public int getNbBloc()
     {
@@ -93,7 +90,6 @@ public class RessourcePlanningHebdoModelAdapter
      * @param j
      * @return 
      * 
-     * @see (si nécessaire)
      */
     public int getBlocSize(int j)
     {
@@ -109,27 +105,12 @@ public class RessourcePlanningHebdoModelAdapter
      * @param gapNumber
      * @return 
      * 
-     * @see (si nécessaire)
      */
     public Object getElementAt(int dayNumber, int gapNumber)
     {
         return model.getElementAt(0, dayNumber, gapNumber);
     }
 
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @param dayNumber
-     * @return 
-     * 
-     * @see (si nécessaire)
-     */
-    public Object getDateHeaderAt(int dayNumber)
-    {
-        return model.getDateHeaderAt(0, dayNumber);
-    }
 
     /** 
      * DOCME Description
@@ -139,7 +120,6 @@ public class RessourcePlanningHebdoModelAdapter
      * @param blocNumber
      * @return 
      * 
-     * @see (si nécessaire)
      */
     public Object getGapHeaderAt(int blocNumber)
     {
@@ -154,7 +134,6 @@ public class RessourcePlanningHebdoModelAdapter
      *
      * @return 
      * 
-     * @see (si nécessaire)
      */
     public int getDayGapSize()
     {
@@ -171,8 +150,20 @@ public class RessourcePlanningHebdoModelAdapter
      */
     public Gap getCurrentGap()
     {
-        // TODO Auto-generated method stub
         return model.getCurrentGap();
+    }
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param dayNumber
+     * @return 
+     * 
+     */
+    public Object getDayHeaderAt(int dayNumber)
+    {
+        return model.getDayHeaderAt(dayNumber);
     }
 
 }

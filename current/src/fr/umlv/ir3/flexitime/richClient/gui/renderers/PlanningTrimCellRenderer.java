@@ -11,8 +11,8 @@ package fr.umlv.ir3.flexitime.richClient.gui.renderers;
 import javax.swing.JComponent;
 
 import fr.umlv.ir3.flexitime.common.gui.models.BusyBloc;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JRessourcePlanning;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JBusy;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JRessourcePlanning;
 
 
 
@@ -21,7 +21,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.JBusy;
  * 
  * @author FlexiTeam - binou
  */
-public class EDTCellRenderer
+public class PlanningTrimCellRenderer
 {
     private JComponent comp = null;
 
@@ -37,7 +37,7 @@ public class EDTCellRenderer
      * @param gap the day's gap of the cell to be paint
      * @return A component whose paint() method will render the specified value
      * 
-     * @see EDTCellRenderer
+     * @see PlanningTrimCellRenderer
      */
     public JComponent getEDTCellRendererComponent(JComponent flexiEDT, Object elementAt, int week, int day, int gap)
     {
@@ -47,12 +47,12 @@ public class EDTCellRenderer
             if(elementAt instanceof BusyBloc)
             {
                 //nous sommes bien dans le cas d'un Busy à placer
-                comp = new JBusy( (BusyBloc)elementAt ); 
+                comp = new JBusy( (BusyBloc)elementAt , JRessourcePlanning.WEEK_WIDTH, JRessourcePlanning.GAP_HEIGTH ); 
             }   
             else
             {
                 //cas d'un créneau vide à placer
-                comp = new JBusy();
+                comp = new JBusy(JRessourcePlanning.WEEK_WIDTH, JRessourcePlanning.GAP_HEIGTH);
                 /*JLabel label = new JLabel();
                 label.setText("");
                 label.setBackground(Color.WHITE);

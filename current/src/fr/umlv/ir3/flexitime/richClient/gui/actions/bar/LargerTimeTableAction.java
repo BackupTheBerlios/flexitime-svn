@@ -56,7 +56,7 @@ public class LargerTimeTableAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent arg0)
     {
-        exploit.increaseView();
+        exploit.increase();
     }
 
 }
