@@ -1,86 +1,63 @@
 /*
  * Created on 12 déc. 2004
  * by Guillaume GUERRIN
- * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
+
 package fr.umlv.ir3.flexitime.common.data.activity;
 
 import java.util.Date;
 import fr.umlv.ir3.flexitime.common.data.Data;
 
-
 /**
- * Busy
- * Busy represents the unavailabilities
+ * Represents the unavailabilities
  * 
  * @version 0.1
- * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Busy extends Data{
+public interface Busy extends Data
+{
 
     /**
-     * getStartDate 
-     * returns the date of the beginning of the busy.
-     * 
-     *     <code>Date date = lesson.getDate()</code>
+     * Returns the date of the beginning of the busy.
+     * <code>Date date = lesson.getDate()</code>
      * 
      * @return the date of the beginning of the busy.
-     * 
-     * @author   FlexiTeam - Guillaume GUERRIN
-     * @date     12 déc. 2004
-     * 
-     * @uml.property name="startDate"
+     * @author FlexiTeam - Guillaume GUERRIN
      */
     Date getStartDate();
 
     /**
-     * setStartDate
-     * changes the date of the beginning of the busy.
-     * 
-     * 		<code>	
-     * 				Date date = new Date();
-     * 				lesson.setDate(date);
-     * 		</code>
+     * Changes the date of the beginning of the busy.
+     * <code>	
+     * 		Date date = new Date();
+     * 		lesson.setDate(date);
+     * </code>
      * 
      * @param daBusy the date of the beginning of the busy.
-     * 
-     * @author   FlexiTeam - Guillaume GUERRIN
-     * @date     12 déc. 2004
-     * 
-     * @uml.property name="startDate"
+     * @author FlexiTeam - Guillaume GUERRIN
      */
     void setStartDate(Date daBusy);
 
-	  
-	  /** 
-	   * getEndDate 
-	   * returns the date of the end of the busy.
-	   * 
-	   *     <code>Date date = busy.getDate()</code>
-	   *
-	   * @return the date of the end of the busy.
-	   * 
-	   * @author   FlexiTeam - Guillaume GUERRIN
-	   * @date     12 déc. 2004
-	   */
-		  Date getEndDate();
-		    
-		/** 
-		 * setEndDate
-		 * changes the date of the end of the busy.
-		 * 
-		 *		<code>	
-		 *				Date date = new Date();
-		 * 				busy.setDate(date);
-		 * 		</code>
-		 *
-		 * @param daBusy the date of the end of the busy.
-		 * 
-		 * @author   FlexiTeam - Guillaume GUERRIN
-		 * @date     12 déc. 2004
-		 */
-		  void setEndDate(Date daBusy);
+    /**
+     * Returns the date of the end of the busy.
+     * <code>Date date = busy.getDate()</code>
+     * 
+     * @return the date of the end of the busy.
+     * @author FlexiTeam - Guillaume GUERRIN
+     */
+    Date getEndDate();
+
+    /**
+     * Changes the date of the end of the busy.
+     * <code>	
+     *		Date date = new Date();
+     * 		busy.setDate(date);
+     * 	</code>
+     * 
+     * @param daBusy the date of the end of the busy.
+     * @author FlexiTeam - Guillaume GUERRIN
+     */
+    void setEndDate(Date daBusy);
 
 }

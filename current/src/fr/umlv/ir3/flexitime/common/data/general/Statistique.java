@@ -1,23 +1,19 @@
 /*
  * Created on 23 déc. 2004
  * by Guillaume GUERRIN
- * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
+
 package fr.umlv.ir3.flexitime.common.data.general;
 
-
 /**
- * Statistique  - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Statistique - DOCME Description explication supplémentaire si nécessaire in
+ * english please... Que fait cette classe, qu'est-ce qu'elle représente, ...
  * 
  * @version Verion ou révision SVN
- * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface Statistique {
+public interface Statistique
+{
 
 }

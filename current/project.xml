@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<project>
+
+	<pomVersion>3</pomVersion>
+	<id>FlexiMaven</id>
+  	<name>FlexiMaven</name>
+	<groupId>FlexiTeam</groupId>
+	<currentVersion>${appversion}</currentVersion>
+	<organization>
+		<name>FlexiTime</name>
+		<url>http://flexitime.free.fr</url>
+		<logo>/images/logo.png</logo>
+	</organization>
+	<inceptionYear>2004</inceptionYear>
+	<package>fr.umlv.ir3.flexitime</package>
+	<!--<logo>/images/logo.png</logo>-->
+	
+	<description>
+		The FlexiTime is a course management tool, developed by the Department of 
+		Computer Science at the University of Marne-La-Vallée (F-77454).
+		FlexiTime allows staff to mark assignments online and to manage
+		their modules efficiently.
+	</description>
+	<shortDescription>University Courses Manager</shortDescription>
+	
+	<url>http://flexitime.free.fr</url>
+
+<!--
+	<repository>
+		<connection>scm:svn:ext:jguers@berlios.de:/svnroot/repos/flexitime:flexitime</connection>
+		<developerConnection>scm:svn:ext:jguers@berlios.de:/svnroot/repos/flexitime:flexitime</developerConnection>
+		<url>http://svn.berlios.de/viewcvs/flexitime/</url>
+	</repository>
+-->
+
+	<versions>
+		<version>
+			<id>$cvsname</id>
+			<name>${appversion}</name>
+			<tag>${appversion}</tag>
+		</version>
+	</versions>
+
+ 	<developers>
+		<developer>
+			<name>Jérôme GUERS</name>
+			<id>JG</id>
+			<email>jguers@univ-mlv.fr</email>
+			<organization>FlexiTeam</organization>
+			<roles>
+                <role>Project Head</role>
+            </roles>
+            <timezone>1</timezone>
+		</developer>
+	</developers>
+
+   <licenses>
+        <license>
+            <name>Lesser General Public License</name>
+			<url>http://www.gnu.org/copyleft/lesser.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+	<dependencies>
+		<!-- project dependencies -->
+
+		<!-- FlexiTime dependencies -->
+	</dependencies>
+
+	<build>
+		<nagEmailAddress></nagEmailAddress>
+		<sourceDirectory>${base.dir}/src</sourceDirectory>
+		<integrationUnitTestSourceDirectory>${base.dir}/test</integrationUnitTestSourceDirectory>
+		
+		<unitTest>
+			<includes>
+				<include>**/*Test.java</include>
+			</includes>
+			<excludes>
+			</excludes>
+		</unitTest>
+
+		<!-- Resources that are packaged up inside the JAR file -->
+		<resources>
+		</resources>
+		<!-- Integration unit test cases -->
+	</build>
+</project>

@@ -4,39 +4,35 @@
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
+
 package fr.umlv.ir3.flexitime.server.core.admin;
 
 import java.util.HashMap;
 
 import fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationListener;
 
-
 /**
- * ConfigurationManagerImpl - DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
+ * ConfigurationManagerImpl - DOCME Description explication supplémentaire si
+ * nécessaire in english please... Que fait cette classe, qu'est-ce qu'elle
  * représente, ...
  * 
  * @version Verion ou révision SVN
- * 
  * @author FlexiTeam - Valère
  */
-public class ConfigurationManager {
+public class ConfigurationManager
+{
 
-    /** 
-     * getConfigurations - DOCME Description
-     * Quel service est rendu par cette méthode
+    /**
+     * getConfigurations - DOCME Description Quel service est rendu par cette
+     * méthode <code>exemple d'appel de la methode</code>
      * 
-     *     <code>exemple d'appel de la methode</code>
-     *
-     * @return 
-     * 
+     * @return
      * @see fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationListener#getConfigurations()
-     * @author   FlexiTeam - Valère
-     * @date     26 déc. 2004
+     * @author FlexiTeam - Valère
+     * @date 26 déc. 2004
      */
-    public HashMap getConfigurations() {
+    public HashMap getConfigurations()
+    {
         // TODO Auto-generated method stub
         return null;
     }
