@@ -16,29 +16,24 @@ import fr.umlv.ir3.flexitime.richClient.event.PlanningDataListener;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An abstract model that notify the client for changement
  * 
  * @version Verion ou révision SVN
- * @see (si nécessaire)
  * 
  * @author FlexiTeam - binou
  */
 public abstract class AbstractPlanningModel implements PlanningModel
 {
-    private List listenerList;
+    private List<PlanningDataListener> listenerList;
     
     
     /**
-     * DOCME
+     * Constructs bla bla bla ;)
      * 
      */
     public AbstractPlanningModel()
     {
-        this.listenerList = new ArrayList(2);
+        this.listenerList = new ArrayList<PlanningDataListener>(2);
     }
     
     /**

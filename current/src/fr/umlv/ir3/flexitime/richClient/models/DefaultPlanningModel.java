@@ -52,6 +52,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
 
     //TODO gérer la fusion horizontalement !! ca serait top
 
+    
     /**
      * DOCME
      */
@@ -205,7 +206,6 @@ public class DefaultPlanningModel extends AbstractPlanningModel
 
 
     /** 
-     * DOCME Description
      * Return a Calendar in order to constructs the header of a date in the planning<br>
      * at the specified week and day <br>
      *
@@ -234,7 +234,6 @@ public class DefaultPlanningModel extends AbstractPlanningModel
      * @param gapNumber the value of the gap (0 is the first)
      * @return the Object at the specified index
      * 
-     * @see (si nécessaire)
      * @author   FlexiTeam - binou
      */
     public Object getElementAt(int weekNumber, int dayNumber, int gapNumber)
@@ -252,7 +251,7 @@ public class DefaultPlanningModel extends AbstractPlanningModel
      * @param weekNumber the value of the week (0 is the first)
      * @param dayNumber the value of the day (0 is the first)
      * @param gapNumber the value of the gap (0 is the first)
-     * @return 
+     * @return the number of empty gap
      * 
      * @author   FlexiTeam - binou
      */

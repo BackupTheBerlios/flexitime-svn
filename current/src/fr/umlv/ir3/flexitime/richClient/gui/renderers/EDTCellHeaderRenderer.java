@@ -19,14 +19,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.FlexiPlanning;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
- * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * Renders an item header in a Planning
  * 
  * @author FlexiTeam - binou
  */
@@ -48,20 +41,22 @@ public class EDTCellHeaderRenderer
      * Comment for <code>DATE_HEADER</code>
      */
     public static final int DATE_HEADER = 3;
-    private JLabel label;
+    private JLabel label = null;
 
-    /**
-     * DOCME
-     * 
-     */
-    public EDTCellHeaderRenderer()
-    {
-        
-    }
     
+    /** 
+     * Return a component that has been configured to display the specified object. 
+     * That component's paint method is then called to "render" the cell header in the planning
+     *
+     * @param edt the planning we're painting
+     * @param object The object returned by edt.getModel().getElementAt(...)
+     * @param headerType hte type of header we will have to paint
+     * @return A component whose paint() method will render the specified value
+     * 
+     * @see EDTCellRenderer
+     */
     public JComponent getEDTCellHeaderRendererComponent(FlexiPlanning edt, Object object, int headerType)
     {
-        this.label = null;
         
         switch(headerType)
         {

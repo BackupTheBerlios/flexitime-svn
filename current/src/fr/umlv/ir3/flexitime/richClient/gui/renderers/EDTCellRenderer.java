@@ -17,37 +17,27 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.LessonBloc;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
- * 
- * @version Verion ou révision SVN
+ * Renders an item in a Planning
  * 
  * @author FlexiTeam - binou
  */
 public class EDTCellRenderer
 {
-    private JComponent comp;
+    private JComponent comp = null;
 
-    /**
-     * DOCME
-     * 
-     */
-    public EDTCellRenderer()
-    {}
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Return a component that has been configured to display the specified object. 
+     * That component's paint method is then called to "render" the cell in the planning
      *
-     * @param flexiEDT
-     * @param elementAt
-     * @return 
+     * @param flexiEDT the planning we're painting
+     * @param elementAt The object returned by edt.getModel().getElementAt(...)
+     * @param week the week of the cell to be paint
+     * @param day the day of the cell to be paint
+     * @param gap the day's gap of the cell to be paint
+     * @return A component whose paint() method will render the specified value
      * 
-     * @author   FlexiTeam - binou
+     * @see EDTCellRenderer
      */
     public JComponent getEDTCellRendererComponent(FlexiPlanning flexiEDT, Object elementAt, int week, int day, int gap)
     {
