@@ -86,4 +86,19 @@ public interface ILesson extends IBusy
      * @param _course ICourse to set
      */
     public void setCourse(ICourse _course);
+    
+    /**
+     * Return length
+     * 
+     * @return Returns the length.
+     */
+    public int getLength();
+    
+    /**
+     * Set length
+     * 
+     * @param length
+     *            The length to set.
+     */
+    public void setLength(int length);
 }
