@@ -479,8 +479,9 @@ public class Time implements Comparable
         
         if(c.get(Calendar.WEEK_OF_YEAR)==c2.get(Calendar.WEEK_OF_YEAR) && c.get(Calendar.YEAR)==c2.get(Calendar.YEAR))
             return 0;
-        long nb3 = c.getTimeInMillis()-c2.getTimeInMillis();
-        if(nb3<(100*60*60*24*7)) return 0;
+        long nb3 = c2.getTimeInMillis()-c.getTimeInMillis();
+
+        if((nb3/100)<(60*60*60*24*7)) return 0;
         int tmp = 0;
         boolean bool= false;
         while(bool==false){
@@ -493,9 +494,9 @@ public class Time implements Comparable
         return tmp;
     }
     
-   /* public static void main(String[] args){
+   /*public static void main(String[] args){
         Time t= new Time(2004,12,27,0,0);
-        Time t2 = new Time(2005,1,2,0,0);
+        Time t2 = new Time(2050,1,2,0,0);
         System.out.println(Time.getGapWeek(t,t2));
     }*/
 
