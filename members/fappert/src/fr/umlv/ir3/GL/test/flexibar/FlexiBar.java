@@ -26,7 +26,7 @@ import javax.swing.JPanel;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class OutlookBar extends JPanel
+public class FlexiBar extends JPanel
 {
 	private final int B_WIDTH = 90;
 	private final int B_HEIGHT = 20;
@@ -42,7 +42,7 @@ public class OutlookBar extends JPanel
 	/**
 	 * 
 	 */
-	public OutlookBar() {
+	public FlexiBar() {
 		super(new BorderLayout());
 		panel = new JPanel();
 		layout = new BoxLayout(panel, BoxLayout.Y_AXIS);

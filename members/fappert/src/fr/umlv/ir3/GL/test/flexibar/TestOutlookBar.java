@@ -93,7 +93,7 @@ public class TestOutlookBar extends JPanel
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         //panel.add(scroll);
         
-        OutlookBar ob = new OutlookBar();
+        FlexiBar ob = new FlexiBar();
         ob.add(new JButton("Filières"), list);
         ob.add(new JButton("Matériels"), textField);
         ob.add(new JButton("Salles"),tree);
