@@ -9,6 +9,7 @@ package fr.umlv.ir3.flexitime.common.data.teachingStructure;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
 
 /**
  * Represents a list of SubjectsGroups defined for a Class
@@ -51,4 +52,20 @@ public interface ITeachingStructure extends IData
      * @author FlexiTeam - Guillaume GUERRIN
      */
     void removeSubjectsGroup(ISubjectsGroup subjectsGroup);
+    
+    /**
+     *  
+     * Getter for parent IClass
+     * @return parent IClass
+     * 
+     */
+    public IClass getParentClass();
+    
+    /**
+     * Sets the parent IClass of this ITeachingStructure  
+     *
+     * @param _class parent IClass 
+     * 
+     */
+    public void setParentClass(IClass _class);
 }

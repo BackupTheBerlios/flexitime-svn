@@ -8,6 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.teachingStructure.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
@@ -27,6 +28,9 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3256721771226083378L;
+    
+    private IClass parentClass;
+    
     //===========//
 	//  Champs	 //
 	//===========//
@@ -124,6 +128,36 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
     public void removeSubjectsGroup(ISubjectsGroup subjectsGroup)
     {
         lstSubjectsGroup.remove(subjectsGroup);
+    }
+    
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#getParentClass()
+     */
+    public IClass getParentClass()
+    {
+        return parentClass;
+    }
+    
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param _class 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#setParentClass(fr.umlv.ir3.flexitime.common.data.general.IClass)
+     */
+    public void setParentClass(IClass _class)
+    {
+        parentClass = _class;
     }
 }
 
