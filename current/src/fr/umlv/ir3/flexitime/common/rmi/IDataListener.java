@@ -25,9 +25,9 @@ public interface IDataListener extends Remote
     /**
      *  
      * Called when a data has changed 
-     * @param data Data that has changed
+     * @param event Data that has changed
      * @throws RemoteException when method is not reachable through RMI
      * 
      */
-    public void dataChanged(DataEvent data) throws RemoteException;
+    public void dataChanged(DataEvent event) throws RemoteException;
 }

@@ -29,28 +29,28 @@ import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 public class ThreadManager extends Thread
 {
     private List<IDataListener> listenerList;
-    private IData data;
-    private int property;
+    private DataEvent event;
+    
     /**
+     * 
      * DOCME
      * @param list
-     * @param data
-     * @param property
+     * @param event
      */
-    public ThreadManager(List<IDataListener> list, IData data, int property) {
+    public ThreadManager(List<IDataListener> list, DataEvent event) {
         this.listenerList = list;
-        this.data = data;
-        this.property = property;
+        this.event = event;
+
     }
-    /** 
+    
+    /**
+     *  
      * DOCME Description
      * Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     *
-     *  
      * 
-     * @see java.lang.Thread#run()
-     * @author   FlexiTeam - Administrateur
+     * 
+     * @see java.lang.Runnable#run()
      */
     public void run() {
         ArrayList<IDataListener> toRemove = new ArrayList<IDataListener>();
@@ -59,7 +59,7 @@ public class ThreadManager extends Thread
             IDataListener element = (IDataListener) iter.next();
             try
             {
-                element.dataChanged(new DataEvent(data, property));
+                element.dataChanged(event);
             }
             catch (RemoteException e)
             {
