@@ -69,7 +69,32 @@ public interface IUserManager extends Remote
      */
     public String getLongName(String login)throws RemoteException;
     
+    /**
+     *  
+     * Method to notify the server that a user wants to disconnect
+     *
+     * @param user IUser that wants to disconnect
+     * @throws RemoteException 
+     * 
+     */
     public void disconnect(IUser user) throws RemoteException;
+    
+    /**
+     * adds a IUserListener 
+     * @param u Iuser assciated to the listener
+     * @param l IUserListener ro add
+     * @throws RemoteException 
+     * 
+     */
+    public void addUserListener(IUser u, IUserListener l) throws RemoteException;
+    
+    /**
+     * Removes a IUserListener
+     * @param u Iuser assciated to the listener 
+     * @throws RemoteException 
+     * 
+     */
+    public void removeUserListener(IUser u) throws RemoteException;
 }
 
 

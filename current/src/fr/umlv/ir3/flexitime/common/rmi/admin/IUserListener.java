@@ -7,7 +7,10 @@
 
 package fr.umlv.ir3.flexitime.common.rmi.admin;
 
-import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 
 /**
  * Users - Implements the interface Users
@@ -15,17 +18,15 @@ import fr.umlv.ir3.flexitime.common.event.DataEvent;
  * @version 0.1
  * @author FlexiTeam - Valère FOREL
  */
-public interface IUserListener
+public interface IUserListener extends Remote
 {
 
     /**
-     * userChanged - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * Listener used to poll a client in order to have his IUser
      * 
-     * @param event
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
+     * @return IUser connected to the client
+     * @throws RemoteException 
      */
-    public void userChanged(DataEvent event);
+    public IUser getUser() throws RemoteException;
 
 }

@@ -33,7 +33,7 @@ public class TestUserStorage
 
     public static void main(String[] args) throws HibernateException, RemoteException, FlexiException
     {
-        IUser u = DataFactory.createUser("flexitime", "flexitim");
+        IUser u = DataFactory.createUser("prasad", "prasad");
         
         //RemoteDataManager.getUserManager().save(u);
         
