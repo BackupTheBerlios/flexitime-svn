@@ -8,7 +8,6 @@
 package fr.umlv.ir3.flexitime.server.core;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,136 +18,72 @@ import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
 
 /**
- * AbstractManager -
+ * AbstractManager - abstract clas for all the managers
  * 
  * @version 0.1
  * @author FlexiTeam - Valère
  */
-public abstract class AbstractManager extends UnicastRemoteObject implements
-        IDataManager
+public abstract class AbstractManager implements IDataManager
 {
 
     /**
-     * @throws RemoteException
+     * list of IDataListener
      */
-    protected AbstractManager() throws RemoteException
-    {
-        super();
-    }
-
     private List listenerList = new ArrayList();
 
     /**
-     * addListener - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     *  
+     * adds a listener to the list
      * 
-     * @param l
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
+     * @param l listener to be added
+     * @throws RemoteException if not reachable
+     * 
      */
-    public void addListener(IDataListener l) throws RemoteException
+    public void addDataListener(IDataListener l) throws RemoteException
     {
         listenerList.add(l);
     }
 
     /**
-     * @param t
-     * @param added
+     * Notifies all listeners that an event has occured
+     * @param d Data on which event has occured
+     * @param property type of the event 
      */
-    protected void notifyListener(Data d, int property) throws RemoteException
+    protected void notifyListener(Data d, int property)
     {
+        ArrayList toRemove = new ArrayList();
         for (Iterator iter = listenerList.iterator() ; iter.hasNext() ;)
         {
             IDataListener element = (IDataListener) iter.next();
-            element.dataChanged(new DataEvent(d, property));
+            try
+            {
+                element.dataChanged(new DataEvent(d, property));
+            }
+            catch (RemoteException e)
+            {
+                //Listener not reachable
+                //Mark it to be removed
+                toRemove.add(element);
+            }
+        }
+        
+        if(!toRemove.isEmpty()){
+            listenerList.removeAll(toRemove);
         }
     }
-
+    
     /**
-     * getDatas - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     *  
+     * removes a listener from the list
+     *
+     * @param l IDataListener to be removed
+     * @throws RemoteException if not reachable
      * 
-     * @return
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getDatas()
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
      */
-    public List get() throws RemoteException
+    public void removeDataListener(IDataListener l) throws RemoteException
     {
-        return null;
-    }
-
-    /**
-     * createData - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param data
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#createData(fr.umlv.ir3.flexitime.common.data.Data)
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
-    public void create(Data data) throws RemoteException
-    {}
-
-    /**
-     * updateData - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param data
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#updateData(fr.umlv.ir3.flexitime.common.data.Data)
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
-    public void update(Data data) throws RemoteException
-    {}
-
-    /**
-     * removeData - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param data
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#removeData(fr.umlv.ir3.flexitime.common.data.Data)
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
-    public void remove(Data data) throws RemoteException
-    {}
-
-    /**
-     * lock - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param data
-     * @return
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#lock(fr.umlv.ir3.flexitime.common.data.Data)
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
-    public boolean lock(Data data) throws RemoteException
-    {
-        return false;
-    }
-
-    /**
-     * unlock - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param data
-     * @return
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#unlock(fr.umlv.ir3.flexitime.common.data.Data)
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
-    public boolean unlock(Data data) throws RemoteException
-    {
-        return false;
+        // FIXME Vérifier les références pour la suppression
+        listenerList.remove(l);
     }
 
 }

@@ -10,7 +10,7 @@ package fr.umlv.ir3.flexitime.server.core;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.Course;
+import fr.umlv.ir3.flexitime.common.data.Data;
 
 /**
  * CourseManagerImpl - DOCME Description explication supplémentaire si
@@ -23,95 +23,101 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.Course;
 public class CourseManager extends AbstractManager
 {
 
-    /**
-     * DOCME
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param d
+     * @throws RemoteException 
      * 
-     * @throws RemoteException
-     */
-    protected CourseManager() throws RemoteException
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#add(fr.umlv.ir3.flexitime.common.data.Data)
+      */
+    public void add(Data d) throws RemoteException
     {
-        super();
-        // TODO Auto-generated constructor stub
+        // TODO Auto-generated method stub
+        
     }
 
-    /**
-     * get - DOCME Description Quel service est rendu par cette méthode
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
+     *
      * @return
-     * @throws RemoteException
-     * @see fr.umlv.ir3.flexitime.server.core.AbstractManager#get()
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#get()
+      */
     public List get() throws RemoteException
     {
+        // TODO Auto-generated method stub
         return null;
     }
 
-    /**
-     * create - DOCME Description Quel service est rendu par cette méthode
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     * 
-     * @param course
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
-    public void create(Course course) throws RemoteException
-    {}
-
-    /**
-     * update - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param course
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
-    public void update(Course course) throws RemoteException
-    {}
-
-    /**
-     * remove - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param course
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
-    public void remove(Course course) throws RemoteException
-    {}
-
-    /**
-     * lock - DOCME Description Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     * 
-     * @param course
+     *
+     * @param d
      * @return
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
-    public boolean lock(Course course) throws RemoteException
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#lock(fr.umlv.ir3.flexitime.common.data.Data)
+      */
+    public boolean lock(Data d) throws RemoteException
     {
+        // TODO Auto-generated method stub
         return false;
     }
 
-    /**
-     * unlock - DOCME Description Quel service est rendu par cette méthode
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
+     *
+     * @param d
+     * @throws RemoteException 
      * 
-     * @param course
-     * @return
-     * @throws RemoteException
-     * @author FlexiTeam - Valère
-     * @date 27 déc. 2004
-     */
-    public boolean unlock(Course course) throws RemoteException
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#remove(fr.umlv.ir3.flexitime.common.data.Data)
+      */
+    public void remove(Data d) throws RemoteException
     {
-        return false;
+        // TODO Auto-generated method stub
+        
     }
+
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param d
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#unlock(fr.umlv.ir3.flexitime.common.data.Data)
+      */
+    public void unlock(Data d) throws RemoteException
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param d
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#update(fr.umlv.ir3.flexitime.common.data.Data)
+      */
+    public void update(Data d) throws RemoteException
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
