@@ -12,7 +12,7 @@
 		<property name="deprecation" value="off" />
 		<property name="src.dir" value="${basedir}/src" />
 		<property name="src.tests.dir" value="${basedir}/test" />
-		<property name="j2ee.dir" value="${basedir}/ligthClient" />
+		<property name="j2ee.dir" value="${basedir}/lightClient" />
 		<property name="libs.dir" value="lib" />
 		<property name="build.dir" value="${basedir}/build" />
 		<property name="build.dest" value="${build.dir}/classes" />
@@ -109,7 +109,7 @@
 
 	<!-- JARS & WAR -->
 	<target name="jar-server" depends="compile">
-		<jar jarfile="${build.dir}/${build.name}-server.jar" compress="true" basedir="${build.dest}" include="**" exclude="fr/umlv/ir3/flexitime/richClient/**">
+		<jar jarfile="${build.dir}/${build.name}-server.jar" compress="true" basedir="${build.dest}" includes="**" excludes="fr/umlv/ir3/flexitime/richClient/**">
 			<manifest>
 				<attribute name="Main-Class" value="fr.umlv.ir3.flexitime.server.Server" />
 				<attribute name="Class-Path" value="${classpath}" />
@@ -118,7 +118,7 @@
 	</target>
 
 	<target name="jar-client" depends="compile">
-		<jar jarfile="${build.dir}/${build.name}-client.jar" compress="true" basedir="${build.dest}" include="**" exclude="data.hbm.xml; hibernate.cfg.xml; flexiConfig.xml; fr/umlv/ir3/flexitime/server/**">
+		<jar jarfile="${build.dir}/${build.name}-client.jar" compress="true" basedir="${build.dest}" includes="**" excludes="data.hbm.xml; hibernate.cfg.xml; flexiConfig.xml; fr/umlv/ir3/flexitime/server/**">
 			<manifest>
 				<attribute name="Main-Class" value="fr.umlv.ir3.flexitime.richClient.gui.Client" />
 				<attribute name="Class-Path" value="${classpath}" />
