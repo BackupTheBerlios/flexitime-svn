@@ -27,7 +27,7 @@ public class ExportAction extends AbstractAction
      */
     private static final long serialVersionUID = 3257007639937430841L;
     private static ExportAction action;
-    private static Icon icon = Client.getIcon(ExportAction.class, "../../pictures/_export.png");
+    private static Icon icon = Client.getIcon(Client.class, "pictures/_export.png");
     
     public static ExportAction getInstance()
     {
