@@ -16,7 +16,9 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
  * Represents a Class with all parameters that it can have.
  * A Class is a list of groups that works on the same SubjectsGroups.
  * 
- * @version 0.1
+ * @version 0.2
+ * @see fr.umlv.ir3.flexitime.common.data.IData
+ * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface IClass extends IData

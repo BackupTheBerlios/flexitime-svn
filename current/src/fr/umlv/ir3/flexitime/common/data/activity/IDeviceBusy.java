@@ -1,15 +1,15 @@
 /*
  * Created on 23 déc. 2004
- * by Famille
+ * by Guillaume GUERRIN
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 
 package fr.umlv.ir3.flexitime.common.data.activity;
 
 /**
- * Represents the unavailabilities for a device
+ * Represents the unavailability for a device
  * 
- * @version Révision 72
+ * @version 0.1
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface IDeviceBusy extends IBusy
@@ -29,11 +29,19 @@ public interface IDeviceBusy extends IBusy
     public final static int REASON_IN_REPAIR = 3;
 
     /**
-     * Changes the Reason of the unavailabilities.
+     * Changes the Reason of the unavailability.
      * 
-     * @param iReason the Reason of the unavailabilities.
+     * @param iReason the Reason of the unavailability.
      * @author FlexiTeam - Guillaume GUERRIN
      */
     void setReason(int iReason);
+    
+    /**
+     * Returns the Reason of the unavailability.
+     * 
+     * @return the Reason of the unavailability.
+     * @author FlexiTeam - Guillaume GUERRIN
+     */
+    int getReason();
 
 }

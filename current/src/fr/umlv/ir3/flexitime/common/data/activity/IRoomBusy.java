@@ -1,6 +1,6 @@
 /*
  * Created on 23 déc. 2004
- * by Famille
+ * by Guillaume GUERRIN
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 
@@ -9,7 +9,7 @@ package fr.umlv.ir3.flexitime.common.data.activity;
 /**
  * Represents the unavailabilities for a Room
  * 
- * @version Révision 72
+ * @version 0.2
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface IRoomBusy extends IBusy
@@ -36,4 +36,11 @@ public interface IRoomBusy extends IBusy
      */
     void setReason(int iReason);
 
+    /**
+     * Returns the reason of the unavailability.
+     * 
+     * @return the Reason of the unavailability.
+     * @author FlexiTeam - Adrien BOUVET
+     */
+    int getReason();
 }
