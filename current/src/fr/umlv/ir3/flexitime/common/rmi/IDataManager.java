@@ -31,7 +31,7 @@ public interface IDataManager extends Remote
      * @throws RemoteException if not reachable
      * 
      */
-    public void add(IData d) throws RemoteException;
+    public void save(IData d) throws RemoteException;
     
     /**
      *  
@@ -65,7 +65,7 @@ public interface IDataManager extends Remote
      * @throws RemoteException if not reachable 
      * 
      */
-    public void remove(IData d) throws RemoteException;
+    public void delete(IData d) throws RemoteException;
     
     /**
      *  
