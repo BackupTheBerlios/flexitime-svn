@@ -9,12 +9,11 @@ import java.rmi.RemoteException;
 
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.SubjectView;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.SubjectsGroupView;
 
 
 /**
@@ -35,13 +34,21 @@ public class SubjectViewModel extends DataListenerImpl
        public void setValue(String value) throws RemoteException
        {
            subject.setName(value);
-           LocalDataManager.getManager().saveOrUpdateSubject(subject,subject.getParentSubjectsGroup());
+           try
+        {
+            LocalDataManager.getManager().saveOrUpdateSubject(subject,subject.getParentSubjectsGroup());
+        }
+        catch (FlexiException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
        }
 
        /* (non-Javadoc)
         * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
         */
-       public void dataChanged(DataEvent event) throws RemoteException
+       public void dataChanged(DataEvent event)
        {
            ISubjectsGroup subjectGroup= (ISubjectsGroup)event.getSource();
            int type = event.getEventType();

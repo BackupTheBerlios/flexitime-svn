@@ -9,13 +9,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.DevicesView;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TrackView;
 
 
 /**
@@ -38,7 +37,15 @@ public class DevicesViewModel extends DataListenerImpl
         public void setValue(String value) throws RemoteException
         {
             device.setName(value);
-            LocalDataManager.getManager().saveOrUpdateDevice(device);
+            try
+            {
+                LocalDataManager.getManager().saveOrUpdateDevice(device);
+            }
+            catch (FlexiException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         public void setDevice(IDevice device) throws RemoteException
         {
@@ -49,7 +56,7 @@ public class DevicesViewModel extends DataListenerImpl
         /* (non-Javadoc)
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             IDevice device = (IDevice)event.getSource();
             int type = event.getEventType();

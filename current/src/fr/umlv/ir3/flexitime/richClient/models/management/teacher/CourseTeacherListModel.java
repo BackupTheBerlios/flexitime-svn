@@ -6,13 +6,10 @@
 package fr.umlv.ir3.flexitime.richClient.models.management.teacher;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
 
-import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
@@ -20,7 +17,6 @@ import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
-import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;
 
 
 
@@ -139,7 +135,15 @@ public class CourseTeacherListModel extends AbstractListModel {
     {
         System.out.println("suppression d'un prof:");
         lstTeacher.remove(teacher); 
-        LocalDataManager.getManager().saveOrUpdateCourse(courseL,courseL.getParentSubject());
+        try
+        {
+            LocalDataManager.getManager().saveOrUpdateCourse(courseL,courseL.getParentSubject());
+        }
+        catch (FlexiException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
 	public void change(List lstTeacher)
@@ -167,7 +171,7 @@ public class CourseTeacherListModel extends AbstractListModel {
         /* (non-Javadoc)
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             ISubject subject = (ISubject)event.getSource();
             int type = event.getEventType();

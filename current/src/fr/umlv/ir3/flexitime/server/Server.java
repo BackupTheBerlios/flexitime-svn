@@ -7,15 +7,19 @@
 package fr.umlv.ir3.flexitime.server;
 
 import java.net.MalformedURLException;
-import java.rmi.*;
-import java.rmi.registry.*;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
-import fr.umlv.ir3.flexitime.common.rmi.admin.*;
+import fr.umlv.ir3.flexitime.common.rmi.IRemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager;
+import fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.server.core.DataManagerImpl;
-import fr.umlv.ir3.flexitime.server.core.admin.*;
+import fr.umlv.ir3.flexitime.server.core.admin.ConfigurationManager;
+import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
 
 /**
  * Main Class for server
@@ -47,7 +51,7 @@ public class Server
             IConfigurationManager cm = new ConfigurationManager();
             cm.init();
             
-            IDataManager dm = new DataManagerImpl();
+            IRemoteDataManager dm = new DataManagerImpl();
             IUserManager um = new UserManager();
             
             Naming.rebind("ConfigManager", cm);

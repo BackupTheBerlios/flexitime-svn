@@ -8,14 +8,12 @@ package fr.umlv.ir3.flexitime.richClient.models.management.track;
 import java.rmi.RemoteException;
 
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.GroupView;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.RoomsView;
 
 
 /**
@@ -39,7 +37,15 @@ public class GroupViewModel extends DataListenerImpl
         {
             group.setName(values[0]);
             group.setNbPerson(Integer.valueOf(values[1]).intValue());
-            LocalDataManager.getManager().saveOrUpdateGroup(group,group.getParentClass());
+            try
+            {
+                LocalDataManager.getManager().saveOrUpdateGroup(group,group.getParentClass());
+            }
+            catch (FlexiException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         
     }
@@ -47,7 +53,7 @@ public class GroupViewModel extends DataListenerImpl
     /* (non-Javadoc)
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
      */
-    public void dataChanged(DataEvent event) throws RemoteException
+    public void dataChanged(DataEvent event)
     {
         IClass iClass = (IClass)event.getSource();
         int type = event.getEventType();

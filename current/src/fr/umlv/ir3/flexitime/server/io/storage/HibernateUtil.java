@@ -6,11 +6,13 @@
 
 package fr.umlv.ir3.flexitime.server.io.storage;
 
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.SessionFactory;
+import net.sf.hibernate.cfg.Configuration;
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
-import net.sf.hibernate.*;
-import net.sf.hibernate.cfg.*;
 
 /**
  * Singleton of SessionFactory to get and close an Hibernate Session

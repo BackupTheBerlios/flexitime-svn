@@ -53,11 +53,29 @@ import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.Plastic3DLookAndFeel;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.common.rmi.admin.IUserListener;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Time;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.*;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExploitationAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExportAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.HistoryAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LargerGapAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LargerTimeTableAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailPreFormatedClassAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailPreFormatedTeacherAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ManagementAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.NextIntervalAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.NextWeekAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreferencesAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousIntervalAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousWeekAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PrintAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerGapAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerTimeTableAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.StatsAction;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.MainPanel;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
@@ -841,6 +859,11 @@ public class Client
             } catch (RemoteException e) {
                 JOptionPane.showMessageDialog(null, language.getText("errMngmt1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
                 setAccueilMode();
+            }
+            catch (FlexiException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
             mngmtPanel   = mngmtView.getJSP(); 
             centerPanel.add(mngmtPanel, JLayeredPane.PALETTE_LAYER);

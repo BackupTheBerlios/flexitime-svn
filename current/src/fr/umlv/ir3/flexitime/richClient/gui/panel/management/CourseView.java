@@ -6,14 +6,10 @@
 package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
@@ -26,13 +22,9 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JTree;
 import javax.swing.ListModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.tree.TreeModel;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -40,14 +32,9 @@ import com.jgoodies.forms.layout.FormLayout;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
-import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.CourseTeacherListModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.CourseViewModel;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupViewModel;
 
 /**
  * CourseView

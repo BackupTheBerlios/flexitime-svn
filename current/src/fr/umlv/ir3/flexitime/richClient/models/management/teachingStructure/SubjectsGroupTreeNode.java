@@ -17,16 +17,12 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassTreeNode;
@@ -253,7 +249,7 @@ public class SubjectsGroupTreeNode extends DataListenerImpl implements FlexiTree
     /* (non-Javadoc)
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
      */
-    public void dataChanged(DataEvent event) throws RemoteException
+    public void dataChanged(DataEvent event)
     {
         ISubjectsGroup subjectsGroup = (ISubjectsGroup)event.getSource();
         if(this.subjectsGroup.equals(subjectsGroup))

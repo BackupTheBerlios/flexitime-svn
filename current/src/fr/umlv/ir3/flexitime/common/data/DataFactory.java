@@ -8,21 +8,53 @@ package fr.umlv.ir3.flexitime.common.data;
 
 import java.awt.Color;
 import java.rmi.RemoteException;
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.activity.*;
-import fr.umlv.ir3.flexitime.common.data.activity.impl.*;
-import fr.umlv.ir3.flexitime.common.data.admin.*;
-import fr.umlv.ir3.flexitime.common.data.admin.impl.*;
-import fr.umlv.ir3.flexitime.common.data.general.*;
-import fr.umlv.ir3.flexitime.common.data.general.impl.*;
-import fr.umlv.ir3.flexitime.common.data.resources.*;
-import fr.umlv.ir3.flexitime.common.data.resources.impl.*;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
+import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.DeviceBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.GroupBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.RoomBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.activity.impl.TeacherBusyImpl;
+import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
+import fr.umlv.ir3.flexitime.common.data.admin.impl.UserImpl;
+import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
+import fr.umlv.ir3.flexitime.common.data.general.IFloor;
+import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.data.general.impl.BuildingImpl;
+import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
+import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
+import fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.IResource;
+import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl;
+import fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.SubjectsGroupImpl;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructureImpl;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
-import fr.umlv.ir3.flexitime.common.tools.*;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
+import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 /**
  * Create all datas from specific parameters. This class contains only statics
@@ -52,14 +84,7 @@ public class DataFactory
     {
         IDeviceBusy d = new DeviceBusyImpl(g);
         
-        try
-        {
             d = (IDeviceBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(d);
         return d;
     }
@@ -79,14 +104,7 @@ public class DataFactory
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent, String comment) throws FlexiException
     {
         IDeviceBusy d = new DeviceBusyImpl(g, comment);
-        try
-        {
             d = (IDeviceBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(d);
         return d;
     }
@@ -107,14 +125,7 @@ public class DataFactory
     {
         IDeviceBusy d = new DeviceBusyImpl(g, reason);
 
-        try
-        {
             d = (IDeviceBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(d);
         return d;
     }
@@ -136,14 +147,7 @@ public class DataFactory
     public static IDeviceBusy createDeviceBusy(Gap g, IDevice parent, int reason, String comment) throws FlexiException
     {
         IDeviceBusy d = new DeviceBusyImpl(g, reason, comment);
-        try
-        {
             d = (IDeviceBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(d);
         return d;
     }
@@ -160,14 +164,7 @@ public class DataFactory
     public static IDeviceBusy createDeviceBusy(IDeviceBusy busy, IDevice parent) throws FlexiException
     {
         IDeviceBusy d = new DeviceBusyImpl(busy);
-        try
-        {
             d = (IDeviceBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(d, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(d);
         return d;
     }
@@ -183,14 +180,7 @@ public class DataFactory
     public static IGroupBusy createGroupBusy(Gap g, IGroup parent) throws FlexiException
     {
         IGroupBusy group = new GroupBusyImpl(g);
-        try
-        {
             group = (IGroupBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(group);
         return group;
     }
@@ -209,14 +199,7 @@ public class DataFactory
     {
         IGroupBusy group = new GroupBusyImpl(g, comment);
         
-        try
-        {
             group = (IGroupBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(group);
         return group;
     }
@@ -233,14 +216,7 @@ public class DataFactory
     public static IGroupBusy createGroupBusy(Gap g, IGroup parent, int reason) throws FlexiException
     {
         IGroupBusy group = new GroupBusyImpl(g, reason);
-        try
-        {
             group = (IGroupBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(group);
         return group;
     }
@@ -260,14 +236,7 @@ public class DataFactory
     {
         IGroupBusy group = new GroupBusyImpl(g, reason, comment);
         
-        try
-        {
             group = (IGroupBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(group);
         return group;
     }
@@ -284,14 +253,7 @@ public class DataFactory
     public static IGroupBusy createGroupBusy(IGroupBusy busy, IGroup parent) throws FlexiException
     {
         IGroupBusy group = new GroupBusyImpl(busy);
-        try
-        {
             group = (IGroupBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(group, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(group);
         return group;
     }    
@@ -316,14 +278,7 @@ public class DataFactory
         for(IResource elem : groups)
             l.add(elem);
         
-        try
-        {
             lesson = LocalDataManager.getManager().saveOrUpdateLesson(lesson, l);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         
         lesson.getSetGroup().clear();
         lesson.getSetDevice().clear();
@@ -359,14 +314,7 @@ public class DataFactory
         for(IResource elem : groups)
             lr.add(elem);
         
-        try
-        {
             lesson = LocalDataManager.getManager().saveOrUpdateLesson(lesson, lr);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
 
         lesson.getSetGroup().clear();
         lesson.getSetDevice().clear();
@@ -402,14 +350,7 @@ public class DataFactory
             l.add(elem);
         l.add(t);
         
-        try
-        {
             lesson = LocalDataManager.getManager().saveOrUpdateLesson(lesson, l);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         
         lesson.getSetGroup().clear();
         lesson.getSetDevice().clear();
@@ -450,14 +391,7 @@ public class DataFactory
             lr.add(elem);
         lr.add(t);
         
-        try
-        {
             lesson = LocalDataManager.getManager().saveOrUpdateLesson(lesson, lr);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
 
         lesson.getSetGroup().clear();
         lesson.getSetDevice().clear();
@@ -503,14 +437,7 @@ public class DataFactory
             l.add(it.next());
         }
         
-        try
-        {
             les = LocalDataManager.getManager().saveOrUpdateLesson(les, l);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
 
         lesson.getSetGroup().clear();
         lesson.getSetDevice().clear();
@@ -539,14 +466,7 @@ public class DataFactory
     {
         IRoomBusy r = new RoomBusyImpl(g);
 
-        try
-        {
             r = (IRoomBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(r);
         return r;
     }
@@ -565,14 +485,7 @@ public class DataFactory
     public static IRoomBusy createRoomBusy(Gap g, IRoom parent, String comment) throws FlexiException
     {
         IRoomBusy r = new RoomBusyImpl(g, comment);
-        try
-        {
             r = (IRoomBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(r);
         return r;
     }
@@ -591,14 +504,7 @@ public class DataFactory
     public static IRoomBusy createRoomBusy(Gap g, IRoom parent, int reason) throws FlexiException
     {
         IRoomBusy r = new RoomBusyImpl(g, reason);
-        try
-        {
             r = (IRoomBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(r);
         return r;
     }
@@ -619,14 +525,7 @@ public class DataFactory
     public static IRoomBusy createRoomBusy(Gap g, IRoom parent, int reason, String comment) throws FlexiException
     {
         IRoomBusy r = new RoomBusyImpl(g, reason, comment);
-        try
-        {
             r = (IRoomBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(r);
         return r;
     }
@@ -643,14 +542,7 @@ public class DataFactory
     public static IRoomBusy createRoomBusy(IRoomBusy busy, IRoom parent) throws FlexiException
     {
         IRoomBusy r = new RoomBusyImpl(busy);
-        try
-        {
             r = (IRoomBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(r, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(r);
         return r;
     }
@@ -667,14 +559,7 @@ public class DataFactory
     public static ITeacherBusy createTeacherBusy(Gap g, ITeacher parent) throws FlexiException
     {
         ITeacherBusy t = new TeacherBusyImpl(g);
-        try
-        {
             t = (ITeacherBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(t);
         return t;
     }
@@ -694,14 +579,7 @@ public class DataFactory
     {
         ITeacherBusy t = new TeacherBusyImpl(g, comment);
         
-        try
-        {
             t = (ITeacherBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(t);
         
         return t;
@@ -721,14 +599,7 @@ public class DataFactory
     public static ITeacherBusy createTeacherBusy(Gap g, ITeacher parent, int reason) throws FlexiException
     {
         ITeacherBusy t = new TeacherBusyImpl(g, reason);
-        try
-        {
             t = (ITeacherBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(t);
         return t;
     }
@@ -749,14 +620,7 @@ public class DataFactory
     public static ITeacherBusy createTeacherBusy(Gap g, ITeacher parent, int reason, String comment) throws FlexiException
     {
         ITeacherBusy t = new TeacherBusyImpl(g, reason, comment);
-        try
-        {
             t = (ITeacherBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(t);        
         return t;
     }
@@ -773,14 +637,7 @@ public class DataFactory
     public static ITeacherBusy createTeacherBusy(ITeacherBusy busy, ITeacher parent) throws FlexiException
     {
         ITeacherBusy t = new TeacherBusyImpl(busy);
-        try
-        {
             t = (ITeacherBusy)LocalDataManager.getManager().saveOrUpdateResourceBusy(t, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addBusy(t);
         return t;
     }
@@ -799,16 +656,7 @@ public class DataFactory
     public static IBuilding createBuilding(String name) throws FlexiException
     {
         IBuilding b = new BuildingImpl(name);
-        
-        try
-        {
             b = LocalDataManager.getManager().saveOrUpdateBuilding(b);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
-        
         return b; 
     }
 
@@ -827,14 +675,7 @@ public class DataFactory
         IClass class1 = new ClassImpl(name, parent);
         
         
-        try
-        {
             class1 = LocalDataManager.getManager().saveOrUpdateClass(class1, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addClass(class1);
         return class1;
     }
@@ -853,14 +694,7 @@ public class DataFactory
     {
         IFloor floor = new FloorImpl(name, parent);
         
-        try
-        {
             floor = LocalDataManager.getManager().saveOrUpdateFloor(floor, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addFloor(floor);
         return floor;
     }
@@ -876,14 +710,7 @@ public class DataFactory
     public static ITrack createTrack(String name) throws FlexiException
     {
         ITrack temp = new TrackImpl(name);
-        try
-        {
             temp = LocalDataManager.getManager().saveOrUpdateTrack(temp);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         return temp;
     }
 
@@ -901,14 +728,7 @@ public class DataFactory
     public static IDevice createDevice(String name) throws FlexiException
     {
         IDevice d = new DeviceImpl(name);
-        try
-        {
             d = LocalDataManager.getManager().saveOrUpdateDevice(d);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         
         return d;
     }
@@ -926,15 +746,7 @@ public class DataFactory
     public static IDevice createDevice(String name, int type) throws FlexiException
     {
         IDevice d = new DeviceImpl(name, type);
-        try
-        {
             d = LocalDataManager.getManager().saveOrUpdateDevice(d);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
-        
         return d;
     }
 
@@ -951,14 +763,7 @@ public class DataFactory
     {
         IGroup group = new GroupImpl(name, nbPerson, parent);
         
-        try
-        {
             group = LocalDataManager.getManager().saveOrUpdateGroup(group, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addGroup(group);
         return group;
     }
@@ -982,14 +787,7 @@ public class DataFactory
     {
         IRoom room = new RoomImpl(name, type, capacity, floor);
         
-        try
-        {
             room = LocalDataManager.getManager().saveOrUpdateRoom(room, floor);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         floor.addRoom(room);
         return room;
     }
@@ -1005,14 +803,7 @@ public class DataFactory
     public static ITeacher createTeacher(String name, String firstName) throws FlexiException
     {
         ITeacher t = new TeacherImpl(name, firstName);
-        try
-        {
             t = LocalDataManager.getManager().saveOrUpdateTeacher(t);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         return t;
     }
 
@@ -1029,14 +820,7 @@ public class DataFactory
             String mail) throws FlexiException
     {
         ITeacher t = new TeacherImpl(name, firstName, mail);
-        try
-        {
             t = LocalDataManager.getManager().saveOrUpdateTeacher(t);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         return t;
     }
 
@@ -1059,14 +843,7 @@ public class DataFactory
     {
         ICourse temp = new CourseImpl(name, parent, type);
         
-        try
-        {
             temp = LocalDataManager.getManager().saveOrUpdateCourse(temp, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addCourse(temp);
         return temp;
     }
@@ -1095,14 +872,7 @@ public class DataFactory
     {
         ICourse temp = new CourseImpl(name, parent, type, defaultLength, 
                 nbHours, color);
-        try
-        {
             temp = LocalDataManager.getManager().saveOrUpdateCourse(temp, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addCourse(temp);
         return temp;
     }
@@ -1134,14 +904,7 @@ public class DataFactory
     {
         ICourse temp = new CourseImpl(name, parent, type, defaultLength,
                 nbHours, color, listTeachers);
-        try
-        {
             temp = LocalDataManager.getManager().saveOrUpdateCourse(temp, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addCourse(temp);
         return temp;
     }
@@ -1161,14 +924,7 @@ public class DataFactory
     {
         ISubject temp = new SubjectImpl(name, parent);
         
-        try
-        {
             temp = LocalDataManager.getManager().saveOrUpdateSubject(temp, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addSubject(temp);
         return temp;
     }
@@ -1189,14 +945,7 @@ public class DataFactory
     {
         ISubjectsGroup temp = new SubjectsGroupImpl(name, parent);
         
-        try
-        {
             temp = LocalDataManager.getManager().saveOrUpdateSubjectsGroup(temp, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.addSubjectsGroup(temp);
         return temp;
     }
@@ -1216,14 +965,7 @@ public class DataFactory
     {
         ITeachingStructure temp = new TeachingStructureImpl(name, parent);
         
-        try
-        {
             temp = LocalDataManager.getManager().saveOrUpdateTeachingStructure(temp, parent);
-        }
-        catch (RemoteException e)
-        {
-            throw new FlexiException(FlexiLanguage.getInstance().getText("unreachableServer"), e);
-        }
         parent.setTeachingStructure(temp);
         return temp;
     }

@@ -5,7 +5,8 @@
  */
 package fr.umlv.ir3.flexitime.common.rmi.admin;
 
-import java.rmi.*;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IUser;

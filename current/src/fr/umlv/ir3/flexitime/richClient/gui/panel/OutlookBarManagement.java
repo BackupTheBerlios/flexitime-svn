@@ -6,32 +6,19 @@
 package fr.umlv.ir3.flexitime.richClient.gui.panel;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.dnd.DropTarget;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeSelectionModel;
 
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiMouseListenerFactory;
@@ -40,7 +27,6 @@ import fr.umlv.ir3.flexitime.richClient.gui.renderers.FlexiTreeRenderer;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.RootDeviceTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RootRoomTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.RootTrackTreeNode;

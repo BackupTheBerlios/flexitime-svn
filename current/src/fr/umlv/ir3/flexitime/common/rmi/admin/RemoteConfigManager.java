@@ -5,8 +5,10 @@
 */
 package fr.umlv.ir3.flexitime.common.rmi.admin;
 
-import java.rmi.*;
-import java.rmi.registry.*;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 /**
 * Singleton used for communication with the server<br>

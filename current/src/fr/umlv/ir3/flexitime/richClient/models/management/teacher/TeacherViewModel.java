@@ -7,14 +7,11 @@ package fr.umlv.ir3.flexitime.richClient.models.management.teacher;
 
 import java.rmi.RemoteException;
 
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
-import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.RoomsView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TeacherView;
 
 
@@ -40,7 +37,15 @@ public class TeacherViewModel extends DataListenerImpl
             teacher.setName(values[0]);
             teacher.setFirstName(values[1]);
             teacher.setEmail(values[2]);
-            LocalDataManager.getManager().saveOrUpdateTeacher(teacher);
+            try
+            {
+                LocalDataManager.getManager().saveOrUpdateTeacher(teacher);
+            }
+            catch (FlexiException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         
     }
@@ -48,7 +53,7 @@ public class TeacherViewModel extends DataListenerImpl
     /* (non-Javadoc)
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
      */
-    public void dataChanged(DataEvent event) throws RemoteException
+    public void dataChanged(DataEvent event)
     {
         ITeacher teacher = (ITeacher)event.getSource();
         int type = event.getEventType();

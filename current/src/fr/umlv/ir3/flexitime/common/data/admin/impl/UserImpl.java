@@ -7,7 +7,8 @@
 package fr.umlv.ir3.flexitime.common.data.admin.impl;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.admin.*;
+import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
+import fr.umlv.ir3.flexitime.common.data.admin.IUser;
 import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
 /**

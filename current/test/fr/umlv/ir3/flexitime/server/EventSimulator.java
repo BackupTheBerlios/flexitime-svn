@@ -55,10 +55,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de groupe\t"+event);
             
@@ -85,10 +84,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de Teacher\t"+event);
             
@@ -114,10 +112,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de Device\t"+event);
             
@@ -143,10 +140,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de Building\t"+event);
             
@@ -172,10 +168,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de Floor\t"+event);
             
@@ -201,10 +196,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de Room\t"+event);
             
@@ -230,10 +224,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de Track\t"+event);
             
@@ -259,10 +252,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de Class\t"+event);
             
@@ -289,10 +281,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de Course\t"+event);
             
@@ -319,10 +310,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de Subject\t"+event);
             
@@ -349,10 +339,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de SubjectsGroup\t"+event);
             
@@ -379,10 +368,9 @@ public class EventSimulator
 
         /** 
          * @param event
-         * @throws RemoteException 
          * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
          */
-        public void dataChanged(DataEvent event) throws RemoteException
+        public void dataChanged(DataEvent event)
         {
             System.out.println("Event de TeachingStructure\t"+event);
             

@@ -8,15 +8,14 @@ package fr.umlv.ir3.flexitime.richClient.models.management.device;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 
 /**
@@ -157,7 +156,15 @@ public class DeviceTreeNode implements FlexiTreeNode
 	 */
 	public void setValue(Object newValue) throws RemoteException {
 		device.setName((String)newValue);
-        LocalDataManager.getManager().saveOrUpdateDevice(device);
+        try
+        {
+            LocalDataManager.getManager().saveOrUpdateDevice(device);
+        }
+        catch (FlexiException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 		
 	}
 

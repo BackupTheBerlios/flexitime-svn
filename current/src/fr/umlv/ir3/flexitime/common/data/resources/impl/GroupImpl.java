@@ -6,12 +6,12 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
-import java.rmi.RemoteException;
 import java.util.SortedSet;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 
 /**
@@ -130,7 +130,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
             {
                 parentClass = LocalDataManager.getManager().getClassFromId(idClass);
             }
-            catch (RemoteException e)
+            catch (FlexiException e)
             {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

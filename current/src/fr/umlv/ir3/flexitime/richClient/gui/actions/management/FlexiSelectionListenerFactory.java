@@ -7,9 +7,7 @@
 package fr.umlv.ir3.flexitime.richClient.gui.actions.management;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.rmi.RemoteException;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -34,12 +32,12 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.management.CourseView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.DevicesView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.FloorView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.GroupView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.management.RoomsView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.SubjectView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.SubjectsGroupView;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TrackView;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.RoomsView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TeacherView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TeachingStructureView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TrackView;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.DeviceTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.DevicesViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;

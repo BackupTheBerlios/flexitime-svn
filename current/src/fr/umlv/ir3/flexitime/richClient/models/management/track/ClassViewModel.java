@@ -7,15 +7,13 @@ package fr.umlv.ir3.flexitime.richClient.models.management.track;
 
 import java.rmi.RemoteException;
 
-import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.ClassView;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TrackView;
 
 
 /**
@@ -36,13 +34,21 @@ public class ClassViewModel extends DataListenerImpl
     public void setValue(String value) throws RemoteException
     {
         iClass.setName(value);
-        LocalDataManager.getManager().saveOrUpdateClass(iClass,iClass.getParentTrack());
+        try
+        {
+            LocalDataManager.getManager().saveOrUpdateClass(iClass,iClass.getParentTrack());
+        }
+        catch (FlexiException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /* (non-Javadoc)
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
      */
-    public void dataChanged(DataEvent event) throws RemoteException
+    public void dataChanged(DataEvent event)
     {
         ITrack track = (ITrack)event.getSource();
         int type = event.getEventType();

@@ -5,7 +5,8 @@
  */
 package fr.umlv.ir3.flexitime.common.rmi.admin;
 
-import java.rmi.*;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;

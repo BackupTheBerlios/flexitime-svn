@@ -9,7 +9,6 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.rmi.RemoteException;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;

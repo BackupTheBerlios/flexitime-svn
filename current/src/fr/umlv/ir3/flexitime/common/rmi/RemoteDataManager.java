@@ -20,9 +20,9 @@ import fr.umlv.ir3.flexitime.common.rmi.admin.IUserManager;
 public class RemoteDataManager
 {
 
-    private static IDataManager          manager;
+    private static IRemoteDataManager          manager;
     private static IUserManager          userManager;
-    private static String                ipServer = "192.168.0.20";
+    private static String                ipServer;
     private static IConfigurationManager cfgManager;
     private static Registry              r;
 
@@ -42,13 +42,13 @@ public class RemoteDataManager
      * 
      * @return IDataManager
      */
-    public static IDataManager getManager()
+    public static IRemoteDataManager getManager()
     {
         if (manager == null)
         {
             try
             {
-                manager = (IDataManager) getRegistry().lookup("manager");
+                manager = (IRemoteDataManager) getRegistry().lookup("manager");
 
             }
             catch (NotBoundException e1)

@@ -8,15 +8,13 @@ package fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure;
 import java.awt.Color;
 import java.rmi.RemoteException;
 
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.CourseView;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.GroupView;
 
 
 /**
@@ -42,7 +40,15 @@ public class CourseViewModel extends DataListenerImpl
             course.setNbHours((Integer.parseInt((String)values[1])));
             course.setDefaultLength((Integer.parseInt((String)values[2])));
             course.setColor((Color)values[3]);
-            LocalDataManager.getManager().saveOrUpdateCourse(course,course.getParentSubject());
+            try
+            {
+                LocalDataManager.getManager().saveOrUpdateCourse(course,course.getParentSubject());
+            }
+            catch (FlexiException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         
     }
@@ -50,7 +56,7 @@ public class CourseViewModel extends DataListenerImpl
     /* (non-Javadoc)
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
      */
-    public void dataChanged(DataEvent event) throws RemoteException
+    public void dataChanged(DataEvent event)
     {
         ISubject subject = (ISubject)event.getSource();
         int type = event.getEventType();

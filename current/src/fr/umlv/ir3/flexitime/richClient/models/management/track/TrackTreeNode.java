@@ -17,18 +17,14 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
-import fr.umlv.ir3.flexitime.richClient.models.management.room.FloorTreeNode;
 
 
 
@@ -241,7 +237,15 @@ public class TrackTreeNode extends DataListenerImpl implements  FlexiTreeNode
 	public void setValue(Object newValue)throws RemoteException 
     {
 		track.setName((String)newValue);
-        LocalDataManager.getManager().saveOrUpdateTrack(track);
+        try
+        {
+            LocalDataManager.getManager().saveOrUpdateTrack(track);
+        }
+        catch (FlexiException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 		
 	}
 
@@ -257,7 +261,7 @@ public class TrackTreeNode extends DataListenerImpl implements  FlexiTreeNode
     /* (non-Javadoc)
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
      */
-    public void dataChanged(DataEvent event) throws RemoteException
+    public void dataChanged(DataEvent event)
     {
         ITrack track = (ITrack)event.getSource();
         if(this.track.equals(track))

@@ -8,9 +8,19 @@ package fr.umlv.ir3.flexitime.richClient.io;
 
 import java.rmi.RemoteException;
 
-import javax.activation.*;
-import javax.mail.*;
-import javax.mail.internet.*;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
 import fr.umlv.ir3.flexitime.common.event.ConfigEvent;

@@ -8,11 +8,10 @@ package fr.umlv.ir3.flexitime.server.core;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
-import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
+import fr.umlv.ir3.flexitime.common.rmi.IRemoteDataListener;
 
 /**
  * ThreadManager
@@ -22,7 +21,7 @@ import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 public class ThreadManager extends Thread
 {
 
-    private List<IDataListener> listenerList;
+    private List<IRemoteDataListener> listenerList;
     private DataEvent           event;
 
     /**
@@ -31,7 +30,7 @@ public class ThreadManager extends Thread
      * @param list
      * @param event
      */
-    public ThreadManager(List<IDataListener> list, DataEvent event)
+    public ThreadManager(List<IRemoteDataListener> list, DataEvent event)
     {
         this.listenerList = list;
         this.event = event;
@@ -46,12 +45,10 @@ public class ThreadManager extends Thread
      */
     public void run()
     {
-        ArrayList<IDataListener> toRemove = new ArrayList<IDataListener>();
-        //synchronized (listenerList)
-        //{
-            for (Iterator iter = listenerList.iterator() ; iter.hasNext() ;)
+        ArrayList<IRemoteDataListener> toRemove = new ArrayList<IRemoteDataListener>();
+            for (IRemoteDataListener element : listenerList)
             {
-                IDataListener element = (IDataListener) iter.next();
+                
                 try
                 {
                     element.dataChanged(event);
@@ -63,7 +60,6 @@ public class ThreadManager extends Thread
                     toRemove.add(element);
                 }
             }
-        //}
 
         if (!toRemove.isEmpty())
         {

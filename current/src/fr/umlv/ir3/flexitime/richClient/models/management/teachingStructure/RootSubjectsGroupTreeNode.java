@@ -6,7 +6,6 @@
 package fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,15 +14,12 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.general.IClass;
-import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassTreeNode;
 
 /**
  * Represents a tree node for a root of subjectsGroup 
@@ -131,7 +127,7 @@ public class RootSubjectsGroupTreeNode extends RootTreeNode
     /* (non-Javadoc)
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
      */
-    public void dataChanged(DataEvent event) throws RemoteException
+    public void dataChanged(DataEvent event)
     {
         ITeachingStructure teaching = (ITeachingStructure)event.getSource();
         if(this.teachingStructure.equals(teaching))

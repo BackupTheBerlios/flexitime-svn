@@ -6,6 +6,8 @@
 
 package fr.umlv.ir3.flexitime.common.rmi;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
@@ -33,7 +35,7 @@ import fr.umlv.ir3.flexitime.common.exception.FlexiException;
  * @see java.rmi.Remote
  * @author FlexiTeam - Prâsad
  */
-public interface IDataManager
+public interface IRemoteDataManager extends Remote
 {
 
     /**
@@ -41,61 +43,65 @@ public interface IDataManager
      * 
      * @param _class TODO
      * @param l listener to be added
+     * @throws RemoteException if not reachable
      */
     public void addDataListener(Class _class, IDataListener l)
-            ;
+            throws RemoteException;
 
     /**
      * removes a listener from the list
      * 
      * @param _class TODO
      * @param l IDataListener to be removed
+     * @throws RemoteException if not reachable
      */
     public void removeDataListener(Class _class, IDataListener l)
-            ;
+            throws RemoteException;
 
     /**
      * locks a data
      * 
      * @param d data to lock
      * @return true if data can be locked, flase otherwise
-     * @ if not reachable
+     * @throws RemoteException if not reachable
+     * @throws InterruptedException
      */
-    public boolean lock(Object d);
+    public boolean lock(Object d) throws RemoteException, InterruptedException;
 
     /**
      * unlocks a data
      * 
      * @param d Data to unlock
-     * @ if not reachable
+     * @throws RemoteException if not reachable
      */
-    public void unlock(Object d) ;
+    public void unlock(Object d) throws RemoteException;
 
     /**
      * Adds a Data created by a client Have to save Data and fire the add
      * 
      * @param building
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException
      */
-    public IBuilding saveOrUpdateBuilding(IBuilding building) throws FlexiException ;
+    public IBuilding saveOrUpdateBuilding(IBuilding building) throws RemoteException;
 
     /**
      * get all datas managed by this manager
      * 
      * @return all datas
-     * @throws FlexiException 
+     * @throws RemoteException
      */
-    public List<IBuilding> getBuildings() throws FlexiException ;
+    public List<IBuilding> getBuildings() throws RemoteException;
 
     /**
      * removes a data have to delete data from storage and inform clients
      * 
      * @param building
      * @return true if OK
+     * @throws RemoteException
      * @throws FlexiException 
      */
-    public boolean deleteBuilding(IBuilding building) throws FlexiException;
+    public boolean deleteBuilding(IBuilding building) throws RemoteException, FlexiException;
 
     /**
      * Adds a Data created by a client Have to save Data and fire the add
@@ -103,28 +109,28 @@ public interface IDataManager
      * @param parent TODO
      * 
      * @return true if OK
-     * @throws FlexiException 
-
+     * @throws RemoteException
      */
-    public IClass saveOrUpdateClass(IClass _class, ITrack parent) throws FlexiException ;
+    public IClass saveOrUpdateClass(IClass _class, ITrack parent) throws RemoteException;
 
     /**
      * get all datas managed by this manager
      * 
      * @param track
      * @return all datas
-     * @
+     * @throws RemoteException
      */
-    //public List<IClass> getClasses(ITrack track) ;
+    public List<IClass> getClasses(ITrack track) throws RemoteException;
 
     /**
      * removes a data have to delete data from storage and inform clients
      * 
      * @param _class
      * @return true if OK
+     * @throws RemoteException
      * @throws FlexiException 
      */
-    public boolean deleteClass(IClass _class) throws FlexiException;
+    public boolean deleteClass(IClass _class) throws RemoteException, FlexiException;
 
     /**
      * Adds a Data created by a client Have to save Data and fire the add
@@ -132,52 +138,55 @@ public interface IDataManager
      * @param parent TODO
      * 
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException
      */
-    public ICourse saveOrUpdateCourse(ICourse course, ISubject parent) throws FlexiException ;
+    public ICourse saveOrUpdateCourse(ICourse course, ISubject parent) throws RemoteException;
 
     /**
      * get all datas managed by this manager
      * 
      * @param subject
      * @return all datas
+     * @throws RemoteException
      */
-    //public List<ICourse> getCourses(ISubject subject) ;
+    public List<ICourse> getCourses(ISubject subject) throws RemoteException;
 
     /**
      * removes a data have to delete data from storage and inform clients
      * 
      * @param course
      * @return true if OK
+     * @throws RemoteException
      * @throws FlexiException 
      */
-    public boolean deleteCourse(ICourse course) throws FlexiException;
+    public boolean deleteCourse(ICourse course) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
      * Have to save Data and fire the add 
      * @param device 
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public IDevice saveOrUpdateDevice(IDevice device) throws FlexiException ;
+    public IDevice saveOrUpdateDevice(IDevice device) throws RemoteException;
     
     /**
      *  
      * get all datas managed by this manager
      * @return all datas
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public List<IDevice> getDevices() throws FlexiException ; 
+    public List<IDevice> getDevices() throws RemoteException; 
     /**
      *  
      * removes a data
      * have to delete data from storage and inform clients
      * @param device 
      * @return true if OK
+     * @throws RemoteException 
      * @throws FlexiException 
      */
-    public boolean deleteDevice(IDevice device) throws FlexiException;
+    public boolean deleteDevice(IDevice device) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -185,26 +194,28 @@ public interface IDataManager
      * @param floor 
      * @param param TODO
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public IFloor saveOrUpdateFloor(IFloor floor, IBuilding param) throws FlexiException ;
+    public IFloor saveOrUpdateFloor(IFloor floor, IBuilding param) throws RemoteException;
     
     /**
      *  
      * get all datas managed by this manager
      * @param building 
      * @return all datas
+     * @throws RemoteException 
      */
-    //public List<IFloor> getFloors(IBuilding building) ; 
+    public List<IFloor> getFloors(IBuilding building) throws RemoteException; 
     /**
      *  
      * removes a data
      * have to delete data from storage and inform clients
      * @param floor 
      * @return true if OK
+     * @throws RemoteException 
      * @throws FlexiException 
      */
-    public boolean deleteFloor(IFloor floor) throws FlexiException;
+    public boolean deleteFloor(IFloor floor) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -212,26 +223,28 @@ public interface IDataManager
      * @param group 
      * @param parent TODO
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public IGroup saveOrUpdateGroup(IGroup group, IClass parent) throws FlexiException ;
+    public IGroup saveOrUpdateGroup(IGroup group, IClass parent) throws RemoteException;
     
     /**
      *  
      * get all datas managed by this manager
      * @param _class 
      * @return all datas
+     * @throws RemoteException 
      */
-    //public List<IGroup> getGroups(IClass _class) ; 
+    public List<IGroup> getGroups(IClass _class) throws RemoteException; 
     /**
      *  
      * removes a data
      * have to delete data from storage and inform clients
      * @param group 
      * @return true if OK
+     * @throws RemoteException 
      * @throws FlexiException 
      */
-    public boolean deleteGroup(IGroup group) throws FlexiException;
+    public boolean deleteGroup(IGroup group) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -239,19 +252,19 @@ public interface IDataManager
      * @param lesson 
      * @param lresource TODO
      * @return true if OK
+     * @throws RemoteException 
      */
-    //public ILesson saveOrUpdateLesson(ILesson lesson, List<IResource> lresource) ;
-    
-    
+    public ILesson saveOrUpdateLesson(ILesson lesson, List<IResource> lresource) throws RemoteException;
+    public Long saveLesson(ILesson lesson, Long[] idR) throws RemoteException;
     /**
      *  
      * removes a data
      * have to delete data from storage and inform clients
      * @param lesson 
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public boolean deleteLesson(ILesson lesson) throws FlexiException ;
+    public boolean deleteLesson(ILesson lesson) throws RemoteException;
     
     /**
      * Adds a Data created by a client
@@ -259,26 +272,28 @@ public interface IDataManager
      * @param room 
      * @param parent TODO
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public IRoom saveOrUpdateRoom(IRoom room, IFloor parent) throws FlexiException ;
+    public IRoom saveOrUpdateRoom(IRoom room, IFloor parent) throws RemoteException;
     
     /**
      *  
      * get all datas managed by this manager
      * @param floor 
      * @return all datas
+     * @throws RemoteException 
      */
-    //public List<IRoom> getRooms(IFloor floor) ; 
+    public List<IRoom> getRooms(IFloor floor) throws RemoteException; 
     /**
      *  
      * removes a data
      * have to delete data from storage and inform clients
      * @param room 
      * @return true if OK
+     * @throws RemoteException 
      * @throws FlexiException 
      */
-    public boolean deleteRoom(IRoom room) throws FlexiException;
+    public boolean deleteRoom(IRoom room) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -286,26 +301,28 @@ public interface IDataManager
      * @param subject 
      * @param parent TODO
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public ISubject saveOrUpdateSubject(ISubject subject, ISubjectsGroup parent) throws FlexiException ;
+    public ISubject saveOrUpdateSubject(ISubject subject, ISubjectsGroup parent) throws RemoteException;
     
     /**
      *  
      * get all datas managed by this manager
      * @param subjectsGroup 
      * @return all datas
+     * @throws RemoteException 
      */
-    //public List<ISubject> getSubjects(ISubjectsGroup subjectsGroup) ; 
+    public List<ISubject> getSubjects(ISubjectsGroup subjectsGroup) throws RemoteException; 
     /**
      *  
      * removes a data
      * have to delete data from storage and inform clients
      * @param subject 
      * @return true if OK
+     * @throws RemoteException 
      * @throws FlexiException 
      */
-    public boolean deleteSubject(ISubject subject) throws FlexiException;
+    public boolean deleteSubject(ISubject subject) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -313,52 +330,55 @@ public interface IDataManager
      * @param subjectsGroup 
      * @param parent TODO
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public ISubjectsGroup saveOrUpdateSubjectsGroup(ISubjectsGroup subjectsGroup, ITeachingStructure parent) throws FlexiException ;
+    public ISubjectsGroup saveOrUpdateSubjectsGroup(ISubjectsGroup subjectsGroup, ITeachingStructure parent) throws RemoteException;
     
     /**
      *  
      * get all datas managed by this manager
      * @param ts 
      * @return all datas
+     * @throws RemoteException 
      */
-    //public List<ISubjectsGroup> getSubjectsGroup(ITeachingStructure ts) ; 
+    public List<ISubjectsGroup> getSubjectsGroup(ITeachingStructure ts) throws RemoteException; 
     /**
      *  
      * removes a data
      * have to delete data from storage and inform clients
      * @param subjectsGroup 
      * @return true if OK
+     * @throws RemoteException 
      * @throws FlexiException 
      */
-    public boolean deleteSubjectsGroup(ISubjectsGroup subjectsGroup) throws FlexiException;
+    public boolean deleteSubjectsGroup(ISubjectsGroup subjectsGroup) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
      * Have to save Data and fire the add 
      * @param teacher 
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public ITeacher saveOrUpdateTeacher(ITeacher teacher) throws FlexiException ;
+    public ITeacher saveOrUpdateTeacher(ITeacher teacher) throws RemoteException;
     
     /**
      *  
      * get all datas managed by this manager
      * @return all datas
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public List<ITeacher> getTeachers() throws FlexiException ; 
+    public List<ITeacher> getTeachers() throws RemoteException; 
     /**
      *  
      * removes a data
      * have to delete data from storage and inform clients
      * @param teacher 
      * @return true if OK
+     * @throws RemoteException 
      * @throws FlexiException 
      */
-    public boolean deleteTeacher(ITeacher teacher) throws FlexiException;
+    public boolean deleteTeacher(ITeacher teacher) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
@@ -366,36 +386,89 @@ public interface IDataManager
      * @param teachingStructure 
      * @param parent TODO
      * @return true if OK
-     * @throws FlexiException 
+     * @throws RemoteException 
      */
-    public ITeachingStructure saveOrUpdateTeachingStructure(ITeachingStructure teachingStructure, IClass parent) throws FlexiException ;
+    public ITeachingStructure saveOrUpdateTeachingStructure(ITeachingStructure teachingStructure, IClass parent) throws RemoteException;
     
     /**
      *  
      * get all datas managed by this manager
      * @param _class 
      * @return all datas
+     * @throws RemoteException 
      */
-    //public ITeachingStructure getTeachingStructure(IClass _class) ; 
+    public ITeachingStructure getTeachingStructure(IClass _class) throws RemoteException; 
     /**
      *  
      * removes a data
      * have to delete data from storage and inform clients
      * @param teachingStructure 
      * @return true if OK
+     * @throws RemoteException 
      * @throws FlexiException 
      */
-    public boolean deleteTeachingStructure(ITeachingStructure teachingStructure) throws FlexiException;
+    public boolean deleteTeachingStructure(ITeachingStructure teachingStructure) throws RemoteException, FlexiException;
     
     /**
      * Adds a Data created by a client
      * Have to save Data and fire the add 
      * @param track 
      * @return true if OK
+     * @throws RemoteException 
+     */
+    public ITrack saveOrUpdateTrack(ITrack track) throws RemoteException;
+    
+    /**
+     *  
+     * get all datas managed by this manager
+     * @return all datas
+     * @throws RemoteException 
+     */
+    //public List<ITrack> getTracks() throws RemoteException; 
+    /**
+     *  
+     * removes a data
+     * have to delete data from storage and inform clients
+     * @param track 
+     * @return true if OK
+     * @throws RemoteException 
      * @throws FlexiException 
      */
-    public ITrack saveOrUpdateTrack(ITrack track) throws FlexiException ;
+    public boolean deleteTrack(ITrack track) throws RemoteException, FlexiException;
     
+    
+    /**
+     * @param b
+     * @param parent
+     * @return IBusy
+     * @throws RemoteException 
+     * 
+     */
+    public IBusy saveOrUpdateResourceBusy(IBusy b, IResource parent) throws RemoteException;
+    /**
+     * @param b
+     * @param parent
+     * @return true if OK
+     * @throws RemoteException 
+     * @throws FlexiException 
+     * 
+     */
+    public boolean deleteResourceBusy(IBusy b, IResource parent) throws RemoteException, FlexiException;
+    
+    //POUR LES TEST//
+    public IGroup getGroup() throws RemoteException;
+
+    /**
+     * 
+     * @param parent
+     * @return List of busies
+     */
+    public List<IBusy> getBusies(Long idResource, Class c) throws RemoteException;
+
+    public IClass getClassFromId(Long idClass)  throws RemoteException;
+
+    public List<IRoom> getRooms() throws RemoteException;
+
     /**
      *  
      * get all datas managed by this manager
@@ -403,50 +476,5 @@ public interface IDataManager
      * @return all datas
      * @throws FlexiException 
      */
-    public List<ITrack> getTracks(IUser user) throws FlexiException ; 
-    /**
-     *  
-     * removes a data
-     * have to delete data from storage and inform clients
-     * @param track 
-     * @return true if OK
-     * @throws FlexiException 
-     */
-    public boolean deleteTrack(ITrack track) throws FlexiException;
-    
-    
-    /**
-     * @param b
-     * @param parent
-     * @return IBusy
-     */
-    public IBusy saveOrUpdateResourceBusy(IBusy b, IResource parent) ;
-    /**
-     * @param b
-     * @param parent
-     * @return true if OK
-     * @throws FlexiException 
-     * 
-     */
-    public boolean deleteResourceBusy(IBusy b, IResource parent) throws FlexiException;
-    
-    /**
-     * 
-     * @param parent
-     * @return List of busies
-     * @throws FlexiException 
-     */
-    public List<IBusy> getBusies(Long idResource, Class c) throws FlexiException ;
-    
-    
-    //POUR LES TEST//
-    /**
-     * @return IGroup
-     * 
-     */
-    public IGroup getGroup() ;
-    
-    public IClass getClassFromId(Long idClass) throws FlexiException ;
-    
-    public List<IRoom> getRooms() ;
+    public List<ITrack> getTracks(IUser user) throws RemoteException ;
 }

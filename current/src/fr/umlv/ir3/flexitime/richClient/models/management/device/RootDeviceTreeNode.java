@@ -130,7 +130,7 @@ public class RootDeviceTreeNode extends RootTreeNode
     /* (non-Javadoc)
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
      */
-    public void dataChanged(DataEvent event) throws RemoteException
+    public void dataChanged(DataEvent event)
     {
         IDevice device = (IDevice)event.getSource();
         int type = event.getEventType();

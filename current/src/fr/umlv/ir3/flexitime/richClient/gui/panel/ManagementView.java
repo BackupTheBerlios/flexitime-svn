@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
 
@@ -32,9 +33,10 @@ public class ManagementView
     JSplitPane jSP;
 	/**
 	 * @throws RemoteException 
+	 * @throws FlexiException 
 	 * 
 	 */
-	public ManagementView() throws RemoteException 
+	public ManagementView() throws RemoteException, FlexiException 
 	{
 		List lstTrack = LocalDataManager.getManager().getTracks(Client.iUser);
         List lstDevice= LocalDataManager.getManager().getDevices();

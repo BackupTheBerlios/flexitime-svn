@@ -16,21 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JTree;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.tree.TreeModel;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
-import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassViewModel;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
 
 /**
  * ClassView

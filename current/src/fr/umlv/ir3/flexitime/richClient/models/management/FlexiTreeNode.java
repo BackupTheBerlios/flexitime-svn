@@ -6,13 +6,11 @@
 package fr.umlv.ir3.flexitime.richClient.models.management;
 
 import java.rmi.RemoteException;
-import java.util.List;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
-import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 
 /**
  * Represents the interface of a tree Node 

@@ -6,12 +6,11 @@
 
 package fr.umlv.ir3.flexitime.server.core;
 
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
+import fr.umlv.ir3.flexitime.common.rmi.IRemoteDataListener;
 
 /**
  * Event Manager
@@ -20,39 +19,25 @@ import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
 public class EventManager
 {
 
-    private final ConcurrentHashMap<Class, List<IDataListener>> map = new ConcurrentHashMap<Class, List<IDataListener>>();
+    //private final ConcurrentHashMap<Class, List<IDataListener>> map = new ConcurrentHashMap<Class, List<IDataListener>>();
+    private final CopyOnWriteArrayList<IRemoteDataListener> listenerlist = new CopyOnWriteArrayList<IRemoteDataListener>(); 
 
     /**
      * 
-     * @param _class
      * @param listener
      */
-    public void addDataListener(Class _class, IDataListener listener)
+    public void addRemoteDataListener(IRemoteDataListener listener)
     {
-            List<IDataListener> l = map.get(_class);
-            if (l == null)
-            {
-                l = new CopyOnWriteArrayList<IDataListener>();
-                map.put(_class, l);
-            }
-
-            l.add(listener);
+        listenerlist.add(listener);
     }
 
     /**
      * 
-     * @param _class
      * @param listener
      */
-    public void removeDataListener(Class _class, IDataListener listener)
+    public void removeDataListener(IDataListener listener)
     {
-            List<IDataListener> l = map.get(_class);
-            if (l == null) return;
-
-            synchronized (l)
-            {
-                l.remove(listener);
-            }
+        listenerlist.remove(listener);
     }
 
     /**
@@ -60,12 +45,9 @@ public class EventManager
      * @param _class
      * @param event
      */
-    public void fireDataChanged(Class _class, DataEvent event)
+    public void fireDataChanged(DataEvent event)
     {
-        List<IDataListener> l = map.get(_class);
-        if (l == null) return;
-
-        ThreadManager t = new ThreadManager(l, event);
+        ThreadManager t = new ThreadManager(listenerlist, event);
         t.start();
 
     }

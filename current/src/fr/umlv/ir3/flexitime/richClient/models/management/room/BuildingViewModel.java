@@ -8,12 +8,11 @@ package fr.umlv.ir3.flexitime.richClient.models.management.room;
 import java.rmi.RemoteException;
 
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
-import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.LocalDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.BuildingView;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.DevicesView;
 
 
 /**
@@ -34,13 +33,21 @@ public class BuildingViewModel extends DataListenerImpl
             public void setValue(String value) throws RemoteException
             {
                 building.setName(value);
-                LocalDataManager.getManager().saveOrUpdateBuilding(building);
+                try
+                {
+                    LocalDataManager.getManager().saveOrUpdateBuilding(building);
+                }
+                catch (FlexiException e)
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
 
             /* (non-Javadoc)
              * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
              */
-            public void dataChanged(DataEvent event) throws RemoteException
+            public void dataChanged(DataEvent event)
             {
                 IBuilding building = (IBuilding)event.getSource();
                 int type = event.getEventType();

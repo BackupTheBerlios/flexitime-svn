@@ -6,10 +6,17 @@
 
 package fr.umlv.ir3.flexitime.common.data.activity.impl;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.resources.*;
+import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
+import fr.umlv.ir3.flexitime.common.data.resources.IResource;
+import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 

@@ -5,10 +5,14 @@
 
 package fr.umlv.ir3.flexitime.server.io;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
-import javax.naming.*;
-import javax.naming.directory.*;
+import javax.naming.Context;
+import javax.naming.NamingException;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
 import javax.naming.ldap.InitialLdapContext;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;

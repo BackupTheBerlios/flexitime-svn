@@ -6,7 +6,6 @@
 package fr.umlv.ir3.flexitime.common.gui.models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.resources.IResource;

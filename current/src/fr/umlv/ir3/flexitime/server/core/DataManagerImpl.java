@@ -35,7 +35,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.IDataListener;
-import fr.umlv.ir3.flexitime.common.rmi.IDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.IRemoteDataManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.server.io.storage.BuildingStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.BusyStorage;
@@ -54,11 +54,11 @@ import fr.umlv.ir3.flexitime.server.io.storage.TeachingStructureStorage;
 import fr.umlv.ir3.flexitime.server.io.storage.TrackStorage;
 
 /**
- * Implementation of IDataListener
- * Exposed via RMI in order to be contacted by clients
+ * Implementation of IDataListener Exposed via RMI in order to be contacted by
+ * clients
  */
 public class DataManagerImpl extends UnicastRemoteObject implements
-        IDataManager
+        IRemoteDataManager
 {
 
     /**
@@ -87,7 +87,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     public void addDataListener(Class _class, IDataListener l)
             throws RemoteException
     {
-        manager.addDataListener(_class, l);
+        //manager.addDataListener(_class, l);
     }
 
     /**
@@ -101,7 +101,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             throws RemoteException
     {
         // FIXME Vérifier les références pour la suppression
-        manager.removeDataListener(_class, l);
+        //manager.removeDataListener(_class, l);
     }
 
     /**
@@ -161,8 +161,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         int type = save ? DataEvent.TYPE_PROPERTY_ADDED
                 : DataEvent.TYPE_PROPERTY_CHANGED;
 
-        manager.fireDataChanged(IBuilding.class, new DataEvent(building,
-                "", type)); //$NON-NLS-1$
+        manager.fireDataChanged(new DataEvent(building, "", type)); //$NON-NLS-1$
         return building;
     }
 
@@ -174,8 +173,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     public List<IBuilding> getBuildings() throws RemoteException
     {
         List<IBuilding> l = DataStorage.get(IBuilding.class);
-        if(l != null)
-            return l;
+        if (l != null) return l;
         try
         {
             l = BuildingStorage.get();
@@ -208,7 +206,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             throw new FlexiException(FlexiLanguage.getInstance().getText(
                     "buildingDeletion"), e); //$NON-NLS-1$
         }
-        manager.fireDataChanged(IBuilding.class, new DataEvent(building,
+        manager.fireDataChanged(new DataEvent(building,
                 "", DataEvent.TYPE_PROPERTY_REMOVED)); //$NON-NLS-1$
         return true;
     }
@@ -245,11 +243,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
 
         int indices = _class.getParentTrack().getLstClass().indexOf(_class);
         manager
-                .fireDataChanged(
-                        ITrack.class,
-                        new DataEvent(
-                                _class.getParentTrack(),
-                                "lstClass", type, new Object[] { _class }, new int[] { indices })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        _class.getParentTrack(),
+                        "lstClass", type, new Object[] { _class }, new int[] { indices })); //$NON-NLS-1$
 
         return _class;
     }
@@ -290,7 +286,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
 
         try
         {
-            //TeachingStructureStorage.delete(_class.getTeachingStructure());
+            // TeachingStructureStorage.delete(_class.getTeachingStructure());
             ClassStorage.delete(_class);
         }
         catch (HibernateException e)
@@ -300,11 +296,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         }
 
         manager
-                .fireDataChanged(
-                        ITrack.class,
-                        new DataEvent(
-                                _class.getParentTrack(),
-                                "lstClass", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { _class }, new int[] { indice })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        _class.getParentTrack(),
+                        "lstClass", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { _class }, new int[] { indice })); //$NON-NLS-1$
 
         return true;
     }
@@ -341,11 +335,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
 
         int indices = course.getParentSubject().getLstCourse().indexOf(course);
         manager
-                .fireDataChanged(
-                        ISubject.class,
-                        new DataEvent(
-                                course.getParentSubject(),
-                                "lstCourse", type, new Object[] { course }, new int[] { indices })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        course.getParentSubject(),
+                        "lstCourse", type, new Object[] { course }, new int[] { indices })); //$NON-NLS-1$
 
         return course;
     }
@@ -397,11 +389,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         }
 
         manager
-                .fireDataChanged(
-                        ISubject.class,
-                        new DataEvent(
-                                course.getParentSubject(),
-                                "lstCourse", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { course }, new int[] { indice })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        course.getParentSubject(),
+                        "lstCourse", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { course }, new int[] { indice })); //$NON-NLS-1$
 
         return true;
     }
@@ -428,7 +418,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             return null;
         }
 
-        manager.fireDataChanged(IDevice.class, new DataEvent(device, "", type)); //$NON-NLS-1$
+        manager.fireDataChanged(new DataEvent(device, "", type)); //$NON-NLS-1$
 
         return device;
     }
@@ -441,8 +431,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     public List<IDevice> getDevices() throws RemoteException
     {
         List<IDevice> l = DataStorage.get(IDevice.class);
-        if(l!=null)
-            return l;
+        if (l != null) return l;
         try
         {
             l = DeviceStorage.get();
@@ -475,13 +464,12 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             throw new FlexiException(FlexiLanguage.getInstance().getText(
                     "deviceDeletion"), e); //$NON-NLS-1$
         }
-        manager.fireDataChanged(IDevice.class, new DataEvent(device,
+        manager.fireDataChanged(new DataEvent(device,
                 "", DataEvent.TYPE_PROPERTY_REMOVED)); //$NON-NLS-1$
         return true;
     }
 
     /**
-
      * @param floor
      * @return IFloor
      * @throws RemoteException
@@ -514,11 +502,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         System.err.println(floor.getIdData());
         int indices = floor.getParentBuilding().getLstFloor().indexOf(floor);
         manager
-                .fireDataChanged(
-                        IBuilding.class,
-                        new DataEvent(
-                                floor.getParentBuilding(),
-                                "lstFloor", type, new Object[] { floor }, new int[] { indices })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        floor.getParentBuilding(),
+                        "lstFloor", type, new Object[] { floor }, new int[] { indices })); //$NON-NLS-1$
 
         return floor;
     }
@@ -568,11 +554,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         }
 
         manager
-                .fireDataChanged(
-                        IBuilding.class,
-                        new DataEvent(
-                                floor.getParentBuilding(),
-                                "lstFloor", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { floor }, new int[] { indice })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        floor.getParentBuilding(),
+                        "lstFloor", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { floor }, new int[] { indice })); //$NON-NLS-1$
 
         return true;
     }
@@ -609,11 +593,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
 
         int indices = group.getParentClass().getLstGroups().indexOf(group);
         manager
-                .fireDataChanged(
-                        IClass.class,
-                        new DataEvent(
-                                group.getParentClass(),
-                                "lstClass", type, new Object[] { group }, new int[] { indices })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        group.getParentClass(),
+                        "lstClass", type, new Object[] { group }, new int[] { indices })); //$NON-NLS-1$
 
         return group;
     }
@@ -663,11 +645,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         }
 
         manager
-                .fireDataChanged(
-                        IClass.class,
-                        new DataEvent(
-                                group.getParentClass(),
-                                "lstGroup", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { group }, new int[] { indice })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        group.getParentClass(),
+                        "lstGroup", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { group }, new int[] { indice })); //$NON-NLS-1$
 
         return true;
     }
@@ -684,17 +664,17 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             e.printStackTrace();
             return null;
         }
-        
-        for(int i=0; i < idR.length; i++)
+
+        for (int i = 0 ; i < idR.length ; i++)
         {
             IResource r;
-            if((r = (IResource)DataStorage.get(idR[i])) == null)
+            if ( ( r = (IResource) DataStorage.get(idR[i]) ) == null)
             {
-                
+
                 try
                 {
-                    Session s =HibernateUtil.currentSession();
-                    r = (IResource)s.load(ResourceImpl.class, idR[i]);
+                    Session s = HibernateUtil.currentSession();
+                    r = (IResource) s.load(ResourceImpl.class, idR[i]);
                     DataStorage.putIfAbsent(idR[i], r);
                 }
                 catch (HibernateException e1)
@@ -716,24 +696,20 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                 }
             }
             manager
-            .fireDataChanged(
-                    IClass.class,
-                    new DataEvent(
+                    .fireDataChanged(new DataEvent(
                             r,
                             "setBusy", DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED, new Object[] { lesson })); //$NON-NLS-1$
         }
-        
+
         return lesson.getIdBusy();
-        
+
     }
-     
-    
+
     /**
-     * @param lesson 
-     * @param lresource 
+     * @param lesson
+     * @param lresource
      * @return ILesson
-     * @throws RemoteException 
-     * 
+     * @throws RemoteException
      */
     public ILesson saveOrUpdateLesson(ILesson lesson, List<IResource> lresource)
             throws RemoteException
@@ -763,113 +739,112 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        
+
         i = 0;
         for (IResource elem : lresource)
         {
-            Class c = null;
-            if(elem instanceof IDevice)
-                c = IDevice.class;
-            else if(elem instanceof IGroup)
-                c = IGroup.class;
-            else if(elem instanceof IRoom)
-                c = IRoom.class;
-            else if(elem instanceof ITeacher)
-                c = ITeacher.class;
-            
-            manager.fireDataChanged(c, new DataEvent(elem,
-                  "setBusy", type[i], new Object[] { lesson }));
+            // Class c = null;
+            // if (elem instanceof IDevice)
+            // c = IDevice.class;
+            // else if (elem instanceof IGroup)
+            // c = IGroup.class;
+            // else if (elem instanceof IRoom)
+            // c = IRoom.class;
+            // else if (elem instanceof ITeacher) c = ITeacher.class;
+
+            manager.fireDataChanged(new DataEvent(elem, "setBusy", type[i],
+                    new Object[] { lesson }));
             ++i;
         }
 
         // Mise à jour des ressources associées
         i = 0;
-//        for (IResource r : lresource)
-//        {
-//            if (r instanceof IGroup)
-//            {
-//                IGroup g = (IGroup) r;
-//                if (newOne || !g.getSetBusy().contains(lesson))
-//                {
-//                    // g.addBusy(lesson);
-//                    lesson.addResource(g);
-//                }
-//                try
-//                {
-//                    GroupStorage.save(g);
-//                }
-//                catch (HibernateException e)
-//                {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                    return null;
-//                }
-//
-//                manager.fireDataChanged(IGroup.class, new DataEvent(g,
-//                        "lstBusy", type[i], new Object[] { lesson }));
-//
-//            }
-//            else if (r instanceof IDevice)
-//            {
-//                IDevice d = (IDevice) r;
-//                if (newOne || !d.getSetBusy().contains(lesson))
-//                    d.addBusy(lesson);
-//                try
-//                {
-//                    DeviceStorage.save(d);
-//                }
-//                catch (HibernateException e)
-//                {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                    return null;
-//                }
-//
-//                manager.fireDataChanged(IDevice.class, new DataEvent(d,
-//                        "lstBusy", type[i], new Object[] { lesson }));
-//
-//            }
-//            else if (r instanceof IRoom)
-//            {
-//                IRoom ro = (IRoom) r;
-//                if (newOne || !ro.getSetBusy().contains(lesson))
-//                    ro.addBusy(lesson);
-//                try
-//                {
-//                    RoomStorage.save(ro);
-//                }
-//                catch (HibernateException e)
-//                {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                    return null;
-//                }
-//                manager.fireDataChanged(IRoom.class, new DataEvent(ro,
-//                        "lstBusy", type[i], new Object[] { lesson }));
-//            }
-//            else if (r instanceof ITeacher)
-//            {
-//                ITeacher t = (ITeacher) r;
-//                if (newOne || !t.getSetBusy().contains(lesson))
-//                    t.addBusy(lesson);
-//                try
-//                {
-//                    TeacherStorage.save(t);
-//                }
-//                catch (HibernateException e)
-//                {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                    return null;
-//                }
-//                manager.fireDataChanged(ITeacher.class, new DataEvent(t,
-//                        "lstBusy", type[i], new Object[] { lesson }));
-//
-//            }
-//            
-//            ++i;
-//
-//        }
+        // for (IResource r : lresource)
+        // {
+        // if (r instanceof IGroup)
+        // {
+        // IGroup g = (IGroup) r;
+        // if (newOne || !g.getSetBusy().contains(lesson))
+        // {
+        // // g.addBusy(lesson);
+        // lesson.addResource(g);
+        // }
+        // try
+        // {
+        // GroupStorage.save(g);
+        // }
+        // catch (HibernateException e)
+        // {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // return null;
+        // }
+        //
+        // manager.fireDataChanged(IGroup.class, new DataEvent(g,
+        // "lstBusy", type[i], new Object[] { lesson }));
+        //
+        // }
+        // else if (r instanceof IDevice)
+        // {
+        // IDevice d = (IDevice) r;
+        // if (newOne || !d.getSetBusy().contains(lesson))
+        // d.addBusy(lesson);
+        // try
+        // {
+        // DeviceStorage.save(d);
+        // }
+        // catch (HibernateException e)
+        // {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // return null;
+        // }
+        //
+        // manager.fireDataChanged(IDevice.class, new DataEvent(d,
+        // "lstBusy", type[i], new Object[] { lesson }));
+        //
+        // }
+        // else if (r instanceof IRoom)
+        // {
+        // IRoom ro = (IRoom) r;
+        // if (newOne || !ro.getSetBusy().contains(lesson))
+        // ro.addBusy(lesson);
+        // try
+        // {
+        // RoomStorage.save(ro);
+        // }
+        // catch (HibernateException e)
+        // {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // return null;
+        // }
+        // manager.fireDataChanged(IRoom.class, new DataEvent(ro,
+        // "lstBusy", type[i], new Object[] { lesson }));
+        // }
+        // else if (r instanceof ITeacher)
+        // {
+        // ITeacher t = (ITeacher) r;
+        // if (newOne || !t.getSetBusy().contains(lesson))
+        // t.addBusy(lesson);
+        // try
+        // {
+        // TeacherStorage.save(t);
+        // }
+        // catch (HibernateException e)
+        // {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // return null;
+        // }
+        // manager.fireDataChanged(ITeacher.class, new DataEvent(t,
+        // "lstBusy", type[i], new Object[] { lesson }));
+        //
+        // }
+        //            
+        // ++i;
+        //
+        // }
 
         // for (Iterator<IGroup> it = lesson.getLstGroup().iterator() ; it
         // .hasNext() ;)
@@ -951,7 +926,6 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         return lesson;
     }
 
-
     /**
      * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
@@ -978,7 +952,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                 e.printStackTrace();
                 return false;
             }
-            manager.fireDataChanged(IGroup.class, new DataEvent(g, "lstBusy",
+            manager.fireDataChanged(new DataEvent(g, "lstBusy",
                     DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED,
                     new Object[] { lesson }));
 
@@ -999,7 +973,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                 e.printStackTrace();
                 return false;
             }
-            manager.fireDataChanged(IDevice.class, new DataEvent(d, "lstBusy",
+            manager.fireDataChanged(new DataEvent(d, "lstBusy",
                     DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED,
                     new Object[] { lesson }));
 
@@ -1019,7 +993,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                 e.printStackTrace();
                 return false;
             }
-            manager.fireDataChanged(IRoom.class, new DataEvent(r, "lstBusy",
+            manager.fireDataChanged(new DataEvent(r, "lstBusy",
                     DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED,
                     new Object[] { lesson }));
 
@@ -1041,7 +1015,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                 e.printStackTrace();
                 return false;
             }
-            manager.fireDataChanged(ITeacher.class, new DataEvent(t, "lstBusy",
+            manager.fireDataChanged(new DataEvent(t, "lstBusy",
                     DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED,
                     new Object[] { lesson }));
 
@@ -1091,7 +1065,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         }
         int indices = room.getFloor().getLstRoom().indexOf(room);
 
-        manager.fireDataChanged(IFloor.class, new DataEvent(room.getFloor(),
+        manager.fireDataChanged(new DataEvent(room.getFloor(),
                 "lstRoom", type, new Object[] { room }, new int[] { indices })); //$NON-NLS-1$
         return room;
     }
@@ -1140,11 +1114,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         }
 
         manager
-                .fireDataChanged(
-                        IFloor.class,
-                        new DataEvent(
-                                room.getFloor(),
-                                "lstRoom", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { room }, new int[] { indice })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        room.getFloor(),
+                        "lstRoom", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { room }, new int[] { indice })); //$NON-NLS-1$
 
         return true;
     }
@@ -1182,11 +1154,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                 subject);
 
         manager
-                .fireDataChanged(
-                        ISubjectsGroup.class,
-                        new DataEvent(
-                                subject.getParentSubjectsGroup(),
-                                "lstSubject", type, new Object[] { subject }, new int[] { indices })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        subject.getParentSubjectsGroup(),
+                        "lstSubject", type, new Object[] { subject }, new int[] { indices })); //$NON-NLS-1$
         return subject;
     }
 
@@ -1238,11 +1208,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         }
 
         manager
-                .fireDataChanged(
-                        ISubjectsGroup.class,
-                        new DataEvent(
-                                subject.getParentSubjectsGroup(),
-                                "lstSubject", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { subject }, new int[] { indice })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        subject.getParentSubjectsGroup(),
+                        "lstSubject", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { subject }, new int[] { indice })); //$NON-NLS-1$
 
         return true;
     }
@@ -1281,11 +1249,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                 .getLstSubjectsGroup().indexOf(subjectsGroup);
 
         manager
-                .fireDataChanged(
-                        ITeachingStructure.class,
-                        new DataEvent(
-                                subjectsGroup.getParentTeachStruct(),
-                                "lstSubjectsGroup", type, new Object[] { subjectsGroup }, new int[] { indices })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        subjectsGroup.getParentTeachStruct(),
+                        "lstSubjectsGroup", type, new Object[] { subjectsGroup }, new int[] { indices })); //$NON-NLS-1$
         return subjectsGroup;
     }
 
@@ -1335,11 +1301,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         }
 
         manager
-                .fireDataChanged(
-                        ITeachingStructure.class,
-                        new DataEvent(
-                                subjectsGroup.getParentTeachStruct(),
-                                "lstSubjectsGroup", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { subjectsGroup }, new int[] { indice })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        subjectsGroup.getParentTeachStruct(),
+                        "lstSubjectsGroup", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { subjectsGroup }, new int[] { indice })); //$NON-NLS-1$
 
         return true;
     }
@@ -1367,8 +1331,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             return null;
         }
 
-        manager.fireDataChanged(ITeacher.class,
-                new DataEvent(teacher, "", type)); //$NON-NLS-1$
+        manager.fireDataChanged(new DataEvent(teacher, "", type)); //$NON-NLS-1$
 
         return teacher;
     }
@@ -1381,8 +1344,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     public List<ITeacher> getTeachers() throws RemoteException
     {
         List<ITeacher> l = DataStorage.get(ITeacher.class);
-        if(l != null)
-            return l;
+        if (l != null) return l;
         try
         {
             l = TeacherStorage.get();
@@ -1429,7 +1391,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                     "teacherDeletion"), e); //$NON-NLS-1$
 
         }
-        manager.fireDataChanged(ITeacher.class, new DataEvent(teacher,
+        manager.fireDataChanged(new DataEvent(teacher,
                 "", DataEvent.TYPE_PROPERTY_REMOVED)); //$NON-NLS-1$
         return true;
     }
@@ -1465,7 +1427,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             return null;
         }
 
-        manager.fireDataChanged(IClass.class, new DataEvent(teachingStructure
+        manager.fireDataChanged(new DataEvent(teachingStructure
                 .getParentClass(),
                 "teachingStructure", type, new Object[] { teachingStructure })); //$NON-NLS-1$
         return teachingStructure;
@@ -1516,11 +1478,9 @@ public class DataManagerImpl extends UnicastRemoteObject implements
                     "teachingStructureDeletion"), e); //$NON-NLS-1$
         }
         manager
-                .fireDataChanged(
-                        IClass.class,
-                        new DataEvent(
-                                teachingStructure,
-                                "teachingStructure", DataEvent.TYPE_PROPERTY_REMOVED, new Object[] { teachingStructure })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        teachingStructure,
+                        "teachingStructure", DataEvent.TYPE_PROPERTY_REMOVED, new Object[] { teachingStructure })); //$NON-NLS-1$
         return true;
     }
 
@@ -1546,7 +1506,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             return null;
         }
 
-        manager.fireDataChanged(ITrack.class, new DataEvent(track, "", type)); //$NON-NLS-1$
+        manager.fireDataChanged(new DataEvent(track, "", type)); //$NON-NLS-1$
 
         return track;
     }
@@ -1559,8 +1519,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     public List<ITrack> getTracks() throws RemoteException
     {
         List<ITrack> l = DataStorage.get(ITrack.class);
-        if(l != null)
-            return l;
+        if (l != null) return l;
         try
         {
             l = TrackStorage.get();
@@ -1574,36 +1533,30 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         DataStorage.addTracks(l);
         return l;
     }
-    
-    
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
+
+    /**
+     * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     *
+     * 
      * @param user
      * @return
-     * @throws RemoteException 
-     * 
+     * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getTracks(fr.umlv.ir3.flexitime.common.data.admin.IUser)
      */
     public List<ITrack> getTracks(IUser user) throws RemoteException
     {
         List<ITrack> l = DataStorage.get(ITrack.class);
-        if(l != null)
+        if (l != null)
         {
             List<ITrack> toSend = new ArrayList<ITrack>();
-            for(ITrack t : l)
+            for (ITrack t : l)
             {
-                if(t.getSetUser().contains(user))
-                    toSend.add(t);
-                    
+                if (t.getSetUser().contains(user)) toSend.add(t);
+
             }
-            if(toSend.size() != 0)
-                return toSend;
+            if (toSend.size() != 0) return toSend;
         }
-        
-        
+
         try
         {
             l = TrackStorage.getTracks(user);
@@ -1636,7 +1589,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             throw new FlexiException(FlexiLanguage.getInstance().getText(
                     "trackDeletion"), e); //$NON-NLS-1$
         }
-        manager.fireDataChanged(ITrack.class, new DataEvent(track,
+        manager.fireDataChanged(new DataEvent(track,
                 "", DataEvent.TYPE_PROPERTY_REMOVED)); //$NON-NLS-1$
         return true;
     }
@@ -1666,7 +1619,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             return null;
         }
 
-        manager.fireDataChanged(IDevice.class, new DataEvent(parent,
+        manager.fireDataChanged(new DataEvent(parent,
                 "setBusy", type, new Object[] { busy })); //$NON-NLS-1$
 
         return busy;
@@ -1678,20 +1631,21 @@ public class DataManagerImpl extends UnicastRemoteObject implements
      * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getBusies(fr.umlv.ir3.flexitime.common.data.resources.IResource)
      */
-    public List<IBusy> getBusies(Long idResource, Class resourceClass) throws RemoteException
+    public List<IBusy> getBusies(Long idResource, Class resourceClass)
+            throws RemoteException
     {
         List l = null;
         try
         {
-            if(resourceClass.equals(IGroup.class))
+            if (resourceClass.equals(IGroup.class))
                 l = BusyStorage.getGroupBusy(idResource);
-            if(resourceClass.equals(IDevice.class))
+            if (resourceClass.equals(IDevice.class))
                 l = BusyStorage.getDeviceBusy(idResource);
-            if(resourceClass.equals(IRoom.class))
+            if (resourceClass.equals(IRoom.class))
                 l = BusyStorage.getRoomBusy(idResource);
-            if(resourceClass.equals(ITeacher.class))
+            if (resourceClass.equals(ITeacher.class))
                 l = BusyStorage.getTeacherBusy(idResource);
-            for(Iterator it = l.iterator(); it.hasNext(); )
+            for (Iterator it = l.iterator() ; it.hasNext() ;)
             {
                 System.out.println(it.next().getClass());
             }
@@ -1709,13 +1663,14 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         DataManagerImpl d = new DataManagerImpl();
         d.getBusies(new Long(37), IGroup.class);
     }
-    /** 
+
+    /**
      * @param b
      * @param parent
      * @return IBusy
-     * @throws RemoteException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateResourceBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy, fr.umlv.ir3.flexitime.common.data.resources.IResource)
+     * @throws RemoteException
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateResourceBusy(fr.umlv.ir3.flexitime.common.data.activity.IBusy,
+     *      fr.umlv.ir3.flexitime.common.data.resources.IResource)
      */
     public IBusy saveOrUpdateResourceBusy(IBusy b, IResource parent)
             throws RemoteException
@@ -1723,20 +1678,19 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         int type = b.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
                 : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
 
-        Class c = null;
-        
-        if(parent instanceof IDevice)
-            c = IDevice.class;
-        else if(parent instanceof IGroup)
-            c = IGroup.class;
-        else if(parent instanceof IRoom)
-            c = IRoom.class;
-        else if(parent instanceof ITeacher)
-            c = ITeacher.class;
-        
+        // Class c = null;
+        //
+        // if (parent instanceof IDevice)
+        // c = IDevice.class;
+        // else if (parent instanceof IGroup)
+        // c = IGroup.class;
+        // else if (parent instanceof IRoom)
+        // c = IRoom.class;
+        // else if (parent instanceof ITeacher) c = ITeacher.class;
+
         try
         {
-            //TeacherStorage.save(parent);
+            // TeacherStorage.save(parent);
             BusyStorage.save(b);
         }
         catch (HibernateException e)
@@ -1746,34 +1700,34 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             return null;
         }
 
-        manager.fireDataChanged(c, new DataEvent(parent,
+        manager.fireDataChanged(new DataEvent(parent,
                 "setBusy", type, new Object[] { b })); //$NON-NLS-1$
 
         return b;
     }
-    
-    /** 
+
+    /**
      * @param b
      * @param parent
      * @return true if OK
-     * @throws RemoteException 
-     * @throws FlexiException 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteResourceBusy(fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy, fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
+     * @throws RemoteException
+     * @throws FlexiException
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteResourceBusy(fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy,
+     *      fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
      */
-    public boolean deleteResourceBusy(IBusy b, IResource parent) throws RemoteException, FlexiException
+    public boolean deleteResourceBusy(IBusy b, IResource parent)
+            throws RemoteException, FlexiException
     {
-        Class c = null;
-        
-        if(parent instanceof IDevice)
-            c = IDevice.class;
-        else if(parent instanceof IGroup)
-            c = IGroup.class;
-        else if(parent instanceof IRoom)
-            c = IRoom.class;
-        else if(parent instanceof ITeacher)
-            c = ITeacher.class;
-        
+        // Class c = null;
+        //
+        // if (parent instanceof IDevice)
+        // c = IDevice.class;
+        // else if (parent instanceof IGroup)
+        // c = IGroup.class;
+        // else if (parent instanceof IRoom)
+        // c = IRoom.class;
+        // else if (parent instanceof ITeacher) c = ITeacher.class;
+
         try
         {
             BusyStorage.delete(b);
@@ -1785,21 +1739,18 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         }
 
         manager
-                .fireDataChanged(
-                        c,
-                        new DataEvent(
-                                parent,
-                                "setBusy", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { b })); //$NON-NLS-1$
+                .fireDataChanged(new DataEvent(
+                        parent,
+                        "setBusy", DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED, new Object[] { b })); //$NON-NLS-1$
 
         return true;
     }
 
-    //POUR LES TESTS
-    
-    /** 
+    // POUR LES TESTS
+
+    /**
      * @return IGroup
-     * @throws RemoteException 
-     * 
+     * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getGroup()
      */
     public IGroup getGroup() throws RemoteException
@@ -1815,24 +1766,20 @@ public class DataManagerImpl extends UnicastRemoteObject implements
             return null;
         }
     }
-    
-    
-    /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
+
+    /**
+     * DOCME Description Quel service est rendu par cette méthode
      * <code>exemple d'appel de la methode</code>
-     *
+     * 
      * @param idChildGroup
      * @return
-     * @throws RemoteException 
-     * 
+     * @throws RemoteException
      * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getParentClass(java.lang.Long)
      */
     public IClass getClassFromId(Long idClass) throws RemoteException
     {
         IClass c = (IClass) DataStorage.get(idClass);
-        if(c != null)
-            return c;
+        if (c != null) return c;
         try
         {
             return ClassStorage.getClassFromId(idClass);
@@ -1844,15 +1791,12 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         }
         return null;
     }
-    
+
     public List<IRoom> getRooms() throws RemoteException
     {
         List<IRoom> l = DataStorage.get(IRoom.class);
-        if(l != null)
-        {
-            return l;
-        }
-        
+        if (l != null) { return l; }
+
         try
         {
             l = RoomStorage.get();

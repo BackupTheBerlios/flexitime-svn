@@ -6,7 +6,6 @@
 package fr.umlv.ir3.flexitime.richClient.models.management;
 
 import java.rmi.RemoteException;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultTreeModel;

@@ -7,20 +7,30 @@
 
 package fr.umlv.ir3.flexitime.richClient.gui.views;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.StringTokenizer;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import com.jgoodies.forms.builder.PanelBuilder;
-import com.jgoodies.forms.debug.FormDebugPanel;
-import com.jgoodies.forms.layout.*;
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
 
-import fr.umlv.ir3.flexitime.common.tools.*;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
+import fr.umlv.ir3.flexitime.common.tools.Validator;
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
 import fr.umlv.ir3.flexitime.richClient.io.FlexiMail;
 

@@ -1,29 +1,29 @@
 /*
- * Created on 27 déc. 2004
- * by Valère
- * 
+ * Created on 6 févr. 2005
+ * by Prâsad
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-
 package fr.umlv.ir3.flexitime.common.rmi;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
 
-/**
- * Interface that all distant listeners have to implement
- * Extends Remote in order to be called remotely.
- * 
- * @version 1.0
- * @author FlexiTeam - Valère
- */
-public interface IDataListener
-{
 
+/**
+ * Remote Data Listener
+ * 
+ * 
+ */
+public interface IRemoteDataListener extends Remote
+{
     /**
      *  
      * Called when a data has changed 
      * @param event Data that has changed
      * 
      */
-    public void dataChanged(DataEvent event);
+    public void dataChanged(DataEvent event) throws RemoteException;
 }
+
