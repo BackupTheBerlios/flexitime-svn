@@ -14,7 +14,11 @@ import java.util.List;
 
 import net.sf.hibernate.HibernateException;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
@@ -57,6 +61,10 @@ import fr.umlv.ir3.flexitime.server.io.storage.TrackStorage;
 public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
 {
 
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3257562889115088182L;
     protected final EventManager manager = new EventManager();
 
     /**
@@ -109,7 +117,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
     public boolean lock(Object d) throws RemoteException, InterruptedException
     {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     /**
@@ -1402,6 +1410,190 @@ public class DataManagerImpl extends UnicastRemoteObject implements IDataManager
         manager.fireDataChanged(ITrack.class, new DataEvent(track,
                 "", DataEvent.TYPE_PROPERTY_REMOVED)); //$NON-NLS-1$
         return true;
+    }
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param busy
+     * @param parent
+     * @return
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateDeviceBusy(fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy, fr.umlv.ir3.flexitime.common.data.resources.IDevice)
+     */
+    public IDeviceBusy saveOrUpdateDeviceBusy(IDeviceBusy busy, IDevice parent) throws RemoteException
+    {
+        int type = busy.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+
+        try
+        {
+            DeviceStorage.save(parent);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+
+        manager
+                .fireDataChanged(
+                        IDevice.class,
+                        new DataEvent(
+                                parent,
+                                "setBusy", type, new Object[] { busy })); //$NON-NLS-1$
+
+        return busy;
+    }
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param parent
+     * @return
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getBusies(fr.umlv.ir3.flexitime.common.data.resources.IResource)
+     */
+    public List<IBusy> getBusies(IResource parent) throws RemoteException
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param track
+     * @return
+     * @throws RemoteException
+     * @throws FlexiException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#deleteDeviceBusy(fr.umlv.ir3.flexitime.common.data.general.ITrack)
+     */
+    public boolean deleteDeviceBusy(ITrack track) throws RemoteException, FlexiException
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param busy
+     * @param parent
+     * @return
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateGroupBusy(fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy, fr.umlv.ir3.flexitime.common.data.resources.IGroup)
+     */
+    public IGroupBusy saveOrUpdateGroupBusy(IGroupBusy busy, IGroup parent) throws RemoteException
+    {
+        int type = busy.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+
+        try
+        {
+            GroupStorage.save(parent);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+
+        manager
+                .fireDataChanged(
+                        IGroup.class,
+                        new DataEvent(
+                                parent,
+                                "setBusy", type, new Object[] { busy })); //$NON-NLS-1$
+
+        return busy;
+
+    }
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param busy
+     * @param parent
+     * @return
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateRoomBusy(fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy, fr.umlv.ir3.flexitime.common.data.resources.IRoom)
+     */
+    public IRoomBusy saveOrUpdateRoomBusy(IRoomBusy busy, IRoom parent) throws RemoteException
+    {
+        int type = busy.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+
+        try
+        {
+            RoomStorage.save(parent);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+
+        manager
+                .fireDataChanged(
+                        IRoom.class,
+                        new DataEvent(
+                                parent,
+                                "setBusy", type, new Object[] { busy })); //$NON-NLS-1$
+
+        return busy;
+
+    }
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param busy
+     * @param parent
+     * @return
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#saveOrUpdateTeacherBusy(fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy, fr.umlv.ir3.flexitime.common.data.resources.ITeacher)
+     */
+    public ITeacherBusy saveOrUpdateTeacherBusy(ITeacherBusy busy, ITeacher parent) throws RemoteException
+    {
+        int type = busy.getIdBusy() == null ? DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
+                : DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED;
+
+        try
+        {
+            TeacherStorage.save(parent);
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+
+        manager
+                .fireDataChanged(
+                        ITeacher.class,
+                        new DataEvent(
+                                parent,
+                                "setBusy", type, new Object[] { busy })); //$NON-NLS-1$
+
+        return busy;
+
     }
 
 }
