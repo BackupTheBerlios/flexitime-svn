@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <flexi:config>
 	<flexi:uriServerData>jdbc:postgresql://gontime.ath.cx:5432</flexi:uriServerData>
-	<flexi:nameBase>flexitime</flexi:nameBase>
+	<flexi:nameBase>flexitime2</flexi:nameBase>
 	<flexi:userBDD>flexitime</flexi:userBDD>
 	<flexi:passBDD>flexitim</flexi:passBDD>
 	<flexi:uriServerLDAP>gontime.ath.cx</flexi:uriServerLDAP>
