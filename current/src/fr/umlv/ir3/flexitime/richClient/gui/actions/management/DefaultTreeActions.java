@@ -98,7 +98,7 @@ public class DefaultTreeActions
 
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				((ResourceTreeModel)model).valueForPathChanged(tree.getSelectionPath(),value);
+                ((ResourceTreeModel)model).valueForPathChanged(tree.getSelectionPath(),value);
 				
 			}
 			
