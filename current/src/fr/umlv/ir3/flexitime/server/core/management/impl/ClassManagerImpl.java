@@ -1,65 +1,116 @@
 /*
- * Created on 13 déc. 2004
- * by Valère FOREL
+ * Created on 26 déc. 2004
+ * by Valère
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.server.core.management.impl;
 
 import fr.umlv.ir3.flexitime.common.data.Data;
-import fr.umlv.ir3.flexitime.common.rmi.IEventManager;
-import fr.umlv.ir3.flexitime.server.core.management.event.PropertyListener;
-
-
-
+import fr.umlv.ir3.flexitime.common.data.general.Class;
+import fr.umlv.ir3.flexitime.common.rmi.IClassManager;
 
 
 /**
- * EventManagerImpl - Implements the interface EventManager
+ * ClassManagerImpl - DOCME Description
+ * explication supplémentaire si nécessaire
+ * in english please...
+ * Que fait cette classe, qu'est-ce qu'elle 
+ * représente, ...
  * 
- * @version 0.1
+ * @version Verion ou révision SVN
  * 
- * @author FlexiTeam - Valère FOREL
+ * @author FlexiTeam - Valère
  */
-public class EventManagerImpl implements IEventManager {
+public class ClassManagerImpl implements IClassManager{
 
     /** 
-     * addListener - DOCME Description
+     * getClass - DOCME Description
      * Quel service est rendu par cette méthode
      * 
      *     <code>exemple d'appel de la methode</code>
      *
-     * @param itemClass
-     * @param property
-     * @param eventType
-     * @param listener 
+     * @param name
+     * @return 
      * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IEventManager#addListener(java.lang.Class, java.lang.String, int, fr.umlv.ir3.flexitime.server.core.management.event.PropertyListener)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IClassManager#getClass(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    public void addListener(Class itemClass, String property, int eventType, PropertyListener listener) {
+    public Class getClass(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /** 
+     * saveClass - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param _class 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IClassManager#saveClass(fr.umlv.ir3.flexitime.common.data.general.Class)
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    public void saveClass(Class _class) {
         // TODO Auto-generated method stub
         
     }
 
     /** 
-     * removeListener - DOCME Description
+     * removeClass - DOCME Description
      * Quel service est rendu par cette méthode
      * 
      *     <code>exemple d'appel de la methode</code>
      *
-     * @param itemClass
-     * @param property
-     * @param listener 
+     * @param name
+     * @return 
      * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IEventManager#removeListener(java.lang.Class, java.lang.String, fr.umlv.ir3.flexitime.server.core.management.event.PropertyListener)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IClassManager#removeClass(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    public void removeListener(Class itemClass, String property, PropertyListener listener) {
+    public Class removeClass(String name) {
         // TODO Auto-generated method stub
-        
+        return null;
+    }
+
+    /** 
+     * lockClass - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param _class
+     * @return 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IClassManager#lockClass(fr.umlv.ir3.flexitime.common.data.general.Class)
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    public boolean lockClass(Class _class) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /** 
+     * unlockClass - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param _class
+     * @return 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IClassManager#unlockClass(fr.umlv.ir3.flexitime.common.data.general.Class)
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    public boolean unlockClass(Class _class) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
     /** 

@@ -1,18 +1,17 @@
 /*
- * Created on 23 déc. 2004
- * by Guillaume GUERRIN
+ * Created on 26 déc. 2004
+ * by Valère
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.rmi;
-
-import java.rmi.Remote;
+package fr.umlv.ir3.flexitime.server.core.management.impl;
 
 import fr.umlv.ir3.flexitime.common.data.ressources.Room;
+import fr.umlv.ir3.flexitime.common.rmi.IRoomManager;
 
 
 /**
- * IRoomManager - DOCME Description
+ * RoomManagerImpl - DOCME Description
  * explication supplémentaire si nécessaire
  * in english please...
  * Que fait cette classe, qu'est-ce qu'elle 
@@ -20,9 +19,10 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Room;
  * 
  * @version Verion ou révision SVN
  * 
- * @author FlexiTeam - Guillaume GUERRIN
+ * @author FlexiTeam - Valère
  */
-public interface IRoomManager extends Remote {
+public class RoomManagerImpl implements IRoomManager{
+
     /** 
      * getRoom - DOCME Description
      * Quel service est rendu par cette méthode
@@ -32,10 +32,15 @@ public interface IRoomManager extends Remote {
      * @param name
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IRoomManager#getRoom(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    Room getRoom(String name);
+    public Room getRoom(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /** 
      * saveRoom - DOCME Description
      * Quel service est rendu par cette méthode
@@ -44,10 +49,15 @@ public interface IRoomManager extends Remote {
      *
      * @param room 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IRoomManager#saveRoom(fr.umlv.ir3.flexitime.common.data.ressources.Room)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    void saveRoom(Room room);
+    public void saveRoom(Room room) {
+        // TODO Auto-generated method stub
+        
+    }
+
     /** 
      * removeRoom - DOCME Description
      * Quel service est rendu par cette méthode
@@ -57,10 +67,15 @@ public interface IRoomManager extends Remote {
      * @param name
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IRoomManager#removeRoom(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    Room removeRoom(String name);
+    public Room removeRoom(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /** 
      * lockRoom - DOCME Description
      * Quel service est rendu par cette méthode
@@ -70,10 +85,15 @@ public interface IRoomManager extends Remote {
      * @param room
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IRoomManager#lockRoom(fr.umlv.ir3.flexitime.common.data.ressources.Room)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    boolean lockRoom(Room room);
+    public boolean lockRoom(Room room) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
     /** 
      * unlockRoom - DOCME Description
      * Quel service est rendu par cette méthode
@@ -83,8 +103,13 @@ public interface IRoomManager extends Remote {
      * @param room
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IRoomManager#unlockRoom(fr.umlv.ir3.flexitime.common.data.ressources.Room)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    boolean unlockRoom(Room room);
+    public boolean unlockRoom(Room room) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

@@ -4,7 +4,9 @@
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.server.core.management;
+package fr.umlv.ir3.flexitime.common.rmi;
+
+import java.rmi.Remote;
 
 import fr.umlv.ir3.flexitime.server.core.management.event.*;
 
@@ -21,7 +23,7 @@ import fr.umlv.ir3.flexitime.server.core.management.event.*;
  * 
  * @author FlexiTeam - Valère FOREL
  */
-public interface EventManager {
+public interface IEventManager extends Remote,AbstractManager{
     /** 
      * addListener - DOCME Description
      * Quel service est rendu par cette méthode

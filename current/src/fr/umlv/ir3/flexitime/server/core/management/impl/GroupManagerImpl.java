@@ -1,18 +1,17 @@
 /*
- * Created on 23 déc. 2004
- * by Guillaume GUERRIN
+ * Created on 26 déc. 2004
+ * by Valère
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.rmi;
-
-import java.rmi.Remote;
+package fr.umlv.ir3.flexitime.server.core.management.impl;
 
 import fr.umlv.ir3.flexitime.common.data.ressources.Group;
+import fr.umlv.ir3.flexitime.common.rmi.IGroupManager;
 
 
 /**
- * IGroupManager - DOCME Description
+ * GroupManagerImpl - DOCME Description
  * explication supplémentaire si nécessaire
  * in english please...
  * Que fait cette classe, qu'est-ce qu'elle 
@@ -20,9 +19,10 @@ import fr.umlv.ir3.flexitime.common.data.ressources.Group;
  * 
  * @version Verion ou révision SVN
  * 
- * @author FlexiTeam - Guillaume GUERRIN
+ * @author FlexiTeam - Valère
  */
-public interface IGroupManager extends Remote {
+public class GroupManagerImpl implements IGroupManager{
+
     /** 
      * getGroup - DOCME Description
      * Quel service est rendu par cette méthode
@@ -32,10 +32,15 @@ public interface IGroupManager extends Remote {
      * @param name
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IGroupManager#getGroup(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    Group getGroup(String name);
+    public Group getGroup(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /** 
      * saveGroup - DOCME Description
      * Quel service est rendu par cette méthode
@@ -44,10 +49,15 @@ public interface IGroupManager extends Remote {
      *
      * @param group 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IGroupManager#saveGroup(fr.umlv.ir3.flexitime.common.data.ressources.Group)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    void saveGroup(Group group);
+    public void saveGroup(Group group) {
+        // TODO Auto-generated method stub
+        
+    }
+
     /** 
      * removeGroup - DOCME Description
      * Quel service est rendu par cette méthode
@@ -57,10 +67,15 @@ public interface IGroupManager extends Remote {
      * @param name
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IGroupManager#removeGroup(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    Group removeGroup(String name);
+    public Group removeGroup(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /** 
      * lockGroup - DOCME Description
      * Quel service est rendu par cette méthode
@@ -70,10 +85,15 @@ public interface IGroupManager extends Remote {
      * @param group
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IGroupManager#lockGroup(fr.umlv.ir3.flexitime.common.data.ressources.Group)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    boolean lockGroup(Group group);
+    public boolean lockGroup(Group group) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
     /** 
      * unlockGroup - DOCME Description
      * Quel service est rendu par cette méthode
@@ -83,9 +103,13 @@ public interface IGroupManager extends Remote {
      * @param group
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IGroupManager#unlockGroup(fr.umlv.ir3.flexitime.common.data.ressources.Group)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    boolean unlockGroup(Group group);
+    public boolean unlockGroup(Group group) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 }

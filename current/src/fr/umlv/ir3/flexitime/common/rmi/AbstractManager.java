@@ -1,91 +1,91 @@
 /*
- * Created on 23 déc. 2004
- * by Guillaume GUERRIN
+ * Created on 26 déc. 2004
+ * by Valère
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.common.rmi;
 
-import java.rmi.Remote;
-
-import fr.umlv.ir3.flexitime.common.data.general.Track;
+import fr.umlv.ir3.flexitime.common.data.Data;
 
 
 /**
- * ITrackManager - DOCME Description
+ * AbstractManager - DOCME Description
  * explication supplémentaire si nécessaire
  * in english please...
  * Que fait cette classe, qu'est-ce qu'elle 
  * représente, ...
  * 
- * @version Verion ou révision SVN
+ * @version 0.1
  * 
- * @author FlexiTeam - Guillaume GUERRIN
+ * @author FlexiTeam - Valère
  */
-public interface ITrackManager extends Remote {
+public interface AbstractManager {
     /** 
-     * getTrack - DOCME Description
+     * getData - DOCME Description
      * Quel service est rendu par cette méthode
      * 
      *     <code>exemple d'appel de la methode</code>
      *
-     * @param name
-     * @return 
-     * 
-     * @author   FlexiTeam - Administrateur
-     * @date     15 déc. 2004
-     */
-    Track getTrack(String name);
-    /** 
-     * addTrack - DOCME Description
-     * Quel service est rendu par cette méthode
-     * 
-     *     <code>exemple d'appel de la methode</code>
-     *
-     * @param track 
-     * 
-     * @author   FlexiTeam - Administrateur
-     * @date     15 déc. 2004
-     */
-    void saveTrack(Track track);
-    /** 
-     * removeTrack - DOCME Description
-     * Quel service est rendu par cette méthode
-     * 
-     *     <code>exemple d'appel de la methode</code>
-     *
-     * @param name
-     * @return 
-     * 
-     * @author   FlexiTeam - Administrateur
-     * @date     15 déc. 2004
-     */
-    Track removeTrack(String name);
-    /** 
-     * lockTrack - DOCME Description
-     * Quel service est rendu par cette méthode
-     * 
-     *     <code>exemple d'appel de la methode</code>
-     *
-     * @param track
      * @return 
      * 
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    boolean lockTrack(Track track);
+    Data getData();
+    
     /** 
-     * unlockTrack - DOCME Description
+     * saveData - DOCME Description
      * Quel service est rendu par cette méthode
      * 
      *     <code>exemple d'appel de la methode</code>
      *
-     * @param track
+     * @param data 
+     * 
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    void saveData(Data data);
+    
+    /** 
+     * removeData - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param data 
+     * 
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    void removeData(Data data);
+    
+    /** 
+     * lock - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param data
      * @return 
      * 
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    boolean unlockTrack(Track track);
-   
+    boolean lock(Data data);
+    
+    /** 
+     * unlock - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param data
+     * @return 
+     * 
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    boolean unlock(Data data);
+
 }

@@ -1,18 +1,17 @@
 /*
- * Created on 23 déc. 2004
- * by Famille
+ * Created on 26 déc. 2004
+ * by Valère
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.rmi;
-
-import java.rmi.Remote;
+package fr.umlv.ir3.flexitime.server.core.management.impl;
 
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.Subject;
+import fr.umlv.ir3.flexitime.common.rmi.ISubjectManager;
 
 
 /**
- * ISubjectManager - DOCME Description
+ * SubjectManagerImpl - DOCME Description
  * explication supplémentaire si nécessaire
  * in english please...
  * Que fait cette classe, qu'est-ce qu'elle 
@@ -20,9 +19,10 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.Subject;
  * 
  * @version Verion ou révision SVN
  * 
- * @author FlexiTeam - Famille
+ * @author FlexiTeam - Valère
  */
-public interface ISubjectManager extends Remote {
+public class SubjectManagerImpl implements ISubjectManager{
+
     /** 
      * getSubject - DOCME Description
      * Quel service est rendu par cette méthode
@@ -32,10 +32,15 @@ public interface ISubjectManager extends Remote {
      * @param name
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.ISubjectManager#getSubject(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    Subject getSubject(String name);
+    public Subject getSubject(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /** 
      * saveSubject - DOCME Description
      * Quel service est rendu par cette méthode
@@ -44,10 +49,15 @@ public interface ISubjectManager extends Remote {
      *
      * @param subject 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.ISubjectManager#saveSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.Subject)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    void saveSubject(Subject subject);
+    public void saveSubject(Subject subject) {
+        // TODO Auto-generated method stub
+        
+    }
+
     /** 
      * removeSubject - DOCME Description
      * Quel service est rendu par cette méthode
@@ -57,10 +67,15 @@ public interface ISubjectManager extends Remote {
      * @param name
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.ISubjectManager#removeSubject(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    Subject removeSubject(String name);
+    public Subject removeSubject(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /** 
      * lockSubject - DOCME Description
      * Quel service est rendu par cette méthode
@@ -70,10 +85,15 @@ public interface ISubjectManager extends Remote {
      * @param subject
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.ISubjectManager#lockSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.Subject)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    boolean lockSubject(Subject subject);
+    public boolean lockSubject(Subject subject) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
     /** 
      * unlockSubject - DOCME Description
      * Quel service est rendu par cette méthode
@@ -83,9 +103,13 @@ public interface ISubjectManager extends Remote {
      * @param subject
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.ISubjectManager#unlockSubject(fr.umlv.ir3.flexitime.common.data.teachingStructure.Subject)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    boolean unlockSubject(Subject subject);
-    
+    public boolean unlockSubject(Subject subject) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

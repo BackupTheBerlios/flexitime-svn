@@ -7,59 +7,107 @@
 package fr.umlv.ir3.flexitime.server.core.management.impl;
 
 import fr.umlv.ir3.flexitime.common.data.Data;
-import fr.umlv.ir3.flexitime.common.rmi.IEventManager;
-import fr.umlv.ir3.flexitime.server.core.management.event.PropertyListener;
-
-
+import fr.umlv.ir3.flexitime.common.data.ressources.Device;
+import fr.umlv.ir3.flexitime.common.rmi.IDeviceManager;
 
 
 
 /**
- * EventManagerImpl - Implements the interface EventManager
+ * DevicesManager - Implements the interface DevicesManager
  * 
  * @version 0.1
  * 
  * @author FlexiTeam - Valère FOREL
  */
-public class EventManagerImpl implements IEventManager {
+public class DeviceManagerImpl implements IDeviceManager {
 
     /** 
-     * addListener - DOCME Description
+     * getDevice - DOCME Description
      * Quel service est rendu par cette méthode
      * 
      *     <code>exemple d'appel de la methode</code>
      *
-     * @param itemClass
-     * @param property
-     * @param eventType
-     * @param listener 
+     * @param name
+     * @return 
      * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IEventManager#addListener(java.lang.Class, java.lang.String, int, fr.umlv.ir3.flexitime.server.core.management.event.PropertyListener)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDeviceManager#getDevice(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    public void addListener(Class itemClass, String property, int eventType, PropertyListener listener) {
+    public Device getDevice(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /** 
+     * saveDevice - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param device 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDeviceManager#saveDevice(fr.umlv.ir3.flexitime.common.data.ressources.Device)
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    public void saveDevice(Device device) {
         // TODO Auto-generated method stub
         
     }
 
     /** 
-     * removeListener - DOCME Description
+     * removeDevice - DOCME Description
      * Quel service est rendu par cette méthode
      * 
      *     <code>exemple d'appel de la methode</code>
      *
-     * @param itemClass
-     * @param property
-     * @param listener 
+     * @param name
+     * @return 
      * 
-     * @see fr.umlv.ir3.flexitime.common.rmi.IEventManager#removeListener(java.lang.Class, java.lang.String, fr.umlv.ir3.flexitime.server.core.management.event.PropertyListener)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDeviceManager#removeDevice(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    public void removeListener(Class itemClass, String property, PropertyListener listener) {
+    public Device removeDevice(String name) {
         // TODO Auto-generated method stub
-        
+        return null;
+    }
+
+    /** 
+     * lockDevice - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param device
+     * @return 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDeviceManager#lockDevice(fr.umlv.ir3.flexitime.common.data.ressources.Device)
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    public boolean lockDevice(Device device) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /** 
+     * unlockDevice - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param device
+     * @return 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDeviceManager#unlockDevice(fr.umlv.ir3.flexitime.common.data.ressources.Device)
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    public boolean unlockDevice(Device device) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
     /** 

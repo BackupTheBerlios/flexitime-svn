@@ -7,6 +7,8 @@
 package fr.umlv.ir3.flexitime.common.rmi;
 
 import java.rmi.Remote;
+import fr.umlv.ir3.flexitime.common.data.general.Class;
+
 
 
 /**
@@ -17,10 +19,73 @@ import java.rmi.Remote;
  * représente, ...
  * 
  * @version Verion ou révision SVN
- * @see (si nécessaire)
  * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
-public interface IClassManager extends Remote {
+public interface IClassManager extends Remote,AbstractManager {
+    /** 
+     * getClass - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param name
+     * @return 
+     * 
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    Class getClass(String name);
+    /** 
+     * addClass - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param _class 
+     * 
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    void saveClass(Class _class);
+    /** 
+     * removeClass - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param name
+     * @return 
+     * 
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    Class removeClass(String name);
+    /** 
+     * lockClass - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param _class
+     * @return 
+     * 
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    boolean lockClass(Class _class);
+    /** 
+     * unlockClass - DOCME Description
+     * Quel service est rendu par cette méthode
+     * 
+     *     <code>exemple d'appel de la methode</code>
+     *
+     * @param _class
+     * @return 
+     * 
+     * @author   FlexiTeam - Valère
+     * @date     26 déc. 2004
+     */
+    boolean unlockClass(Class _class);
 
 }

@@ -1,18 +1,17 @@
 /*
- * Created on 23 déc. 2004
- * by Famille
+ * Created on 26 déc. 2004
+ * by Valère
  * 
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
-package fr.umlv.ir3.flexitime.common.rmi;
-
-import java.rmi.Remote;
+package fr.umlv.ir3.flexitime.server.core.management.impl;
 
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.SubjectsGroup;
+import fr.umlv.ir3.flexitime.common.rmi.ISubjectsGroupManager;
 
 
 /**
- * ISubjectsGroupManager - DOCME Description
+ * SubjectsGroupManagerImpl - DOCME Description
  * explication supplémentaire si nécessaire
  * in english please...
  * Que fait cette classe, qu'est-ce qu'elle 
@@ -20,9 +19,10 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.SubjectsGroup;
  * 
  * @version Verion ou révision SVN
  * 
- * @author FlexiTeam - Famille
+ * @author FlexiTeam - Valère
  */
-public interface ISubjectsGroupManager extends Remote {
+public class SubjectsGroupManagerImpl implements ISubjectsGroupManager{
+
     /** 
      * getSubjectsGroup - DOCME Description
      * Quel service est rendu par cette méthode
@@ -32,10 +32,15 @@ public interface ISubjectsGroupManager extends Remote {
      * @param name
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.ISubjectsGroupManager#getSubjectsGroup(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    SubjectsGroup getSubjectsGroup(String name);
+    public SubjectsGroup getSubjectsGroup(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /** 
      * saveSubjectsGroup - DOCME Description
      * Quel service est rendu par cette méthode
@@ -44,10 +49,15 @@ public interface ISubjectsGroupManager extends Remote {
      *
      * @param subjectsGroup 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.ISubjectsGroupManager#saveSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.SubjectsGroup)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    void saveSubjectsGroup(SubjectsGroup subjectsGroup);
+    public void saveSubjectsGroup(SubjectsGroup subjectsGroup) {
+        // TODO Auto-generated method stub
+        
+    }
+
     /** 
      * removeSubjectsGroup - DOCME Description
      * Quel service est rendu par cette méthode
@@ -57,10 +67,15 @@ public interface ISubjectsGroupManager extends Remote {
      * @param name
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.ISubjectsGroupManager#removeSubjectsGroup(java.lang.String)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    SubjectsGroup removeSubjectsGroup(String name);
+    public SubjectsGroup removeSubjectsGroup(String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     /** 
      * lockSubjectsGroup - DOCME Description
      * Quel service est rendu par cette méthode
@@ -70,10 +85,15 @@ public interface ISubjectsGroupManager extends Remote {
      * @param subjectsGroup
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.ISubjectsGroupManager#lockSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.SubjectsGroup)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    boolean lockSubjectsGroup(SubjectsGroup subjectsGroup);
+    public boolean lockSubjectsGroup(SubjectsGroup subjectsGroup) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
     /** 
      * unlockSubjectsGroup - DOCME Description
      * Quel service est rendu par cette méthode
@@ -83,8 +103,13 @@ public interface ISubjectsGroupManager extends Remote {
      * @param subjectsGroup
      * @return 
      * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.ISubjectsGroupManager#unlockSubjectsGroup(fr.umlv.ir3.flexitime.common.data.teachingStructure.SubjectsGroup)
      * @author   FlexiTeam - Valère
      * @date     26 déc. 2004
      */
-    boolean unlockSubjectsGroup(SubjectsGroup subjectsGroup);
+    public boolean unlockSubjectsGroup(SubjectsGroup subjectsGroup) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }
