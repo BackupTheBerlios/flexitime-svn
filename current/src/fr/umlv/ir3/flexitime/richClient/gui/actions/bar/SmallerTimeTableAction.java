@@ -27,23 +27,32 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
  */
 public class SmallerTimeTableAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3257285850738997557L;
     private static SmallerTimeTableAction action;
     private static Icon icon = Client.getIcon(SmallerTimeTableAction.class, "../../pictures/_zoom-.png");
     
-    ExploitationView view;
+    private static ExploitationView view;
     
-    public static SmallerTimeTableAction getInstance(ExploitationView view)
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return an action
+     */
+    public static SmallerTimeTableAction getInstance()
     {
         if(action==null)
-            action = new SmallerTimeTableAction(view);            
-        
+            action = new SmallerTimeTableAction(); 
         return action;
     }
 
-    protected SmallerTimeTableAction(ExploitationView view)
+    protected SmallerTimeTableAction()
     {
         super("Retrecir la plage", icon);
-        this.view = view;
     }
     /** 
      * DOCME Description
@@ -57,6 +66,19 @@ public class SmallerTimeTableAction extends AbstractAction
     public void actionPerformed(ActionEvent arg0)
     {
         view.decrease();
+    }
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param _view 
+     * 
+     */
+    public static void setView(ExploitationView _view)
+    {
+        view = _view;        
     }
 
 }

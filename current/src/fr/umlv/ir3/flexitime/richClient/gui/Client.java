@@ -13,7 +13,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.LayoutManager;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -48,8 +47,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
-
-import org.jgroups.SetStateEvent;
 
 import com.jgoodies.plaf.HeaderStyle;
 import com.jgoodies.plaf.Options;
@@ -88,7 +85,7 @@ public class Client
     private static JSplitPane mngmtPanel;
     private static MainPanel accueilView;
     private static JScrollPane accueilPanel;
-    private JPanel jp_status;
+    private static JPanel jp_status;
     private static JLabel status;
     private static ButtonGroup butGpExploit;
     private static JButton butLargerGap;
@@ -217,9 +214,6 @@ public class Client
             }
         });
         centerPanel.add(accueilPanel, JLayeredPane.PALETTE_LAYER);
-        //TODO if(user!=null && user.getPrefs().getDefaultTrack() != null)
-        //{ setExploitMode() Mettre une filière en paramètre ???????
-        //}else
         setAccueilMode();
         setStatus("Prêt");
         //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -285,43 +279,44 @@ public class Client
         toolBar.addSeparator();
 
         butGpExploit = new ButtonGroup();
+        
         //gap + petit
-        butSmallerGap = createButton(SmallerGapAction.getInstance(exploitView));
+        butSmallerGap = createButton(SmallerGapAction.getInstance());
         butGpExploit.add(butSmallerGap);
         toolBar.add(butSmallerGap);
         
         //gap + grand
-        butLargerGap = createButton(LargerGapAction.getInstance(exploitView));
+        butLargerGap = createButton(LargerGapAction.getInstance());
         butGpExploit.add(butLargerGap);
         toolBar.add(butLargerGap);
         
         //full back
-        butPrevInterval = createButton(PreviousIntervalAction.getInstance(exploitView));
+        butPrevInterval = createButton(PreviousIntervalAction.getInstance());
         butGpExploit.add(butPrevInterval);
         toolBar.add(butPrevInterval);
         
         //Back
-        butBack = createButton(PreviousWeekAction.getInstance(exploitView));
+        butBack = createButton(PreviousWeekAction.getInstance());
         butGpExploit.add(butBack);
         toolBar.add(butBack);
         
         //plage + petite
-        butSmallerTimeTable = createButton((SmallerTimeTableAction.getInstance(exploitView)));
+        butSmallerTimeTable = createButton((SmallerTimeTableAction.getInstance()));
         butGpExploit.add(butSmallerTimeTable);
         toolBar.add(butSmallerTimeTable);
         
         //plage + large
-        butLargerTimeTable = createButton((LargerTimeTableAction.getInstance(exploitView)));
+        butLargerTimeTable = createButton((LargerTimeTableAction.getInstance()));
         butGpExploit.add(butLargerTimeTable);
         toolBar.add(butLargerTimeTable);
         
         //Forward
-        butNext = createButton(NextWeekAction.getInstance(exploitView));
+        butNext = createButton(NextWeekAction.getInstance());
         butGpExploit.add(butNext);
         toolBar.add(butNext);
         
         //full forward
-        butNextInterval = createButton(NextIntervalAction.getInstance(exploitView));
+        butNextInterval = createButton(NextIntervalAction.getInstance());
         butGpExploit.add(butNextInterval);
         toolBar.add(butNextInterval);
         
@@ -343,7 +338,7 @@ public class Client
         labTrackAct.setFont(v);
         String filiereActuelle = " |    " + language.getText("track") + " : "; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         /*TODO ajouter la filiere a l'affichage 
-        if( (String s = UserImpl.getTrack()) != null)
+        if( (String s = iUser.getPrefs().getTrack()) != null)
         {
             filiereActuelle += s;
         }
@@ -581,6 +576,7 @@ public class Client
     public static void setStatus(String etat)
     {
         status.setText(etat);
+        //jp_status.validate();
     }
 
     /**
@@ -719,7 +715,7 @@ public class Client
                         RemoteDataManager.getUserManager().addUserListener(iUser, new userListener());
                     } catch (RemoteException e) {
                         JOptionPane.showMessageDialog(null, language.getText("errLogin1"), language.getText("erreur"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
-                        e.printStackTrace();
+                        //e.printStackTrace();
                     }    
                     return true;
                 }
@@ -777,6 +773,7 @@ public class Client
     }
     
     
+    
     /** 
      * DOCME Description
      * Quel service est rendu par cette méthode
@@ -785,21 +782,34 @@ public class Client
      */
     public static void setExploitMode()
     {
+        setStatus("DTC !!!!!!!!!");
+        centerPanel.validate();
+        centerPanel.repaint();        
         PrintAction.getInstance().setEnabled(true);
         labTrackAct.setVisible(true);
         enableButGpExploit();
         if(exploitPanel==null)
         {
-            setStatus("Chargement...");
             //TODO FlexiProgressMonitor fpm = new FlexiProgressMonitor();
             //fpm.run();
             exploitView = new ExploitationView();
             exploitPanel = (JPanel)exploitView.getPanel();
             centerPanel.add(exploitPanel, JLayeredPane.PALETTE_LAYER);
+            
+            //set de la view sur les actions
+            SmallerGapAction.setView(exploitView);
+            LargerGapAction.setView(exploitView);
+            PreviousIntervalAction.setView(exploitView);
+            PreviousWeekAction.setView(exploitView);
+            SmallerTimeTableAction.setView(exploitView);
+            LargerTimeTableAction.setView(exploitView);
+            NextWeekAction.setView(exploitView);
+            NextIntervalAction.setView(exploitView);
+            
             //fpm.stop();
-            setStatus("Prêt");
         }
         centerPanel.moveToFront(exploitPanel);
+        setStatus("Prêt");
         centerPanel.validate();
         centerPanel.repaint();
     }
@@ -818,7 +828,7 @@ public class Client
         disableButGpExploit();
         if(mngmtPanel == null)
         {
-            setStatus("Chargement...");
+            //setStatus("Chargement...");
             //TODO FlexiProgressMonitor fpm = new FlexiProgressMonitor();
             //fpm.run();
             try {
@@ -830,9 +840,9 @@ public class Client
             mngmtPanel   = mngmtView.getJSP(); 
             centerPanel.add(mngmtPanel, JLayeredPane.PALETTE_LAYER);
             //fpm.stop();
-            setStatus("Prêt");
         }
         centerPanel.moveToFront(mngmtPanel);
+        //setStatus("Prêt");
         centerPanel.validate();
         centerPanel.repaint();
     }
@@ -930,7 +940,7 @@ public class Client
         }
         
         //TODO JG, charger pref user notamment filière par défaut(si pas ds pref->afficher view)
-        System.out.println("charge "+ iUser.getName() + " prefs"); //$NON-NLS-1$ //$NON-NLS-2$
+        System.out.println("charger "+ iUser.getName() + " prefs"); //$NON-NLS-1$ //$NON-NLS-2$
         //PreferencesImpl prefs = new PreferencesImpl();
         
         Client c = new Client();

@@ -27,23 +27,32 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
  */
 public class LargerTimeTableAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3904960871661910327L;
     private static LargerTimeTableAction action;
     private static Icon icon = Client.getIcon(LargerTimeTableAction.class, "../../pictures/_zoom+.png");
     
-    ExploitationView exploit;
+    private static ExploitationView view;
     
-    public static LargerTimeTableAction getInstance(ExploitationView exploit)
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return an action
+     */
+    public static LargerTimeTableAction getInstance()
     {
         if(action==null)
-            action = new LargerTimeTableAction(exploit);
-        
+            action = new LargerTimeTableAction();
         return action;
     }
 
-    protected LargerTimeTableAction(ExploitationView exploit)
+    protected LargerTimeTableAction()
     {
         super("Agrandir la plage", icon);
-        this.exploit = exploit;
     }
     /** 
      * DOCME Description
@@ -56,7 +65,20 @@ public class LargerTimeTableAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent arg0)
     {
-        exploit.increase();
+        view.increase();
+    }
+
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param _view 
+     * 
+     */
+    public static void setView(ExploitationView _view)
+    {
+        view = _view;        
     }
 
 }

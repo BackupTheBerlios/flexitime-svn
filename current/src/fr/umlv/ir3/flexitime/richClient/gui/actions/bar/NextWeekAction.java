@@ -21,29 +21,38 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
  * Que fait cette classe, qu'est-ce qu'elle 
  * représente, ...
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 0.1
  * 
+ * @author FlexiTeam - Adrien BOUVET
  */
 public class NextWeekAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3258134639406102068L;
     private static NextWeekAction action;
     private static Icon icon = Client.getIcon(NextWeekAction.class, "../../pictures/_forward.png");
     
-    ExploitationView view;
+    private static ExploitationView view;
     
-    public static NextWeekAction getInstance(ExploitationView view)
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return an action
+     */
+    public static NextWeekAction getInstance()
     {
         if(action==null)
-            action = new NextWeekAction(view);
-        
+            action = new NextWeekAction();
         return action;
     }
 
-    protected NextWeekAction(ExploitationView view)
+    protected NextWeekAction()
     {
         super("Avancer d'une semaine", icon);
-        this.view = view;
     }
     /** 
      * DOCME Description
@@ -57,6 +66,19 @@ public class NextWeekAction extends AbstractAction
     public void actionPerformed(ActionEvent e)
     {
         view.stepOver();
+    }
+
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param _view 
+     * 
+     */
+    public static void setView(ExploitationView _view)
+    {
+        view = _view;        
     }
 
 }

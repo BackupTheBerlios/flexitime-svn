@@ -27,23 +27,32 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
  */
 public class NextIntervalAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3257002155331630389L;
     private static NextIntervalAction action;
     private static Icon icon = Client.getIcon(NextIntervalAction.class, "../../pictures/_forwardFull.png");
     
-    ExploitationView view;
+    private static ExploitationView view;
     
-    public static NextIntervalAction getInstance(ExploitationView view)
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return an action
+     */
+    public static NextIntervalAction getInstance()
     {
         if(action==null)
-            action = new NextIntervalAction(view);
-
+            action = new NextIntervalAction();
         return action;
     }
 
-    protected NextIntervalAction(ExploitationView view)
+    protected NextIntervalAction()
     {
         super("Avancer d'un interval de temps", icon);
-        this.view = view;
     }
     /** 
      * DOCME Description
@@ -59,5 +68,17 @@ public class NextIntervalAction extends AbstractAction
         view.fullStepOver();
     }
 
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param _view 
+     * 
+     */
+    public static void setView(ExploitationView _view)
+    {
+        view = _view;        
+    }
 }
 

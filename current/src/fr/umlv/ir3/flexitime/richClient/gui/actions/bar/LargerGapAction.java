@@ -27,23 +27,33 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
  */
 public class LargerGapAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3258410646872731955L;
     private static LargerGapAction action;
     private static Icon icon = Client.getIcon(LargerGapAction.class, "../../pictures/_gapLarger2.png");
     
-    ExploitationView view;
+    private static ExploitationView view;
     
-    public static LargerGapAction getInstance(ExploitationView view)
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return an action
+     */
+    public static LargerGapAction getInstance()
     {
         if(action==null)
-            action = new LargerGapAction(view);
+            action = new LargerGapAction();
 
         return action;
     }
 
-    protected LargerGapAction(ExploitationView view)
+    protected LargerGapAction()
     {
         super("Agrandir la précision d'un emploi du temps", icon);
-        this.view = view;
     }
     /** 
      * DOCME Description
@@ -57,6 +67,19 @@ public class LargerGapAction extends AbstractAction
     public void actionPerformed(ActionEvent arg0)
     {
         view.moreGapTime();
+    }
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param _view 
+     * 
+     */
+    public static void setView(ExploitationView _view)
+    {
+        view = _view;        
     }
 
 }
