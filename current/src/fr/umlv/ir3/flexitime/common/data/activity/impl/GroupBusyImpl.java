@@ -9,6 +9,7 @@ package fr.umlv.ir3.flexitime.common.data.activity.impl;
 import java.util.Date;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
+import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 /**
  * Defines an unavailability for a group.
@@ -18,10 +19,10 @@ import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
  * REASON_WORK      = 2;
  * 
  * 
- * @version 0.1
+ * @version 199
  * @see fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
 public class GroupBusyImpl extends BusyImpl implements IGroupBusy
 {
@@ -43,30 +44,51 @@ public class GroupBusyImpl extends BusyImpl implements IGroupBusy
 	 */
 	protected GroupBusyImpl()
 	{}
-	
-	/**
-	 * Constructs an unavailibility for a group with just a name in parameter. 
-	 * 
-	 * @param strName a string.
-	 */
-	public GroupBusyImpl(String strName)
-	{
-		super(strName);          
-	}
-	
+    
     /**
-     * Constructs an unavailibility for a group. 
+     * Constructs an unavailibility for a group without reason. 
      * 
-     * @param iReason an Integer representing the reason of the unavailibility.
-     * @param strName a string.
      * @param daStart the start date of the unavailibility.
      * @param daEnd the end date of the unavailibility.
-     * 
      */
-    public GroupBusyImpl(int iReason, String strName, Date daStart, Date daEnd)
+    GroupBusyImpl(Date daStart, Date daEnd)
     {
-        super(strName,daStart,daEnd);
+        super(daStart,daEnd);
+    }
+    
+    /**
+     * Constructs an unavailibility for a group between a gap without reason.
+     * 
+     * @param g gap of the unavaibulity
+     */
+    GroupBusyImpl(Gap g)
+    {
+        super(g);
+    }
+	
+    /**
+     * Constructs an unavailibility for a group for the reason specified. 
+     * 
+     * @param daStart the start date of the unavailibility.
+     * @param daEnd the end date of the unavailibility.
+     * @param iReason an Integer representing the reason of the unavailibility.
+     */
+    GroupBusyImpl(Date daStart, Date daEnd, int iReason)
+    {
+        super(daStart,daEnd);
         reason = iReason;           
+    }
+    
+    /**
+     * Constructs an unavailibility for a group between a gap for the reason specified.
+     * 
+     * @param g gap of the unavaibulity
+     * @param iReason reason of the unavaibility
+     */
+    GroupBusyImpl(Gap g, int iReason)
+    {
+        super(g);
+        reason = iReason;
     }
     
     

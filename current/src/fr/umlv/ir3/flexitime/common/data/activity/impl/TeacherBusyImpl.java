@@ -3,16 +3,16 @@
  * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
+
 package fr.umlv.ir3.flexitime.common.data.activity.impl;
 
 import java.util.Date;
 
 import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
 
-
 /**
- * Defines an unavailability for a teacher.
- * Containes a reason for the unavailibility, a start and an end date and a name.
+ * Defines an unavailability for a teacher. Containes a reason for the
+ * unavailibility, a start and an end date and a name.
  * 
  * REASON_WORK      = 1;
  * REASON_HOLLYDAYS = 2;
@@ -21,85 +21,71 @@ import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
  * REASON_PERSO     = 5;
  * 
  * 
- * @version 0.1
+ * @version 199
  * @see fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy
  * 
- * @author FlexiTeam - Adrien BOUVET
+ * @author FlexiTeam - Jérôme GUERS
  */
 public class TeacherBusyImpl extends BusyImpl implements ITeacherBusy
 {
+
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3256445785217577008L;
-    //===========//
-	//  Champs	 //
-	//===========//
-    private int reason;
-    
-       
-    //=============//
-	//Constructeurs//
-    //=============//
-	/**
-	 * Default constructor for a teacher's unavailibility. 
-	 */
-	protected TeacherBusyImpl()
-	{}
-	
-	/**
-	 * Constructs an unavailibility for a teacher with just a name in parameter. 
-	 * 
-	 * @param strName a string. 
-	 */
-	public TeacherBusyImpl(String strName)
-	{
-		super(strName);         
-	}
-	
+    // ===========//
+    // Champs //
+    // ===========//
+    private int               reason;
+
+    // =============//
+    // Constructeurs//
+    // =============//
     /**
-     * Constructs an unavailibility for a teacher. 
-     * 
-     * @param iReason an Integer representing the reason of the unavailibility.
-     * @param strName a string.
-     * @param daStart the start date of the unavailibility.
-     * @param daEnd the end date of the unavailibility.
-     * 
+     * Default constructor for a teacher's unavailibility.
      */
-    public TeacherBusyImpl(int iReason, String strName, Date daStart, Date daEnd)
+    protected TeacherBusyImpl()
+    {}
+
+    /**
+     * Constructs an unavailibility for a teacher.
+     * 
+     * @param daStart
+     *            the start date of the unavailibility.
+     * @param daEnd
+     *            the end date of the unavailibility.
+     * @param iReason
+     *            an Integer representing the reason of the unavailibility.
+     */
+    public TeacherBusyImpl(Date daStart, Date daEnd, int iReason)
     {
-        super(strName,daStart,daEnd);
-        reason = iReason;           
+        super(daStart, daEnd);
+        reason = iReason;
     }
-    
-    
-    
-    
-    //===========//
-    // Méthodes  //
-	//===========//
-    /** 
+
+    // ===========//
+    // Méthodes //
+    // ===========//
+    /**
      * Returns the reason of the unavailibility.
      * <code>int reason = getReason()</code>
-     *
+     * 
      * @return the reason of the unavailibility.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy#getReason()
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public int getReason()
     {
         return reason;
     }
-    
-    /** 
-     * Sets the reason of the unavailibility.
-     * <code>setReason(iReason)</code>
-     *
-     * @param iReason an Integer representing the reason of unavailibility.
+
+    /**
+     * Sets the reason of the unavailibility. <code>setReason(iReason)</code>
+     * 
+     * @param iReason
+     *            an Integer representing the reason of unavailibility.
      * 
      * @see fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy#setReason(int)
-     * @author   FlexiTeam - Adrien BOUVET
      */
     public void setReason(int iReason)
     {
