@@ -7,14 +7,11 @@ package fr.umlv.ir3.flexitime.common.gui.event;
 
 
 
+
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Interface used by planning to be notified of changement in their models
  * 
- * @version Verion ou révision SVN
+ * @version 1.0
  * 
  * @author FlexiTeam - binou
  */

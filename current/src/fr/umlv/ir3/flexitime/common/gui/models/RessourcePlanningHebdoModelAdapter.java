@@ -13,13 +13,10 @@ import fr.umlv.ir3.flexitime.common.tools.Time;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Adapter extended the <code>RessourcePlanningModel</code> to <br>
+ * manipulate data for one ressource juste for one week
  * 
- * @version Verion ou révision SVN
+ * @version 0.5
  * 
  * @author FlexiTeam - binou
  */
@@ -27,7 +24,9 @@ public class RessourcePlanningHebdoModelAdapter extends RessourcePlanningModel
 {
 
     /**
-     * DOCME
+     * Constructs a Model according to the specified Ressource
+     * and the initial Gap to handle
+     * 
      * @param ressource
      * @param initialGap
      */
@@ -67,15 +66,15 @@ public class RessourcePlanningHebdoModelAdapter extends RessourcePlanningModel
         return (String)super.getDayHeaderAt(dayNumber) + " " + t.getStrDate().substring(0, t.getStrDate().length()-5);  //$NON-NLS-1$
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
  
+    /** 
+     * Allows to know if there is a lesson a the specified week, day and gap
+     *
+     * @param dayNumber the value of the day (0 is the first)
+     * @param gapNumber the value of the gap (0 is the first)
+     * @return true if there's a lesson
+     * 
+     */
     public boolean isALesson(int dayNumber, int gapNumber)
     {
         return super.isALesson(0, dayNumber, gapNumber);

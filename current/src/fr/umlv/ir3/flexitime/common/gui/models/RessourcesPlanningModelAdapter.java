@@ -14,11 +14,7 @@ import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * Adapter using <code>RessourcePlanningModel</code> to manage severals ressources in severals weeks
  * 
  * @version Verion ou révision SVN
  * @see (si nécessaire)

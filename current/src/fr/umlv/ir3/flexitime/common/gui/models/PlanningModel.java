@@ -7,13 +7,10 @@
 package fr.umlv.ir3.flexitime.common.gui.models;
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * This interface defines the methods components like JRessourcePlanning <br>
+ * use to get the value of each cell in a planning and other information
  * 
- * @version Verion ou révision SVN
+ * @version 0.5
  * 
  * @author FlexiTeam - binou
  */

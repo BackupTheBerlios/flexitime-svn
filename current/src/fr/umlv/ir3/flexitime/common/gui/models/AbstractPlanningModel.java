@@ -18,6 +18,7 @@ import fr.umlv.ir3.flexitime.common.gui.event.PlanningDataListener;
  * An abstract model that notify the client for changement
  * 
  * @version Verion ou révision SVN
+ * @see PlanningDataListener
  * 
  * @author FlexiTeam - binou
  */

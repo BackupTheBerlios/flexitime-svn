@@ -8,7 +8,7 @@ package fr.umlv.ir3.flexitime.common.gui.event;
 
 
 /**
- * Defines an event that encapsulates changes to a planning.
+ * Defines an event that encapsulates changes information in a planning.
  *
  * @version 0.1 16/01/05
  * @author Fabien Appert

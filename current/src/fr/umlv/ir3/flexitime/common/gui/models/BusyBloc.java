@@ -19,7 +19,7 @@ import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 
 
 /**
- * Encapsulate a Busy and is number of Gap
+ * Encapsulate a Busy and the number of Gap used by this Busy 
  * 
  * @version 1.0
  * 

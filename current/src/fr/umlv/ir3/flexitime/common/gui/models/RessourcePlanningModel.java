@@ -30,8 +30,8 @@ import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
 
 
 /**
- * DOCME Description explication supplémentaire si nécessaire in english
- * please... Que fait cette classe, qu'est-ce qu'elle représente, ...
+ * The default implementation for a JRessourcePlannning component's data model<br>
+ * Use one ressource in severals weeks with a 
  * 
  * @version 1.0
  * @author FlexiTeam - binou
@@ -39,44 +39,41 @@ import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
 public class RessourcePlanningModel extends AbstractPlanningModel
 {
     private static FlexiLanguage language;
-    static
-    {
-        language = FlexiLanguage.getInstance();
-    }
+    static                       {language = FlexiLanguage.getInstance();}
     
     //Données dépendantes des préférences
-    private final String[] tmpDayEnum = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"}; //$NON-NLS-1$
-    private final int      nbDays  = 5;
+    private final String[]      tmpDayEnum = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"}; //$NON-NLS-1$
+    private final int           nbDays  = 5;
     
     
-    private final int gapUnit = 15;
-    private int gapMultiplicateur = 4;
-    private int      gapTime;
+    private final int           gapUnit = 15;
+    private int                 gapMultiplicateur = 4;
+    private int                 gapTime;
     
-    private final TimeBloc[] blocList;
+    private final TimeBloc[]    blocList;
 
 
     //Données calculées à mettre à jour
     //Attention a bien mettre le premier Gap a 00:01 et le dernier a 23:59
-    private Gap             edtWeekGap;
-    private int            nbWeeks = 0;
-    private int            nbGaps = 0;
-    //private int            blocNbGapsList;
+    private Gap                 edtWeekGap;
+    private int                 nbWeeks = 0;
+    private int                 nbGaps = 0;
+
 
     //La ressoruce
-    private IResource ressource;
+    private IResource           ressource;
     //Totues les indispo de la Ressource
-    private Set<IBusy> ressourceSet;
+    private Set<IBusy>          ressourceSet;
     //Données métiers à placer ordonnée dans une liste de semaine, contenante une liste de jour, avec la liste de tous les Busy dans l'ordre
-    private List<List[]>           busyList;
+    private List<List[]>        busyList;
     //Image des Busy encapsulé par des LessonBloc et structuré de la meme maniere => list de semaine avec une liste de jour et une liste de LessonBloc
-    private List<DayBloc[]>         busyListImage;
+    private List<DayBloc[]>     busyListImage;
     
     //TODO faire un JSlider pour assurer la cohérence
     //TODO idée => fusionner les 2 listes pour gain de place
     //TODO gérer la fusion horizontalement !! ca serait top
     
-    //TODO controler les ajouts (ex 9h30 9h30 de prasad)
+    //TODO controler les ajouts (ex le 9h30 9h30 de prasad)
 
     
     /**
@@ -105,6 +102,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         initDataList();
         
   
+        // TODO à verifier
         // Je suppose :
         // -> Busy toutes comprises dans le créneau concerné ici
         // -> Busy valides (pas de chevauchement etc ...)
