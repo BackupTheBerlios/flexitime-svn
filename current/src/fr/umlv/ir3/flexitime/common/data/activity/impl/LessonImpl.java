@@ -106,8 +106,8 @@ public class LessonImpl extends BusyImpl implements ILesson
     public LessonImpl(Gap g, ICourse _course, List<IGroup> groups, int l)
     {
         this(g, _course);
-        for (IGroup gElem : groups)
-            addResource(gElem);
+//        for (IGroup gElem : groups)
+//            addResource(gElem);
         length = l;
     }
     
@@ -145,7 +145,7 @@ public class LessonImpl extends BusyImpl implements ILesson
     public LessonImpl(Gap g, ICourse _course, List<IGroup> groups, int l , ITeacher defaultTeach)
     {
         this(g, _course, groups, l);
-        addResource(defaultTeach);
+//        addResource(defaultTeach);
     }
     
     /**
@@ -158,17 +158,17 @@ public class LessonImpl extends BusyImpl implements ILesson
     {
         this(lesson.getGap(), lesson.getCourse());
         length = lesson.getLength();
-        for (Iterator iter = lesson.getLstDevice().iterator() ; iter.hasNext() ;)
-            addResource((IDevice)iter.next());
-        
-        for (Iterator iter = lesson.getLstGroup().iterator() ; iter.hasNext() ;)
-            addResource((IGroup)iter.next());
-        
-        for (Iterator iter = lesson.getLstRoom().iterator() ; iter.hasNext() ;)
-            addResource((IRoom)iter.next());
-        
-        for (Iterator iter = lesson.getLstTeacher().iterator() ; iter.hasNext() ;)
-            addResource((ITeacher)iter.next());
+//        for (Iterator iter = lesson.getLstDevice().iterator() ; iter.hasNext() ;)
+//            addResource((IDevice)iter.next());
+//        
+//        for (Iterator iter = lesson.getLstGroup().iterator() ; iter.hasNext() ;)
+//            addResource((IGroup)iter.next());
+//        
+//        for (Iterator iter = lesson.getLstRoom().iterator() ; iter.hasNext() ;)
+//            addResource((IRoom)iter.next());
+//        
+//        for (Iterator iter = lesson.getLstTeacher().iterator() ; iter.hasNext() ;)
+//            addResource((ITeacher)iter.next());
     }
 
     // ======== //
