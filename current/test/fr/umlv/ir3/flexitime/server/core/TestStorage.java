@@ -16,6 +16,7 @@ import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
+import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
@@ -101,10 +102,12 @@ public class TestStorage
 //        {
 //            System.out.println(g.getName());
 //        }
-        IBuilding b = RemoteDataManager.getManager().getBuildings().iterator().next();
-        System.out.println(b);
-        for(IFloor f : b.getLstFloor())
-            System.out.println(f.getName());
+//        IBuilding b = RemoteDataManager.getManager().getBuildings().iterator().next();
+//        System.out.println(b);
+//        for(IFloor f : b.getLstFloor())
+//            System.out.println(f.getName());
+        
+        //IGroup g = RemoteDat
         
     }
 }

@@ -170,7 +170,7 @@ public class GroupStorage
         {
             s = HibernateUtil.currentSession();
             tx = s.beginTransaction();
-            l = s.find("FROM GroupImpl as g WHERE g.idData = ?", new Long(40), Hibernate.LONG);
+            l = s.find("FROM GroupImpl as g WHERE g.idData = ?", new Long(37), Hibernate.LONG);
             tx.commit();
         }
         catch (HibernateException e)
