@@ -5,7 +5,9 @@ package fr.umlv.ir3.GL.flexitime.server;
 
 import java.rmi.Naming;
 
-import fr.umlv.ir3.GL.flexitime.server.core.TeacherCore;
+import fr.umlv.ir3.GL.flexitime.server.core.TeacherManager;
+
+
 
 /**
  * @author Administrateur
@@ -17,7 +19,7 @@ public class FlexitimeServeur {
 	   */
 	  public static void main (String[] argv) {
 	    try {
-	      Naming.rebind ("TeacherCore", new TeacherCore());
+	      Naming.rebind ("TeacherManager", new TeacherManager());
 	      System.out.println ("Flexitime Server is ready.");
 	    } catch (Exception e) {
 	      System.out.println ("Flexitime Server failed: " + e);

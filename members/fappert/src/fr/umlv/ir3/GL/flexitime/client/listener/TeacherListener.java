@@ -6,7 +6,7 @@
  */
 package fr.umlv.ir3.GL.flexitime.client.listener;
 
-import fr.umlv.ir3.GL.flexitime.client.event.MetierEvent;
+import fr.umlv.ir3.GL.flexitime.common.event.MetierEvent;
 
 
 
