@@ -167,16 +167,16 @@ public class Client
         toolBar.addSeparator();
         
         //plage + large  !!!modif constructeur by Binou, ExploitationView needed !!!
-        toolBar.add(createButton((LargerTimeTableAction.getInstance())));
+        //toolBar.add(createButton((LargerTimeTableAction.getInstance())));
         
         //plage + petite
-        toolBar.add(createButton((SmallerTimeTableAction.getInstance())));
+        //toolBar.add(createButton((SmallerTimeTableAction.getInstance())));
         
         //Back
-        toolBar.add(createButton(PreviousWeekAction.getInstance()));
+        //toolBar.add(createButton(PreviousWeekAction.getInstance()));
         
         //Forward
-        toolBar.add(createButton(NextWeekAction.getInstance()));
+        //toolBar.add(createButton(NextWeekAction.getInstance()));
         
         
         
