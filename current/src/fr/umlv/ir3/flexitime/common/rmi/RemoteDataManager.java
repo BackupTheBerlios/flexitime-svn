@@ -34,6 +34,7 @@ public class RemoteDataManager
     public static void setIpServer(String ip)
     {
         ipServer = ip;
+        r = null;
     }
 
     /**
