@@ -4,8 +4,6 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/hibernate/ant-1.5.3.jar"/>
-	<classpathentry kind="lib" path="lib/activation.jar"/>
-	<classpathentry kind="lib" path="lib/mail.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/ant-optional-1.5.3.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/c3p0-0.8.4.5.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/cglib-full-2.0.2.jar"/>
@@ -27,7 +25,6 @@
 	<classpathentry kind="lib" path="lib/hibernate/jcs-1.0-dev.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/jdbc2_0-stdext.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/jgroups-2.2.7.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate/jta.jar"/>
 	<classpathentry sourcepath="D:/Applis/JAVA/jdk-1_5_0-doc.zip" kind="lib" path="lib/hibernate/junit-3.8.1.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/log4j-1.2.8.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate/odmg-3.0.jar"/>
@@ -40,5 +37,8 @@
 	<classpathentry kind="lib" path="lib/hibernate/xml-apis.jar"/>
 	<classpathentry kind="lib" path="lib/forms-1.0.5.jar"/>
 	<classpathentry kind="lib" path="lib/looks-1.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/activation.jar"/>
+	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/jta.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

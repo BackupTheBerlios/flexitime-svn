@@ -5,13 +5,10 @@
  */
 package fr.umlv.ir3.flexitime.common.tools;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.resources.*;
 
 
 
@@ -126,7 +123,7 @@ public class Statistics
         else stat.setDone(false);;
         stat.setCourse(lesson.getCourse().getName());
         stat.setNbHours(lesson.getCourse().getNbHours());
-        List lg = lesson.getLstGroup();
+        Set lg = lesson.getSetGroup();
         Iterator itlg = lg.iterator();
         while(itlg.hasNext()){
             IGroup res = (IGroup)itlg.next();
