@@ -15,11 +15,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for sending mail.
  * 
  * @version 0.1
  * 

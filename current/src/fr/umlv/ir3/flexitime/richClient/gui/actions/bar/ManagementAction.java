@@ -14,30 +14,30 @@ import fr.umlv.ir3.flexitime.richClient.gui.Client;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for switching the actual view to management.
  * 
  * @version 0.1
- * @author FlexiTeam - Adrien BOUVET
  * 
+ * @author FlexiTeam - Adrien BOUVET
  */
-public class GestionAction extends AbstractAction
+public class ManagementAction extends AbstractAction
 {
-    private static GestionAction action;
-    private static Icon icon = Client.getIcon(GestionAction.class, "../../pictures/_gestion.png");
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3256718485576234549L;
+    private static ManagementAction action;
+    private static Icon icon = Client.getIcon(ManagementAction.class, "../../pictures/_gestion.png");
     
-    public static GestionAction getInstance()
+    public static ManagementAction getInstance()
     {
         if(action==null)
-            action = new GestionAction();
+            action = new ManagementAction();
         
         return action;
     }
 
-    protected GestionAction()
+    protected ManagementAction()
     {
         super("Passer en mode Gestion", icon);
     }

@@ -31,7 +31,7 @@ import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 
 
 /**
- * This class draws a frame where the user can authenticate.
+ * draws a frame where the user can authenticate.
  * 
  * @version 0.1
  * @author FlexiTeam - BOUVET Adrien

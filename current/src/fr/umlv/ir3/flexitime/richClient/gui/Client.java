@@ -65,9 +65,12 @@ import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.UsersManagementView;
 
 /**
- * Client This class build an graphic interface for the user.
+ * builds a rich graphic interface for the user.
+ * initiates the menu bar, the tool bar and the status bar.
+ * creates an eploitation view and a management view and prints one of them in the center panel.
  * 
- * @version 0.1
+ * 
+ * @version 0.5
  * @author FlexiTeam - Adrien BOUVET
  */
 public class Client
@@ -265,7 +268,7 @@ public class Client
         toolBar.addSeparator();
         
         //Gestion
-        toolBar.add(createButton(GestionAction.getInstance()));
+        toolBar.add(createButton(ManagementAction.getInstance()));
         
         //Exploitation
         toolBar.add(createButton(ExploitationAction.getInstance()));
@@ -497,7 +500,7 @@ public class Client
         JMenu mode = new JMenu(language.getText("mode")); //$NON-NLS-1$
         menuAffichage.add(mode);
         
-        Action gestion = GestionAction.getInstance();
+        Action gestion = ManagementAction.getInstance();
         mode.add(gestion);
         
         Action exploitation = ExploitationAction.getInstance();
@@ -575,8 +578,9 @@ public class Client
      */
     public static void setStatus(String etat)
     {
+        System.out.println("je suis dtc: " + etat);
         status.setText(etat);
-        //jp_status.validate();
+        status.repaint();
     }
 
     /**
@@ -783,8 +787,8 @@ public class Client
     public static void setExploitMode()
     {
         setStatus("DTC !!!!!!!!!");
-        centerPanel.validate();
-        centerPanel.repaint();        
+        jp_status.revalidate();
+        jp_status.repaint();        
         PrintAction.getInstance().setEnabled(true);
         labTrackAct.setVisible(true);
         enableButGpExploit();
@@ -809,7 +813,7 @@ public class Client
             //fpm.stop();
         }
         centerPanel.moveToFront(exploitPanel);
-        setStatus("Prêt");
+        setStatus("Pret");
         centerPanel.validate();
         centerPanel.repaint();
     }

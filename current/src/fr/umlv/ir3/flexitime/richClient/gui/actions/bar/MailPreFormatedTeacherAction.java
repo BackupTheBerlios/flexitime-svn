@@ -15,11 +15,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for sending a pre-formated mail to a teacher.
  * 
  * @version 0.1
  * 
@@ -27,6 +23,10 @@ import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
  */
 public class MailPreFormatedTeacherAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3258415040573747763L;
     private static MailPreFormatedTeacherAction action;
     private static Icon icon = Client.getIcon(MailPreFormatedTeacherAction.class, "../../pictures/_mail.png");
     

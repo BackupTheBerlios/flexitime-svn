@@ -14,18 +14,18 @@ import fr.umlv.ir3.flexitime.richClient.gui.Client;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for viewing old timetables and their modifications.
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 0.1
  * 
+ * @author FlexiTeam - Adrien BOUVET 
  */
 public class HistoryAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 4051048575008191539L;
     private static HistoryAction action;
     private static Icon icon = Client.getIcon(HistoryAction.class, "../../pictures/_history.png");
     

@@ -50,7 +50,7 @@ import fr.umlv.ir3.flexitime.richClient.models.management.UsersListModel;
 
 /**
  * draws a frame where an administrator can manage the soft's users.
- * It is used to set password for users and their permissions.
+ * It is used to set password for users and also their permissions.
  * 
  * @version 0.2
  * @author FlexiTeam - BOUVET Adrien

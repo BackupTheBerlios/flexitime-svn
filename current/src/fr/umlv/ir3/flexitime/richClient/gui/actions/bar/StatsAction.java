@@ -14,18 +14,18 @@ import fr.umlv.ir3.flexitime.richClient.gui.Client;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for instanciating and showing the statistics view.
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 0.1
  * 
+ * @author FlexiTeam - Adrien BOUVET 
  */
 public class StatsAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3546356219414460215L;
     private static StatsAction action;
     private static Icon icon = Client.getIcon(StatsAction.class, "../../pictures/_stats.png");
     

@@ -19,17 +19,18 @@ import fr.umlv.ir3.flexitime.server.io.PrintUtilities;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for printing timetables.
  * 
  * @version 0.1
  * 
+ * @author FlexiTeam - Adrien BOUVET 
  */
 public class PrintAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 4049635689815749687L;
     private static PrintAction action;
     private static Icon icon = Client.getIcon(PrintAction.class, "../../pictures/_print.png");
     private static JButton button;
@@ -86,6 +87,13 @@ public class PrintAction extends AbstractAction
         button.setEnabled(newValue);
     }
     
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param _exploitView 
+     */
     public static void setExploitView(ExploitationView _exploitView)
     {
         exploitView = _exploitView;        

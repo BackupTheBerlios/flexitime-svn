@@ -15,11 +15,8 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for decreasing the number of weeks included in the 
+ * timetable of the exploitation view.
  * 
  * @version 0.1
  * 

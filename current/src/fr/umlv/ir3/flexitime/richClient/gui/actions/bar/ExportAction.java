@@ -14,18 +14,18 @@ import fr.umlv.ir3.flexitime.richClient.gui.Client;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for exporting timetables.
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 0.1
  * 
+ * @author FlexiTeam - Adrien BOUVET 
  */
 public class ExportAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3257007639937430841L;
     private static ExportAction action;
     private static Icon icon = Client.getIcon(ExportAction.class, "../../pictures/_export.png");
     
@@ -33,7 +33,6 @@ public class ExportAction extends AbstractAction
     {
         if(action==null)
             action = new ExportAction();
-        
         return action;
     }
 

@@ -15,11 +15,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for moving backward to view the timetable of the previous week.
  * 
  * @version 0.1
  * 

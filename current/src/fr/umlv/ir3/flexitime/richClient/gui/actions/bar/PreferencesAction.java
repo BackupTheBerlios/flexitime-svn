@@ -1,6 +1,6 @@
 /*
  * Created on 16 janv. 2005
- * by BOUVET Adrien
+ * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.actions.bar;
@@ -21,18 +21,18 @@ import fr.umlv.ir3.flexitime.common.data.admin.impl.PreferencesImpl;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for printing the preferences' view.
  * 
  * @version 0.1
- * @author FlexiTeam - BOUVET Adrien
  * 
+ * @author FlexiTeam - Adrien BOUVET
  */
 public class PreferencesAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3257571706666497840L;
     private static PreferencesAction action;
     private PreferencesImpl prefs;
     

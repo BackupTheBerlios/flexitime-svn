@@ -5,38 +5,17 @@
  */
 package fr.umlv.ir3.flexitime.richClient.gui.actions.bar;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-import com.jgoodies.forms.builder.PanelBuilder;
-import com.jgoodies.forms.layout.CellConstraints;
-import com.jgoodies.forms.layout.FormLayout;
 
 import fr.umlv.ir3.flexitime.richClient.gui.Client;
 import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * An action implementation useful for sending a pre-formated mail to a class.
  * 
  * @version 0.1
  * 
@@ -44,6 +23,10 @@ import fr.umlv.ir3.flexitime.richClient.gui.views.MailView;
  */
 public class MailPreFormatedClassAction extends AbstractAction
 {
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 3977866180692293685L;
     private static MailPreFormatedClassAction action;
     private static Icon icon = Client.getIcon(MailPreFormatedClassAction.class, "../../pictures/_mail.png");
     

@@ -24,10 +24,10 @@ import fr.umlv.ir3.flexitime.common.tools.*;
 import fr.umlv.ir3.flexitime.richClient.io.FlexiMail;
 
 /**
- * This class draws a frame where the user can specify some options before
- * sending a mail.
+ * draws a frame where the user can specify some options before sending a mail.
+ *  
  * 
- * @version 325
+ * @version 0.2
  * @author FlexiTeam - BOUVET Adrien
  */
 public class MailView
