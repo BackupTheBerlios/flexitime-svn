@@ -20,7 +20,6 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.*;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.tools.*;
-import fr.umlv.ir3.flexitime.richClient.event.RemoteDataManager;
 
 /**
  * Create all datas from specific parameters. This class contains only statics
