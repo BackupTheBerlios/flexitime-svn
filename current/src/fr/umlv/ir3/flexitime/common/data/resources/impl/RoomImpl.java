@@ -7,6 +7,7 @@ package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 
@@ -31,7 +32,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	//===========//
     private int iType;
     private int iCapacity;
-    private FloorImpl parentFloor; 
+    private IFloor parentFloor; 
     
     
 	//=============//
@@ -152,7 +153,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#getFloor()
 	 * @author   FlexiTeam - Adrien BOUVET
 	 */
-	public FloorImpl getFloor()
+	public IFloor getFloor()
 	{
 		return parentFloor;
 	}
@@ -166,7 +167,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
 	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IRoom#setFloor(java.lang.String)
 	 * @author   FlexiTeam - Adrien BOUVET
 	 */
-	public void setFloor(FloorImpl floor)
+	public void setFloor(IFloor floor)
 	{
 		this.parentFloor = floor;
 	}

@@ -6,7 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources;
 
-import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
+import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 
 /**
  * Represents a room which belong to a floor
@@ -69,7 +69,7 @@ public interface IRoom extends IResource
 	 * @return the floor where the room is.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-	FloorImpl getFloor();
+	IFloor getFloor();
 
 	/**
 	 * Sets the floor where the room is.
@@ -77,5 +77,5 @@ public interface IRoom extends IResource
 	 * @param capacity the floor where the room is.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-	void setFloor(FloorImpl floor);
+	void setFloor(IFloor floor);
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
+import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
 
 /**
@@ -20,12 +21,11 @@ import fr.umlv.ir3.flexitime.common.data.general.IFloor;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class BuildingImpl implements IBuilding
+public class BuildingImpl extends DataImpl implements IBuilding
 {
     //===========//
     //   Champs  //
     //===========// 
-    private String strName;
     private List listOfFloors;
     
     
@@ -45,7 +45,7 @@ public class BuildingImpl implements IBuilding
 	 */
 	public BuildingImpl(String name)
 	{
-		this.strName = name;
+		super(name);
 		listOfFloors = new ArrayList();
 	}
 	
@@ -58,7 +58,7 @@ public class BuildingImpl implements IBuilding
      */
     public BuildingImpl(String name, List listFloors)
     {
-        this.strName = name;
+        super(name);
         this.listOfFloors = new ArrayList(listFloors);
     }
 
@@ -129,31 +129,5 @@ public class BuildingImpl implements IBuilding
     public void removeFloor(IFloor floor)
     {
         listOfFloors.remove(floor);
-    }
-
-    /** 
-     * Returns the name of this building.
-     * <code>String name = building.getName()</code>
-     *
-     * @return the name of the building. 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     */
-    public String getName()
-    {
-        return strName;
-    }
-
-    /** 
-     * Sets the name of this building.
-     * <code>building.setName(name)</code>
-     *
-     * @param name a string.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     */
-    public void setName(String name)
-    {
-        this.strName = name;
     }
 }

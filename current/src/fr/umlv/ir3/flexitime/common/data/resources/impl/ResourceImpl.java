@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
+import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 
 
@@ -20,12 +21,11 @@ import fr.umlv.ir3.flexitime.common.data.resources.IResource;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public abstract class ResourceImpl implements IResource
+public abstract class ResourceImpl extends DataImpl implements IResource
 {
     //===========//
 	//  Champs	 //
 	//===========//
-    private String strName;
     private List listOfBusy;
     
     
@@ -45,7 +45,7 @@ public abstract class ResourceImpl implements IResource
 	 */
 	public ResourceImpl(String name)
 	{
-		this.strName = name;
+		super(name);
 		this.listOfBusy = new ArrayList();
 	}
 	
@@ -58,7 +58,7 @@ public abstract class ResourceImpl implements IResource
      */
     public ResourceImpl(String name, List listBusy)
     {
-        this.strName = name;
+        super(name);
         this.listOfBusy = new ArrayList(listBusy);
     }
 
@@ -120,34 +120,6 @@ public abstract class ResourceImpl implements IResource
     public void removeBusy(IBusy busy)
     {
         listOfBusy.remove(busy);
-    }
-
-    /** 
-     * Retruns the name of the resource.
-     * <code>String name = resource.getName()</code>
-     *
-     * @return the name of the resource.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public String getName()
-    {
-        return strName;
-    }
-
-    /** 
-     * Sets the name of the resource.
-     * <code>resource.setName(name)</code>
-     *
-     * @param name a string.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void setName(String name)
-    {
-        this.strName = name;
     }
 
 }

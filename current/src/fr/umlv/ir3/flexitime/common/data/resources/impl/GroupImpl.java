@@ -7,6 +7,7 @@ package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 
@@ -26,7 +27,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
 	//  Champs	 //
 	//===========//
     private int iNbPerson; 
-    private ClassImpl parentClass;
+    private IClass parentClass;
     
     
 	//=============//
@@ -113,7 +114,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
 	 * 
 	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#getParentClass()
 	 */
-	public ClassImpl getParentClass()
+	public IClass getParentClass()
 	{
 		return parentClass;
 	}
@@ -126,7 +127,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
 	 * 
 	 * @see fr.umlv.ir3.flexitime.common.data.ressources.IGroup#setParentClass(int)
 	 */ 
-	public void setParentClass(ClassImpl parentClass)
+	public void setParentClass(IClass parentClass)
 	{
 		this.parentClass = parentClass;
 	}

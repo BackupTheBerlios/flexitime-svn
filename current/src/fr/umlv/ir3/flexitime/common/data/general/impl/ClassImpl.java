@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
+import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
@@ -26,15 +28,14 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructur
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class ClassImpl implements IClass
+public class ClassImpl extends DataImpl implements IClass
 {
     //===========//
     //   Champs  //
     //===========// 
-    private String strName;
     private List listOfGroups;
     private ITeachingStructure teachStruct;
-    private TrackImpl parentTrack;
+    private ITrack parentTrack;
     
     
     //==================//
@@ -53,7 +54,7 @@ public class ClassImpl implements IClass
 	 */
 	public ClassImpl(String name)
 	{
-		this.strName = name;
+		super(name);
 		listOfGroups = new ArrayList();
 	}
 	
@@ -65,7 +66,7 @@ public class ClassImpl implements IClass
 	 */
 	public ClassImpl(String name, TrackImpl track)
 	{
-		this.strName = name;
+		super(name);
 		this.parentTrack = track;
 		listOfGroups = new ArrayList();
 	}
@@ -80,7 +81,7 @@ public class ClassImpl implements IClass
      */
     public ClassImpl(String sName, List listOfGroups, ITeachingStructure struct, TrackImpl track)
     {
-        this.strName = sName;
+        super(sName);
         this.listOfGroups = new ArrayList(listOfGroups);
         this.teachStruct = struct;
         this.parentTrack = track;
@@ -220,7 +221,7 @@ public class ClassImpl implements IClass
 	 * 
 	 * @see fr.umlv.ir3.flexitime.common.general.IClass#getParentTrack()
 	 */
-	public TrackImpl getParentTrack()
+	public ITrack getParentTrack()
 	{
 		return parentTrack;
 	}
@@ -233,36 +234,9 @@ public class ClassImpl implements IClass
 	 * 
 	 * @see fr.umlv.ir3.flexitime.common.general.IClass#setParentTrack(fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl)
 	 */
-	public void setParentTrack(TrackImpl track)
+	public void setParentTrack(ITrack track)
 	{
 		this.parentTrack = track;
 	}
-
-    /** 
-     * Returns the name of this class.
-     * <code>String name = class.getName()</code>
-     *
-     * @return the name of this class.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     */
-    public String getName()
-    {
-        return strName;
-    }
-
-    /** 
-     * Sets the name of this class.
-     * <code>class.setName(name)</code>
-     *
-     * @param name a string.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     */
-    public void setName(String name)
-    {
-        this.strName = name;
-    }
-
 }
 

@@ -9,7 +9,6 @@ package fr.umlv.ir3.flexitime.common.data.general;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
-import fr.umlv.ir3.flexitime.common.data.general.impl.TrackImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
 
@@ -94,13 +93,13 @@ public interface IClass extends IData
 	 *
 	 * @return the parent track of this class.
 	 */
-	public TrackImpl getParentTrack();
+	public ITrack getParentTrack();
 
 	/**
 	 * Sets the parent track of this class.
 	 * 
 	 * @param track the parent track of this class.
 	 */
-	public void setParentTrack(TrackImpl track);
+	public void setParentTrack(ITrack track);
 
 }

@@ -6,7 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.resources;
 
-import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
 
 /**
  * Represents a group of studients who belong at the same Class
@@ -39,7 +39,7 @@ public interface IGroup extends IResource
 	 * @return the parent class of this group.
      * @author FlexiTeam - Adrien BOUVET
 	 */
-	public ClassImpl getParentClass();
+	public IClass getParentClass();
 
 	/** 
 	 * Sets the parent class of this group.
@@ -47,6 +47,6 @@ public interface IGroup extends IResource
 	 * @param parentClass the parent class of this group.
      * @author FlexiTeam - Adrien BOUVET
 	 */ 
-	public void setParentClass(ClassImpl parentClass);
+	public void setParentClass(IClass parentClass);
 
 }

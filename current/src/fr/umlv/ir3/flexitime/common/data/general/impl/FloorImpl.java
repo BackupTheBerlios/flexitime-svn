@@ -8,7 +8,9 @@ package fr.umlv.ir3.flexitime.common.data.general.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
+import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 
 
@@ -20,14 +22,13 @@ import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class FloorImpl implements IFloor
+public class FloorImpl extends DataImpl implements IFloor
 {
     //===========//
     //   Champs  //
     //===========// 
-    private String strName;
     private List listOfRooms; 
-    private BuildingImpl parentBuilding;
+    private IBuilding parentBuilding;
     
     
     //==================//
@@ -46,7 +47,7 @@ public class FloorImpl implements IFloor
 	 */
 	public FloorImpl(String name)
 	{
-		this.strName = name;
+		super(name);
 		listOfRooms = new ArrayList();
 	}
 	
@@ -58,7 +59,7 @@ public class FloorImpl implements IFloor
 	 */
 	public FloorImpl(String name, BuildingImpl building)
 	{
-		this.strName = name;
+		super(name);
 		this.parentBuilding = building;
 		listOfRooms = new ArrayList();
 	}
@@ -72,7 +73,7 @@ public class FloorImpl implements IFloor
      */
     public FloorImpl(String name, List listRooms, BuildingImpl building)
     {
-        this.strName = name;
+        super(name);
         this.listOfRooms = new ArrayList(listRooms);
         this.parentBuilding = building;
     }
@@ -141,7 +142,7 @@ public class FloorImpl implements IFloor
 	 * 
 	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#getBuilding()
 	 */
-	public BuildingImpl getBuilding()
+	public IBuilding getBuilding()
 	{
 		return parentBuilding;
 	}
@@ -151,38 +152,12 @@ public class FloorImpl implements IFloor
 	 * 
 	 * @param strBuilding the building where the floor is.
 	 * 
-	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#setBuilding(java.lang.String)
+	 * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#setBuilding(IBuilding)
 	 */
-	public void setBuilding(BuildingImpl building)
+	public void setBuilding(IBuilding building)
 	{
 		this.parentBuilding = building;
 	}
 	
-    /** 
-     * Returns the name of this floor.
-     * <code>String name = floor.getName()</code>
-     *
-     * @return the name of this floor. 
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     */
-    public String getName()
-    {
-        return strName;
-    }
-
-    /** 
-     * Sets the name of this floor.
-     * <code>floor.setName(name)</code>
-     *
-     * @param name a string.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     */
-    public void setName(String name)
-    {
-        this.strName = name;
-    }
-
 }
 

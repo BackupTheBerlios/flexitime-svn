@@ -10,6 +10,7 @@ import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
 
 /**
@@ -20,14 +21,12 @@ import fr.umlv.ir3.flexitime.common.data.general.ITrack;
  * 
  * @author FlexiTeam - Adrien BOUVET
  */
-public class TrackImpl implements ITrack
+public class TrackImpl extends DataImpl implements ITrack
 {
     //===========//
     //   Champs  //
     //===========// 
     private List listOfClasses;
-    private String strName;
-    
 
     //==================//
     //   Constructeurs  //
@@ -47,7 +46,7 @@ public class TrackImpl implements ITrack
      */
     public TrackImpl(String sName)
     {
-        this.strName = sName;  
+        super(sName);  
         this.listOfClasses = new ArrayList();
     }
     
@@ -59,7 +58,7 @@ public class TrackImpl implements ITrack
 	 */
 	public TrackImpl(String sName, List listClasses)
 	{
-		this.strName = sName;
+		super(sName);
 		this.listOfClasses = new ArrayList(listClasses);		        
 	}
     
@@ -121,34 +120,5 @@ public class TrackImpl implements ITrack
     {
         listOfClasses.remove(pClass);
     }
-
-    /** 
-     * Returns the name of this track.
-     * <code>String name = getName()</code>
-     *
-     * @return the name of this track.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#getName()
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public String getName()
-    {
-        return strName;
-    }
-
-    /** 
-     * Sets the name of this track.
-     * <code>setName(name)</code>
-     *
-     * @param name a string.
-     * 
-     * @see fr.umlv.ir3.flexitime.common.data.IData#setName(java.lang.String)
-     * @author   FlexiTeam - Adrien BOUVET
-     */
-    public void setName(String name)
-    {
-        this.strName = name;
-    }
-
 }
 

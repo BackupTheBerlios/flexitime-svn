@@ -9,7 +9,6 @@ package fr.umlv.ir3.flexitime.common.data.general;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.IData;
-import fr.umlv.ir3.flexitime.common.data.general.impl.BuildingImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 
 /**
@@ -59,7 +58,7 @@ public interface IFloor extends IData
 	 * @return the building where the floor is. 
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-    BuildingImpl getBuilding();
+    IBuilding getBuilding();
     
 	/**
 	 * Sets the building where the floor is.
@@ -67,6 +66,6 @@ public interface IFloor extends IData
 	 * @param building the building where the floor is.
 	 * @author FlexiTeam - Adrien BOUVET
 	 */
-    void setBuilding(BuildingImpl building);
+    void setBuilding(IBuilding building);
 
 }
