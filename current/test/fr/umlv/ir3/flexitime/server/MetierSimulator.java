@@ -272,10 +272,11 @@ public class MetierSimulator
             System.out.println("\t" + b);
         
 
+        //System.exit(0);
         
-        
-        lesson1.addResource(ir1_grp1);
-        RemoteDataManager.getManager().saveOrUpdateLesson(lesson1, lesson1.getAllResources());
+        //lesson1.addResource(ir1_grp1);
+        //RemoteDataManager.getManager().saveOrUpdateLesson(lesson1, lesson1.getAllResources());
+        RemoteDataManager.getManager().deleteLesson(lesson1);
 //        RemoteDataManager.getManager().deleteLesson(lesson1);
         lesson2.addResource(salle2017);
         lesson3.addResource(salle2017);

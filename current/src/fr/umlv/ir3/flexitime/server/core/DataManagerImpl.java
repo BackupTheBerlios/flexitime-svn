@@ -732,6 +732,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
     public ILesson saveOrUpdateLesson(ILesson lesson, List<IResource> lresource)
             throws RemoteException
     {
+        System.err.println("Appel de saveLesson");
         boolean newOne = ( lesson.getIdBusy() == null );
         // int type = lesson.getIdBusy() == null ?
         // DataEvent.TYPE_PROPERTY_SUBDATA_ADDED
@@ -759,92 +760,92 @@ public class DataManagerImpl extends UnicastRemoteObject implements
 
         // Mise à jour des ressources associées
         i = 0;
-        for (IResource r : lresource)
-        {
-            if (r instanceof IGroup)
-            {
-                IGroup g = (IGroup) r;
-                if (newOne || !g.getSetBusy().contains(lesson))
-                {
-                    // g.addBusy(lesson);
-                    lesson.addResource(g);
-                }
-                try
-                {
-                    GroupStorage.save(g);
-                }
-                catch (HibernateException e)
-                {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return null;
-                }
-
-                manager.fireDataChanged(IGroup.class, new DataEvent(g,
-                        "lstBusy", type[i], new Object[] { lesson }));
-
-            }
-            else if (r instanceof IDevice)
-            {
-                IDevice d = (IDevice) r;
-                if (newOne || !d.getSetBusy().contains(lesson))
-                    d.addBusy(lesson);
-                try
-                {
-                    DeviceStorage.save(d);
-                }
-                catch (HibernateException e)
-                {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return null;
-                }
-
-                manager.fireDataChanged(IDevice.class, new DataEvent(d,
-                        "lstBusy", type[i], new Object[] { lesson }));
-
-            }
-            else if (r instanceof IRoom)
-            {
-                IRoom ro = (IRoom) r;
-                if (newOne || !ro.getSetBusy().contains(lesson))
-                    ro.addBusy(lesson);
-                try
-                {
-                    RoomStorage.save(ro);
-                }
-                catch (HibernateException e)
-                {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return null;
-                }
-                manager.fireDataChanged(IRoom.class, new DataEvent(ro,
-                        "lstBusy", type[i], new Object[] { lesson }));
-            }
-            else if (r instanceof ITeacher)
-            {
-                ITeacher t = (ITeacher) r;
-                if (newOne || !t.getSetBusy().contains(lesson))
-                    t.addBusy(lesson);
-                try
-                {
-                    TeacherStorage.save(t);
-                }
-                catch (HibernateException e)
-                {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return null;
-                }
-                manager.fireDataChanged(ITeacher.class, new DataEvent(t,
-                        "lstBusy", type[i], new Object[] { lesson }));
-
-            }
-            
-            ++i;
-
-        }
+//        for (IResource r : lresource)
+//        {
+//            if (r instanceof IGroup)
+//            {
+//                IGroup g = (IGroup) r;
+//                if (newOne || !g.getSetBusy().contains(lesson))
+//                {
+//                    // g.addBusy(lesson);
+//                    lesson.addResource(g);
+//                }
+//                try
+//                {
+//                    GroupStorage.save(g);
+//                }
+//                catch (HibernateException e)
+//                {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                    return null;
+//                }
+//
+//                manager.fireDataChanged(IGroup.class, new DataEvent(g,
+//                        "lstBusy", type[i], new Object[] { lesson }));
+//
+//            }
+//            else if (r instanceof IDevice)
+//            {
+//                IDevice d = (IDevice) r;
+//                if (newOne || !d.getSetBusy().contains(lesson))
+//                    d.addBusy(lesson);
+//                try
+//                {
+//                    DeviceStorage.save(d);
+//                }
+//                catch (HibernateException e)
+//                {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                    return null;
+//                }
+//
+//                manager.fireDataChanged(IDevice.class, new DataEvent(d,
+//                        "lstBusy", type[i], new Object[] { lesson }));
+//
+//            }
+//            else if (r instanceof IRoom)
+//            {
+//                IRoom ro = (IRoom) r;
+//                if (newOne || !ro.getSetBusy().contains(lesson))
+//                    ro.addBusy(lesson);
+//                try
+//                {
+//                    RoomStorage.save(ro);
+//                }
+//                catch (HibernateException e)
+//                {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                    return null;
+//                }
+//                manager.fireDataChanged(IRoom.class, new DataEvent(ro,
+//                        "lstBusy", type[i], new Object[] { lesson }));
+//            }
+//            else if (r instanceof ITeacher)
+//            {
+//                ITeacher t = (ITeacher) r;
+//                if (newOne || !t.getSetBusy().contains(lesson))
+//                    t.addBusy(lesson);
+//                try
+//                {
+//                    TeacherStorage.save(t);
+//                }
+//                catch (HibernateException e)
+//                {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                    return null;
+//                }
+//                manager.fireDataChanged(ITeacher.class, new DataEvent(t,
+//                        "lstBusy", type[i], new Object[] { lesson }));
+//
+//            }
+//            
+//            ++i;
+//
+//        }
 
         // for (Iterator<IGroup> it = lesson.getLstGroup().iterator() ; it
         // .hasNext() ;)
@@ -1721,6 +1722,7 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         try
         {
             GroupStorage.save(parent);
+            
         }
         catch (HibernateException e)
         {

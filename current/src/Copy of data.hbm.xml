@@ -189,21 +189,21 @@
 		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.activity.impl.LessonImpl" table="lesson" dynamic-update="true">
 				<key column="idBusy"/>
 				<many-to-one name="course" class="fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.CourseImpl" column="idCourse"/>
-				<set name="setDevice" cascade="none" table="resourcebusyset">
-					<key column="idBusy" />
-					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl" column="idResource"/>
+				<set name="setDevice" cascade="none" table="lessondevicelist">
+					<key column="idLesson" />
+					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.DeviceImpl" column="idDevice"/>
 				</set>
-				<set name="setGroup" cascade="none" table="resourcebusyset">
-					<key column="idBusy" />
-					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl" column="idResource"/>
+				<set name="setGroup" cascade="none" table="lessongrouplist">
+					<key column="idLesson" />
+					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl" column="idGroup"/>
 				</set>
-				<set name="setRoom" cascade="none" table="resourcebusyset">
-					<key column="idBusy" />
-					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl" column="idResource"/>
+				<set name="setRoom" cascade="none" table="lessonroomlist">
+					<key column="idLesson" />
+					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.RoomImpl" column="idRoom"/>
 				</set>
-				<set name="setTeacher" cascade="none" table="resourcebusyset">
-					<key column="idBusy" />
-					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl" column="idResource"/>
+				<set name="setTeacher" cascade="none" table="lessonteacherlist">
+					<key column="idLesson" />
+					<many-to-many class="fr.umlv.ir3.flexitime.common.data.resources.impl.TeacherImpl" column="idTeacher"/>
 				</set>
 		</joined-subclass>
 		
