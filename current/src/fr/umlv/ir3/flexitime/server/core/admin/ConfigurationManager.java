@@ -7,20 +7,30 @@
 
 package fr.umlv.ir3.flexitime.server.core.admin;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.xml.parsers.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.*;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
-import fr.umlv.ir3.flexitime.common.exception.*;
+import fr.umlv.ir3.flexitime.common.event.ConfigEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationListener;
 import fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
-import fr.umlv.ir3.flexitime.richClient.io.FlexiMail;
 import fr.umlv.ir3.flexitime.server.io.FlexiLDAP;
 import fr.umlv.ir3.flexitime.server.io.storage.HibernateUtil;
 
@@ -37,6 +47,8 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
      */
     private static final long serialVersionUID = 3256442499634378288L;
     private static IConfig currentConfig;
+    
+    private List<IConfigurationListener> listenerList = new CopyOnWriteArrayList<IConfigurationListener>();
     
     /** 
      * DOCME Description
@@ -99,8 +111,24 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
     private void upDateConfig() throws FlexiException, RemoteException
     {
         HibernateUtil.setConfiguration(currentConfig);
-        //FlexiMail.setConfiguration(currentConfig);
         FlexiLDAP.setConfiguration(currentConfig);
+        
+        ConfigEvent e = new ConfigEvent(currentConfig);
+        List<IConfigurationListener> toRemove = new ArrayList<IConfigurationListener>();
+        for(IConfigurationListener l : listenerList)
+        {
+            try
+            {
+                l.ConfigurationChanged(e);
+            }
+            catch(RemoteException ex)
+            {
+                ex.printStackTrace();
+                toRemove.add(l);
+            }
+        }
+        
+        listenerList.removeAll(toRemove);
     }
 
     /**
@@ -214,5 +242,32 @@ public class ConfigurationManager extends UnicastRemoteObject implements IConfig
         out.write("<".getBytes());
         out.write(root.getBytes());
         out.write(">".getBytes());
+    }
+    
+    
+    /** 
+     *
+     * @param listener
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager#addConfigurationListener(fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationListener)
+     */
+    public void addConfigurationListener(IConfigurationListener listener)
+            throws RemoteException
+    {
+        listenerList.add(listener);
+    }
+    
+    
+    /** 
+     * @param listener
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager#removeConfigurationListener(fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationListener)
+     */
+    public void removeConfigurationListener(IConfigurationListener listener)
+            throws RemoteException
+    {
+        listenerList.remove(listener);
     }
 }

@@ -13,8 +13,10 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
+import fr.umlv.ir3.flexitime.common.event.ConfigEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.rmi.admin.AbstractConfigurationListener;
 
 /**
  * DOCME
@@ -25,6 +27,39 @@ import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 public class FlexiMail
 {
 
+    private static class CfgListener extends AbstractConfigurationListener{
+
+        
+        /**
+         * Comment for <code>serialVersionUID</code>
+         */
+        private static final long serialVersionUID = 3256444698607760695L;
+
+        /**
+         * DOCME
+         * @throws RemoteException
+         */
+        public CfgListener() throws RemoteException
+        {
+            super();
+            // TODO Auto-generated constructor stub
+        }
+
+        /** 
+         * @param event
+         * @throws RemoteException 
+         * 
+         * @see fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationListener#ConfigurationChanged(fr.umlv.ir3.flexitime.common.event.ConfigEvent)
+         */
+        public void ConfigurationChanged(ConfigEvent event) throws RemoteException
+        {
+            System.err.println("event received");
+            System.setProperty("mail.smtp.host", event.getConfig().getUriSMTPserver());
+            session = Session.getDefaultInstance(System.getProperties());
+            
+        }
+        
+    }
     private static Session session;
 
     /**
@@ -37,8 +72,6 @@ public class FlexiMail
         try
         {
             // System.setProperty("mail.smtp.host", config.getUriSMTPserver());
-            System.err.println(RemoteDataManager.getConfigurationManager()
-                    .get().getUriSMTPserver());
             System.setProperty("mail.smtp.host", RemoteDataManager
                     .getConfigurationManager().get().getUriSMTPserver());
         }
@@ -77,6 +110,16 @@ public class FlexiMail
             e.printStackTrace();
         }
         session = Session.getDefaultInstance(System.getProperties());
+        
+        try
+        {
+            RemoteDataManager.getConfigurationManager().addConfigurationListener(new FlexiMail.CfgListener());
+        }
+        catch (RemoteException e1)
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
     }
 
     // Fonction d'envoie d'un message

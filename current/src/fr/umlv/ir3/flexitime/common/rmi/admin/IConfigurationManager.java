@@ -50,5 +50,23 @@ public interface IConfigurationManager extends Remote
      * @throws RemoteException 
      */
     public void init() throws FlexiException, RemoteException;
+    
+    /**
+     * Adds a ConfigurationListener 
+     *
+     * @param listener IConfigurationListener to add
+     * @throws RemoteException 
+     * 
+     */
+    public void addConfigurationListener(IConfigurationListener listener) throws RemoteException;
+    
+    /**
+     * Removes a ConfigurationListener 
+     *
+     * @param listener IConfigurationListener to remove
+     * @throws RemoteException 
+     * 
+     */
+    public void removeConfigurationListener(IConfigurationListener listener) throws RemoteException;
 }
 
