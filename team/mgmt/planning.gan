@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="FlexiTime" company="FlexiTime" webLink="http://flexitime.free.fr" view-date="1/11/2004" view-zoom="3" version="1.10.1">
+<project name="FlexiTime" company="FlexiTime" webLink="http://flexitime.free.fr" view-date="1/11/2004" view-zoom="3" version="1.10.2">
     <!-- -->    <description>
         Gestion des emplois du Temps
         Projet de Génie Logiciel &#47; Informatique Réseaux 3° année
@@ -233,7 +233,7 @@
                 </notes>
             </task>
         </task>
-        <task id="191" name="Spécification de l'IG" color="#006600" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="9/11/2004" duration="20" complete="89" fixed-start="true" priority="1" expand="true">
+        <task id="191" name="Spécification de l'IG" color="#006600" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="9/11/2004" duration="20" complete="91" fixed-start="true" priority="1" expand="true">
             <task id="285" name="Zoning de l'interface" color="#006600" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="9/11/2004" duration="3" complete="100" fixed-start="false" priority="1" expand="true">
                 <notes>
                     FA : 2h
@@ -285,11 +285,12 @@
                     VF : 4h
                 </notes>
             </task>
-            <task id="1044" name="Redéfinition de la charte graphique" color="#006600" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="24/11/2004" duration="2" complete="15" fixed-start="false" priority="1" expand="true">
+            <task id="1044" name="Redéfinition de la charte graphique" color="#006600" shape="0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0" meeting="false" start="24/11/2004" duration="2" complete="50" fixed-start="false" priority="1" expand="true">
                 <notes>
                     * Définition des couleurs et de l'aspect - rendu graphique de chacun des composants utilisés (Prévu 2h)
                     * Recherche de bibliothèques d'icones (Prévu 2h)
                     AB : 45Min : création nouveau document
+                    AB : 1H : partie Logo
                 </notes>
             </task>
             <task id="1045" name="Nouvelle relecture" color="#006600" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="26/11/2004" duration="3" complete="0" fixed-start="false" priority="1" expand="true">
@@ -340,7 +341,7 @@
                     <notes>
                         * Qualification des différentes SGBDR &#38; choix justifié (Prévu 6h)
                         Recherche d'info et consignation 1h le 12&#47;11 et 2h le 18&#47;11
-                        MAJ doc 2h le
+                        MAJ doc
                     </notes>
                 </task>
                 <task id="782" name="Choix de la bibliothèque d'IG" color="#003300" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="19/11/2004" duration="8" complete="95" fixed-start="false" priority="1" expand="true">
@@ -456,105 +457,105 @@
     </resources>
 
     <allocations>
-        <allocation task-id="26" resource-id="0" load="100"/>
-        <allocation task-id="186" resource-id="0" load="100"/>
-        <allocation task-id="28" resource-id="0" load="30"/>
-        <allocation task-id="27" resource-id="0" load="10"/>
-        <allocation task-id="288" resource-id="0" load="10"/>
-        <allocation task-id="789" resource-id="0" load="80"/>
-        <allocation task-id="1046" resource-id="0" load="40"/>
-        <allocation task-id="1" resource-id="3" load="100"/>
-        <allocation task-id="20" resource-id="4" load="100"/>
-        <allocation task-id="16" resource-id="3" load="100"/>
-        <allocation task-id="17" resource-id="3" load="100"/>
-        <allocation task-id="5" resource-id="6" load="100"/>
-        <allocation task-id="15" resource-id="5" load="80"/>
-        <allocation task-id="19" resource-id="5" load="80"/>
-        <allocation task-id="18" resource-id="7" load="100"/>
-        <allocation task-id="187" resource-id="5" load="20"/>
-        <allocation task-id="187" resource-id="3" load="50"/>
-        <allocation task-id="190" resource-id="4" load="100"/>
-        <allocation task-id="9" resource-id="0" load="100"/>
-        <allocation task-id="10" resource-id="5" load="100"/>
-        <allocation task-id="10" resource-id="7" load="100"/>
-        <allocation task-id="10" resource-id="6" load="100"/>
-        <allocation task-id="10" resource-id="0" load="100"/>
-        <allocation task-id="10" resource-id="3" load="100"/>
-        <allocation task-id="10" resource-id="4" load="100"/>
-        <allocation task-id="106" resource-id="4" load="10"/>
-        <allocation task-id="107" resource-id="4" load="10"/>
-        <allocation task-id="108" resource-id="4" load="40"/>
-        <allocation task-id="109" resource-id="0" load="10"/>
-        <allocation task-id="30" resource-id="0" load="30"/>
-        <allocation task-id="30" resource-id="4" load="50"/>
-        <allocation task-id="420" resource-id="0" load="80"/>
-        <allocation task-id="421" resource-id="5" load="100"/>
-        <allocation task-id="421" resource-id="7" load="100"/>
-        <allocation task-id="421" resource-id="6" load="100"/>
-        <allocation task-id="421" resource-id="0" load="80"/>
-        <allocation task-id="421" resource-id="3" load="100"/>
-        <allocation task-id="421" resource-id="4" load="100"/>
-        <allocation task-id="512" resource-id="3" load="100"/>
-        <allocation task-id="513" resource-id="4" load="100"/>
-        <allocation task-id="514" resource-id="6" load="100"/>
-        <allocation task-id="515" resource-id="0" load="80"/>
-        <allocation task-id="516" resource-id="5" load="100"/>
-        <allocation task-id="517" resource-id="7" load="100"/>
-        <allocation task-id="518" resource-id="5" load="100"/>
-        <allocation task-id="518" resource-id="7" load="100"/>
-        <allocation task-id="518" resource-id="6" load="100"/>
-        <allocation task-id="518" resource-id="0" load="80"/>
-        <allocation task-id="518" resource-id="3" load="100"/>
-        <allocation task-id="518" resource-id="4" load="100"/>
-        <allocation task-id="267" resource-id="3" load="100"/>
-        <allocation task-id="268" resource-id="5" load="100"/>
-        <allocation task-id="268" resource-id="7" load="100"/>
-        <allocation task-id="645" resource-id="5" load="100"/>
-        <allocation task-id="645" resource-id="7" load="100"/>
-        <allocation task-id="645" resource-id="6" load="50"/>
-        <allocation task-id="645" resource-id="0" load="50"/>
-        <allocation task-id="645" resource-id="3" load="100"/>
-        <allocation task-id="645" resource-id="4" load="50"/>
-        <allocation task-id="269" resource-id="5" load="100"/>
-        <allocation task-id="269" resource-id="7" load="100"/>
-        <allocation task-id="269" resource-id="3" load="50"/>
-        <allocation task-id="270" resource-id="3" load="50"/>
-        <allocation task-id="285" resource-id="7" load="100"/>
-        <allocation task-id="285" resource-id="0" load="80"/>
-        <allocation task-id="285" resource-id="3" load="100"/>
-        <allocation task-id="525" resource-id="7" load="100"/>
-        <allocation task-id="526" resource-id="0" load="80"/>
-        <allocation task-id="777" resource-id="0" load="80"/>
-        <allocation task-id="527" resource-id="3" load="100"/>
-        <allocation task-id="284" resource-id="4" load="100"/>
-        <allocation task-id="776" resource-id="4" load="100"/>
-        <allocation task-id="778" resource-id="6" load="50"/>
-        <allocation task-id="779" resource-id="5" load="100"/>
-        <allocation task-id="1044" resource-id="4" load="100"/>
-        <allocation task-id="1045" resource-id="0" load="80"/>
-        <allocation task-id="521" resource-id="6" load="100"/>
-        <allocation task-id="522" resource-id="6" load="100"/>
-        <allocation task-id="523" resource-id="6" load="50"/>
-        <allocation task-id="780" resource-id="5" load="100"/>
-        <allocation task-id="529" resource-id="6" load="50"/>
-        <allocation task-id="528" resource-id="5" load="100"/>
-        <allocation task-id="782" resource-id="7" load="100"/>
-        <allocation task-id="783" resource-id="3" load="100"/>
-        <allocation task-id="783" resource-id="4" load="100"/>
-        <allocation task-id="784" resource-id="3" load="100"/>
-        <allocation task-id="786" resource-id="4" load="100"/>
-        <allocation task-id="785" resource-id="3" load="100"/>
-        <allocation task-id="787" resource-id="0" load="50"/>
-        <allocation task-id="532" resource-id="5" load="100"/>
-        <allocation task-id="533" resource-id="6" load="100"/>
-        <allocation task-id="530" resource-id="5" load="100"/>
-        <allocation task-id="531" resource-id="6" load="100"/>
-        <allocation task-id="781" resource-id="7" load="50"/>
-        <allocation task-id="1047" resource-id="5" load="100"/>
-        <allocation task-id="1047" resource-id="0" load="30"/>
-        <allocation task-id="1321" resource-id="3" load="100"/>
-        <allocation task-id="1051" resource-id="5" load="100"/>
-        <allocation task-id="1051" resource-id="3" load="100"/>
+        <allocation task-id="26" resource-id="0" load="100.0"/>
+        <allocation task-id="186" resource-id="0" load="100.0"/>
+        <allocation task-id="28" resource-id="0" load="30.0"/>
+        <allocation task-id="27" resource-id="0" load="10.0"/>
+        <allocation task-id="288" resource-id="0" load="10.0"/>
+        <allocation task-id="789" resource-id="0" load="80.0"/>
+        <allocation task-id="1046" resource-id="0" load="40.0"/>
+        <allocation task-id="1" resource-id="3" load="100.0"/>
+        <allocation task-id="20" resource-id="4" load="100.0"/>
+        <allocation task-id="16" resource-id="3" load="100.0"/>
+        <allocation task-id="17" resource-id="3" load="100.0"/>
+        <allocation task-id="5" resource-id="6" load="100.0"/>
+        <allocation task-id="15" resource-id="5" load="80.0"/>
+        <allocation task-id="19" resource-id="5" load="80.0"/>
+        <allocation task-id="18" resource-id="7" load="100.0"/>
+        <allocation task-id="187" resource-id="5" load="20.0"/>
+        <allocation task-id="187" resource-id="3" load="50.0"/>
+        <allocation task-id="190" resource-id="4" load="100.0"/>
+        <allocation task-id="9" resource-id="0" load="100.0"/>
+        <allocation task-id="10" resource-id="7" load="100.0"/>
+        <allocation task-id="10" resource-id="5" load="100.0"/>
+        <allocation task-id="10" resource-id="6" load="100.0"/>
+        <allocation task-id="10" resource-id="4" load="100.0"/>
+        <allocation task-id="10" resource-id="3" load="100.0"/>
+        <allocation task-id="10" resource-id="0" load="100.0"/>
+        <allocation task-id="106" resource-id="4" load="10.0"/>
+        <allocation task-id="107" resource-id="4" load="10.0"/>
+        <allocation task-id="108" resource-id="4" load="40.0"/>
+        <allocation task-id="109" resource-id="0" load="10.0"/>
+        <allocation task-id="30" resource-id="4" load="50.0"/>
+        <allocation task-id="30" resource-id="0" load="30.0"/>
+        <allocation task-id="420" resource-id="0" load="80.0"/>
+        <allocation task-id="421" resource-id="7" load="100.0"/>
+        <allocation task-id="421" resource-id="5" load="100.0"/>
+        <allocation task-id="421" resource-id="6" load="100.0"/>
+        <allocation task-id="421" resource-id="4" load="100.0"/>
+        <allocation task-id="421" resource-id="3" load="100.0"/>
+        <allocation task-id="421" resource-id="0" load="80.0"/>
+        <allocation task-id="512" resource-id="3" load="100.0"/>
+        <allocation task-id="513" resource-id="4" load="100.0"/>
+        <allocation task-id="514" resource-id="6" load="100.0"/>
+        <allocation task-id="515" resource-id="0" load="80.0"/>
+        <allocation task-id="516" resource-id="5" load="100.0"/>
+        <allocation task-id="517" resource-id="7" load="100.0"/>
+        <allocation task-id="518" resource-id="7" load="100.0"/>
+        <allocation task-id="518" resource-id="5" load="100.0"/>
+        <allocation task-id="518" resource-id="6" load="100.0"/>
+        <allocation task-id="518" resource-id="4" load="100.0"/>
+        <allocation task-id="518" resource-id="3" load="100.0"/>
+        <allocation task-id="518" resource-id="0" load="80.0"/>
+        <allocation task-id="267" resource-id="3" load="100.0"/>
+        <allocation task-id="268" resource-id="7" load="100.0"/>
+        <allocation task-id="268" resource-id="5" load="100.0"/>
+        <allocation task-id="645" resource-id="7" load="100.0"/>
+        <allocation task-id="645" resource-id="5" load="100.0"/>
+        <allocation task-id="645" resource-id="6" load="50.0"/>
+        <allocation task-id="645" resource-id="4" load="50.0"/>
+        <allocation task-id="645" resource-id="3" load="100.0"/>
+        <allocation task-id="645" resource-id="0" load="50.0"/>
+        <allocation task-id="269" resource-id="7" load="100.0"/>
+        <allocation task-id="269" resource-id="5" load="100.0"/>
+        <allocation task-id="269" resource-id="3" load="50.0"/>
+        <allocation task-id="270" resource-id="3" load="50.0"/>
+        <allocation task-id="285" resource-id="7" load="100.0"/>
+        <allocation task-id="285" resource-id="3" load="100.0"/>
+        <allocation task-id="285" resource-id="0" load="80.0"/>
+        <allocation task-id="525" resource-id="7" load="100.0"/>
+        <allocation task-id="526" resource-id="0" load="80.0"/>
+        <allocation task-id="777" resource-id="0" load="80.0"/>
+        <allocation task-id="527" resource-id="3" load="100.0"/>
+        <allocation task-id="284" resource-id="4" load="100.0"/>
+        <allocation task-id="776" resource-id="4" load="100.0"/>
+        <allocation task-id="778" resource-id="6" load="50.0"/>
+        <allocation task-id="779" resource-id="5" load="100.0"/>
+        <allocation task-id="1044" resource-id="4" load="100.0"/>
+        <allocation task-id="1045" resource-id="0" load="80.0"/>
+        <allocation task-id="521" resource-id="6" load="100.0"/>
+        <allocation task-id="522" resource-id="6" load="100.0"/>
+        <allocation task-id="523" resource-id="6" load="50.0"/>
+        <allocation task-id="780" resource-id="5" load="100.0"/>
+        <allocation task-id="529" resource-id="6" load="50.0"/>
+        <allocation task-id="528" resource-id="5" load="100.0"/>
+        <allocation task-id="782" resource-id="7" load="100.0"/>
+        <allocation task-id="783" resource-id="4" load="100.0"/>
+        <allocation task-id="783" resource-id="3" load="100.0"/>
+        <allocation task-id="784" resource-id="3" load="100.0"/>
+        <allocation task-id="786" resource-id="4" load="100.0"/>
+        <allocation task-id="785" resource-id="3" load="100.0"/>
+        <allocation task-id="787" resource-id="0" load="50.0"/>
+        <allocation task-id="532" resource-id="5" load="100.0"/>
+        <allocation task-id="533" resource-id="6" load="100.0"/>
+        <allocation task-id="530" resource-id="5" load="100.0"/>
+        <allocation task-id="531" resource-id="6" load="100.0"/>
+        <allocation task-id="781" resource-id="7" load="50.0"/>
+        <allocation task-id="1047" resource-id="5" load="100.0"/>
+        <allocation task-id="1047" resource-id="0" load="30.0"/>
+        <allocation task-id="1321" resource-id="3" load="100.0"/>
+        <allocation task-id="1051" resource-id="5" load="100.0"/>
+        <allocation task-id="1051" resource-id="3" load="100.0"/>
     </allocations>
 
 
