@@ -98,10 +98,10 @@ public abstract class DataImpl implements IData
         if (obj == null) return false;
         if (! ( this.getClass().equals(obj.getClass()))) return false;
         IData other = (IData) obj;
-        if ( ( ( idData != 0 ) && ( other.getIdData() == 0 ) )
-                || ( ( idData == 0 ) && ( other.getIdData() != 0 ) ))
+        if ( ( ( idData != null ) && ( other.getIdData() == null ) )
+                || ( ( idData == null ) && ( other.getIdData() != null ) ))
             return false;
-        if (idData == 0) return this.getName().equals(other.getName());
+        if (idData == null) return this.getName().equals(other.getName());
         return ( idData == other.getIdData() );
     }
 }

@@ -12,9 +12,10 @@ import fr.umlv.ir3.flexitime.common.tools.*;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 
 /**
- * DOCME Description
+ * Implements all methods of IBusy
  * 
- * @author FlexiTeam - Guillaume GUERRIN
+ * @version 220
+ * @author FlexiTeam - Jérôme GUERS
  */
 public abstract class BusyImpl implements IBusy
 {
@@ -26,6 +27,7 @@ public abstract class BusyImpl implements IBusy
     private Date   daEnd;
     protected Long idBusy;
     private static FlexiLanguage language;
+    
     static
     {
         language = FlexiLanguage.getInstance();
