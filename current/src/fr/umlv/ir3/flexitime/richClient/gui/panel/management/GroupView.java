@@ -1,30 +1,24 @@
 /*
- * Created on 13 déc. 2004
- * by Adrien Bouvet
- * 
- * Copyright: GPL - UMLV(FR) - 2004/2005
+ * Created on 22 janv. 2005
+ *
+ * TODO To change the template for this generated file go to
+ * Window - Preferences - Java - Code Style - Code Templates
  */
-
 package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
 import javax.swing.tree.TreeModel;
 
 import com.jgoodies.forms.layout.CellConstraints;
@@ -34,26 +28,26 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeList
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
 
 /**
- * RoomsView - DOCME Description explication supplémentaire si nécessaire in
- * english please... Que fait cette classe, qu'est-ce qu'elle représente, ...
- * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
- * @author FlexiTeam - Adrien Bouvet
+ * @author Famille
+ *
+ * TODO To change the template for this generated type comment go to
+ * Window - Preferences - Java - Code Style - Code Templates
  */
-public class RoomsView implements FlexiTreeNodeListener
+public class GroupView implements FlexiTreeNodeListener
 {
+
 	JPanel panel;
 	ResourceTreeModel model;
 	JTree tree;
 	JButton okButton;
 	JButton cancelButton;
 	JTextField name;
-	JTextField capacity;
+	JTextField nbPerson;
 	JLabel errorLabel;
-	public RoomsView(TreeModel model,JTree tree)
+	public GroupView(TreeModel model,JTree tree)
 	{
 		this.model=(ResourceTreeModel)model;
 		this.tree=tree;
@@ -81,18 +75,18 @@ public class RoomsView implements FlexiTreeNodeListener
 		cancelButton=new JButton("Annuler");
 		cancelButton.setEnabled( false);
 		name = new JTextField(tree.getSelectionPath().getLastPathComponent().toString());
-		capacity = new JTextField(""+((RoomTreeNode)tree.getSelectionPath().getLastPathComponent()).getRoom().getCapacity());
+		nbPerson = new JTextField(""+((GroupTreeNode)tree.getSelectionPath().getLastPathComponent()).getGroup().getNbPerson());
 		DocumentListener documentListener = new DocumentListener(){
 
 			public void insertUpdate(DocumentEvent arg0) {
 				try{
-		            Integer number = Integer.valueOf(capacity.getText()).intValue();
+		            Integer number = Integer.valueOf(nbPerson.getText()).intValue();
 		            okButton.setEnabled(true);
 					cancelButton.setEnabled(true);
 					errorLabel.setVisible(false);
 				}
 		        catch(NumberFormatException e){
-		        	if(capacity.getText().length()>9)errorLabel.setText("Valeur excessive");
+		        	if(nbPerson.getText().length()>9)errorLabel.setText("Valeur excessive");
 		        	else errorLabel.setText("Valeur numérique uniquement");
 		        	errorLabel.setVisible(true);
 		        	okButton.setEnabled(false);
@@ -109,7 +103,7 @@ public class RoomsView implements FlexiTreeNodeListener
 			
 		};
 		name.getDocument().addDocumentListener(documentListener);
-		capacity.getDocument().addDocumentListener(documentListener);
+		nbPerson.getDocument().addDocumentListener(documentListener);
 		//Mise en place des actions des boutons
 		okButton.addActionListener(new ActionListener(){
 
@@ -117,7 +111,7 @@ public class RoomsView implements FlexiTreeNodeListener
 			{
 				List list = new ArrayList();
 				list.add(name.getText());
-				list.add(capacity.getText());
+				list.add(nbPerson.getText());
 				model.change((FlexiTreeNode)tree.getSelectionPath().getLastPathComponent(),list);
 				okButton.setEnabled(false);
 				cancelButton.setEnabled(false);
@@ -127,22 +121,22 @@ public class RoomsView implements FlexiTreeNodeListener
 
 			public void actionPerformed(ActionEvent arg0) {
 				name.setText(tree.getSelectionPath().getLastPathComponent().toString());
-				capacity.setText(""+((RoomTreeNode)tree.getSelectionPath().getLastPathComponent()).getRoom().getCapacity());
+				nbPerson.setText(""+((GroupTreeNode)tree.getSelectionPath().getLastPathComponent()).getGroup().getNbPerson());
 				okButton.setEnabled(false);
 				cancelButton.setEnabled(false);
 			}
 		
 		});
 		
-		FormLayout layout = new FormLayout("50px, pref, 10px, 35dlu,50dlu,pref,20px,pref,","70px, pref, 20px, pref,20px,30px,pref");
+		FormLayout layout = new FormLayout("50px, pref, 10px, 50dlu,35dlu,pref,20px,pref,","70px, pref, 20px, pref,20px,30px,pref");
 		//Collone 							 1		2	  3		4		5	6	7	  8		9  10	11
 		//layout.setRowGroups(new int[][]{{1, 3, 5}});
 		panel.setLayout(layout);
 		CellConstraints cc = new CellConstraints();
 		panel.add(new JLabel("Nom:"), cc.xy (2, 2));
 		panel.add(name, cc.xyw(4, 2, 2));
-		panel.add(new JLabel("Capacité:"), cc.xy (2, 4));
-		panel.add(capacity, cc.xy (4, 4));
+		panel.add(new JLabel("Nombre de Personnes:"), cc.xyw (2, 4,3));
+		panel.add(nbPerson, cc.xy (5, 4));
 		panel.add(errorLabel,cc.xyw(2,5,4));
 		panel.add(okButton, cc.xy (6, 7));
 		panel.add(cancelButton,cc.xy (8, 7));
@@ -167,4 +161,5 @@ public class RoomsView implements FlexiTreeNodeListener
 		cancelButton.setEnabled( false);
 		
 	}
+
 }
