@@ -36,38 +36,28 @@ public class HibernateUtil
      */
     public static void setConfiguration(IConfig config) throws FlexiException
     {
-        Configuration cfg = new Configuration();
-        StringBuffer buffer = new StringBuffer();
-        buffer.append(config.getUriServerData() + "/");
-        buffer.append(config.getNameBase());
-        cfg.setProperty("hibernate.connection.url", buffer.toString());
-        cfg.setProperty("hibernate.connection.username", config.getUserBDD());
-        cfg.setProperty("hibernate.connection.password", config.getPassBDD());
-        try
-        {
-            sessionFactory = cfg.configure().buildSessionFactory();
-        }
-        catch (HibernateException e)
-        {
+        Configuration cfg = null;
+        try {
+            cfg = new Configuration().configure();
+            
+            StringBuffer buffer = new StringBuffer();
+            buffer.append(config.getUriServerData() + "/");
+            buffer.append(config.getNameBase());
+            
+            System.out.println(cfg.getProperty("hibernate.connection.url"));
+            cfg.setProperty("hibernate.connection.url", buffer.toString());
+            System.out.println(cfg.getProperty("hibernate.connection.url"));
+            cfg.setProperty("hibernate.connection.username", config.getUserBDD());
+            cfg.setProperty("hibernate.connection.password", config.getPassBDD());
+
+            sessionFactory = cfg.buildSessionFactory();
+        } catch (HibernateException e) {
             throw new FlexiException(FlexiLanguage.getInstance().getText(
-                    "errHiber1")
-                    + e.getMessage(), e);
+            "errHiber1")
+            + e.getMessage(), e);
         }
     }
 
-    static{
-        Configuration cfg = new Configuration();
-        try
-        {
-            sessionFactory = cfg.configure().buildSessionFactory();
-        }
-        catch (HibernateException e)
-        {
-//            throw new FlexiException(FlexiLanguage.getInstance().getText(
-//                    "errHiber1")
-//                    + e.getMessage(), e);
-        }
-    }
     /**
      * 
      * Get current Hibernate Session

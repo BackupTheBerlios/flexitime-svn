@@ -59,7 +59,6 @@ public class Server
         catch (RemoteException e)
         {
             System.err.println(FlexiLanguage.getInstance().getText("errRMI2"));
-            e.printStackTrace();
             System.exit(2);
         }
         catch (MalformedURLException e)
