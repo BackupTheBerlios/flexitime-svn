@@ -8,7 +8,10 @@
 package fr.umlv.ir3.flexitime.richClient.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.Calendar;
 
 import javax.swing.AbstractAction;
@@ -29,6 +33,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
@@ -45,12 +50,21 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExploitationAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.ExportAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.GestionAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.HistoryAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LargerTimeTableAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.LogoutAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.MailAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.NextWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreferencesAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PreviousWeekAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.PrintAction;
+import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.SmallerTimeTableAction;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.bar.StatsAction;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.MainView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.ManagementView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.exploitation.ExploitationView;
+import fr.umlv.ir3.flexitime.richClient.gui.views.IPServerView;
 import fr.umlv.ir3.flexitime.richClient.gui.views.LoginView;
+import fr.umlv.ir3.flexitime.server.core.admin.UserManager;
 
 /**
  * Client This class build an graphic interface for the user.
@@ -63,9 +77,13 @@ public class Client
     // ====== //
     // Champs //
     // ====== //
-    private JFrame frame;
+    private static JFrame frame;
     private static LoginView loginView;
-    private JPanel panel;
+    private static JPanel mainPanel;
+    private static JPanel centerPanel;
+    private static JPanel exploitPanel;
+    private static JPanel mngmtPanel;
+    private static JScrollPane accueilPanel;
     private JPanel jp_status;
     private JLabel status;
     private static String user;
@@ -87,10 +105,35 @@ public class Client
         frame = new JFrame(language.getText("appliTitle"));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
-        panel = new JPanel(new BorderLayout());
-        frame.setContentPane(panel);
         ImageIcon icon = new ImageIcon(getClass().getResource("pictures/FlexiTime_icone32.png"));
         frame.setIconImage(icon.getImage());
+        
+        //gestion conteneurs
+        mainPanel = new JPanel(new BorderLayout());
+        frame.setContentPane(mainPanel);
+        centerPanel = new JPanel(new FlowLayout());
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+
+        
+        
+        //construction des 3 panels principaux
+        MainView accueilView = new MainView();
+        ExploitationView exploitView = new ExploitationView();
+        ManagementView mngmtView = null;
+		try {
+			mngmtView = new ManagementView();
+		} catch (RemoteException e) {
+            //TODO
+            System.out.println("mngmtView inouvrable");
+		}
+        accueilPanel = accueilView.getPanel();
+        accueilPanel.setPreferredSize(frame.getSize());
+        accueilPanel.revalidate();
+        exploitPanel = (JPanel)exploitView.getPanel();
+        exploitPanel.setPreferredSize(frame.getSize());
+        exploitPanel.revalidate();
+        mngmtPanel   = mngmtView.getPanel(); 
+        mngmtPanel.setPreferredSize(new Dimension(1000,1000));
     }
     
 
@@ -109,10 +152,13 @@ public class Client
         initMenuBar();
         initToolBar();
         initStateBar();
-        MainView mainPanel = new MainView();
-        frame.add(mainPanel.getPanel());
+
+        centerPanel.add(accueilPanel);
+        centerPanel.add(exploitPanel);
+        centerPanel.add(mngmtPanel);
+        setAccueilMode();
         frame.setVisible(true);
-        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         return 0;
     }
 
@@ -134,7 +180,7 @@ public class Client
     {
         JToolBar toolBar = new JToolBar();
         toolBar.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
-        panel.add(toolBar, BorderLayout.PAGE_START);
+        mainPanel.add(toolBar, BorderLayout.PAGE_START);
         
         //Imprimer
         toolBar.add(createButton(PrintAction.getInstance()));
@@ -175,10 +221,7 @@ public class Client
         
         
         
-        toolBar.addSeparator();
-        toolBar.addSeparator();
-        toolBar.addSeparator();
-        toolBar.addSeparator();
+        //toolBar.add
         
         
         //date actuelle
@@ -480,7 +523,7 @@ public class Client
         jp_status.add(status, BorderLayout.CENTER);
         jp_status.setBorder(new BevelBorder(BevelBorder.LOWERED));
         
-        frame.getContentPane().add(jp_status,BorderLayout.SOUTH);
+        mainPanel.add(jp_status,BorderLayout.SOUTH);
     }
     
     
@@ -649,6 +692,45 @@ public class Client
     }
     
     
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     * 
+     */
+    public static void setExploitMode()
+    {
+        accueilPanel.setVisible(false);
+        mngmtPanel.setVisible(false);
+        exploitPanel.setVisible(true);
+    }
+    
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     * 
+     */
+    public static void setMngmtMode()
+    {
+        accueilPanel.setVisible(false);
+        mngmtPanel.setVisible(true);
+        exploitPanel.setVisible(false);
+    }
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     * 
+     */
+    public static void setAccueilMode()
+    {
+        accueilPanel.setVisible(true);
+        mngmtPanel.setVisible(false);
+        exploitPanel.setVisible(false);
+    }
   
     // ==== //
     // Main //

@@ -1,6 +1,6 @@
 /*
  * Created on 16 janv. 2005
- * by Prâsad
+ * by Adrien BOUVET
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.richClient.gui.actions.bar;
@@ -20,8 +20,8 @@ import fr.umlv.ir3.flexitime.richClient.gui.Client;
  * Que fait cette classe, qu'est-ce qu'elle 
  * représente, ...
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 0.1
+ * @author FlexiTeam - Adrien BOUVET
  * 
  */
 public class GestionAction extends AbstractAction
@@ -52,8 +52,7 @@ public class GestionAction extends AbstractAction
      */
     public void actionPerformed(ActionEvent e)
     {
-    // TODO Auto-generated method stub
-
+        Client.setMngmtMode();
     }
 
 }

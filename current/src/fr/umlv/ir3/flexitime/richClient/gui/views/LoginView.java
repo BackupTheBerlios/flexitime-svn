@@ -11,6 +11,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -60,8 +62,46 @@ public class LoginView
         JLabel labIcon = new JLabel(icon);
         final JTextField tfLogin = new JTextField();
         tfLogin.setText("<votre nom>");
+        tfLogin.addMouseListener(new MouseListener() {
+
+            public void mouseClicked(MouseEvent arg0)
+            {
+                tfLogin.setText("");
+            }
+
+            public void mousePressed(MouseEvent arg0)
+            {}
+
+            public void mouseReleased(MouseEvent arg0)
+            {}
+
+            public void mouseEntered(MouseEvent arg0)
+            {}
+
+            public void mouseExited(MouseEvent arg0)
+            {}            
+        });
         final JPasswordField tfPass = new JPasswordField("password");  
         tfPass.setText("password");
+        tfPass.addMouseListener(new MouseListener() {
+
+            public void mouseClicked(MouseEvent arg0)
+            {
+                tfPass.setText("");
+            }
+
+            public void mousePressed(MouseEvent arg0)
+            {}
+
+            public void mouseReleased(MouseEvent arg0)
+            {}
+
+            public void mouseEntered(MouseEvent arg0)
+            {}
+
+            public void mouseExited(MouseEvent arg0)
+            {}            
+        });
         JButton butOK = new JButton("OK");
         butOK.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent arg0)
