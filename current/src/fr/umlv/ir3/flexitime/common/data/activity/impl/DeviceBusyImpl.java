@@ -6,8 +6,6 @@
 
 package fr.umlv.ir3.flexitime.common.data.activity.impl;
 
-import java.util.Date;
-
 import fr.umlv.ir3.flexitime.common.data.activity.IDeviceBusy;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 
@@ -47,43 +45,14 @@ public class DeviceBusyImpl extends BusyImpl implements IDeviceBusy
     {}
 
     /**
-     * Constructs an unavailibility for a device without a reason.
-     * 
-     * @param daStart
-     *            the start date of the unavailibility.
-     * @param daEnd
-     *            the end date of the unavailibility.
-     */
-    DeviceBusyImpl(Date daStart, Date daEnd)
-    {
-        super(daStart, daEnd);
-    }
-
-    /**
      * Constructs an unavailibility for a device between a gap without reason.
      * 
      * @param g
      *            gap of the unavaibulity
      */
-    DeviceBusyImpl(Gap g)
+    public DeviceBusyImpl(Gap g)
     {
         super(g);
-    }
-
-    /**
-     * Constructs an unavailibility for a device for the reason specified.
-     * 
-     * @param daStart
-     *            the start date of the unavailibility.
-     * @param daEnd
-     *            the end date of the unavailibility.
-     * @param iReason
-     *            an Integer representing the reason of the unavailibility.
-     */
-    DeviceBusyImpl(Date daStart, Date daEnd, int iReason)
-    {
-        super(daStart, daEnd);
-        reason = iReason;
     }
 
     /**
@@ -95,9 +64,9 @@ public class DeviceBusyImpl extends BusyImpl implements IDeviceBusy
      * @param iReason
      *            reason of the unavaibility
      */
-    DeviceBusyImpl(Gap g, int iReason)
+    public DeviceBusyImpl(Gap g, int iReason)
     {
-        super(g);
+        this(g);
         reason = iReason;
     }
 

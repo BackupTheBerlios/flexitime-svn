@@ -6,9 +6,8 @@
 
 package fr.umlv.ir3.flexitime.common.data.activity.impl;
 
-import java.util.Date;
-
 import fr.umlv.ir3.flexitime.common.data.activity.ITeacherBusy;
+import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 /**
  * Defines an unavailability for a teacher. Containes a reason for the
@@ -48,18 +47,27 @@ public class TeacherBusyImpl extends BusyImpl implements ITeacherBusy
     {}
 
     /**
-     * Constructs an unavailibility for a teacher.
+     * Constructs an unavailibility for a teacher without reason.
      * 
-     * @param daStart
-     *            the start date of the unavailibility.
-     * @param daEnd
-     *            the end date of the unavailibility.
+     * @param g
+     *            the gap between the unavailibility.
+     */
+    public TeacherBusyImpl(Gap g)
+    {
+        super(g);
+    }
+    
+    /**
+     * Constructs an unavailibility for a teacher for the reason specified.
+     * 
+     * @param g
+     *            the gap between the unavailibility.
      * @param iReason
      *            an Integer representing the reason of the unavailibility.
      */
-    public TeacherBusyImpl(Date daStart, Date daEnd, int iReason)
+    public TeacherBusyImpl(Gap g, int iReason)
     {
-        super(daStart, daEnd);
+        this(g);
         reason = iReason;
     }
 

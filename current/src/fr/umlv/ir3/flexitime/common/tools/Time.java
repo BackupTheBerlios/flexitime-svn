@@ -184,7 +184,7 @@ public class Time
         return h+":"+m+":"+s+":"+ms;
     }
     /** 
-     * getTime - get the time in "hh:mm:ss:mms"
+     * getTime - get the time in "hh:mm"
      *
      * @return Returns the time
      */

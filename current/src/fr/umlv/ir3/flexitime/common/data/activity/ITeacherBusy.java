@@ -40,7 +40,6 @@ public interface ITeacherBusy extends IBusy
      * Changes the Reason of the unavailability.
      * 
      * @param iReason the Reason of the unavailability.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     void setReason(int iReason);
     
@@ -48,7 +47,6 @@ public interface ITeacherBusy extends IBusy
      * Returns the reason of the unavailability.
      * 
      * @return the Reason of the unavailability.
-     * @author FlexiTeam - Adrien BOUVET
      */
     int getReason();
 }

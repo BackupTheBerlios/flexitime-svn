@@ -6,17 +6,13 @@
 
 package fr.umlv.ir3.flexitime.common.data.activity.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
-import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
-import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
-import fr.umlv.ir3.flexitime.common.data.resources.IResource;
-import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
-import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.common.data.resources.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 /**
  * Defines an unavailibility for a course in the TimeTable. Contains a list of
@@ -37,10 +33,10 @@ public class LessonImpl extends BusyImpl implements ILesson
     // ===========//
     // Champs //
     // ===========//
-    private List              lstDevice;
-    private List              lstRoom;
-    private List              lstTeacher;
-    private List              lstGroup;
+    private List<IDevice>     lstDevice;
+    private List<IRoom>       lstRoom;
+    private List<ITeacher>    lstTeacher;
+    private List<IGroup>      lstGroup;
     private ICourse           course;
 
     // =============//
@@ -52,31 +48,49 @@ public class LessonImpl extends BusyImpl implements ILesson
      */
     protected LessonImpl()
     {
-        lstDevice = new ArrayList();
-        lstRoom = new ArrayList();
-        lstTeacher = new ArrayList();
-        lstGroup = new ArrayList();
+        lstDevice = new ArrayList<IDevice>();
+        lstRoom = new ArrayList<IRoom>();
+        lstTeacher = new ArrayList<ITeacher>();
+        lstGroup = new ArrayList<IGroup>();
     }
 
     /**
      * Constructs an unavailibility for a course.
      * 
-     * @param daStart
-     *            the start date of the unavailibility.
-     * @param daEnd
-     *            the end date of the unavailibility.
+     * @param g
+     *            the gap between the unavailibility.
      * @param _course
      *            ICourse associated with this Lesson
      * 
      */
-    LessonImpl(Date daStart, Date daEnd, ICourse _course)
+    public LessonImpl(Gap g, ICourse _course)
     {
-        super(daStart, daEnd);
-        lstDevice = new ArrayList();
-        lstRoom = new ArrayList();
-        lstTeacher = new ArrayList();
-        lstGroup = new ArrayList();
+        super(g);
+        lstDevice = new ArrayList<IDevice>();
+        lstRoom = new ArrayList<IRoom>();
+        lstTeacher = new ArrayList<ITeacher>();
+        lstGroup = new ArrayList<IGroup>();
+
         course = _course;
+    }
+
+    /**
+     * Constructs an unavailibility for a course.
+     * 
+     * @param g
+     *            the gap between the unavailibility.
+     * @param _course
+     *            ICourse associated with this Lesson
+     * @param defaultTeach
+     *            the teacher who teach these lesson
+     * @param group
+     *            the group who learn this lesson
+     */
+    public LessonImpl(Gap g, ICourse _course, ITeacher defaultTeach, IGroup group)
+    {
+        this(g, _course);
+        lstTeacher.add(defaultTeach);
+        lstGroup.add(group);
     }
 
     // ===========//
@@ -96,19 +110,19 @@ public class LessonImpl extends BusyImpl implements ILesson
     {
         if (resource instanceof IRoom)
         {
-            lstRoom.add(resource);
+            lstRoom.add((IRoom) resource);
         }
         else if (resource instanceof IDevice)
         {
-            lstDevice.add(resource);
+            lstDevice.add((IDevice) resource);
         }
         else if (resource instanceof IGroup)
         {
-            lstGroup.add(resource);
+            lstGroup.add((IGroup) resource);
         }
         else if (resource instanceof ITeacher)
         {
-            lstTeacher.add(resource);
+            lstTeacher.add((ITeacher) resource);
         }
 
     }
@@ -185,7 +199,7 @@ public class LessonImpl extends BusyImpl implements ILesson
     /**
      * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setLstTeacher(List)
      */
-    public void setLstTeacher(List lteacher)
+    public void setLstTeacher(List<ITeacher> lteacher)
     {
         lstTeacher = lteacher;
 
@@ -194,7 +208,7 @@ public class LessonImpl extends BusyImpl implements ILesson
     /**
      * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setLstDevice(List)
      */
-    public void setLstDevice(List ldevice)
+    public void setLstDevice(List<IDevice> ldevice)
     {
         lstDevice = ldevice;
 
@@ -203,7 +217,7 @@ public class LessonImpl extends BusyImpl implements ILesson
     /**
      * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setLstRoom(List)
      */
-    public void setLstRoom(List lroom)
+    public void setLstRoom(List<IRoom> lroom)
     {
         lstRoom = lroom;
     }
@@ -211,7 +225,7 @@ public class LessonImpl extends BusyImpl implements ILesson
     /**
      * @see fr.umlv.ir3.flexitime.common.data.activity.ILesson#setLstGroup(List)
      */
-    public void setLstGroup(List lgroup)
+    public void setLstGroup(List<IGroup> lgroup)
     {
         lstGroup = lgroup;
     }

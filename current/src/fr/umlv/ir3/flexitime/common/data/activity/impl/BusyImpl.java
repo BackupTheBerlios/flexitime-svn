@@ -38,7 +38,7 @@ public abstract class BusyImpl implements IBusy
      * @param daStart the start date of the unavailibility.
      * @param daEnd the end date of the unavailibility.
      */
-    BusyImpl(Date daStart, Date daEnd)
+    private BusyImpl(Date daStart, Date daEnd)
     {
         this.daStart = daStart;
         this.daEnd = daEnd;      

@@ -6,6 +6,7 @@
 
 package fr.umlv.ir3.flexitime.common.data.admin.impl;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,11 +53,11 @@ public class PreferencesImpl extends DataImpl implements IPreferences
 	 * @param lengthGap
 	 * @param listColors
 	 */
-	public PreferencesImpl(int heightGap, int lengthGap, List listColors)
+	public PreferencesImpl(int heightGap, int lengthGap, List<Color> listColors)
 	{
 		this.iHeightGap = heightGap;
 		this.iLengthGap = lengthGap;
-		this.listOfColors = new ArrayList(listColors);		
+		this.listOfColors = new ArrayList<Color>(listColors);		
 	}
 	
 
@@ -108,7 +109,7 @@ public class PreferencesImpl extends DataImpl implements IPreferences
 	/**
 	 * Returns the list of  
 	 * 
-	 * @return
+	 * @return the prefered color of the user
 	 */
 	public List getListOfColors()
 	{
@@ -122,5 +123,4 @@ public class PreferencesImpl extends DataImpl implements IPreferences
 	{
 		this.listOfColors = listOfColors;
 	}
-    
 }

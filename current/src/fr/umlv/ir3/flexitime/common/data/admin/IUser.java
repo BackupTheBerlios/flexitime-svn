@@ -12,78 +12,52 @@ import fr.umlv.ir3.flexitime.common.data.IData;
  * IUser
  * represents the interface of a User
  * 
- * @version Verion ou révision SVN
+ * @version 201
  * 
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface IUser extends IData
 { 
     /**
-     *  getPassword
      * returns the Password of a user
-     * 
-     *
-     *  @return the Password of a user
-     * 
-     * @author   FlexiTeam - Guillaume GUERRIN
+
+     * @return the Password of a user
      */
     public String getPassword();
     
     /**
-     *  setPassword
      * returns the Password of a user
-     * 
      *
      *  @param pass the Password of a user
-     * 
-     * @author   FlexiTeam - Guillaume GUERRIN
      */
     public void setPassword(String pass);
     
     /**
-     *  getPreference
      * returns the preference of a user
-     * 
      *
-     *  @return the preference of a user
-     * 
-     * @author   FlexiTeam - Guillaume GUERRIN
+     * @return the preference of a user
      */
     public IPreferences getPreferences();
     
     /**
-     *  setPreference
      * set the preference of a user
      * 
-     *
-     *  @param pref the preference of a user
-     * 
-     * @author   FlexiTeam - Guillaume GUERRIN
+     * @param pref
+     *            the preference of a user
      */
     public void setPreferences(IPreferences pref);
     
     /**
-     *  
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @return 
+     * DOCME
      * 
-     * @author   FlexiTeam - Famille
+     * @return a boolean 
      */
     public boolean isLdap();
    
     /**
-    *  
-    * DOCME Description
-    * Quel service est rendu par cette méthode
-    * <code>exemple d'appel de la methode</code>
+    * DOCME
     *
     * @param ldap 
-    * 
-    * @see (si nécessaire)
-    * @author   FlexiTeam - Famille
     */
     public void setLdap(boolean ldap);
 }

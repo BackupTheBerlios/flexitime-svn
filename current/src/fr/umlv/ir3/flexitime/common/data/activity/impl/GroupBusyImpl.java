@@ -6,8 +6,6 @@
 
 package fr.umlv.ir3.flexitime.common.data.activity.impl;
 
-import java.util.Date;
-
 import fr.umlv.ir3.flexitime.common.data.activity.IGroupBusy;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 
@@ -46,48 +44,24 @@ public class GroupBusyImpl extends BusyImpl implements IGroupBusy
 	{}
     
     /**
-     * Constructs an unavailibility for a group without reason. 
-     * 
-     * @param daStart the start date of the unavailibility.
-     * @param daEnd the end date of the unavailibility.
-     */
-    GroupBusyImpl(Date daStart, Date daEnd)
-    {
-        super(daStart,daEnd);
-    }
-    
-    /**
      * Constructs an unavailibility for a group between a gap without reason.
      * 
      * @param g gap of the unavaibulity
      */
-    GroupBusyImpl(Gap g)
+    public GroupBusyImpl(Gap g)
     {
         super(g);
     }
 	
-    /**
-     * Constructs an unavailibility for a group for the reason specified. 
-     * 
-     * @param daStart the start date of the unavailibility.
-     * @param daEnd the end date of the unavailibility.
-     * @param iReason an Integer representing the reason of the unavailibility.
-     */
-    GroupBusyImpl(Date daStart, Date daEnd, int iReason)
-    {
-        super(daStart,daEnd);
-        reason = iReason;           
-    }
-    
     /**
      * Constructs an unavailibility for a group between a gap for the reason specified.
      * 
      * @param g gap of the unavaibulity
      * @param iReason reason of the unavaibility
      */
-    GroupBusyImpl(Gap g, int iReason)
+    public GroupBusyImpl(Gap g, int iReason)
     {
-        super(g);
+        this(g);
         reason = iReason;
     }
     

@@ -1,6 +1,6 @@
 /*
  * Created on 13 janv. 2005
- * by Famille
+ * by Guillaume GUERRIN
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.common.data.admin.impl;
@@ -11,15 +11,11 @@ import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * DOCME 
  * 
- * @version Verion ou révision SVN
+ * @version 201
  * 
- * @author FlexiTeam - Famille
+ * @author FlexiTeam - Guillaume GUERRIN
  */
 public class UserImpl extends DataImpl implements IUser
 {
@@ -41,10 +37,24 @@ public class UserImpl extends DataImpl implements IUser
     //=============//
     protected UserImpl(){}
     
+    /**
+     * 
+     * DOCME
+     * @param name
+     */
     public UserImpl(String name)
     {
         super(name);
     }
+    
+    /**
+     * 
+     * DOCME
+     * @param name
+     * @param password
+     * @param preferences
+     * @param ldap
+     */
     public UserImpl(String name,String password,IPreferences preferences,boolean ldap)
     {
         super(name);
@@ -53,6 +63,13 @@ public class UserImpl extends DataImpl implements IUser
         this.ldap =ldap;
     }
     
+    /**
+     * 
+     * DOCME
+     * @param name
+     * @param preferences
+     * @param ldap
+     */
     public UserImpl(String name,IPreferences preferences,boolean ldap)
     {
         super(name);
@@ -60,6 +77,13 @@ public class UserImpl extends DataImpl implements IUser
         this.ldap =ldap;
     }
     
+    /**
+     * 
+     * DOCME
+     * @param name
+     * @param password
+     * @param ldap
+     */
     public UserImpl(String name,String password,boolean ldap)
     {
         super(name);
@@ -71,14 +95,11 @@ public class UserImpl extends DataImpl implements IUser
     // Méthodes  //
 	//===========//
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @return 
+     * DOCME
+     * 
+     * @return user password 
      * 
      * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#getPassword()
-     * @author   FlexiTeam - Famille
      */
     public String getPassword()
     {
@@ -86,30 +107,23 @@ public class UserImpl extends DataImpl implements IUser
     }
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
+     * DOCME
      *
      * @param password 
      * 
      * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#setPassword(java.lang.String)
-     * @author   FlexiTeam - Famille
      */
     public void setPassword(String password)
     {
     	this.password = password;
-
     }
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     * @return 
+     * DOCME
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#getPreference()
-     * @author   FlexiTeam - Famille
+     * @return user preferences 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#getPreferences()
      */
     public IPreferences getPreferences()
     {
@@ -117,14 +131,11 @@ public class UserImpl extends DataImpl implements IUser
     }
 
     /** 
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
+     * DOCME
+     * 
      * @param preferences 
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#setPreference(fr.umlv.ir3.flexitime.common.data.admin.IPreferences)
-     * @author   FlexiTeam - Famille
+     * @see fr.umlv.ir3.flexitime.common.data.admin.IUser#setPreferences(fr.umlv.ir3.flexitime.common.data.admin.IPreferences)
      */
     public void setPreferences(IPreferences preferences)
     {

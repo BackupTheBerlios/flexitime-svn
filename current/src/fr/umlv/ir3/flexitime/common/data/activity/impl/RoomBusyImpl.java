@@ -6,9 +6,8 @@
 
 package fr.umlv.ir3.flexitime.common.data.activity.impl;
 
-import java.util.Date;
-
 import fr.umlv.ir3.flexitime.common.data.activity.IRoomBusy;
+import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 /**
  * Defines an unavailability for a room. Containes a reason for the
@@ -46,18 +45,27 @@ public class RoomBusyImpl extends BusyImpl implements IRoomBusy
     {}
 
     /**
-     * Constructs an unavailibility for a room.
+     * Constructs an unavailibility for a room without reason.
      * 
-     * @param daStart
-     *            the start date of the unavailibility.
-     * @param daEnd
-     *            the end date of the unavailibility.
+     * @param g
+     *            the gap between the unavailibility.
+     */
+    public RoomBusyImpl(Gap g)
+    {
+        super(g);
+    }
+
+    /**
+     * Constructs an unavailibility for a room for the reason specified.
+     * 
+     * @param g
+     *            the gap between the unavailibility.
      * @param iReason
      *            an Integer representing the reason of the unavailibility.
      */
-    public RoomBusyImpl(Date daStart, Date daEnd, int iReason)
+    public RoomBusyImpl(Gap g, int iReason)
     {
-        super(daStart, daEnd);
+        this(g);
         reason = iReason;
     }
 

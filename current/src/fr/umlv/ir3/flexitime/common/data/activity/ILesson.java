@@ -8,7 +8,7 @@ package fr.umlv.ir3.flexitime.common.data.activity;
 
 import java.util.List;
 
-import fr.umlv.ir3.flexitime.common.data.resources.IResource;
+import fr.umlv.ir3.flexitime.common.data.resources.*;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 
 /**
@@ -23,7 +23,6 @@ public interface ILesson extends IBusy
      * Add a Resource in a lesson .
      * 
      * @param resource the new Resource in a lesson.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     void addResource(IResource resource);
 
@@ -31,7 +30,6 @@ public interface ILesson extends IBusy
      * Remove Resource in a lesson.
      * 
      * @param resource the new Resource in a lesson
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     void removeResource(IResource resource);
     
@@ -44,7 +42,7 @@ public interface ILesson extends IBusy
      * Setter for List of ITeacher
      * @param lteacher List to set
      */
-    public void setLstTeacher(List lteacher); 
+    public void setLstTeacher(List<ITeacher> lteacher); 
     
     /**
      * Getter for List of IDevice
@@ -55,7 +53,7 @@ public interface ILesson extends IBusy
      * Setter for List of IDevice
      * @param ldevice List to set
      */
-    public void setLstDevice(List ldevice);
+    public void setLstDevice(List<IDevice> ldevice);
     
     /**
      * Getter for List of IRoom
@@ -66,7 +64,7 @@ public interface ILesson extends IBusy
      * Setter for List of IGroup
      * @param lroom List to set
      */
-    public void setLstRoom(List lroom);
+    public void setLstRoom(List<IRoom> lroom);
     /**
      * Getter for List of IGroup
      * @return List of IGroup
@@ -76,7 +74,7 @@ public interface ILesson extends IBusy
      * Setter for List of IGroup
      * @param lgroup List to set
      */
-    public void setLstGroup(List lgroup);
+    public void setLstGroup(List<IGroup> lgroup);
     
     /**
      * Getter for ICourse contained in this Busy
@@ -88,6 +86,4 @@ public interface ILesson extends IBusy
      * @param _course ICourse to set
      */
     public void setCourse(ICourse _course);
-    
-
 }

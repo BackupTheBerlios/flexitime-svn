@@ -25,19 +25,17 @@ public interface IBusy extends Serializable
      * <code>Date date = lesson.getDate()</code>
      * 
      * @return the date of the beginning of the busy.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     Date getStartDate();
 
     /**
-     * Changes the date of the beginning of the busy.
-     * <code>	
+     * Changes the date of the beginning of the busy. <code>	
      * 		Date date = new Date();
      * 		lesson.setDate(date);
      * </code>
      * 
-     * @param daBusy the date of the beginning of the busy.
-     * @author FlexiTeam - Guillaume GUERRIN
+     * @param daBusy
+     *            the date of the beginning of the busy.
      */
     void setStartDate(Date daBusy);
 
@@ -46,44 +44,41 @@ public interface IBusy extends Serializable
      * <code>Date date = busy.getDate()</code>
      * 
      * @return the date of the end of the busy.
-     * @author FlexiTeam - Guillaume GUERRIN
      */
     Date getEndDate();
 
     /**
-     * Changes the date of the end of the busy.
-     * <code>	
+     * Changes the date of the end of the busy. <code>	
      *		Date date = new Date();
      * 		busy.setDate(date);
      * 	</code>
      * 
-     * @param daBusy the date of the end of the busy.
-     * @author FlexiTeam - Guillaume GUERRIN
+     * @param daBusy
+     *            the date of the end of the busy.
      */
     void setEndDate(Date daBusy);
 
     /**
-     *  
-     *Get Gap for this Busy
-     *
+     * Get Gap for this Busy
+     * 
      * @return Gap
      * 
      */
     public Gap getGap();
-    
+
     /**
      * Getter for id of the Busy
-     *
+     * 
      * @return id of the busy
      * 
      */
     public Long getIdBusy();
-    
+
     /**
-     *  
      * Setter of id
-     * @param idBusy id to set 
      * 
+     * @param idBusy
+     *            id to set
      */
     public void setIdBusy(Long idBusy);
 }
