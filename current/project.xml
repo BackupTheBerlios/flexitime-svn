@@ -1,89 +1,102 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
-
-	<pomVersion>3</pomVersion>
-	<id>FlexiMaven</id>
-  	<name>FlexiMaven</name>
-	<groupId>FlexiTeam</groupId>
-	<currentVersion>${appversion}</currentVersion>
-	<organization>
-		<name>FlexiTime</name>
-		<url>http://flexitime.free.fr</url>
-		<logo>/images/logo.png</logo>
-	</organization>
-	<inceptionYear>2004</inceptionYear>
-	<package>fr.umlv.ir3.flexitime</package>
-	<!--<logo>/images/logo.png</logo>-->
-	
-	<description>
+  <pomVersion>3</pomVersion>
+  <artifactId>FlexiTeam:null</artifactId>
+  <id>FlexiMaven</id>
+  <name>FlexiTime</name>
+  <groupId>FlexiTeam</groupId>
+  <currentVersion>${appversion}</currentVersion>
+  <organization>
+    <name>FlexiTime</name>
+    <url>http://flexitime.free.fr</url>
+    <logo>/images/logo.png</logo>
+  </organization>
+  <inceptionYear>2004-2005</inceptionYear>
+  <package>fr.umlv.ir3.flexitime</package>
+  <!--
+    <logo>/images/logo.png</logo>
+  -->
+  <description>
 		The FlexiTime is a course management tool, developed by the Department of 
 		Computer Science at the University of Marne-La-Vallée (F-77454).
 		FlexiTime allows staff to mark assignments online and to manage
 		their modules efficiently.
 	</description>
-	<shortDescription>University Courses Manager</shortDescription>
-	
-	<url>http://flexitime.free.fr</url>
-
-<!--
-	<repository>
-		<connection>scm:svn:ext:jguers@berlios.de:/svnroot/repos/flexitime:flexitime</connection>
-		<developerConnection>scm:svn:ext:jguers@berlios.de:/svnroot/repos/flexitime:flexitime</developerConnection>
-		<url>http://svn.berlios.de/viewcvs/flexitime/</url>
-	</repository>
--->
-
-	<versions>
-		<version>
-			<id>$cvsname</id>
-			<name>${appversion}</name>
-			<tag>${appversion}</tag>
-		</version>
-	</versions>
-
- 	<developers>
-		<developer>
-			<name>Jérôme GUERS</name>
-			<id>JG</id>
-			<email>jguers@univ-mlv.fr</email>
-			<organization>FlexiTeam</organization>
-			<roles>
-                <role>Project Head</role>
-            </roles>
-            <timezone>1</timezone>
-		</developer>
-	</developers>
-
-   <licenses>
-        <license>
-            <name>Lesser General Public License</name>
-			<url>http://www.gnu.org/copyleft/lesser.html</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-	<dependencies>
-		<!-- project dependencies -->
-
-		<!-- FlexiTime dependencies -->
-	</dependencies>
-
-	<build>
-		<nagEmailAddress></nagEmailAddress>
-		<sourceDirectory>${base.dir}/src</sourceDirectory>
-		<integrationUnitTestSourceDirectory>${base.dir}/test</integrationUnitTestSourceDirectory>
-		
-		<unitTest>
-			<includes>
-				<include>**/*Test.java</include>
-			</includes>
-			<excludes>
-			</excludes>
-		</unitTest>
-
-		<!-- Resources that are packaged up inside the JAR file -->
-		<resources>
-		</resources>
-		<!-- Integration unit test cases -->
-	</build>
+  <shortDescription>University Courses Manager</shortDescription>
+  <url>http://flexitime.free.fr</url>
+  <repository>
+    <connection>scm:svn:ext:jguers@berlios.de:/svnroot/repos/flexitime:flexitime</connection>
+    <developerConnection>scm:svn:ext:jguers@berlios.de:/svnroot/repos/flexitime:flexitime</developerConnection>
+    <url>http://svn.berlios.de/viewcvs/flexitime/</url>
+  </repository>
+  <versions>
+    <version>
+      <id>$cvsname</id>
+      <name>${appversion}</name>
+      <tag>${appversion}</tag>
+    </version>
+  </versions>
+  <developers>
+    <developer>
+      <name>Jérôme GUERS</name>
+      <id>JG</id>
+      <email>jguers@univ-mlv.fr</email>
+      <organization>FlexiTeam</organization>
+      <timezone>1</timezone>
+    </developer>
+    <developer>
+      <name>Adrien BOUVET</name>
+      <id>AB</id>
+      <email>abouvet@univ-mlv.fr</email>
+      <organization>FlexiTeam</organization>
+      <timezone>1</timezone>
+    </developer>
+    <developer>
+      <name>Fabien APPERT</name>
+      <id>FA</id>
+      <email>fappert@univ-mlv.fr</email>
+      <organization>FlexiTeam</organization>
+      <timezone>1</timezone>
+    </developer>
+    <developer>
+      <name>Guillaume GUERRIN</name>
+      <id>GG</id>
+      <email>gguerrrin@univ-mlv.fr</email>
+      <organization>FlexiTeam</organization>
+      <timezone>1</timezone>
+    </developer>
+    <developer>
+      <name>Valère FOREL</name>
+      <id>VF</id>
+      <email>vforel@univ-mlv.fr</email>
+      <organization>FlexiTeam</organization>
+      <timezone>1</timezone>
+    </developer>
+    <developer>
+      <name>Prasad RAMASSAMY</name>
+      <id>PR</id>
+      <email>pramassa@univ-mlv.fr</email>
+      <organization>FlexiTeam</organization>
+      <timezone>1</timezone>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>Lesser General Public License</name>
+      <url>http://www.gnu.org/copyleft/lesser.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <build>
+    <sourceDirectory>${base.dir}/src</sourceDirectory>
+    <unitTestSourceDirectory>${base.dir}/test</unitTestSourceDirectory>
+    <unitTest>
+      <includes>
+        <include>**/*Test.java</include>
+      </includes>
+    </unitTest>
+    <!-- Resources that are packaged up inside the JAR file -->
+    <!-- Integration unit test cases -->
+  </build>
 </project>
+
