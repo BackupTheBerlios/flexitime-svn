@@ -20,7 +20,7 @@
 		<!-- Building -->
 		<joined-subclass name="fr.umlv.ir3.flexitime.common.data.general.impl.BuildingImpl" table="building" dynamic-update="true">
 			<key column="idBuilding"/>
-			<list name="lstFloor" cascade="all" lazy="true">
+			<list name="lstFloor" cascade="all">
 				<key column="idBuilding" />
 				<index column="posFloor" />
 				<one-to-many class="fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl" />
