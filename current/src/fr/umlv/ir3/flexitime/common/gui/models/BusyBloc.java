@@ -13,6 +13,7 @@ package fr.umlv.ir3.flexitime.common.gui.models;
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 
@@ -68,7 +69,15 @@ public class BusyBloc
             lesson = (ILesson)busyBloc.getBusy();
             //TODO !!!! ATTENTION COPY DE LA REF DU Lesson ICI !!!! A CHANGER
             //TODO verifier si on doit valuer le nbGap suivant le course ou le lesson
-            this.busy = DataFactory.createLesson(lesson);    //new Busy(lesson.getBusy());
+            try
+            {
+                this.busy = DataFactory.createLesson(lesson);
+            }
+            catch (FlexiException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }    //new Busy(lesson.getBusy());
             this.nbGap = busyBloc.getNbGap();
         }
     }

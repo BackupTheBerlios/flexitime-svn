@@ -25,6 +25,7 @@ import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
 
 
@@ -130,7 +131,10 @@ public class MetierSimulator
     public static void generate()
     {
         
-        midonnet = DataFactory.createTeacher("Midonnet","jeCpasSonPrenom","midonnet@univ-mlv.fr");
+        try
+        {
+            midonnet = DataFactory.createTeacher("Midonnet","jeCpasSonPrenom","midonnet@univ-mlv.fr");
+
         revuz = DataFactory.createTeacher("Revuz","Dominiqueuniquenique","revuz@univ-mlv.fr");
         roussel = DataFactory.createTeacher("Roussel","Gilles","groussel@univ-mlv.fr");
         
@@ -256,6 +260,14 @@ public class MetierSimulator
         salle2027.addBusy(lesson4);
         salle2027.addBusy(lesson5);*/
         
+        
+        }
+        catch (FlexiException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
 
         
         
@@ -291,7 +303,29 @@ public class MetierSimulator
         return roussel;
     }
     
-    
+    public static List createTeacherList()
+    {
+        List lstTeacher = new ArrayList();
+        
+        try
+        {
+            midonnet = DataFactory.createTeacher("Midonnet","jeCpasSonPrenom","midonnet@univ-mlv.fr");
+
+            lstTeacher.add(midonnet);
+            revuz = DataFactory.createTeacher("Revuz","Dominiqueuniquenique","revuz@univ-mlv.fr");
+            lstTeacher.add(revuz);
+            roussel = DataFactory.createTeacher("Roussel","Gilles","groussel@univ-mlv.fr");
+            lstTeacher.add(roussel);
+        }
+        catch (FlexiException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        return lstTeacher;
+    }
+
     
     /** 
      * @return dsfsd
@@ -353,7 +387,7 @@ public class MetierSimulator
     }*/
     
     
-    public static List createTrackList()
+    /*public static List createTrackList()
     {
         //Construction des Track
         ITrack trackIR = DataFactory.createTrack("IR");
@@ -405,9 +439,9 @@ public class MetierSimulator
         lstTrack.add(trackEI);
         
         return lstTrack;
-    }
+    }*/
     
-    public static List createDeviceList()
+    /*public static List createDeviceList()
     {
         List lstDevice = new ArrayList();
         //Construction des Devices videoproj type 0
@@ -444,9 +478,9 @@ public class MetierSimulator
         lstDevice.add(device8);
         
         return lstDevice;
-    }
+    }*/
     
-    
+    /*
     public static List createRoomList()
     {
         List lstBuilding = new ArrayList();
@@ -468,7 +502,7 @@ public class MetierSimulator
         IFloor floorDes1 = DataFactory.createFloor("Etage1",buildingDes);
         IFloor floorDes2 = DataFactory.createFloor("Etage2",buildingDes);
 
-        
+        */
         /*//Construction des salles
         IRoom RoomCop11 = DataFactory.createRoom("Salle Cop11",0,30,floorCop1);
         IRoom RoomCop12 = DataFactory.createRoom("Salle Cop12",1,20,floorCop1);
@@ -508,26 +542,13 @@ public class MetierSimulator
         IRoom RoomDes13 = DataFactory.createRoom("Salle Des13",2,10,floorDes1);
         IRoom RoomDes14 = DataFactory.createRoom("Salle Des14",1,10,floorDes1);
         IRoom RoomDes15 = DataFactory.createRoom("Salle Des15",2,20,floorDes1);
-        */
+        
         lstBuilding.add(buildingCop);
         lstBuilding.add(buildingRab);
         lstBuilding.add(buildingDes);
         return lstBuilding;
-    }
+    }*/
     
-    public static List createTeacherList()
-    {
-        List lstTeacher = new ArrayList();
-        
-        midonnet = DataFactory.createTeacher("Midonnet","jeCpasSonPrenom","midonnet@univ-mlv.fr");
-        lstTeacher.add(midonnet);
-        revuz = DataFactory.createTeacher("Revuz","Dominiqueuniquenique","revuz@univ-mlv.fr");
-        lstTeacher.add(revuz);
-        roussel = DataFactory.createTeacher("Roussel","Gilles","groussel@univ-mlv.fr");
-        lstTeacher.add(roussel);
-        
-        return lstTeacher;
-    }
 
 }
 

@@ -11,11 +11,10 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
-import fr.umlv.ir3.flexitime.common.data.DataFactory;
 import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
+import fr.umlv.ir3.flexitime.common.data.activity.ILesson;
 import fr.umlv.ir3.flexitime.common.data.resources.IResource;
 import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.common.tools.Gap;
@@ -23,14 +22,11 @@ import fr.umlv.ir3.flexitime.common.tools.Time;
 import fr.umlv.ir3.flexitime.common.tools.TimeBloc;
 
 
-//TODO BUG => erreur d'affichage kan 2 années se croisent :(((((
-
-
 /**
  * DOCME Description explication supplémentaire si nécessaire in english
  * please... Que fait cette classe, qu'est-ce qu'elle représente, ...
  * 
- * @version Verion ou révision SVN
+ * @version 1.0
  * @author FlexiTeam - binou
  */
 public class RessourcePlanningModel extends AbstractPlanningModel
@@ -42,10 +38,13 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     }
     
     //Données dépendantes des préférences
-    private final String[] tmpDayEnum = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"};
+    private final String[] tmpDayEnum = { "Lundi", "Mardi", "Mercredi", "Jeudi","Vendredi"}; //$NON-NLS-1$
     private final int      nbDays  = 5;
-    //TODO faire un JSlider pour assurer la cohérence
-    private final int      gapTime = 60;
+    
+    
+    private final int gapUnit = 15;
+    private int gapMultiplicateur = 4;
+    private int      gapTime;
     
     private final TimeBloc[] blocList;
 
@@ -66,18 +65,14 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     //Image des Busy encapsulé par des LessonBloc et structuré de la meme maniere => list de semaine avec une liste de jour et une liste de LessonBloc
     private List<DayBloc[]>         busyListImage;
     
+    //TODO faire un JSlider pour assurer la cohérence
     //TODO idée => fusionner les 2 listes pour gain de place
-    
-
-
     //TODO gérer la fusion horizontalement !! ca serait top
 
     
     /**
      * Constructs a Model according to the specified Ressource
      * and the initial Gap to handle
-     * @param _ressource 
-     * @param initialGap 
      *  
      * @param _ressource the ressource concerned by the planning
      * @param initialGap th initial gap handle to create the model
@@ -89,53 +84,50 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.ressource = _ressource;
         this.ressourceSet = ressource.getSetBusy();
         this.edtWeekGap = initialGap;
-        this.nbWeeks = Time.getGapWeek(edtWeekGap.getStartDate(),edtWeekGap.getEndDate()) + 1 ;
         
-        System.out.println("Debut : " + this.edtWeekGap.getStartDate().getStrDate());
-        System.out.println("Fin : " + this.edtWeekGap.getEndDate().getStrDate());
-        
-        /*this.blocList = new Gap[4];
-        this.blocList[0] = new Gap(1901,1,1,8,30,1901,1,1,10,30);
-        this.blocList[1] = new Gap(1901,1,1,10,45,1901,1,1,12,45);
-        this.blocList[2] = new Gap(1901,1,1,13,45,1901,1,1,15,45);
-        this.blocList[3] = new Gap(1901,1,1,16,0,1901,1,1,18,0);*/
         this.blocList = new TimeBloc[4];
         this.blocList[0] = new TimeBloc(8,30,10,30);
         this.blocList[1] = new TimeBloc(10,45,12,45);
         this.blocList[2] = new TimeBloc(13,45,15,45);
         this.blocList[3] = new TimeBloc(16,0,18,0);
 
-
-        for (int i = 0; i < blocList.length; i++)
-            this.nbGaps += countNbGap(blocList[i].countNbMinutes());
+        initWorkingData();
+        initDataList();
+        
   
         // Je suppose :
         // -> Busy toutes comprises dans le créneau concerné ici
         // -> Busy valides (pas de chevauchement etc ...)
         // -> Busy dans l'ordre chronologique
         
-        this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
-        //this.initialyseDatas(MetierSimulator.getLessonsList());
-        //this.initialyseDatas(null);
-        this.initialyseImage();
+
         
-        System.out.println("nbWeeks=" + nbWeeks);
-        System.out.println("nbBlocs=" + this.blocList.length);
-        System.out.println("nbGap=" + this.nbGaps);
-        
-        
-        //TreeSet test = (TreeSet)ressource.getSetBusy();
-        //TreeSet subSet = (TreeSet)test.subSet(DataFactory.createLesson(new Gap(2005,1,4,0,0,2005,1,4,0,0),null,  new ArrayList(), 0      ) , DataFactory.createLesson(new Gap(2005,1,5,0,0,2005,1,5,0,0),null, new ArrayList(), 0      )     );
-        //TreeSet pwet = (TreeSet)subSet.tailSet();
-        
-        /*for(Object busy : subSet)
-        {
-            IBusy bus = (IBusy)busy;
-            System.out.println("Busy : " + bus.getStartDate() + " => " + bus.getEndDate());
-        }*/
+        //System.out.println("Debut : " + this.edtWeekGap.getStartDate().getStrDate());
+        //System.out.println("Fin : " + this.edtWeekGap.getEndDate().getStrDate());
+
 
     }
 
+    private void initWorkingData()
+    {
+        this.gapTime = this.gapUnit * this.gapMultiplicateur;
+        this.nbWeeks = Time.getGapWeek(edtWeekGap.getStartDate(),edtWeekGap.getEndDate()) + 1 ;
+        this.nbGaps = 0;
+        for (int i = 0; i < blocList.length; i++)
+            this.nbGaps += countNbGap(blocList[i].countNbMinutes());
+        
+        System.out.println("nbWeeks=" + nbWeeks); //$NON-NLS-1$
+        System.out.println("nbBlocs=" + this.blocList.length); //$NON-NLS-1$
+        System.out.println("nbGap=" + this.nbGaps); //$NON-NLS-1$
+    }
+    
+    private void initDataList()
+    {
+        this.initialyseDatas(subSet(this.ressourceSet,this.edtWeekGap));
+        //this.initialyseDatas(MetierSimulator.getLessonsList());
+        //this.initialyseDatas(null);
+        this.initialyseImage();  
+    }
 
     private Set subSet(Set<IBusy> from, Gap gap)
     {
@@ -164,7 +156,6 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         
         return set;
         
-        //TODO changer
         //Gap start = new Gap(gap.getStartDate().getCal(), gap.getStartDate().getCal());
         //Gap end = new Gap(gap.getEndDate().getCal(), gap.getEndDate().getCal());
         //return (TreeSet)from.subSet(DataFactory.createLesson(start,null, new ArrayList(),0) , DataFactory.createLesson(end,null,new ArrayList(),0));
@@ -245,9 +236,36 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     {
         return edtWeekGap;
     }
+    
 
 
 
+    /** 
+     * Get the multiplier used to calculate the gapTime
+     *
+     * @return the multiplier
+     * 
+     * @see RessourcePlanningModel#getGapUnit()
+     * 
+     */
+    public int getGapMultiplicateur()
+    {
+        return gapMultiplicateur;
+    }
+    
+    /** 
+     * Get the unit used to calculate the gapTime
+     *
+     * @return the unit in minutes
+     * 
+     * @see RessourcePlanningModel#getGapMultiplicateur()
+     */
+    public int getGapUnit()
+    {
+        return gapUnit;
+    }
+    
+    
     /**
      * Return an Integer which is the value of the week in its
      * year in order to constructs the Header of the week column <br>
@@ -291,7 +309,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
      */
     public Object getGapHeaderAt(int blocNumber)
     {
-        return language.formatShortTime( new Time(1901,1,1,blocList[blocNumber].getStartHour(),blocList[blocNumber].getStartMin()))  + "-" + language.formatShortTime(   new Time(1901,1,1,blocList[blocNumber].getEndHour(),blocList[blocNumber].getEndMin())   );
+        return language.formatShortTime( new Time(1901,1,1,blocList[blocNumber].getStartHour(),blocList[blocNumber].getStartMin()))  + "-" + language.formatShortTime(   new Time(1901,1,1,blocList[blocNumber].getEndHour(),blocList[blocNumber].getEndMin())   ); //$NON-NLS-1$
     }
 
 
@@ -389,6 +407,8 @@ public class RessourcePlanningModel extends AbstractPlanningModel
     
     
 	/**
+     * Add a BusyBloc to the contents data
+     * 
      * @param weekNumber the value of the week (0 is the first)
      * @param dayNumber the value of the day (0 is the first)
      * @param gapNumber the value of the gap (0 is the first)
@@ -398,7 +418,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 	{
 		//Ici il faudra ajouter le cours au groupe et le faire valider par le serveur
 		
-	    //pas de verif avant de placer le cours pour l'instant
+	    //pas de verif avant de placer le cours pour l'instant, mais le controle a deja été fait dans le controleur normalement
 	    DayBloc bloc = this.getDayBloc(weekNumber, dayNumber);
 	    bloc.representationList[gapNumber] = lesson;
 	    if(lesson.getNbGap() > 1 )
@@ -406,30 +426,54 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 	        for (int i = gapNumber+1 ; i < gapNumber+lesson.getNbGap() ; i++)
 	            bloc.representationList[i] = null;
 	    }
-        
-        
-	    
-	    
 		fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+lesson.getNbGap()-1 );
 	}
     
-    
-       /** 
-     * DOCME Description
-     */
-    public void increase()
+    public void updateLesson(int weekNumber, int dayNumber, int gapNumber)
     {
-        this.edtWeekGap.getEndDate().addWeek(1);
-        this.nbWeeks += 1;
+        //le BusyBloc a normalement déja été changé
+        //TODO communication au serveur
         
-        this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
-        this.initialyseImage();
+        //System.out.println("***model***");
+        //System.out.println("Element changé en " + weekNumber + "," + dayNumber + "," + gapNumber);
+        IBusy busy = ((BusyBloc)this.getDayBloc(weekNumber, dayNumber).getElementAt(gapNumber)).getBusy();
+        System.out.println("size : " + ((ILesson)busy).getLstTeacher().size());
+        //fireContentsChanged()
     }
+    
+    
+    
+    
+    /** 
+     * Change the range of week currently used for the planning<br>
+     * the result will be the previous Gap of week
+     */
+    public void fullStepBack()
+    {
+        this.edtWeekGap.getStartDate().addWeek(-this.nbWeeks);
+        this.edtWeekGap.getEndDate().addWeek(-this.nbWeeks);
 
+        this.initDataList();
+    }
+    
+    /** 
+     * Change the range of week currently used for the planning<br>
+     * the result will be the same gap but one week earlier
+     */
+    public void stepBack()
+    {
+//      TODO optimiser en ne faisant ke l'ajout
+        this.edtWeekGap.getStartDate().addWeek(-1);
+        this.edtWeekGap.getEndDate().addWeek(-1);
 
+        this.initDataList();
+        
+    }
+    
 
     /** 
-     * DOCME Description
+     * Change the range of week currently used for the planning<br>
+     * the result will be the the same gap without the ending week
      */
     public void decrease()
     {
@@ -439,68 +483,77 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         this.busyList.remove(this.busyList.size()-1);
         this.busyListImage.remove(this.busyListImage.size()-1);
     }
-
-
+    
+    /** 
+     * Change the range of week currently used for the planning<br>
+     * the result will be the the same gap with another week added
+     */
+    public void increase()
+    {
+        this.edtWeekGap.getEndDate().addWeek(1);
+        this.nbWeeks += 1;
+        
+        this.initDataList();
+    }
+    
 
     /** 
-     * DOCME Description
+     * Change the range of week currently used for the planning<br>
+     * the result will be the same gap but one week later
      */
     public void stepOver()
     {
         this.edtWeekGap.getStartDate().addWeek(1);
         this.edtWeekGap.getEndDate().addWeek(1);
         
-        this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
-        this.initialyseImage();
+        this.initDataList();
         
     }
 
 
-
     /** 
-     * DOCME Description
+     * Decrease the size of gap's time
      */
-    public void stepBack()
+    public void lessGapTime()
     {
-//      TODO optimiser en ne faisant ke l'ajout
-        this.edtWeekGap.getStartDate().addWeek(-1);
-        this.edtWeekGap.getEndDate().addWeek(-1);
-        
-        System.out.println("Debut : " + this.edtWeekGap.getStartDate().getStrDate());
-        System.out.println("Fin : " + this.edtWeekGap.getEndDate().getStrDate());
-
-        this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
-        this.initialyseImage();
-        
+        if(this.gapMultiplicateur < 2)
+            return;
+        this.gapMultiplicateur = this.gapMultiplicateur/2;
+        this.initWorkingData();
+        this.initDataList();
+    }
+    
+    /** 
+     * Increase the size of gap's time
+     */
+    public void moreGapTime()
+    {
+        if(this.gapMultiplicateur > 4)
+            return;
+        this.gapMultiplicateur = this.gapMultiplicateur*2;
+        this.initWorkingData();
+        this.initDataList();
     }
 
 
 
+
+
     /** 
-     * DOCME Description
+     * Change the range of week currently used for the planning<br>
+     * the result will be the next Gap of week
      */
     public void fullStepOver()
     {
         this.edtWeekGap.getStartDate().addWeek(this.nbWeeks);
         this.edtWeekGap.getEndDate().addWeek(this.nbWeeks);
 
-        this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
-        this.initialyseImage();
+        this.initDataList();
     }
 
 
 
-    /** 
-     * DOCME Description
-     */
-    public void fullStepBack()
-    {
-        this.edtWeekGap.getStartDate().addWeek(-this.nbWeeks);
-        this.edtWeekGap.getEndDate().addWeek(-this.nbWeeks);
 
-        this.initialyseDatas(subSet(ressourceSet,this.edtWeekGap));
-        this.initialyseImage();
-    }
     
 
 
@@ -581,7 +634,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
                 dayNumber = curBusy.getGap().getStartDate().getIDayOfWeek();
                 if(dayList[dayNumber] == null)
                     dayList[dayNumber] = new ArrayList<IBusy>(1);
-                System.out.println("ajout de " + curBusy.getGap().getStartDate().getStrDate());
+                //System.out.println("ajout de " + curBusy.getGap().getStartDate().getStrDate());
                 dayList[dayNumber].add(curBusy);
                 if(iter.hasNext())
                     curBusy = (IBusy)iter.next();
@@ -591,10 +644,10 @@ public class RessourcePlanningModel extends AbstractPlanningModel
         }
     }
     
-    private int getWeekNumber(IBusy curBusy)
+    /*private int getWeekNumber(IBusy curBusy)
     {
         return curBusy.getGap().getStartDate().getWeek() - this.edtWeekGap.getStartDate().getWeek();
-    }
+    }*/
     
     private boolean isInWeek(IBusy curBusy, int week)
     {
@@ -687,7 +740,7 @@ public class RessourcePlanningModel extends AbstractPlanningModel
                 
                 //cas d'erreur, le cours a placer est en dehors des plages horaires
                 if(curBloc == blocList.length)
-                    return; //TODO lever une exception
+                    return;
 
                 //On cherche le numéro du Gap ki le contiendra dans ce bloc et on ajoute tous les gap des blocs d'avant
                 int firstGap = countNbGap(blocList[curBloc].getStartDate() ,  busy.getGap().getStartDate()) +precSizeBloc;
