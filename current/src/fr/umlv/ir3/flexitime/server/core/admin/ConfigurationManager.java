@@ -9,7 +9,10 @@ package fr.umlv.ir3.flexitime.server.core.admin;
 
 import java.util.HashMap;
 
+import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
+import fr.umlv.ir3.flexitime.common.data.admin.IPreferences;
 import fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationListener;
+import fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationManager;
 
 /**
  * ConfigurationManagerImpl - DOCME Description explication supplémentaire si
@@ -19,22 +22,24 @@ import fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationListener;
  * @version Verion ou révision SVN
  * @author FlexiTeam - Valère
  */
-public class ConfigurationManager
+public class ConfigurationManager implements IConfigurationManager 
 {
-
-    /**
-     * getConfigurations - DOCME Description Quel service est rendu par cette
-     * méthode <code>exemple d'appel de la methode</code>
-     * 
-     * @return
-     * @see fr.umlv.ir3.flexitime.common.rmi.admin.IConfigurationListener#getConfigurations()
-     * @author FlexiTeam - Valère
-     * @date 26 déc. 2004
-     */
-    public HashMap getConfigurations()
+    //Pas de gestion de lock car un seul admin en meme temps !!
+    public IConfig get()
     {
-        // TODO Auto-generated method stub
-        return null;
+        //On va chercher la config dans la base
+        //if ConfigStorage.lock() == false;
+        //On la retourne
+        //return ConfigStorage.get();
+        return(null);
+    }
+    
+    public void save(IConfig config)
+    {
+        //if ConfigStorage.lock() == false;
+        //On met la nouvelle
+        //ConfigStorage.set(config);
+        //notifié?
     }
 
 }
