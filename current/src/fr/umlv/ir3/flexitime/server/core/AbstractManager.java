@@ -81,9 +81,10 @@ public abstract class AbstractManager implements IDataManager
      * 
      * @author   FlexiTeam - Administrateur
      */
-    public boolean lock() throws InterruptedException
+    public synchronized boolean lock() throws InterruptedException
     {
-        if(lock.tryLock(5,TimeUnit.SECONDS)) return true;
+        if(lock.tryLock(10,TimeUnit.SECONDS)) return true;
+        //if(lock.tryLock()) return true;
         return false;
     }
     /** 
