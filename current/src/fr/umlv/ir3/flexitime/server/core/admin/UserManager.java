@@ -7,7 +7,10 @@
 
 package fr.umlv.ir3.flexitime.server.core.admin;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
@@ -24,19 +27,19 @@ import fr.umlv.ir3.flexitime.server.io.FlexiLDAP;
  * @version Verion ou révision SVN
  * @author FlexiTeam - Valère
  */
-public class UserManager implements IUserManager
+public class UserManager extends UnicastRemoteObject implements IUserManager
 {
     FlexiLDAP ldap;
     List ConnectedUser;
     
-    public UserManager(IConfig config)
+    public UserManager(IConfig config) throws RemoteException
     {
         //On se connecte au server ldap en utilisant la config
-        ldap = new FlexiLDAP(config.getServerLDAP(),config.getPortLDAP() ,config.getPathUserLDAP(), config.getPathGroupLDAP());
+        ldap = new FlexiLDAP(config.getUriServerLDAP(),config.getPortLDAP() ,config.getPathUserLDAP(), config.getPathGroupLDAP());
         ConnectedUser = new ArrayList();
     }
     
-    public boolean ConnectToRich(String name, String passwd)
+    public boolean ConnectToRich(String name, String passwd) throws RemoteException
     {
         if(!ConnectedUser.contains(name))
         {
@@ -54,7 +57,7 @@ public class UserManager implements IUserManager
         return false;     
     }
     
-    public boolean ConnectToLight(String name, String passwd)
+    public boolean ConnectToLight(String name, String passwd) throws RemoteException
     {
         if(checkUser(name,passwd))return true;
         return false;     
@@ -71,25 +74,32 @@ public class UserManager implements IUserManager
      * @author FlexiTeam - Valère
      * @date 26 déc. 2004
      */
-    public boolean checkUser(String name, String passwd)
+    public boolean checkUser(String name, String passwd) throws RemoteException
     {
-       //TODO (Gestion des exeptions si on ne peut pas joindre soit le LDAP soit la base de données)
-        //On verifie que le User ne soit pas déja connecté
-            //On vérifie d'abord si l'utilisateur se trouve dans le LDAP
-            //TODO Il faudrait lire les informations concernant la config du LDAP dans la base.
-            // On construit par défaut pour le moment
-            if(ldap.createConnection(name,passwd))
-            {
-                return true;
-            }
-                //Si on ne l'a pas trouvé dans le LDAP on regarde si c'est un utilisateur local à l'appli    
-            if(name == null)//<- a modifier pour test sur la base
-            /*ICI il faut retrouver tous les utilisateurs de l'appli dans la base.
-                 Ensuite il faut parcourir la liste, voir si l'on trouve l'utilisateur et vérifier son password
-                 Si on le trouve on renvoit true sinon false.*/
-                return true;
-            //Sinon si il n'est ni dans le ldap ni dans la base alors false
-                return false;
+        //TODO (Gestion des exeptions si on ne peut pas joindre soit le LDAP soit la base de données)
+        //      On verifie que le User ne soit pas déja connecté
+        Iterator it = ConnectedUser.iterator();
+        while(it.hasNext()){
+            if(name.equals((String)it.next())) return false;
+        }
+        
+        //      On vérifie d'abord si l'utilisateur se trouve dans le LDAP
+        if(ldap.createConnection(name,passwd)) return true;
+        //      Si on ne l'a pas trouvé dans le LDAP on regarde si c'est un utilisateur local à l'appli    
+        /* il faut retrouver tous les utilisateurs de l'appli dans la base.
+             Ensuite il faut parcourir la liste, voir si l'on trouve l'utilisateur et vérifier son password
+             Si on le trouve on renvoit true sinon false.*/
+        //FIXME List lstUser = UserStorage.get();
+        //FIXME it = lstUser.iterator();
+        //FIXME while(it.hasNext()){
+        //FIXME    IUser user = (IUser)it.next();
+        //FIXME    if(name.compareTo(user.getName())) {
+        //FIXME        if(passwd.compareTo(user.getPassword()))
+        //FIXME            return true;
+        //FIXME    }
+        //FIXME }
+        //Sinon si il n'est ni dans le ldap ni dans la base alors false
+        return false;
     }
     /**
      *  getUser
@@ -100,12 +110,12 @@ public class UserManager implements IUserManager
      * 
      * @author   FlexiTeam - Famille
      */
-    public IUser get(String name)
+    public IUser get(String name) throws RemoteException
     {
         //TODO ligne de dessous à retirer
         IUser user = new UserImpl(name);    
         //On recupere le user dans la base
-        //User user = UserStorage.get(name);
+        //FIXME User user = UserStorage.get(name);
         
         //s'il existe, on le retourne
         return user;
@@ -122,7 +132,7 @@ public class UserManager implements IUserManager
      * @see fr.umlv.ir3.flexitime.common.data.admin
      * @author   FlexiTeam - Famille
      */
-    public void save(String name, String password)
+    public void save(String name, String password) throws RemoteException
     {
         //Un user de ldap ou non?
         //On verifie si il est dans le ldap
@@ -131,7 +141,7 @@ public class UserManager implements IUserManager
         {
             //Si l'utilisateur est dans le ldap
             //On lui cree un user avec une preference mais sans mot de passe
-            IUser user = new UserImpl(name,new PreferencesImpl(),true);
+            //IUser user = new UserImpl(name,new PreferencesImpl(),true);
             //Puis on l'ajoute a la base de données
             //UserStorage.add(user);
         }
@@ -139,7 +149,7 @@ public class UserManager implements IUserManager
         {
             //Si 'utilisteur n'est pas dans le ldap
             //On cree un user avec les preferences et le mot de passe local a l'appli
-            IUser user = new UserImpl(name,password,new PreferencesImpl(),false);
+            //IUser user = new UserImpl(name,password,new PreferencesImpl(),false);
             //Puis on l'ajoute a la base de données
             //UserStorage.add(user);
         }
@@ -155,7 +165,7 @@ public class UserManager implements IUserManager
      * @see fr.umlv.ir3.flexitime.common.data.admin
      * @author   FlexiTeam - Famille
      */
-    public void removeUser(String name)
+    public void removeUser(String name) throws RemoteException
     {
             //On cree un user
             IUser user = new UserImpl(name);
@@ -172,7 +182,7 @@ public class UserManager implements IUserManager
      * @see fr.umlv.ir3.flexitime.common.data.admin
      * @author   FlexiTeam - Famille
      */
-    public void changeLocalPasswd(String name,String newPassword)
+    public void changeLocalPasswd(String name,String newPassword) throws RemoteException
     {
         //Un user de ldap ou non?
         //On verifie si il est dans le ldap
