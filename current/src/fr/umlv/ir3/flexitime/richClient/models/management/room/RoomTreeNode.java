@@ -52,10 +52,6 @@ public class RoomTreeNode implements FlexiTreeNode
 	 */
 	private List children;
 	
-	/**
-	* List of Listener
-	*/
-	List listener; 
 	
 	//==================//
     //   Constructeurs  //
@@ -66,7 +62,6 @@ public class RoomTreeNode implements FlexiTreeNode
 		this.parent = parent;
 		this.room = room;
 		children = new ArrayList();
-		this.listener = new ArrayList();
 	}
 	
 	/**
@@ -167,7 +162,8 @@ public class RoomTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
 	 */
-	public void setValue(Object newValue) throws RemoteException {
+	public void setValue(Object newValue) throws RemoteException 
+    {
 		room.setName((String)newValue);
         RemoteDataManager.getManager().saveOrUpdateRoom(room,room.getFloor());
 		

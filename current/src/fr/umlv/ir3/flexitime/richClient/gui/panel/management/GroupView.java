@@ -9,11 +9,13 @@ package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -28,6 +30,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeList
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupViewModel;
 
 /**
  * @author Famille
@@ -35,22 +38,20 @@ import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GroupView implements FlexiTreeNodeListener
+public class GroupView
 {
 
 	JPanel panel;
-	ResourceTreeModel model;
-	JTree tree;
+	GroupViewModel model;
 	JButton okButton;
 	JButton cancelButton;
 	JTextField name;
 	JTextField nbPerson;
 	JLabel errorLabel;
-	public GroupView(TreeModel model,JTree tree)
+	public GroupView(GroupViewModel model)
 	{
-		this.model=(ResourceTreeModel)model;
-		this.tree=tree;
-		((FlexiTreeNode)this.tree.getSelectionPath().getLastPathComponent()).addFlexiTreeNodeListener(this);
+		this.model=model;
+        model.setView(this);
 		create();
 	}
 	
@@ -73,8 +74,8 @@ public class GroupView implements FlexiTreeNodeListener
 		okButton.setEnabled(false);
 		cancelButton=new JButton("Annuler");
 		cancelButton.setEnabled( false);
-		name = new JTextField(tree.getSelectionPath().getLastPathComponent().toString());
-		nbPerson = new JTextField(""+((GroupTreeNode)tree.getSelectionPath().getLastPathComponent()).getGroup().getNbPerson());
+		name = new JTextField(model.getGroup().getName());
+		nbPerson = new JTextField(""+ model.getGroup().getNbPerson());
 		DocumentListener documentListener = new DocumentListener(){
 
 			public void insertUpdate(DocumentEvent arg0) {
@@ -108,19 +109,25 @@ public class GroupView implements FlexiTreeNodeListener
 
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				List list = new ArrayList();
-				list.add(name.getText());
-				list.add(nbPerson.getText());
-				model.change((FlexiTreeNode)tree.getSelectionPath().getLastPathComponent(),list);
-				okButton.setEnabled(false);
-				cancelButton.setEnabled(false);
+				try 
+                {
+    			    String[] values = new String[2];
+    				values[0]=name.getText();
+    				values[1]=nbPerson.getText();
+    				model.setValue(values);
+    				okButton.setEnabled(false);
+    				cancelButton.setEnabled(false);
+                } 
+                catch (RemoteException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(),"Modification impossible",JOptionPane.ERROR_MESSAGE);
+                }
 			}	
 		});
 		cancelButton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent arg0) {
-				name.setText(tree.getSelectionPath().getLastPathComponent().toString());
-				nbPerson.setText(""+((GroupTreeNode)tree.getSelectionPath().getLastPathComponent()).getGroup().getNbPerson());
+				name.setText(model.getGroup().getName());
+				nbPerson.setText(""+model.getGroup().getNbPerson());
 				okButton.setEnabled(false);
 				cancelButton.setEnabled(false);
 			}
@@ -149,16 +156,10 @@ public class GroupView implements FlexiTreeNodeListener
 	{
 		return panel;
 	}
-
-
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.gui.actions.FlexiTreeNodeListener#nodeChanged(java.lang.Object)
-	 */
-	public void nodeChanged(Object obj) {
-		name.setText( (String)obj);
-		okButton.setEnabled( false);
-		cancelButton.setEnabled( false);
-		
-	}
-
+     
+    public void fireChanged()
+     {
+         name.setText(model.getGroup().getName());
+         nbPerson.setText("" + model.getGroup().getNbPerson());
+     }
 }

@@ -4,8 +4,9 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package fr.umlv.ir3.flexitime.richClient.models.management.track;
+package fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -14,7 +15,9 @@ import java.util.List;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
+import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 
@@ -48,11 +51,6 @@ public class CourseTreeNode implements FlexiTreeNode
 		 * The list of the sub categories
 		 */
 		private List children;
-		
-		/**
-		 * List of Listener
-		*/
-		List listener; 
 		 
 		
 		//==================//
@@ -64,7 +62,6 @@ public class CourseTreeNode implements FlexiTreeNode
 			this.parent = parent;
 			this.course = course;
 			children = new ArrayList();
-			this.listener = new ArrayList();
 		}
 		
 		/**
@@ -137,22 +134,13 @@ public class CourseTreeNode implements FlexiTreeNode
 		{
 			return course;
 		}
-		/**
-		 * Creates dynamiquely the list of the children when the user click on the "plus"
-		 * @return the list of sub categories
-		 */
-		/*public List processChildren()
-		{
-			if(children.size()>0)return children;
-			
-			ArrayList list = new ArrayList(track.getLstClass().size());
-			for(int i = 0;i<track.getLstClass().size();i++)
-			{
-				list.add(new TrackTreeNode(this,(Category)cat.getSubCategories().get(i),factory,model));
-			}
-			this.children =list;
-			return(list);
-		}*/
+		public void setCourse(ICourse course)
+        {
+            this.course = course;
+            model.nodeChanged(this);
+        }
+		
+        
 		public String toString()
 		{
 			return course.getName();
@@ -163,19 +151,6 @@ public class CourseTreeNode implements FlexiTreeNode
 		 */
 		public void add() {}
 		
-		/* (non-Javadoc)
-		 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
-		 */
-		public void change(List obj) 
-		{
-			if(obj.size()>=2)
-			{
-				course.setName((String)obj.get(0));
-				//group.setNbPerson((new Integer((String)obj.get(1))).intValue());
-				model.nodeChanged(this);
-			}
-		}	
-
 		/* (non-Javadoc)
 		 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 		 */
@@ -188,10 +163,9 @@ public class CourseTreeNode implements FlexiTreeNode
 		/* (non-Javadoc)
 		 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
 		 */
-		public void setValue(Object newValue) {
+		public void setValue(Object newValue) throws RemoteException {
 			course.setName((String)newValue);
-			informListenerChange(newValue);
-			model.nodeChanged(this);
+            RemoteDataManager.getManager().saveOrUpdateCourse(course,course.getParentSubject());
 			
 		}
 
@@ -201,19 +175,6 @@ public class CourseTreeNode implements FlexiTreeNode
 		public void setModel(DefaultTreeModel model) {
 			this.model=model;
 			
-		}
-		public void addFlexiTreeNodeListener(FlexiTreeNodeListener ob)
-		{
-			listener.add(ob);
-		}
-		
-		public void informListenerChange(Object value)
-		{
-			Iterator iter = listener.iterator() ;
-			for(;iter.hasNext();)
-			{
-				((FlexiTreeNodeListener)iter.next()).nodeChanged(value);
-			}
 		}
 
 }

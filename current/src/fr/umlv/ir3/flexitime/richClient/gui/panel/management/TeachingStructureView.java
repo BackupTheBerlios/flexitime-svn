@@ -26,8 +26,8 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiSelectionLis
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.RootTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.RootSubjectsGroupTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.TeachingStructureTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.RootSubjectsGroupTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.TeachingStructureTreeNode;
 
 /**
  * @author Famille

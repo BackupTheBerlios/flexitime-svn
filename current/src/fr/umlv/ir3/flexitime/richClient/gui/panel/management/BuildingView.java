@@ -1,10 +1,9 @@
 /*
- * Created on 13 déc. 2004
- * by Adrien Bouvet
- * 
- * Copyright: GPL - UMLV(FR) - 2004/2005
+ * Created on 28 janv. 2005
+ *
+ * TODO To change the template for this generated file go to
+ * Window - Preferences - Java - Code Style - Code Templates
  */
-
 package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 
 import java.awt.event.ActionEvent;
@@ -23,25 +22,24 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 import fr.umlv.ir3.flexitime.richClient.models.management.device.DevicesViewModel;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.TrackViewModel;
+import fr.umlv.ir3.flexitime.richClient.models.management.room.BuildingViewModel;
+
 
 /**
- * DevicesView - DOCME Description explication supplémentaire si nécessaire in
- * english please... Que fait cette classe, qu'est-ce qu'elle représente, ...
- * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
- * @author FlexiTeam - Adrien Bouvet
+ * @author Famille
+ *
+ * TODO To change the template for this generated type comment go to
+ * Window - Preferences - Java - Code Style - Code Templates
  */
-public class DevicesView
+public class BuildingView
 {
     JPanel panel;
-    DevicesViewModel model;
+    BuildingViewModel model;
     JButton okButton;
     JButton cancelButton;
     JTextField name;
     
-    public DevicesView(DevicesViewModel model)
+    public BuildingView(BuildingViewModel model)
     {
         this.model=model;
         model.setView(this);
@@ -64,7 +62,7 @@ public class DevicesView
         cancelButton=new JButton("Annuler");
         okButton.setEnabled(false);
         cancelButton.setEnabled(false);
-        name = new JTextField(model.getDevice().getName());
+        name = new JTextField(model.getBuilding().getName());
         name.getDocument().addDocumentListener(new DocumentListener(){
 
             public void insertUpdate(DocumentEvent arg0) {
@@ -97,13 +95,13 @@ public class DevicesView
                     {
                         JOptionPane.showMessageDialog(null,e.getMessage(),"Modification impossible",JOptionPane.ERROR_MESSAGE);
                     }
-                   
+                    
             }   
         });
         cancelButton.addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent arg0) {
-                name.setText(model.getDevice().getName());
+                name.setText(model.getBuilding().getName());
                 okButton.setEnabled(false);
                 cancelButton.setEnabled(false);
             }

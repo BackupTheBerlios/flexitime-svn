@@ -51,10 +51,6 @@ public class DeviceTreeNode implements FlexiTreeNode
 	 */
 	private List children;
 	
-	/**
-	 * List of Listener
-	*/
-	List listener;  
 	
 	//==================//
     //   Constructeurs  //
@@ -65,7 +61,6 @@ public class DeviceTreeNode implements FlexiTreeNode
 		this.parent = parent;
 		this.device = device;
 		children = new ArrayList();
-		this.listener = new ArrayList();
 	}
 	
 	/**

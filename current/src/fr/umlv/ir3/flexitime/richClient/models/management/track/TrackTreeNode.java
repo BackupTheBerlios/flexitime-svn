@@ -6,22 +6,30 @@
  */
 package fr.umlv.ir3.flexitime.richClient.models.management.track;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
+import fr.umlv.ir3.flexitime.common.data.general.IBuilding;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
+import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.general.ITrack;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
+import fr.umlv.ir3.flexitime.richClient.models.management.room.FloorTreeNode;
 
 
 
@@ -32,7 +40,7 @@ import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class TrackTreeNode implements FlexiTreeNode
+public class TrackTreeNode extends DataListenerImpl implements  FlexiTreeNode
 {
 	//===========//
     //   Champs  //
@@ -57,23 +65,18 @@ public class TrackTreeNode implements FlexiTreeNode
 	 */
 	private List children;
 	
-	/**
-	 * List of Listener
-	*/
-	List listener;
-	
 	 
 	
 	//==================//
     //   Constructeurs  //
     //==================// 
 	
-	public TrackTreeNode(TreeNode parent,ITrack track)
+	public TrackTreeNode(TreeNode parent,ITrack track) throws RemoteException
 	{
 		this.parent = parent;
 		this.track = track;
 		children = new ArrayList();
-		this.listener = new ArrayList();
+        RemoteDataManager.getManager().addDataListener(ITrack.class,this);
 	}
 	
 	/**
@@ -82,8 +85,9 @@ public class TrackTreeNode implements FlexiTreeNode
 	 * @param cat the category
 	 * @param factory the BuckFactory
 	 * @param model the model
+	 * @throws RemoteException 
 	 */
-	public TrackTreeNode(TreeNode parent,ITrack track,DefaultTreeModel model)
+	public TrackTreeNode(TreeNode parent,ITrack track,DefaultTreeModel model) throws RemoteException
 	{
 		this(parent,track);
 		this.model=model;
@@ -151,20 +155,23 @@ public class TrackTreeNode implements FlexiTreeNode
 	public List processChildren()
 	{
 		if(children.size()>0)return children;
-		
-		ArrayList list = new ArrayList(track.getLstClass().size());
 		for(int i = 0;i<track.getLstClass().size();i++)
 		{
-			list.add(new ClassTreeNode(this,(IClass)track.getLstClass().get(i),model));
+			add((IClass)track.getLstClass().get(i));
 		}
-		this.children =list;
-		return(list);
+		return children;
 	}
 	
 	public ITrack getTrack()
 	{
 		return track;
 	}
+    
+    public void setTrack(ITrack track)
+    {
+        this.track =  track;
+        model.nodeChanged(this);
+    }
 	/**
 	 * Redefinition of the method toString()
 	 * @return the name into a string
@@ -178,50 +185,53 @@ public class TrackTreeNode implements FlexiTreeNode
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
 	 */
-	public void add() throws FlexiException 
+	public void add() throws FlexiException
 	{
-
-		System.out.println("Add promotion");	
-        IClass iClass = DataFactory.createClass("Nouvelle Promotion",track);
-			iClass.setTeachingStructure(DataFactory.createTeachingStructure("structure",iClass));
+            System.out.println("Add promotion");	
+            IClass iClass=DataFactory.createClass("Nouvelle Promotion",track);
+            DataFactory.createTeachingStructure("structure",iClass);
+	}
+    
+    public void add(IClass iClass)
+    {
+        try
+        {    
+            track.addClass(iClass);
             ClassTreeNode child = new ClassTreeNode(this,iClass,model);
-			if(children.size()==0)
-			{
-				processChildren();
-			}
-			else
-			{
-				children.add(child);
-			}
-			model.nodesWereInserted(this,new int[]{children.size()-1});
-	}
-	
-	
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
-	 */
-	public void change(List value) {
-		//non utilisée
-	}
+            children.add(child);
+            model.nodesWereInserted(this,new int[]{children.size()-1});
+        }
+        catch(RemoteException e)
+        {
+            JOptionPane.showMessageDialog(null,e.getMessage(),"Ajout impossible",JOptionPane.ERROR_MESSAGE);  
+        }
+    }
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
-	public void remove(TreeNode childNode) {
-		track.removeClass(((ClassTreeNode)childNode).getIClass());
-		int index = children.indexOf(childNode);
-		children.remove(childNode);	
-		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+	public void remove(TreeNode childNode) throws RemoteException, FlexiException {
+        RemoteDataManager.getManager().deleteClass(((ClassTreeNode)childNode).getIClass());  
 		
 	}
+    
+    public void remove(IClass iClass) 
+    {
+        ClassTreeNode childNode = searchChild(iClass);
+        track.removeClass(((ClassTreeNode)childNode).getIClass());
+        int index = children.indexOf(childNode);
+        children.remove(childNode); 
+        model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
+        
+    }
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
 	 */
-	public void setValue(Object newValue) {
+	public void setValue(Object newValue)throws RemoteException 
+    {
 		track.setName((String)newValue);
-		informListenerChange(newValue);
-		model.nodeChanged(this);
+        RemoteDataManager.getManager().saveOrUpdateTrack(track);
 		
 	}
 
@@ -233,18 +243,57 @@ public class TrackTreeNode implements FlexiTreeNode
 		this.model= (ResourceTreeModel)model;
 		
 	}
-	
-	public void addFlexiTreeNodeListener(FlexiTreeNodeListener ob)
-	{
-		listener.add(ob);
-	}
-	
-	public void informListenerChange(Object value)
-	{
-		Iterator iter = listener.iterator() ;
-		for(;iter.hasNext();)
-		{
-			((FlexiTreeNodeListener)iter.next()).nodeChanged(value);
-		}
-	}
+
+    /* (non-Javadoc)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
+     */
+    public void dataChanged(DataEvent event) throws RemoteException
+    {
+        ITrack track = (ITrack)event.getSource();
+        int type = event.getEventType();
+        switch(type)
+        {
+            case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+            {
+                Object[] tabClass = event.getSubObjects();
+                for(int i=0;i<tabClass.length;i++)
+                {
+                   add((IClass)tabClass[i]);
+                }
+                break;
+            }
+            case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
+            {
+                Object[] tabClass = event.getSubObjects();
+               for(int i=0;i<tabClass.length;i++)
+               {
+                   ClassTreeNode ctn = searchChild((IClass)tabClass[i]);
+                   ctn.setIClass((IClass)tabClass[i]);
+               }
+               break; 
+            }
+            case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+            {
+                Object[] tabClass = event.getSubObjects();
+                for(int i=0;i<tabClass.length;i++)
+                {
+                    remove((IClass)tabClass[i]);
+                }
+                break;   
+            }
+        }
+    }
+    public ClassTreeNode searchChild(IClass iClass)
+    {
+        Iterator ite = children.iterator() ;
+        for(;ite.hasNext();)
+        {
+            ClassTreeNode ctn= (ClassTreeNode)ite.next();
+            if(ctn.getIClass().equals(iClass))
+            {
+                return ctn;
+            }
+        }
+        return null;
+    }
 }

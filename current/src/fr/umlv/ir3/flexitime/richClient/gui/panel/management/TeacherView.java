@@ -10,6 +10,7 @@ package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -17,6 +18,7 @@ import java.util.StringTokenizer;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
@@ -28,7 +30,9 @@ import com.jgoodies.forms.layout.FormLayout;
 
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
+import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListModel;
+import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherViewModel;
 
 /**
  * TeacherView - DOCME Description explication supplémentaire si nécessaire in
@@ -38,22 +42,21 @@ import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherListMod
  * @see (si nécessaire)
  * @author FlexiTeam - Adrien Bouvet
  */
-public class TeacherView implements FlexiTreeNodeListener
+public class TeacherView
 {
 	JPanel panel;
-	TeacherListModel model;
-	JList list;
+	TeacherViewModel model;
 	JButton okButton;
 	JButton cancelButton;
 	JTextField name;
 	JTextField firstName;
 	JTextField email;
 	JLabel errorLabel;
-	ITeacher teacher;
-	public TeacherView(ListModel model,JList list)
+	
+    public TeacherView(TeacherViewModel model)
 	{
-		this.model=(TeacherListModel)model;
-		this.list =list;
+		this.model= model;
+        model.setView(this);
 		create();
 	}
 	
@@ -76,10 +79,9 @@ public class TeacherView implements FlexiTreeNodeListener
 		okButton.setEnabled(false);
 		cancelButton=new JButton("Annuler");
 		cancelButton.setEnabled( false);
-		teacher = (ITeacher)model.getPartyAt(list.getSelectedIndex());
-		name = new JTextField(teacher.getName());
-		firstName = new JTextField(teacher.getFirstName());
-		email = new JTextField(teacher.getEmail());
+		name = new JTextField(model.getTeacher().getName());
+		firstName = new JTextField(model.getTeacher().getFirstName());
+		email = new JTextField(model.getTeacher().getEmail());
 		
 		//Definition des document listener
 		// Pour Nom et prenom
@@ -154,21 +156,27 @@ public class TeacherView implements FlexiTreeNodeListener
 
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				List values = new ArrayList();
-				values.add(name.getText());
-				values.add(firstName.getText());
-				values.add(email.getText());
-				model.change(values,list.getSelectedIndex());
-				okButton.setEnabled(false);
-				cancelButton.setEnabled(false);
+				try 
+                {
+                    String[] values = new String[3];
+    				values[0]= name.getText();
+    		        values[1]= firstName.getText();
+                    values[2]= email.getText();
+    				model.setValue(values);
+    				okButton.setEnabled(false);
+    				cancelButton.setEnabled(false);
+                } 
+                catch (RemoteException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(),"Modification impossible",JOptionPane.ERROR_MESSAGE);
+                }
 			}	
 		});
 		cancelButton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent arg0) {
-				name.setText(teacher.getName());
-				firstName.setText(teacher.getFirstName());
-				email.setText(teacher.getEmail());
+				name.setText(model.getTeacher().getName());
+				firstName.setText(model.getTeacher().getFirstName());
+				email.setText(model.getTeacher().getEmail());
 				okButton.setEnabled(false);
 				cancelButton.setEnabled(false);
 			}
@@ -199,15 +207,11 @@ public class TeacherView implements FlexiTreeNodeListener
 	{
 		return panel;
 	}
-
-
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.gui.actions.FlexiTreeNodeListener#nodeChanged(java.lang.Object)
-	 */
-	public void nodeChanged(Object obj) {
-		name.setText( (String)obj);
-		okButton.setEnabled( false);
-		cancelButton.setEnabled( false);
-		
-	}
+    
+    public void fireChanged()
+    {
+        name.setText(model.getTeacher().getName());
+        firstName.setText(model.getTeacher().getFirstName());
+        email.setText(model.getTeacher().getEmail());
+    }
 }

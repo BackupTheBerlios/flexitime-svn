@@ -4,24 +4,33 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package fr.umlv.ir3.flexitime.richClient.models.management.track;
+package fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
+import fr.umlv.ir3.flexitime.common.data.general.IClass;
+import fr.umlv.ir3.flexitime.common.data.general.ITrack;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
+import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
+import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
+import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
+import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassTreeNode;
 
 /**
  * @author Famille
@@ -29,7 +38,7 @@ import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class SubjectsGroupTreeNode implements FlexiTreeNode
+public class SubjectsGroupTreeNode extends DataListenerImpl implements FlexiTreeNode
 {
 //	===========//
     //   Champs  //
@@ -54,23 +63,18 @@ public class SubjectsGroupTreeNode implements FlexiTreeNode
 	 */
 	private List children;
 	
-	/**
-	 * List of Listener
-	*/
-	List listener;
-	
 	 
 	
 	//==================//
     //   Constructeurs  //
     //==================// 
 	
-	public SubjectsGroupTreeNode(TreeNode parent,ISubjectsGroup subjectsGroup)
+	public SubjectsGroupTreeNode(TreeNode parent,ISubjectsGroup subjectsGroup) throws RemoteException
 	{
 		this.parent = parent;
 		this.subjectsGroup = subjectsGroup;
 		children = new ArrayList();
-		this.listener = new ArrayList();
+        RemoteDataManager.getManager().addDataListener(ISubjectsGroup.class,this);
 	}
 	
 	/**
@@ -79,8 +83,9 @@ public class SubjectsGroupTreeNode implements FlexiTreeNode
 	 * @param cat the category
 	 * @param factory the BuckFactory
 	 * @param model the model
+	 * @throws RemoteException 
 	 */
-	public SubjectsGroupTreeNode(TreeNode parent,ISubjectsGroup subjectsGroup,DefaultTreeModel model)
+	public SubjectsGroupTreeNode(TreeNode parent,ISubjectsGroup subjectsGroup,DefaultTreeModel model) throws RemoteException
 	{
 		this(parent,subjectsGroup);
 		this.model=model;
@@ -148,20 +153,23 @@ public class SubjectsGroupTreeNode implements FlexiTreeNode
 	public List processChildren()
 	{
 		if(children.size()>0)return children;
-		
-		ArrayList list = new ArrayList(subjectsGroup.getLstSubject().size());
 		for(int i = 0;i<subjectsGroup.getLstSubject().size();i++)
 		{
-			list.add(new SubjectTreeNode(this,(ISubject)subjectsGroup.getLstSubject().get(i),model));
+			add((ISubject)subjectsGroup.getLstSubject().get(i));
 		}
-		this.children =list;
-		return(list);
+		return children;
 	}
 	
 	public ISubjectsGroup getSubjectsGroup()
 	{
 		return subjectsGroup;
 	}
+    
+    public void setSubjectsGroup(ISubjectsGroup subjectsGroup)
+    {
+        this.subjectsGroup =  subjectsGroup;
+        model.nodeChanged(this);
+    }
 	/**
 	 * Redefinition of the method toString()
 	 * @return the name into a string
@@ -177,45 +185,49 @@ public class SubjectsGroupTreeNode implements FlexiTreeNode
 	 */
 	public void add() throws FlexiException 
 	{
-
-			ISubject subj = DataFactory.createSubject("Nouvelle Matière",subjectsGroup);
-			SubjectTreeNode child = new SubjectTreeNode(this,subj,model);
-			if(children.size()==0)
-			{
-				processChildren();
-			}
-			else
-			{
-				children.add(child);
-			}
-			model.nodesWereInserted(this,new int[]{children.size()-1});
-}
-	
-	
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
-	 */
-	public void change(List value) {
-		//non utilisée
+        DataFactory.createSubject("Nouvelle Matière",subjectsGroup);
 	}
+	
+    public void add(ISubject subject)
+    {
+        try
+        {    
+            subjectsGroup.addSubject(subject);
+            SubjectTreeNode child = new SubjectTreeNode(this,subject,model);
+            children.add(child);
+            model.nodesWereInserted(this,new int[]{children.size()-1});
+        }
+        catch(RemoteException e)
+        {
+            JOptionPane.showMessageDialog(null,e.getMessage(),"Ajout impossible",JOptionPane.ERROR_MESSAGE);  
+        }
+    }
+	
 
-	/* (non-Javadoc)
+    public void remove(TreeNode childNode) throws RemoteException, FlexiException 
+    {
+        RemoteDataManager.getManager().deleteClass(((ClassTreeNode)childNode).getIClass());
+    }
+	
+        /* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
-	public void remove(TreeNode childNode) {
-		subjectsGroup.removeSubject(((SubjectTreeNode)childNode).getSubject());
-		int index = children.indexOf(childNode);
+	
+    public void remove(ISubject subject) 
+    {
+        SubjectTreeNode childNode = searchChild(subject);
+        subjectsGroup.removeSubject(((SubjectTreeNode)childNode).getSubject());
+        int index = children.indexOf(childNode);
 		children.remove(childNode);	
 		model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
 		
-	}
+    }
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
 	 */
 	public void setValue(Object newValue) {
 		subjectsGroup.setName((String)newValue);
-		informListenerChange(newValue);
 		model.nodeChanged(this);
 		
 	}
@@ -228,18 +240,58 @@ public class SubjectsGroupTreeNode implements FlexiTreeNode
 		this.model= (ResourceTreeModel)model;
 		
 	}
-	
-	public void addFlexiTreeNodeListener(FlexiTreeNodeListener ob)
-	{
-		listener.add(ob);
-	}
-	
-	public void informListenerChange(Object value)
-	{
-		Iterator iter = listener.iterator() ;
-		for(;iter.hasNext();)
-		{
-			((FlexiTreeNodeListener)iter.next()).nodeChanged(value);
-		}
-	}
+
+    /* (non-Javadoc)
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataListener#dataChanged(fr.umlv.ir3.flexitime.common.event.DataEvent)
+     */
+    public void dataChanged(DataEvent event) throws RemoteException
+    {
+        ISubjectsGroup subjectsGroup = (ISubjectsGroup)event.getSource();
+        int type = event.getEventType();
+        switch(type)
+        {
+            case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
+            {
+                Object[] tabSubject = event.getSubObjects();
+                for(int i=0;i<tabSubject.length;i++)
+                {
+                   add((ISubject)tabSubject[i]);
+                }
+                break;
+            }
+            case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
+            {
+                Object[] tabSubject = event.getSubObjects();
+               for(int i=0;i<tabSubject.length;i++)
+               {
+                   SubjectTreeNode stn = searchChild((ISubject)tabSubject[i]);
+                   stn.setSubject((ISubject)tabSubject[i]);
+               }
+               break; 
+            }
+            case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
+            {
+                Object[] tabSubject = event.getSubObjects();
+                for(int i=0;i<tabSubject.length;i++)
+                {
+                    remove((ISubject)tabSubject[i]);
+                }
+                break;   
+            }
+        } 
+    }
+    
+    public SubjectTreeNode searchChild(ISubject subject)
+    {
+        Iterator ite = children.iterator() ;
+        for(;ite.hasNext();)
+        {
+            SubjectTreeNode stn= (SubjectTreeNode)ite.next();
+            if(stn.getSubject().equals(subject))
+            {
+                return stn;
+            }
+        }
+        return null;
+    }
 }

@@ -258,29 +258,29 @@ public class BuildingTreeNode extends DataListenerImpl implements FlexiTreeNode
          {
              case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
              {
-                 IFloor[] tabFloor = (IFloor[])event.getSubObjects();
+                 Object[] tabFloor = (Object[])event.getSubObjects();
                  for(int i=0;i<tabFloor.length;i++)
                  {
-                    add(tabFloor[i]);
+                    add((IFloor)tabFloor[i]);
                  }
                  break;
              }
              case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
              {
-                IFloor[] tabFloor = (IFloor[])event.getSubObjects();
+                Object[] tabFloor = (Object[])event.getSubObjects();
                 for(int i=0;i<tabFloor.length;i++)
                 {
-                    FloorTreeNode ftn = searchChild(tabFloor[i]);
-                    ftn.setFloor(tabFloor[i]);
+                    FloorTreeNode ftn = searchChild((IFloor)tabFloor[i]);
+                    ftn.setFloor((IFloor)tabFloor[i]);
                 }
                 break; 
              }
              case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
              {
-                 IFloor[] tabFloor = (IFloor[])event.getSubObjects();
+                Object[] tabFloor = (Object[])event.getSubObjects();
                  for(int i=0;i<tabFloor.length;i++)
                  {
-                     remove(tabFloor[i]);
+                     remove((IFloor)tabFloor[i]);
                  }
                  break;   
              }

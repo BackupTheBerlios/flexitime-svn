@@ -10,11 +10,13 @@ package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -29,6 +31,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeList
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomViewModel;
 
 /**
  * RoomsView - DOCME Description explication supplémentaire si nécessaire in
@@ -38,21 +41,20 @@ import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomTreeNode;
  * @see (si nécessaire)
  * @author FlexiTeam - Adrien Bouvet
  */
-public class RoomsView implements FlexiTreeNodeListener
+public class RoomsView
 {
 	JPanel panel;
-	ResourceTreeModel model;
-	JTree tree;
+	RoomViewModel model;
 	JButton okButton;
 	JButton cancelButton;
 	JTextField name;
 	JTextField capacity;
 	JLabel errorLabel;
-	public RoomsView(TreeModel model,JTree tree)
+	
+    public RoomsView(RoomViewModel model)
 	{
-		this.model=(ResourceTreeModel)model;
-		this.tree=tree;
-		((FlexiTreeNode)this.tree.getSelectionPath().getLastPathComponent()).addFlexiTreeNodeListener(this);
+		this.model=model;
+        model.setView(this);
 		create();
 	}
 	
@@ -75,8 +77,8 @@ public class RoomsView implements FlexiTreeNodeListener
 		okButton.setEnabled(false);
 		cancelButton=new JButton("Annuler");
 		cancelButton.setEnabled( false);
-		name = new JTextField(tree.getSelectionPath().getLastPathComponent().toString());
-		capacity = new JTextField(""+((RoomTreeNode)tree.getSelectionPath().getLastPathComponent()).getRoom().getCapacity());
+		name = new JTextField(model.getRoom().getName());
+		capacity = new JTextField(""+model.getRoom().getCapacity());
 		DocumentListener documentListener = new DocumentListener(){
 
 			public void insertUpdate(DocumentEvent arg0) {
@@ -110,19 +112,25 @@ public class RoomsView implements FlexiTreeNodeListener
 
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				List list = new ArrayList();
-				list.add(name.getText());
-				list.add(capacity.getText());
-				model.change((FlexiTreeNode)tree.getSelectionPath().getLastPathComponent(),list);
-				okButton.setEnabled(false);
-				cancelButton.setEnabled(false);
+				try 
+                {
+                    String[] values = new String[2];
+    				values[0] = name.getText();
+    				values[1] =capacity.getText();
+    				model.setValue(values);
+    				okButton.setEnabled(false);
+    				cancelButton.setEnabled(false);
+                } 
+                catch (RemoteException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(),"Modification impossible",JOptionPane.ERROR_MESSAGE);
+                }
 			}	
 		});
 		cancelButton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent arg0) {
-				name.setText(tree.getSelectionPath().getLastPathComponent().toString());
-				capacity.setText(""+((RoomTreeNode)tree.getSelectionPath().getLastPathComponent()).getRoom().getCapacity());
+				name.setText(model.getRoom().getName());
+				capacity.setText("" + model.getRoom().getCapacity());
 				okButton.setEnabled(false);
 				cancelButton.setEnabled(false);
 			}
@@ -151,15 +159,11 @@ public class RoomsView implements FlexiTreeNodeListener
 	{
 		return panel;
 	}
+    
+    public void fireChanged()
+    {
+        name.setText(model.getRoom().getName());
+        capacity.setText("" + model.getRoom().getCapacity());
+    }
 
-
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.gui.actions.FlexiTreeNodeListener#nodeChanged(java.lang.Object)
-	 */
-	public void nodeChanged(Object obj) {
-		name.setText( (String)obj);
-		okButton.setEnabled( false);
-		cancelButton.setEnabled( false);
-		
-	}
 }

@@ -8,10 +8,12 @@ package fr.umlv.ir3.flexitime.richClient.gui.actions.management;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
@@ -21,27 +23,43 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeNode;
 
+import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.management.BuildingView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.ClassView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.CourseView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.management.DevicesView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.management.FloorView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.GroupView;
-import fr.umlv.ir3.flexitime.richClient.gui.panel.management.NameView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.management.SubjectView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.management.SubjectsGroupView;
+import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TrackView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.RoomsView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TeacherView;
 import fr.umlv.ir3.flexitime.richClient.gui.panel.management.TeachingStructureView;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.DeviceTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.device.DevicesViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.device.TypeDeviceTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.BuildingTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.room.BuildingViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.FloorTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.room.FloorViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.TypeRoomTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teacher.TeacherViewModel;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.CourseTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectViewModel;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectsGroupTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectsGroupViewModel;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.TeachingStructureTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.TypeCourseTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.CourseTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.SubjectTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.SubjectsGroupTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.TeachingStructureTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.TrackTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.TypeCourseTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.track.TrackViewModel;
 
 /**
  * @author Famille
@@ -62,28 +80,33 @@ public class FlexiSelectionListenerFactory
 		{
 			public void valueChanged(TreeSelectionEvent arg0) 
 			{
-					JTree tmpTree = (JTree)arg0.getSource();
+				 try 
+                 {
+                    JTree tmpTree = (JTree)arg0.getSource();
 					if(tmpTree.getSelectionPath()!= null)
 					{
 						TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
 						JPanel panel1 = new JPanel(new BorderLayout());
 						if(tmpTreeNode instanceof TrackTreeNode)
-						{
-							NameView trackView = new NameView(tmpTree.getModel(),tmpTree);
-							panel1.add(new JScrollPane(trackView.getPanel()), BorderLayout.CENTER);
-							panel1.setBorder(BorderFactory.createTitledBorder("Filière"));
-							
+						{										   
+				            TrackViewModel model = new TrackViewModel(((TrackTreeNode)tmpTreeNode).getTrack());
+				            TrackView trackView = new TrackView(model);
+				            panel1.add(new JScrollPane(trackView.getPanel()), BorderLayout.CENTER);
+				            panel1.setBorder(BorderFactory.createTitledBorder("Filière"));
+                               	
 						}
 						else if(tmpTreeNode instanceof ClassTreeNode)
-						{
-							ClassView classView = new ClassView(tmpTree.getModel(),tmpTree);
+						{                     
+                            ClassViewModel model = new ClassViewModel(((ClassTreeNode)tmpTreeNode).getIClass());
+                            ClassView classView = new ClassView(model);
 							panel1.add(new JScrollPane(classView.getPanel()), BorderLayout.CENTER);
 							panel1.setBorder(BorderFactory.createTitledBorder("Promotion"));
 							
 						}
 						else if(tmpTreeNode instanceof GroupTreeNode)
 						{
-							GroupView groupView = new GroupView(tmpTree.getModel(),tmpTree);
+							GroupViewModel model = new GroupViewModel(((GroupTreeNode)tmpTreeNode).getGroup());
+                            GroupView groupView = new GroupView(model);
 							panel1.add(new JScrollPane(groupView.getPanel()), BorderLayout.CENTER);
 							panel1.setBorder(BorderFactory.createTitledBorder("Groupe"));
 							
@@ -100,6 +123,11 @@ public class FlexiSelectionListenerFactory
 						panelParent.validate() ;
 						panelParent.repaint();
 					}
+                 } 
+                    catch (RemoteException e) 
+                     {
+                         JOptionPane.showMessageDialog(null,e.getMessage(),"Afficahge impossible",JOptionPane.ERROR_MESSAGE);
+                     }
 				}
 	        	
 	        };
@@ -117,7 +145,9 @@ public class FlexiSelectionListenerFactory
 		{
 			public void valueChanged(TreeSelectionEvent arg0) 
 			{
-					JTree tmpTree = (JTree)arg0.getSource();
+				 try 
+                 {	
+				     JTree tmpTree = (JTree)arg0.getSource();
 					if(tmpTree.getSelectionPath()!= null)
 					{
 						TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
@@ -132,7 +162,8 @@ public class FlexiSelectionListenerFactory
 						}
 						else if(tmpTreeNode instanceof DeviceTreeNode)
 						{
-							NameView deviceView = new NameView(tmpTree.getModel(),tmpTree);
+							DevicesViewModel model = new DevicesViewModel(((DeviceTreeNode)tmpTreeNode).getDevice());
+                            DevicesView deviceView = new DevicesView(model);
 							panel1.add(new JScrollPane(deviceView.getPanel()), BorderLayout.CENTER);
 							panel1.setBorder(BorderFactory.createTitledBorder("Matériel"));
 							
@@ -143,6 +174,12 @@ public class FlexiSelectionListenerFactory
                         panelParent.validate() ;
 						panelParent.repaint();
 					}
+
+                 } 
+                 catch (RemoteException e) 
+                  {
+                      JOptionPane.showMessageDialog(null,e.getMessage(),"Afficahge impossible",JOptionPane.ERROR_MESSAGE);
+                  }
 				}
 	        	
 	        };
@@ -161,21 +198,25 @@ public class FlexiSelectionListenerFactory
 		{
 			public void valueChanged(TreeSelectionEvent arg0) 
 			{
-					JTree tmpTree = (JTree)arg0.getSource();
+                try 
+                {   	
+                    JTree tmpTree = (JTree)arg0.getSource();
 					if(tmpTree.getSelectionPath()!= null)
 					{
 						TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
 						JPanel panel1 = new JPanel(new BorderLayout());
 						if(tmpTreeNode instanceof BuildingTreeNode)
-						{
-							NameView buildingView = new NameView(tmpTree.getModel(),tmpTree);
-							panel1.add(new JScrollPane(buildingView.getPanel()), BorderLayout.CENTER);
-							panel1.setBorder(BorderFactory.createTitledBorder("Batiment"));
-							
+						{                           
+                            BuildingViewModel model =null;
+                            model = new BuildingViewModel(((BuildingTreeNode)tmpTreeNode).getBuilding());
+                            BuildingView buildingView = new BuildingView(model);
+                            panel1.add(new JScrollPane(buildingView.getPanel()), BorderLayout.CENTER);
+                            panel1.setBorder(BorderFactory.createTitledBorder("Batiment"));
 						}
 						else if(tmpTreeNode instanceof FloorTreeNode)
 						{
-							NameView floorView = new NameView(tmpTree.getModel(),tmpTree);
+                            FloorViewModel model = new FloorViewModel(((FloorTreeNode)tmpTreeNode).getFloor());
+                            FloorView floorView = new FloorView(model);
 							panel1.add(new JScrollPane(floorView.getPanel()), BorderLayout.CENTER);
 							panel1.setBorder(BorderFactory.createTitledBorder("Etage"));
 							
@@ -187,7 +228,8 @@ public class FlexiSelectionListenerFactory
 						}
 						else if(tmpTreeNode instanceof RoomTreeNode)
 						{
-							RoomsView roomView = new RoomsView(tmpTree.getModel(),tmpTree);
+							RoomViewModel model = new RoomViewModel(((RoomTreeNode)tmpTreeNode).getRoom());
+                            RoomsView roomView = new RoomsView(model);
 							panel1.add(new JScrollPane(roomView.getPanel()), BorderLayout.CENTER);
 							panel1.setBorder(BorderFactory.createTitledBorder("Salle"));
 							
@@ -198,7 +240,12 @@ public class FlexiSelectionListenerFactory
                         panelParent.validate() ;
 						panelParent.repaint();
 					}
-				}
+                } 
+                catch (RemoteException e) 
+                {
+                    JOptionPane.showMessageDialog(null,e.getMessage(),"Afficahge impossible",JOptionPane.ERROR_MESSAGE);
+                }
+			}
 	        	
 	        };
 	        return selectionListener;
@@ -215,20 +262,26 @@ public class FlexiSelectionListenerFactory
 		{
 			public void valueChanged(ListSelectionEvent arg0) 
 			{
-				JList list  = (JList)arg0.getSource();	
-				
-				TeacherView teacherView = new TeacherView(list.getModel(),list);
-				JPanel panel1 = new JPanel(new BorderLayout());
-		        panel1.add(new JScrollPane(teacherView.getPanel()), BorderLayout.CENTER);
-		        panel1.setBorder(BorderFactory.createTitledBorder("Professeur"));
-		        panel1.setVisible( true);
-		        panelParent.remove(0);
-                panelParent.add(panel1, BorderLayout.CENTER,0);
-                //((JSplitPane)panelParent).setRightComponent(panel1);
-                panelParent.validate() ;
-		        panelParent.repaint();
-			}
-	        	
+				 try 
+				 {  
+                    JList list  = (JList)arg0.getSource();	
+    				TeacherViewModel model = new TeacherViewModel((ITeacher)list.getModel().getElementAt(list.getSelectedIndex()));
+    				TeacherView teacherView = new TeacherView(model);
+    				JPanel panel1 = new JPanel(new BorderLayout());
+    		        panel1.add(new JScrollPane(teacherView.getPanel()), BorderLayout.CENTER);
+    		        panel1.setBorder(BorderFactory.createTitledBorder("Professeur"));
+    		        panel1.setVisible( true);
+    		        panelParent.remove(0);
+                    panelParent.add(panel1, BorderLayout.CENTER,0);
+                    //((JSplitPane)panelParent).setRightComponent(panel1);
+                    panelParent.validate() ;
+    		        panelParent.repaint();
+                 }
+				 catch (RemoteException e) 
+				 {
+				     JOptionPane.showMessageDialog(null,e.getMessage(),"Afficahge impossible",JOptionPane.ERROR_MESSAGE);
+				 }
+            } 	
 		};
 	    return selectionListener;
 	}
@@ -244,46 +297,55 @@ public class FlexiSelectionListenerFactory
 		{
 			public void valueChanged(TreeSelectionEvent arg0) 
 			{
-					JTree tmpTree = (JTree)arg0.getSource();
-					if(tmpTree.getSelectionPath()!= null)
-					{
-						TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
-						JPanel panel1 = new JPanel(new BorderLayout());
-						if(tmpTreeNode instanceof SubjectsGroupTreeNode)
-						{
-							NameView subjectsGroupView = new NameView(tmpTree.getModel(),tmpTree);
-							panel1.add(new JScrollPane(subjectsGroupView.getPanel()), BorderLayout.CENTER);
-							panel1.setBorder(BorderFactory.createTitledBorder("Bloc"));
-							
-						}
-						else if(tmpTreeNode instanceof SubjectTreeNode)
-						{
-							NameView subjectView = new NameView(tmpTree.getModel(),tmpTree);
-							panel1.add(new JScrollPane(subjectView.getPanel()), BorderLayout.CENTER);
-							panel1.setBorder(BorderFactory.createTitledBorder("Matière"));
-							
-						}
-						else if(tmpTreeNode instanceof TypeCourseTreeNode)
-						{
-							//Pas de vue
-							
-						}
-						else if(tmpTreeNode instanceof CourseTreeNode)
-						{
-							CourseView courseView = new CourseView(tmpTree.getModel(),tmpTree);
-							panel1.add(new JScrollPane(courseView.getPanel()), BorderLayout.CENTER);
-							panel1.setBorder(BorderFactory.createTitledBorder("Cours"));
-							
-						}
-                        panel1.setMaximumSize(new Dimension(10,10));
-                        panelParent.remove(0);
-						//panelParent.add(panel1,JSplitPane.RIGHT,0);
-                        panelParent.add(panel1, BorderLayout.CENTER,0);
-						//((JSplitPane)panelParent).setRightComponent(panel1);
-                        panelParent.validate() ;
-						panelParent.repaint();
-					}
-				}
+                try 
+                {
+                        JTree tmpTree = (JTree)arg0.getSource();
+    					if(tmpTree.getSelectionPath()!= null)
+    					{
+    						TreeNode tmpTreeNode = (TreeNode)tmpTree.getSelectionPath().getLastPathComponent();
+    						JPanel panel1 = new JPanel(new BorderLayout());
+    						if(tmpTreeNode instanceof SubjectsGroupTreeNode)
+    						{
+                                SubjectsGroupViewModel model = new SubjectsGroupViewModel(((SubjectsGroupTreeNode)tmpTreeNode).getSubjectsGroup());
+                                SubjectsGroupView subjectsGroupView = new SubjectsGroupView(model);
+    							panel1.add(new JScrollPane(subjectsGroupView.getPanel()), BorderLayout.CENTER);
+    							panel1.setBorder(BorderFactory.createTitledBorder("Bloc"));
+    							
+    						}
+    						else if(tmpTreeNode instanceof SubjectTreeNode)
+    						{
+    							SubjectViewModel model = new SubjectViewModel(((SubjectTreeNode)tmpTreeNode).getSubject());
+                                SubjectView subjectView = new SubjectView(model);
+    							panel1.add(new JScrollPane(subjectView.getPanel()), BorderLayout.CENTER);
+    							panel1.setBorder(BorderFactory.createTitledBorder("Matière"));
+    							
+    						}
+    						else if(tmpTreeNode instanceof TypeCourseTreeNode)
+    						{
+    							//Pas de vue
+    							
+    						}
+    						else if(tmpTreeNode instanceof CourseTreeNode)
+    						{
+    							CourseView courseView = new CourseView(tmpTree.getModel(),tmpTree);
+    							panel1.add(new JScrollPane(courseView.getPanel()), BorderLayout.CENTER);
+    							panel1.setBorder(BorderFactory.createTitledBorder("Cours"));
+    							
+    						}
+                            panel1.setMaximumSize(new Dimension(10,10));
+                            panelParent.remove(0);
+    						//panelParent.add(panel1,JSplitPane.RIGHT,0);
+                            panelParent.add(panel1, BorderLayout.CENTER,0);
+    						//((JSplitPane)panelParent).setRightComponent(panel1);
+                            panelParent.validate() ;
+    						panelParent.repaint();
+    					}
+				    }
+                    catch (RemoteException e) 
+                    {
+                        JOptionPane.showMessageDialog(null,e.getMessage(),"Afficahge impossible",JOptionPane.ERROR_MESSAGE);
+                    }
+			    }
 	        	
 	        };
 	        return selectionListener;

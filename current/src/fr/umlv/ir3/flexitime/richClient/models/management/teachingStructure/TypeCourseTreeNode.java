@@ -1,11 +1,12 @@
 /*
- * Created on 21 janv. 2005
+ * Created on 23 janv. 2005
  *
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package fr.umlv.ir3.flexitime.richClient.models.management.room;
+package fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -16,14 +17,13 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import fr.umlv.ir3.flexitime.common.data.DataFactory;
-import fr.umlv.ir3.flexitime.common.data.general.IFloor;
-import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
+import fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
-import fr.umlv.ir3.flexitime.richClient.models.management.device.DeviceTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomTreeNode;
 
 /**
  * @author Famille
@@ -31,7 +31,7 @@ import fr.umlv.ir3.flexitime.richClient.models.management.device.DeviceTreeNode;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class TypeRoomTreeNode implements FlexiTreeNode
+public class TypeCourseTreeNode implements FlexiTreeNode
 {
 //	===========//
     //   Champs  //
@@ -47,16 +47,16 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	private final TreeNode parent;
 	
 	/**
-	 * The list of room
+	 * The list of device
 	 */
-	private List lstRoom;
+	private List lstCourse;
 
 	/**
 	 * The name of the type
 	 */
 	private String name;
 	/**
-	 * The name of the type
+	 * The int of the type
 	 */
 	private int type;
 	/**
@@ -70,12 +70,12 @@ public class TypeRoomTreeNode implements FlexiTreeNode
     //   Constructeurs  //
     //==================// 
 	
-	public TypeRoomTreeNode(TreeNode parent,String name,int type,List lstRoom)
+	public TypeCourseTreeNode(TreeNode parent,String name,int type,List lstCourse)
 	{
 		this.parent = parent;
 		this.name=name;
-		this.type= type;
-		this.lstRoom = lstRoom;
+		this.type =type;
+		this.lstCourse = lstCourse;
 	}
 	
 	/**
@@ -85,9 +85,9 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	 * @param factory the BuckFactory
 	 * @param model the model
 	 */
-	public TypeRoomTreeNode(TreeNode parent,String name,int type,List lstRoom,DefaultTreeModel model)
+	public TypeCourseTreeNode(TreeNode parent,String name,int type,List lstCourse,DefaultTreeModel model)
 	{
-		this(parent,name,type,lstRoom);
+		this(parent,name,type,lstCourse);
 		this.model=model;
 		children = new ArrayList();
 	}
@@ -109,13 +109,6 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	public int getChildCount() {
 		return processChildren().size();
 	}
-   
-    /* (non-Javadoc)
-     * @see javax.swing.tree.TreeNode#getChildCount()
-     */
-    public int getType() {
-        return type;
-    }
 
 	/* (non-Javadoc)
 	 * @see javax.swing.tree.TreeNode#getParent()
@@ -143,7 +136,7 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	 * @see javax.swing.tree.TreeNode#isLeaf()
 	 */
 	public boolean isLeaf() {
-		if(lstRoom == null) return true;
+		if(lstCourse == null) return true;
 		else return false;
 	}
 
@@ -162,10 +155,10 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	{
 		if(children.size()>0)return children;
 		
-		ArrayList list = new ArrayList(lstRoom.size());
-		for(int i = 0;i<lstRoom.size();i++)
+		ArrayList list = new ArrayList(lstCourse.size());
+		for(int i = 0;i<lstCourse.size();i++)
 		{
-			list.add(new RoomTreeNode(this,(IRoom)lstRoom.get(i),model));
+			list.add(new CourseTreeNode(this,(ICourse)lstCourse.get(i),model));
 		}
 		this.children =list;
 		return(list);
@@ -173,8 +166,13 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	
 	public List getLstDevice()
 	{
-		return lstRoom;
+		return lstCourse;
 	}
+    
+    public int getType()
+    {
+     return type;   
+    }
 	/**
 	 * Redefinition of the method toString()
 	 * @return the name into a string
@@ -190,55 +188,46 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 	 */
 	public void add() throws FlexiException 
 	{
-			DataFactory.createRoom("Nouvelle Salle",type,0,((FloorTreeNode)this.getParent()).getFloor());
+	    ICourse course= DataFactory.createCourse("Nouveau Cours",((SubjectTreeNode)this.getParent()).getSubject(),type);
 	}
-    
-    public TreeNode add(IRoom room)
+	
+    public void add(ICourse course)
     {
-        System.out.println("Add room");
-        lstRoom.add(room);
-        RoomTreeNode child = new RoomTreeNode(this,room,model);
-        if(children.size()==0)
-        {
-            processChildren();
-        }
-        else
-        {
-            children.add(child);
-        }
-        model.nodesWereInserted(this,new int[]{children.size()-1});
-        return child;
+            lstCourse.add( course);
+            CourseTreeNode child = new CourseTreeNode(this,course,model);
+            if(children.size()==0)
+            {
+                processChildren();
+            }
+            else
+            {
+                children.add(child);
+            }
+            model.nodesWereInserted(this,new int[]{children.size()-1});
     }
+	
+	/* (non-Javadoc)
+	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#add(java.lang.Object)
+	 */
+	public void change(List value) {
+		//Non utilisée
+	}
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#remove(fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode)
 	 */
-	public void remove(TreeNode childNode) {
-		((FloorTreeNode)this.getParent()).getFloor().getLstRoom().remove(((RoomTreeNode)childNode).getRoom());
+	public void remove(TreeNode childNode) throws RemoteException, FlexiException {
+		((SubjectTreeNode)this.getParent()).remove(((CourseTreeNode)childNode).getCourse());
 		
 	}
     
-    public void remove(IRoom room) {
-        RoomTreeNode childNode = searchChild(room);
-        lstRoom.remove(room);
+    public void remove(ICourse course) {
+        CourseTreeNode childNode = searchChild(course);
+        lstCourse.remove(((CourseTreeNode)childNode).getCourse());
         int index = children.indexOf(childNode);
-        children.remove(childNode); 
+        children.remove(childNode);   
         model.nodesWereRemoved(this,new int[]{index},new Object[]{childNode});
         
-    }
-    
-    public RoomTreeNode searchChild(IRoom room)
-    {
-        Iterator ite = children.iterator() ;
-        for(;ite.hasNext();)
-        {
-            RoomTreeNode rtn= (RoomTreeNode)ite.next();
-            if(rtn.getRoom().equals(room))
-            {
-                return rtn;
-            }
-        }
-        return null;
     }
 
 	/* (non-Javadoc)
@@ -249,12 +238,11 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 		
 	}
     
-    public void changedRoom(IRoom room)
+    public void changedCourse(ICourse course)
     {
-        RoomTreeNode childNode= searchChild(room);
-        childNode.setRoom(room);
+        CourseTreeNode childNode= searchChild(course);
+        childNode.setCourse(course);
     }
-
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setModel(fr.umlv.ir3.flexitime.richClient.models.ResourceModel)
@@ -263,5 +251,19 @@ public class TypeRoomTreeNode implements FlexiTreeNode
 		this.model= (ResourceTreeModel)model;
 		
 	}
+    
+    public CourseTreeNode searchChild(ICourse course)
+    {
+        Iterator ite = children.iterator() ;
+        for(;ite.hasNext();)
+        {
+            CourseTreeNode rtn= (CourseTreeNode)ite.next();
+            if(rtn.getCourse().equals(course))
+            {
+                return rtn;
+            }
+        }
+        return null;
+    }
 
 }

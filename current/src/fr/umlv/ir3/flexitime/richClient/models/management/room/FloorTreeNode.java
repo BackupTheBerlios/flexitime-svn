@@ -22,6 +22,7 @@ import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
 import fr.umlv.ir3.flexitime.common.event.DataEvent;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
@@ -59,11 +60,6 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 	 * The list of the sub categories
 	 */
 	private List children;
-	
-	/**
-	 * List of Listener
-	*/
-	List listener; 
 	 
 	
 	//==================//
@@ -75,7 +71,6 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 		this.parent = parent;
 		this.floor = floor;
 		children = new ArrayList();
-		this.listener = new ArrayList();
         RemoteDataManager.getManager().addDataListener(IFloor.class,this);
 	}
 	
@@ -220,6 +215,12 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
 		//non utilisée
 		
 	}
+    public void remove(IRoom room) throws RemoteException, FlexiException 
+    {
+        System.out.println("delete room");
+        RemoteDataManager.getManager().deleteRoom(room);
+        
+    }
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.ir3.flexitime.richClient.models.FlexiTreeNode#setValue(javax.swing.tree.TreePath, java.lang.Object)
@@ -249,34 +250,34 @@ public class FloorTreeNode extends DataListenerImpl implements FlexiTreeNode
         {
             case DataEvent.TYPE_PROPERTY_SUBDATA_ADDED:
             {
-                IRoom[] tabRoom = (IRoom[])event.getSubObjects();
+                Object[] tabRoom = (Object[])event.getSubObjects();
                 for(int i=0;i<tabRoom.length;i++)
                 {
-                    floor.addRoom(tabRoom[i]);
-                    TypeRoomTreeNode trtn = searchChild(tabRoom[i].getType());
-                    trtn.add(tabRoom[i]);
+                    floor.addRoom((IRoom)tabRoom[i]);
+                    TypeRoomTreeNode trtn = searchChild(((IRoom)tabRoom[i]).getType());
+                    trtn.add((IRoom)tabRoom[i]);
                 }
                 break;
             }
             case DataEvent.TYPE_PROPERTY_SUBDATA_CHANGED:
             {
-                IRoom[] tabRoom = (IRoom[])event.getSubObjects();
+                Object[] tabRoom = (Object[])event.getSubObjects();
                for(int i=0;i<tabRoom.length;i++)
                {
-                   TypeRoomTreeNode tdtn = searchChild(tabRoom[i].getType());
-                   tdtn.setValue(tabRoom[i]);
+                   TypeRoomTreeNode tdtn = searchChild(((IRoom)tabRoom[i]).getType());
+                   tdtn.changedRoom((IRoom)tabRoom[i]);
                     break;
                }
                break; 
             }
             case DataEvent.TYPE_PROPERTY_SUBDATA_REMOVED:
             {
-                IRoom[] tabRoom = (IRoom[])event.getSubObjects();
+                Object[] tabRoom = (Object[])event.getSubObjects();
                 for(int i=0;i<tabRoom.length;i++)
                 {
-                    floor.removeRoom(tabRoom[i]);
-                    TypeRoomTreeNode trtn = searchChild(tabRoom[i].getType());
-                    trtn.remove(tabRoom[i]);
+                    floor.removeRoom((IRoom)tabRoom[i]);
+                    TypeRoomTreeNode trtn = searchChild(((IRoom)tabRoom[i]).getType());
+                    trtn.remove((IRoom)tabRoom[i]);
                 }
                 break;   
             }

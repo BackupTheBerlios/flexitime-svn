@@ -8,9 +8,11 @@ package fr.umlv.ir3.flexitime.richClient.gui.panel.management;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -25,6 +27,7 @@ import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeList
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassViewModel;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
 
 /**
@@ -33,12 +36,11 @@ import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class ClassView implements FlexiTreeNodeListener
+public class ClassView
 {
 
 	JPanel panel;
-	ResourceTreeModel model;
-	JTree tree;
+	ClassViewModel model;
 	JButton okButton;
 	JButton cancelButton;
 	JTextField name;
@@ -47,11 +49,10 @@ public class ClassView implements FlexiTreeNodeListener
 	//JTextField nbPerson;
 	//JTextField nbGroup;
 	JLabel errorLabel;
-	public ClassView(TreeModel model,JTree tree)
+	public ClassView(ClassViewModel model)
 	{
-		this.model=(ResourceTreeModel)model;
-		this.tree=tree;
-		((FlexiTreeNode)this.tree.getSelectionPath().getLastPathComponent()).addFlexiTreeNodeListener(this);
+		this.model=model;
+        model.setView(this);
 		create();
 	}
 	
@@ -74,11 +75,11 @@ public class ClassView implements FlexiTreeNodeListener
 		okButton.setEnabled(false);
 		cancelButton=new JButton("Annuler");
 		cancelButton.setEnabled( false);
-		name = new JTextField(tree.getSelectionPath().getLastPathComponent().toString());
-		nbPerson = new JLabel(""+((ClassTreeNode)tree.getSelectionPath().getLastPathComponent()).getIClass().getNbPerson());
+		name = new JTextField(model.getIClass().getName());
+		nbPerson = new JLabel(""+model.getIClass().getNbPerson());
 		//nbPerson = new JTextField(""+((ClassTreeNode)tree.getSelectionPath().getLastPathComponent()).getIClass().getNbPerson());
 		nbPerson.setEnabled(false);
-		nbGroup = new JLabel(""+((ClassTreeNode)tree.getSelectionPath().getLastPathComponent()).getIClass().getNbGroup());
+		nbGroup = new JLabel(""+model.getIClass().getNbGroup());
 		//nbGroup = new JTextField(""+((ClassTreeNode)tree.getSelectionPath().getLastPathComponent()).getIClass().getNbGroup());
 		nbGroup.setEnabled(false);
 		DocumentListener documentListener = new DocumentListener(){
@@ -102,16 +103,22 @@ public class ClassView implements FlexiTreeNodeListener
 
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				model.valueForPathChanged(tree.getSelectionPath(),name.getText());
-				okButton.setEnabled(false);
-				cancelButton.setEnabled(false);
+				try 
+                {
+					model.setValue(name.getName());
+                    okButton.setEnabled(false);
+                    cancelButton.setEnabled(false);
+				} 
+                catch (RemoteException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(),"Modification impossible",JOptionPane.ERROR_MESSAGE);
+				}
 			}	
 		});
 		cancelButton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent arg0) {
-				name.setText(tree.getSelectionPath().getLastPathComponent().toString());
-				nbPerson.setText(""+((GroupTreeNode)tree.getSelectionPath().getLastPathComponent()).getGroup().getNbPerson());
+				name.setText(model.getIClass().getName());
+				//nbPerson.setText(""+((GroupTreeNode)tree.getSelectionPath().getLastPathComponent()).getGroup().getNbPerson());
 				okButton.setEnabled(false);
 				cancelButton.setEnabled(false);
 			}
@@ -141,16 +148,13 @@ public class ClassView implements FlexiTreeNodeListener
 	{
 		return panel;
 	}
+    
+    public void fireChanged()
+    {
+        name.setText(model.getIClass().getName());
+        nbPerson.setText("" + model.getIClass().getNbPerson());
+        nbGroup.setText(""+model.getIClass().getNbGroup());
+    }
 
-
-	/* (non-Javadoc)
-	 * @see fr.umlv.ir3.flexitime.richClient.gui.actions.FlexiTreeNodeListener#nodeChanged(java.lang.Object)
-	 */
-	public void nodeChanged(Object obj) {
-		name.setText( (String)obj);
-		okButton.setEnabled( false);
-		cancelButton.setEnabled( false);
-		
-	}
 
 }

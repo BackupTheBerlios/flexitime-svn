@@ -73,10 +73,9 @@ public class RootRoomTreeNode extends RootTreeNode
 		ArrayList list = new ArrayList(lst.size());
 		for(int i = 0;i<lst.size();i++)
 		{
-			list.add(add((IBuilding)lst.get(i)));
+			add((IBuilding)lst.get(i));
 		}
-		this.children =list;
-		return(list);
+		return children;
 	}
 
 	public void add() throws FlexiException
@@ -84,7 +83,7 @@ public class RootRoomTreeNode extends RootTreeNode
 		DataFactory.createBuilding("Nouveau Batiment");
 	}
 	
-    public TreeNode add(IBuilding building)
+    public void add(IBuilding building)
     {
        try
        {
@@ -93,13 +92,11 @@ public class RootRoomTreeNode extends RootTreeNode
            lst.add(building);
            children.add(child);
            model.nodesWereInserted(this,new int[]{children.size()-1});
-           return child; 
        }
        catch(RemoteException e)
        {
         JOptionPane.showMessageDialog(null,e.getMessage(),"Ajout impossible",JOptionPane.ERROR_MESSAGE);
        }
-       return null;
     }
 
 	public void remove(TreeNode childNode) throws RemoteException, FlexiException {

@@ -110,8 +110,7 @@ public class OutlookBarManagement
     }
     
 
-    public JPanel createPanelForComponent(JComponent comp,
-                                          String title) {
+    public JPanel createPanelForComponent(JComponent comp,String title) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(comp, BorderLayout.CENTER);
         if (title != null) {

@@ -24,14 +24,14 @@ import fr.umlv.ir3.flexitime.richClient.models.management.room.BuildingTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.FloorTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.RoomTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.room.TypeRoomTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.CourseTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.SubjectsGroupTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.TeachingStructureTreeNode;
+import fr.umlv.ir3.flexitime.richClient.models.management.teachingStructure.TypeCourseTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.ClassTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.CourseTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.GroupTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.SubjectTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.SubjectsGroupTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.TeachingStructureTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.track.TrackTreeNode;
-import fr.umlv.ir3.flexitime.richClient.models.management.track.TypeCourseTreeNode;
 
 /**
  * @author Famille
