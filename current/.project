@@ -11,16 +11,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>edu.mit.lcs.pag.continuoustester.informer</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>edu.mit.lcs.pag.continuoustester.testrunner</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.mevenide.ui.mavenbuilder</name>
 			<arguments>
 			</arguments>

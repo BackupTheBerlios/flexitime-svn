@@ -469,4 +469,8 @@ public interface IDataManager extends Remote
      * @throws RemoteException
      */
     public List<IBusy> getBusies(IResource parent) throws RemoteException;
+    
+    
+    //POUR LES TEST//
+    public IGroup getGroup() throws RemoteException;
 }

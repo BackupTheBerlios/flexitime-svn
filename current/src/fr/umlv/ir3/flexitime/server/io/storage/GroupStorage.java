@@ -160,5 +160,31 @@ public class GroupStorage
             HibernateUtil.closeSession();
         }
     }
+    
+    public static IGroup getGroup() throws HibernateException
+    {
+        Session s = null;
+        Transaction tx = null;
+        List<IGroup> l = null;
+        try
+        {
+            s = HibernateUtil.currentSession();
+            tx = s.beginTransaction();
+            l = s.find("FROM GroupImpl as g WHERE g.idData = ?", new Long(36), Hibernate.LONG);
+            tx.commit();
+        }
+        catch (HibernateException e)
+        {
+            e.printStackTrace();
+            if (tx != null) tx.rollback();
+            throw e;
+        }
+        finally
+        {
+            HibernateUtil.closeSession();
+        }
+
+        return l.iterator().next();
+    }
 }
 

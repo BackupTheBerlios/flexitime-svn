@@ -1798,4 +1798,29 @@ public class DataManagerImpl extends UnicastRemoteObject implements
         return true;
     }
 
+    //POUR LES TESTS
+    
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @return
+     * @throws RemoteException 
+     * 
+     * @see fr.umlv.ir3.flexitime.common.rmi.IDataManager#getGroup()
+     */
+    public IGroup getGroup() throws RemoteException
+    {
+        try
+        {
+            return GroupStorage.getGroup();
+        }
+        catch (HibernateException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
