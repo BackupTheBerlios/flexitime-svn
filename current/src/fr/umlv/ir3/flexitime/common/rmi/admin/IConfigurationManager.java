@@ -13,6 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
+import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 
 
 /**
@@ -33,12 +34,9 @@ public interface IConfigurationManager extends Remote
      * considered.
      * 
      * @return current configuration
-     *  
-     * @throws ParserConfigurationException 
-     * @throws SAXException 
-     * @throws IOException 
+     * @throws FlexiException 
      */
-    public IConfig get() throws SAXException, ParserConfigurationException, IOException;
+    public IConfig get() throws FlexiException;
     
     /**
      * DOCME
