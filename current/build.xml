@@ -12,7 +12,7 @@
 		<property name="deprecation" value="off" />
 		<property name="src.dir" value="${basedir}/src" />
 		<property name="src.tests.dir" value="${basedir}/test" />
-		<property name="j2ee.dir" value="${basedir}/j2ee" />
+		<property name="j2ee.dir" value="${basedir}/ligthClient" />
 		<property name="libs.dir" value="lib" />
 		<property name="build.dir" value="${basedir}/build" />
 		<property name="build.dest" value="${build.dir}/classes" />
