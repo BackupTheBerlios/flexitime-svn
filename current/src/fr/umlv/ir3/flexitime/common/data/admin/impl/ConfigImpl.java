@@ -17,7 +17,6 @@ import fr.umlv.ir3.flexitime.common.data.admin.IConfig;
  */
 public class ConfigImpl implements IConfig
 {
-
     /**
      * Comment for <code>serialVersionUID</code>
      */
@@ -25,7 +24,6 @@ public class ConfigImpl implements IConfig
     // ===========//
     // Champs //
     // ===========//
-    private Long idConfig;
     /** URI of the storage server */
     private String            uriServerData ;
     /** Name of database to store datas */
@@ -57,27 +55,6 @@ public class ConfigImpl implements IConfig
     // ======== //
     // Méthodes //
     // ======== //
-    /**
-     * Getter for idConfig
-     *
-     * @return id of the configuration
-     * 
-     */
-    public Long getIdConfig()
-    {
-        return idConfig;
-    }
-    
-    /**
-     * Setter fo idConfig
-     * @param idConfig id to set
-     * 
-     */
-    public void setIdConfig(Long idConfig)
-    {
-        this.idConfig = idConfig;
-    }
-    
     /**
      * DOCME
      * 

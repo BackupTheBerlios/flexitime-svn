@@ -17,22 +17,6 @@ import java.io.Serializable;
 public interface IConfig extends Serializable
 {
     /**
-     * Returns id of the Configuration
-     *
-     * @return id
-     * 
-     */
-    Long getIdConfig();
-
-    /**
-     * Setter fot the id
-     * 
-     * @param id Id to set 
-     * 
-     */
-    void setIdConfig(Long id);
-    
-    /**
      *  getServerLDAP
      * returns the address of the server
      *
