@@ -30,7 +30,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
     //===========//
     //   Champs  //
     //===========// 
-    private List lstFloors;
+    private List<IFloor> lstFloors;
     
     
     //==================//
@@ -50,7 +50,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
 	public BuildingImpl(String name)
 	{
 		super(name);
-		lstFloors = new ArrayList();
+		lstFloors = new ArrayList<IFloor>();
 	}
 	
     /**
@@ -60,7 +60,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
      * @param listFloors a list of floors contains by the building.
      * 
      */
-    public BuildingImpl(String name, List listFloors)
+    public BuildingImpl(String name, List<IFloor> listFloors)
     {
         super(name);
         this.lstFloors = listFloors;
@@ -91,7 +91,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding#getLstFloor()
      */
-    public List getLstFloor()
+    public List<IFloor> getLstFloor()
     {
         return lstFloors;
     }
@@ -104,7 +104,7 @@ public class BuildingImpl extends DataImpl implements IBuilding
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IBuilding#setLstFloor(java.util.List)
      */
-    public void setLstFloor(List lstFloor)
+    public void setLstFloor(List<IFloor> lstFloor)
     {
         this.lstFloors = lstFloor;
     }

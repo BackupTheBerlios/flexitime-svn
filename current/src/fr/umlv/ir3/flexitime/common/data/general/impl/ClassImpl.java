@@ -15,7 +15,6 @@ import fr.umlv.ir3.flexitime.common.data.impl.DataImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
 import fr.umlv.ir3.flexitime.common.data.resources.impl.GroupImpl;
 import fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure;
-import fr.umlv.ir3.flexitime.common.data.teachingStructure.impl.TeachingStructureImpl;
 
 
 /**
@@ -37,7 +36,7 @@ public class ClassImpl extends DataImpl implements IClass
     //===========//
     //   Champs  //
     //===========// 
-    private List lstGroups;
+    private List<IGroup> lstGroups;
     private ITeachingStructure teachingStructure;
     private ITrack parentTrack;
     
@@ -59,7 +58,7 @@ public class ClassImpl extends DataImpl implements IClass
 	public ClassImpl(String name)
 	{
 		super(name);
-		lstGroups = new ArrayList();
+		lstGroups = new ArrayList<IGroup>();
 	}
 	
 	/**
@@ -72,7 +71,7 @@ public class ClassImpl extends DataImpl implements IClass
 	{
 		super(name);
 		this.parentTrack = track;
-		lstGroups = new ArrayList();
+		lstGroups = new ArrayList<IGroup>();
 	}
 	
     /**
@@ -83,7 +82,7 @@ public class ClassImpl extends DataImpl implements IClass
      * @param struct the teaching structure of this class.
 	 * @param track the parent track.
      */
-    public ClassImpl(String sName, List listOfGroups, ITeachingStructure struct, TrackImpl track)
+    public ClassImpl(String sName, List<IGroup> listOfGroups, ITeachingStructure struct, TrackImpl track)
     {
         super(sName);
         this.lstGroups = listOfGroups;
@@ -173,7 +172,7 @@ public class ClassImpl extends DataImpl implements IClass
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#getLstGroups()
      */
-    public List getLstGroups()
+    public List<IGroup> getLstGroups()
     {
         return lstGroups;
     }
@@ -186,7 +185,7 @@ public class ClassImpl extends DataImpl implements IClass
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IClass#setLstGroups(java.util.List)
      */
-    public void setLstGroups(List lstGroup)
+    public void setLstGroups(List<IGroup> lstGroup)
     {
         lstGroups = lstGroup;
     }

@@ -7,6 +7,7 @@ package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IFloor;
 import fr.umlv.ir3.flexitime.common.data.general.impl.FloorImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IRoom;
@@ -80,7 +81,7 @@ public class RoomImpl extends ResourceImpl implements IRoom
      * @param capacity the number maximum of students whom can sit in the room.
 	 * @param floor the parent floor of this room. 
      */
-    public RoomImpl(String name, List listBusy, int type, int capacity, FloorImpl floor)
+    public RoomImpl(String name, List<IBusy> listBusy, int type, int capacity, FloorImpl floor)
     {
         super(name, listBusy);
         this.type = type;

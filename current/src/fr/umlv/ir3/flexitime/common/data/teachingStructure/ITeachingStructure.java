@@ -25,7 +25,7 @@ public interface ITeachingStructure extends IData
      * @return the list of SubjectsGroups.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    List getLstSubjectsGroup();
+    List<ISubjectsGroup> getLstSubjectsGroup();
 
     /**
      * Changes the list of SubjectsGroup of a
@@ -34,7 +34,7 @@ public interface ITeachingStructure extends IData
      * @param lst the new list of SubjectsGroups.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setLstSubjectsGroup(List lst);
+    void setLstSubjectsGroup(List<ISubjectsGroup> lst);
 
     /**
      * Add a SubjectsGroup in a TeachingStructure .

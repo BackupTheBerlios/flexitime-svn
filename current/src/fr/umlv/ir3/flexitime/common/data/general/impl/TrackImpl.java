@@ -30,7 +30,7 @@ public class TrackImpl extends DataImpl implements ITrack
     //===========//
     //   Champs  //
     //===========// 
-    private List lstClass;
+    private List<IClass> lstClass;
 
     //==================//
     //   Constructeurs  //
@@ -51,7 +51,7 @@ public class TrackImpl extends DataImpl implements ITrack
     public TrackImpl(String sName)
     {
         super(sName);  
-        this.lstClass = new ArrayList();
+        this.lstClass = new ArrayList<IClass>();
     }
     
 	/**
@@ -60,7 +60,7 @@ public class TrackImpl extends DataImpl implements ITrack
 	 * @param sName a string.
 	 * @param listClasses a list of classes.
 	 */
-	public TrackImpl(String sName, List listClasses)
+	public TrackImpl(String sName, List<IClass> listClasses)
 	{
 		super(sName);
 		this.lstClass = listClasses;		        
@@ -78,7 +78,7 @@ public class TrackImpl extends DataImpl implements ITrack
      * @see fr.umlv.ir3.flexitime.common.data.general.ITrack#getLstClass()
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public List getLstClass()
+    public List<IClass> getLstClass()
     {
         return lstClass;
     }
@@ -92,7 +92,7 @@ public class TrackImpl extends DataImpl implements ITrack
      * @see fr.umlv.ir3.flexitime.common.data.general.ITrack#setLstClass(java.util.List)
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public void setLstClass(List lstClass)
+    public void setLstClass(List<IClass> lstClass)
     {
         this.lstClass = lstClass;
     }

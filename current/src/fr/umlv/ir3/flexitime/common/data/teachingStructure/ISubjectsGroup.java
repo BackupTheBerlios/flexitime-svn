@@ -25,7 +25,7 @@ public interface ISubjectsGroup extends IData
      * @return the list of Subject of SubjectsGroups.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    List getLstSubject();
+    List<ISubject> getLstSubject();
 
     /**
      * setLstSubject changes the list of Subject of blocs.
@@ -33,7 +33,7 @@ public interface ISubjectsGroup extends IData
      * @param lstSubject the list of Subject of blocs.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setLstSubject(List lstSubject);
+    void setLstSubject(List<ISubject> lstSubject);
 
     /**
      * Add a Subject in a SubjectsGroup .

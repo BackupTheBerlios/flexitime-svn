@@ -31,7 +31,7 @@ public class FloorImpl extends DataImpl implements IFloor
     //===========//
     //   Champs  //
     //===========// 
-    private List lstRoom; 
+    private List<IRoom> lstRoom; 
     private IBuilding parentBuilding;
     
     
@@ -52,7 +52,7 @@ public class FloorImpl extends DataImpl implements IFloor
 	public FloorImpl(String name)
 	{
 		super(name);
-		lstRoom = new ArrayList();
+		lstRoom = new ArrayList<IRoom>();
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class FloorImpl extends DataImpl implements IFloor
 	{
 		super(name);
 		this.parentBuilding = building;
-		lstRoom = new ArrayList();
+		lstRoom = new ArrayList<IRoom>();
 	}
 	
     /**
@@ -75,7 +75,7 @@ public class FloorImpl extends DataImpl implements IFloor
      * @param listRooms a list of rooms for this floor.
      * @param building a string representing the name of the building where the floor is.
      */
-    public FloorImpl(String name, List listRooms, BuildingImpl building)
+    public FloorImpl(String name, List<IRoom> listRooms, BuildingImpl building)
     {
         super(name);
         this.lstRoom = listRooms;
@@ -94,7 +94,7 @@ public class FloorImpl extends DataImpl implements IFloor
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#getLstRoom()
      */
-    public List getLstRoom()
+    public List<IRoom> getLstRoom()
     {
         return lstRoom;
     }
@@ -107,7 +107,7 @@ public class FloorImpl extends DataImpl implements IFloor
      * 
      * @see fr.umlv.ir3.flexitime.common.data.general.IFloor#setLstRoom(java.util.List)
      */
-    public void setLstRoom(List lstRoom)
+    public void setLstRoom(List<IRoom> lstRoom)
     {
         this.lstRoom = lstRoom;
     }

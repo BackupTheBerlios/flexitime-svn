@@ -7,6 +7,7 @@ package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.general.IClass;
 import fr.umlv.ir3.flexitime.common.data.general.impl.ClassImpl;
 import fr.umlv.ir3.flexitime.common.data.resources.IGroup;
@@ -83,7 +84,7 @@ public class GroupImpl extends ResourceImpl implements IGroup
      * @param nbPerson the number of students in this group.
 	 * @param parentClass the parent class of this group.
      */
-    public GroupImpl(String name, List listBusy, int nbPerson, ClassImpl parentClass)
+    public GroupImpl(String name, List<IBusy> listBusy, int nbPerson, ClassImpl parentClass)
     {
         super(name, listBusy);
         this.nbPerson = nbPerson;

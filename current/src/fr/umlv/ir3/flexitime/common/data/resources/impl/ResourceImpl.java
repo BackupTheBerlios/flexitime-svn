@@ -26,7 +26,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
     //===========//
 	//  Champs	 //
 	//===========//
-    private List lstBusy;
+    private List<IBusy> lstBusy;
     
     
 	//=============//
@@ -46,7 +46,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
 	public ResourceImpl(String name)
 	{
 		super(name);
-		this.lstBusy = new ArrayList();
+		this.lstBusy = new ArrayList<IBusy>();
 	}
 	
     /**
@@ -56,7 +56,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * @param listBusy a list of unavailibilities.
      * 
      */
-    public ResourceImpl(String name, List listBusy)
+    public ResourceImpl(String name, List<IBusy> listBusy)
     {
         super(name);
         this.lstBusy = listBusy;
@@ -75,7 +75,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#getLstBusy()
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public List getLstBusy()
+    public List<IBusy> getLstBusy()
     {
         return lstBusy;
     }
@@ -89,7 +89,7 @@ public abstract class ResourceImpl extends DataImpl implements IResource
      * @see fr.umlv.ir3.flexitime.common.data.resources.IResource#setLstBusy(java.util.List)
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public void setLstBusy(List lstBusy)
+    public void setLstBusy(List<IBusy> lstBusy)
     {
         this.lstBusy = lstBusy;
     }

@@ -9,11 +9,9 @@ package fr.umlv.ir3.flexitime.server.io.storage;
 
 import java.util.List;
 
-import net.sf.hibernate.Hibernate;
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
-
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 
 
@@ -133,9 +131,27 @@ public class DeviceStorage
      * @param device IDevice to delete
      * 
      */
-    public static void delete(IDevice device)
+    public static void delete(IDevice device) throws HibernateException
     {
-        
+        Session s = null;
+        Transaction tx = null;
+        try
+        {
+            s = HibernateUtil.currentSession();
+            tx = s.beginTransaction();
+            s.delete(device);
+            tx.commit();
+        }
+        catch (HibernateException e)
+        {
+            e.printStackTrace();
+            if (tx != null) tx.rollback();
+            throw e;
+        }
+        finally
+        {
+            HibernateUtil.closeSession();
+        }
     }
 }
 

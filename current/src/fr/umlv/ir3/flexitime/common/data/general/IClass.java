@@ -62,7 +62,7 @@ public interface IClass extends IData
      * @return the list of groups of a Class.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    List getLstGroups();
+    List<IGroup> getLstGroups();
 
     /**
      * Changes the list of groups of a Class.
@@ -70,7 +70,7 @@ public interface IClass extends IData
      * @param lstGroup the new list of groups of a Class.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setLstGroups(List lstGroup);
+    void setLstGroups(List<IGroup> lstGroup);
 
     /**
      * Add a new group in the Class

@@ -34,7 +34,7 @@ public interface IBuilding extends IData
      * @return a list of floors of Building.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    List getLstFloor();
+    List<IFloor> getLstFloor();
 
     /**
      * Changes a list of the floor of Building.
@@ -42,7 +42,7 @@ public interface IBuilding extends IData
      * @param lstFloor the new list of floor.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setLstFloor(List lstFloor);
+    void setLstFloor(List<IFloor> lstFloor);
 
     /**
      * Add a floor in Building.

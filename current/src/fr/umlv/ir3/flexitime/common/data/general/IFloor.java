@@ -26,7 +26,7 @@ public interface IFloor extends IData
      * @return a list of floors of a floor.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    List getLstRoom();
+    List<IRoom> getLstRoom();
 
     /**
      * Changes a list of rooms of a floor.
@@ -34,7 +34,7 @@ public interface IFloor extends IData
      * @param lstRoom the new list of floor.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setLstRoom(List lstRoom);
+    void setLstRoom(List<IRoom> lstRoom);
 
     /**
      * Add a room in a floor

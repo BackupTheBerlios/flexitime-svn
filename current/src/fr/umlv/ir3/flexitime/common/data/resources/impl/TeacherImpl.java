@@ -7,6 +7,7 @@ package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.resources.ITeacher;
 
 
@@ -59,7 +60,7 @@ public class TeacherImpl extends ResourceImpl implements ITeacher
      * @param email the email of the teacher.
      * 
      */
-    public TeacherImpl(String name, String firstName, List listBusy, String email)
+    public TeacherImpl(String name, String firstName, List<IBusy> listBusy, String email)
     {
         super(name, listBusy);
         this.firstName = firstName;        

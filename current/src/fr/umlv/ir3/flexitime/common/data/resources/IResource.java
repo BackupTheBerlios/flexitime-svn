@@ -26,7 +26,7 @@ public interface IResource extends IData
      * @return the list of unavailabilities of the resource.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    List getLstBusy();
+    List<IBusy> getLstBusy();
 
     /**
      * Changes the list of unavailabilities of the resouce.
@@ -34,7 +34,7 @@ public interface IResource extends IData
      * @param lstBusy the new unavailabilities.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setLstBusy(List lstBusy);
+    void setLstBusy(List<IBusy> lstBusy);
 
     /**
      * Add a unavailabilities in a Resource .

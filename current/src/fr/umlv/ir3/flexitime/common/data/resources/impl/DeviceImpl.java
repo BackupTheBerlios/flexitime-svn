@@ -7,6 +7,7 @@ package fr.umlv.ir3.flexitime.common.data.resources.impl;
 
 import java.util.List;
 
+import fr.umlv.ir3.flexitime.common.data.activity.IBusy;
 import fr.umlv.ir3.flexitime.common.data.resources.IDevice;
 
 
@@ -57,7 +58,7 @@ public class DeviceImpl extends ResourceImpl implements IDevice
      * @param type the type of device.
      * 
      */
-    public DeviceImpl(String name, List listBusy, String type)
+    public DeviceImpl(String name, List<IBusy> listBusy, String type)
     {
         super(name, listBusy);
         this.type = type;

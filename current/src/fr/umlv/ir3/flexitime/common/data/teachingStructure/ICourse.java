@@ -92,7 +92,7 @@ public interface ICourse extends IData
      * @return the list of Teachers of a course.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    List getLstTeacher();
+    List<ITeacher> getLstTeacher();
 
     /**
      * Changes the list of Teacher of a course.
@@ -100,7 +100,7 @@ public interface ICourse extends IData
      * @param lstTeacher the list of Teacher of a course.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setLstTeacher(List lstTeacher);
+    void setLstTeacher(List<ITeacher> lstTeacher);
 
     /**
      * Add a teacher in a course

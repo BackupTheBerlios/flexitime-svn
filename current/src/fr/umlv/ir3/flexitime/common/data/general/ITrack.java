@@ -25,7 +25,7 @@ public interface ITrack extends IData
      * @return the list of class.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    List getLstClass();
+    List<IClass> getLstClass();
 
     /**
      * Changes the list of class .
@@ -33,7 +33,7 @@ public interface ITrack extends IData
      * @param lstClass the new list of Class
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setLstClass(List lstClass);
+    void setLstClass(List<IClass> lstClass);
 
     /**
      * Add a class in a track

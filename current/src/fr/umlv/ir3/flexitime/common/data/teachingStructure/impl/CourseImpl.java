@@ -37,7 +37,7 @@ public class CourseImpl extends DataImpl implements ICourse
     private int type;
     private int nbHours;
     private Color color;
-    private List lstTeacher;
+    private List<ITeacher> lstTeacher;
     private int defaultLength;
     private ISubject parentSubject;
     
@@ -59,6 +59,7 @@ public class CourseImpl extends DataImpl implements ICourse
 	public CourseImpl(String name)
 	{
 		super(name);
+        lstTeacher = new ArrayList<ITeacher>();
 	}
 	
 	/**
@@ -71,6 +72,7 @@ public class CourseImpl extends DataImpl implements ICourse
 	{
 		super(name);
 		this.parentSubject = subject;
+        lstTeacher = new ArrayList<ITeacher>();
 	}
 	
     /**
@@ -85,7 +87,7 @@ public class CourseImpl extends DataImpl implements ICourse
 	 * @param subject the parent subject of this course.
      * 
      */
-    public CourseImpl(String name, int type, int nbHours, Color color, List listTeachers, int defaultLength, SubjectImpl subject)
+    public CourseImpl(String name, int type, int nbHours, Color color, List<ITeacher> listTeachers, int defaultLength, SubjectImpl subject)
     {
         super(name);
         this.type = type;
@@ -111,7 +113,7 @@ public class CourseImpl extends DataImpl implements ICourse
         this.nbHours = nbHours;
         this.color = color;
         this.defaultLength = defaultLength;
-        lstTeacher = new ArrayList();
+        lstTeacher = new ArrayList<ITeacher>();
     }
 
     
@@ -240,7 +242,7 @@ public class CourseImpl extends DataImpl implements ICourse
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#getLstTeacher()
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public List getLstTeacher()
+    public List<ITeacher> getLstTeacher()
     {
         return lstTeacher;
     }
@@ -254,7 +256,7 @@ public class CourseImpl extends DataImpl implements ICourse
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ICourse#setLstTeacher(java.util.List)
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public void setLstTeacher(List lstTeacher)
+    public void setLstTeacher(List<ITeacher> lstTeacher)
     {
         this.lstTeacher = lstTeacher;
     }

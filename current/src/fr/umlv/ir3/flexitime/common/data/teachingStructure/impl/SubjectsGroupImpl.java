@@ -31,7 +31,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
     //===========//
 	//  Champs	 //
 	//===========//
-    private List lstSubject;
+    private List<ISubject> lstSubject;
     private ITeachingStructure parentTeachStruct;
     
     
@@ -52,7 +52,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
 	public SubjectsGroupImpl(String name)
 	{
 		super(name);
-		lstSubject = new ArrayList();
+		lstSubject = new ArrayList<ISubject>();
 	}
 	
 	/**
@@ -65,6 +65,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
 	{
 		super(name);
 		this.parentTeachStruct = struct;
+        lstSubject = new ArrayList<ISubject>();
 	}
 	
     /**
@@ -74,7 +75,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
      * @param listSubjects a list of subjects.
      * @param teachStruct the parent teaching structure of this subjects' group. 
      */
-    public SubjectsGroupImpl(String name, List listSubjects, TeachingStructureImpl teachStruct)
+    public SubjectsGroupImpl(String name, List<ISubject> listSubjects, TeachingStructureImpl teachStruct)
     {
         super(name);
         this.lstSubject = listSubjects;
@@ -93,7 +94,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup#getLstSubject()
      */
-    public List getLstSubject()
+    public List<ISubject> getLstSubject()
     {
         return lstSubject;
     }
@@ -106,7 +107,7 @@ public class SubjectsGroupImpl extends DataImpl implements ISubjectsGroup
      * 
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubjectsGroup#setLstSubject(java.util.List)
      */
-    public void setLstSubject(List lstSubject)
+    public void setLstSubject(List<ISubject> lstSubject)
     {
         this.lstSubject = lstSubject;
     }

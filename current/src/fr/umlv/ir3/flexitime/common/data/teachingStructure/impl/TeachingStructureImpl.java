@@ -30,7 +30,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
     //===========//
 	//  Champs	 //
 	//===========//
-    private List lstSubjectsGroup;
+    private List<ISubjectsGroup> lstSubjectsGroup;
     
     
 	//=============//
@@ -50,7 +50,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
 	public TeachingStructureImpl(String name)
 	{
 		super(name);
-		lstSubjectsGroup = new ArrayList();
+		lstSubjectsGroup = new ArrayList<ISubjectsGroup>();
 	}
 	
     /**
@@ -59,7 +59,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
      * @param name a string.
      * @param listSubjectsGroup the list of subjects' groups.
      */
-    public TeachingStructureImpl(String name, List listSubjectsGroup)
+    public TeachingStructureImpl(String name, List<ISubjectsGroup> listSubjectsGroup)
     {
         super(name);
         this.lstSubjectsGroup = listSubjectsGroup;
@@ -78,7 +78,7 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#getLstSubjectsGroup()
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public List getLstSubjectsGroup()
+    public List<ISubjectsGroup> getLstSubjectsGroup()
     {
         return lstSubjectsGroup;
     }
@@ -89,10 +89,10 @@ public class TeachingStructureImpl extends DataImpl implements ITeachingStructur
      *
      * @param lst the list of subjects' groups. 
      * 
-     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#setLstSubjectsGroup(java.util.List)
+     * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ITeachingStructure#setLstSubjectsGroup(List<ISubjectsGroup>)
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public void setLstSubjectsGroup(List lst)
+    public void setLstSubjectsGroup(List<ISubjectsGroup> lst)
     {
         lstSubjectsGroup = lst;
     }

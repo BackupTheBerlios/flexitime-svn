@@ -31,7 +31,7 @@ public class SubjectImpl extends DataImpl implements ISubject
     //===========//
 	//  Champs	 //
 	//===========//
-    private List lstCourse;
+    private List<ICourse> lstCourse;
     private ISubjectsGroup parentSubjectsGroup;
     
     
@@ -52,7 +52,7 @@ public class SubjectImpl extends DataImpl implements ISubject
 	public SubjectImpl(String name)
 	{
 		super(name);
-		lstCourse = new ArrayList();
+		lstCourse = new ArrayList<ICourse>();
 	}
 	
 	/**
@@ -65,6 +65,7 @@ public class SubjectImpl extends DataImpl implements ISubject
 	{
 		super(name);
 		this.parentSubjectsGroup = subjectsGroup;
+        lstCourse = new ArrayList<ICourse>();
 	}
 	
     /**
@@ -74,7 +75,7 @@ public class SubjectImpl extends DataImpl implements ISubject
      * @param listCourses a list of courses.
      * @param subjectsGroup	the parent subjects' group of this subject. 
      */
-    public SubjectImpl(String name, List listCourses, SubjectsGroupImpl subjectsGroup)
+    public SubjectImpl(String name, List<ICourse> listCourses, SubjectsGroupImpl subjectsGroup)
     {
         super(name);
         this.lstCourse = listCourses;
@@ -94,7 +95,7 @@ public class SubjectImpl extends DataImpl implements ISubject
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject#getLstCourse()
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public List getLstCourse()
+    public List<ICourse> getLstCourse()
     {
         return lstCourse;
     }
@@ -108,7 +109,7 @@ public class SubjectImpl extends DataImpl implements ISubject
      * @see fr.umlv.ir3.flexitime.common.data.teachingStructure.ISubject#setLstCourse(java.util.List)
      * @author   FlexiTeam - Adrien BOUVET
      */
-    public void setLstCourse(List lstCourse)
+    public void setLstCourse(List<ICourse> lstCourse)
     {
         this.lstCourse = lstCourse;
     }

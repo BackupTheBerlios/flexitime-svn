@@ -25,7 +25,7 @@ public interface ISubject extends IData
      * @return the list of course.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    List getLstCourse();
+    List<ICourse> getLstCourse();
 
     /**
      * Changes the list of course.
@@ -33,7 +33,7 @@ public interface ISubject extends IData
      * @param lstCourse the list of course.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setLstCourse(List lstCourse);
+    void setLstCourse(List<ICourse> lstCourse);
 
     /**
      * Add a course in a Subject
