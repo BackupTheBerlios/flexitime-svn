@@ -25,6 +25,7 @@ import fr.umlv.ir3.flexitime.common.event.DataEvent;
 import fr.umlv.ir3.flexitime.common.exception.FlexiException;
 import fr.umlv.ir3.flexitime.common.rmi.DataListenerImpl;
 import fr.umlv.ir3.flexitime.common.rmi.RemoteDataManager;
+import fr.umlv.ir3.flexitime.common.tools.FlexiLanguage;
 import fr.umlv.ir3.flexitime.richClient.gui.actions.management.FlexiTreeNodeListener;
 import fr.umlv.ir3.flexitime.richClient.models.management.FlexiTreeNode;
 import fr.umlv.ir3.flexitime.richClient.models.management.ResourceTreeModel;
@@ -60,7 +61,14 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
 		 * The list of the sub categories
 		 */
 		private List children;
-		 
+		 /**
+          * The static class for language
+		  */
+        private static FlexiLanguage language;
+        static
+        {
+            language = FlexiLanguage.getInstance();
+        }
 		
 		//==================//
 	    //   Constructeurs  //
@@ -170,12 +178,12 @@ public class SubjectTreeNode extends DataListenerImpl implements FlexiTreeNode
 				}
 			}
 			Iterator TypeCourseIte = map.keySet().iterator();	
-			for(int i=0;i<ICourse.class.getFields().length;i++)
+			for(int i=1;i<=ICourse.class.getFields().length;i++)
 			{
 				String name = new String();
-				name += ICourse.class.getFields()[i].getName() ;
+				name += language.getText("courseType"+i);
 				List lstCourse;
-				if(map.get(new Integer(i))!= null )lstCourse = (List)map.get(i);
+				if(map.get(new Integer(i-1))!= null )lstCourse = (List)map.get(i-1);
 				else lstCourse = new ArrayList();
 				list.add(new TypeCourseTreeNode(this,name,i,lstCourse,model));
 			}

@@ -133,5 +133,7 @@ public class SubjectsGroupView
     public void setValue(String value)
     {
         name.setText(value);
+        okButton.setEnabled(false);
+        cancelButton.setEnabled(false);
     }
 }
