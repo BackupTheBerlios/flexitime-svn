@@ -479,7 +479,7 @@ public class Time implements Comparable
         
         int tmp = 0;
         
-        while(c.get(Calendar.WEEK_OF_MONTH)!=c2.get(Calendar.WEEK_OF_MONTH)
+        while(c.get(Calendar.WEEK_OF_YEAR)!=c2.get(Calendar.WEEK_OF_YEAR)
                 && c.get(Calendar.YEAR)!=c2.get(Calendar.YEAR)){
             tmp++;
             c.add(Calendar.WEEK_OF_YEAR,1);
@@ -488,8 +488,8 @@ public class Time implements Comparable
     }
     
     /*public static void main(String[] args){
-        Time t= new Time(2003,1,1,0,0);
-        Time t2 = new Time(2005,1,1,0,0);
+        Time t= new Time(2005,1,6,0,0);
+        Time t2 = new Time(2005,2,3,0,0);
         System.out.println(Time.getGapWeek(t,t2));
         System.out.println(t.getYear());
     }*/
