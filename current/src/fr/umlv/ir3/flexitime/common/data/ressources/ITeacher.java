@@ -9,27 +9,27 @@ package fr.umlv.ir3.flexitime.common.data.ressources;
 /**
  * Represents a teacher
  * 
- * @version 0.1
+ * @version 0.2
  * @author FlexiTeam - Guillaume GUERRIN
  */
 public interface ITeacher extends IResource
 {
 
     /**
-     * Returns the surname of the teacher.
+     * Returns the firstname of the teacher.
      * 
-     * @return the surname of the teacher.
+     * @return the firstname of the teacher.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    String getSurName();
+    String getFirstName();
 
     /**
-     * Changes the surname of the teacher.
+     * Changes the firstname of the teacher.
      * 
-     * @param surName the new surname.
+     * @param firstName the new firstname.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setSurName(String surName);
+    void setFirstName(String firstName);
 
     /**
      * Returns the email of the teacher.

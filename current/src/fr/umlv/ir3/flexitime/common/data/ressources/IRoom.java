@@ -51,7 +51,7 @@ public interface IRoom extends IResource
      * @return the capacity of the room.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    String getCapacity();
+    int getCapacity();
 
     /**
      * Changes the capacity of the room.
@@ -59,6 +59,6 @@ public interface IRoom extends IResource
      * @param capacity the capacity of the room.
      * @author FlexiTeam - Guillaume GUERRIN
      */
-    void setCapacity(String capacity);
+    void setCapacity(int capacity);
 
 }
