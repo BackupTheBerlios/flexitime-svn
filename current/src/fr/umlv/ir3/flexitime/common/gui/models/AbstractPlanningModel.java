@@ -83,7 +83,6 @@ public abstract class AbstractPlanningModel implements PlanningModel
      * are included.  Note that
      * lowerGap need not be less than or equal to upperGap.
      * 
-     * @param source the <code>PlanningModel</code> that changed, typically "this"
      * @param lowerGap one end of the interval
      * @param upperGap the other end of the interval
      * @see RessourcePlanningModel
@@ -106,7 +105,6 @@ public abstract class AbstractPlanningModel implements PlanningModel
      * are included.  Note that
      * lowerGap need not be less than or equal to upperGap.
      * 
-     * @param source the <code>PlanningModel</code> that changed, typically "this"
      * @param lowerGap one end of the interval
      * @param upperGap the other end of the interval
      * @see RessourcePlanningModel
@@ -128,7 +126,6 @@ public abstract class AbstractPlanningModel implements PlanningModel
      * of the interval that's been removed.  Note that <code>lowerGap</code>
      * need not be less than or equal to <code>upperGap</code>.
      * 
-     * @param source the <code>PlanningModel</code> that changed, typically "this"
      * @param lowerGap one end of the interval,
      *               including <code>lowerGap</code>
      * @param upperGap the other end of the interval,

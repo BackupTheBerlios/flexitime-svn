@@ -429,16 +429,24 @@ public class RessourcePlanningModel extends AbstractPlanningModel
 		fireIntervalAdded(weekNumber, dayNumber, gapNumber, gapNumber+lesson.getNbGap()-1 );
 	}
     
+    /** 
+     * DOCME Description
+     * Quel service est rendu par cette méthode
+     * <code>exemple d'appel de la methode</code>
+     *
+     * @param weekNumber
+     * @param dayNumber
+     * @param gapNumber 
+     * 
+     */
     public void updateLesson(int weekNumber, int dayNumber, int gapNumber)
     {
         //le BusyBloc a normalement déja été changé
         //TODO communication au serveur
-        
-        //System.out.println("***model***");
-        //System.out.println("Element changé en " + weekNumber + "," + dayNumber + "," + gapNumber);
-        BusyBloc busyBloc = (BusyBloc)this.getDayBloc(weekNumber, dayNumber).getElementAt(gapNumber);
 
-        fireContentsChanged(weekNumber,dayNumber,gapNumber,busyBloc.getNbGap());
+        BusyBloc busyBloc = (BusyBloc)this.getDayBloc(weekNumber, dayNumber).getElementAt(gapNumber);
+        
+        fireContentsChanged(weekNumber,dayNumber,gapNumber,gapNumber+busyBloc.getNbGap());
     }
     
     
