@@ -472,42 +472,27 @@ public class Time implements Comparable
      */
     public static int getGapWeek(Time t1, Time t2)
     {
-        Time minTime;
-        Time maxTime;
-        int number = 0;
-        if (Time.compare(t1, t2) == -1)
-        {
-            minTime = t1;
-            maxTime = t2;
+        Calendar c = Calendar.getInstance();
+        long number = t1.getCal().getTimeInMillis();
+        c.setTimeInMillis(number);
+        Calendar c2 = t2.getCal();
+        
+        int tmp = 0;
+        
+        while(c.get(Calendar.WEEK_OF_MONTH)!=c2.get(Calendar.WEEK_OF_MONTH)
+                && c.get(Calendar.YEAR)!=c2.get(Calendar.YEAR)){
+            tmp++;
+            c.add(Calendar.WEEK_OF_YEAR,1);
         }
-        else
-        {
-            minTime = t2;
-            maxTime = t1;
-        }
-        if (minTime.getYear() == maxTime.getYear())
-        {
-            number = maxTime.getWeek() - minTime.getWeek();
-            if (number < 0) number = maxTime.getWeek();
-            return number;
-        }
-        for (int i = 0 ; i < maxTime.getYear() - minTime.getYear() + 1 ; i++)
-        {
-            if (i == 0)
-                number = number
-                        + minTime.getCal().getMaximum(Calendar.WEEK_OF_YEAR)
-                        - minTime.getWeek();
-            else if (i == maxTime.getYear() - minTime.getYear())
-                number = number + maxTime.getWeek();
-            else
-            {
-                Calendar c = Calendar.getInstance();
-                c.set(Calendar.YEAR, minTime.getYear() + i);
-                number = number + c.getMaximum(Calendar.WEEK_OF_YEAR);
-            }
-        }
-        return number;
+        return tmp;
     }
+    
+    /*public static void main(String[] args){
+        Time t= new Time(2003,1,1,0,0);
+        Time t2 = new Time(2005,1,1,0,0);
+        System.out.println(Time.getGapWeek(t,t2));
+        System.out.println(t.getYear());
+    }*/
 
     /**
      * Gets the number of hour (in float) between 2 Time. <br>
