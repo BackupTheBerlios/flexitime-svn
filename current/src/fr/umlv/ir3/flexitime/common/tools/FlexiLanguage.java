@@ -69,7 +69,7 @@ public class FlexiLanguage
     {
         currentLocale = locale;
         shortDate = DateFormat.getDateInstance(DateFormat.SHORT, currentLocale);
-        longDate = DateFormat.getDateInstance(DateFormat.LONG, currentLocale);
+        longDate = DateFormat.getDateInstance(DateFormat.FULL, currentLocale);
         shortTime = DateFormat.getTimeInstance(DateFormat.SHORT, currentLocale);
         longTime = DateFormat.getTimeInstance(DateFormat.LONG, currentLocale);
         prop = ResourceBundle.getBundle("str");//$NON-NLS-1$
@@ -112,7 +112,7 @@ public class FlexiLanguage
     }
     
     /**
-     * Format time in long format ("hh:mm:ss:SS" for US for exemple)
+     * Format time in long format ("hh:mm:ss" for US for exemple)
      * 
      * @param t
      *            time to format time field
@@ -166,7 +166,7 @@ public class FlexiLanguage
     public String getDay(int d)
     {
         GregorianCalendar day = new GregorianCalendar(2000, 1, 1);
-        while (day.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
+        while (day.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY)
         {
             day.add(Calendar.DATE, 1);
         }

@@ -17,7 +17,7 @@ import java.util.Calendar;
  * @version 216
  * @author FlexiTeam - Jérôme GUERS
  */
-public class Time
+public class Time implements Comparable
 {
 
     // ===========//
@@ -245,8 +245,6 @@ public class Time
     /**
      * Compare 2 Time
      * 
-     * @param t1
-     *            a Time
      * @param t2
      *            a Time
      * @return
@@ -256,14 +254,9 @@ public class Time
      *            <li>0 if it's equal</li>
      *            </ul>
      */
-    public static int compare(Time t1, Time t2)
+    public int compareTo(Object t2)
     {
-        if (t1.getCal().compareTo(t2.getCal()) == -1)
-            return -1;
-        else if (t1.getCal().compareTo(t2.getCal()) == 1)
-            return 1;
-        else
-            return 0;
+        return this.getCal().compareTo(((Time)t2).getCal());
     }
 
     /**
@@ -354,9 +347,28 @@ public class Time
         cal.add(Calendar.WEEK_OF_YEAR, number);
     }
 
-    // ======================//
+    // ================== //
     // Méthodes statiques //
-    // ======================//
+    // ================== //
+    /**
+     * Compare 2 Time
+     * 
+     * @param t1
+     *            a Time
+     * @param t2
+     *            a Time
+     * @return
+     *            <ul>
+     *            <li>-1 if time1 is before time2</li>
+     *            <li>1 if time1 is after time2</li>
+     *            <li>0 if it's equal</li>
+     *            </ul>
+     */
+    public static int compare(Time t1, Time t2)
+    {
+        return t1.getCal().compareTo(t2.getCal());
+    }
+    
     /**
      * Get the number of millisecond between two Time.
      * 

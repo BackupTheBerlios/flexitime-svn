@@ -1,6 +1,6 @@
 /*
  * Created on 6 janv. 2005
- * by Famille
+ * by Guillaume GUERRIN
  * Copyright: GPL - UMLV(FR) - 2004/2005
  */
 package fr.umlv.ir3.flexitime.common.tools;
@@ -11,43 +11,37 @@ import junit.framework.TestCase;
 
 
 /**
- * DOCME Description
- * explication supplémentaire si nécessaire
- * in english please...
- * Que fait cette classe, qu'est-ce qu'elle 
- * représente, ...
+ * DOCME
  * 
- * @version Verion ou révision SVN
- * @see (si nécessaire)
+ * @version 320
  * 
- * @author FlexiTeam - Famille
+ * @author FlexiTeam - Jérôme GUERS
  */
 public class TestTime extends TestCase
 {
-   
-    
-    /**
-     *  
-     * DOCME Description
-     * Quel service est rendu par cette méthode
-     * <code>exemple d'appel de la methode</code>
-     *
-     *  
-     * 
-     * @author   FlexiTeam - Famille
-     */
+    public void testGetStrDay()
+    {
+        Time time = new Time(2005, 01, 31, 12, 00);
+        FlexiLanguage language = FlexiLanguage.getInstance();
+        for(int i=0; i < 7; i++)
+        {
+            System.out.println(time.getStrDay());
+            if(!(time.getStrDay().equals(language.getDay(Calendar.MONDAY + i))))
+                fail("Erreur ecriture du jour");
+            time.addDay(1);
+        }
+            
+    }
     public void testGetStrDate()
     {
-        //Creation des time avec : le 06/12/2004 qui est un lundi
-        Time time = new Time(2004, 12, 6, 12, 00);
-        if(time.getStrDate().compareTo("Lundi 6 Décembre 2004") != 0 ) fail();
+        Time time = new Time(2005, 01, 29, 12, 00);
+        if(!(time.getStrDate().equalsIgnoreCase("samedi 29 janvier 2005"))) fail("Erreur affichage de longue date");
     }
 
     public void testGetDate()
     {
-//      Creation des time avec : le 06/12/2004 qui est un lundi 
         Time time = new Time(2004, 12, 6, 12, 00);
-        if(time.getShortDate().compareTo("06/12/2004") != 0 ) fail();
+        if(!(time.getShortDate().equals("06/12/04"))) fail("Erreur affichage de date courtes");
     }
     public void testGetHour()
     {
@@ -68,7 +62,7 @@ public class TestTime extends TestCase
 //      Creation des time avec : le 06/12/2004 
         Time time = new Time(2004, 12, 6, 12, 00);
         time.addDay(7);//si on ajoute 7 jours on obtient le lundi 13 decembre 2004
-        if(time.getShortDate().compareTo("13/12/2004") != 0 ) fail();
+        if(!(time.getShortDate().equals("13/12/04"))) fail("Problème d'ajout de jours");
     }
     
     public void testAddWeek()
@@ -76,7 +70,7 @@ public class TestTime extends TestCase
 //      Creation des time avec : le 06/12/2004 
         Time time = new Time(2004, 12, 6, 12, 00);
         time.addWeek(1);//si on ajoute 1semaine on obtient le lundi 13 decembre 2004
-        if(time.getShortDate().compareTo("13/12/2004") != 0 ) fail();
+        if(!(time.getShortDate().equals("13/12/04"))) fail("Erreur d'ajout de semaine");
     }
     
     public void testAddMonth()
@@ -84,7 +78,7 @@ public class TestTime extends TestCase
 //      Creation des time avec : le 06/12/2004
         Time time = new Time(2004, 12, 6, 12, 00);
         time.addMonth(3);
-        if(time.getShortDate().compareTo("06/03/2005") != 0 ) fail();
+        if(!(time.getShortDate().equals("06/03/05"))) fail("Erreur d'ajout de mois");
     }
     
     public void testAddYear()
@@ -92,7 +86,7 @@ public class TestTime extends TestCase
 //      Creation des time avec : le 06/12/2004 
         Time time = new Time(2004, 12, 6, 12, 00);
         time.addYear(2);
-        if(time.getShortDate().compareTo("06/12/2006") != 0 ) fail();
+        if(!(time.getShortDate().equals("06/12/06"))) fail("Erreur d'ajout d'années");
     }
     
     public void testAddHour()
